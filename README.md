@@ -15,7 +15,7 @@ branding are not included.
 ## First milestone
 
 Compare small Godot 4, Unity and GDevelop attempts against the same arena,
-original assets, mission rules, camera, movement stick and assisted aiming.
+original assets, mission rules, camera and touchscreen tap/aim controls.
 Review engine suitability first; the engine choice remains open. No multiplayer,
 large world or speculative framework. Report actual development/export effort,
 real execution and limits; compare Android feel/performance on the same physical
@@ -31,12 +31,11 @@ The cloud workspace has Godot 4.7.2, Blender, Node.js and Android tools availabl
 Unity is not installed. GDevelop import/export has not yet been validated.
 No Android APK, engine winner or general learning benefit is claimed.
 
-The remote repository has not yet been created: the GitHub integration returns
-HTTP 403 for repository creation. The operator must create
-`https://github.com/sayac007/EnergyBlast` as **public**, without initial files.
-Then this initial commit can be pushed and implementation continued on an
-isolated branch. No pull requests, automatic merges or publication workflows
-are created at this stage.
+The public repository is [sayac007/EnergyBlast](https://github.com/sayac007/EnergyBlast).
+Initial local work has been preserved and the workspace is connected. Active
+implementation proceeds on `feat/touch-mission-pilot`; no pull requests or
+releases are created at this stage. The operator's latest design choices are
+touch controls without a joystick, persistent stars/equipment and earned clues.
 
 ## Rights
 

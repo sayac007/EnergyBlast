@@ -20,3 +20,9 @@ qa-results/
 *.key
 .private/
 .DS_Store
+
+# Language / Android local caches
+__pycache__/
+*.pyc
+.gradle/
+local.properties

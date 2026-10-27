@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "language": "de",
+  "speaker": "Serena",
+  "model": "Qwen3-TTS-12Hz-0.6B-CustomVoice",
+  "model_source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice/tree/85e237c12c027371202489a0ec509ded67b5e4b5",
+  "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+  "dataset_license": "Not separately specified by publisher",
+  "human_listening_review": "OPEN for new mission clips",
+  "owner_reuse_permission": "Explicit operator instruction 2026-10-27; matching public audio only",
+  "clips": [
+    {
+      "id": "success",
+      "text": "Wunderbar! Das hast du gut gemacht.",
+      "file": "success.ogg",
+      "sha256": "791b176f20c8f1cf102ae3f55cb048be2e7d77c4a40c68da3ea8bbbe479cf1fc",
+      "seconds": 4.04,
+      "playback_gain_db": 12.121859,
+      "source": "Kinderwelt exact approved reuse",
+      "source_file": "voice_de_2dc0c4add4916ef770ff.ogg",
+      "source_manifest_sha256": "410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44"
+    },
+    {
+      "id": "again",
+      "text": "Schau noch einmal. Du kannst es ausprobieren.",
+      "file": "again.ogg",
+      "sha256": "bb5f424521bd4f8699f8cbc900eb892e169554d99832aab5fabd507f4af53b94",
+      "seconds": 4.36,
+      "playback_gain_db": 7.93266,
+      "source": "Kinderwelt exact approved reuse",
+      "source_file": "voice_de_192b4f5168798f6a662a.ogg",
+      "source_manifest_sha256": "410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44"
+    },
+    {
+      "id": "praise_1",
+      "text": "Sehr klug entschieden!",
+      "file": "praise_1.ogg",
+      "sha256": "351df87d10e95bf9894dc55633dfae8489248b35eabf8e11f7e7d54c924cb359",
+      "seconds": 2.44,
+      "playback_gain_db": 8.773583,
+      "source": "Kinderwelt exact approved reuse",
+      "source_file": "voice_de_94bb696769f2d4324ccf.ogg",
+      "source_manifest_sha256": "410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44"
+    },
+    {
+      "id": "praise_4",
+      "text": "Du hast genau hingeschaut. Klasse!",
+      "file": "praise_4.ogg",
+      "sha256": "68c90416a3197428191c5dcdb18b9206c707555b83097a5063dc3367ececa145",
+      "seconds": 3.72,
+      "playback_gain_db": 5.122957,
+      "source": "Kinderwelt exact approved reuse",
+      "source_file": "voice_de_dcd3f45b22edab5db8cc.ogg",
+      "source_manifest_sha256": "410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44"
+    },
+    {
+      "id": "gate",
+      "text": "Drei Lichter. Dann öffnet sich das Tor.",
+      "file": "gate.ogg",
+      "sha256": "ed12f5d69e728f131ced99cb54d10bbc2f75fa2d5648a88116800ec969c65043",
+      "seconds": 5.64,
+      "playback_gain_db": 6.5929160158278215,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "move",
+      "text": "Tippe auf den Boden. Dein Roboter läuft dorthin.",
+      "file": "move.ogg",
+      "sha256": "585216de6028c40f940ef6ad236873cc5941a80e9a03060b890fbbcf80d235fe",
+      "seconds": 4.68,
+      "playback_gain_db": 10.986769290074022,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "hints_empty",
+      "text": "Sammle Hinweise mit einer Mission.",
+      "file": "hints_empty.ogg",
+      "sha256": "957448e0df619782a6f09a6bea32bedf4b88fb3c2a596bac5ed39feca4419391",
+      "seconds": 3.48,
+      "playback_gain_db": 6.675289496019978,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "hint_bank",
+      "text": "Suche hinter der blauen Kiste.",
+      "file": "hint_bank.ogg",
+      "sha256": "329954c0e30997bfede9b6f288eb2d1b61f3f588528a7c6e176a9ccf75583e1f",
+      "seconds": 3.4,
+      "playback_gain_db": 3.3828345137283518,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "hint_guardian",
+      "text": "Suche hinter dem großen Versteck.",
+      "file": "hint_guardian.ogg",
+      "sha256": "a52c2cea9f6d9f4e2fb6c742eaad9bbc18a6a5d046bca253ad56d81d113cbc86",
+      "seconds": 3.24,
+      "playback_gain_db": 11.04971103332442,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "trap",
+      "text": "Tippe auf einen Platz für dein Fangfeld.",
+      "file": "trap.ogg",
+      "sha256": "7b105cb095902a545aabbdc21998d749666bdf1878714db2ed2646a362bcdf09",
+      "seconds": 3.48,
+      "playback_gain_db": 4.753930870579027,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "found",
+      "text": "Ein geheimer Fund! Sterne und Ausrüstung für dich.",
+      "file": "found.ogg",
+      "sha256": "82c6bc9523367d2492d03f5a2ca7ad9d5383343d67759393966380f0fe139222",
+      "seconds": 5.4,
+      "playback_gain_db": 5.806578878746182,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "upgrade",
+      "text": "Deine Ausrüstung ist stärker geworden.",
+      "file": "upgrade.ogg",
+      "sha256": "038d65d33e33578460fba47e9658dcf902927384695cbaf4e5a7bf32bb6285d4",
+      "seconds": 3.32,
+      "playback_gain_db": 4.740780483352825,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "intro_guardian",
+      "text": "Der Wächter kommt. Bleibe im Versteck.",
+      "file": "intro_guardian.ogg",
+      "sha256": "8da907fce1bcd745fbddf6d813f96caf853cd01d95e39bc23a830ebb52c53566",
+      "seconds": 3.72,
+      "playback_gain_db": 9.780952953728018,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "fire",
+      "text": "Jetzt schießen. Beobachte die Spur.",
+      "file": "fire.ogg",
+      "sha256": "5186f9d5e05225541c22ba35361abbed1f972194a33a953ad2e5441fd2fe19c5",
+      "seconds": 4.28,
+      "playback_gain_db": 6.5027730751473936,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "gate_closed",
+      "text": "Drei Lichter. Dann geht es los.",
+      "file": "gate_closed.ogg",
+      "sha256": "076fa2b62f4a92deac5411f8c001455eeea88f9abdbdc1a542d4b00723895e8a",
+      "seconds": 3.48,
+      "playback_gain_db": 6.619134518214899,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "seen",
+      "text": "Zurück ins Versteck. Ein neuer Versuch.",
+      "file": "seen.ogg",
+      "sha256": "57fc8eec8bcb7611e3757ef01f553de21a567064e4ab547ff5c46009ad65fe21",
+      "seconds": 3.64,
+      "playback_gain_db": 4.355044890669461,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "intro_bank",
+      "text": "Triff den gelben Knopf über die Wand.",
+      "file": "intro_bank.ogg",
+      "sha256": "ee5cb272d7e07fa9b2afcc21034d07623664803d58d1de735d7d541a29fb82bf",
+      "seconds": 3.32,
+      "playback_gain_db": 7.423579401973636,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "predict",
+      "text": "Wo landet der Schuss? Tippe auf die Stelle.",
+      "file": "predict.ogg",
+      "sha256": "f93a2e6bc993a1b1149cc7607f83f6923fa0b3a2c379c3ab78cbd79c0bae87b0",
+      "seconds": 3.96,
+      "playback_gain_db": 4.689009145935056,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "aim",
+      "text": "Tippe auf die leuchtende Wand.",
+      "file": "aim.ogg",
+      "sha256": "96b8caa71696f5f0a250d98d0b5be976769ce405c2768ca6b806cc67667a1c27",
+      "seconds": 3.4,
+      "playback_gain_db": 8.441184353247953,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    }
+  ]
+}

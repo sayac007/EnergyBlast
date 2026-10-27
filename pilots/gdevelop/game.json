@@ -1,0 +1,341 @@
+{
+  "firstLayout": "Pilot",
+  "gdVersion": {
+    "build": 269,
+    "major": 5,
+    "minor": 6,
+    "revision": 0
+  },
+  "properties": {
+    "adaptGameResolutionAtRuntime": true,
+    "antialiasingMode": "MSAA",
+    "antialisingEnabledOnMobile": false,
+    "folderProject": false,
+    "orientation": "default",
+    "packageName": "org.example.energyblast.gdevelop",
+    "pixelsRounding": false,
+    "projectUuid": "",
+    "scaleMode": "linear",
+    "sizeOnStartupMode": "adaptWidth",
+    "templateSlug": "",
+    "version": "0.1.0",
+    "name": "EnergyBlast Touch Pilot",
+    "description": "",
+    "author": "",
+    "windowWidth": 720,
+    "windowHeight": 1280,
+    "latestCompilationDirectory": "",
+    "maxFPS": 60,
+    "minFPS": 20,
+    "verticalSync": false,
+    "platformSpecificAssets": {},
+    "loadingScreen": {
+      "backgroundColor": 0,
+      "backgroundFadeInDuration": 0.2,
+      "backgroundImageResourceName": "",
+      "gdevelopLogoStyle": "light",
+      "logoAndProgressFadeInDuration": 0.2,
+      "logoAndProgressLogoFadeInDelay": 0,
+      "minDuration": 0,
+      "progressBarColor": 16777215,
+      "progressBarHeight": 20,
+      "progressBarMaxWidth": 200,
+      "progressBarMinWidth": 40,
+      "progressBarWidthPercent": 30,
+      "showGDevelopSplash": false,
+      "showProgressBar": true
+    },
+    "watermark": {
+      "placement": "bottom-left",
+      "showWatermark": false
+    },
+    "authorIds": [],
+    "authorUsernames": [],
+    "categories": [],
+    "playableDevices": [
+      "mobile"
+    ],
+    "extensionProperties": [],
+    "platforms": [
+      {
+        "name": "GDevelop JS platform"
+      }
+    ],
+    "currentPlatform": "GDevelop JS platform",
+    "disableRuntimeMetrics": true,
+    "showGDevelopSplash": false
+  },
+  "resources": {
+    "resources": [
+      {
+        "kind": "model3D",
+        "name": "robot.glb",
+        "file": "assets/robot.glb",
+        "userAdded": true
+      },
+      {
+        "kind": "image",
+        "name": "white.png",
+        "file": "assets/white.png",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "success.ogg",
+        "file": "assets/success.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "again.ogg",
+        "file": "assets/again.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "praise_1.ogg",
+        "file": "assets/praise_1.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "praise_4.ogg",
+        "file": "assets/praise_4.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "gate.ogg",
+        "file": "assets/gate.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "move.ogg",
+        "file": "assets/move.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "hints_empty.ogg",
+        "file": "assets/hints_empty.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "hint_bank.ogg",
+        "file": "assets/hint_bank.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "hint_guardian.ogg",
+        "file": "assets/hint_guardian.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "trap.ogg",
+        "file": "assets/trap.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "found.ogg",
+        "file": "assets/found.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "upgrade.ogg",
+        "file": "assets/upgrade.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "intro_guardian.ogg",
+        "file": "assets/intro_guardian.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "fire.ogg",
+        "file": "assets/fire.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "gate_closed.ogg",
+        "file": "assets/gate_closed.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "seen.ogg",
+        "file": "assets/seen.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "intro_bank.ogg",
+        "file": "assets/intro_bank.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "predict.ogg",
+        "file": "assets/predict.ogg",
+        "userAdded": true
+      },
+      {
+        "kind": "audio",
+        "name": "aim.ogg",
+        "file": "assets/aim.ogg",
+        "userAdded": true
+      }
+    ]
+  },
+  "objects": [],
+  "objectsFolderStructure": {
+    "folderName": "__ROOT"
+  },
+  "objectsGroups": [],
+  "variables": [],
+  "layouts": [
+    {
+      "b": 52,
+      "disableInputWhenNotFocused": true,
+      "mangledName": "Pilot",
+      "name": "Pilot",
+      "r": 16,
+      "standardSortMethod": true,
+      "stopSoundsOnStartup": true,
+      "title": "",
+      "v": 35,
+      "uiSettings": {},
+      "objectsGroups": [],
+      "variables": [],
+      "instances": [],
+      "objects": [
+        {
+          "assetStoreId": "",
+          "name": "Cube",
+          "type": "Scene3D::Cube3DObject",
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "content": {
+            "width": 100,
+            "height": 100,
+            "depth": 100,
+            "enableTextureTransparency": false,
+            "facesOrientation": "Y",
+            "frontFaceResourceName": "white.png",
+            "backFaceResourceName": "white.png",
+            "backFaceUpThroughWhichAxisRotation": "X",
+            "leftFaceResourceName": "white.png",
+            "rightFaceResourceName": "white.png",
+            "topFaceResourceName": "white.png",
+            "bottomFaceResourceName": "white.png",
+            "frontFaceVisible": true,
+            "backFaceVisible": true,
+            "leftFaceVisible": true,
+            "rightFaceVisible": true,
+            "topFaceVisible": true,
+            "bottomFaceVisible": true,
+            "frontFaceResourceRepeat": false,
+            "backFaceResourceRepeat": false,
+            "leftFaceResourceRepeat": false,
+            "rightFaceResourceRepeat": false,
+            "topFaceResourceRepeat": false,
+            "bottomFaceResourceRepeat": false,
+            "materialType": "StandardWithoutMetalness",
+            "tint": "255;255;255",
+            "isCastingShadow": true,
+            "isReceivingShadow": true
+          }
+        },
+        {
+          "assetStoreId": "",
+          "name": "Robot",
+          "type": "Scene3D::Model3DObject",
+          "variables": [],
+          "effects": [],
+          "behaviors": [],
+          "content": {
+            "centerLocation": "CenteredOnZ",
+            "crossfadeDuration": 0.10000000149011612,
+            "depth": 180,
+            "height": 50,
+            "isCastingShadow": true,
+            "isReceivingShadow": true,
+            "keepAspectRatio": true,
+            "materialType": "StandardWithoutMetalness",
+            "modelResourceName": "robot.glb",
+            "originLocation": "ModelOrigin",
+            "rotationX": 90,
+            "rotationY": 0,
+            "rotationZ": 90,
+            "width": 80,
+            "animations": []
+          }
+        }
+      ],
+      "objectsFolderStructure": {
+        "folderName": "__ROOT",
+        "children": [
+          {
+            "objectName": "Cube"
+          },
+          {
+            "objectName": "Robot"
+          }
+        ]
+      },
+      "events": [
+        {
+          "type": "BuiltinCommonInstructions::JsCode",
+          "inlineCode": "// Native GDevelop scene/objects/renderer. Same JSON rules and original GLB as Godot.\nif (!runtimeScene.energyblast) {\n  runtimeScene.getGame().enableMetrics(false);\n  const DEF = {\n  \"schema\": 1,\n  \"id\": \"energyblast-touch-01\",\n  \"language\": \"de\",\n  \"controls\": \"tap_to_move_explicit_aim_and_fire\",\n  \"arena\": [\n    -7,\n    -5,\n    14,\n    10\n  ],\n  \"player\": {\n    \"speed\": 3.0,\n    \"radius\": 0.27\n  },\n  \"guardian\": {\n    \"speed\": 1.6,\n    \"range\": 5.5,\n    \"fov_degrees\": 70,\n    \"notice_seconds\": 1.0\n  },\n  \"gate\": {\n    \"period\": 8.0,\n    \"open_seconds\": 3.0,\n    \"warning_seconds\": 3.0\n  },\n  \"hint_reward_per_mission\": 2,\n  \"rewards\": {\n    \"mission:bank\": 75,\n    \"skill:bank\": 25,\n    \"secret:bank\": 50,\n    \"mission:guardian\": 100,\n    \"skill:guardian\": 25,\n    \"secret:guardian\": 50\n  },\n  \"unlocks\": [\n    {\n      \"id\": \"prism\",\n      \"stars\": 100,\n      \"effect\": \"two_bounces\"\n    },\n    {\n      \"id\": \"armor\",\n      \"stars\": 160,\n      \"effect\": \"notice_grace_plus_0.4\"\n    },\n    {\n      \"id\": \"boots\",\n      \"stars\": 230,\n      \"effect\": \"speed_plus_0.35\"\n    },\n    {\n      \"id\": \"cloak\",\n      \"stars\": 300,\n      \"effect\": \"vision_range_times_0.75\"\n    }\n  ],\n  \"missions\": [\n    {\n      \"id\": \"bank\",\n      \"title\": \"Bandenschalter\",\n      \"spawn\": [\n        -4,\n        3.2\n      ],\n      \"goal\": [\n        4.5,\n        0.0\n      ],\n      \"reflectors\": [\n        [\n          -6.7,\n          -4.6,\n          13.4,\n          0.25\n        ],\n        [\n          6.45,\n          -4.1,\n          0.25,\n          8.2\n        ]\n      ],\n      \"covers\": [\n        [\n          -0.7,\n          -0.6,\n          1.4,\n          3.6\n        ],\n        [\n          -5.3,\n          -1.8,\n          1.5,\n          1.0\n        ]\n      ],\n      \"secret\": {\n        \"position\": [\n          -4.5,\n          -2.5\n        ],\n        \"item\": \"wide_lens\",\n        \"hint_landmark\": [\n          -4.5,\n          -1.3\n        ]\n      },\n      \"description\": \"Über die Wand zum Schalter.\",\n      \"observation\": \"Predict a point beyond the bounce before firing; show actual trace afterward.\"\n    },\n    {\n      \"id\": \"guardian\",\n      \"title\": \"Wächter und Energietor\",\n      \"spawn\": [\n        -5.5,\n        3.5\n      ],\n      \"goal\": [\n        5.2,\n        -3.5\n      ],\n      \"reflectors\": [],\n      \"covers\": [\n        [\n          -3,\n          -1.5,\n          2,\n          3\n        ],\n        [\n          0.8,\n          0.4,\n          1.6,\n          1.8\n        ],\n        [\n          3.5,\n          -4.7,\n          0.25,\n          3.7\n        ]\n      ],\n      \"gate_rect\": [\n        3.75,\n        -1.15,\n        2.95,\n        0.3\n      ],\n      \"staging\": [\n        5.1,\n        0.0\n      ],\n      \"patrol\": [\n        [\n          -4,\n          -2.6\n        ],\n        [\n          2.95,\n          -2.6\n        ],\n        [\n          2.95,\n          2.9\n        ],\n        [\n          -4,\n          2.9\n        ]\n      ],\n      \"secret\": {\n        \"position\": [\n          -1.8,\n          -2.4\n        ],\n        \"item\": \"quiet_boots\",\n        \"hint_landmark\": [\n          -2,\n          -0.4\n        ]\n      },\n      \"description\": \"Der Wächter kommt. Bleibe im Versteck. Drei Lichter zeigen das Tor.\",\n      \"observation\": \"Use cover or capture field; prepare at the gate, then tap through its visible opening.\"\n    }\n  ]\n}\n;\n  const AUDIO = {\"success\":{\"id\":\"success\",\"text\":\"Wunderbar! Das hast du gut gemacht.\",\"file\":\"success.ogg\",\"sha256\":\"791b176f20c8f1cf102ae3f55cb048be2e7d77c4a40c68da3ea8bbbe479cf1fc\",\"seconds\":4.04,\"playback_gain_db\":12.121859,\"source\":\"Kinderwelt exact approved reuse\",\"source_file\":\"voice_de_2dc0c4add4916ef770ff.ogg\",\"source_manifest_sha256\":\"410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44\"},\"again\":{\"id\":\"again\",\"text\":\"Schau noch einmal. Du kannst es ausprobieren.\",\"file\":\"again.ogg\",\"sha256\":\"bb5f424521bd4f8699f8cbc900eb892e169554d99832aab5fabd507f4af53b94\",\"seconds\":4.36,\"playback_gain_db\":7.93266,\"source\":\"Kinderwelt exact approved reuse\",\"source_file\":\"voice_de_192b4f5168798f6a662a.ogg\",\"source_manifest_sha256\":\"410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44\"},\"praise_1\":{\"id\":\"praise_1\",\"text\":\"Sehr klug entschieden!\",\"file\":\"praise_1.ogg\",\"sha256\":\"351df87d10e95bf9894dc55633dfae8489248b35eabf8e11f7e7d54c924cb359\",\"seconds\":2.44,\"playback_gain_db\":8.773583,\"source\":\"Kinderwelt exact approved reuse\",\"source_file\":\"voice_de_94bb696769f2d4324ccf.ogg\",\"source_manifest_sha256\":\"410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44\"},\"praise_4\":{\"id\":\"praise_4\",\"text\":\"Du hast genau hingeschaut. Klasse!\",\"file\":\"praise_4.ogg\",\"sha256\":\"68c90416a3197428191c5dcdb18b9206c707555b83097a5063dc3367ececa145\",\"seconds\":3.72,\"playback_gain_db\":5.122957,\"source\":\"Kinderwelt exact approved reuse\",\"source_file\":\"voice_de_dcd3f45b22edab5db8cc.ogg\",\"source_manifest_sha256\":\"410f5b3aafdcc272f7ae34ec496b208c166dd73c881f230e801480e18aefcd44\"},\"gate\":{\"id\":\"gate\",\"text\":\"Drei Lichter. Dann öffnet sich das Tor.\",\"file\":\"gate.ogg\",\"sha256\":\"ed12f5d69e728f131ced99cb54d10bbc2f75fa2d5648a88116800ec969c65043\",\"seconds\":5.64,\"playback_gain_db\":6.5929160158278215,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"move\":{\"id\":\"move\",\"text\":\"Tippe auf den Boden. Dein Roboter läuft dorthin.\",\"file\":\"move.ogg\",\"sha256\":\"585216de6028c40f940ef6ad236873cc5941a80e9a03060b890fbbcf80d235fe\",\"seconds\":4.68,\"playback_gain_db\":10.986769290074022,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"hints_empty\":{\"id\":\"hints_empty\",\"text\":\"Sammle Hinweise mit einer Mission.\",\"file\":\"hints_empty.ogg\",\"sha256\":\"957448e0df619782a6f09a6bea32bedf4b88fb3c2a596bac5ed39feca4419391\",\"seconds\":3.48,\"playback_gain_db\":6.675289496019978,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"hint_bank\":{\"id\":\"hint_bank\",\"text\":\"Suche hinter der blauen Kiste.\",\"file\":\"hint_bank.ogg\",\"sha256\":\"329954c0e30997bfede9b6f288eb2d1b61f3f588528a7c6e176a9ccf75583e1f\",\"seconds\":3.4,\"playback_gain_db\":3.3828345137283518,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"hint_guardian\":{\"id\":\"hint_guardian\",\"text\":\"Suche hinter dem großen Versteck.\",\"file\":\"hint_guardian.ogg\",\"sha256\":\"a52c2cea9f6d9f4e2fb6c742eaad9bbc18a6a5d046bca253ad56d81d113cbc86\",\"seconds\":3.24,\"playback_gain_db\":11.04971103332442,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"trap\":{\"id\":\"trap\",\"text\":\"Tippe auf einen Platz für dein Fangfeld.\",\"file\":\"trap.ogg\",\"sha256\":\"7b105cb095902a545aabbdc21998d749666bdf1878714db2ed2646a362bcdf09\",\"seconds\":3.48,\"playback_gain_db\":4.753930870579027,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"found\":{\"id\":\"found\",\"text\":\"Ein geheimer Fund! Sterne und Ausrüstung für dich.\",\"file\":\"found.ogg\",\"sha256\":\"82c6bc9523367d2492d03f5a2ca7ad9d5383343d67759393966380f0fe139222\",\"seconds\":5.4,\"playback_gain_db\":5.806578878746182,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"upgrade\":{\"id\":\"upgrade\",\"text\":\"Deine Ausrüstung ist stärker geworden.\",\"file\":\"upgrade.ogg\",\"sha256\":\"038d65d33e33578460fba47e9658dcf902927384695cbaf4e5a7bf32bb6285d4\",\"seconds\":3.32,\"playback_gain_db\":4.740780483352825,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"intro_guardian\":{\"id\":\"intro_guardian\",\"text\":\"Der Wächter kommt. Bleibe im Versteck.\",\"file\":\"intro_guardian.ogg\",\"sha256\":\"8da907fce1bcd745fbddf6d813f96caf853cd01d95e39bc23a830ebb52c53566\",\"seconds\":3.72,\"playback_gain_db\":9.780952953728018,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"fire\":{\"id\":\"fire\",\"text\":\"Jetzt schießen. Beobachte die Spur.\",\"file\":\"fire.ogg\",\"sha256\":\"5186f9d5e05225541c22ba35361abbed1f972194a33a953ad2e5441fd2fe19c5\",\"seconds\":4.28,\"playback_gain_db\":6.5027730751473936,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"gate_closed\":{\"id\":\"gate_closed\",\"text\":\"Drei Lichter. Dann geht es los.\",\"file\":\"gate_closed.ogg\",\"sha256\":\"076fa2b62f4a92deac5411f8c001455eeea88f9abdbdc1a542d4b00723895e8a\",\"seconds\":3.48,\"playback_gain_db\":6.619134518214899,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"seen\":{\"id\":\"seen\",\"text\":\"Zurück ins Versteck. Ein neuer Versuch.\",\"file\":\"seen.ogg\",\"sha256\":\"57fc8eec8bcb7611e3757ef01f553de21a567064e4ab547ff5c46009ad65fe21\",\"seconds\":3.64,\"playback_gain_db\":4.355044890669461,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"intro_bank\":{\"id\":\"intro_bank\",\"text\":\"Triff den gelben Knopf über die Wand.\",\"file\":\"intro_bank.ogg\",\"sha256\":\"ee5cb272d7e07fa9b2afcc21034d07623664803d58d1de735d7d541a29fb82bf\",\"seconds\":3.32,\"playback_gain_db\":7.423579401973636,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"predict\":{\"id\":\"predict\",\"text\":\"Wo landet der Schuss? Tippe auf die Stelle.\",\"file\":\"predict.ogg\",\"sha256\":\"f93a2e6bc993a1b1149cc7607f83f6923fa0b3a2c379c3ab78cbd79c0bae87b0\",\"seconds\":3.96,\"playback_gain_db\":4.689009145935056,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"},\"aim\":{\"id\":\"aim\",\"text\":\"Tippe auf die leuchtende Wand.\",\"file\":\"aim.ogg\",\"sha256\":\"96b8caa71696f5f0a250d98d0b5be976769ce405c2768ca6b806cc67667a1c27\",\"seconds\":3.4,\"playback_gain_db\":8.441184353247953,\"source\":\"New complete mission sentence; same local synthetic speaker\",\"model_sha256\":\"bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb\"}};\n  class Pilot {\n    constructor(scene) {\n      this.scene = scene;\n      this.layer = scene.getLayer(\"\");\n      this.models = [];\n      this.meshes = [];\n      this.saved = { earned: {}, clues: [], weapon: \"pulse\" };\n      try {\n        const v = JSON.parse(localStorage.getItem(\"energyblast-progress\"));\n        if (v && v.earned && Array.isArray(v.clues)) this.saved = v;\n      } catch (e) {}\n      this.saved.earned = Object.fromEntries(\n        Object.entries(this.saved.earned).filter(\n          ([k, v]) => v === true && DEF.rewards[k],\n        ),\n      );\n      this.saved.clues = [...new Set(this.saved.clues)]\n        .filter((x) => /^(bank|guardian):[12]$/.test(x))\n        .slice(0, this.cluesEarned());\n      this.layer.setCameraX(0);\n      this.layer.setCameraY(1300);\n      this.layer.setCameraZ(1900);\n      this.layer.setCameraZoom(0.4556962);\n      this.layer.setCameraRotationX(34.38);\n      this.layer\n        .get3DRendererObject()\n        .add(new THREE.AmbientLight(0xffffff, 0.7));\n      const light = new THREE.DirectionalLight(0xffffff, 0.7);\n      light.position.set(-1000, 500, 1800);\n      this.layer.get3DRendererObject().add(light);\n      this.canvas = document.querySelector(\"canvas\");\n      this.ui();\n      this.load(0);\n      this.menu();\n      this.sound = true;\n      this.queue = [];\n      this.important = [];\n      window.addEventListener(\"pointerdown\", (e) => {\n        if (e.target.closest(\"[data-ebui]\") || this.paused) return;\n        this.tap(e.clientX, e.clientY);\n      });\n      document.addEventListener(\"energyblast-pause\", () =>\n        this.setBackground(true),\n      );\n      document.addEventListener(\"energyblast-resume\", () =>\n        this.setBackground(false),\n      );\n      document.addEventListener(\"visibilitychange\", () =>\n        this.setBackground(document.hidden),\n      );\n    }\n    setBackground(value) {\n      if (!!this.background === value) return;\n      this.background = value;\n      if (value) {\n        this.resumeAudio =\n          !!this.audio && !this.audio.paused && !this.audio.ended;\n        if (this.audio) this.audio.pause();\n      } else if (this.resumeAudio && this.sound && this.audio) {\n        this.resumeAudio = false;\n        this.audio.play().catch(() => {});\n      }\n    }\n    total() {\n      return Object.keys(this.saved.earned).reduce(\n        (n, k) => n + (DEF.rewards[k] || 0),\n        0,\n      );\n    }\n    cluesEarned() {\n      return (\n        [\"bank\", \"guardian\"].filter((m) => this.saved.earned[\"mission:\" + m])\n          .length * 2\n      );\n    }\n    hints() {\n      return this.cluesEarned() - this.saved.clues.length;\n    }\n    clueLevel() {\n      return this.saved.clues.filter((x) => x.startsWith(this.m.id + \":\"))\n        .length;\n    }\n    save() {\n      try {\n        localStorage.setItem(\n          \"energyblast-progress\",\n          JSON.stringify(this.saved),\n        );\n      } catch (e) {\n        this.status(\"Speichern nicht möglich.\");\n      }\n    }\n    award(id) {\n      if (this.saved.earned[id]) return 0;\n      const before = this.total();\n      this.saved.earned[id] = true;\n      if (before < 100 && this.total() >= 100) this.saved.weapon = \"prism\";\n      this.save();\n      this.score();\n      return DEF.rewards[id];\n    }\n    stats() {\n      let n = this.total();\n      return {\n        speed: 3 + (n >= 230 ? Math.min(0.5, (n - 220) / 210) : 0),\n        grace: n >= 160 ? 1.4 : 1,\n        cloak: n >= 300 ? Math.min(0.35, (n - 280) / 180) : 0,\n        bounces: n >= 100 && this.saved.weapon === \"prism\" ? 2 : 1,\n        lens: !!this.saved.earned[\"secret:bank\"],\n        quiet: !!this.saved.earned[\"secret:guardian\"],\n      };\n    }\n    say(id) {\n      if (!this.sound || !AUDIO[id]) return;\n      if (this.audio && !this.audio.paused) {\n        if ([\"success\", \"found\", \"upgrade\"].includes(id)) {\n          if (!this.important.includes(id)) this.important.push(id);\n        } else this.next = id;\n        return;\n      }\n      const row = AUDIO[id],\n        res = gdjs.projectData.resources.resources.find(\n          (r) => r.name === row.file,\n        );\n      this.audio = new Audio(res.file);\n      this.context ||= new (window.AudioContext || window.webkitAudioContext)();\n      this.context.resume();\n      const source = this.context.createMediaElementSource(this.audio),\n        gain = this.context.createGain();\n      gain.gain.value = Math.pow(10, (row.playback_gain_db - 1) / 20);\n      source.connect(gain);\n      gain.connect(this.context.destination);\n      this.audio.onended = () => {\n        source.disconnect();\n        gain.disconnect();\n        const n = this.important.shift() || this.next;\n        if (n === this.next) this.next = null;\n        if (n) this.say(n);\n      };\n      this.audio.play().catch(() => {});\n    }\n    cube(x, y, w, h, depth, color, z = 0) {\n      let o = this.scene.createObject(\"Cube\");\n      o.setPosition(x * 100, y * 100);\n      o.setZ(z * 100);\n      o.setWidth(w * 100);\n      o.setHeight(h * 100);\n      o.setDepth(depth * 100);\n      o.setColor(color);\n      this.models.push(o);\n      return o;\n    }\n    robot(p, scale = 1) {\n      let o = this.scene.createObject(\"Robot\");\n      o.setWidth(80 * scale);\n      o.setHeight(50 * scale);\n      o.setDepth(180 * scale);\n      o.setPosition(p[0] * 100, p[1] * 100);\n      o.setZ(0);\n      this.models.push(o);\n      return o;\n    }\n    load(index) {\n      for (const o of this.models) o.deleteFromScene(this.scene);\n      this.models = [];\n      for (const o of this.meshes) {\n        this.layer.get3DRendererObject().remove(o);\n        o.geometry.dispose();\n        o.material.dispose();\n      }\n      this.meshes = [];\n      this.m = DEF.missions[index];\n      this.index = index;\n      this.p = [...this.m.spawn];\n      this.g = [...(this.m.patrol?.[0] || [0, 0])];\n      this.forward = [1, 0];\n      this.patrol = 0;\n      this.clock = 0;\n      this.notice = 0;\n      this.detected = 0;\n      this.frozen = 0;\n      this.retry = 0;\n      this.solved = false;\n      this.mode = \"move\";\n      this.path = [];\n      this.aim = [0.58, -0.81];\n      this.prediction = null;\n      this.trace = [];\n      this.traceTime = 0;\n      this.clueTime = 0;\n      this.trap = null;\n      this.trapUsed = false;\n      this.pending = false;\n      this.walls = [\n        { r: [-7, -5, 14, 0.3], type: \"border\" },\n        { r: [-7, 4.7, 14, 0.3], type: \"border\" },\n        { r: [-7, -5, 0.3, 10], type: \"border\" },\n        { r: [6.7, -5, 0.3, 10], type: \"border\" },\n      ];\n      this.cube(-7, -5, 14, 10, 0.15, \"40;76;89\", -0.2);\n      for (const r of this.m.covers) this.walls.push({ r, type: \"cover\" });\n      for (const r of this.m.reflectors)\n        this.walls.push({ r, type: \"reflector\" });\n      for (const w of this.walls)\n        this.cube(\n          ...w.r,\n          w.type === \"cover\" ? 1.35 : 1,\n          w.type === \"reflector\" ? \"85;229;219\" : \"66;110;140\",\n        );\n      this.hero = this.robot(this.p);\n      this.target = this.cube(\n        this.m.goal[0] - 0.4,\n        this.m.goal[1] - 0.4,\n        0.8,\n        0.8,\n        0.5,\n        \"255;200;94\",\n      );\n      const sp = this.m.secret.position;\n      this.secret = this.cube(\n        sp[0] - 0.3,\n        sp[1] - 0.25,\n        0.6,\n        0.5,\n        0.5,\n        \"200;140;245\",\n      );\n      this.secret.hide(true);\n      if (this.m.patrol) {\n        this.guard = this.robot(this.g, 1.35);\n        const r = this.m.gate_rect;\n        this.gate = this.cube(...r, 1.2, \"225;150;135\");\n        this.lights = [];\n        for (let i = 0; i < 3; i++)\n          this.lights.push(\n            this.cube(4 + i * 0.65, -1, 0.3, 0.2, 0.25, \"70;90;110\", 1.5),\n          );\n      }\n      this.layer.setCameraRotationX(34.38);\n      this.status(\"Tippe auf den Boden.\");\n      this.score();\n    }\n    activeWalls() {\n      return this.walls.concat(\n        this.m.gate_rect && !this.open()\n          ? [{ r: this.m.gate_rect, type: \"gate\" }]\n          : [],\n      );\n    }\n    open() {\n      return (\n        this.clock % DEF.gate.period >= DEF.gate.period - DEF.gate.open_seconds\n      );\n    }\n    distance(a, b) {\n      return Math.hypot(a[0] - b[0], a[1] - b[1]);\n    }\n    blocked(p) {\n      return (\n        p[0] < -6.5 ||\n        p[0] > 6.5 ||\n        p[1] < -4.5 ||\n        p[1] > 4.5 ||\n        this.activeWalls().some(\n          ({ r }) =>\n            p[0] > r[0] - 0.28 &&\n            p[0] < r[0] + r[2] + 0.28 &&\n            p[1] > r[1] - 0.28 &&\n            p[1] < r[1] + r[3] + 0.28,\n        )\n      );\n    }\n    ray(o, d, length, walls) {\n      let best = null,\n        tmax = length;\n      for (const w of walls) {\n        let r = w.r;\n        for (const [value, axis, n] of [\n          [r[0], 0, [-1, 0]],\n          [r[0] + r[2], 0, [1, 0]],\n          [r[1], 1, [0, -1]],\n          [r[1] + r[3], 1, [0, 1]],\n        ]) {\n          if (Math.abs(d[axis]) < 1e-6) continue;\n          let t = (value - o[axis]) / d[axis],\n            k = 1 - axis,\n            p = [o[0] + d[0] * t, o[1] + d[1] * t];\n          if (\n            t > 0.001 &&\n            t < tmax &&\n            p[k] >= r[k] - 0.0001 &&\n            p[k] <= r[k] + r[k + 2] + 0.0001\n          ) {\n            tmax = t;\n            best = { p, n, t, type: w.type };\n          }\n        }\n      }\n      return best;\n    }\n    norm(d) {\n      let l = Math.hypot(...d) || 1;\n      return d.map((v) => v / l);\n    }\n    segment(p, a, b) {\n      let d = [b[0] - a[0], b[1] - a[1]],\n        t = Math.max(\n          0,\n          Math.min(\n            1,\n            ((p[0] - a[0]) * d[0] + (p[1] - a[1]) * d[1]) /\n              (d[0] * d[0] + d[1] * d[1] || 1),\n          ),\n        );\n      return this.distance(p, [a[0] + t * d[0], a[1] + t * d[1]]);\n    }\n    shot() {\n      let d = [...this.aim],\n        o = [this.p[0] + d[0] * 0.35, this.p[1] + d[1] * 0.35],\n        points = [o],\n        length = 28;\n      for (let b = 0; b < this.stats().bounces + 2; b++) {\n        let hit = this.ray(o, d, length, this.activeWalls());\n        if (!hit) {\n          points.push([o[0] + d[0] * length, o[1] + d[1] * length]);\n          break;\n        }\n        points.push(hit.p);\n        length -= hit.t;\n        if (hit.type !== \"reflector\" || b >= this.stats().bounces) break;\n        let dot = d[0] * hit.n[0] + d[1] * hit.n[1];\n        d = [d[0] - 2 * dot * hit.n[0], d[1] - 2 * dot * hit.n[1]];\n        o = [hit.p[0] + d[0] * 0.003, hit.p[1] + d[1] * 0.003];\n      }\n      return points;\n    }\n    navigate(target) {\n      const cell = (p) => [\n          Math.max(0, Math.min(35, Math.round((p[0] + 6.8) / 0.4))),\n          Math.max(0, Math.min(25, Math.round((p[1] + 4.8) / 0.4))),\n        ],\n        point = (c) => [c[0] * 0.4 - 6.8, c[1] * 0.4 - 4.8],\n        key = (c) => c[1] * 36 + c[0];\n      let start = cell(this.p),\n        end = cell(target);\n      if (this.blocked(point(end))) {\n        let best = 1e9;\n        for (let x = 0; x < 36; x++)\n          for (let y = 0; y < 26; y++) {\n            let p = point([x, y]),\n              d = this.distance(p, target);\n            if (!this.blocked(p) && d < best) {\n              best = d;\n              end = [x, y];\n            }\n          }\n      }\n      const queue = [start],\n        parent = new Map([[key(start), null]]);\n      let found = false;\n      for (let i = 0; i < queue.length; i++) {\n        let c = queue[i];\n        if (key(c) === key(end)) {\n          found = true;\n          break;\n        }\n        for (const [dx, dy] of [\n          [-1, 0],\n          [1, 0],\n          [0, -1],\n          [0, 1],\n          [-1, -1],\n          [1, -1],\n          [-1, 1],\n          [1, 1],\n        ]) {\n          let n = [c[0] + dx, c[1] + dy];\n          if (\n            n[0] < 0 ||\n            n[0] >= 36 ||\n            n[1] < 0 ||\n            n[1] >= 26 ||\n            parent.has(key(n)) ||\n            this.blocked(point(n))\n          )\n            continue;\n          if (\n            dx &&\n            dy &&\n            (this.blocked(point([c[0] + dx, c[1]])) ||\n              this.blocked(point([c[0], c[1] + dy])))\n          )\n            continue;\n          parent.set(key(n), c);\n          queue.push(n);\n        }\n      }\n      this.path = [];\n      if (found) {\n        for (let c = end; c; c = parent.get(key(c)))\n          this.path.unshift(point(c));\n      } else if (this.m.staging) {\n        this.say(\"gate_closed\");\n        this.navigate(this.m.staging);\n      }\n    }\n    tap(x, y) {\n      let rect = this.canvas.getBoundingClientRect(),\n        ray = new THREE.Raycaster();\n      ray.setFromCamera(\n        new THREE.Vector2(\n          ((x - rect.left) / rect.width) * 2 - 1,\n          -(((y - rect.top) / rect.height) * 2 - 1),\n        ),\n        this.layer.getRenderer().getThreeCamera(),\n      );\n      let p = new THREE.Vector3();\n      if (\n        !ray.ray.intersectPlane(\n          new THREE.Plane(new THREE.Vector3(0, 0, 1), 0),\n          p,\n        )\n      )\n        return;\n      let q = [\n        Math.max(-6.4, Math.min(6.4, p.x / 100)),\n        Math.max(-4.3, Math.min(4.3, -p.y / 100)),\n      ];\n      this.touch(q);\n    }\n    touch(p) {\n      if (this.retry) return;\n      if (this.mode === \"move\") this.navigate(p);\n      else if (this.mode === \"aim\")\n        this.aim = this.norm([p[0] - this.p[0], p[1] - this.p[1]]);\n      else if (this.mode === \"predict\") this.prediction = p;\n      else if (\n        this.mode === \"trap\" &&\n        !this.trapUsed &&\n        this.distance(p, this.p) < 3.5 &&\n        !this.blocked(p) &&\n        !this.ray(\n          this.p,\n          this.norm([p[0] - this.p[0], p[1] - this.p[1]]),\n          this.distance(p, this.p),\n          this.activeWalls(),\n        )\n      ) {\n        this.trap = p;\n        this.trapTime = 12;\n        this.trapUsed = true;\n        this.mode = \"move\";\n      }\n    }\n    fire() {\n      if (this.pending) return;\n      if (this.m.id === \"bank\" && !this.prediction) {\n        this.mode = \"predict\";\n        this.say(\"predict\");\n        return;\n      }\n      this.trace = this.shot();\n      this.traceTime = 2.2;\n      this.pending = true;\n      this.win = false;\n      if (this.m.id === \"guardian\")\n        for (let i = 1; i < this.trace.length; i++)\n          if (this.segment(this.g, this.trace[i - 1], this.trace[i]) < 0.7)\n            this.frozen = Math.max(this.frozen, 0.5);\n      for (let i = 1; i < this.trace.length - 1; i++)\n        if (\n          this.segment(this.m.goal, this.trace[i], this.trace[i + 1]) <\n          (this.stats().lens ? 0.7 : 0.6)\n        ) {\n          this.win = true;\n          this.trace = this.trace.slice(0, i + 2);\n          this.trace[i + 1] = this.m.goal;\n          break;\n        }\n    }\n    hint() {\n      if (this.hintDebounce > 0) return;\n      this.hintDebounce = 1.2;\n      let level = this.clueLevel();\n      if (level < 2) {\n        if (this.hints() <= 0) {\n          this.say(\"hints_empty\");\n          return;\n        }\n        this.saved.clues.push(this.m.id + \":\" + (level + 1));\n        this.save();\n      }\n      this.clueTime = 8;\n      this.say(\"hint_\" + this.m.id);\n      this.score();\n    }\n    finish(skill) {\n      if (this.solved) return;\n      this.solved = true;\n      let n = this.award(\"mission:\" + this.m.id);\n      if (skill) n += this.award(\"skill:\" + this.m.id);\n      this.say(\"success\");\n      this.path = [];\n      this.modal(\"Geschafft! + \" + n + \" ★\", [\n        [\"Geheimnisse suchen\", \"?\", () => this.close()],\n        [\"Nächste Karte\", \"▶\", () => this.menu()],\n        [\n          \"Noch einmal\",\n          \"↻\",\n          () => {\n            this.load(this.index);\n            this.close();\n            this.say(\"intro_\" + this.m.id);\n          },\n        ],\n      ]);\n    }\n    ui() {\n      const style = document.createElement(\"style\");\n      style.textContent =\n        \"html,body{margin:0;background:#102334!important;overflow:hidden}#eb{position:fixed;inset:0;color:#ecfff7;font:18px system-ui;pointer-events:none}#eb button{pointer-events:auto;color:#eafff5;background:#203f55;border:0;border-radius:14px;min-height:50px;font:14px system-ui;padding:6px;touch-action:manipulation}#eb button b{display:block;color:#61e6cd;font-size:25px}#eb .row{display:flex;gap:4px}#eb .row>*{flex:1}#eb .top{position:absolute;left:12px;right:12px;top:10px;display:flex;gap:8px;align-items:center}#eb .bottom{position:absolute;left:10px;right:10px;bottom:12px}#eb #eb-status{text-align:center;min-height:34px;font-size:14px}#eb .dialog{pointer-events:auto;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#19364a;padding:18px;border-radius:22px;width:min(82vw,440px);box-sizing:border-box;display:flex;flex-direction:column;gap:14px}\";\n      document.head.appendChild(style);\n      this.hud = document.createElement(\"div\");\n      this.hud.id = \"eb\";\n      this.hud.innerHTML =\n        '<div data-ebui class=\"top\"><strong id=\"eb-stars\" style=\"color:#ffd56a;flex:1\">★ 0</strong><span id=\"eb-hints\">? 0</span><button id=\"eb-cards\">▶ Karten</button><button id=\"eb-sound\">♫ Ton</button></div><div data-ebui class=\"bottom\"><div id=\"eb-status\"></div><div class=\"row\" id=\"eb-modes\"></div><div class=\"row\" id=\"eb-extra\"></div></div><div data-ebui id=\"eb-dialog\" class=\"dialog\"></div>';\n      document.body.appendChild(this.hud);\n      const button = (text, icon, parent, fn) => {\n        let b = document.createElement(\"button\");\n        b.innerHTML = \"<b>\" + icon + \"</b>\" + text;\n        b.onclick = (e) => {\n          e.stopPropagation();\n          fn();\n        };\n        parent.appendChild(b);\n        return b;\n      };\n      this.button = button;\n      for (const [id, text, icon] of [\n        [\"move\", \"Laufen\", \"♧\"],\n        [\"aim\", \"Zielen\", \"⌖\"],\n        [\"predict\", \"Tipp\", \"⊙\"],\n        [\"fire\", \"Schuss\", \"ϟ\"],\n        [\"trap\", \"Fangfeld\", \"◎\"],\n      ])\n        button(text, icon, this.hud.querySelector(\"#eb-modes\"), () => {\n          if (id === \"trap\" && this.m.id !== \"guardian\") return;\n          if (id === \"fire\") this.fire();\n          else {\n            this.mode = id;\n            this.path = [];\n            this.say(id === \"predict\" ? \"predict\" : id);\n          }\n        });\n      const row = this.hud.querySelector(\"#eb-extra\");\n      button(\"Hinweis\", \"?\", row, () => this.hint());\n      button(\"Erklären\", \"♫\", row, () => this.say(\"intro_\" + this.m.id));\n      button(\"Ausrüstung\", \"◇\", row, () => this.gear());\n      this.hud.querySelector(\"#eb-cards\").onclick = () => this.menu();\n      this.hud.querySelector(\"#eb-sound\").onclick = () => {\n        this.sound = !this.sound;\n        if (!this.sound) {\n          if (this.audio) this.audio.pause();\n          this.next = null;\n          this.important = [];\n        }\n      };\n      this.svg = document.createElementNS(\"http://www.w3.org/2000/svg\", \"svg\");\n      this.svg.setAttribute(\n        \"style\",\n        \"position:absolute;inset:0;width:100%;height:100%;pointer-events:none\",\n      );\n      this.hud.prepend(this.svg);\n    }\n    score() {\n      this.hud.querySelector(\"#eb-stars\").textContent = \"★ \" + this.total();\n      this.hud.querySelector(\"#eb-hints\").textContent = \"? \" + this.hints();\n    }\n    status(text) {\n      this.hud.querySelector(\"#eb-status\").textContent = text;\n    }\n    modal(title, actions) {\n      let d = this.hud.querySelector(\"#eb-dialog\");\n      d.replaceChildren();\n      const h = document.createElement(\"strong\");\n      h.textContent = title;\n      h.style.fontSize = \"24px\";\n      d.appendChild(h);\n      for (const [text, icon, fn] of actions) this.button(text, icon, d, fn);\n      d.style.display = \"flex\";\n      this.paused = true;\n    }\n    close() {\n      this.hud.querySelector(\"#eb-dialog\").style.display = \"none\";\n      this.paused = false;\n    }\n    menu() {\n      this.modal(\n        \"ENERGYBLAST\",\n        DEF.missions\n          .map((m, i) => [\n            m.title,\n            i === 0 ? \"↗\" : \"▣\",\n            () => {\n              this.load(i);\n              this.close();\n              if (this.audio) this.audio.pause();\n              this.next = null;\n              this.important = [];\n              this.say(\"intro_\" + m.id);\n            },\n          ])\n          .concat([[\"Weiter\", \"▶\", () => this.close()]]),\n      );\n    }\n    gear() {\n      this.modal(\n        \"Deine Ausrüstung\",\n        DEF.unlocks\n          .map((u) => [\n            (this.total() >= u.stars ? \"✓ \" : u.stars + \" ★ \") +\n              {\n                prism: \"Prisma\",\n                armor: \"Rüstung\",\n                boots: \"Stiefel\",\n                cloak: \"Tarnung\",\n              }[u.id],\n            \"◇\",\n            () => {\n              if (u.id === \"prism\" && this.total() >= 100) {\n                this.saved.weapon =\n                  this.saved.weapon === \"prism\" ? \"pulse\" : \"prism\";\n                this.save();\n              }\n              this.say(\"upgrade\");\n            },\n          ])\n          .concat([[\"Weiter\", \"▶\", () => this.close()]]),\n      );\n    }\n    line(points, color) {\n      if (points.length < 2) return;\n      let coords = points.map((p) => {\n        let v = new THREE.Vector3(p[0] * 100, -p[1] * 100, 8).project(\n          this.layer.getRenderer().getThreeCamera(),\n        );\n        let r = this.canvas.getBoundingClientRect();\n        return (\n          r.left +\n          (v.x + 1) * 0.5 * r.width +\n          \",\" +\n          (r.top + (1 - v.y) * 0.5 * r.height)\n        );\n      });\n      const line = document.createElementNS(\n        \"http://www.w3.org/2000/svg\",\n        \"polyline\",\n      );\n      line.setAttribute(\"points\", coords.join(\" \"));\n      line.setAttribute(\"stroke\", color);\n      line.setAttribute(\"stroke-width\", \"3\");\n      line.setAttribute(\"fill\", \"none\");\n      this.svg.appendChild(line);\n    }\n    update(dt) {\n      if (this.paused || this.background) return;\n      this.clock += dt;\n      this.traceTime -= dt;\n      this.clueTime -= dt;\n      this.hintDebounce = Math.max(0, (this.hintDebounce || 0) - dt);\n      this.svg.replaceChildren();\n      if (this.pending && this.traceTime < 1.45) {\n        this.pending = false;\n        if (this.win && this.m.id === \"bank\")\n          this.finish(\n            this.prediction && this.distance(this.prediction, this.m.goal) < 1,\n          );\n        else if (this.m.id === \"bank\") this.say(\"again\");\n      }\n      if (this.retry > 0) {\n        this.retry -= dt;\n        if (this.retry <= 0) {\n          this.p = [...this.m.spawn];\n          this.notice = 0;\n          this.trapUsed = false;\n        }\n      } else if (this.path.length) {\n        let t = this.path[0],\n          d = this.distance(t, this.p),\n          step = this.stats().speed * dt;\n        if (d < step) {\n          this.p = t;\n          this.path.shift();\n        } else {\n          let n = this.norm([t[0] - this.p[0], t[1] - this.p[1]]),\n            q = [this.p[0] + n[0] * step, this.p[1] + n[1] * step];\n          if (!this.blocked(q)) this.p = q;\n          else this.path = [];\n          this.hero.setAngle((Math.atan2(n[1], n[0]) * 180) / Math.PI);\n        }\n      }\n      this.hero.setPosition(this.p[0] * 100, this.p[1] * 100);\n      const fade = 1 - this.stats().cloak * 1.4;\n      this.hero.get3DRendererObject().traverse((n) => {\n        if (n.material) {\n          n.material.transparent = true;\n          n.material.opacity = fade;\n        }\n      });\n      const model = this.hero.get3DRendererObject();\n      if (model)\n        for (const name of [\"Leg_L\", \"Leg_R\", \"Arm_L\", \"Arm_R\"]) {\n          let node = model.getObjectByName(name);\n          if (node)\n            node.rotation.x =\n              Math.sin(this.clock * 11) *\n              (this.path.length ? 0.5 : 0.04) *\n              (name.endsWith(\"L\") ? 1 : -1);\n        }\n      if (this.m.patrol) this.tickGuard(dt);\n      const sp = this.m.secret.position,\n        dist = this.distance(this.p, sp);\n      this.secret.hide(\n        !!this.saved.earned[\"secret:\" + this.m.id] ||\n          dist > 2 ||\n          !!this.ray(\n            this.p,\n            this.norm([sp[0] - this.p[0], sp[1] - this.p[1]]),\n            dist - 0.05,\n            this.walls,\n          ),\n      );\n      if (this.secret.isVisible() && dist < 0.7) {\n        this.award(\"secret:\" + this.m.id);\n        this.say(\"found\");\n        this.secret.hide(true);\n      }\n      if (this.path.length) this.line([this.p, ...this.path], \"#6beacf\");\n      if (this.mode === \"aim\" || this.mode === \"predict\")\n        this.line(this.shot().slice(0, 2), \"#6beacf\");\n      if (this.traceTime > 0) this.line(this.trace, \"#ffd36c\");\n      if (this.prediction)\n        this.line(\n          [\n            [this.prediction[0] - 0.3, this.prediction[1]],\n            [this.prediction[0] + 0.3, this.prediction[1]],\n          ],\n          \"#dcb1ff\",\n        );\n      if (this.clueTime > 0)\n        this.line(\n          [this.p, this.clueLevel() >= 2 ? sp : this.m.secret.hint_landmark],\n          \"#ffe795\",\n        );\n    }\n    tickGuard(dt) {\n      this.frozen = Math.max(0, this.frozen - dt);\n      if (!this.frozen) {\n        let target = this.m.patrol[(this.patrol + 1) % this.m.patrol.length],\n          d = this.distance(this.g, target);\n        this.forward = this.norm([\n          target[0] - this.g[0],\n          target[1] - this.g[1],\n        ]);\n        if (d < dt * 1.6) {\n          this.g = [...target];\n          this.patrol = (this.patrol + 1) % this.m.patrol.length;\n        } else\n          this.g = [\n            this.g[0] + this.forward[0] * dt * 1.6,\n            this.g[1] + this.forward[1] * dt * 1.6,\n          ];\n      }\n      this.guard.setPosition(this.g[0] * 100, this.g[1] * 100);\n      this.guard.setAngle(\n        (Math.atan2(this.forward[1], this.forward[0]) * 180) / Math.PI,\n      );\n      if (this.trap) {\n        this.trapTime -= dt;\n        this.line(\n          [\n            [this.trap[0] - 0.7, this.trap[1]],\n            [this.trap[0] + 0.7, this.trap[1]],\n          ],\n          \"#a3f1ca\",\n        );\n        if (this.distance(this.g, this.trap) < 1.05) {\n          this.frozen = 3.5;\n          this.trap = null;\n        } else if (this.trapTime < 0) this.trap = null;\n      }\n      const distance =\n          5.5 * (1 - this.stats().cloak) * (this.stats().quiet ? 0.9 : 1),\n        v = this.norm([this.p[0] - this.g[0], this.p[1] - this.g[1]]),\n        seen =\n          !this.frozen &&\n          this.distance(this.p, this.g) < distance &&\n          v[0] * this.forward[0] + v[1] * this.forward[1] >\n            Math.cos((35 * Math.PI) / 180) &&\n          !this.ray(\n            this.g,\n            v,\n            this.distance(this.p, this.g) - 0.02,\n            this.walls,\n          );\n      this.notice = Math.max(0, this.notice + (seen ? dt : -dt * 2));\n      if (this.notice >= this.stats().grace && !this.retry) {\n        this.detected++;\n        this.retry = 0.9;\n        this.path = [];\n        this.say(\"seen\");\n      }\n      const angle = Math.atan2(this.forward[1], this.forward[0]);\n      const fan = [this.g];\n      for (let i = 0; i <= 20; i++) {\n        let a = angle + ((-35 + i * 3.5) * Math.PI) / 180,\n          d = [Math.cos(a), Math.sin(a)],\n          hit = this.ray(this.g, d, distance, this.walls);\n        fan.push(\n          hit\n            ? hit.p\n            : [this.g[0] + d[0] * distance, this.g[1] + d[1] * distance],\n        );\n      }\n      const polygon = document.createElementNS(\n        \"http://www.w3.org/2000/svg\",\n        \"polygon\",\n      );\n      polygon.setAttribute(\n        \"points\",\n        fan\n          .map((p) => {\n            let v = new THREE.Vector3(p[0] * 100, -p[1] * 100, 4).project(\n                this.layer.getRenderer().getThreeCamera(),\n              ),\n              r = this.canvas.getBoundingClientRect();\n            return (\n              r.left +\n              (v.x + 1) * 0.5 * r.width +\n              \",\" +\n              (r.top + (1 - v.y) * 0.5 * r.height)\n            );\n          })\n          .join(\" \"),\n      );\n      polygon.setAttribute(\"fill\", \"#eab06455\");\n      this.svg.appendChild(polygon);\n      this.gate.setDepth(this.open() ? 12 : 120);\n      for (let i = 0; i < 3; i++)\n        this.lights[i].setColor(\n          this.clock % 8 >= 3 + i ? \"104;246;198\" : \"70;90;110\",\n        );\n      if (\n        !this.solved &&\n        this.p[1] < -1.4 &&\n        this.distance(this.p, this.m.goal) < 0.8\n      )\n        this.finish(this.detected === 0);\n    }\n  }\n  runtimeScene.energyblast = new Pilot(runtimeScene);\n  globalThis.__energyblast = runtimeScene.energyblast;\n}\nruntimeScene.energyblast.update(\n  Math.min(0.05, runtimeScene.getElapsedTime() / 1000),\n);\n",
+          "parameterObjects": "",
+          "useStrict": true,
+          "eventsSheetExpanded": false
+        }
+      ],
+      "layers": [
+        {
+          "ambientLightColorB": 230,
+          "ambientLightColorG": 220,
+          "ambientLightColorR": 200,
+          "camera2DPlaneMaxDrawingDistance": 5000,
+          "camera3DFarPlaneDistance": 10000,
+          "camera3DFieldOfView": 45,
+          "camera3DNearPlaneDistance": 3,
+          "cameraType": "orthographic",
+          "followBaseLayerCamera": false,
+          "isLightingLayer": false,
+          "isLocked": false,
+          "name": "",
+          "renderingType": "3d",
+          "visibility": true,
+          "cameras": [
+            {
+              "defaultSize": true,
+              "defaultViewport": true,
+              "height": 0,
+              "viewportBottom": 1,
+              "viewportLeft": 0,
+              "viewportRight": 1,
+              "viewportTop": 0,
+              "width": 0
+            }
+          ],
+          "effects": []
+        }
+      ],
+      "behaviorsSharedData": []
+    }
+  ],
+  "externalEvents": [],
+  "eventsFunctionsExtensions": [],
+  "externalLayouts": []
+}

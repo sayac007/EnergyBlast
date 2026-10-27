@@ -1,44 +1,79 @@
 # EnergyBlast
 
-Independent Android 3D learning-game pilot for children aged 7–10.
+Ein kleiner Android-Spielpilot für Kinder von 7–10 Jahren:
+**Beobachten → Planen → Handeln.** Freundliche Roboter, kurze Versuche und klare
+Touch-Steuerung ohne Joystick. Das eigenständige öffentliche Projekt lässt
+Kinderwelt unverändert.
 
-**Observe → Plan → Act.** The first mission, *Rescue the energy core*, uses a
-small arena, cover, a patrolling guardian robot, a friendly energy tool and one
-placeable capture field. One situation rewards observation/preparation; another
-has a brief action window. Waiting itself earns no points.
+## Jetzt spielbar
 
-This is a new public repository. The existing Kinderwelt project stays separate.
-No code, family artwork, recordings, signing keys or private material is copied
-from it. Battlelands Royale is a visual/control reference only; its assets and
-branding are not included.
+Zunächst **zwei Missionen**:
 
-## First milestone
+- **Bandenschalter:** Zielen, den Auftreffpunkt schätzen und einen Energieschuss
+  über die leuchtende Wand zum gelben Knopf lenken.
+- **Wächter und Energietor:** Deckung und Patrouille beobachten, ein Fangfeld
+  vorbereiten und nach drei Lichtern das wiederkehrende Zeitfenster nutzen.
 
-Compare small Godot 4, Unity and GDevelop attempts against the same arena,
-original assets, mission rules, camera and touchscreen tap/aim controls.
-Review engine suitability first; the engine choice remains open. No multiplayer,
-large world or speculative framework. Report actual development/export effort,
-real execution and limits; compare Android feel/performance on the same physical
-device before making a final choice.
+Boden antippen = laufen. Große Symbole wählen Zielen, Tipp, Schuss und Fangfeld.
+Missionen und Hinweise werden gesprochen; „Erklären“ wiederholt die Erklärung.
+Grundlegende Spielhilfen sind immer kostenlos.
 
-The [complete work order](docs/pilot-brief.md) records the common mission and
-pedagogical scope. [Repository instructions](AGENTS.md) apply to all work.
+Sterne bleiben nach dem Neustart erhalten. Bei **100 / 160 / 230 / 300 Sternen**
+werden Prisma-Waffe, Rüstung, schnelleres Laufen und teilweise Tarnung wirksam.
+Zwei versteckte Ausrüstungsfunde bringen zusätzliche Sterne. Hinweise darauf
+verdient man durch Missionen; gekaufte Hinweisstufen bleiben gespeichert.
+Warten, Fehlversuche und Wiederholungen erzeugen keine zusätzlichen Punkte.
+Der Pilot bietet insgesamt höchstens **325 Sterne**, noch keinen langen Feldzug.
 
-## Current status
+Die [Test-APKs und ihre Build-Nachweise](downloads/README.md) liegen auf
+`feat/touch-mission-pilot`. Es sind Entwicklungsversionen für manuelle Tests,
+keine Google-Play-Releases. Godot nutzt `org.example.energyblast.pilot`, der
+GDevelop-Vergleich `org.example.energyblast.gdevelop`; beide können nebeneinander
+installiert werden. Eigene Spielstände werden nicht zwischen ihnen übertragen.
 
-Initial repository files only. No engine pilot has been implemented or tested.
-The cloud workspace has Godot 4.7.2, Blender, Node.js and Android tools available;
-Unity is not installed. GDevelop import/export has not yet been validated.
-No Android APK, engine winner or general learning benefit is claimed.
+## Was tatsächlich geprüft ist
 
-The public repository is [sayac007/EnergyBlast](https://github.com/sayac007/EnergyBlast).
-Initial local work has been preserved and the workspace is connected. Active
-implementation proceeds on `feat/touch-mission-pilot`; no pull requests or
-releases are created at this stage. The operator's latest design choices are
-touch controls without a joystick, persistent stars/equipment and earned clues.
+| Versuch | Ausgeführt | Noch offen |
+|---|---|---|
+| Godot 4.7.2 | echter 3D-Start/Render, 43 Spielprüfungen, Speichern über Prozessneustart, Android-APK | Bediengefühl, Audio, Rotation und Leistung auf einem echten Android-Gerät |
+| GDevelop 5.6.269 | echter WebGL-Export, Touch-/Spiel-/Speicher-/Sprachwarteschlangenprüfungen im Chromium-Browser, Android-WebView-APK | dieselben echten Gerätetests; Abhängigkeit von installierter Android System WebView |
+| Unity | gemeinsamer Figuren-/Missions-Importkit und C#-Syntaxprüfung | aktivierter Editor fehlt: kein nachgewiesener Import, keine Kompilierung, kein Android-Build |
 
-## Rights
+Es gibt **keinen abgeschlossenen Drei-Engine-Leistungstest** und noch keinen
+belegten Engine-Sieger. Die [zentrale Qualitätsübersicht](docs/QUALITY.md)
+trennt ausgeführte Prüfungen, Grenzen und das gemeinsame Geräte-Testprotokoll.
+Verbesserungen von Geometrieverständnis oder allgemeiner Impulskontrolle sind
+pädagogische Hypothesen, keine empirisch nachgewiesenen Wirkungen.
 
-Public visibility does not by itself grant a source/assets licence. The operator
-has not selected a licence for this new project. Any engine or third-party
-components retain their own terms; their notices must be preserved when used.
+## Einstieg für die Entwicklung
+
+Gemeinsame Regeln und Originalfigur: `shared/pilot.json`, `shared/assets/`.
+Die Engine-Piloten liegen unter `pilots/`; Synchronisation/Export unter `tools/`.
+[Reproduzierbare Befehle](docs/BUILD_AND_TEST.md) enthalten die Voraussetzungen
+und dieselben aktuellen Testaufrufe:
+
+```bash
+python3 tools/sync_assets.py
+python3 tools/sync_unity.py
+node tools/gdevelop_export.mjs
+python3 tools/check_shared.py
+python3 tools/check_godot.py
+python3 tools/check_gdevelop.py
+```
+
+Der Node-Export benötigt die zuvor installierten, gepinnten GDevelop-Werkzeuge;
+Godot-/Chromium-Pfade können gemäß Anleitung angepasst werden.
+
+Das [ursprüngliche Pilot-Briefing](docs/pilot-brief.md) und die
+[aktuellen Touch-/Belohnungsentscheidungen](docs/touch-pilot.md) erklären den
+Umfang. Keine Pull Requests, automatischen Merges oder Releases in dieser Phase.
+Kinderwelt wird nur für ausdrücklich erlaubte passende Audioaufnahmen gelesen.
+Keine Familien-Assets, Benutzerkonten, Telemetrie oder Online-Spielverbindungen.
+
+## Herkunft und Rechte
+
+Figur und Kulisse werden aus eigenem Code erzeugt. Vier passende Sprachclips
+sind mit Zustimmung übernommen, 15 Missionssätze neu erzeugt. Quellen, Hashes,
+Modell- und Engine-Hinweise: [THIRD_PARTY.md](THIRD_PARTY.md).
+Für eigene neue Inhalte ist noch keine Projektlizenz gewählt; die Öffentlichkeit
+des Repositories erteilt allein keine Nutzungslizenz. Fremdlizenzen bleiben erhalten.

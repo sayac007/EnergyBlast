@@ -1,0 +1,28 @@
+[project]
+title = EnergyBlast Defold
+version = 0.2.0
+custom_resources = /data
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /main/main.renderc
+[input]
+game_binding = /input/game.input_bindingc
+[display]
+width = 720
+height = 1280
+update_frequency = 60
+vsync = 1
+dynamic_orientation = 1
+[render]
+clear_color_red = 0.035
+clear_color_green = 0.055
+clear_color_blue = 0.11
+clear_color_alpha = 1
+[android]
+package = org.example.energyblast.defold
+version_code = 2
+minimum_sdk_version = 24
+target_sdk_version = 36
+manifest = /main/AndroidManifest.xml
+[physics]
+use_fixed_timestep = 0

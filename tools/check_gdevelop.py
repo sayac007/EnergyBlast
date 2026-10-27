@@ -1,8 +1,8 @@
 """Touch/mission/save regression against an actual exported GDevelop WebGL game."""
 from pathlib import Path
-import functools,threading,http.server,json,re
+import functools,threading,http.server,json,re,os
 from playwright.sync_api import sync_playwright
-folder=Path('/tmp/energyblast-gdevelop-web')
+folder=Path(os.environ.get('ENERGYBLAST_GD_OUTPUT','/tmp/energyblast-gdevelop-web'))
 class Handler(http.server.SimpleHTTPRequestHandler):
  def log_message(self,*args):pass
 server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(folder)))

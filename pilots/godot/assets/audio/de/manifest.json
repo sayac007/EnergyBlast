@@ -202,6 +202,76 @@
       "playback_gain_db": 8.441184353247953,
       "source": "New complete mission sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_reactor",
+      "text": "Kanone voraus. Nutze die leuchtende Wand.",
+      "file": "combat_reactor.ogg",
+      "sha256": "dc37003804656ead40ed59f9c70cacd7659eab76da7dadb301aa359e5ed40b18",
+      "seconds": 5.16,
+      "playback_gain_db": 5.6092229632207875,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_win",
+      "text": "Sektor gesichert.",
+      "file": "combat_win.ogg",
+      "sha256": "104169aebb08f65dd62000d68f070d57e39898e959ef51d5db954efd85152bd4",
+      "seconds": 2.36,
+      "playback_gain_db": 5.87645913196019,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_retry",
+      "text": "Energie leer. Neuer Anlauf.",
+      "file": "combat_retry.ogg",
+      "sha256": "190f0b17288f6ef0efbe7625d3ad200a9b6e06507891b78491ff27b36aa40013",
+      "seconds": 3.32,
+      "playback_gain_db": 5.925258127578,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_citadel",
+      "text": "Zwei Kanonen. Bleib in Deckung.",
+      "file": "combat_citadel.ogg",
+      "sha256": "763b034ebfea0364c3ca099fe986b20ab75eea073e2be9923d68d64f0329b5fc",
+      "seconds": 3.48,
+      "playback_gain_db": 6.42945094930961,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_controls",
+      "text": "Tippe zum Laufen. Ziehe zum Zielen. Lass los zum Schießen.",
+      "file": "combat_controls.ogg",
+      "sha256": "e8b9db260feaf044158c42223b38f89dbb015866675a7b68d5e76d0d27a7d5a9",
+      "seconds": 6.28,
+      "playback_gain_db": 4.62559733723316,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_shield",
+      "text": "Triff die Kanone über die Wand.",
+      "file": "combat_shield.ogg",
+      "sha256": "8ba709ff5ad1b8ca2ff362b18a4865f299f435d89b9d67244f17dfdf6bc26fc1",
+      "seconds": 3.24,
+      "playback_gain_db": 4.363081424458119,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "combat_loot",
+      "text": "Neue Ausrüstung.",
+      "file": "combat_loot.ogg",
+      "sha256": "9f5a09db6411d92037c02ac5ac5af0b997908453527d873296f448d5fbd4ee2e",
+      "seconds": 2.68,
+      "playback_gain_db": 8.915231051050213,
+      "source": "New complete mission sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
     }
   ]
 }

@@ -1,0 +1,56 @@
+local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
+local function box(self,x,y,w,h,c)
+ local n=gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(w,h,0));gui.set_color(n,color(c));self.nodes[#self.nodes+1]=n;return n
+end
+local function text(self,x,y,s,c,scale)
+ local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ecfff7'));gui.set_scale(n,vmath.vector3(scale or 1));self.nodes[#self.nodes+1]=n;return n
+end
+local function circle(self,x,y,r,c)
+ local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,40);self.nodes[#self.nodes+1]=n;return n
+end
+local function button(self,x,y,w,h,title,action,c)
+ local n=box(self,x,y,w,h,c or'24526a');text(self,x,y,title,'ecfff7',.85);self.buttons[#self.buttons+1]={node=n,action=action};return n
+end
+local function line(self,x1,y1,x2,y2,c,width)
+ local dx,dy=x2-x1,y2-y1;local n=box(self,(x1+x2)/2,(y1+y2)/2,math.sqrt(dx*dx+dy*dy),width or 3,c);gui.set_rotation(n,vmath.vector3(0,0,math.atan2(dy,dx)*180/math.pi))
+end
+function init(self)self.nodes={};self.buttons={};self.last_dialog=nil;msg.post('.','acquire_input_focus')end
+function update(self,dt)
+ local g=_G.energyblast;if not g then return end
+ for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={}
+ text(self,112,1230,tostring(g:total()),'ffd674',1.2);for i=0,4 do local a=math.pi/2+i*math.pi*2/5;local n=circle(self,45+math.cos(a)*8,1230+math.sin(a)*8,11,'ffd674');gui.set_perimeter_vertices(n,3);gui.set_rotation(n,vmath.vector3(0,0,a*180/math.pi))end
+ for i=1,g.max_hp do circle(self,42+i*35,1185,10,i<=g.hp and'ff7394'or'334460')end
+ text(self,360,1185,g.m.title,'afc8dd',.65);text(self,600,1185,'? '..g:credits(),'ffd674',.8)
+ button(self,650,1230,68,60,'|||','menu','20314b');button(self,550,1230,68,60,'TON','sound','20314b')
+ text(self,360,245,g.status,'b8dbe7',.65)
+ local n=circle(self,570,108,78,'d63969');text(self,570,108,' FEUER','ffffff',.9);self.buttons[#self.buttons+1]={node=n,action='fire'}
+ n=circle(self,145,108,70,'1d5969');text(self,145,108,g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'» DASH','ffffff',.85);self.buttons[#self.buttons+1]={node=n,action='dash'}
+ button(self,355,180,150,46,'? Hinweis','hint','20314b');button(self,355,115,150,46,'Funk','radio','20314b');button(self,355,50,150,46,'Arsenal','gear','20314b')
+ for _,t in ipairs(g.enemies)do if t.hp>0 then local x,y=g.project(g,t.p,1.5);box(self,x,y,48,7,'11223b');box(self,x-(2-t.hp)*12,y,24*t.hp,7,'ff7394');if t.shield then text(self,x,y+26,'','b788ff',.9)end;if t.warning>0 then local hit=require('main.combat').ray(t.p,t.direction,20,g:active());local p=hit and hit.p or {t.p[1]+t.direction[1]*20,t.p[2]+t.direction[2]*20};local x1,y1=g.project(g,t.p,.75);local x2,y2=g.project(g,p,.75);line(self,x1,y1,x2,y2,'d95f80',2)end end end
+ for _,b in ipairs(g.bullets)do local x,y=g.project(g,b.p,.75);circle(self,x,y,6,b.enemy and'ff6485'or'a1fff0')end
+ if g.aiming then local points=g:shot();for i=1,#points-1 do local x,y=g.project(g,points[i]);local x2,y2=g.project(g,points[i+1]);line(self,x,y,x2,y2,'91e9d6',2)end end
+ if g.secret_visible then local x,y=g.project(g,g.m.secret.position,.4);box(self,x,y,25,20,'a066ef');box(self,x,y+8,29,6,'ffd674')end
+ if g.clue_time>0 then local p=g:level()>1 and g.m.secret.position or g.m.secret.hint_landmark;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
+ if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1],r[2]},.6);local x2,y2=g.project(g,{r[1]+r[3],r[2]},.6);line(self,x,y,x2,y2,g:open()and'4edfbd'or'f3a36c',g:open()and 2 or 10);for i=0,2 do local lx,ly=g.project(g,{4.2+i*.6,-1},1.5);circle(self,lx,ly,6,g.clock%8>=3+i and'68f6c6'or'43566a')end end
+ if g.dialog then
+  box(self,360,690,660,650,'18253e');self.buttons={};text(self,360,945,'ENERGYBLAST','ecfff7',1.45)
+  if g.dialog=='menu'then text(self,360,890,'RICOCHET RAID 02','9db5ce',.75);button(self,360,795,570,100,'01  PRISMA-STATION','sector1');button(self,360,665,570,100,'02  NEON-ZITADELLE','sector2','69395f');button(self,360,500,570,80,' WEITER','continue')
+  elseif g.dialog=='win'then text(self,360,850,'SEKTOR GESICHERT','ffd674',1.05);text(self,360,780,'+ '..g.reward..' *','ffd674',1.2);button(self,360,675,560,85,' BEUTE SUCHEN','loot');button(self,360,560,560,85,' SEKTOREN','menu');button(self,360,450,560,70,' NOCH EINMAL','retry')
+  elseif g.dialog=='defeat'then text(self,360,820,'ENERGIE LEER','ff7394',1.3);text(self,360,745,'Sterne bleiben erhalten.','afc8dd',.75);button(self,360,625,560,100,' NEUER ANLAUF','retry','d63969');button(self,360,480,560,80,'||| SEKTOREN','menu')
+  else text(self,360,850,'ARSENAL','ffd674',1.2);for i,row in ipairs({'100 * PRISMA: 2 ABPRALLER','160 * RUESTUNG: +1 ENERGIE','230 * STIEFEL: MEHR TEMPO','300 * TARNUNG'})do text(self,360,800-i*65,row,'b8dbe7',.72)end;button(self,360,440,560,80,'WEITER','continue')end
+ end
+end
+local function handle(self,a)
+ local g=_G.energyblast;if not g then return false end
+ if a.released then g.held=false end
+ for _,b in ipairs(self.buttons)do if gui.pick_node(b.node,a.x,a.y)then
+  if a.pressed then local action=b.action;if action~='fire'and action~='dash'and action~='hint'then g.cancel_controls()end
+   if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='sector1'then g.choose(1)elseif action=='sector2'then g.choose(2)elseif action=='menu'then g.paused=true;g.dialog='menu'elseif action=='continue'then g.paused=false;g.dialog=nil elseif action=='retry'then g.choose(g.index)elseif action=='loot'then g.paused=false;g.over=false;g.dialog=nil elseif action=='gear'then g.paused=true;g.dialog='gear'elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
+  end
+  return true
+ end end
+ g.input(a);return true
+end
+function on_input(self,id,a)
+ if id==hash('multitouch')then for _,t in ipairs(a.touch or{})do handle(self,t)end;return true elseif id==hash('touch')then return handle(self,a)elseif id==hash('back')and a.pressed then _G.energyblast.paused=true;_G.energyblast.dialog='menu';return true end
+end

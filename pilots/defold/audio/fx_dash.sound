@@ -1,0 +1,4 @@
+sound: "/audio/dash.wav"
+looping: 0
+group: "master"
+gain: 1

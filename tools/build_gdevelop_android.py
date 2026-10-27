@@ -31,7 +31,7 @@ def run(args):
 bt=sdk/'build-tools/36.1.0'
 badging=run([bt/'aapt2','dump','badging',apk]);(out/'manifest.txt').write_text(badging)
 assert "name='org.example.energyblast.gdevelop'" in badging
-assert "versionCode='1'" in badging and "versionName='0.1.0'" in badging
+assert "versionCode='2'" in badging and "versionName='0.2.0'" in badging
 assert 'uses-permission:' not in badging
 assert re.search(r"^(?:minSdkVersion|sdkVersion):'24'$",badging,re.M) and "targetSdkVersion:'36'" in badging
 xml=run([bt/'aapt2','dump','xmltree',apk,'--file','AndroidManifest.xml']);(out/'manifest-xml.txt').write_text(xml)
@@ -39,5 +39,5 @@ assert re.search(r':allowBackup\([^)]*\)=false',xml)
 sig=run([bt/'apksigner','verify','--verbose','--print-certs',apk]);(out/'signature.txt').write_text(sig)
 assert 'CN=EnergyBlast Pilot Debug' in sig and 'v2): true' in sig
 run([bt/'zipalign','-c','-P','16','4',apk])
-report={'built_at_utc':datetime.now(timezone.utc).isoformat(),'status':'PASS','variant':'GDevelop 5.6.269 WebGL in offline Android WebView','package':'org.example.energyblast.gdevelop','version':'0.1.0','version_code':1,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
+report={'built_at_utc':datetime.now(timezone.utc).isoformat(),'status':'PASS','variant':'GDevelop 5.6.269 WebGL in offline Android WebView','package':'org.example.energyblast.gdevelop','version':'0.2.0','version_code':2,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
 (out/'verification.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

@@ -18,3 +18,17 @@
 - Use friendly robots and non-graphic effects. Keep rapid retries and respectful
   feedback. Reward suitable decisions, not maximum waiting. Do not infer general
   everyday impulse-control improvements from performance on these missions.
+
+## Current shooter milestone (operator update, 27 October 2026)
+
+- The operator explicitly selected **Godot, GDevelop and Defold**. All three need
+  playable Android comparison builds. Unity is an archived unexecuted import kit;
+  BRUTAL was assessed but not selected after its desktop/framework limitations.
+- Build an actual touch shooter with indirect learning through play: hostile
+  cannons, visible projectiles, energy/damage, cover, dash and reflected attacks.
+  No compulsory answer/prediction mode and no classroom/retry coaching phrases.
+- Current shared rules are `shared/combat.json`; `shared/pilot.json` describes the
+  archived 0.1 regression. Do not confuse an old successful test/build with 0.2.
+- Native Defold builds require Bob 1.14.0 / Java 25. Check build success before
+  running the engine so a failed compile can never reuse a stale binary.
+- Keep the new branch isolated, no PR, no automatic merge or release publication.

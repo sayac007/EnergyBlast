@@ -1,0 +1,76 @@
+local Combat=require 'main.combat'
+local function project(g,p,height)
+ local w,h=window.get_size();local aspect=w/h;local size=math.max(16.8,11.7/aspect);local view=vmath.matrix4_look_at(vmath.vector3(18,24,0),vmath.vector3(),vmath.vector3(0,1,0));local projection=vmath.matrix4_orthographic(-size*aspect/2,size*aspect/2,-size/2,size/2,.1,100)
+ local q=projection*view*vmath.vector4(p[1],height or .75,p[2],1);return (q.x/q.w+1)*360,(q.y/q.w+1)*640
+end
+local function ground(x,y)
+ local w,h=window.get_size();local aspect=w/h;local size=math.max(16.8,11.7/aspect);local view=vmath.matrix4_look_at(vmath.vector3(18,24,0),vmath.vector3(),vmath.vector3(0,1,0));local projection=vmath.matrix4_orthographic(-size*aspect/2,size*aspect/2,-size/2,size/2,.1,100);local inv=vmath.inv(projection*view)
+ local near=inv*vmath.vector4(x/360-1,y/640-1,-1,1);local far=inv*vmath.vector4(x/360-1,y/640-1,1,1);local p=vmath.vector3(near.x/near.w,near.y/near.w,near.z/near.w);local d=vmath.vector3(far.x/far.w,far.y/far.w,far.z/far.w)-p;local t=-p.y/d.y;return {math.max(-6.4,math.min(6.4,p.x+d.x*t)),math.max(-4.3,math.min(4.3,p.z+d.z*t))}
+end
+local function rebuild(self,index)
+ for _,id in ipairs(self.objects or{})do go.delete(id)end;self.objects={};self.g:load(index)
+ local function make(name,p)local id=factory.create('#'..name,vmath.vector3(p[1],0,p[2]));self.objects[#self.objects+1]=id;return id end
+ self.arena=make(self.g.m.id,{0,0});self.hero=make('hero',self.g.p)
+ for _,t in ipairs(self.g.enemies)do t.node=make('cannon',t.p)end
+ self.g.say('combat_'..self.g.m.id);self.voice_next='combat_controls'
+end
+local function voice(self,id)
+ if self.muted then return end
+ if not self.clips[id]then return end
+ if self.voice_left>0 then self.voice_next=id;return end
+ sound.play('#'..id);self.voice_id=id;self.voice_left=self.clips[id].seconds
+end
+local function test(self)
+ local g=self.g;local n=0;local function check(v,m)n=n+1;assert(v,m)end;local function step(t)for i=1,math.floor(t/.025)do g:update(.025)end end
+ g.paused=false;local x,y=project(g,{-4,2},0);g.input({x=x,y=y,pressed=true});g.input({x=x,y=y,released=true});check(#g.path>0,'tap-to-move');g:load(1);local sx,sy=project(g,{-3,2},0);local tx,ty=project(g,{1.392857,-4.35},0);g.input({x=sx,y=sy,pressed=true});g.input({x=tx,y=ty});g.input({x=tx,y=ty,released=true});check(#g.bullets>0,'drag-release fires');check(math.abs(g.aim[1]-.581238)<.01,'native gesture/world projection');g.held=true;g.aiming=true;g.cancel_controls();check(not g.held and not g.aiming,'cancel held combat input');g:load(1);check(#g.enemies==1 and g.enemies[1].hp==2,'live cannon');g.p={3,2};g.aim=Combat.norm({1.5,-2});g:fire();step(.4);check(g.enemies[1].hp==2,'shield blocks direct fire')
+ g:load(1);g.p={4.5,3.2};step(1);check(g.enemies[1].warning>0,'windup');step(2);check(g.hp<3,'real enemy hit');local hp=g.hp;g:hit_player();check(g.hp==hp,'invulnerability')
+ g:load(1);step(4);check(g.hp==3,'cover intercepts shells');check(g:total()==0,'no wait farming');g.aim=Combat.norm({8.5,-11.9});g:fire();step(1.8);check(g.enemies[1].hp==1,'bank shot');g:fire();step(1.8);check(g.solved,'enemy destroyed');check(g:total()==100 and g:credits()==2,'one-time combat reward');g:finish();check(g:total()==100,'no replay double award');g:load(2);check(#g.enemies==2,'second sector');g:navigate({5.2,-3.5});check(#g.path>0 and g.path[#g.path][2]>-1.1,'staging at closed gate')
+ print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
+end
+function init(self)
+ self.objects={};self.voice_left=0;self.clips={};self.muted=false;self.voice_next=nil
+ local data=json.decode(sys.load_resource('/data/combat.json'));local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
+ self.test_mode=sys.get_config_string('project.test_mode','0')=='1';local path=sys.get_save_file('energyblast','progress');self.save_path=path;local saved=nil;if not self.test_mode then saved=sys.load(path)end
+ if saved and not saved.earned then saved=nil end
+ self.g=Combat.new(data,saved);self.g.changed=function()if not self.test_mode then local ok=sys.save(path,self.g.saved);if not ok then self.g.status='Spielstand konnte nicht gespeichert werden.'end end end
+ self.g.say=function(id)if not self.test_mode then voice(self,id)end end
+ self.g.sfx=function(id)if not self.muted and not self.test_mode then sound.play('#fx_'..id)end end
+ window.set_listener(function(_,event)
+  if event==window.WINDOW_EVENT_FOCUS_LOST then self.g.background=true;self.g.cancel_controls();if self.voice_id then sound.pause('#'..self.voice_id,true)end
+  elseif event==window.WINDOW_EVENT_FOCUS_GAINED then self.g.background=false;if self.voice_id and not self.muted then sound.pause('#'..self.voice_id,false)end end
+ end)
+ self.g.cancel_controls=function()self.pointer=nil;self.g.held=false;self.g.aiming=false end
+ self.g.project=project
+ self.g.choose=function(index)if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,index)end
+ self.g.replay=function()if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;voice(self,'combat_'..self.g.m.id);self.voice_next='combat_controls'end
+ self.g.toggle_sound=function()self.muted=not self.muted;if self.muted and self.voice_id then sound.stop('#'..self.voice_id);self.voice_left=0;self.voice_next=nil end end
+ self.g.input=function(a)
+  if self.g.paused or self.g.over then return end
+  if a.pressed then self.pointer={x=a.x,y=a.y};self.g.aiming=false
+  elseif self.pointer and a.released then
+   if self.g.aiming then self.g:fire()else local p=ground(a.x,a.y);local enemy=false;for _,t in ipairs(self.g.enemies)do enemy=enemy or(t.hp>0 and Combat.dist(t.p,p)<.8)end;if enemy or self.g:blocked(p)then self.g.aim=Combat.norm({p[1]-self.g.p[1],p[2]-self.g.p[2]});self.g:fire()else self.g:navigate(p)end end;self.pointer=nil;self.g.aiming=false
+  elseif self.pointer and((a.x-self.pointer.x)^2+(a.y-self.pointer.y)^2)>196 then self.g.aiming=true;self.g.path={};local p=ground(a.x,a.y);self.g.aim=Combat.norm({p[1]-self.g.p[1],p[2]-self.g.p[2]})end
+ end
+ _G.energyblast=self.g;rebuild(self,1);self.g.paused=true;self.g.dialog='menu'
+ local save_test=sys.get_config_string('project.save_test','')
+ if save_test=='write' then
+  self.muted=true;self.g.saved={earned={},clues={},weapon='pulse'};self.g:award('mission:reactor');self.g:award('skill:reactor');self.g:hint();assert(self.g:total()==100 and self.g:credits()==1);print('DEFOLD SAVE WRITE PASS');msg.post('@system:','exit',{code=0})
+ elseif save_test=='read' then
+  assert(self.g:total()==100 and self.g:credits()==1 and self.g:level()==1);assert(self.g:award('mission:reactor')==0);print('DEFOLD SAVE RESTART PASS');msg.post('@system:','exit',{code=0})
+ end
+ if sys.get_config_string('project.capture_mode','0')=='1' then self.g.choose(1);self.muted=true end
+ if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
+end
+function update(self,dt)
+ if self.test_wait then self.test_wait=self.test_wait-dt;if self.test_wait<=0 then self.test_wait=nil;test(self);return end end
+ if self.g.background then return end
+ self.voice_left=math.max(0,self.voice_left-dt)
+ if self.voice_left<=0 and self.voice_next then local id=self.voice_next;self.voice_next=nil;voice(self,id)end
+ self.g:update(dt)
+ local p=self.g.p;go.set_position(vmath.vector3(p[1],#self.g.path>0 and math.abs(math.sin(self.g.clock*11))*.05 or 0,p[2]),self.hero)
+ go.set_rotation(vmath.quat_rotation_y(self.g.aiming and math.atan2(self.g.aim[1],self.g.aim[2])or(self.g.facing or 0)),self.hero)
+ for _,t in ipairs(self.g.enemies)do go.set_rotation(vmath.quat_rotation_y(math.atan2(t.direction[1],t.direction[2])),t.node);go.set_scale(t.hp>0 and 1 or .001,t.node)end
+end
+function on_message(self,id,message,sender)
+ if id==hash('window_event')then self.g.background=message.event==window.WINDOW_EVENT_FOCUS_LOST end
+end

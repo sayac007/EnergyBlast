@@ -8,3 +8,12 @@ for name in ['robot.glb']:
 shutil.copytree(ROOT/'shared/audio',dest/'audio',dirs_exist_ok=True)
 
 shutil.copytree(ROOT/'shared/notices',dest/'notices',dirs_exist_ok=True)
+
+shutil.copyfile(ROOT/'shared/combat.json',dest/'combat.json')
+
+(dest/'shooter').mkdir(exist_ok=True)
+for stale in (dest/'shooter').iterdir():
+ if stale.suffix in ['.gltf','.bin'] or stale.name.endswith('.gltf.import'):stale.unlink()
+for model in (ROOT/'shared/assets/shooter').glob('*.glb'):shutil.copyfile(model,dest/'shooter'/model.name)
+
+shutil.copytree(ROOT/'shared/fonts',dest/'fonts',dirs_exist_ok=True)

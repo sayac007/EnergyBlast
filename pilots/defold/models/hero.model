@@ -1,0 +1,7 @@
+mesh: "/models/hero.gltf"
+materials { name: "Ultramarine" material: "/models/hero-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Midnight titanium" material: "/models/hero-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/hero-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Pulse coral" material: "/models/hero-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/hero-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/hero-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -14,10 +14,12 @@ class SharedChecks(unittest.TestCase):
   self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
   project=json.loads((ROOT/'pilots/gdevelop/game.json').read_text())
   js=project['layouts'][0]['events'][0]['inlineCode']
-  self.assertIn(source.decode(),js)
+  self.assertIn((ROOT/'shared/combat.json').read_text(),js)
+  self.assertEqual((ROOT/'shared/combat.json').read_bytes(),(ROOT/'pilots/godot/assets/combat.json').read_bytes())
+  self.assertEqual((ROOT/'shared/combat.json').read_bytes(),(ROOT/'pilots/defold/data/combat.json').read_bytes())
  def test_all_audio_decodes_matches_manifest_and_will_not_clip(self):
   m=json.loads((ROOT/'shared/audio/de/manifest.json').read_text())
-  self.assertEqual(len(m['clips']),19);self.assertEqual(len({c['id'] for c in m['clips']}),19)
+  self.assertEqual(len(m['clips']),26);self.assertEqual(len({c['id'] for c in m['clips']}),26)
   self.assertEqual(sum(c['source']=='Kinderwelt exact approved reuse' for c in m['clips']),4)
   for c in m['clips']:
    with self.subTest(clip=c['id']):
@@ -36,6 +38,8 @@ class SharedChecks(unittest.TestCase):
   d=json.loads((ROOT/'shared/pilot.json').read_text())
   self.assertEqual(sum(d['rewards'].values()),325)
   self.assertEqual(len(d['missions']),2)
+  combat=json.loads((ROOT/'shared/combat.json').read_text());self.assertEqual(sum(combat['rewards'].values()),650)
+  self.assertEqual(sum(v for k,v in combat['rewards'].items()if k.endswith((':reactor',':citadel'))),325)
   for m in d['missions']:
    self.assertTrue(all(key+':'+m['id'] in d['rewards'] for key in ['mission','skill','secret']))
   self.assertEqual([u['stars'] for u in d['unlocks']],[100,160,230,300])
@@ -44,4 +48,7 @@ class SharedChecks(unittest.TestCase):
   self.assertNotIn('<uses-permission',manifest);self.assertIn('android:allowBackup="false"',manifest)
   preset=(ROOT/'pilots/godot/export_presets.cfg').read_text()
   self.assertIn('permissions/internet=false',preset);self.assertIn('user_data_backup/allow=false',preset)
+  native=(ROOT/'pilots/defold/main/AndroidManifest.xml').read_text();self.assertNotIn('<uses-permission',native);self.assertIn('android:allowBackup="false"',native)
+  import configparser
+  cfg=configparser.ConfigParser();cfg.read(ROOT/'pilots/defold/game.project');self.assertEqual(cfg['bootstrap']['render'],'/main/main.renderc')
 if __name__=='__main__':unittest.main(verbosity=2)

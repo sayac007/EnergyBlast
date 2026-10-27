@@ -1,0 +1,4 @@
+sound: "/audio/combat_controls.ogg"
+looping: 0
+group: "master"
+gain: 1.5180282959691593

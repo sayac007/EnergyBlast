@@ -3,6 +3,13 @@ import argparse,hashlib,json,math,os,shutil,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 TEXTS={
+'combat_reactor':'Kanone voraus. Nutze die leuchtende Wand.',
+'combat_citadel':'Zwei Kanonen. Bleib in Deckung.',
+'combat_controls':'Tippe zum Laufen. Ziehe zum Zielen. Lass los zum Schießen.',
+'combat_shield':'Triff die Kanone über die Wand.',
+'combat_win':'Sektor gesichert.',
+'combat_retry':'Energie leer. Neuer Anlauf.',
+'combat_loot':'Neue Ausrüstung.',
 'intro_bank':'Triff den gelben Knopf über die Wand.',
 'intro_guardian':'Der Wächter kommt. Bleibe im Versteck.',
 'gate':'Drei Lichter. Dann öffnet sich das Tor.',

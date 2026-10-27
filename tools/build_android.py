@@ -31,7 +31,7 @@ with tempfile.TemporaryDirectory(prefix='energyblast-export-',dir='/tmp') as d:
  bt=sdk/'build-tools/36.1.0'
  badging=run([bt/'aapt2','dump','badging',apk]);out.joinpath('manifest.txt').write_text(badging)
  assert "name='org.example.energyblast.pilot'" in badging
- assert "versionCode='1'" in badging and "versionName='0.1.0'" in badging
+ assert "versionCode='2'" in badging and "versionName='0.2.0'" in badging
  assert 'uses-permission:' not in badging
  assert re.search(r"^(?:minSdkVersion|sdkVersion):'24'$",badging,re.M) and "targetSdkVersion:'36'" in badging
  xml=run([bt/'aapt2','dump','xmltree',apk,'--file','AndroidManifest.xml'])
@@ -41,5 +41,5 @@ with tempfile.TemporaryDirectory(prefix='energyblast-export-',dir='/tmp') as d:
  out.joinpath('signature.txt').write_text(signature)
  assert 'CN=EnergyBlast Pilot Debug' in signature and 'v2): true' in signature
  run([bt/'zipalign','-c','-P','16','4',apk])
- report={'built_at_utc':datetime.now(timezone.utc).isoformat(),'status':'PASS','variant':'Godot touch pilot','package':'org.example.energyblast.pilot','version':'0.1.0','version_code':1,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
+ report={'built_at_utc':datetime.now(timezone.utc).isoformat(),'status':'PASS','variant':'Godot 4.7.2 native ARM64 shooter','package':'org.example.energyblast.pilot','version':'0.2.0','version_code':2,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
  out.joinpath('verification.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

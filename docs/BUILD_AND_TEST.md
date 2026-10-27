@@ -1,69 +1,103 @@
-# Bauen und prüfen
+# Bauen und prüfen — Shooter 0.2
 
-Vom Repository-Hauptverzeichnis ausführen. Build-Ausgaben gehören außerhalb des
-Checkouts oder unter das ignorierte `build/`. Keine Schlüssel ins Repository.
-Die Cloud-Vorgaben liegen unter `/workspace/tools`; die Python-Buildskripte nehmen
-`--tools` entgegen. Andere Installationen müssen dieselbe beschriebene Struktur
-bereitstellen. Vorbereitete Werkzeuge sind keine im Repository enthaltene SDKs.
+Vom Repository-Hauptverzeichnis ausführen. Build-Ausgaben außerhalb des Checkouts
+oder unter ignoriertem `build/`; keine Schlüssel in Git. Die bisherigen 0.1-
+Tests bleiben separat ausführbar, sind aber keine Tests der neuen Startszenen.
 
-## Voraussetzungen
+## Werkzeuge
 
 - Python 3.12, FFmpeg, Node.js >=18; hier Node 24.
-- Godot **4.7.2 official** und exakt passende Android-Exportvorlagen. GLES3 /
-  Compatibility, ARM64; ETC2/ASTC-Import ist aktiviert.
-- JDK 17, Android SDK platform 36, build-tools **36.1.0**, platform-tools.
-- GDevelop: reale **5.6.269** Core/Runtime-Dateien aus dem nachstehenden gepinnten
-  Community-Werkzeug, kein selbst geschriebener Ersatz-Renderer.
-- GDevelop Android: Gradle **8.11.1**, Android Gradle Plugin **8.6.1**. Erstmaliges
-  Auflösen benötigt Zugang zu Google Maven/Maven Central. Plugin 8.6.1 warnt
-  normalerweise bei compileSdk 36; die Warnung wird ausdrücklich unterdrückt.
-  Das ist ein gebauter Debug-Pilot, keine Zertifizierung dieser Toolchain für Play.
-- Browserprüfung: `python3 -m pip install playwright`; Chromium, hier
-  `/usr/bin/chromium`. Kein Browserdownload nötig, wenn dieser bereits installiert ist.
+- Godot **4.7.2 official** mit exakt passenden Android-Vorlagen; Compatibility /
+  OpenGL ES 3, ARM64, ETC2/ASTC-Import aktiviert.
+- Android SDK platform **36**, build-tools **36.1.0**, platform-tools; JDK 17 für
+  Godot/GDevelop. Standard-Toolverzeichnis `/workspace/tools`, via `--tools` änderbar.
+- GDevelop: `gdcore-tools` **2.0.0-gd-v5.6.269-autobuild**, `gdexporter`
+  **4.0.0-beta7**, exakt im Lockfile. Tatsächliche GDJS-3D-Laufzeit.
+- GDevelop Android: Gradle **8.11.1**, AGP **8.6.1**. compileSdk-36-Warnung dieses
+  älteren Plugins ausdrücklich unterdrückt; keine daraus abgeleitete Play-Freigabe.
+- Defold **1.14.0**: Bob und native Engine sowie Java **25** aus derselben offiziellen
+  Linux-Distribution. `tools/setup_defold.py` lädt gepinnte Dateien nach `/tmp`.
+- Browserprüfung: Python-Paket `playwright`, Chromium unter `/usr/bin/chromium`.
+  Native Render-/Defold-Prüfungen brauchen Xvfb und OpenGL; hier Software-Mesa.
 
-## Gemeinsame Dateien und GDevelop-Export
+## Vorbereitung
 
 ```bash
 npm ci --prefix tools/gdevelop-tools --ignore-scripts
 export ENERGYBLAST_GD_TOOLS="$PWD/tools/gdevelop-tools"
-export ENERGYBLAST_GD_OUTPUT=/tmp/energyblast-gdevelop-web
+python3 tools/setup_defold.py --output /tmp/energyblast-defold-tools
 python3 tools/sync_assets.py
 python3 tools/sync_unity.py
+python3 tools/sync_defold.py
 node tools/gdevelop_export.mjs
 ```
 
-Im aktuellen Cloud-Workspace ist dasselbe gepinnte Werkzeug bereits unter
+Das gepinnte GDevelop-Werkzeug ist in dieser Cloud bereits unter
 `/tmp/energyblast-gd-tools` installiert, dem Standard des Exportskripts.
-`pilots/gdevelop/game.json` ist das daraus erzeugte native GDevelop-Projekt.
-Eine neue Godot-Importdatei darf anschließend vom Editor erzeugt werden.
+`ENERGYBLAST_GD_OUTPUT` ändert den HTML5-Ausgabepfad; die Browserprüfung nutzt
+standardmäßig `/tmp/energyblast-gdevelop-web`.
 
-Der Community-Exporter setzte irrtümlich den Draco-WASM-Decoder als JavaScript-
-`<script>` ein. Das Exportskript entfernt **nur diesen ungültigen Script-Verweis**;
-der Decoder selbst bleibt enthalten. Ein Browserstart mit JavaScript-Fehlern gilt
-nicht als bestandener Export.
+`sync_unity` aktualisiert ausschließlich gemeinsame Kopien im archivierten
+Importkit; Unity gehört nicht zum ausgewählten Vergleich. Alle drei aktuellen
+Engine-Versuche beziehen Regeln aus `shared/combat.json`. Die `.gltf`/`.bin`-Paare
+für Defold und `.glb` für die anderen stammen aus demselben Blender-Generator.
+
+Optionale Neuerzeugung der Originalmodelle/Töne:
+
+```bash
+blender -b --python tools/make_shooter_models.py
+python3 tools/make_sfx.py
+```
+
+Danach synchronisieren, neu exportieren und die Herkunftshashes aktualisieren.
+Kein Bilder-/Assetdownload ist zur Erzeugung der eigenen 3D-Modelle erforderlich.
+Die unveränderte zusätzliche Lilita-One-Schrift wird mit OFL-Hinweis mitgeliefert.
 
 ## Aktuelle Tests
 
 ```bash
 python3 tools/check_shared.py
 python3 tools/check_godot.py
-python3 tools/check_gdevelop.py
+python3 tools/check_gdevelop_combat.py
+python3 tools/check_defold.py
 ```
 
-- `check_shared`: Regeln/Modellkopien, Manifest-Hashes, alle 19 Ogg-Dateien tatsächlich
-  mit FFmpeg decodieren, Dauer, nutzbare Pegel und Headroom nach Wiedergabeverstärkung;
-  begrenzte Belohnungsökonomie und Android-Quellkonfiguration.
-- `check_godot`: 43 Prüfungen im echten Godot, darunter Touch-Projektion, Abpraller,
-  Deckung, Torfenster, Missionen/Belohnungen; getrennte Schreib-/Neustartprozesse für
-  lokalen Fortschritt. Standardpfad mit `--godot /pfad/zu/godot` überschreiben.
-  Testaudio ist hier ausgeschaltet: FFmpeg und der Browser prüfen Medien getrennt.
-- `check_gdevelop`: echter exportierter Runtime im lokalen HTTP-Server, Chromium mit
-  WebGL und Touch-Emulation, Missionen, Hinweise, Neustart, Ausrüstung, Hintergrund-
-  Pause und vollständige Sprachwarteschlange. Fehler/externe Requests werden erfasst.
-  Es wird kein Android-Touch-/Leistungsnachweis daraus abgeleitet.
+- `check_shared`: Regeln/Modellkopien, Herkunft/Audiohashes, alle 26 Ogg-Dateien mit
+  FFmpeg decodiert, Dauer/Pegel/Verstärkung, begrenzte Belohnungen, Android-Manifeste
+  und der tatsächlich verwendete Defold-Render-Einstieg.
+- `check_godot`: 43 alte Kern- und 24 neue Kampfprüfungen, Touch-/Weltprojektion,
+  wirkliche Schüsse/Schild/Treffer/Deckung/Dash, Sterne/Hint-Migration und getrennte
+  Speicherprozesse. `--godot /pfad/zu/godot` überschreibt den Cloud-Pfad.
+- `check_gdevelop_combat`: reale exportierte WebGL-Laufzeit, echter Touch-Drag über
+  Chromium/CDP, sichtbare Deckung gegen Kollisionskoordinaten, Kampf, gespeicherte
+  Sterne/alte Hinweise, Neustartfläche, keine JS-Seitenfehler/externe Requests.
+- `check_defold`: baut zuerst und stoppt bei Fehlern, startet dann die native Engine
+  in Xvfb. 17 Prüfungen einschließlich Eingabeprojektion und Kampf, anschließend
+  getrennte Prozesse für Speichern/Neustart. Sound nutzt ein Nullgerät; keine
+  menschliche Audioabnahme. `--sdk` überschreibt das externe SDK-Verzeichnis.
 
-Für den unabhängigen optionalen ASR-Screen sind `sherpa_onnx`, NumPy und lokal
-bereitgestellte Whisper-small-int8-Dateien erforderlich:
+Zusätzliche unveränderte GDevelop-Regression (separater Export, anschließend den
+aktuellen Export wiederherstellen):
+
+```bash
+ENERGYBLAST_GD_LEGACY=1 ENERGYBLAST_GD_OUTPUT=/tmp/energyblast-gdevelop-legacy node tools/gdevelop_export.mjs
+ENERGYBLAST_GD_OUTPUT=/tmp/energyblast-gdevelop-legacy python3 tools/check_gdevelop.py
+node tools/gdevelop_export.mjs
+```
+
+Der Community-Exporter setzte einen WASM-Decoder fälschlich als JavaScript-Script
+in HTML ein. Nur dieser ungültige Script-Verweis wird entfernt; der Decoder bleibt.
+GDevelop braucht außerdem die explizite glTF-Achsenanpassung für sichtbare Deckung.
+Defold braucht `bootstrap.render`, nicht einen unbeachteten `render.render`-Eintrag.
+
+## Sprachausgabe
+
+Bereits enthaltene Aufnahmen reichen für Builds. Vier genehmigte alte Clips,
+15 ältere Pilotansagen und sieben neue Kampfansagen stehen mit Text/Hash/Quelle
+im Manifest. Im neuen Spiel werden die kurzen Kampfansagen verwendet. Es werden
+keine Silben zusammengeschnitten und keine Schauspielerstimmen nachgeahmt.
+
+Optionaler unabhängiger ASR-Screen mit lokalem Whisper-small-int8:
 
 ```bash
 /workspace/tools/piper-env/bin/python tools/screen_voice.py \
@@ -71,49 +105,41 @@ bereitgestellte Whisper-small-int8-Dateien erforderlich:
   --output /tmp/energyblast-asr.json
 ```
 
-Spracherzeugung ist für Builds **nicht nötig**. `tools/prepare_audio.py --help`
-beschreibt den optionalen Offline-Bau mit dem gepinnten Qwen-Modell. Dabei werden
-nur erlaubte passende Ausgangsclips gelesen, vollständige Sätze erzeugt und
-Modell-/Dateihashes geprüft. Niemals private Sprachmodelle/Schlüssel committen.
+`tools/prepare_audio.py --help` beschreibt die optionale Offline-Erzeugung mit
+gepinntem Qwen-Modell/Serena. Keine Modellgewichte oder privaten Aufnahmen im Repo.
+ASR ist kein menschlicher Verständlichkeits-/Betonungsnachweis.
 
-## Android-APKs
+## Die drei Android-APKs
 
 ```bash
 python3 tools/build_android.py --output /tmp/energyblast-godot-build
 python3 tools/build_gdevelop_android.py --output /tmp/energyblast-gdevelop-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold-build
 ```
 
-Ausgabeverzeichnisse müssen neu sein. Godot erzeugt einmal einen ausschließlich
-für diese Piloten verwendeten Entwicklungsschlüssel **außerhalb** des Repositories
-unter `<tools>/energyblast-pilot-signing/debug.keystore`. Der GDevelop-Bau verwendet
-denselben Debug-Schlüssel. Die bekannten Android-Debug-Parameter sind keine
-Release-Zugangsdaten. Diese APKs sind nicht mit einer Play-Upload-Identität signiert.
+Ausgabeverzeichnisse müssen neu sein. Godot verwendet einen für diese Piloten
+angelegten Entwicklungsschlüssel außerhalb des Repositories unter
+`<tools>/energyblast-pilot-signing/debug.keystore`; die beiden anderen verwenden
+denselben Debug-Schlüssel. Keine Play-Upload-Identität und keine Release-Secrets.
+Defolds bekannte Debug-Passwortdatei liegt temporär nur im externen Buildordner
+und wird nach dem Aufruf entfernt.
 
-GDevelop verpackt den **realen HTML5/WebGL-Export** in einer kleinen eigenen
-Android-WebView-Hülle. Alle Dateien werden über einen abgefangenen lokalen HTTPS-
-Ursprung aus APK-Assets gelesen; keine Internet-/Medienberechtigung, kein nativer
-JavaScript-Bridge-Zugriff, keine externen Navigationsziele. Android System WebView
-bleibt eine Geräteabhängigkeit. Lokal gespeicherte Sterne liegen im privaten
-App-/WebView-Speicher; Backup ist deaktiviert.
+GDevelop verpackt die echte GDJS/WebGL-Laufzeit in eine eigene lokale Android-
+WebView-Hülle. Keine Internet-/Medienberechtigung, keine JavaScript-Native-Bridge,
+keine externen Navigationsziele. Die System-WebView bleibt eine Geräteabhängigkeit.
+Defold und Godot verwenden native ARM64-Engines. Alle Spielstände bleiben im
+privaten App-Speicher, Backup ist deaktiviert.
 
-Der GDevelop-Bau kann nach erfolgreicher Abhängigkeitsauflösung `--offline` nutzen.
-Bei Unternehmens-/Cloud-Proxys liest der Java-Prozess nicht automatisch denselben
-CA-Speicher wie Python. Optional `--trust-store /pfad/zum/lokalen/cacerts` nutzen;
-HTTPS-Proxy ohne Zugangsdaten wird übernommen. Zertifikatsprüfung bleibt aktiv.
-Die Android-Benutzerverzeichnisse sind pro Bau isoliert, ohne `$HOME` umzubiegen.
+GDevelop unterstützt nach Auflösung seiner Abhängigkeiten `--offline` und bei
+Cloud-Proxys `--trust-store /lokaler/pfad/cacerts`. Zertifikatsprüfung bleibt an.
+Die Android-/Java-Benutzerverzeichnisse sind isoliert; `$HOME` wird nicht umgebogen.
 
-Die Befehle erzeugen funktional nachvollziehbare Builds, keine zugesicherte
-Bit-für-Bit-Reproduktion (Zeitstempel/Signaturcontainer können abweichen).
-Die Skripte schreiben APK, Export-/Build-Log, Manifestauszug, Signaturauszug und
-`verification.json` mit Bytes, SHA-256, Commit und Dirty-Status. Sie prüfen Paket,
-Version, fehlende Berechtigungen, Debug-Signatur und ZIP-Ausrichtung mit 16-KB-
-Seiten. Ein erfolgreicher Bau beweist keinen Start auf einem echten Gerät.
-Die abschließenden Downloads werden vom bereits committeten sauberen Quellstand
-gebaut; ihre Metadaten nennen genau diesen Quellcommit.
+Die Skripte erzeugen APK, technische Auszüge und `verification.json`: Paket,
+Version 0.2.0 / Code 2, fehlende Berechtigungen, deaktiviertes Backup, gültige
+Entwicklungssignatur, ZIP-Ausrichtung mit 16-KB-Seiten, Größe, SHA-256 und Quellcommit.
+Das sind nachvollziehbare Befehle, keine zugesicherte Bit-für-Bit-Reproduktion.
+Keine Aussage über eine auf echter Hardware bereits bestandene Installation.
 
-## Unity
-
-Siehe `pilots/unity/README.md`. Ein aktivierter Unity Editor mit Android-Modulen
-ist nötig. Die mitgelieferten drei C#-Dateien wurden lediglich mit Tree-sitter auf
-Syntaxfehler geprüft. Das ist **keine** Unity-API-/Compilerprüfung.
-Keine Unity-APK oder Aktivierung wird vorgetäuscht.
+Abschlussdateien entstehen vom sauberen Quellcommit; anschließend kommen APKs und
+Provenienz in einen eigenen Download-Commit. Laufzeitlogs bleiben außerhalb von
+Git, keine CI-Artefaktflut und kein automatisches Release/PR/Merge.

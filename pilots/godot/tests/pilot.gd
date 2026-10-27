@@ -37,7 +37,7 @@ func run():
 	check(not G.visible(Vector2.ZERO,Vector2.RIGHT,Vector2(0,3),6,70,[]),"Outside cone is safe")
 	for t in [0.0,2.0,4.99,8.0]:check(not G.gate_open(t,data.gate),"Closed timing "+str(t))
 	for t in [5.0,6.0,7.99,13.0]:check(G.gate_open(t,data.gate),"Open timing "+str(t))
-	var scene=load("res://main.tscn").instantiate()
+	var scene=load("res://tests/legacy.tscn").instantiate()
 	root.add_child(scene)
 	await process_frame
 	scene.set_process(false)

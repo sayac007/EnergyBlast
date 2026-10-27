@@ -32,3 +32,13 @@ The three-engine comparison is still requested. Godot and a native GDevelop WebG
 Unity Editor/runtime activation is unavailable. See QUALITY.md for actual results. No
 engine winner or unexecuted Android/device benchmark is claimed. Do not create
 pull requests, merge or publish a release at this stage.
+
+## Superseding shooter update
+
+The operator asked for an actual shooter, not an instructional exercise, and
+explicitly selected Godot, GDevelop and Defold. `shared/combat.json` now governs
+two active cannon sectors. Tap to move; drag/release to shoot; direct FIRE hold
+and DASH. There is no required prediction/answer step. Short tactical radio
+replaces the old gentle teaching/retry phrasing in the active game. Shared original
+3D environments/characters replace the bare geometry. BRUTAL was assessed, not
+selected; Unity does not count as a completed pilot. Current results: QUALITY.md.

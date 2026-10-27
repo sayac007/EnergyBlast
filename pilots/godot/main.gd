@@ -555,6 +555,7 @@ func finish_mission(skill: bool):
 func _notification(what):
 	if what == NOTIFICATION_APPLICATION_PAUSED:
 		backgrounded=true
+		if has_method("cancel_controls"):call("cancel_controls")
 		if is_instance_valid(voice):voice.stream_paused=true
 	elif what == NOTIFICATION_APPLICATION_RESUMED:
 		backgrounded=false

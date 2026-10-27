@@ -1,0 +1,4 @@
+sound: "/audio/combat_loot.ogg"
+looping: 0
+group: "master"
+gain: 2.4874911973425626

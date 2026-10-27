@@ -7,9 +7,10 @@ const base = process.env.ENERGYBLAST_GD_TOOLS || "/tmp/energyblast-gd-tools";
 const { gd, exportProject } = await import(
   pathToFileURL(path.join(base, "node_modules/gdcore-tools/src/index.mjs"))
 );
+const legacy = process.env.ENERGYBLAST_GD_LEGACY === "1";
 const p = gd.ProjectHelper.createNewGDJSProject();
 p.setName("EnergyBlast Touch Pilot");
-p.setVersion("0.1.0");
+p.setVersion("0.2.0");
 p.setPackageName("org.example.energyblast.gdevelop");
 p.setGameResolutionSize(720, 1280);
 p.setOrientation("default");
@@ -27,6 +28,13 @@ layer.setAmbientLightColor(200, 220, 230);
 const objects = scene.getObjects();
 objects.insertNewObject(p, "Scene3D::Cube3DObject", "Cube", 0);
 objects.insertNewObject(p, "Scene3D::Model3DObject", "Robot", 1);
+for (const name of ["Hero", "Cannon", "Reactor", "Citadel"])
+  objects.insertNewObject(
+    p,
+    "Scene3D::Model3DObject",
+    name,
+    objects.getObjectsCount(),
+  );
 const raw = new gd.SerializerElement();
 p.serializeTo(raw);
 const data = JSON.parse(gd.Serializer.toJSON(raw));
@@ -77,13 +85,44 @@ for (const c of manifest.clips) {
     userAdded: true,
   });
 }
-const code = fs
+let code = fs
   .readFileSync(path.join(root, "pilots/gdevelop/pilot.js"), "utf8")
   .replace(
     "/*ENERGYBLAST_DEF*/ {}",
-    fs.readFileSync(path.join(root, "shared/pilot.json"), "utf8"),
+    fs.readFileSync(
+      path.join(root, legacy ? "shared/pilot.json" : "shared/combat.json"),
+      "utf8",
+    ),
   )
   .replace("/*ENERGYBLAST_AUDIO*/ {}", JSON.stringify(audio));
+for (const name of ["Hero", "Cannon", "Reactor", "Citadel"]) {
+  const file = name.toLowerCase() + ".glb";
+  data.layouts[0].objects.find(
+    (o) => o.name === name,
+  ).content.modelResourceName = file;
+  data.layouts[0].objects.find((o) => o.name === name).content.rotationZ =
+    name === "Hero" || name === "Cannon" ? 90 : 0;
+  fs.copyFileSync(
+    path.join(root, "shared/assets/shooter", file),
+    path.join(root, "pilots/gdevelop/assets", file),
+  );
+  data.resources.resources.push({
+    kind: "model3D",
+    name: file,
+    file: "assets/" + file,
+    userAdded: true,
+  });
+}
+if (!legacy) {
+  code = code.replace(/new Pilot\(runtimeScene\)/, "new Shooter(runtimeScene)");
+  const marker = "runtimeScene.energyblast = new Shooter(runtimeScene)";
+  code = code.replace(
+    marker,
+    fs.readFileSync(path.join(root, "pilots/gdevelop/shooter.js"), "utf8") +
+      "\n" +
+      marker,
+  );
+}
 data.layouts[0].events = [
   {
     type: "BuiltinCommonInstructions::JsCode",
@@ -117,9 +156,10 @@ fs.writeFileSync(
 );
 fs.mkdirSync(path.join(out, "licenses"), { recursive: true });
 for (const name of fs.readdirSync(path.join(root, "shared/notices")))
-  fs.copyFileSync(
+  fs.cpSync(
     path.join(root, "shared/notices", name),
     path.join(out, "licenses", name),
+    { recursive: true },
   );
 for (const name of ["LICENSE.txt", "MODEL_CARD.txt"])
   fs.copyFileSync(
@@ -127,3 +167,12 @@ for (const name of ["LICENSE.txt", "MODEL_CARD.txt"])
     path.join(out, "licenses", "AUDIO_" + name),
   );
 console.log("Exported GDevelop 5.6.269 to", out); // Community exporter emitted a WASM file as a script; keep binary, remove only its invalid script tag.
+
+fs.copyFileSync(
+  path.join(root, "shared/fonts/LilitaOne-Regular.ttf"),
+  path.join(out, "LilitaOne-Regular.ttf"),
+);
+fs.copyFileSync(
+  path.join(root, "shared/fonts/OFL.txt"),
+  path.join(out, "licenses/FONT_OFL.txt"),
+);

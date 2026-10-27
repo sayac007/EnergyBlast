@@ -1,3 +1,6 @@
+> Historical, unexecuted import kit. The selected current comparison is Godot,
+> GDevelop and Defold; this directory is not a completed fourth prototype.
+
 # Unity comparison import kit — NOT EXECUTED HERE
 
 Unity Editor/Hub and an activated Editor licence are absent from this workspace.

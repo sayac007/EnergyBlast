@@ -1,0 +1,6 @@
+mesh: "/models/cannon.gltf"
+materials { name: "Midnight titanium" material: "/models/cannon-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ultramarine" material: "/models/cannon-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/cannon-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Pulse coral" material: "/models/cannon-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/cannon-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

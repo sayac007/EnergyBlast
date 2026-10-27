@@ -1,0 +1,4 @@
+sound: "/audio/combat_shield.ogg"
+looping: 0
+group: "master"
+gain: 1.4728349157703384

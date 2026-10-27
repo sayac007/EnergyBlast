@@ -20,7 +20,7 @@ if (!runtimeScene.energyblast) {
         ),
       );
       this.saved.clues = [...new Set(this.saved.clues)]
-        .filter((x) => /^(bank|guardian):[12]$/.test(x))
+        .filter((x) => /^(bank|guardian|reactor|citadel):[12]$/.test(x))
         .slice(0, this.cluesEarned());
       this.layer.setCameraX(0);
       this.layer.setCameraY(1300);

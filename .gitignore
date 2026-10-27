@@ -26,3 +26,8 @@ __pycache__/
 *.pyc
 .gradle/
 local.properties
+
+# Defold local build state
+.internal/
+.editor_settings
+crash.dmp

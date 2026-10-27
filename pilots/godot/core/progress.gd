@@ -24,9 +24,15 @@ func load_saved():
 			if data.rewards.has(key) and parsed.earned[key] == true: earned[key] = true
 		clues.clear()
 		for id in parsed.clues:
-			if id in ["bank:1", "bank:2", "guardian:1", "guardian:2"] and id not in clues and clues.size() < earned_clue_count(): clues.append(id)
+			if id in valid_clue_ids() and id not in clues and clues.size() < earned_clue_count(): clues.append(id)
 		weapon = "prism" if parsed.get("weapon") == "prism" and total() >= 100 else "pulse"
 		return
+
+func valid_clue_ids() -> Array:
+	var result=[]
+	for id in data.get("progress_mission_ids", ["bank", "guardian"]):
+		result.append(id+":1");result.append(id+":2")
+	return result
 
 func total() -> int:
 	var value = 0
@@ -35,8 +41,8 @@ func total() -> int:
 
 func earned_clue_count() -> int:
 	var value = 0
-	for mission in ["bank", "guardian"]:
-		if earned.has("mission:" + mission): value += int(data.hint_reward_per_mission)
+	for key in data.get("hint_completion_keys", ["mission:bank", "mission:guardian"]):
+		if earned.has(key): value += int(data.hint_reward_per_mission)
 	return value
 
 func hint_count() -> int:
@@ -54,14 +60,14 @@ func clue_level(mission: String) -> int:
 	return int((mission + ":1") in clues) + int((mission + ":2") in clues)
 
 func buy_clue(mission: String) -> bool:
-	if mission not in ["bank", "guardian"] or hint_count() <= 0 or clue_level(mission) >= 2: return false
+	if mission not in data.get("progress_mission_ids", ["bank", "guardian"]) or hint_count() <= 0 or clue_level(mission) >= 2: return false
 	clues.append(mission + ":" + str(clue_level(mission) + 1))
 	save()
 	return true
 
 func stats() -> Dictionary:
 	var stars = total()
-	return {"speed": 3.0 + (minf(.5, (stars - 220.0) / 210.0) if stars >= 230 else 0.0), "grace": 1.4 if stars >= 160 else 1.0, "cloak": minf(.35, (stars - 280.0) / 180.0) if stars >= 300 else 0.0, "bounces": 2 if weapon == "prism" and stars >= 100 else 1, "lens": earned.has("secret:bank"), "quiet": earned.has("secret:guardian")}
+	return {"speed": 3.0 + (minf(.5, (stars - 220.0) / 210.0) if stars >= 230 else 0.0), "grace": 1.4 if stars >= 160 else 1.0, "cloak": minf(.35, (stars - 280.0) / 180.0) if stars >= 300 else 0.0, "bounces": 2 if weapon == "prism" and stars >= 100 else 1, "lens": earned.has("secret:bank") or earned.has("secret:reactor"), "quiet": earned.has("secret:guardian") or earned.has("secret:citadel")}
 
 func save():
 	var file = FileAccess.open(path + ".tmp", FileAccess.WRITE)

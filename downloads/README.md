@@ -17,6 +17,9 @@ Das sind ausschließlich Debug-Builds mit Entwicklungssignatur, keine Play-Uploa
 Dateien. Keine Release-/Upload-Schlüssel verwendet. Deinstallieren löscht lokale
 Sterne; Updates benötigen dieselbe Entwicklungssignatur.
 
+Ausgelieferter Quellstand: [`46c1fec`](https://github.com/sayac007/EnergyBlast/commit/46c1fecc54356f9fecd8f6144ec00de2fd0df90d).
+Godot: **28.854.983 Bytes**, GDevelop: **1.211.285 Bytes**.
+
 Die nebenliegenden `godot-verification.json` und `gdevelop-verification.json`
 nennen den tatsächlichen **Quellcommit**, Buildzeitpunkt, Dateigröße und SHA-256.
 Die APKs werden erst nach dem sauberen Quellcommit erzeugt und anschließend in

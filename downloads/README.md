@@ -33,3 +33,11 @@ mit diesen Hashes verglichen. Die APKs und Metadaten sind ein separater Commit
 nach dem Quellstand. Keine GitHub-Releases, keine Pull Requests/automatischen Merges.
 
 [Prüfergebnisse und offene echte Geräte-/Hörtests](../docs/QUALITY.md).
+
+Ausgelieferter Quellstand: [`1006cde`](https://github.com/sayac007/EnergyBlast/commit/1006cde8595b4249d0375ddf8bc4ea60fd2a93c9).
+
+| Datei | Bytes |
+|---|---:|
+| Godot | 30.317.360 |
+| GDevelop | 1.720.558 |
+| Defold | 8.737.978 |

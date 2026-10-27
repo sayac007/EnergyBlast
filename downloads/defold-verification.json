@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "built_at_utc": "2026-10-27T13:19:36.581784+00:00",
+  "variant": "Defold 1.14.0 native ARM64 shooter",
+  "package": "org.example.energyblast.defold",
+  "version": "0.2.0",
+  "version_code": 2,
+  "bytes": 8737978,
+  "sha256": "fc2f4a46c9182b7512c0604e64349eee6fbb2c2152b89a45c30f4647419a9b6f",
+  "permissions": [],
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "allow_backup": false,
+  "signature": "Development-only key; not a Play release identity",
+  "zip_alignment_16kb": "PASS",
+  "source_commit": "1006cde8595b4249d0375ddf8bc4ea60fd2a93c9",
+  "source_dirty": false,
+  "manual_android_test": "NOT VERIFIED",
+  "key_in_repository": false
+}

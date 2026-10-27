@@ -1,0 +1,22 @@
+# Engine caches and local build output
+.godot/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+UserSettings/
+node_modules/
+build/
+dist/
+qa-results/
+
+# Local tooling and credentials
+.env
+.env.*
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.key
+.private/
+.DS_Store

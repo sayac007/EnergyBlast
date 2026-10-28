@@ -29,3 +29,9 @@
   No game branch merge, pull request or release publication is authorized by it.
 - Matching finished public Kinderwelt audio was explicitly authorized read-only,
   with provenance/notices. Never copy private family assets or signing material.
+
+## Binding documentation standard (operator decision, 28 October 2026)
+
+- Follow docs/DOCUMENTATION_STANDARD.md for future work: useful README, traceable
+  brief, honest test/limit reporting, stable milestone/download references.
+- Keep scope proportional; minor changes need no new milestone or full game tests.

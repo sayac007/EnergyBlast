@@ -113,3 +113,5 @@ Priorität 2:
 Priorität 3:
 Engine-Auswahl offen / bevorzugt:
 ```
+
+Für die weitere Arbeit gilt der [verbindliche Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).

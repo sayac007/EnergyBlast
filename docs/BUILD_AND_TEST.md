@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.4.1
+# Bauen und prüfen — Defold 0.5.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -12,6 +12,8 @@ und dessen feste Quell-/APK-Referenzen erreichbar.
   Linux-Distribution. SDK-Dateien sind in `tools/defold-sdk.json` per Hash gepinnt.
 - Android SDK platform **36**, build-tools **36.1.0**, JDK 17 für die APK-Prüfwerkzeuge.
   Standardverzeichnis `/workspace/tools`, über `--tools` anpassbar.
+- Pillow für echte native Screenshots und die Pixelprüfung; Blender/Cycles mit
+  deaktiviertem Denoising für die optionalen Originalporträts.
 - Native Linux-Tests: Xvfb/OpenGL, `libX11.so.6`, `libXtst.so.6`, OpenAL Soft mit
   Null- und WAVE-Backend. Die Audioausgabe wird tatsächlich aufgezeichnet.
 
@@ -44,20 +46,31 @@ python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** sieben Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 30 Sprach-
+- **check_shared:** neun Testgruppen. Daten/Modelle/Provenienz, unveränderte
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 34 Sprach-
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native **106** Prüfungen: 76 bisherige Fälle plus 30 Reflexions-/Energieprüfungen. Drei erweiterte
+  Native **187** Prüfungen: 107 bisherige und 80 neue Spiel-/Kauf-/Oberflächenfälle. Sechs
   Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, 0,30-s-Schwelle,
   langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
 - Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
-  Musikpräferenz. Echte XTest-Eingaben prüfen Menü, kurzen Tipp und langen Hold
+  Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
   WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
   Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
+
+- `check_defold_depth.py` prüft tatsächlich gerenderte verdeckte Geschosse mit
+  einem sichtbaren Kontrollgeschoss. `check_shared.py` liest die echten glTF-
+  Positionspuffer aller Wandkörper und prüft deren Kollisionsflächen sowie
+  Stereomischung und Abschnittsdynamik. Beide laufen in den obigen Befehlen.
+
+Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
+
+```bash
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast05-images
+```
 
 `--sdk` ändert den SDK-Pfad. Der Starter isoliert private Zustandsverzeichnisse
 und beendet bei Timeout seine gesamte Prozessgruppe. Laufzeitberichte verbleiben
@@ -72,7 +85,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.4 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.5 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 
@@ -95,17 +108,17 @@ Unabhängiger ASR-Screen, ohne Referenztext als Prompt:
 
 Musik-/Klangherkunft, Hash und Messwerte in `shared/audio/defold04/music.json`.
 60 Sekunden, 32 Takte bei 128 BPM, vollständig eigene Synthese. Statischer
-Musik-Gain **1**; Laufzeitpegel 0,28 im Spiel, 0,16 im Menü, 0,065 unter Ansagen.
+Musik-Gain **1**; Laufzeitpegel 0,28 im Spiel, 0,24 im Menü, 0,065 unter Ansagen.
 Master-Gain 0,75, SFX separat gedämpft. Musikpräferenz wird lokal gespeichert.
 Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold04-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold05-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.4.1 / Code 5**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.5.0 / Code 6**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.

@@ -1,4 +1,34 @@
-# Aktueller Prüfstand — Defold 0.4.1
+# Aktueller Prüfstand — Defold 0.5, Toybox Raid
+
+**28.10.2026.** [Meilenstein 04](MILESTONE_04.md),
+[aktuelle Befehle](BUILD_AND_TEST.md), [Quell-/APK-Referenzen](../downloads/README.md).
+
+| Tatsächlich geprüft | Ergebnis |
+|---|---|
+| Native Defold-Regeln | **187 PASS** = bisherige 107 + 80 neue Fälle; alle sechs Sektoren, neue Ziele, Kauf/Guthaben/Migration, Figuren, sichere HUD-Flächen |
+| Getrennte Speicherstarts | **PASS**, Gesamtsterne, Restguthaben, Käufe, Figur, Hinweise, Musik |
+| Wirkliche native UI-Eingaben | **PASS**, Figuren wechseln, zwei Käufe, Sektor wählen, kurzer/langer Druck, FEUER, TON-Pause/Fortsetzung |
+| Wirklicher Tiefenpuffer | **PASS**, verdecktes Geschoss unsichtbar; sichtbares Kontrollgeschoss vorhanden |
+| Gemeinsame Prüfungen | **9 Gruppen PASS**, Medien/Hashes, tatsächliche glTF-Wandpuffer vs. Kollision, Stereodynamik, eingefrorene andere Kopien, keine Berechtigungen/Backup |
+| Native Audioaufnahme | **PASS**, Musik an Signal / aus Nullsignal, Sprach-/Effektmischung ohne Überlauf im geprüften Fall |
+| Unabhängiges ASR | **5/5** vollständige Defold-Ansagen normalisiert exakt; kein menschlicher Hörnachweis |
+| Sichtprüfung | Reale native Menü-, Figuren- und Sektorbilder angesehen; Linux/Xvfb, kein Gerätebenchmark |
+
+Die Hauptursache für vermeintliche Schüsse über Wände war die Darstellung als
+GUI über der 3D-Welt. Native Geschosse, genaue Wandkappen und der neue Bildtest
+sichern die Korrektur ab. [Technische Details](MILESTONE_04.md).
+
+**Manuell offen für die neue APK:** physisches Update/Spielstandübernahme,
+Touchgefühl, Rotation/Seitenverhältnisse, Klang, längere Runden, Schwierigkeit und
+Geräteleistung. Keine behauptete empirische Lernwirkung oder Store-Reife.
+Kein Actions-Workflow und keine behauptete grüne CI. Andere Engines eingefroren.
+
+## Historische Nachweise
+
+Die folgenden Ergebnisse gehören zu älteren Versionen; sie ersetzen keinen
+neuen Test. Feste Quell-/APK-Referenzen in den jeweiligen Meilensteinen.
+
+## Prüfstand 0.4.1
 
 **28.10.2026:** 107 native Prüfungen bestanden: die bisherigen 76 plus 31 neue
 Fälle für alle Wandarten, Winkel, Ecken, dünne Wände, nächstes Ziel, Prisma-

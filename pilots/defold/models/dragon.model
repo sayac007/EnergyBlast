@@ -1,0 +1,6 @@
+mesh: "/models/dragon.gltf"
+materials { name: "Dragon turquoise" material: "/models/dragon-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Dragon apricot" material: "/models/dragon-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/dragon-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Midnight titanium" material: "/models/dragon-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Dragon cream" material: "/models/dragon-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

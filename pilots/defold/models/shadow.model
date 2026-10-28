@@ -1,0 +1,2 @@
+mesh: "/models/shadow.gltf"
+materials { name: "Shadow" material: "/models/shadow-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -8,7 +8,7 @@ shutil.copyfile(R/'shared/audio/de/manifest.json',D/'data/audio.json')
 shutil.copyfile(R/'shared/audio/de/LICENSE.txt',D/'data/AUDIO_LICENSE.txt')
 for f in (R/'shared/assets/defold04').iterdir():
  if f.suffix in ['.gltf','.bin']:shutil.copyfile(f,D/'models'/f.name)
-for name in ['hero','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock']:
+for name in ['hero','dragon','fox','wing_left','wing_right','bolt','enemy_bolt','fireball','shadow','gate','chest','drone','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock','forge','echo','rescue']:
  gltf=json.loads((D/'models'/(name+'.gltf')).read_text());model=['mesh: "/models/'+name+'.gltf"']
  for i,m in enumerate(gltf['materials']):
   color=m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1]);key=name+'-'+str(i);material='''name: "%s"
@@ -46,7 +46,7 @@ text=text.replace('<!-- BEGIN_INCLUDE(manifest) -->','<!-- Modified for EnergyBl
 text=re.sub(r'\s*<uses-permission[^>]+/>','',text).replace('android:hasCode="true"','android:hasCode="true" android:allowBackup="false"')
 (D/'main/AndroidManifest.xml').write_text(text)
 components=['components { id: "logic" component: "/main/main.script" }','components { id: "ui" component: "/main/ui.gui" }']
-for name in ['hero','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock']:components.append('components { id: "'+name+'" component: "/models/'+name+'.factory" }')
+for name in ['hero','dragon','fox','wing_left','wing_right','bolt','enemy_bolt','fireball','shadow','gate','chest','drone','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock','forge','echo','rescue']:components.append('components { id: "'+name+'" component: "/models/'+name+'.factory" }')
 for c in manifest['clips']:
  if (D/'audio'/(c['id']+'.sound')).exists():components.append('components { id: "'+c['id']+'" component: "/audio/'+c['id']+'.sound" }')
 (D/'main/main.go').write_text('\n'.join(components)+'\n')
@@ -66,3 +66,8 @@ for file,name,loop,gain in [('aurora-hop.ogg','music',1,1.0),('energy-burst.ogg'
  (D/'audio'/(name+'.sound')).write_text('sound: "/audio/'+file+'"\nlooping: '+str(loop)+'\ngroup: "master"\ngain: '+str(gain)+'\n')
  components.append('components { id: "'+name+'" component: "/audio/'+name+'.sound" }')
 (D/'main/main.go').write_text('\n'.join(components)+'\n')
+
+# Original portrait renders, not external character art.
+for name in ['hero','dragon','fox']:shutil.copyfile(R/'shared/assets/defold04'/(name+'.png'),D/'models'/(name+'.png'))
+(D/'models/portraits.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ['hero','dragon','fox'])+'\nextrude_borders: 2\n')
+shutil.copyfile(R/'shared/assets/defold04/surfaces.json',D/'data/surfaces.json')

@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-04",
+  "id": "energyblast-defold-05",
   "language": "de",
   "controls": "short_tap_move_long_hold_aim_release_fire",
   "arena": [
@@ -44,28 +44,41 @@
     "secret:citadel": 50,
     "mission:dock": 150,
     "skill:dock": 50,
-    "secret:dock": 75
+    "secret:dock": 75,
+    "mission:forge": 125,
+    "skill:forge": 25,
+    "secret:forge": 50,
+    "mission:echo": 125,
+    "skill:echo": 25,
+    "secret:echo": 50,
+    "mission:rescue": 125,
+    "skill:rescue": 25,
+    "secret:rescue": 50
   },
   "unlocks": [
     {
       "id": "prism",
       "stars": 100,
-      "effect": "two_bounces"
+      "effect": "two_bounces",
+      "price": 100
     },
     {
       "id": "armor",
       "stars": 160,
-      "effect": "one_extra_hit_point_on_sector_start"
+      "effect": "one_extra_hit_point_on_sector_start",
+      "price": 160
     },
     {
       "id": "boots",
       "stars": 230,
-      "effect": "speed_plus_0.35"
+      "effect": "speed_plus_0.5",
+      "price": 230
     },
     {
       "id": "cloak",
       "stars": 300,
-      "effect": "vision_range_times_0.75"
+      "effect": "vision_range_times_0.825",
+      "price": 300
     }
   ],
   "missions": [
@@ -117,6 +130,22 @@
         "hint_landmark": [
           -6.75,
           -1.95
+        ],
+        "marks": [
+          {
+            "position": [
+              -6.75,
+              -3.5
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -7.65,
+              -3.5
+            ],
+            "kind": "arrow"
+          }
         ]
       },
       "description": "Kanone voraus. Nutze die leuchtende Wand.",
@@ -143,7 +172,9 @@
           ],
           "radius": 0.65
         }
-      ]
+      ],
+      "kind": "combat",
+      "voice": "combat_reactor"
     },
     {
       "id": "citadel",
@@ -227,6 +258,22 @@
         "hint_landmark": [
           -3.0,
           -0.6
+        ],
+        "marks": [
+          {
+            "position": [
+              -2.7,
+              -3.1
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -3.7,
+              -3.1
+            ],
+            "kind": "arrow"
+          }
         ]
       },
       "description": "Zwei Kanonen. Nutze die Deckung.",
@@ -261,7 +308,9 @@
           ],
           "radius": 0.65
         }
-      ]
+      ],
+      "kind": "combat",
+      "voice": "combat_citadel"
     },
     {
       "id": "dock",
@@ -327,6 +376,22 @@
         "hint_landmark": [
           -4.2,
           -0.6
+        ],
+        "marks": [
+          {
+            "position": [
+              -4.2,
+              -2.6
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -5.2,
+              -2.6
+            ],
+            "kind": "arrow"
+          }
         ]
       },
       "description": "Relais ausschalten. Dann den Kern sichern.",
@@ -402,7 +467,365 @@
           ],
           "radius": 0.65
         }
+      ],
+      "kind": "combat",
+      "voice": "raid_dock"
+    },
+    {
+      "id": "forge",
+      "title": "MAGNETWERK",
+      "kind": "trap",
+      "spawn": [
+        -7,
+        4.8
+      ],
+      "goal": [
+        6,
+        -3
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -3,
+          -1,
+          2,
+          4
+        ],
+        [
+          2,
+          -2,
+          2,
+          3
+        ]
+      ],
+      "secret": {
+        "position": [
+          -5,
+          -4.8
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -5,
+          -3.3
+        ],
+        "marks": [
+          {
+            "position": [
+              -5,
+              -3.65
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -6,
+              -4.0
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Lege eine Falle. Locke den Waechter hinein.",
+      "voice": "defold_forge",
+      "radar": [
+        -2.0,
+        1.0
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": false,
+      "turrets": [
+        {
+          "position": [
+            0,
+            -4
+          ],
+          "hp": 3,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              0,
+              -4
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "speed": 1.5,
+          "phase": 0.4
+        }
       ]
+    },
+    {
+      "id": "echo",
+      "title": "ECHO-KAMMER",
+      "kind": "sequence",
+      "spawn": [
+        -6,
+        0
+      ],
+      "goal": [
+        5,
+        -4
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -2,
+          -1.5,
+          2,
+          4
+        ],
+        [
+          3,
+          -1,
+          2,
+          2
+        ]
+      ],
+      "secret": {
+        "position": [
+          -7,
+          -4.7
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -7,
+          -3.2
+        ],
+        "marks": [
+          {
+            "position": [
+              -7,
+              -3.5500000000000003
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -8,
+              -3.9000000000000004
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Merke dir die Folge. Triff die Kristalle.",
+      "voice": "defold_echo",
+      "radar": [
+        -1.0,
+        0.5
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": false,
+      "turrets": [
+        {
+          "position": [
+            7,
+            3.7
+          ],
+          "hp": 2,
+          "phase": 0.5
+        }
+      ],
+      "sequence": [
+        2,
+        1,
+        3
+      ],
+      "sequence_nodes": [
+        [
+          -4,
+          -3.6
+        ],
+        [
+          0,
+          -3.6
+        ],
+        [
+          4,
+          -3.6
+        ]
+      ]
+    },
+    {
+      "id": "rescue",
+      "title": "DROHNEN-RETTUNG",
+      "kind": "escort",
+      "spawn": [
+        -7,
+        4.8
+      ],
+      "goal": [
+        6,
+        -4.8
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -3,
+          -2.5,
+          2,
+          5
+        ],
+        [
+          2,
+          -1,
+          2,
+          3
+        ]
+      ],
+      "secret": {
+        "position": [
+          -7,
+          -4.8
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -7,
+          -3.3
+        ],
+        "marks": [
+          {
+            "position": [
+              -7,
+              -3.65
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -8,
+              -4.0
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Begleite die Drohne. Schuetze ihren Weg.",
+      "voice": "defold_rescue",
+      "radar": [
+        -2.0,
+        0.0
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": true,
+      "turrets": [
+        {
+          "position": [
+            7,
+            3.8
+          ],
+          "hp": 2,
+          "phase": 1
+        },
+        {
+          "position": [
+            2,
+            -4.8
+          ],
+          "hp": 2,
+          "phase": 0.6
+        }
+      ],
+      "escort": {
+        "spawn": [
+          -6.5,
+          4.4
+        ],
+        "route": [
+          [
+            -6,
+            3
+          ],
+          [
+            -5,
+            -3.8
+          ],
+          [
+            0,
+            -4.8
+          ],
+          [
+            6,
+            -4.8
+          ]
+        ],
+        "hp": 3,
+        "speed": 1.7
+      }
     }
   ],
   "combat": {
@@ -426,16 +849,41 @@
     "guardian",
     "reactor",
     "citadel",
-    "dock"
+    "dock",
+    "forge",
+    "echo",
+    "rescue"
   ],
   "hint_completion_keys": [
     "mission:bank",
     "mission:guardian",
     "mission:reactor",
     "mission:citadel",
-    "mission:dock"
+    "mission:dock",
+    "mission:forge",
+    "mission:echo",
+    "mission:rescue"
   ],
   "preview_trajectory": false,
   "world_scale": 1.5,
-  "hold_seconds": 0.3
+  "hold_seconds": 0.3,
+  "shop_enabled": true,
+  "save_schema": 2,
+  "characters": [
+    {
+      "id": "hero",
+      "name": "NOVA",
+      "shot": "energy"
+    },
+    {
+      "id": "dragon",
+      "name": "FLAMMI",
+      "shot": "fireball"
+    },
+    {
+      "id": "fox",
+      "name": "FENNEK",
+      "shot": "energy"
+    }
+  ]
 }

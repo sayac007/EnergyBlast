@@ -2,4 +2,5 @@ script: "/main/ui.gui_script"
 fonts {name:"ui" font:"/main/ui.font"}
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT
-max_nodes: 512
+max_nodes: 1024
+textures {name: "portraits" texture: "/models/portraits.atlas"}

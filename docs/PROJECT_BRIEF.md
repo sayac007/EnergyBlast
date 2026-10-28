@@ -113,3 +113,17 @@ Bereiche sie neutralisieren können. Umsetzung in 0.4.1: Abpraller an Deckungen,
 Rändern und geschlossenen Toren für beide Seiten; begrenzte Zahl, Reichweite und
 Lebensdauer sowie blau markierte, begehbare Neutralisationsfelder. Das sind
 Spielregeln für Energiegeschosse, keine realistische Ballistiksimulation.
+
+## Gemeinsamer Spieltest und Auftrag für 0.5 — 28.10.2026
+
+Visuelle Referenz ist jetzt **Brawl Stars**: kräftige, übersichtliche eigene
+Gestaltung, keine kopierten Assets. Deckung verlassen darf taktisch nötig sein.
+Alle sichtbaren Wände müssen beide Geschossarten reflektieren oder klar absorbieren;
+kein optisches Darüber-/Durchfliegen. HUD und Menüs dürfen keine spielbare Fläche
+abdecken. Geheimnisse erhalten kostenlose Spuren/Pfeile als Umwelthinweise.
+Ausrüstung wird ausdrücklich für Sterne gekauft; die Gesamtpunktzahl bleibt
+motivierend erhalten. Neue, stärker instrumentierte Musik und drei weitere
+Kampfsituationen sowie auswählbare nicht-robotische Figuren sind beauftragt.
+
+Umsetzung und Grenzen: [Meilenstein 04 — Toybox Raid](MILESTONE_04.md).
+Defold bleibt Schwerpunkt, die beiden Vergleichs-Engines bleiben eingefroren.

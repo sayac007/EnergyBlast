@@ -1,0 +1,3 @@
+mesh: "/models/gate.gltf"
+materials { name: "Pulse coral" material: "/models/gate-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/gate-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }

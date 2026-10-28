@@ -1,0 +1,3 @@
+mesh: "/models/fireball.gltf"
+materials { name: "Fire orange" material: "/models/fireball-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/fireball-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }

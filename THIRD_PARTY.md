@@ -104,3 +104,20 @@ sound. No external recording, sample or reference melody is used. Source/metrics
 hashes: `shared/audio/defold04/music.json`. One new complete synthetic control cue
 uses the existing pinned model/Serena speaker and existing model notices; its
 manifest is `shared/audio/defold04/manifest.json`. No new runtime dependency.
+
+## Defold 0.5 — Toybox Raid
+
+Brawl Stars is a visual reference only. No game art, character, soundtrack,
+recording or melody was downloaded/copied from it. The dragon, fennec, wings,
+portraits and revised arenas are original Blender geometry/renders in the same
+`tools/make_defold04_models.py` generator. Native depth-tested projectiles and
+original toon lighting use the standard Defold renderer. Provenance and SHA-256
+cover the full `shared/assets/defold04` directory, including portraits/surfaces.
+
+Aurora Hop — Toybox Ensemble is a new arrangement of our own composition, with
+nine mathematically synthesized instruments, stereo ambience and four density/
+dynamic sections. No external song, sample, performance or reference melody.
+The updated music manifest records hashes/metrics. Four new complete mission/
+secret cues use the existing pinned Qwen model and synthetic Serena speaker;
+five Defold cues total. Existing model/font/engine notices remain applicable.
+No new runtime dependency or project licence grant.

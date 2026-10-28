@@ -17,6 +17,46 @@
       "playback_gain_db": 7.2174242535535065,
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_forge",
+      "text": "Lege eine Magnetfalle. Locke den Wächter hinein. Dann ist sein Schild aus.",
+      "file": "defold_forge.ogg",
+      "sha256": "ad360aa65810c6f4be8860d34ed5ef737c56f620f57ef17289f2f4152d847120",
+      "seconds": 6.76,
+      "playback_gain_db": 8.011446506004912,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_rescue",
+      "text": "Begleite die Drohne. Bleibe in ihrer Nähe und schütze sie vor den Kanonen.",
+      "file": "defold_rescue.ogg",
+      "sha256": "e83e115d59b52267dd38c85f8352fd5b35cc8db5a1c0f737e8f72dd8fd759e39",
+      "seconds": 5.96,
+      "playback_gain_db": 8.76707293858185,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_secret",
+      "text": "Suche die goldenen Pfeile und die dunklen Spuren. Dahinter liegt ein Schatz.",
+      "file": "defold_secret.ogg",
+      "sha256": "2f822388a32c72b52e9e6145ea3c94675c005f5357d1e325f9ed2ac209032a7c",
+      "seconds": 7.24,
+      "playback_gain_db": 7.490950215383605,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_echo",
+      "text": "Schau auf die Lichter. Triff sie in derselben Reihenfolge.",
+      "file": "defold_echo.ogg",
+      "sha256": "321750ea9f15966c7078427c93cf99c53ee5befff058ae9a858bd2ca422ebb4a",
+      "seconds": 5.88,
+      "playback_gain_db": 9.371813840788787,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
     }
   ]
 }

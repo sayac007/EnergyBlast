@@ -1,5 +1,6 @@
 -- Shared camera mathematics for rendering, touch unprojection and world overlays.
-local M={width=720,height=1280,bottom=250,top=1130,size=12.2}
+local Layout=require 'main.layout'
+local M={width=Layout.width,height=Layout.height,bottom=Layout.bottom,top=Layout.top,size=12.2}
 function M.matrices(w,h,center)
  local pixel_height=h*(M.top-M.bottom)/M.height
  local aspect=w/pixel_height;local size=math.max(M.size,10/aspect)

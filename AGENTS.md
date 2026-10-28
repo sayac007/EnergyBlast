@@ -97,3 +97,18 @@
   enemy 6 s, plus range. Fade near expiration and dissipate visibly.
 - Blue X neutralisation fields absorb either side's shots and remain walkable.
   These are explicit absorption areas; ordinary walls still reflect.
+
+## Toybox Raid (operator playtest, 28 October 2026)
+
+- Defold 0.5.0/code 6, six sectors, three selectable original characters. Brawl
+  Stars is a visual direction, never an asset source. Preserve tap/hold controls.
+- All shots must be native depth-tested models. Never restore GUI projectile
+  circles. All solid arena meshes/caps must match collision footprints; verify
+  actual exported POSITION buffers and the native occlusion image regression.
+- Keep every interactive HUD element outside Layout.bottom..Layout.top. Menus
+  replace the paused world entirely, rather than covering a playable scene.
+- Free environmental treasure marks, optional earned clues. Real persistent
+  purchases spend wallet balance, never lifetime score. One-time migration keeps
+  pre-shop gear. New missions: magnetic trap, light sequence, escorted drone.
+- Use MILESTONE_04.md, QUALITY.md and BUILD_AND_TEST.md for actual scope/results.
+  Other engines stay frozen; no PR, merge, Actions or Release/store publication.

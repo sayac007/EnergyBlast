@@ -1,0 +1,10 @@
+mesh: "/models/echo.gltf"
+materials { name: "Midnight titanium" material: "/models/echo-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Terrain echo" material: "/models/echo-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Panel light echo" material: "/models/echo-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Panel deep echo" material: "/models/echo-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Wall echo" material: "/models/echo-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Crown echo" material: "/models/echo-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/echo-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/echo-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/echo-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }

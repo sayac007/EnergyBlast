@@ -1,0 +1,8 @@
+mesh: "/models/fox.gltf"
+materials { name: "Explorer plum" material: "/models/fox-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/fox-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Fennec amber" material: "/models/fox-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Fennec cream" material: "/models/fox-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Midnight titanium" material: "/models/fox-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/fox-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/fox-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -2,7 +2,7 @@
 import argparse,hashlib,json,math,os,subprocess,tempfile
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
-TEXTS={'defold_controls':'Kurz tippen zum Laufen. Halte zum Zielen. Lass los zum Schießen.'}
+TEXTS={'defold_secret':'Suche die goldenen Pfeile und die dunklen Spuren. Dahinter liegt ein Schatz.', 'defold_forge':'Lege eine Magnetfalle. Locke den Wächter hinein. Dann ist sein Schild aus.', 'defold_echo':'Schau auf die Lichter. Triff sie in derselben Reihenfolge.', 'defold_rescue':'Begleite die Drohne. Bleibe in ihrer Nähe und schütze sie vor den Kanonen.', 'defold_controls':'Kurz tippen zum Laufen. Halte zum Zielen. Lass los zum Schießen.'}
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
  p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);a=p.parse_args()

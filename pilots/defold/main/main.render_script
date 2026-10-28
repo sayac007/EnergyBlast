@@ -1,9 +1,9 @@
 local View=require 'main.view'
 function init(self)
- self.model=render.predicate({'model'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0}
+ self.model=render.predicate({'model'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.scene=true
 end
 function on_message(self,id,m)
- if id==hash('camera')then self.center={m.x,m.z}end
+ if id==hash('camera')then self.center={m.x,m.z};self.scene=m.scene~=false end
 end
 function update(self)
  local w,h=render.get_window_width(),render.get_window_height()
@@ -11,7 +11,7 @@ function update(self)
  render.clear({[graphics.BUFFER_TYPE_COLOR0_BIT]=vmath.vector4(.035,.055,.11,1),[graphics.BUFFER_TYPE_DEPTH_BIT]=1,[graphics.BUFFER_TYPE_STENCIL_BIT]=0})
  render.set_viewport(0,h*View.bottom/View.height,w,h*(View.top-View.bottom)/View.height)
  render.enable_state(graphics.STATE_DEPTH_TEST);render.set_depth_func(graphics.COMPARE_FUNC_LEQUAL);render.enable_state(graphics.STATE_CULL_FACE)
- local v,p=View.matrices(w,h,self.center);render.set_view(v);render.set_projection(p);render.draw(self.model)
+ local v,p=View.matrices(w,h,self.center);render.set_view(v);render.set_projection(p);if self.scene then render.draw(self.model)end
  render.set_viewport(0,0,w,h);render.disable_state(graphics.STATE_DEPTH_TEST);render.disable_state(graphics.STATE_CULL_FACE);render.set_depth_mask(false)
  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA)
  render.set_view(vmath.matrix4());render.set_projection(vmath.matrix4_orthographic(0,w,0,h,-1,1))

@@ -1,0 +1,2 @@
+mesh: "/models/enemy_bolt.gltf"
+materials { name: "Pulse coral" material: "/models/enemy_bolt-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

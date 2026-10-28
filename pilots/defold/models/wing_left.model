@@ -1,0 +1,3 @@
+mesh: "/models/wing_left.gltf"
+materials { name: "Fire orange" material: "/models/wing_left-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Dragon apricot" material: "/models/wing_left-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }

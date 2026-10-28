@@ -8,5 +8,5 @@ vertex_constants { name: "mtx_view" type: CONSTANT_TYPE_VIEW }
 vertex_constants { name: "mtx_proj" type: CONSTANT_TYPE_PROJECTION }
 vertex_constants { name: "mtx_normal" type: CONSTANT_TYPE_NORMAL }
 vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -100 y: 160 z: 80 w: 1 } }
-fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: 0.12999999523162842 y: 0.28999999165534973 z: 0.6299999952316284 w: 1 } }
+fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: 1 y: 0.7354000210762024 z: 0.3084000051021576 w: 1 } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }

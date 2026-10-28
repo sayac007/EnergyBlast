@@ -53,8 +53,8 @@ class SharedChecks(unittest.TestCase):
    self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
-  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertEqual(d['rewards'],old['rewards'])
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),1)
+  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]==v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),5)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -68,6 +68,37 @@ class SharedChecks(unittest.TestCase):
     self.assertLess(abs(samples[0]-samples[-1]),.005)
   sound=(ROOT/'pilots/defold/audio/music.sound').read_text();self.assertIn('looping: 1',sound);self.assertIn('gain: 1.0',sound)
   self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
+ def test_exported_wall_geometry_matches_every_collider(self):
+  # Read actual exported POSITION buffers, not just the generator's claims.
+  surfaces=json.loads((ROOT/'shared/assets/defold04/surfaces.json').read_text())
+  for mission,rows in surfaces.items():
+   gltf=json.loads((ROOT/'shared/assets/defold04'/(mission+'.gltf')).read_text());points={}
+   for node in gltf['nodes']:
+    name=node.get('name','')
+    if not name.startswith('SOLID '):continue
+    index=int(name.split()[2]if name.startswith('SOLID crown ')else name.split()[1])
+    self.assertNotIn('rotation',node);self.assertNotIn('scale',node)
+    translation=node.get('translation',[0,0,0]);mesh=gltf['meshes'][node['mesh']]
+    for primitive in mesh['primitives']:
+     acc=gltf['accessors'][primitive['attributes']['POSITION']];view=gltf['bufferViews'][acc['bufferView']]
+     self.assertEqual(acc['componentType'],5126);self.assertEqual(acc['type'],'VEC3')
+     raw=(ROOT/'shared/assets/defold04'/gltf['buffers'][view['buffer']]['uri']).read_bytes()
+     start=view.get('byteOffset',0)+acc.get('byteOffset',0);stride=view.get('byteStride',12)
+     for j in range(acc['count']):
+      point=struct.unpack_from('<fff',raw,start+j*stride);points.setdefault(index,[]).append([point[k]+translation[k]for k in range(3)])
+   self.assertEqual(len(points),len(rows),mission)
+   for i,row in enumerate(rows):
+    pts=points[i];xs=[p[0]for p in pts];zs=[p[2]for p in pts];actual=[min(xs),min(zs),max(xs)-min(xs),max(zs)-min(zs)]
+    for value,expected in zip(actual,row['r']):self.assertAlmostEqual(value,expected,places=5,msg=mission+':'+str(i))
+  gui=(ROOT/'pilots/defold/main/ui.gui_script').read_text()
+  self.assertNotIn('for _,b in ipairs(g.bullets)',gui,'shots must be depth-tested native models')
+ def test_ensemble_has_real_stereo_and_section_dynamics(self):
+  pcm=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(ROOT/'shared/audio/defold04/aurora-hop.ogg'),'-ar','8000','-ac','2','-f','f32le','-'])
+  samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);sections=[]
+  for i in range(4):
+   values=samples[i*15*8000*2:(i+1)*15*8000*2];sections.append(math.sqrt(sum(v*v for v in values)/len(values)))
+  self.assertGreater(max(sections)/min(sections),1.5)
+  self.assertGreater(math.sqrt(sum((l-r)**2 for l,r in zip(samples[::2],samples[1::2]))/(len(samples)//2)),.005)
  def test_shortlisted_engines_do_not_render_ballistic_previews(self):
   gui=(ROOT/'pilots/defold/main/ui.gui_script').read_text();js=(ROOT/'pilots/gdevelop/shooter.js').read_text()
   self.assertNotIn('g:shot()',gui);self.assertNotIn('this.line(this.shot()',js)

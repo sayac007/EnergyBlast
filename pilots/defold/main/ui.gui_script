@@ -1,115 +1,183 @@
+local Layout=require 'main.layout'
 local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
 local function box(self,x,y,w,h,c)
  local n=gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(w,h,0));gui.set_color(n,color(c));if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
 end
-local function text(self,x,y,s,c,scale)
- local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ecfff7'));gui.set_scale(n,vmath.vector3(scale or 1));if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+local function text(self,x,y,s,c,scale,max_width)
+ local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ffffff'))
+ local scale=scale or 1;local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),s);if max_width and metrics.width*scale>max_width then scale=max_width/metrics.width end
+ gui.set_scale(n,vmath.vector3(scale));if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
 end
 local function circle(self,x,y,r,c)
- local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,40);if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+ local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,32);if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+end
+local function pill(self,x,y,w,h,c)
+ box(self,x,y,w-h,h,c);circle(self,x-(w-h)/2,y,h/2,c);circle(self,x+(w-h)/2,y,h/2,c)
 end
 local function button(self,x,y,w,h,title,action,c)
- c=c or'24526a';local n=box(self,x,y,w-h,h,c);circle(self,x-(w-h)/2,y,h/2,c);circle(self,x+(w-h)/2,y,h/2,c);
- -- A full rectangular hitbox keeps the pill's ends tappable.
- local hit=box(self,x,y,w,h,c);gui.set_alpha(hit,0);text(self,x,y,title,'ecfff7',.85);self.buttons[#self.buttons+1]={node=hit,action=action};return n
+ c=c or'316bd6';pill(self,x,y-5,w,h,'0b1638');pill(self,x,y,w,h,c)
+ local hit=box(self,x,y,w,h,'ffffff');gui.set_alpha(hit,0);text(self,x,y,title,'ffffff',.80,w-22)
+ self.buttons[#self.buttons+1]={node=hit,action=action,rect={x,y,w,h}}
 end
 local function line(self,x1,y1,x2,y2,c,width)
  local dx,dy=x2-x1,y2-y1;local n=box(self,(x1+x2)/2,(y1+y2)/2,math.sqrt(dx*dx+dy*dy),width or 3,c);gui.set_rotation(n,vmath.vector3(0,0,math.atan2(dy,dx)*180/math.pi))
 end
-function init(self)self.nodes={};self.buttons={};self.last_dialog=nil;self.ui_pointers={};msg.post('.','acquire_input_focus')end
+local function ring(self,x,y,r,c,width)
+ for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;line(self,x+math.cos(a)*r,y+math.sin(a)*r,x+math.cos(b)*r,y+math.sin(b)*r,c,width or 3)end
+end
+local function portrait(self,x,y,id,size)
+ local n=box(self,x,y,size,size,'ffffff');gui.set_texture(n,'portraits');gui.play_flipbook(n,id)
+end
+local function star(self,x,y,r)
+ for i=0,4 do local a=math.pi/2+i*math.pi*2/5;local n=circle(self,x+math.cos(a)*r*.4,y+math.sin(a)*r*.4,r*.55,'ffdf58');gui.set_perimeter_vertices(n,3);gui.set_rotation(n,vmath.vector3(0,0,a*180/math.pi))end
+end
+local function page(self,g,title)
+ box(self,360,640,720,1280,'111e47')
+ for i=1,7 do local n=box(self,(i*151)%720,(i*191)%1280,270,85,i%2==0 and'19275c'or'1c2d65');gui.set_rotation(n,vmath.vector3(0,0,-18))end
+ text(self,360,1190,title,'ffffff',1.35,660)
+ star(self,55,1115,20);text(self,175,1115,tostring(g:total())..' GESAMT','ffdf58',.72,230)
+ text(self,500,1115,tostring(g:wallet())..' GUTHABEN','a7f4e6',.72,290)
+end
+local function dialog(self,g)
+ self.buttons={};page(self,g,g.dialog=='menu'and'ENERGYBLAST'or g.dialog=='gear'and'ARSENAL'or g.dialog=='characters'and'WAHL DER HELDEN'or'ENERGYBLAST')
+ if g.dialog=='menu'then
+  text(self,360,1050,'TOYBOX RAID  |  0.5.0','a5c8ff',.67)
+  local badges={'WINKEL','ZEITFENSTER','SCHALTER','FALLE','LICHTERFOLGE','BEGLEITUNG'}
+  local colors={'268974','8751bb','bf7430','b54960','3a6fc7','3d8863'}
+  for i,m in ipairs(g.data.missions)do
+   local x=i%2==1 and 185 or 535;local y=930-math.floor((i-1)/2)*177
+   box(self,x,y,320,147,'25386c');circle(self,x-110,y+28,22,colors[i]);text(self,x-110,y+28,tostring(i),'ffffff',.85)
+   button(self,x,y-12,306,66,m.title,'sector'..i,colors[i]);text(self,x,y-57,badges[i],'d4e5ff',.48,285)
+  end
+  button(self,185,325,312,78,'HELDEN','characters','804bd1');portrait(self,95,409,g:character().id,100)
+  text(self,345,410,g:character().name,'ffdf58',.75)
+  button(self,535,325,312,78,'ARSENAL','gear','b67422')
+  button(self,360,210,620,74,'WEITER SPIELEN','continue','268974')
+  text(self,360,100,'KURZ TIPPEN: LAUFEN  |  HALTEN: ZIELEN','bed8ff',.55,660)
+  if g.ui_test and not self.menu_ready then self.menu_ready=true;print('DEFOLD MENU READY')end
+ elseif g.dialog=='characters'then
+  text(self,360,1025,'JEDER HELD KANN JEDE MISSION SCHAFFEN','a5c8ff',.57,660)
+  for i,c in ipairs(g.data.characters)do local x=125+(i-1)*235
+   local chosen=g:character().id==c.id
+   box(self,x,780,214,360,chosen and'4b3b8e'or'25386c');portrait(self,x,825,c.id,215)
+   text(self,x,695,c.name,chosen and'ffdf58'or'ffffff',.85)
+   text(self,x,650,c.shot=='fireball'and'FEUERBALL'or'ENERGIE','bad8ff',.48)
+   button(self,x,550,210,70,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'268974'or'804bd1')
+  end
+  button(self,360,280,620,80,'ZURUECK','menu')
+ elseif g.dialog=='gear'then
+  text(self,360,1040,g.shop_status or'KAUFEN & SOFORT AUSRUESTEN','ffdf58',.65,640)
+  local names={prism='PRISMA-KANONE',armor='RUESTUNG',boots='TEMPOSTIEFEL',cloak='TARNMODUL'}
+  local effects={prism='ZWEI ABPRALLER',armor='+1 ENERGIE',boots='SCHNELLER LAUFEN',cloak='SPAETER ENTDECKT'}
+  for i,u in ipairs(g.data.unlocks)do local y=922-(i-1)*155;local owned=g:owns(u.id)
+   box(self,360,y,654,132,'25386c');circle(self,80,y,29,owned and'268974'or'9d6630');text(self,80,y,owned and'+'or'*','ffdf58',1)
+   text(self,290,y+30,names[u.id],'ffffff',.77,310);text(self,290,y-16,effects[u.id],'bed8ff',.56,310)
+   local label=owned and(u.id=='prism'and(g.saved.weapon=='prism'and'AN'or'AUS')or'AKTIV')or(tostring(u.price)..' *')
+   button(self,570,y,170,75,label,'buy:'..u.id,owned and'268974'or'b67422')
+  end
+  text(self,360,320,'Gesamtsterne bleiben. Nur Guthaben wird ausgegeben.','bed8ff',.52,660)
+  button(self,185,220,310,74,'WEITER','continue','268974');button(self,535,220,310,74,'SEKTOREN','menu')
+  button(self,360,100,620,62,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','3b5391')
+ elseif g.dialog=='win'then
+  text(self,360,905,'SEKTOR GESICHERT','ffdf58',1.15,650);star(self,360,800,55);text(self,360,690,'+ '..g.reward..' STERNE','ffdf58',1.2)
+  button(self,360,560,610,90,'BEUTE SUCHEN','loot','804bd1');button(self,360,420,610,90,'SEKTOREN','menu');button(self,360,280,610,80,'NOCH EINMAL','retry','268974')
+ else
+  text(self,360,850,'NEUER ANLAUF?','ff9dc6',1.25);text(self,360,770,'Deine Sterne bleiben erhalten.','c4dcff',.75)
+  button(self,360,610,620,100,'NOCH EINMAL','retry','ca437b');button(self,360,440,620,90,'SEKTOREN','menu')
+ end
+end
+function init(self)self.nodes={};self.buttons={};self.ui_pointers={};msg.post('.','acquire_input_focus')end
 function update(self,dt)
  local g=_G.energyblast;if not g then return end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
- box(self,360,1207,700,120,'14233b');text(self,112,1230,tostring(g:total()),'ffd674',1.2);for i=0,4 do local a=math.pi/2+i*math.pi*2/5;local n=circle(self,45+math.cos(a)*8,1230+math.sin(a)*8,11,'ffd674');gui.set_perimeter_vertices(n,3);gui.set_rotation(n,vmath.vector3(0,0,a*180/math.pi))end
- for i=1,g.max_hp do circle(self,42+i*35,1185,10,i<=g.hp and'ff7394'or'334460')end
- text(self,350,1230,g.m.title,'afc8dd',.65);text(self,600,1185,'? '..g:credits(),'ffd674',.8)
- button(self,650,1230,68,60,'|||','menu','20314b');button(self,550,1230,68,60,g.muted and'STUMM'or'TON','sound','20314b')
- box(self,360,218,695,65,'14233b');text(self,360,238,g.status,'b8dbe7',.59)
- local alive,relays=0,0;for _,t in ipairs(g.enemies)do if t.hp>0 then if t.kind=='relay'then relays=relays+1 else alive=alive+1 end end end
- text(self,360,207,g.m.id=='dock'and('RELAIS '..(2-relays)..'/2   |   KANONEN '..alive)or('KANONEN '..alive),'ffd674',.65)
- local n=circle(self,570,108,78,'d63969');text(self,570,108,' FEUER','ffffff',.9);self.buttons[#self.buttons+1]={node=n,action='fire'}
- n=circle(self,145,108,70,'1d5969');text(self,145,108,g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'» DASH','ffffff',.85);self.buttons[#self.buttons+1]={node=n,action='dash'}
- button(self,355,180,150,46,'? Hinweis','hint','20314b');button(self,355,115,150,46,'Funk','radio','20314b');button(self,355,50,150,46,'Arsenal','gear','20314b')
- -- Small overview of the expanded world; not a shot predictor.
- box(self,360,1173,130,60,'0d1b2e')
- local bounds=g.data.arena
- local function mini(p)return 420-(p[2]-bounds[2])/bounds[4]*120,1148+(1-(p[1]-bounds[1])/bounds[3])*50 end
- for _,t in ipairs(g.enemies)do if t.hp>0 then local x,y=mini(t.p);circle(self,x,y,2.5,t.kind=='relay'and'ffd674'or'ff7394')end end
- local gx,gy=mini(g.m.goal);circle(self,gx,gy,3,'83e9b2')
- local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0')
- -- Keep all world annotations inside the gameplay viewport, clear of controls.
- local clip=box(self,360,690,720,880,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
- -- Only the current projectile is drawn. Never render shot() / a reflected preview.
- for _,t in ipairs(g.enemies)do if t.hp>0 then
-  local x,y=g.project(g,t.p,1.6)
-  if t.warning>0 and(x<12 or x>708 or y<265 or y>1115)then
-   local ex=math.max(22,math.min(698,x));local ey=math.max(275,math.min(1105,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)
-  end
-  local max=t.max_hp or 2
-  box(self,x,y,48,7,'11223b');box(self,x-(1-t.hp/max)*24,y,48*t.hp/max,7,t.kind=='relay'and'ffd674'or'ff7394')
-  local sx,sy=g.project(g,t.p,.1)
-  if t.shield or g:locked(t)then circle(self,sx,sy,30,'49346a');circle(self,sx,sy,25,'26374a');text(self,sx,sy,'+','b788ff',.9)end
-  if t.warning>0 then
-   local mx,my=g.project(g,t.p,.95);local pulse=8+4*math.sin(g.clock*28)^2;circle(self,mx,my,pulse,'ffb47b');text(self,x,y+23,'!','ffd674',1.1)
+ -- A menu REPLACES the scene; it never covers a still-playable area.
+ if g.dialog then dialog(self,g);return end
+ box(self,360,1190,720,180,'111e47');box(self,360,130,720,260,'111e47')
+ box(self,360,1104,720,8,'48b5c7');box(self,360,256,720,8,'48b5c7')
+ star(self,40,1238,20);text(self,130,1238,tostring(g:total()),'ffdf58',1.1,155)
+ text(self,120,1137,'GUTHABEN '..g:wallet(),'a7f4e6',.50,220)
+ for i=1,g.max_hp do circle(self,30+i*37,1182,12,i<=g.hp and'ff7394'or'344774')end
+ text(self,365,1240,g.m.title,'e2eeff',.64,225)
+ local alive=0;for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='sequence'then alive=alive+1 end end
+ text(self,570,1177,g.drone and('DROHNE '..g.drone.hp..'/3')or g.m.kind=='sequence'and('FOLGE '..g.sequence_progress..'/3')or('ZIELE '..alive),'ffd674',.64,210)
+ if g.m.kind=='sequence'then
+  local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
+  for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,520+i*36,1138,14,lit and'ffe57a'or'394a7d');text(self,520+i*36,1138,tostring(i),lit and'17214b'or'b8bfff',.62)end
+ else text(self,570,1137,'? '..g:credits(),'bed8ff',.55)end
+ for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='|||',sound=g.muted and'AUS'or'TON',hint='? HINWEIS',radio='FUNK',gear='ARSENAL'})[name]
+  if name=='hint'and g.m.kind=='trap'then button(self,250,184,154,48,'? HINWEIS','hint','3b5391');button(self,425,184,176,48,g.trap_cooldown>0 and string.format('FALLE %.0f',g.trap_cooldown)or'FALLE','trap','804bd1')
+  else button(self,r[1],r[2],r[3],r[4],title,name=='gear'and'gear'or name,'3b5391')end
+ end
+ for _,name in ipairs({'fire','dash'})do local r=Layout.controls[name];circle(self,r[1],r[2]-6,r[3]/2,'081430');local n=circle(self,r[1],r[2],r[3]/2,name=='fire'and'dc497d'or'267d9b');ring(self,r[1],r[2],r[3]/2-7,name=='fire'and'ff95b5'or'69d9e5',3)
+  text(self,r[1],r[2],name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.92);self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
+ end
+ text(self,360,234,g.status,'cce7ff',.55,676)
+ box(self,360,1164,130,78,'0b1537');local bounds=g.data.arena
+ local function mini(p)return 420-(p[2]-bounds[2])/bounds[4]*120,1130+(1-(p[1]-bounds[1])/bounds[3])*68 end
+ for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
+ local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');local gx,gy=mini(g.m.goal);circle(self,gx,gy,3,'ffdf58')
+ -- World-only annotations are clipped at the exact render/input viewport.
+ local clip=box(self,360,(Layout.bottom+Layout.top)/2,720,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
+ for _,e in ipairs(g.enemies)do if e.hp>0 then
+  local x,y=g.project(g,e.p,1.6)
+  if e.warning>0 and(x<12 or x>708 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(22,math.min(698,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
+  if e.kind=='sequence'then
+   local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
+   ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
+  else
+   box(self,x,y,50,8,'11223b');box(self,x-(1-e.hp/e.max_hp)*25,y,50*e.hp/e.max_hp,8,'ff7394')
+   if e.shield or g:locked(e)then text(self,x,y+26,e.trap_shield and((e.trapped or 0)>0 and'!'or'X')or'+','d4afff',.8)end
+   if e.warning>0 then text(self,x,y+32,'!','ffcf66',1.15)end
+   if (e.trapped or 0)>0 then local tx,ty=g.project(g,e.p,.2);ring(self,tx,ty,28,'97f0ff',4)end
   end
  end end
- for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05);for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;local x1,y1=g.project(g,{zone.position[1]+zone.radius*math.cos(a),zone.position[2]+zone.radius*math.sin(a)},.05);local x2,y2=g.project(g,{zone.position[1]+zone.radius*math.cos(b),zone.position[2]+zone.radius*math.sin(b)},.05);line(self,x1,y1,x2,y2,'52cde4',3)end;circle(self,x,y,13,'123e63');text(self,x,y,'X','9befff',.65)end
- for _,b in ipairs(g.bullets)do local x,y=g.project(g,b.p,.75);local glow=circle(self,x,y,9,b.enemy and'783a59'or'23666c');local core=circle(self,x,y,5,b.enemy and'ff6485'or'cafff5');gui.set_alpha(glow,b.alpha);gui.set_alpha(core,b.alpha)end
- if g.aiming and g.target then local x,y=g.project(g,g.target,0);circle(self,x,y,13,'bcf8e8');circle(self,x,y,10,'173a4a');circle(self,x,y,3,'bcf8e8')end
- if #g.path>0 then local x,y=g.project(g,g.path[#g.path],.1);circle(self,x,y,10,'23666c');circle(self,x,y,4,'a1fff0')end
- for _,f in ipairs(g.fx)do
-  local x,y=g.project(g,f.p,.8)
-  if f.kind=='explosion'then
-   if f.age<.10 then local flash=circle(self,x,y,20*(1-f.age/.1),'fff4b5');gui.set_alpha(flash,.7)end
-   local radius=8+f.age*75
-   for j=0,15 do local a=j*math.pi/8;local b=(j+1)*math.pi/8
-    line(self,x+math.cos(a)*radius,y+math.sin(a)*radius,x+math.cos(b)*radius,y+math.sin(b)*radius,'ffd674',math.max(1,5*f.life/.9))
-   end
-  else for j=0,5 do local a=j*math.pi/3;circle(self,x+math.cos(a)*f.age*60,y+math.sin(a)*f.age*60,3,f.kind=='absorb'and'9befff'or f.kind=='dissipate'and'99b5c8'or'ffd674')end end
+ for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05)
+  for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;local x1,y1=g.project(g,{zone.position[1]+zone.radius*math.cos(a),zone.position[2]+zone.radius*math.sin(a)},.05);local x2,y2=g.project(g,{zone.position[1]+zone.radius*math.cos(b),zone.position[2]+zone.radius*math.sin(b)},.05);line(self,x1,y1,x2,y2,'52cde4',3)end
+  text(self,x,y,'X','9befff',.65)
  end
- if g.pending_hold and g.touch.pointer then local p=g.touch.pointer
-  for j=1,12 do local a=j*math.pi/6;circle(self,p.x+math.cos(a)*22,p.y+math.sin(a)*22,3,j<=g.hold_progress*12 and'ffd674'or'456073')end
+ -- Projectiles are native depth-tested models. No GUI shot can float over cover.
+ if g.aiming and g.target then local x,y=g.project(g,g.target,0);ring(self,x,y,15,'fff4b0',3);circle(self,x,y,3,'fff4b0')end
+ if #g.path>0 then local x,y=g.project(g,g.path[#g.path],.1);ring(self,x,y,11,'9affe0',3)end
+ for _,f in ipairs(g.fx)do local x,y=g.project(g,f.p,.8)
+  if f.kind=='explosion'then ring(self,x,y,8+f.age*75,'ffd674',math.max(1,5*f.life/.9))
+  else for j=0,5 do local a=j*math.pi/3;circle(self,x+math.cos(a)*f.age*60,y+math.sin(a)*f.age*60,3,f.kind=='absorb'and'9befff'or'ffd674')end end
  end
-
+ for _,trap in ipairs(g.traps)do local x,y=g.project(g,trap.p,.1);for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;local x1,y1=g.project(g,{trap.p[1]+.85*math.cos(a),trap.p[2]+.85*math.sin(a)},.1);local x2,y2=g.project(g,{trap.p[1]+.85*math.cos(b),trap.p[2]+.85*math.sin(b)},.1);line(self,x1,y1,x2,y2,'ae9aff',4)end;text(self,x,y,'+','c6efff',.8)end
+ if g.pending_hold and g.touch.pointer then local p=g.touch.pointer;for j=1,12 do local a=j*math.pi/6;circle(self,p.x+math.cos(a)*22,p.y+math.sin(a)*22,3,j<=g.hold_progress*12 and'ffd674'or'456073')end end
  if g.m.heal and not g.heal_used then local x,y=g.project(g,g.m.heal,.4);circle(self,x,y,16,'255a52');text(self,x,y,'+','9affe0',1)end
- if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);text(self,x,y,alive==0 and'KERN'or'','a1fff0',.65)end
-
- if g.secret_visible then local x,y=g.project(g,g.m.secret.position,.4);box(self,x,y,25,20,'a066ef');box(self,x,y+8,29,6,'ffd674')end
+ if g.drone then local x,y=g.project(g,g.drone.p,1.2);text(self,x,y,g.drone.moving and'»'or'...','fff4b0',.9)end
+ if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);ring(self,x,y,20+math.sin(g.clock*3)*2,'ffdf58',3)end
  if g.clue_time>0 then local p=g:level()>1 and g.m.secret.position or g.m.secret.hint_landmark;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
- if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1],r[2]},.6);local x2,y2=g.project(g,{r[1]+r[3],r[2]},.6);line(self,x,y,x2,y2,g:open()and'4edfbd'or'f3a36c',g:open()and 2 or 10);for i=0,2 do local lx,ly=g.project(g,{r[1]+r[3]*(i+1)/4,r[2]+.5},1.5);circle(self,lx,ly,6,g.clock%8>=3+i and'68f6c6'or'43566a')end end
+ if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
  self.world_parent=nil
- if g.dialog then
-  box(self,360,690,680,830,'18253e');self.buttons={};text(self,360,1020,'ENERGYBLAST','ecfff7',1.45)
-  if g.dialog=='menu'then text(self,360,965,'AURORA HOP  |  0.4.1','9db5ce',.8)
-   button(self,360,855,570,95,'01  PRISMA-STATION','sector1','255464');text(self,360,793,'ABPRALLER','9db5ce',.55)
-   button(self,360,710,570,95,'02  NEON-ZITADELLE','sector2','69395f');text(self,360,648,'DECKUNG & ZEITFENSTER','9db5ce',.55)
-   button(self,360,565,570,95,'03  AURORA-DOCK','sector3','725632');text(self,360,503,'RELAIS & BEWEGLICHE GEGNER','ffd674',.55)
-   button(self,360,375,570,72,' WEITER','continue')
-  elseif g.dialog=='win'then text(self,360,850,'SEKTOR GESICHERT','ffd674',1.05);text(self,360,780,'+ '..g.reward..' *','ffd674',1.2);button(self,360,675,560,85,' BEUTE SUCHEN','loot');button(self,360,560,560,85,' SEKTOREN','menu');button(self,360,450,560,70,' NOCH EINMAL','retry')
-  elseif g.dialog=='defeat'then text(self,360,820,'ENERGIE LEER','ff7394',1.3);text(self,360,745,'Sterne bleiben erhalten.','afc8dd',.75);button(self,360,625,560,100,' NEUER ANLAUF','retry','d63969');button(self,360,480,560,80,'||| SEKTOREN','menu')
-  else text(self,360,850,'ARSENAL','ffd674',1.2);for i,row in ipairs({'100 * PRISMA: 2 ABPRALLER','160 * RUESTUNG: +1 ENERGIE','230 * STIEFEL: MEHR TEMPO','300 * TARNUNG'})do text(self,360,800-i*65,row,'b8dbe7',.72)end;button(self,360,455,560,75,'WEITER','continue');button(self,360,350,560,65,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','315566')end
+ if g.ui_test then
+  for _,b in ipairs(self.buttons)do local r=b.rect;assert(Layout.safe(r[1],r[2],r[3],r[4]),'HUD overlaps scene: '..b.action)end
+  if g.m.id=='dock'and not self.ui_ready then self.ui_ready=true;local x,y=g.project(g,{g.p[1]+1,g.p[2]-1},0);print('DEFOLD UI READY dock '..math.floor(x)..' '..math.floor(y))end
  end
- if g.ui_test and g.m.id=='dock'and not g.dialog and not self.ui_ready then self.ui_ready=true;local x,y=g.project(g,{g.p[1]+1,g.p[2]-1},0);print('DEFOLD UI READY dock '..math.floor(x)..' '..math.floor(y))end
 end
 local function handle(self,a)
  local g=_G.energyblast;if not g then return false end
- local key=a.id or 0
- local captured=self.ui_pointers[key]
- if captured then
-  if a.released then if captured=='fire'then g.held=false end;self.ui_pointers[key]=nil end
-  return true
- end
+ local key=a.id or 0;local captured=self.ui_pointers[key]
+ if captured then if a.released then if captured=='fire'then g.held=false end;self.ui_pointers[key]=nil end;return true end
  if not a.pressed then g.input(a);return true end
  for _,b in ipairs(self.buttons)do if gui.pick_node(b.node,a.x,a.y)then
-  if a.pressed then local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end;self.ui_pointers[key]=action;if action~='fire'and action~='dash'and action~='hint'then g.cancel_controls()end
-   if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='sector1'then g.choose(1)elseif action=='sector2'then g.choose(2)elseif action=='sector3'then g.choose(3)elseif action=='menu'then g.paused=true;g.dialog='menu'elseif action=='continue'then g.paused=false;g.dialog=nil elseif action=='retry'then g.choose(g.index)elseif action=='loot'then g.paused=false;g.over=false;g.dialog=nil elseif action=='gear'then g.paused=true;g.dialog='gear'elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
-  end
+  local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end
+  if action~='fire'and action~='dash'and action~='hint'and action~='trap'then g.cancel_controls()end
+  self.ui_pointers[key]=action
+  if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap'then g:trap()
+  elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
+  elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11))
+  elseif action:sub(1,4)=='buy:'then g:buy(action:sub(5));if g.ui_test then assert(g:owns(action:sub(5)));print('DEFOLD SHOP PURCHASE PASS '..action)end
+  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action
+  elseif action=='continue'then g.paused=false;g.dialog=nil
+  elseif action=='retry'then g.choose(g.index)
+  elseif action=='loot'then g.paused=false;g.over=false;g.dialog=nil
+  elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
   return true
  end end
- if a.y>=250 and a.y<=1130 then g.input(a)end;return true
+ if not g.dialog and Layout.field(a.x,a.y)then g.input(a)end;return true
 end
 function on_input(self,id,a)
  if id==hash('multitouch')then for _,t in ipairs(a.touch or{})do handle(self,t)end;return true elseif id==hash('touch')then return handle(self,a)elseif id==hash('back')and a.pressed then _G.energyblast.cancel_controls();_G.energyblast.paused=true;_G.energyblast.dialog='menu';return true end
 end
-
 function on_message(self,id)if id==hash('cancel_controls')then self.ui_pointers={}end end

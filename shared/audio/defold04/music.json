@@ -1,7 +1,24 @@
 {
   "schema": 1,
   "origin": "Original deterministic composition and mathematical synthesis by tools/make_defold_music.py; no sampled or transcribed reference melody",
-  "title": "Aurora Hop",
+  "title": "Aurora Hop \u2014 Toybox Ensemble",
+  "instruments": [
+    "lead",
+    "plucked strings",
+    "string pad",
+    "bells",
+    "brass reply",
+    "bass",
+    "kick",
+    "snare",
+    "hi-hat"
+  ],
+  "section_dynamics": [
+    0.62,
+    0.9,
+    0.48,
+    1.0
+  ],
   "bpm": 128,
   "bars": 32,
   "music_gain": 0.28,
@@ -10,17 +27,17 @@
   "files": [
     {
       "file": "aurora-hop.ogg",
-      "sha256": "35547c7cee655d5170da6ec514fa85c79c7c02c553824f59312d9257fcd196df",
+      "sha256": "f6708452157adf0a8adae7815b37eb011d2a5e540324db592282f698c6595c7a",
       "seconds": 60.0,
-      "peak": 0.7194725275039673,
-      "rms": 0.20106802880764008
+      "peak": 0.6262713074684143,
+      "rms": 0.11436527222394943
     },
     {
       "file": "energy-burst.ogg",
-      "sha256": "59e691367530e147ca77c446e89cae12773a741b9b69a9fcd91221e7418ff0df",
+      "sha256": "1a247f2e92a9595eb407f637c537bb00d1c173e7676fc4c1386f50fba66cec70",
       "seconds": 0.646,
-      "peak": 0.5920129418373108,
-      "rms": 0.07554962486028671
+      "peak": 0.5792970657348633,
+      "rms": 0.07536163926124573
     }
   ]
 }

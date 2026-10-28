@@ -1,0 +1,5 @@
+mesh: "/models/drone.gltf"
+materials { name: "Solar gold" material: "/models/drone-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Midnight titanium" material: "/models/drone-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/drone-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/drone-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }

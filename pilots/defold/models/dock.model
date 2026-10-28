@@ -1,9 +1,10 @@
 mesh: "/models/dock.gltf"
 materials { name: "Midnight titanium" material: "/models/dock-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Bright dock" material: "/models/dock-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Terrain dock" material: "/models/dock-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel light dock" material: "/models/dock-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel deep dock" material: "/models/dock-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Solar gold" material: "/models/dock-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ultramarine" material: "/models/dock-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Porcelain armor" material: "/models/dock-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Wall dock" material: "/models/dock-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Crown dock" material: "/models/dock-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/dock-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Ion cyan" material: "/models/dock-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/dock-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -44,9 +44,9 @@ end
 function P.spawn(g,origin,direction,enemy)
  local n=math.sqrt(direction[1]^2+direction[2]^2);if n<1e-9 then return nil end
  local cfg=g.data.combat
- local budget=enemy and(cfg.enemy_bounces or 0)or(g:total()>=100 and g.saved.weapon=='prism'and 2 or 1)
+ local budget=enemy and(cfg.enemy_bounces or 0)or(g:owns('prism') and g.saved.weapon=='prism'and 2 or 1)
  local b={p={origin[1],origin[2]},direction={direction[1]/n,direction[2]/n},enemy=enemy,
-  age=0,alpha=1,lifetime=enemy and(cfg.enemy_seconds or 6)or(cfg.player_seconds or 3),bounces=0,max_bounces=budget,segment=1,remaining=enemy and(cfg.enemy_range or 20)or(cfg.shot_range or 28),
+  visual=not enemy and g:character().shot or 'enemy',age=0,alpha=1,lifetime=enemy and(cfg.enemy_seconds or 6)or(cfg.player_seconds or 3),bounces=0,max_bounces=budget,segment=1,remaining=enemy and(cfg.enemy_range or 20)or(cfg.shot_range or 28),
   speed=enemy and cfg.enemy_bullet_speed or cfg.player_bullet_speed}
  g.bullets[#g.bullets+1]=b;return b
 end
@@ -61,6 +61,7 @@ function P.update(g,dt)
    local target=nil;local target_t=travel+1e-7
    if b.enemy then
     local t=circle_hit(b.p,b.direction,travel,g.p,.36);if t then target_t=t;target='player'end
+    if g.drone and g.drone.hp>0 then local td=circle_hit(b.p,b.direction,travel,g.drone.p,.4);if td and td<target_t then target_t=td;target='drone'end end
    else
     local radius=(g.saved.earned['secret:bank']or g.saved.earned['secret:reactor'])and .56 or .48
     for _,e in ipairs(g.enemies)do if e.hp>0 then
@@ -75,7 +76,7 @@ function P.update(g,dt)
    if target then travel=target_t end
    b.p={b.p[1]+b.direction[1]*travel,b.p[2]+b.direction[2]*travel};b.remaining=b.remaining-travel;distance=distance-travel
    if target then
-    if target=='absorber'then g.fx[#g.fx+1]={kind='absorb',p={b.p[1],b.p[2]},age=0,life=.22}elseif target=='player'then g:hit_player()else g:hit(target,b.bounces)end;removed=true
+    if target=='absorber'then g.fx[#g.fx+1]={kind='absorb',p={b.p[1],b.p[2]},age=0,life=.22}elseif target=='player'then g:hit_player()elseif target=='drone'then g:hit_drone()else g:hit(target,b.bounces)end;removed=true
    elseif wall then
     local reflective=g.data.combat.reflect_all_walls or wall.type=='reflector'
     if reflective and b.bounces<b.max_bounces then

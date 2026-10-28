@@ -1,0 +1,3 @@
+mesh: "/models/chest.gltf"
+materials { name: "Explorer plum" material: "/models/chest-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/chest-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }

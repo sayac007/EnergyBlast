@@ -1,10 +1,10 @@
 mesh: "/models/citadel.gltf"
 materials { name: "Midnight titanium" material: "/models/citadel-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Bright citadel" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Terrain citadel" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel light citadel" material: "/models/citadel-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel deep citadel" material: "/models/citadel-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Pulse coral" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ultramarine" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Porcelain armor" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Solar gold" material: "/models/citadel-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ion cyan" material: "/models/citadel-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Wall citadel" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Crown citadel" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/citadel-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/citadel-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }

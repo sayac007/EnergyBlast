@@ -20,16 +20,23 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-ui-',dir='/tmp')as d
  with log.open('w')as stream:
   proc=subprocess.Popen([str(a.engine),'--config=project.ui_test=1',str(ROOT/'pilots/defold/build/default/game.projectc')],env=os.environ,stdout=stream,stderr=subprocess.STDOUT)
   try:
-   time.sleep(1);click(360,715) # Actual third-sector menu pill.
+   wait_for('DEFOLD MENU READY');click(185,955) # HELDEN: full-screen picker.
+   click(360,730);wait_for('DEFOLD CHARACTER PICK PASS dragon')
+   click(595,730);wait_for('DEFOLD CHARACTER PICK PASS fox')
+   click(360,730);wait_for('DEFOLD CHARACTER PICK PASS dragon')
+   click(360,1000);click(535,955) # Back, then Arsenal.
+   click(570,358);wait_for('DEFOLD SHOP PURCHASE PASS buy:prism')
+   click(570,513);wait_for('DEFOLD SHOP PURCHASE PASS buy:armor')
+   click(535,1060);click(185,539) # Menu, sector 3.
    text=wait_for('DEFOLD UI READY dock');match=re.search(r'DEFOLD UI READY dock (\d+) (\d+)',text);assert match,text
    px,py=map(int,match.groups());py=1280-py
    click(px,py);wait_for('DEFOLD UI SHORT TAP shots=0')
    click(px,py,.42);wait_for('DEFOLD UI LONG HOLD shots=1')
-   time.sleep(.5);click(570,1172) # Retained visible FIRE control.
-   click(550,50);time.sleep(.3);click(550,50);wait_for('DEFOLD AUDIO PAUSE RESUME PASS')
+   time.sleep(.5);click(610,1180) # Retained visible FIRE control.
+   click(555,45);time.sleep(.3);click(555,45);wait_for('DEFOLD AUDIO PAUSE RESUME PASS')
    try:proc.wait(timeout=6)
    except subprocess.TimeoutExpired:print(log.read_text());raise
   finally:
    if proc.poll()is None:proc.terminate();proc.wait(timeout=5)
  text=log.read_text();assert proc.returncode==0 and 'ERROR:'not in text and 'DEFOLD NATIVE MENU CLICK PASS'in text,text
- print('DEFOLD NATIVE MENU AND FIRE CLICK PASS; SHORT TAP / LONG HOLD / MUSIC PASS')
+ print('DEFOLD NATIVE MENU AND FIRE CLICK PASS; SHORT TAP / LONG HOLD / SHOP / CHARACTERS / HUD / MUSIC PASS')

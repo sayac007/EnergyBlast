@@ -1,0 +1,10 @@
+mesh: "/models/forge.gltf"
+materials { name: "Midnight titanium" material: "/models/forge-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Terrain forge" material: "/models/forge-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Panel light forge" material: "/models/forge-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Panel deep forge" material: "/models/forge-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Wall forge" material: "/models/forge-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Crown forge" material: "/models/forge-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/forge-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/forge-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/forge-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }

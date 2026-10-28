@@ -1,9 +1,10 @@
 mesh: "/models/reactor.gltf"
 materials { name: "Midnight titanium" material: "/models/reactor-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Bright reactor" material: "/models/reactor-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Terrain reactor" material: "/models/reactor-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel light reactor" material: "/models/reactor-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Panel deep reactor" material: "/models/reactor-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ion cyan" material: "/models/reactor-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ultramarine" material: "/models/reactor-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Porcelain armor" material: "/models/reactor-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Solar gold" material: "/models/reactor-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Wall reactor" material: "/models/reactor-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Crown reactor" material: "/models/reactor-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/reactor-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/reactor-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/reactor-8.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -1,0 +1,2 @@
+mesh: "/models/dock_ground.gltf"
+materials { name: "Painted ground material" material: "/models/dock_ground-0.material" textures { sampler: "tex0" texture: "/models/ground-sand.png" } }

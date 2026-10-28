@@ -45,7 +45,7 @@ function M.new(data,saved)
   self.path={};if found then local c=finish;while c do table.insert(self.path,1,point(c));c=parents[key(c)]end
   elseif self.m.staging and M.dist(target,self.m.staging)>.5 then self:navigate(self.m.staging)end
  end
- function g:fire()if self.paused or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
+ function g:fire()if self.paused or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
  function g:hit_player()if self.invulnerable>0 or self.over then return end;self.hp=self.hp-1;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
  function g:finish()if self.solved then return end;self.solved=true;self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self.say('combat_win')end
@@ -59,7 +59,7 @@ function M.new(data,saved)
   if t.kind=='sequence'then Objectives.sequence_hit(self,t);return end
   if t.trap_shield and(t.trapped or 0)<=0 then self.status='MAGNETFALLE BRICHT DEN SCHILD';return end
   if self:locked(t)then self.status='RELAIS ZUERST';self.say('raid_relays');return end
-  if t.shield and not t.trap_shield and bounces==0 then self.status='SCHILD: Triff ueber eine Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return end;t.hp=t.hp-1;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.22,age=0,kind='hit'};if self.sfx then self.sfx('hit')end
+  if t.shield and not t.trap_shield and bounces==0 then self.status='SCHILD: Triff ueber eine Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return end;t.hp=t.hp-1;t.hit_timer=.18;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.22,age=0,kind='hit'};if self.sfx then self.sfx('hit')end
   if t.hp<=0 then t.death_age=0;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.9,age=0,kind='explosion'};if self.sfx then self.sfx('explode')end;local alive=false;for _,e in ipairs(self.enemies)do alive=alive or e.hp>0 end;if not alive then if not self.m.exit_required then self:finish()else self.status='KANONEN AUS. Erreiche den Energiekern.'end end end
  end
  function g:hint()
@@ -69,7 +69,8 @@ function M.new(data,saved)
   if self.background then return end
   dt=math.min(.1,dt)
   for i=#self.fx,1,-1 do local f=self.fx[i];f.age=(f.age or 0)+dt;f.life=f.life-dt;if f.life<=0 then table.remove(self.fx,i)end end
-  for _,t in ipairs(self.enemies)do if t.death_age then t.death_age=t.death_age+dt end end
+  self.recoil=math.max(0,(self.recoil or 0)-dt)
+  for _,t in ipairs(self.enemies)do t.hit_timer=math.max(0,(t.hit_timer or 0)-dt);if t.death_age then t.death_age=t.death_age+dt end end
   if self.pending_win then self.pending_win=self.pending_win-dt;if self.pending_win<=0 then self.pending_win=nil;if not self.dialog then self.dialog='win'end end end
  end
  function g:update(dt)

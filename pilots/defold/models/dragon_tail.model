@@ -1,0 +1,3 @@
+mesh: "/models/dragon_tail.gltf"
+materials { name: "Dragon jade" material: "/models/dragon_tail-0.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Dragon butter" material: "/models/dragon_tail-1.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }

@@ -681,6 +681,981 @@
       "sha256": "ce02171ef487f43ecc3d96da6cc8ff6fcd4cbda511cc07800b71de31f01e1455",
       "origin": "Original Blender 4.3.2 geometry / portrait renders from tools/make_defold04_models.py; no downloaded artwork",
       "animation": "Native bob, heading, dragon wings, projectiles and explosions"
+    },
+    {
+      "path": "shared/assets/defold06/TEXTURE_PROVENANCE.json",
+      "sha256": "582cb24996723a752de9cc2bef5d31c92fff1f7c7efeaf6dac60b5a9d3809017",
+      "origin": "Original OpenAI image-generation outputs 2026-10-28; flat ground materials; no reference-game image input; TEXTURE_PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold06/bolt.bin",
+      "sha256": "d57c79129a71a3532f4658d39ea1384794c380452ee269dd6113715221f3bbc1",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/bolt.glb",
+      "sha256": "6aea5e134571625a355337352eeb636114ecfe8d2351dcda8366841c83ff7611",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/bolt.gltf",
+      "sha256": "797f9959c44a172baadd53f36d46d5189e8bff0b5209beb4f7152e57abd5e7d8",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/button_blue.png",
+      "sha256": "af8784d16797a5299bb2c2868485768297da769159e993fb7067f620c8ebd9ae",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/button_gold.png",
+      "sha256": "da27f692e781fb73eef9615c0d7d6086d5f5f001e05f56b58ea2bf1821c8064d",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/button_green.png",
+      "sha256": "c0b5b177c4786a748e01e9d895ef86fa7e5a6cbbb5035b0d6070ad606ea0fe40",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/button_violet.png",
+      "sha256": "e7d887ca3d02a9607d8f57b9fa86935c7739a5f72a1f0690ef979ad6efdae011",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/cannon.bin",
+      "sha256": "d1bf9a83d59da161bb3e62ee65d1a400c8bb5e48e303056b3eaf1975c8dd987f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/cannon.glb",
+      "sha256": "f31ba7e66cba33cc138bcbeb9bd343b412cd75bd7ea22d023e53f87879add300",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/cannon.gltf",
+      "sha256": "7e18341fbc4a41668f2e08584b0d2449984aa0712ee929d31c94bda2e4537172",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/cannon.runtime.bin",
+      "sha256": "95bd6b3adc94338aef3bc3292967ee134d246839d8a0b894195adbb75acb02b0",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/cannon.runtime.gltf",
+      "sha256": "63dd6f36d12af7f8d20a7507570f5f017c1df52e39cb3e0a35b16c4753a0455e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/chest.bin",
+      "sha256": "fb8fdcef8c5543e186c14e957574a88e53cb19e6a2c49a93819b63c967a2c051",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/chest.glb",
+      "sha256": "32e7a3e9be3960a8447182c4bf15523bbc79c853dc987acf4e6f463f526a9179",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/chest.gltf",
+      "sha256": "2839957a6f640d94fd54a1199de8f759a6beb7019b882ddf6e130aa536c0477f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/chest.runtime.bin",
+      "sha256": "a694cda80fce57ecb028f9ebc13c6073d781b635e8620a528d25c13d43c32e4f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/chest.runtime.gltf",
+      "sha256": "ed51eb712f225db94a256b900fd8ddfb89416b063d0bf6250294adf45c3d7436",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel.bin",
+      "sha256": "cdff1f52838a4b182aba1fc2ad8c9d67f083771911e7a90a5d6841f0ef35fc57",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel.glb",
+      "sha256": "cd7b0e7a2a8ccca8f9b1ba29c4c566f415fdecb83bbb5be38c94c122dd7213ca",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel.gltf",
+      "sha256": "f4fb9000ccc8a863070d2dd9087c401078f9dd96d8a2a8a4738ac1d3db1d365c",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel.runtime.bin",
+      "sha256": "c088bceb27ac3b70fcfaa630f4c0f2f1fae29807d845c34117de367d2224be70",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel.runtime.gltf",
+      "sha256": "a80c6c77cb8c629fd9591aad61732be9b1fd2a58de0500fd7fa92ab5157a8b64",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel_ground.glb",
+      "sha256": "0075f3ea071113c20b7e62bf19abd18f41651e506f451d5d4ec2f3ba2a7f808c",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/citadel_ground.gltf",
+      "sha256": "b30f5b5dc6fb569413bea94a7ce3cbfb73115a20109e446c788a43452f27bc4f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dimensions.json",
+      "sha256": "2272db9889985b0f9e54f2eb791d70270bbd17984b1aa82d6598ecfe552f0550",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock.bin",
+      "sha256": "7d1fed97d2b04774890369da2d1c47439d82aa73a7464a8e16b827c40091dae7",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock.glb",
+      "sha256": "5d55a34c7f550491d631a3503bb0c6bbfa47eee1900e97ebde6202fb70bc432a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock.gltf",
+      "sha256": "590af411da6bd9b582e17cee4769f0b94ba7f378ccd9be60586019986fa5f316",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock.runtime.bin",
+      "sha256": "770f76a6ee3c02788d44de6210bf1aa5a20a8a6e5a390ca4c9d02d22d19b7ec5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock.runtime.gltf",
+      "sha256": "f52c448da17396c5bf5dd3d32b7f94653b9ca0a9deca18f21ea421bd6f9471d5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock_ground.glb",
+      "sha256": "4b230d08529371b0c1827b427e3d139f136496f3ca9f260539c8045b4901e259",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dock_ground.gltf",
+      "sha256": "2ab495425b42a4b3dd925bb30b985d738ec3a7241a00673e06c98bea62c50e0a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon-ao.png",
+      "sha256": "61ab362b406420b7203959d26b8bfe8b2b978ff5337b00b9855d8552b651e125",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon.bin",
+      "sha256": "79c848801e17d78252514ed5cd43b3b870c5f3f0c0ff0d5fb0e6aa9cb2136d03",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon.glb",
+      "sha256": "bd1fea851324e729b7ca3761e69c5dacd3a06818cc69fafca6959d73d67a3759",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon.gltf",
+      "sha256": "a3370f88cdf40d7e3f412ca3d2e0d6d518a49640c9916d119c1bbb39c97ff504",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon.png",
+      "sha256": "dae204ffb6dd1019cc26e761f2aadcdcea15cf87161eda64a7fdc1f955be7fca",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_l.bin",
+      "sha256": "b40704f764f57c52595337d637feba461ec402da723e70be9f2f5132f5fc822b",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_l.glb",
+      "sha256": "63af69df9744a1a904d1ad6cb70f843e9482eb1deb976d8f58ca440d23a72e0e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_l.gltf",
+      "sha256": "82bbf8e81c3806d94228f6aed47157e51055c808619bd7a7f6de56f31dcc193f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_r.bin",
+      "sha256": "50a12b4fc1415884484739974259ecd8a7568343677ede52a468a20a51f27e17",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_r.glb",
+      "sha256": "f597332a34c23952b72b3161f4e081ca5ae80ee1ff9377eed744d8937c7635a8",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_arm_r.gltf",
+      "sha256": "6e1c72167dab9d6b3b2631b755c55f8e9f4e79d087cd32f2ddbc76af9ce63f02",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_l.bin",
+      "sha256": "a37811844617a91535f90a3c163439a11494bfa1daef0cdf941cdc4057164d68",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_l.glb",
+      "sha256": "e14dde003280959caa1610131032d688210d1ad95d043b8e795510f23f76a88c",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_l.gltf",
+      "sha256": "0b504dcdba6701b500eeacac5768a8e62597c851b368a808373c8774485d7bfb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_r.bin",
+      "sha256": "dbd1a725e3751b9e19b068f44e6760d9ddb6a849a3e44ed0fd59a18e785c94c5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_r.glb",
+      "sha256": "1a5d5f8be6dfcf9d2f0541d9f761a1184709e47b02e62ec3f47dc22e7fef3230",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_leg_r.gltf",
+      "sha256": "4cb575761fb22c3a8135c56752e5cef257bab3335090af22ff1a6fa5bb288c35",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_tail.bin",
+      "sha256": "2f76c85a3464275c656eba0b56015a1caa2249671a1f20acdc8e375d14e48ea0",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_tail.glb",
+      "sha256": "8db7a8171b6a21e2cdb8eca653efceb7cd5efe6ad640d8896d35b359afc4cb95",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_tail.gltf",
+      "sha256": "333e1c56a43974656a3061537a292af3f53b129d6fe7105346f66b9ff1d79855",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_l.bin",
+      "sha256": "007049b62676127b80416b7d3cd4029da4c8928a11b9764de53020b1237d48dd",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_l.glb",
+      "sha256": "36cd876e1bafe62e6b61a80feba147102355c012765de2aa655277d6434d9b1f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_l.gltf",
+      "sha256": "6d3bde96abdc73c8850b9b2f5fd9837ffc275894633f8b69094d4d67280376b7",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_r.bin",
+      "sha256": "46c5a68e054eb84b1c202f00a18873001f0d0273f2e6dcf5684c0d7a868d8f28",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_r.glb",
+      "sha256": "2216438840d4b8b40b8f50750b689fa70689d78e9798a581e16a110fd87d8104",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/dragon_wing_r.gltf",
+      "sha256": "235a1bbb83cd6a1721ed5d30d96e12b327c38a180aac9a883eb519f2475fae54",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/drone.bin",
+      "sha256": "b8fb203f8c582862a1e5d4458eef282fe5768984d73df5d42a54ac717538449d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/drone.glb",
+      "sha256": "132fe43ebe7facc4de2e3cf823d148cd83af547e7a7690fd1750213c01ff1987",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/drone.gltf",
+      "sha256": "21979590a9c233ca81ffd89270ae5f949b453f2b43a0ef3f6cf41ec224670495",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/drone.runtime.bin",
+      "sha256": "3c06b82564886639d63d0dbccdf5e6c27bf16f3cfd5416fd82b3d1690ba26438",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/drone.runtime.gltf",
+      "sha256": "3acfc09100182588c456dfac66efda4d08463842d9ce222c9ee884a7992622dc",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo.bin",
+      "sha256": "2235faa551fdb74b7636f1367414fbda642c4e80b92d3b265d806ccf6ad4d01a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo.glb",
+      "sha256": "eda02a6d6e0ef480bf06ba5186790d260acaa74512bac7765cba01078f11c52d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo.gltf",
+      "sha256": "d0225dffc94da6798861e4629380b530e506c445a59f1f9bf0d6bb15f5745807",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo.runtime.bin",
+      "sha256": "098d2281fff5484988882081ce0611deec1de6056245d181ca9634380eb2a1cf",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo.runtime.gltf",
+      "sha256": "7d3fc1e4c96cc9cd69348bfa649a5f43f6bb4af8e0cd82fb943c04f52383c7c9",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo_ground.glb",
+      "sha256": "700dc6e8c77151b27034d2c1ce5fd422441f334f02657f297d6f3dd2aa6dc214",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/echo_ground.gltf",
+      "sha256": "6886d8d3ed011fe3a91c3293efca1e418d5120d22a693bbb15bcef00929379b3",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/enemy_bolt.bin",
+      "sha256": "32e7b83c88bad8731d5fe44fccbb19a85e4e34ceae3be8a13f4e393e1292e89f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/enemy_bolt.glb",
+      "sha256": "522ad94758022b209f92d62cb2e6469f6da8ecc00b83a08fd271f8ca6cef5269",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/enemy_bolt.gltf",
+      "sha256": "8386742440590a320b6ff4a44acc206e985e87330e5ff376674653aae8e8e5d8",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fireball.bin",
+      "sha256": "119faf2904d1a8be24fea9527cc83748823ca4f5c7bfec4f3cb8882fb7024b34",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fireball.glb",
+      "sha256": "1d5ebec73a5492228283fa70efd33ed29cb7610d011805d7b4e7c5a659400230",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fireball.gltf",
+      "sha256": "1842ef09c543388a08f3db934f89ddbbefc8418bf9c56645691d8c4e80d777b7",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fireball.runtime.bin",
+      "sha256": "0e2eefe64ddffca462816f1ec4c05c2e1b6b1991778e572a385bd6d94fd41ed9",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fireball.runtime.gltf",
+      "sha256": "e1ac9a5ead84b2e3d31aa3e4f3be56f448e8e0da79b651d1fb3eb7f762870c36",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge.bin",
+      "sha256": "32466a220cef6f95d14fc146b5d0e6400f98252de8b1105635b6aba67dcd58ad",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge.glb",
+      "sha256": "6e6143617bd500c23d155f4b8355a61c4efd60cd92fe4c66909721083fe1a1f8",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge.gltf",
+      "sha256": "968b625a2c120a373742e86791f24dff2d59cc702728c88d712b1a85d44cef16",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge.runtime.bin",
+      "sha256": "4bf39bb5351498c12d08a45b8be2fb499a55aecd678a77c965bded4adb372e36",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge.runtime.gltf",
+      "sha256": "35e0cf8884ba00768f9399235ef03c4a32876adb53a66bd9a466e9038754b57d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge_ground.glb",
+      "sha256": "540628d94fe11122d2d9ed68d96b6f0db4f62c29ec801633483b32b3e471033d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/forge_ground.gltf",
+      "sha256": "d3dc6662dc3d7eb48b7adda4fc463c2a24d44c61f8d59cff989e3f2df8861aa9",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox-ao.png",
+      "sha256": "09466559a48e7cc6039562ee46061662a8bba699e7c98192574e0b649ce0eca6",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox.bin",
+      "sha256": "de9315ec69ed3fc0fd69b432192ba93f8712f23bb240f76ba003ef49067b3b00",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox.glb",
+      "sha256": "5b38813fe5dbed285d8d07ef05666f44adc31d8e65ba1a08d27953a1798a967f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox.gltf",
+      "sha256": "f3d602ef59e6b4b7d4dcc4f4ccf4cb28a947a25d0e53fc09e2431e89629ade43",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox.png",
+      "sha256": "494d8633b4903eaeb1cafdfdf97486ce8d0329419f22c41d176bb0c4818b276f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_l.bin",
+      "sha256": "0cd5277d33fb1dfe3ef7a0fdddd8a660c01d112312b8cea6c1b141c0e291dffb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_l.glb",
+      "sha256": "cfcffb1391941a77596d4fff3c6a8f2e5f04b39d0b0cf82e6f5587ce4b2116fb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_l.gltf",
+      "sha256": "8aa1e6936d95ef0b84275675868651cbe6c0a3fa7697d124c5d5f3cdbae3cdb6",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_r.bin",
+      "sha256": "984806176b8f5e4f835d54446213d4fd5ccdc40ac66beea9726e34fd19401935",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_r.glb",
+      "sha256": "03511faa22cbfc8ea47a7f4c21138a5ed09c830b3e6a19b1d0670316026953cc",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_arm_r.gltf",
+      "sha256": "03b194b4e43d5fda731f7c027fde675280544470aa7e9cf49488b8e5c87ca248",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_l.bin",
+      "sha256": "7a194b79b664084e81a8dba90bac661c1840b651950e049d46047cef10a98003",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_l.glb",
+      "sha256": "eda3655f14501c8a0a07f98b8b3e8fbdf9cf95203bc20f5b47b0ac09387915b2",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_l.gltf",
+      "sha256": "2735687435f459fbcb6c1312f0d29105386bb6c39ef5e2934a647caa59ec9041",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_r.bin",
+      "sha256": "1c83cabc899adca12ecbe96fe8202e4e5507a52223bf2eb7c70c29a5393ba1ca",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_r.glb",
+      "sha256": "e375f55f00c1ac8f2a827e23aa20a3d14052b1e8c11b305f851b58ec22c9cad4",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_leg_r.gltf",
+      "sha256": "84c85466369e8aa1e177afbc53846eb81bb03cfeee980237eec6909f8af9f9e0",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_tail.bin",
+      "sha256": "bac704a174cb3799f1eecbde5a43de37bcaf3da7cf2d2766bccd8ce5466b9cbb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_tail.glb",
+      "sha256": "07964d7e7f434ef0917f67b0c41ccaeb8e1c8d3d7bbce92fd89b81c33c5fd063",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/fox_tail.gltf",
+      "sha256": "7f1dfa87170ec62001e08d12d857c644ca9dfa8df3ec6215eb1da444310946bb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/gate.bin",
+      "sha256": "1c08d8363b4fd08c9282a4d95b9b478dff7c6e5011efabe62c03500eb0560fb3",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/gate.glb",
+      "sha256": "805daa9c834ae3aa41c34a2bfcf432aa78691aa1644a6608db53390ef305cb8e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/gate.gltf",
+      "sha256": "528a61486b1fa74ef2436f020941a0cbcd6100d36e6e320e92193f0eb5d147e7",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/gate.runtime.bin",
+      "sha256": "9c801f7ab6d3538d539a3cedb693a75964e4ab51bb9f0d14634df5dfe8adb992",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/gate.runtime.gltf",
+      "sha256": "13c3418bb547da7f47a26795f26031dc37b72bfcb10166b8d983a2415dbb0073",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/glow.bin",
+      "sha256": "a6ab58766214a70910fd456171b39af4cd630f0fca7b94d5f216b0d61058ddec",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/glow.glb",
+      "sha256": "75af8bac6e207b6e7b42b9725adfc8473ea683aa1bbd1c04aa256d9120ff5fc3",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/glow.gltf",
+      "sha256": "b74b7bd49d7cbceb35f06aa20a54c557fa7de346e72674b6a6182338c5224ed5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/ground-garden.png",
+      "sha256": "b9fce66a34a7d4007fd32a23cc866228fff27f7ba6151bf2fe9bd6b871d71ed8",
+      "origin": "Original OpenAI image-generation outputs 2026-10-28; flat ground materials; no reference-game image input; TEXTURE_PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold06/ground-sand.png",
+      "sha256": "359b9b4e3a19ae9257dab64dffc6d3a77473fd6949ac73a7c36700ce5ec805fa",
+      "origin": "Original OpenAI image-generation outputs 2026-10-28; flat ground materials; no reference-game image input; TEXTURE_PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold06/hero-ao.png",
+      "sha256": "8af98083a8f262c3047fd0c2f6f74e1c402d0e05bec7f5c377eb2f518efb31b5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero.bin",
+      "sha256": "7751299d54fb5870a824669fb7cd9437306dbf21a441c3f62a222d65be71bf65",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero.glb",
+      "sha256": "b5278ad2fab030fec6602aa9bc02a6cf304cccd398633a7332911448adc1b393",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero.gltf",
+      "sha256": "92dea2da20c38fc1296d71fa22286cfb36770f978c3b3492d35f60a298925e73",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero.png",
+      "sha256": "2b3df0f5ad10ea8c95fc796155f4f2a8fa2ed13669ce87a7c5b4d76ff6251655",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_l.bin",
+      "sha256": "4fab5d82209cf1eba8190eb01d6858c9458eb6a6a1dd2e73eceddca211ad1ee6",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_l.glb",
+      "sha256": "c65454abbd0609a010ffd74b9a1875e84e46afbaf9aecb4e7568206af7f6e19b",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_l.gltf",
+      "sha256": "8e1ed96e68c55750e28dc6992b19e5650e51e1a4e549ccb2b8544c2eabccc5b2",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_r.bin",
+      "sha256": "f6be496125253afa107714e93ca5dbbb46b04cfd866d1131f1ac8d49f86b7a3e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_r.glb",
+      "sha256": "7cb323d60befeb0a92aabb812175d9b92113f67aab465338457a66e52c0cbbfb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_arm_r.gltf",
+      "sha256": "dd8a712a886dfe983895fc56413e50ebe59ab124f4a2d9f46741dc607b5b827b",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_l.bin",
+      "sha256": "69ac8017e4f0aca935e4c822dc58fb1022759aa25bf3a9e3242a1e5198130e6d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_l.glb",
+      "sha256": "c8631d08d526b8a9d38b2df9b4d06e66b66c196759aed67b727f0f8799dacec4",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_l.gltf",
+      "sha256": "20b3057e330164466def94e6443099c1b3998b56cd39946cfc49da9b2ba2fa85",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_r.bin",
+      "sha256": "0527b0eb222eb1af8ae2cb18cd45b1d090428be13b894564e8d71c44ae145588",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_r.glb",
+      "sha256": "e20b9ecfbb813bcf27108e301a6dc8a0295678a66cb6f4f49e60932eb081e436",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/hero_leg_r.gltf",
+      "sha256": "4e3b2d393981ee42b17aca513fa156babe68e6d1a4a2b1ea11b70e5482e875a2",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/lobby.bin",
+      "sha256": "a126a9ad6d92f09ad7ca4d5fc98ab42250c0b54113fbe0d10a203cca37c75b5d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/lobby.glb",
+      "sha256": "b5cf1278f5a150ce41ee7a3a7357dda82543dcc9c7f5db4d8a8cdd4dc762b8ce",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/lobby.gltf",
+      "sha256": "0a33d5ab2f4f05b734bba0970eab3367a192d467a044dc1862c7c8e923d7d682",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/lobby.runtime.bin",
+      "sha256": "373ced8208b416d52ab98c7cf3bd49b541943eed59d750e5662426a012a427f3",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/lobby.runtime.gltf",
+      "sha256": "3c3f15cf7048e0d38adc80896a5815397bf76fcef30603a74dabb90ae42e838a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/models.json",
+      "sha256": "b36597e94363eece641fde94835b68e1dc3b59d6b2e4cfa7765606778b81d839",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/panel.png",
+      "sha256": "c8480756d200f954ec2c95e059b0ef08f35a1a2a129d54f38d964901687d38c2",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/radar.bin",
+      "sha256": "77662f8f83ecfbfb3e5c9b9a2294a52e9f8e59d9de42a4b5b1dd87b91893c5c8",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/radar.glb",
+      "sha256": "816941c0225d17afe092a09009f678144b7e2b468966cbe636c27e3aabe20d38",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/radar.gltf",
+      "sha256": "626c3e4ebca0506d76c80a22570afb09776b28ceb69ede287ced1811cbf26d16",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/radar.runtime.bin",
+      "sha256": "621951e9ff8a28cdf56e1e3e5ff7b31b037b2ec0b8067a65f45d3c360b659128",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/radar.runtime.gltf",
+      "sha256": "4b9ba36d03b21c97c15b1ee2c825ef88cc73be218efe44d5d0e50a96af10a102",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor.bin",
+      "sha256": "738f5a4165de7c787ba29da26e7c02ed7dbf13988dfd253ef995ad3566bde08e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor.glb",
+      "sha256": "a5f3ac62487cef616fc54855e8bbe27e47674356e10e874d2d2ff960e6248d17",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor.gltf",
+      "sha256": "fe3f42a02430449fa9dc5033ad2660a76da6a1fe3f86e74288e2c941ac50c073",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor.runtime.bin",
+      "sha256": "dded95783b1cd4ff2d4db6cb79a2edf52a288eb7adf4291c160fa27d2358f44c",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor.runtime.gltf",
+      "sha256": "e63f9db9627210d55ee5ac538383eb59553a08ec6adc3736a3abef8f86ebacf3",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor_ground.glb",
+      "sha256": "1fed6e951226c842635ca12f06fbd5329ba1bf5d33aa0fff22b1b602f29376ca",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/reactor_ground.gltf",
+      "sha256": "93bfa06c4069daadfb56d761f79b0f0388b7e5ce8354334c2c1c1f0e72011ac9",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/relay.bin",
+      "sha256": "0475998978d4637a2c9f7af04718bf834d61847678d0d185699883c2c5ee0e27",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/relay.glb",
+      "sha256": "b7bd37ad20484e8825750d62cd0bf1987f6e7b5eb169b6cc5160b22e4d5c83c0",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/relay.gltf",
+      "sha256": "7e3ddb1b1b650de77ee921c02aca6b6b0c6bbf10406e920d3d378e3590889ef1",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/relay.runtime.bin",
+      "sha256": "1ede158cf22fa363bcf9ff73b4f8d11e6db9ee3a30c5d7dcce24f6604ccf07bb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/relay.runtime.gltf",
+      "sha256": "ef7a056232a836380e9a1dd7e9fabc01df47efef4ffb7f4e1ed2723b4e0b9eeb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue.bin",
+      "sha256": "72dda10bd40b8a43035164e0bde0791bd47595717a76852c59352c664c24c1c5",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue.glb",
+      "sha256": "ef213c88b27f8b74005a70fbb9f6f46164faa1c5dd9ba647664dd8761f591a19",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue.gltf",
+      "sha256": "b198d030219bc159c58f4bcac6c4d11540fbb06fdea9f19e9d28f4f88b7f9c3a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue.runtime.bin",
+      "sha256": "b7adeac3b6d454ee8b31502b3f405d369ab4030ebadbb2a54f66e8bc33f4b062",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue.runtime.gltf",
+      "sha256": "f045f1b24e2f772ce35d984de0f39bbe186db38c1d1711c09e14a76f0b0ea37d",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue_ground.bin",
+      "sha256": "6247c8e6bc95cbfa524d4fea7aa3cd47fae79af46fff53c1ec9f1d16ddccd997",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue_ground.glb",
+      "sha256": "c2cf125b11c7cf9eb2341f4bb8c819714cf8c353f15801081ba4011b65762b72",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rescue_ground.gltf",
+      "sha256": "ecacfb9e00dfa36cd8f5bedfb1831cf2d9df9ba5a7c8ed2a6b0dc07f61ea129c",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/rigs.json",
+      "sha256": "8f5df95e14b5bbfe11fcc3076bc9fc0c372da9520d78ff76d3d24e7cb37c3825",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/selection_ring.bin",
+      "sha256": "620aedd10ccb0d40f9727f1fe52c00e602a9b463488ac96d7ad1ac30f3531c04",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/selection_ring.glb",
+      "sha256": "195b7b0a458d91bf7f48807158b2610eae547dc78f67b8a24334ed755245d305",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/selection_ring.gltf",
+      "sha256": "a645900d044518536ef4b13d69a1057bea51604ae5283896c38efd6cc89869ed",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/shadow.bin",
+      "sha256": "d27f0b420c34117d5b60d72f44a9211bbfb9670ef460e6bfecd81fce9e8a7efb",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/shadow.glb",
+      "sha256": "2161f0ff7657b7fc1457449a95d660fa6e0608dbe67d7ce469d8d668bae75589",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/shadow.gltf",
+      "sha256": "4dcc34299c8a4002b670075f967135b9866225f48c06603eb9cebb1279f2ee20",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark.bin",
+      "sha256": "be37c66127d03894d07b9be5760fa08de144a497aa165d257756db1d4750e27f",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark.glb",
+      "sha256": "b4c8f20e39f56fc23a5787b174a0a563d88587b204c67885e780928788c3e517",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark.gltf",
+      "sha256": "0ca705b6294c2f5e4d52cf5981d0d473f6143e8f82d6fe68836806b8711eae46",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark_hot.bin",
+      "sha256": "7783a957535e55ee264fe16587d243daa9cce7abac5b6341c1245a3031ffa78e",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark_hot.glb",
+      "sha256": "36f7f536531114c14a76ec5f4290e4ee474c0ff47dde3860660f1ba8d0bae933",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/spark_hot.gltf",
+      "sha256": "20619f28c7c534c30c146e2991a0607eb382e4bdc6ddf91698370a75bee950f7",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/surfaces.json",
+      "sha256": "933311e5715036503ac0d59bd8a834336b7b205820777a1d9cbc6c03c376372a",
+      "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_aim.png",
+      "sha256": "d0d86c3a6c8179fff6e6f3c4e1d305b256e3a2d1acc4bb5293f50da98ff8c373",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_background.png",
+      "sha256": "f6e9d98a767078dc5598d3b4f1454a30202a222de3f59b3dba502edaeb6e9120",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_dash.png",
+      "sha256": "a6e58bfbd8137163ba389dada19bb34e3efec58e420f3b2f7dcfba8b98ca94f2",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_gear.png",
+      "sha256": "497e5327408937214692cddfdd9343da23408721a2c3b5d1d39171175a9bd5a0",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_heart.png",
+      "sha256": "7c8f965144fa12068df98b14826aa13d9f0b5dd3d8b18dc7a7b8044bdeeaf8a6",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_hint.png",
+      "sha256": "1ee7cb72b5a7783d4a139c6d6b79c48b6cebef73508a884fa9c8ccc1a9af45ec",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_menu.png",
+      "sha256": "591898f8dca1e0a7db6bdb5ec0059c01317799008a42a180639f83ea98d3aba5",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_radio.png",
+      "sha256": "8d49154f9d2b081cf35842dcc2092db48f8e88aa950b12dffb0b04a3009ed724",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_sound.png",
+      "sha256": "ad94655e2e47f615a1696b60fb7ba83d9aabccab3083f4ad1c72b85a0d8cff63",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_star.png",
+      "sha256": "c6c242ad51bdd6301573c0dc0d54325636b07859d97e70eb8ababe833cca2265",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold06/ui_trap.png",
+      "sha256": "fb29e52873eb4d07c14c606b2793320ea3d2393afc90bf9f69d696e4cb33040f",
+      "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
     }
   ],
   "audio": "shared/audio/de/manifest.json",

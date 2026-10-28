@@ -1,4 +1,4 @@
-# EnergyBlast — Defold 0.5, Toybox Raid
+# EnergyBlast — Defold 0.6, Prism Frontier
 
 Ein echter Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren:
 aktive Kanonen, Deckung, Ausweichen und klug eingeschätzte Abpraller.
@@ -10,11 +10,11 @@ Godot 0.2 bleiben als eingefrorene Vergleiche erhalten.
 | Einstieg | Hier weiterlesen |
 |---|---|
 | Installierbare Test-App | [APK mit Größe, Hash und Update-Hinweisen](downloads/README.md) |
-| Abgleich mit euren sieben Testpunkten | [Meilenstein 04](docs/MILESTONE_04.md) |
+| Abgleich mit euren sieben Testpunkten | [Meilenstein 05](docs/MILESTONE_05.md) |
 | Was geprüft wurde und was offen ist | [Qualitätsüberblick](docs/QUALITY.md) |
 | Ausgangsauftrag und aktuelle Entscheidungen | [Projektauftrag](docs/PROJECT_BRIEF.md), [unverändertes Original](docs/pilot-brief.md) |
 | Selbst bauen und prüfen | [Build-/Testanleitung](docs/BUILD_AND_TEST.md) |
-| Frühere Versionen | [0.4](docs/MILESTONE_03.md), [0.3](docs/MILESTONE_02.md), [0.2](docs/MILESTONE_01.md) |
+| Frühere Versionen | [0.5](docs/MILESTONE_04.md), [0.4](docs/MILESTONE_03.md), [0.3](docs/MILESTONE_02.md), [0.2](docs/MILESTONE_01.md) |
 
 ## Installieren
 
@@ -24,26 +24,32 @@ Android 7/API 24+, ARM64; Version 0.5.0/Code 6, gleiche Entwicklungssignatur wie
 [Hash, Quellstand und technische Prüfungen](downloads/README.md).
 Der physische Update-/Spieltest der neuen Datei bleibt offen.
 
-## Jetzt neu
+## Grafik neu aufbauen statt nur umfärben
 
-- **Geschosse bleiben hinter Wänden.** Sie sind echte 3D-Modelle mit Tiefenprüfung,
-  keine darüber gezeichneten GUI-Punkte. Alle sichtbaren Wandkörper/Kappen stimmen
-  mit ihren Kollisionsflächen überein. Beide Seiten prallen ab; blaue X-Felder
-  neutralisieren. Ein Abpraller, Prisma zwei, Gegner einer; begrenzte Reichweite
-  und Lebensdauer von 3/6 Sekunden, anschließend Verpuffen.
-- **Freies Spielfeld.** Punkte, Energie, Miniübersicht und sämtliche Tasten liegen
-  außerhalb des Spielausschnitts. Menüs ersetzen die pausierte Szene vollständig.
-  Die große 21×15-Welt und folgende Kamera bleiben erhalten.
-- **Findbare Geheimnisse.** Kostenlose goldene Bodenpfeile und dunkle Spuren/Luken
-  weisen auf Verstecke hin. Verdiente Zusatzhinweise bleiben freiwillig.
-- **Echtes Arsenal.** Prisma, Rüstung, Stiefel und Tarnmodul kaufen, dauerhaft
-  ausrüsten und nach einem Neustart behalten. Gesamtsterne bleiben erhalten;
-  nur das getrennte Guthaben wird ausgegeben. Alte automatische Freischaltungen
-  werden beim Update kostenlos übernommen.
-- **Neue Gestaltung und Musik.** Kräftige Spielinseln, klare Wandkronen, eigener
-  Toon-Shader, Kontakt-Schatten, animierte Flügel und Energieexplosionen. Eigene
-  Stereo-Musik mit neun synthetischen Instrumenten, vier dynamischen Abschnitten
-  und ruhigeren Zwischenpassagen. Keine kopierte Referenzmelodie oder Aufnahme.
+Nach der Ablehnung von 0.5 wurden offizielle **Brawl-Stars-Spielbilder** und
+Produktionsberichte recherchiert und die tatsächliche Laufzeit überarbeitet.
+[Quellen, Beobachtungen und konkrete Entscheidungen](docs/ART_DIRECTION.md).
+
+- **Gestaltete Landschaft:** eigene Sandstein-/Gartenmaterialien, gegliederte
+  Mauern mit Steinlagen und Kappen, erkennbare Umgebung statt Kachelbrett.
+- **Plastische Figuren:** neu modellierte Entdecker-, Drachen- und Fuchsfigur.
+  Gebackene Kontaktschattierung und weichere Beleuchtung erreichen tatsächlich
+  den nativen Renderer. Kein besseres Konzeptbild als Ersatz für das Spielmodell.
+- **Tatsächliche Animation:** bewegliche Arme/Beine, Flügel und Schwanz, kleine
+  Leerlaufbewegungen, geglättetes Drehen, Rückstoß und sichtbare Trefferreaktion.
+- **Animiertes 3D-Menü:** dieselbe Spielfigur auf einer Bühne; eigene plastische
+  Bedienelemente mit Stern-, Herz-, Ziel- und Funksymbolen.
+- **Klares Querformat:** zusammenhängende 992×528-Spielfläche im 1280×720-Layout.
+  Steuerung und HUD liegen außen. Die große Welt und folgende Kamera bleiben.
+- **Räumliche Effekte:** Feuerbälle, Licht und kurze vergangene Spuren sind
+  tiefengeprüft; keine darübergelegten GUI-Schüsse und kein vorhergesagter Weg.
+- **Geprüfte Zusammenfassung der Geometrie:** pro Arena 8 statt rund 450–480
+  statischer Batches; dieselben Positionen bleiben erhalten. Keine versprochene
+  Handy-Bildrate ohne Gerätetest.
+
+Alle sechs Missionen, Punkte, Käufe, Hinweise und Spielstände bleiben.
+[Umsetzung und Grenzen](docs/MILESTONE_05.md). Die persönliche grafische Abnahme
+ist offen; technische Prüfungen erklären eine Darstellung nicht automatisch für gelungen.
 
 ## Drei Helden und drei zusätzliche Kampfsituationen
 
@@ -65,13 +71,15 @@ bis 1.525. Wiederholen und Warten erzeugen keine doppelten Belohnungen.
 Bedienung und Missionsziel werden gesprochen; die Lichtfolge lässt sich kostenlos
 wiederholen. Kein vorgeschalteter Fragebogen, kein Joystick, keine berechnete Flugbahn.
 
-## Tatsächlich gerendert
+## Tatsächliche Laufzeit — keine Konzeptbilder
 
-| Figurenwahl | Neue Echo-Kammer |
-|---|---|
-| ![Drei eigene Figuren](docs/images/05-defold-cast.png) | ![Echo-Kammer mit freien Bedienflächen](docs/images/05-defold-echo.png) |
+![Neue animierte Menüfigur](docs/images/06-defold-menu.png)
 
-Native Linux-/OpenGL-Laufzeit, keine Konzeptbilder und keine behauptete Handyaufnahme.
+![Tatsächliche Lauf-, Ziel- und Schusssequenz](docs/images/06-defold-gameplay.gif)
+
+Native Linux-/OpenGL-Laufzeit mit wirklichen XTest-Eingaben. Keine behauptete
+Handyaufnahme. [Echo-Kammer](docs/images/06-defold-echo.png),
+[Figurenwahl](docs/images/06-defold-characters.png).
 
 ## Bedienung
 
@@ -91,21 +99,21 @@ Musik kann im Arsenal separat ausgeschaltet werden; TON schaltet alle Audios um.
 
 ## Tatsächliche Prüfungen und Grenzen
 
-**28.10.2026:** **187 native Prüfungen** und **neun gemeinsame Testgruppen**
-bestanden. Echte native Menüeingaben prüfen Figurenwechsel, Käufe, kurzen/langen
-Druck, FEUER und Tonpause. Getrennte Speicherstarts erhalten Sterne, Restguthaben,
-Käufe, Figur, Hinweise und Musikpräferenz.
+**28.10.2026:** **199 native Prüfungen** und **elf gemeinsame Testgruppen**
+bestanden. Echte Menü-/Kauf-/Figuren-/Touch-Eingaben bei 1280×720 und nach
+Fensteränderung auf 1280×800 geprüft. Wirklich bewegte Gliedmaßen und getrennte
+Speicherneustarts geprüft. Wandverdeckung: 0 veränderte Pixel beim verdeckten
+Geschoss, sichtbares Kontrollgeschoss einschließlich Licht vorhanden.
 
-Ein tatsächlicher Bildtest belegt die Geschossverdeckung hinter Wänden mit einem
-sichtbaren Kontrollgeschoss davor. Die exportierten Wand-Positionspuffer werden
-gegen die Kollisionsflächen geprüft. Native Musik-/Sprach-/Effektmischung
-aufgezeichnet; Musik aus liefert Nullsignal. Fünf Ansagen unabhängig vollständig
-per ASR erkannt. [Ausführliche Nachweise](docs/MILESTONE_04.md).
+Exportierte Wandpositionen, AO-/Texturbindung und Erhaltung der statischen
+Geometrie beim Batching geprüft. Native Musik-/Sprach-/Effektausgabe erneut
+aufgezeichnet. Musik und Sprachdateien sind unverändert.
+[Qualitätsüberblick](docs/QUALITY.md), [Befehle](docs/BUILD_AND_TEST.md).
 
-**Für die neue APK offen:** physisches Installieren/Update und Spielstandübernahme,
-Touchgefühl, Rotation/Seitenverhältnisse, Klang, längere Runden, Schwierigkeit und
-Geräteleistung. Native Linux-/OpenGL-Tests sind keine Handy-Spielrunde. Keine
-empirisch nachgewiesene Lernwirkung, keine Store-Reife und keine grüne CI behauptet.
+**Offen für die neue APK:** physische Installation/Update und Spielstandübernahme,
+Touch-/Klanggefühl, Geräte-Seitenverhältnisse, längere Runden und Geräteleistung.
+Grafische Abnahme durch euch offen. Kein Hardwarebenchmark, keine empirisch
+nachgewiesene Lernwirkung oder Store-Reife und keine grüne CI behauptet.
 
 ## Arbeitsweise und Herkunft
 
@@ -114,8 +122,8 @@ Keine PRs, automatischen Merges, Actions-Workflows oder GitHub-Releases.
 Kinderwelt und andere Repositories bleiben unverändert. Keine privaten Bilder,
 Konten, Werbung, Telemetrie oder neuen Berechtigungen. Lokale Daten, Backup aus.
 
-[Regeln](shared/defold04.json), [Originalmodelle/Porträts](shared/assets/defold04/),
-[Blender-Generator](tools/make_defold04_models.py), [Musikgenerator](tools/make_defold_music.py),
+[Regeln](shared/defold04.json), [Originalmodelle/Porträts](shared/assets/defold06/),
+[Blender-Generator](tools/make_defold06_models.py), [Musikgenerator](tools/make_defold_music.py),
 [Kollision/Geschosse](pilots/defold/main/projectiles.lua),
 [Käufe/Migration](pilots/defold/main/progression.lua),
 [neue Ziele](pilots/defold/main/objectives.lua),

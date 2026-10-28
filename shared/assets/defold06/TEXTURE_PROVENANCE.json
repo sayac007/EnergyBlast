@@ -1,0 +1,23 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "file": "ground-sand.png",
+      "sha256": "359b9b4e3a19ae9257dab64dffc6d3a77473fd6949ac73a7c36700ce5ec805fa",
+      "origin": "Original image generated with OpenAI image_gen tool in this EnergyBlast session",
+      "generated_date": "2026-10-28",
+      "reference_image_input": false,
+      "purpose": "Flat painted ground material; applied to native arena plane, not a mock-up",
+      "source_game_art_copied": false
+    },
+    {
+      "file": "ground-garden.png",
+      "sha256": "b9fce66a34a7d4007fd32a23cc866228fff27f7ba6151bf2fe9bd6b871d71ed8",
+      "origin": "Original image generated with OpenAI image_gen tool in this EnergyBlast session",
+      "generated_date": "2026-10-28",
+      "reference_image_input": false,
+      "purpose": "Flat painted ground material; applied to native arena plane, not a mock-up",
+      "source_game_art_copied": false
+    }
+  ]
+}

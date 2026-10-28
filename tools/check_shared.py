@@ -41,8 +41,8 @@ class SharedChecks(unittest.TestCase):
   for f in (ROOT/'shared/assets/raid').glob('*.glb'):
    raw=f.read_bytes();self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
    self.assertEqual(raw,(ROOT/'pilots/gdevelop/assets'/f.name).read_bytes())
-  for f in (ROOT/'shared/assets/defold04').iterdir():
-   if f.suffix in ['.gltf','.bin']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
+  for f in (ROOT/'shared/assets/defold06').iterdir():
+   if f.suffix in ['.gltf','.bin','.png']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
   raid=json.loads((ROOT/'shared/audio/raid/manifest.json').read_text());self.assertEqual(len(raid['clips']),3)
   for c in raid['clips']:
    raw=(ROOT/'shared/audio/raid'/c['file']).read_bytes();self.assertEqual(hashlib.sha256(raw).hexdigest(),c['sha256'])
@@ -70,9 +70,9 @@ class SharedChecks(unittest.TestCase):
   self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
  def test_exported_wall_geometry_matches_every_collider(self):
   # Read actual exported POSITION buffers, not just the generator's claims.
-  surfaces=json.loads((ROOT/'shared/assets/defold04/surfaces.json').read_text())
+  surfaces=json.loads((ROOT/'shared/assets/defold06/surfaces.json').read_text())
   for mission,rows in surfaces.items():
-   gltf=json.loads((ROOT/'shared/assets/defold04'/(mission+'.gltf')).read_text());points={}
+   gltf=json.loads((ROOT/'shared/assets/defold06'/(mission+'.gltf')).read_text());points={}
    for node in gltf['nodes']:
     name=node.get('name','')
     if not name.startswith('SOLID '):continue
@@ -82,7 +82,7 @@ class SharedChecks(unittest.TestCase):
     for primitive in mesh['primitives']:
      acc=gltf['accessors'][primitive['attributes']['POSITION']];view=gltf['bufferViews'][acc['bufferView']]
      self.assertEqual(acc['componentType'],5126);self.assertEqual(acc['type'],'VEC3')
-     raw=(ROOT/'shared/assets/defold04'/gltf['buffers'][view['buffer']]['uri']).read_bytes()
+     raw=(ROOT/'shared/assets/defold06'/gltf['buffers'][view['buffer']]['uri']).read_bytes()
      start=view.get('byteOffset',0)+acc.get('byteOffset',0);stride=view.get('byteStride',12)
      for j in range(acc['count']):
       point=struct.unpack_from('<fff',raw,start+j*stride);points.setdefault(index,[]).append([point[k]+translation[k]for k in range(3)])
@@ -99,6 +99,59 @@ class SharedChecks(unittest.TestCase):
    values=samples[i*15*8000*2:(i+1)*15*8000*2];sections.append(math.sqrt(sum(v*v for v in values)/len(values)))
   self.assertGreater(max(sections)/min(sections),1.5)
   self.assertGreater(math.sqrt(sum((l-r)**2 for l,r in zip(samples[::2],samples[1::2]))/(len(samples)//2)),.005)
+ def test_rigs_ao_and_textures_reach_runtime(self):
+  from PIL import Image,ImageStat
+  art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text());rigs=json.loads((art/'rigs.json').read_text())
+  for hero in ['hero','dragon','fox']:
+   parts={p['part']for p in rigs[hero]};self.assertTrue({'body','leg_l','leg_r','arm_l','arm_r'}<=parts)
+   ao=Image.open(art/(hero+'-ao.png')).convert('L');self.assertEqual(ao.size,(1024,1024));self.assertGreater(ImageStat.Stat(ao).stddev[0],10)
+   for piece in rigs[hero]:
+    self.assertEqual(models[piece['model']]['texture'],hero+'-ao.png')
+    binding=(ROOT/'pilots/defold/models'/(piece['model']+'.model')).read_text();self.assertIn(hero+'-ao.png',binding)
+    self.assertIn('tags: "actor"',(ROOT/'pilots/defold/models'/(piece['model']+'-0.material')).read_text())
+  for mission in ['reactor','citadel','dock','forge','echo','rescue']:
+   model=mission+'_ground';texture=models[model]['texture'];self.assertIn(texture,(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
+   self.assertEqual((art/texture).read_bytes(),(ROOT/'pilots/defold/models'/texture).read_bytes())
+  self.assertIn('self.glow',(ROOT/'pilots/defold/main/main.render_script').read_text())
+ def test_static_batches_preserve_source_geometry(self):
+  import numpy as np
+  art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text())
+  def geometry(file):
+   g=json.loads(file.read_text());result=set();primitive_count=0
+   for node in g['nodes']:
+    if 'mesh'not in node:continue
+    self.assertNotIn('children',node)
+    if 'matrix'in node:transform=np.array(node['matrix']).reshape((4,4),order='F')
+    else:
+     x,y,z,w=node.get('rotation',[0,0,0,1]);rot=np.array([[1-2*(y*y+z*z),2*(x*y-z*w),2*(x*z+y*w)],[2*(x*y+z*w),1-2*(x*x+z*z),2*(y*z-x*w)],[2*(x*z-y*w),2*(y*z+x*w),1-2*(x*x+y*y)]])
+     transform=np.eye(4);transform[:3,:3]=rot@np.diag(node.get('scale',[1,1,1]));transform[:3,3]=node.get('translation',[0,0,0])
+    for primitive in g['meshes'][node['mesh']]['primitives']:
+     primitive_count+=1;acc=g['accessors'][primitive['attributes']['POSITION']];view=g['bufferViews'][acc['bufferView']];raw=(file.parent/g['buffers'][view['buffer']]['uri']).read_bytes();offset=view.get('byteOffset',0)+acc.get('byteOffset',0);stride=view.get('byteStride',12)
+     coords=np.array([struct.unpack_from('<fff',raw,offset+j*stride)for j in range(acc['count'])]);coords=np.c_[coords,np.ones(len(coords))]@transform.T
+     result.update(tuple(point)for point in np.round(coords[:,:3],6))
+   return result,primitive_count
+  for name,m in models.items():
+   if 'runtime'not in m:continue
+   before,count_before=geometry(art/(name+'.gltf'));after,count_after=geometry(art/m['runtime'])
+   # Exporting Float32 transforms can move the final decimal; compare positions
+   # geometrically, rather than relying on rounding across a bin boundary.
+   def covers(a,b):
+    buckets={}
+    for point in b:
+     key=tuple(math.floor(v*10000)for v in point);buckets.setdefault(key,[]).append(point)
+    for point in a:
+     key=tuple(math.floor(v*10000)for v in point);found=False
+     for dx in [-1,0,1]:
+      for dy in [-1,0,1]:
+       for dz in [-1,0,1]:
+        if any(max(abs(p[i]-point[i])for i in range(3))<.00002 for p in buckets.get((key[0]+dx,key[1]+dy,key[2]+dz),[])):found=True;break
+       if found:break
+      if found:break
+     if not found:return False
+    return True
+   self.assertTrue(covers(before,after)and covers(after,before),'batched position changed: '+name);self.assertLessEqual(count_after,count_before,name)
+   if name in ['reactor','citadel','dock','forge','echo','rescue']:self.assertLess(count_after,count_before/4,name)
+   self.assertIn(m['runtime'],(ROOT/'pilots/defold/models'/(name+'.model')).read_text())
  def test_shortlisted_engines_do_not_render_ballistic_previews(self):
   gui=(ROOT/'pilots/defold/main/ui.gui_script').read_text();js=(ROOT/'pilots/gdevelop/shooter.js').read_text()
   self.assertNotIn('g:shot()',gui);self.assertNotIn('this.line(this.shot()',js)

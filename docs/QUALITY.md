@@ -1,4 +1,36 @@
-# Aktueller Prüfstand — Defold 0.5, Toybox Raid
+# Aktueller Prüfstand — Defold 0.6, Prism Frontier
+
+**28.10.2026.** [Sorgfältiger Grafikauftrag und Recherche](ART_DIRECTION.md),
+[Umsetzung/Bilder](MILESTONE_05.md), [Kommandos](BUILD_AND_TEST.md),
+[APK-/Quellmetadaten](../downloads/README.md).
+
+| Tatsächlich geprüft | Ergebnis |
+|---|---|
+| Native Regeln und Darstellungshierarchie | **199 PASS**, bisherige 187 erhalten; echte Gelenkobjekte und gegenläufige Beine, Querformat/Bediengrenzen |
+| Tatsächliche native UI-Eingaben | **PASS** bei 1280×720 und 1280×800; Figurenwechsel, zwei Käufe, kurze/lange Eingabe, FEUER, TON |
+| Getrennte Speicherprozesse | **PASS**, Gesamtsterne, Guthaben/Käufe, Figur, Hinweise, Musik |
+| Geschossverdeckung einschließlich Licht | **PASS**, verdeckt 0 veränderte Pixel, davor sichtbarer Kontrollfall |
+| Gemeinsame Prüfungen | **11 Gruppen PASS**, Medien/Hashes/Privatsphäre, tatsächliche Wandgeometrie, AO-/Texturbindung, beidseitiger Vergleich vor/nach statischem Batching |
+| Native Audioausgabe | **PASS**, Musik an/aus und Sprach-/Effektmischung aufgezeichnet; kein Überlauf im geprüften Fall |
+| Eigene Sichtprüfung | Menü, Figurenwahl und sechs Sektoren in echter Laufzeit angesehen; 35 native Animationsframes mit wirklichen XTest-Eingaben aufgezeichnet |
+| Grafische Abnahme durch Betreiber | **OFFEN**; 0.5 wurde ausdrücklich abgelehnt. Testzahlen ersetzen diese Entscheidung nicht. |
+
+Die neue Shader-Ausgabe verwendet tatsächliche Texturen und gebackenes AO.
+Statische Arena-Primitiven wurden von 447–481 auf jeweils 8 zusammengefasst;
+Positionspuffer bleiben geometrisch gleich. Das ist keine gemessene Handy-Bildrate.
+Die sechs Missionen, Punkteökonomie, Käufe und alten Spielstände bleiben erhalten.
+
+**Manuell offen:** neue APK auf Handy aktualisieren/installieren, physische
+Spielstandübernahme, Touch-/Klanggefühl, Geräteformat, längere Runden, Schwierigkeit
+und Geräteleistung. Keine Store-Reife, empirische Lernwirkung oder grüne CI.
+Andere Engines und Repositories unverändert. [Historie](MILESTONE_04.md).
+
+## Historische Nachweise
+
+Die folgenden Ergebnisse gehören zu älteren Versionen und sind keine neuen
+Tests der aktuellen Fassung. Quell-/APK-Referenzen bleiben unverändert erreichbar.
+
+## Prüfstand 0.5, Toybox Raid
 
 **28.10.2026.** [Meilenstein 04](MILESTONE_04.md),
 [aktuelle Befehle](BUILD_AND_TEST.md), [Quell-/APK-Referenzen](../downloads/README.md).

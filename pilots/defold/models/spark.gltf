@@ -15,38 +15,33 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Angular energy fragment",
+			"name":"spark",
 			"scale":[
-				0.800000011920929,
-				1.5,
-				0.6499999761581421
+				0.09000000357627869,
+				0.15000000596046448,
+				0.07000000029802322
 			]
 		}
 	],
 	"materials":[
 		{
 			"doubleSided":true,
-			"emissiveFactor":[
-				0.055999997794628165,
-				0.5739999852180482,
-				0.5809999784231188
-			],
-			"name":"Ion cyan",
+			"name":"Mint light",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
-					0.07999999821186066,
-					0.8199999928474426,
-					0.8299999833106995,
+					0.12999999523162842,
+					0.8899999856948853,
+					0.8500000238418579,
 					1
 				],
-				"metallicFactor":0.11999999731779099,
-				"roughnessFactor":0.4399999976158142
+				"metallicFactor":0,
+				"roughnessFactor":0.47999998927116394
 			}
 		}
 	],
 	"meshes":[
 		{
-			"name":"Icosphere",
+			"name":"Sphere.081",
 			"primitives":[
 				{
 					"attributes":{
@@ -64,67 +59,67 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":60,
+			"count":323,
 			"max":[
-				0.1341637521982193,
-				0.15000000596046448,
-				0.12759600579738617
+				0.9999998211860657,
+				1,
+				0.9999997019767761
 			],
 			"min":[
-				-0.1341637521982193,
-				-0.15000000596046448,
-				-0.12759600579738617
+				-0.999999463558197,
+				-1,
+				-1
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":60,
+			"count":323,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":60,
+			"count":323,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":60,
+			"count":1584,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":720,
+			"byteLength":3876,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":720,
-			"byteOffset":720,
+			"byteLength":3876,
+			"byteOffset":3876,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":480,
-			"byteOffset":1440,
+			"byteLength":2584,
+			"byteOffset":7752,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":120,
-			"byteOffset":1920,
+			"byteLength":3168,
+			"byteOffset":10336,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":2040,
+			"byteLength":13504,
 			"uri":"spark.bin"
 		}
 	]

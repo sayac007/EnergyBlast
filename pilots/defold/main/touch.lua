@@ -28,7 +28,7 @@ function M.new(g,ground)
    self.pointer.x=a.x;self.pointer.y=a.y
    if self.pointer.seconds+1e-7>=self.threshold then self:aim()end
    if a.released then
-    if g.aiming then g:fire();if g.ui_test then print('DEFOLD UI LONG HOLD shots='..g.shots_fired)end else g.target=ground(a.x,a.y);g:navigate(g.target);g.status='LAUFEN - Halten: Zielen';if g.ui_test then print('DEFOLD UI SHORT TAP shots='..g.shots_fired)end end
+    if g.aiming then g:fire();g.status='SCHUSS - KURZ TIPPEN: LAUFEN';if g.ui_test then print('DEFOLD UI LONG HOLD shots='..g.shots_fired)end else g.target=ground(a.x,a.y);g:navigate(g.target);g.status='LAUFEN - Halten: Zielen';if g.ui_test then print('DEFOLD UI SHORT TAP shots='..g.shots_fired)end end
     self.pointer=nil;g.aiming=false;g.pending_hold=false;g.hold_progress=0
    end
   end

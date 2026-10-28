@@ -10,7 +10,7 @@ for name,options in [('menu',[]),('characters',['--config=project.capture_page=c
  env=dict(os.environ,LIBGL_ALWAYS_SOFTWARE='1',ALSOFT_DRIVERS='null',XDG_DATA_HOME=str(state/'data'),XDG_CACHE_HOME=str(state/'cache'),XDG_CONFIG_HOME=str(state/'config'))
  with(state/'runtime.log').open('w')as log:
   proc=subprocess.Popen(['/tmp/energyblast-defold-tools/dmengine']+options+[str(R/'pilots/defold/build/default/game.projectc')],env=env,stdout=log,stderr=subprocess.STDOUT)
-  try:time.sleep(1.1);ImageGrab.grab().crop((0,0,720,1280)).save(root/(name+'.png'))
+  try:time.sleep(1.1);ImageGrab.grab().crop((0,0,1280,720)).save(root/(name+'.png'))
   finally:proc.terminate();proc.wait(timeout=5)
  assert 'ERROR:'not in(state/'runtime.log').read_text(),(state/'runtime.log').read_text()
  print(name,'native capture PASS',flush=True)

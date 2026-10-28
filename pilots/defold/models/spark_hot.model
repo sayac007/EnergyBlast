@@ -1,2 +1,2 @@
 mesh: "/models/spark_hot.gltf"
-materials { name: "Solar gold" material: "/models/spark_hot-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/spark_hot-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

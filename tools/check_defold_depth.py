@@ -21,7 +21,7 @@ with tempfile.TemporaryDirectory(prefix='energyblast-depth-',dir='/tmp')as direc
     while 'DEFOLD DEPTH READY'not in(state/'runtime.log').read_text()and time.monotonic()<deadline:time.sleep(.025)
     assert 'DEFOLD DEPTH READY'in(state/'runtime.log').read_text(),(state/'runtime.log').read_text()
     time.sleep(.7)
-    images[mode]=ImageGrab.grab().crop((0,180,720,1020)).convert('RGB')
+    images[mode]=ImageGrab.grab().crop((144,96,1136,624)).convert('RGB')
    finally:proc.terminate();proc.wait(timeout=5)
   assert 'ERROR:'not in(state/'runtime.log').read_text(),(state/'runtime.log').read_text()
  hidden=ImageChops.difference(images['none'],images['behind'])

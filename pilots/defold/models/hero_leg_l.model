@@ -1,0 +1,4 @@
+mesh: "/models/hero_leg_l.gltf"
+materials { name: "Honey gold" material: "/models/hero_leg_l-0.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Deep blue ink" material: "/models/hero_leg_l-1.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Warm leather" material: "/models/hero_leg_l-2.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }

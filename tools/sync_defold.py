@@ -6,26 +6,29 @@ shutil.copyfile(R/'shared/defold04.json',D/'data/defold04.json')
 shutil.copytree(R/'shared/notices',D/'data/notices',dirs_exist_ok=True)
 shutil.copyfile(R/'shared/audio/de/manifest.json',D/'data/audio.json')
 shutil.copyfile(R/'shared/audio/de/LICENSE.txt',D/'data/AUDIO_LICENSE.txt')
-for f in (R/'shared/assets/defold04').iterdir():
- if f.suffix in ['.gltf','.bin']:shutil.copyfile(f,D/'models'/f.name)
-for name in ['hero','dragon','fox','wing_left','wing_right','bolt','enemy_bolt','fireball','shadow','gate','chest','drone','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock','forge','echo','rescue']:
- gltf=json.loads((D/'models'/(name+'.gltf')).read_text());model=['mesh: "/models/'+name+'.gltf"']
+art=R/'shared/assets/defold06'
+models=json.loads((art/'models.json').read_text())
+for f in art.iterdir():
+ if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
+for name in models:
+ mesh=models[name].get('runtime',name+'.gltf');gltf=json.loads((D/'models'/mesh).read_text());model=['mesh: "/models/'+mesh+'"']
  for i,m in enumerate(gltf['materials']):
-  color=m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1]);key=name+'-'+str(i);material='''name: "%s"
-tags: "model"
+  color=models[name].get('color_tint',m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1]));key=name+'-'+str(i);tag=models[name]['tag'];fragment='shadow.fp'if tag=='shadow'else'glow.fp'if tag=='glow'else'bright.fp';texture=models[name]['texture']or'white.png';ground=1 if name.endswith('_ground')else 0;material='''name: "%s"
+tags: "%s"
 vertex_program: "/builtins/materials/model.vp"
-fragment_program: "/main/bright.fp"
+fragment_program: "/main/%s"
 vertex_space: VERTEX_SPACE_LOCAL
 vertex_constants { name: "mtx_worldview" type: CONSTANT_TYPE_WORLDVIEW }
 vertex_constants { name: "mtx_view" type: CONSTANT_TYPE_VIEW }
 vertex_constants { name: "mtx_proj" type: CONSTANT_TYPE_PROJECTION }
 vertex_constants { name: "mtx_normal" type: CONSTANT_TYPE_NORMAL }
-vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -100 y: 160 z: 80 w: 1 } }
+vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -40 y: 100 z: 60 w: 1 } }
 fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: %s y: %s z: %s w: %s } }
+fragment_constants { name: "surface" type: CONSTANT_TYPE_USER value { x: %s y: 0 z: 0 w: 0 } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }
-'''%(key,*color)
+'''%(key,tag,fragment,*color,ground)
   (D/'models'/(key+'.material')).write_text(material)
-  model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/white.png" } }')
+  model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')
  (D/'models'/(name+'.model')).write_text('\n'.join(model)+'\n')
  (D/'models'/(name+'.go')).write_text('components { id: "model" component: "/models/'+name+'.model" position {x:0 y:0 z:0} rotation {x:0 y:0 z:0 w:1} }\n')
  (D/'models'/(name+'.factory')).write_text('prototype: "/models/'+name+'.go"\n')
@@ -46,7 +49,7 @@ text=text.replace('<!-- BEGIN_INCLUDE(manifest) -->','<!-- Modified for EnergyBl
 text=re.sub(r'\s*<uses-permission[^>]+/>','',text).replace('android:hasCode="true"','android:hasCode="true" android:allowBackup="false"')
 (D/'main/AndroidManifest.xml').write_text(text)
 components=['components { id: "logic" component: "/main/main.script" }','components { id: "ui" component: "/main/ui.gui" }']
-for name in ['hero','dragon','fox','wing_left','wing_right','bolt','enemy_bolt','fireball','shadow','gate','chest','drone','cannon','relay','radar','spark','spark_hot','reactor','citadel','dock','forge','echo','rescue']:components.append('components { id: "'+name+'" component: "/models/'+name+'.factory" }')
+for name in models:components.append('components { id: "'+name+'" component: "/models/'+name+'.factory" }')
 for c in manifest['clips']:
  if (D/'audio'/(c['id']+'.sound')).exists():components.append('components { id: "'+c['id']+'" component: "/audio/'+c['id']+'.sound" }')
 (D/'main/main.go').write_text('\n'.join(components)+'\n')
@@ -68,6 +71,13 @@ for file,name,loop,gain in [('aurora-hop.ogg','music',1,1.0),('energy-burst.ogg'
 (D/'main/main.go').write_text('\n'.join(components)+'\n')
 
 # Original portrait renders, not external character art.
-for name in ['hero','dragon','fox']:shutil.copyfile(R/'shared/assets/defold04'/(name+'.png'),D/'models'/(name+'.png'))
+for name in ['hero','dragon','fox']:shutil.copyfile(art/(name+'.png'),D/'models'/(name+'.png'))
 (D/'models/portraits.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ['hero','dragon','fox'])+'\nextrude_borders: 2\n')
-shutil.copyfile(R/'shared/assets/defold04/surfaces.json',D/'data/surfaces.json')
+shutil.copyfile(art/'surfaces.json',D/'data/surfaces.json')
+
+shutil.copyfile(art/'rigs.json',D/'data/rigs.json')
+
+ui_names=['button_blue','button_gold','button_green','button_violet','panel']+['ui_'+n for n in ['star','heart','aim','dash','hint','radio','gear','menu','sound','trap']]+['ui_background']
+(D/'models/interface.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ui_names)+'\nextrude_borders: 2\n')
+components.append('components { id: "backdrop" component: "/main/backdrop.gui" }')
+(D/'main/main.go').write_text('\n'.join(components)+'\n')

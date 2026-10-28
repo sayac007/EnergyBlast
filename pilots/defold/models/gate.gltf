@@ -16,10 +16,10 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Shut gate",
+			"name":"Solid closed gate",
 			"translation":[
 				0,
-				0.550000011920929,
+				0.5400000214576721,
 				0
 			]
 		},
@@ -28,7 +28,7 @@
 			"name":"Gate crown",
 			"translation":[
 				0,
-				1.1200000047683716,
+				1.100000023841858,
 				0
 			]
 		}
@@ -36,46 +36,36 @@
 	"materials":[
 		{
 			"doubleSided":true,
-			"emissiveFactor":[
-				0.699999988079071,
-				0.11199999558925633,
-				0.25200000572204573
-			],
-			"name":"Pulse coral",
+			"name":"Jade",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
-					1,
-					0.1599999964237213,
-					0.36000001430511475,
+					0.03500000014901161,
+					0.5799999833106995,
+					0.5199999809265137,
 					1
 				],
-				"metallicFactor":0.11999999731779099,
-				"roughnessFactor":0.4399999976158142
+				"metallicFactor":0,
+				"roughnessFactor":0.47999998927116394
 			}
 		},
 		{
 			"doubleSided":true,
-			"emissiveFactor":[
-				0.699999988079071,
-				0.4549999755620959,
-				0.09099999511241919
-			],
-			"name":"Solar gold",
+			"name":"Honey gold",
 			"pbrMetallicRoughness":{
 				"baseColorFactor":[
 					1,
-					0.6499999761581421,
-					0.12999999523162842,
+					0.6100000143051147,
+					0.07500000298023224,
 					1
 				],
-				"metallicFactor":0.11999999731779099,
-				"roughnessFactor":0.4399999976158142
+				"metallicFactor":0,
+				"roughnessFactor":0.47999998927116394
 			}
 		}
 	],
 	"meshes":[
 		{
-			"name":"Cube.034",
+			"name":"Cube.044",
 			"primitives":[
 				{
 					"attributes":{
@@ -89,7 +79,7 @@
 			]
 		},
 		{
-			"name":"Cube.035",
+			"name":"Cube.045",
 			"primitives":[
 				{
 					"attributes":{
@@ -107,15 +97,15 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":278,
+			"count":195,
 			"max":[
 				0.5,
-				0.550000011920929,
+				0.5400000214576721,
 				0.5
 			],
 			"min":[
 				-0.5,
-				-0.550000011920929,
+				-0.5400000214576721,
 				-0.5
 			],
 			"type":"VEC3"
@@ -123,33 +113,33 @@
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":278,
+			"count":195,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":278,
+			"count":195,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":564,
+			"count":900,
 			"type":"SCALAR"
 		},
 		{
 			"bufferView":4,
 			"componentType":5126,
-			"count":259,
+			"count":191,
 			"max":[
 				0.5,
-				0.05999999865889549,
+				0.04500000178813934,
 				0.5
 			],
 			"min":[
 				-0.5,
-				-0.05999999865889549,
+				-0.04500000178813934,
 				-0.5
 			],
 			"type":"VEC3"
@@ -157,75 +147,75 @@
 		{
 			"bufferView":5,
 			"componentType":5126,
-			"count":259,
+			"count":191,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":6,
 			"componentType":5126,
-			"count":259,
+			"count":191,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":7,
 			"componentType":5123,
-			"count":564,
+			"count":900,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":3336,
+			"byteLength":2340,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":3336,
-			"byteOffset":3336,
+			"byteLength":2340,
+			"byteOffset":2340,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2224,
-			"byteOffset":6672,
+			"byteLength":1560,
+			"byteOffset":4680,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1128,
-			"byteOffset":8896,
+			"byteLength":1800,
+			"byteOffset":6240,
 			"target":34963
 		},
 		{
 			"buffer":0,
-			"byteLength":3108,
-			"byteOffset":10024,
+			"byteLength":2292,
+			"byteOffset":8040,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":3108,
-			"byteOffset":13132,
+			"byteLength":2292,
+			"byteOffset":10332,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2072,
-			"byteOffset":16240,
+			"byteLength":1528,
+			"byteOffset":12624,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1128,
-			"byteOffset":18312,
+			"byteLength":1800,
+			"byteOffset":14152,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":19440,
+			"byteLength":15952,
 			"uri":"gate.bin"
 		}
 	]

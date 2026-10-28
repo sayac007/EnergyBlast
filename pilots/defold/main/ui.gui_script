@@ -1,23 +1,32 @@
 local Layout=require 'main.layout'
 local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
+local function track(self,n)
+ gui.set_adjust_mode(n,gui.ADJUST_STRETCH)
+ if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+end
 local function box(self,x,y,w,h,c)
- local n=gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(w,h,0));gui.set_color(n,color(c));if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+ local n=gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(w,h,0));gui.set_color(n,color(c));return track(self,n)
 end
 local function text(self,x,y,s,c,scale,max_width)
  local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ffffff'))
  local scale=scale or 1;local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),s);if max_width and metrics.width*scale>max_width then scale=max_width/metrics.width end
- gui.set_scale(n,vmath.vector3(scale));if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+ gui.set_scale(n,vmath.vector3(scale));return track(self,n)
 end
+local function picture(self,x,y,w,h,name,atlas,sliced)
+ local n=box(self,x,y,w,h,'ffffff');gui.set_texture(n,atlas or'interface');gui.play_flipbook(n,name)
+ if sliced then gui.set_slice9(n,vmath.vector4(24,24,24,24))end;return n
+end
+local function panel(self,x,y,w,h)return picture(self,x,y,w,h,'panel',nil,true)end
+local function icon(self,x,y,name,size)return picture(self,x,y,size or 46,size or 46,'ui_'..name)end
 local function circle(self,x,y,r,c)
- local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,32);if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+ local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,32);return track(self,n)
 end
-local function pill(self,x,y,w,h,c)
- box(self,x,y,w-h,h,c);circle(self,x-(w-h)/2,y,h/2,c);circle(self,x+(w-h)/2,y,h/2,c)
-end
-local function button(self,x,y,w,h,title,action,c)
- c=c or'316bd6';pill(self,x,y-5,w,h,'0b1638');pill(self,x,y,w,h,c)
- local hit=box(self,x,y,w,h,'ffffff');gui.set_alpha(hit,0);text(self,x,y,title,'ffffff',.80,w-22)
- self.buttons[#self.buttons+1]={node=hit,action=action,rect={x,y,w,h}}
+local function button(self,x,y,w,h,title,action,c,ico)
+ local palette={['3b5391']='blue',['268974']='green',['b67422']='gold',['804bd1']='violet'}
+ local style=palette[c]or c or'blue';local n=picture(self,x,y,w,h,'button_'..style,nil,true)
+ if ico then icon(self,x-w/2+35,y+3,ico,36)end
+ text(self,x+(ico and 15 or 0),y+3,title,'ffffff',.85,w-(ico and 75 or 22))
+ self.buttons[#self.buttons+1]={node=n,action=action,rect={x,y,w,h}};return n
 end
 local function line(self,x1,y1,x2,y2,c,width)
  local dx,dy=x2-x1,y2-y1;local n=box(self,(x1+x2)/2,(y1+y2)/2,math.sqrt(dx*dx+dy*dy),width or 3,c);gui.set_rotation(n,vmath.vector3(0,0,math.atan2(dy,dx)*180/math.pi))
@@ -25,102 +34,101 @@ end
 local function ring(self,x,y,r,c,width)
  for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;line(self,x+math.cos(a)*r,y+math.sin(a)*r,x+math.cos(b)*r,y+math.sin(b)*r,c,width or 3)end
 end
-local function portrait(self,x,y,id,size)
- local n=box(self,x,y,size,size,'ffffff');gui.set_texture(n,'portraits');gui.play_flipbook(n,id)
-end
-local function star(self,x,y,r)
- for i=0,4 do local a=math.pi/2+i*math.pi*2/5;local n=circle(self,x+math.cos(a)*r*.4,y+math.sin(a)*r*.4,r*.55,'ffdf58');gui.set_perimeter_vertices(n,3);gui.set_rotation(n,vmath.vector3(0,0,a*180/math.pi))end
-end
+local function portrait(self,x,y,id,size)return picture(self,x,y,size,size,id,'portraits')end
+local function star(self,x,y,r)icon(self,x,y,'star',r*2)end
 local function page(self,g,title)
- box(self,360,640,720,1280,'111e47')
- for i=1,7 do local n=box(self,(i*151)%720,(i*191)%1280,270,85,i%2==0 and'19275c'or'1c2d65');gui.set_rotation(n,vmath.vector3(0,0,-18))end
- text(self,360,1190,title,'ffffff',1.35,660)
- star(self,55,1115,20);text(self,175,1115,tostring(g:total())..' GESAMT','ffdf58',.72,230)
- text(self,500,1115,tostring(g:wallet())..' GUTHABEN','a7f4e6',.72,290)
+ -- The background is a separate earlier render pass; the animated 3D hero stays visible.
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'PRISM FRONTIER  ·  0.6','a3e7df',.61)
+ panel(self,930,670,640,82);text(self,930,682,title,'ffffff',.96,590)
+ icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
+ text(self,1080,652,g:wallet()..' GUTHABEN','a4f3d5',.56,220)
+ text(self,284,153,g:character().name,'fff0a6',1.15)
+ text(self,284,119,g:character().shot=='fireball'and'DRACHE · FEUERBALL'or'ENTDECKER · ENERGIE','a3e7df',.57,480)
 end
 local function dialog(self,g)
- self.buttons={};page(self,g,g.dialog=='menu'and'ENERGYBLAST'or g.dialog=='gear'and'ARSENAL'or g.dialog=='characters'and'WAHL DER HELDEN'or'ENERGYBLAST')
+ self.buttons={};page(self,g,g.dialog=='menu'and'DEINE MISSION'or g.dialog=='gear'and'ARSENAL'or g.dialog=='characters'and'DEIN HELD'or'ENERGYBLAST')
  if g.dialog=='menu'then
-  text(self,360,1050,'TOYBOX RAID  |  0.5.0','a5c8ff',.67)
-  local badges={'WINKEL','ZEITFENSTER','SCHALTER','FALLE','LICHTERFOLGE','BEGLEITUNG'}
-  local colors={'268974','8751bb','bf7430','b54960','3a6fc7','3d8863'}
+  local names={'WINKEL & ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','FALLE VORBEREITEN','LICHTERFOLGE MERKEN','DROHNE BESCHUETZEN'}
+  local styles={'green','violet','gold','gold','blue','green'}
   for i,m in ipairs(g.data.missions)do
-   local x=i%2==1 and 185 or 535;local y=930-math.floor((i-1)/2)*177
-   box(self,x,y,320,147,'25386c');circle(self,x-110,y+28,22,colors[i]);text(self,x-110,y+28,tostring(i),'ffffff',.85)
-   button(self,x,y-12,306,66,m.title,'sector'..i,colors[i]);text(self,x,y-57,badges[i],'d4e5ff',.48,285)
+   local x=i%2==1 and 772 or 1090;local y=534-math.floor((i-1)/2)*153
+   panel(self,x,y,302,140);button(self,x,y+14,288,78,m.title,'sector'..i,styles[i]);text(self,x,y-36,names[i],'c1d9e9',.50,278)
+   if g.saved.earned['mission:'..m.id]then icon(self,x-126,y+57,'star',25)else text(self,x-126,y+57,tostring(i),'ffe38b',.55)end
   end
-  button(self,185,325,312,78,'HELDEN','characters','804bd1');portrait(self,95,409,g:character().id,100)
-  text(self,345,410,g:character().name,'ffdf58',.75)
-  button(self,535,325,312,78,'ARSENAL','gear','b67422')
-  button(self,360,210,620,74,'WEITER SPIELEN','continue','268974')
-  text(self,360,100,'KURZ TIPPEN: LAUFEN  |  HALTEN: ZIELEN','bed8ff',.55,660)
+  button(self,807,83,366,78,'WEITER SPIELEN','continue','green');button(self,1130,83,250,78,'ARSENAL','gear','gold')
+  button(self,284,63,490,78,'HELDEN WAEHLEN','characters','blue')
   if g.ui_test and not self.menu_ready then self.menu_ready=true;print('DEFOLD MENU READY')end
  elseif g.dialog=='characters'then
-  text(self,360,1025,'JEDER HELD KANN JEDE MISSION SCHAFFEN','a5c8ff',.57,660)
-  for i,c in ipairs(g.data.characters)do local x=125+(i-1)*235
-   local chosen=g:character().id==c.id
-   box(self,x,780,214,360,chosen and'4b3b8e'or'25386c');portrait(self,x,825,c.id,215)
-   text(self,x,695,c.name,chosen and'ffdf58'or'ffffff',.85)
-   text(self,x,650,c.shot=='fireball'and'FEUERBALL'or'ENERGIE','bad8ff',.48)
-   button(self,x,550,210,70,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'268974'or'804bd1')
+  for i,c in ipairs(g.data.characters)do local x=725+(i-1)*205;local chosen=g:character().id==c.id
+   panel(self,x,389,195,380);portrait(self,x,448,c.id,203)
+   text(self,x,325,c.name,chosen and'ffe493'or'ffffff',.84,175)
+   text(self,x,291,c.shot=='fireball'and'FEUERBALL'or'ENERGIE','b8dce4',.50,170)
+   button(self,x,237,190,77,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'green'or'violet')
   end
-  button(self,360,280,620,80,'ZURUECK','menu')
+  button(self,930,83,615,78,'ZURUECK','menu','blue')
  elseif g.dialog=='gear'then
-  text(self,360,1040,g.shop_status or'KAUFEN & SOFORT AUSRUESTEN','ffdf58',.65,640)
+  text(self,930,592,g.shop_status or'KAUFEN · DAUERHAFT AUSRUESTEN','ffe38b',.60,590)
   local names={prism='PRISMA-KANONE',armor='RUESTUNG',boots='TEMPOSTIEFEL',cloak='TARNMODUL'}
-  local effects={prism='ZWEI ABPRALLER',armor='+1 ENERGIE',boots='SCHNELLER LAUFEN',cloak='SPAETER ENTDECKT'}
-  for i,u in ipairs(g.data.unlocks)do local y=922-(i-1)*155;local owned=g:owns(u.id)
-   box(self,360,y,654,132,'25386c');circle(self,80,y,29,owned and'268974'or'9d6630');text(self,80,y,owned and'+'or'*','ffdf58',1)
-   text(self,290,y+30,names[u.id],'ffffff',.77,310);text(self,290,y-16,effects[u.id],'bed8ff',.56,310)
+  local effects={prism='2 ABPRALLER',armor='+1 ENERGIE',boots='MEHR TEMPO',cloak='SPAETER ENTDECKT'}
+  for i,u in ipairs(g.data.unlocks)do local y=521-(i-1)*103;local owned=g:owns(u.id)
+   panel(self,930,y,625,92);icon(self,658,y+3,i==2 and'heart'or i==3 and'dash'or i==4 and'gear'or'aim',43)
+   text(self,830,y+18,names[u.id],'ffffff',.77,277);text(self,830,y-15,effects[u.id],'afd9e0',.53,277)
    local label=owned and(u.id=='prism'and(g.saved.weapon=='prism'and'AN'or'AUS')or'AKTIV')or(tostring(u.price)..' *')
-   button(self,570,y,170,75,label,'buy:'..u.id,owned and'268974'or'b67422')
+   button(self,1130,y,183,75,label,'buy:'..u.id,owned and'green'or'gold')
   end
-  text(self,360,320,'Gesamtsterne bleiben. Nur Guthaben wird ausgegeben.','bed8ff',.52,660)
-  button(self,185,220,310,74,'WEITER','continue','268974');button(self,535,220,310,74,'SEKTOREN','menu')
-  button(self,360,100,620,62,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','3b5391')
+  text(self,930,145,'Gesamtsterne bleiben · Guthaben wird ausgegeben','b8dce4',.51,610)
+  button(self,770,73,295,75,'WEITER','continue','green');button(self,1090,73,295,75,'SEKTOREN','menu','blue')
+  button(self,284,63,490,78,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','violet','sound')
  elseif g.dialog=='win'then
-  text(self,360,905,'SEKTOR GESICHERT','ffdf58',1.15,650);star(self,360,800,55);text(self,360,690,'+ '..g.reward..' STERNE','ffdf58',1.2)
-  button(self,360,560,610,90,'BEUTE SUCHEN','loot','804bd1');button(self,360,420,610,90,'SEKTOREN','menu');button(self,360,280,610,80,'NOCH EINMAL','retry','268974')
+  panel(self,930,389,628,422);text(self,930,535,'SEKTOR GESICHERT','ffe38b',1.05,580);star(self,930,432,57);text(self,930,338,'+ '..g.reward..' STERNE','ffe38b',1.15)
+  button(self,930,231,585,79,'BEUTE SUCHEN','loot','violet');button(self,930,99,615,80,'SEKTOREN','menu','green');button(self,284,63,490,78,'NOCH EINMAL','retry','blue')
  else
-  text(self,360,850,'NEUER ANLAUF?','ff9dc6',1.25);text(self,360,770,'Deine Sterne bleiben erhalten.','c4dcff',.75)
-  button(self,360,610,620,100,'NOCH EINMAL','retry','ca437b');button(self,360,440,620,90,'SEKTOREN','menu')
+  panel(self,930,387,628,420);text(self,930,493,'NEUER ANLAUF?','ffa6c3',1.14);text(self,930,420,'Deine Sterne bleiben erhalten.','d0e5e9',.79,565)
+  button(self,930,303,580,89,'NOCH EINMAL','retry','gold');button(self,930,99,615,80,'SEKTOREN','menu','blue')
  end
 end
-function init(self)self.nodes={};self.buttons={};self.ui_pointers={};msg.post('.','acquire_input_focus')end
+function init(self)self.nodes={};self.buttons={};self.ui_pointers={};self.counter=0;msg.post('.','acquire_input_focus')end
 function update(self,dt)
  local g=_G.energyblast;if not g then return end
+ if g.dialog then
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',tostring(g.reward)},'|')
+  if key==self.dialog_key then return end;self.dialog_key=key
+ else self.dialog_key=nil end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
- -- A menu REPLACES the scene; it never covers a still-playable area.
  if g.dialog then dialog(self,g);return end
- box(self,360,1190,720,180,'111e47');box(self,360,130,720,260,'111e47')
- box(self,360,1104,720,8,'48b5c7');box(self,360,256,720,8,'48b5c7')
- star(self,40,1238,20);text(self,130,1238,tostring(g:total()),'ffdf58',1.1,155)
- text(self,120,1137,'GUTHABEN '..g:wallet(),'a7f4e6',.50,220)
- for i=1,g.max_hp do circle(self,30+i*37,1182,12,i<=g.hp and'ff7394'or'344774')end
- text(self,365,1240,g.m.title,'e2eeff',.64,225)
+ panel(self,640,673,1280,96);panel(self,72,360,144,528);panel(self,1208,360,144,528);panel(self,640,48,1280,96)
+ self.counter=self.counter+(g:total()-self.counter)*math.min(1,dt*10)
+ icon(self,38,678,'star',46);text(self,121,680,tostring(math.floor(self.counter+.5)),'ffe590',1.08,125);text(self,120,649,'GESAMTSTERNE','a6d3e5',.42,185)
+ text(self,634,682,g.m.title,'ffffff',1.0,650)
  local alive=0;for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='sequence'then alive=alive+1 end end
- text(self,570,1177,g.drone and('DROHNE '..g.drone.hp..'/3')or g.m.kind=='sequence'and('FOLGE '..g.sequence_progress..'/3')or('ZIELE '..alive),'ffd674',.64,210)
- if g.m.kind=='sequence'then
-  local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
-  for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,520+i*36,1138,14,lit and'ffe57a'or'394a7d');text(self,520+i*36,1138,tostring(i),lit and'17214b'or'b8bfff',.62)end
- else text(self,570,1137,'? '..g:credits(),'bed8ff',.55)end
- for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='|||',sound=g.muted and'AUS'or'TON',hint='? HINWEIS',radio='FUNK',gear='ARSENAL'})[name]
-  if name=='hint'and g.m.kind=='trap'then button(self,250,184,154,48,'? HINWEIS','hint','3b5391');button(self,425,184,176,48,g.trap_cooldown>0 and string.format('FALLE %.0f',g.trap_cooldown)or'FALLE','trap','804bd1')
-  else button(self,r[1],r[2],r[3],r[4],title,name=='gear'and'gear'or name,'3b5391')end
+ text(self,634,650,g.drone and('DROHNE '..g.drone.hp..'/3')or g.m.kind=='sequence'and('LICHTERFOLGE '..g.sequence_progress..'/3')or('KANONEN '..alive),'b9dfe5',.52,530)
+ portrait(self,72,548,g:character().id,135)
+ for i=1,g.max_hp do local h=icon(self,15+i*27,460,'heart',27);if i>g.hp then gui.set_color(h,vmath.vector4(.25,.35,.4,.6))end end
+ for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='ARSENAL'})[name]
+  button(self,r[1],r[2],r[3],r[4],title,name,'blue')
+  if name=='menu'or name=='sound'then icon(self,r[1],r[2]+2,name,37)end
  end
- for _,name in ipairs({'fire','dash'})do local r=Layout.controls[name];circle(self,r[1],r[2]-6,r[3]/2,'081430');local n=circle(self,r[1],r[2],r[3]/2,name=='fire'and'dc497d'or'267d9b');ring(self,r[1],r[2],r[3]/2-7,name=='fire'and'ff95b5'or'69d9e5',3)
-  text(self,r[1],r[2],name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.92);self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
+ for _,name in ipairs({'fire','dash'})do local r=Layout.controls[name]
+  local n=picture(self,r[1],r[2],r[3],r[4],name=='fire'and'button_gold'or'button_blue',nil,true)
+  icon(self,r[1],r[2]+15,name=='fire'and'aim'or'dash',62)
+  text(self,r[1],r[2]-36,name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.69)
+  self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
- text(self,360,234,g.status,'cce7ff',.55,676)
- box(self,360,1164,130,78,'0b1537');local bounds=g.data.arena
- local function mini(p)return 420-(p[2]-bounds[2])/bounds[4]*120,1130+(1-(p[1]-bounds[1])/bounds[3])*68 end
+ if g.m.kind=='trap'then button(self,72,110,120,67,g.trap_cooldown>0 and string.format('%.0f',g.trap_cooldown)or'FALLE','trap','violet');icon(self,72,155,'trap',30)end
+ text(self,551,57,g.status,'d2e9ec',.64,780);text(self,551,27,'KURZ TIPPEN: LAUFEN     HALTEN: ZIELEN     LOSLASSEN: FEUERN','8db8cd',.45,790)
+ text(self,72,45,'? '..g:credits(),'ffe590',.73)
+ panel(self,1051,47,151,72);local bounds=g.data.arena
+ local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
  for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
  local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');local gx,gy=mini(g.m.goal);circle(self,gx,gy,3,'ffdf58')
+ if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
+  for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
+ end
  -- World-only annotations are clipped at the exact render/input viewport.
- local clip=box(self,360,(Layout.bottom+Layout.top)/2,720,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
+ local clip=box(self,(Layout.left+Layout.right)/2,(Layout.bottom+Layout.top)/2,Layout.right-Layout.left,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
  for _,e in ipairs(g.enemies)do if e.hp>0 then
   local x,y=g.project(g,e.p,1.6)
-  if e.warning>0 and(x<12 or x>708 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(22,math.min(698,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
+  if e.warning>0 and(x<Layout.left+12 or x>Layout.right-12 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(Layout.left+22,math.min(Layout.right-22,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
   if e.kind=='sequence'then
    local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
    ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)

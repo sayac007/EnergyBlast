@@ -1,0 +1,2 @@
+mesh: "/models/selection_ring.gltf"
+materials { name: "Mint light" material: "/models/selection_ring-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

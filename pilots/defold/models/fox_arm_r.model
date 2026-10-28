@@ -1,0 +1,5 @@
+mesh: "/models/fox_arm_r.gltf"
+materials { name: "Fox plum" material: "/models/fox_arm_r-0.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }
+materials { name: "Honey gold" material: "/models/fox_arm_r-1.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }
+materials { name: "Fox copper" material: "/models/fox_arm_r-2.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }
+materials { name: "Jade" material: "/models/fox_arm_r-3.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }

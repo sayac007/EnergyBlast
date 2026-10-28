@@ -1,17 +1,27 @@
 local View=require 'main.view'
 function init(self)
- self.model=render.predicate({'model'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.scene=true
+ self.glow=render.predicate({'glow'});self.model=render.predicate({'model'});self.actor=render.predicate({'actor'});self.shadow=render.predicate({'shadow'});self.stage=render.predicate({'stage'});self.backdrop=render.predicate({'backdrop'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.hero={0,0};self.scene=true
 end
 function on_message(self,id,m)
- if id==hash('camera')then self.center={m.x,m.z};self.scene=m.scene~=false end
+ if id==hash('camera')then self.center={m.x,m.z};self.hero={m.hero_x or 0,m.hero_z or 0};self.scene=m.scene~=false end
 end
 function update(self)
  local w,h=render.get_window_width(),render.get_window_height()
  render.set_viewport(0,0,w,h);render.set_depth_mask(true)
- render.clear({[graphics.BUFFER_TYPE_COLOR0_BIT]=vmath.vector4(.035,.055,.11,1),[graphics.BUFFER_TYPE_DEPTH_BIT]=1,[graphics.BUFFER_TYPE_STENCIL_BIT]=0})
- render.set_viewport(0,h*View.bottom/View.height,w,h*(View.top-View.bottom)/View.height)
+ render.clear({[graphics.BUFFER_TYPE_COLOR0_BIT]=vmath.vector4(.035,.075,.14,1),[graphics.BUFFER_TYPE_DEPTH_BIT]=1,[graphics.BUFFER_TYPE_STENCIL_BIT]=0})
+ render.set_view(vmath.matrix4());render.set_projection(vmath.matrix4_orthographic(0,w,0,h,-1,1));render.disable_state(graphics.STATE_DEPTH_TEST);render.draw(self.backdrop)
  render.enable_state(graphics.STATE_DEPTH_TEST);render.set_depth_func(graphics.COMPARE_FUNC_LEQUAL);render.enable_state(graphics.STATE_CULL_FACE)
- local v,p=View.matrices(w,h,self.center);render.set_view(v);render.set_projection(p);if self.scene then render.draw(self.model)end
+ if self.scene then
+  render.set_viewport(w*View.left/View.width,h*View.bottom/View.height,w*(View.right-View.left)/View.width,h*(View.top-View.bottom)/View.height)
+  local v,p=View.matrices(w,h,self.center);render.set_view(v);render.set_projection(p);render.draw(self.model)
+  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.set_depth_mask(false);render.draw(self.shadow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
+  render.draw(self.actor)
+  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.draw(self.glow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
+ else
+  render.set_viewport(w*30/1280,h*85/720,w*530/1280,h*535/720)
+  local x,z=self.hero[1],self.hero[2];render.set_view(vmath.matrix4_look_at(vmath.vector3(x+2.8,2.8,z+5),vmath.vector3(x,.95,z),vmath.vector3(0,1,0)))
+  render.set_projection(vmath.matrix4_orthographic(-1.62*(w*530/1280)/(h*535/720),1.62*(w*530/1280)/(h*535/720),-1.62,1.62,.1,100));render.draw(self.stage);render.draw(self.actor)
+ end
  render.set_viewport(0,0,w,h);render.disable_state(graphics.STATE_DEPTH_TEST);render.disable_state(graphics.STATE_CULL_FACE);render.set_depth_mask(false)
  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA)
  render.set_view(vmath.matrix4());render.set_projection(vmath.matrix4_orthographic(0,w,0,h,-1,1))

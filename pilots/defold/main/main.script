@@ -19,27 +19,76 @@ local function clear_fragments(self)
  self.fragments={}
 end
 local function replace_hero(self)
- for _,id in ipairs(self.hero_ids or{})do go.delete(id)end;self.hero_ids={}
- local function part(name)local id=factory.create('#'..name,vmath.vector3(0,0,0));self.hero_ids[#self.hero_ids+1]=id;return id end
- self.hero=part(self.g:character().id);self.wings={}
- if self.g:character().id=='dragon'then
-  for _,name in ipairs({'wing_left','wing_right'})do local id=part(name);go.set_parent(id,self.hero,false);self.wings[#self.wings+1]=id end
+ for _,id in ipairs(self.hero_ids or{})do go.delete(id)end
+ self.hero_ids={};self.hero_parts={};self.wings={};self.hero_rotation=vmath.quat()
+ local rig=self.rigs[self.g:character().id]
+ for _,piece in ipairs(rig)do if piece.part=='body'then
+  self.hero=factory.create('#'..piece.model,vmath.vector3(0,0,0));self.hero_ids[#self.hero_ids+1]=self.hero
+ end end
+ for _,piece in ipairs(rig)do if piece.part~='body'then
+  local id=factory.create('#'..piece.model,vmath.vector3(0,0,0));go.set_parent(id,self.hero,false)
+  go.set_position(vmath.vector3(piece.pivot[1],piece.pivot[2],piece.pivot[3]),id)
+  self.hero_parts[piece.part]=id;self.hero_ids[#self.hero_ids+1]=id
+  if piece.part=='wing_l'or piece.part=='wing_r'then self.wings[#self.wings+1]=id end
+ end end
+end
+local function animate_hero(self,dt)
+ local g=self.g;local walking=#g.path>0 and not g.paused;local stage=g.dialog~=nil;local time=self.visual_clock
+ local cycle=time*(walking and 12 or 3.2);local recoil=(g.recoil or 0)/.20
+ local bob=walking and math.abs(math.sin(cycle))*.045 or math.sin(time*2.8)*.013
+ go.set_position(vmath.vector3(g.p[1],bob,g.p[2]),self.hero)
+ local facing=g.aiming or g.held or g.cooldown>.1
+ local yaw=stage and(.12+math.sin(time*.55)*.18)or(facing and math.atan2(g.aim[1],g.aim[2])or(g.facing or 0))
+ local wanted=vmath.quat_rotation_y(yaw)*vmath.quat_rotation_x((walking and .055 or 0)-recoil*.11)
+ self.hero_rotation=vmath.slerp(math.min(1,dt*18),self.hero_rotation,wanted);go.set_rotation(self.hero_rotation,self.hero)
+ for part,id in pairs(self.hero_parts)do
+  local side=part:sub(-1)=='l'and -1 or 1;local angle=0
+  if part:sub(1,3)=='leg'then angle=walking and math.sin(cycle)*.58*side or 0;go.set_rotation(vmath.quat_rotation_x(angle),id)
+  elseif part:sub(1,3)=='arm'then angle=walking and -math.sin(cycle)*.35*side or math.sin(time*2.8)*.025;go.set_rotation(vmath.quat_rotation_x(angle-recoil*.35),id)
+  elseif part:sub(1,4)=='wing'then go.set_rotation(vmath.quat_rotation_z(math.sin(time*(walking and 10 or 4))*.22*side),id)
+  elseif part=='tail'then go.set_rotation(vmath.quat_rotation_y(math.sin(time*4)*.22),id)end
+ end
+ if self.ui_test and walking and not self.motion_checked and math.abs(math.sin(cycle))>.01 then
+  assert(self.hero_parts.leg_l and self.hero_parts.arm_r and math.abs(math.sin(cycle))>.01)
+  self.motion_checked=true;print('DEFOLD ACTUAL ARTICULATED WALK PASS')
  end
 end
 local function clear_projectiles(self)
- for _,id in pairs(self.projectile_nodes or{})do go.delete(id)end;self.projectile_nodes={}
+ for _,id in pairs(self.projectile_nodes or{})do go.delete(id)end
+ for _,id in pairs(self.halo_nodes or{})do go.delete(id)end
+ for _,trail in ipairs(self.trails or{})do go.delete(trail.id)end
+ self.projectile_nodes={};self.halo_nodes={};self.trails={}
 end
-local function draw_projectiles(self)
+local function glow_color(b,alpha)
+ if b.visual=='fireball'then return vmath.vector4(1,.34,.045,alpha)end
+ return b.enemy and vmath.vector4(1,.10,.22,alpha)or vmath.vector4(.09,.76,1,alpha)
+end
+local function glow(self,p,b,alpha)
+ local id=factory.create('#glow',vmath.vector3(p[1],.65,p[2]));go.set_rotation(vmath.quat_rotation_x(-math.atan2(24,18)),id)
+ go.set(msg.url(nil,id,'model'),'tint',glow_color(b,alpha));return id
+end
+local function draw_projectiles(self,dt)
  local alive={}
+ for i=#self.trails,1,-1 do local t=self.trails[i];t.life=t.life-dt
+  if t.life<=0 then go.delete(t.id);table.remove(self.trails,i)else go.set_scale(t.life/.19*.65,t.id)end
+ end
  for _,b in ipairs(self.g.bullets)do
   alive[b]=true
-  if not self.projectile_nodes[b]then self.projectile_nodes[b]=factory.create(b.visual=='fireball'and'#fireball'or b.enemy and'#enemy_bolt'or'#bolt',vmath.vector3(0,0,0))end
+  if not self.projectile_nodes[b]then
+   self.projectile_nodes[b]=factory.create(b.visual=='fireball'and'#fireball'or b.enemy and'#enemy_bolt'or'#bolt',vmath.vector3(0,0,0));self.halo_nodes[b]=glow(self,b.p,b,.6)
+  end
   local id=self.projectile_nodes[b]
-  go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),id)
+  go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),id);go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),self.halo_nodes[b])
   go.set_rotation(vmath.quat_rotation_y(math.atan2(b.direction[1],b.direction[2])),id)
-  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1),id)
+  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1),id);go.set_scale(math.max(.01,b.alpha)*.70,self.halo_nodes[b])
+  b.trail_clock=(b.trail_clock or 0)+dt
+  if not self.g.paused and b.trail_clock>.045 then
+   b.trail_clock=0
+   if #self.trails>=80 then go.delete(self.trails[1].id);table.remove(self.trails,1)end
+   self.trails[#self.trails+1]={id=glow(self,b.p,b,.34),life=.19}
+  end
  end
- for b,id in pairs(self.projectile_nodes)do if not alive[b]then go.delete(id);self.projectile_nodes[b]=nil end end
+ for b,id in pairs(self.projectile_nodes)do if not alive[b]then go.delete(id);if self.halo_nodes[b]then go.delete(self.halo_nodes[b])end;self.halo_nodes[b]=nil;self.projectile_nodes[b]=nil end end
 end
 local function rebuild(self,index)
  clear_fragments(self);clear_projectiles(self)
@@ -47,12 +96,13 @@ local function rebuild(self,index)
  local function make(name,p)
   local id=factory.create('#'..name,vmath.vector3(p[1],0,p[2]));self.objects[#self.objects+1]=id;return id
  end
- self.arena=make(self.g.m.id,{0,0});replace_hero(self)
- self.hero_shadow=make('shadow',self.g.p);self.chest=make('chest',self.g.m.secret.position)
+ self.arena=make(self.g.m.id,{0,0});self.ground=make(self.g.m.id..'_ground',{0,0});replace_hero(self)
+ self.selection=make('selection_ring',self.g.p);self.hero_shadow=make('shadow',self.g.p);self.chest=make('chest',self.g.m.secret.position)
  self.gate=self.g.m.gate_rect and make('gate',{0,0})or nil
  self.drone=self.g.drone and make('drone',self.g.drone.p)or nil
+ self.lobby=make('lobby',self.g.p)
  self.radar=make('radar',self.g.m.radar);go.set_position(vmath.vector3(self.g.m.radar[1],1.17,self.g.m.radar[2]),self.radar)
- for _,t in ipairs(self.g.enemies)do t.node=make((t.kind=='relay'or t.kind=='sequence')and'relay'or'cannon',t.p)end
+ for _,t in ipairs(self.g.enemies)do t.shadow=make('shadow',t.p);t.node=make((t.kind=='relay'or t.kind=='sequence')and'relay'or'cannon',t.p)end
  View.follow(self.g,0,true)
  self.g.say(self.g.m.voice or(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id));self.voice_next='defold_controls'
 end
@@ -89,10 +139,12 @@ local function run_tests(self)
  n=n+require('main.reflection_checks').run(self.g)
  self.g.data.shop_enabled=true
  n=n+require('main.toybox_checks').run(self.g)
+ self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
+ n=n+require('main.presentation_checks').run(self)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
 end
 function init(self)
- self.objects={};self.fragments={};self.voice_left=0;self.clips={};self.voice_next=nil
+ self.objects={};self.fragments={};self.visual_clock=0;self.rigs=json.decode(sys.load_resource('/data/rigs.json'));self.voice_left=0;self.clips={};self.voice_next=nil
  self.test_mode=sys.get_config_string('project.test_mode','0')=='1';self.muted=self.test_mode
  local data=json.decode(sys.load_resource('/data/defold04.json'))
  local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
@@ -143,6 +195,7 @@ function init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
+ self.visual_clock=self.capture_depth and 0 or self.visual_clock+dt
  if self.capture_audio_left then self.capture_audio_left=self.capture_audio_left-dt;if self.capture_audio_left<=0 then msg.post('@system:','exit',{code=0});return end end
  if self.test_wait then
   self.test_wait=self.test_wait-dt
@@ -166,20 +219,19 @@ function update(self,dt)
   if self.voice_left<=0 and self.voice_next then local id=self.voice_next;self.voice_next=nil;voice(self,id)end
  end
  self.g:update(dt);music_update(self)
- View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil})
+ View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2]})
  go.set_rotation(vmath.quat_rotation_y(self.g.clock*.45),self.radar)
- local p=self.g.p;local walking=#self.g.path>0
- go.set_position(vmath.vector3(p[1],walking and math.abs(math.sin(self.g.clock*11))*.06 or 0,p[2]),self.hero)
- local facing=self.g.aiming or self.g.held or self.g.cooldown>.1
- go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow)
- for i,id in ipairs(self.wings)do go.set_rotation(vmath.quat_rotation_z(math.sin(self.g.clock*(walking and 12 or 5))*.22*(i==1 and 1 or -1)),id)end
- go.set_rotation(vmath.quat_rotation_y(facing and math.atan2(self.g.aim[1],self.g.aim[2])or(self.g.facing or 0)),self.hero)
+ local p=self.g.p
+ animate_hero(self,dt)
+ go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow);go.set_position(vmath.vector3(p[1],0,p[2]),self.selection)
+ go.set_position(vmath.vector3(p[1],0,p[2]),self.lobby)
  for _,t in ipairs(self.g.enemies)do
   local age=t.death_age;local scale=t.hp>0 and(t.boss and 1.2 or 1)or(age and age<.32 and math.max(.001,1-age/.32)*1.2 or .001)
+  go.set_position(vmath.vector3(t.p[1],0,t.p[2]),t.shadow);go.set_scale(t.hp>0 and 1 or .001,t.shadow)
   go.set_position(vmath.vector3(t.p[1],t.kind=='relay'and math.sin(self.g.clock*2)*.08 or 0,t.p[2]),t.node)
-  go.set_rotation(vmath.quat_rotation_y(math.atan2(t.direction[1],t.direction[2])+(age or 0)*12),t.node);go.set_scale(scale,t.node)
+  go.set_rotation(vmath.quat_rotation_y(math.atan2(t.direction[1],t.direction[2])+(age or 0)*12),t.node);go.set_scale(vmath.vector3(scale*(1+(t.hit_timer or 0)*.7),scale*(1-(t.hit_timer or 0)*.5),scale),t.node)
  end
- draw_projectiles(self)
+ draw_projectiles(self,dt)
  if self.gate then local r=self.g.m.gate_rect;go.set_position(vmath.vector3(r[1]+r[3]/2,0,r[2]+r[4]/2),self.gate);go.set_scale(vmath.vector3(r[3],self.g:open()and .001 or 1,r[4]),self.gate)end
  go.set_scale(self.g.secret_visible and 1 or .001,self.chest)
  if self.drone then local e=self.g.drone;go.set_position(vmath.vector3(e.p[1],.08*math.sin(self.g.clock*5),e.p[2]),self.drone)end
@@ -188,16 +240,19 @@ end
 function on_message(self,id,message)
  if id==hash('choose')then
   if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,message.index)
+  if sys.get_config_string('project.capture_motion','0')=='1'then
+   local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-1},0);local ax,ay=View.project(self.g,{3,-4},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))
+  end
   local depth=sys.get_config_string('project.capture_depth','')
   if depth~=''then
    self.capture_depth=depth;self.g.paused=true;self.g.clock=0;self.g.camera={0,1.8}
-   if depth~='none'then require('main.projectiles').spawn(self.g,{depth=='behind'and -1.2 or 1.4,1.8},{0,1},true)end
+   if depth~='none'then require('main.projectiles').spawn(self.g,{0,depth=='behind'and -.97 or 4.8},{0,1},true)end
    print('DEFOLD DEPTH READY '..depth)
   end
   if sys.get_config_string('project.capture_fx','0')=='1'then
    local t=self.g.enemies[2]or self.g.enemies[1];self.g.p={t.p[1]-1.5,t.p[2]+1};View.follow(self.g,0,true);t.shield=false;t.boss=false;while t.hp>0 do self.g:hit(t,1)end;self.g.paused=true;print('DEFOLD FX CAPTURE READY')
   end
-  if self.ui_test then assert(self.g.m.id=='dock'and #self.g.enemies==5);print('DEFOLD UI SECTOR SELECTED dock');self.ui_exit=3.5 end
+  if self.ui_test then assert(self.g.m.id=='dock'and #self.g.enemies==5);print('DEFOLD UI SECTOR SELECTED dock');self.ui_exit=8 end
  elseif id==hash('character')then
   if self.g:set_character(message.id)then replace_hero(self);if self.ui_test then assert(self.g:character().id==message.id and #self.wings==(message.id=='dragon'and 2 or 0));print('DEFOLD CHARACTER PICK PASS '..message.id)end end
  elseif id==hash('radio')then

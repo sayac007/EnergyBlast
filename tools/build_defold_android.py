@@ -18,11 +18,11 @@ apk=out/'energyblast-defold-debug.apk';shutil.copyfile(apks[0],apk)
 def run(args):
  r=subprocess.run([str(x)for x in args],check=True,env=dict(env,JAVA_HOME=str(a.tools/'android-jdk')),capture_output=True,text=True);return r.stdout+r.stderr
 bt=a.tools/'android-sdk/build-tools/36.1.0';badging=run([bt/'aapt2','dump','badging',apk]);(out/'manifest.txt').write_text(badging)
-assert "name='org.example.energyblast.defold'" in badging and "versionCode='6'"in badging and "versionName='0.5.0'"in badging
+assert "name='org.example.energyblast.defold'" in badging and "versionCode='7'"in badging and "versionName='0.6.0'"in badging
 assert not re.search(r'^uses-permission:',badging,re.M)
 assert re.search(r"^(?:minSdkVersion|sdkVersion):'24'$",badging,re.M) and "targetSdkVersion:'36'" in badging
-xml=run([bt/'aapt2','dump','xmltree',apk,'--file','AndroidManifest.xml']);(out/'manifest-xml.txt').write_text(xml);assert re.search(r':allowBackup\([^)]*\)=false',xml)
+xml=run([bt/'aapt2','dump','xmltree',apk,'--file','AndroidManifest.xml']);(out/'manifest-xml.txt').write_text(xml);assert re.search(r':allowBackup\([^)]*\)=false',xml);assert re.search(r':screenOrientation\([^)]*\)=11(?:\s|$)',xml),xml
 sig=run([bt/'apksigner','verify','--verbose','--print-certs',apk]);(out/'signature.txt').write_text(sig);assert 'CN=EnergyBlast Pilot Debug'in sig
 run([bt/'zipalign','-c','-P','16','4',apk])
-report={'status':'PASS','built_at_utc':datetime.now(timezone.utc).isoformat(),'variant':'Defold 1.14.0 native ARM64 shooter','package':'org.example.energyblast.defold','version':'0.5.0','version_code':6,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
+report={'status':'PASS','built_at_utc':datetime.now(timezone.utc).isoformat(),'variant':'Defold 1.14.0 native ARM64 shooter','package':'org.example.energyblast.defold','version':'0.6.0','version_code':7,'bytes':apk.stat().st_size,'sha256':hashlib.sha256(apk.read_bytes()).hexdigest(),'permissions':[],'min_sdk':24,'target_sdk':36,'allow_backup':False,'screen_orientation':'userLandscape','signature':'Development-only key; not a Play release identity','zip_alignment_16kb':'PASS','source_commit':run(['git','-C',ROOT,'rev-parse','HEAD']).strip(),'source_dirty':bool(run(['git','-C',ROOT,'status','--porcelain']).strip()),'manual_android_test':'NOT VERIFIED','key_in_repository':False}
 (out/'verification.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))

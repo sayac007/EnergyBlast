@@ -121,3 +121,16 @@ The updated music manifest records hashes/metrics. Four new complete mission/
 secret cues use the existing pinned Qwen model and synthetic Serena speaker;
 five Defold cues total. Existing model/font/engine notices remain applicable.
 No new runtime dependency or project licence grant.
+
+## Defold 0.6 — Prism Frontier
+
+Research sources and observation limits are in `docs/ART_DIRECTION.md`. Official
+Brawl Stars screenshots were viewed as references only; none is included in this
+repository or APK. No reference-game model/texture/animation is downloaded for reuse.
+Detailed new geometry, rigid-part joints, portraits, AO bakes and static batches
+come from `tools/make_defold06_models.py`. UI graphics are original layered vector
+and gradient drawings in `tools/make_defold_ui.py`. Two original ground material
+images were generated with OpenAI image_gen in this session without input reference
+images; `shared/assets/defold06/TEXTURE_PROVENANCE.json` records hashes/origin.
+These are actual native game textures, not conceptual screenshots. Existing
+engine/font/model/audio notices and project licence status remain unchanged.

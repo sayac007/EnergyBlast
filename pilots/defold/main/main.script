@@ -59,6 +59,7 @@ local function run_tests(self)
  prior.camera={0,0};bind_controls(prior);prior.cancel_controls=function()prior.touch:cancel()end
  local n=require('main.regression_checks').run(prior)
  n=n+require('main.defold04_checks').run(self.g)
+ n=n+require('main.reflection_checks').run(self.g)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
 end
 function init(self)

@@ -53,7 +53,8 @@ function update(self,dt)
    local mx,my=g.project(g,t.p,.95);local pulse=8+4*math.sin(g.clock*28)^2;circle(self,mx,my,pulse,'ffb47b');text(self,x,y+23,'!','ffd674',1.1)
   end
  end end
- for _,b in ipairs(g.bullets)do local x,y=g.project(g,b.p,.75);circle(self,x,y,9,b.enemy and'783a59'or'23666c');circle(self,x,y,5,b.enemy and'ff6485'or'cafff5')end
+ for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05);circle(self,x,y,25,'123e63');circle(self,x,y,20,'207a9a');circle(self,x,y,13,'123e63');text(self,x,y,'X','9befff',.65)end
+ for _,b in ipairs(g.bullets)do local x,y=g.project(g,b.p,.75);local glow=circle(self,x,y,9,b.enemy and'783a59'or'23666c');local core=circle(self,x,y,5,b.enemy and'ff6485'or'cafff5');gui.set_alpha(glow,b.alpha);gui.set_alpha(core,b.alpha)end
  if g.aiming and g.target then local x,y=g.project(g,g.target,0);circle(self,x,y,13,'bcf8e8');circle(self,x,y,10,'173a4a');circle(self,x,y,3,'bcf8e8')end
  if #g.path>0 then local x,y=g.project(g,g.path[#g.path],.1);circle(self,x,y,10,'23666c');circle(self,x,y,4,'a1fff0')end
  for _,f in ipairs(g.fx)do
@@ -64,7 +65,7 @@ function update(self,dt)
    for j=0,15 do local a=j*math.pi/8;local b=(j+1)*math.pi/8
     line(self,x+math.cos(a)*radius,y+math.sin(a)*radius,x+math.cos(b)*radius,y+math.sin(b)*radius,'ffd674',math.max(1,5*f.life/.9))
    end
-  else for j=0,5 do local a=j*math.pi/3;circle(self,x+math.cos(a)*f.age*60,y+math.sin(a)*f.age*60,3,'ffd674')end end
+  else for j=0,5 do local a=j*math.pi/3;circle(self,x+math.cos(a)*f.age*60,y+math.sin(a)*f.age*60,3,f.kind=='absorb'and'9befff'or f.kind=='dissipate'and'99b5c8'or'ffd674')end end
  end
  if g.pending_hold and g.touch.pointer then local p=g.touch.pointer
   for j=1,12 do local a=j*math.pi/6;circle(self,p.x+math.cos(a)*22,p.y+math.sin(a)*22,3,j<=g.hold_progress*12 and'ffd674'or'456073')end
@@ -79,7 +80,7 @@ function update(self,dt)
  self.world_parent=nil
  if g.dialog then
   box(self,360,690,680,830,'18253e');self.buttons={};text(self,360,1020,'ENERGYBLAST','ecfff7',1.45)
-  if g.dialog=='menu'then text(self,360,965,'AURORA HOP  |  0.4','9db5ce',.8)
+  if g.dialog=='menu'then text(self,360,965,'AURORA HOP  |  0.4.1','9db5ce',.8)
    button(self,360,855,570,95,'01  PRISMA-STATION','sector1','255464');text(self,360,793,'ABPRALLER','9db5ce',.55)
    button(self,360,710,570,95,'02  NEON-ZITADELLE','sector2','69395f');text(self,360,648,'DECKUNG & ZEITFENSTER','9db5ce',.55)
    button(self,360,565,570,95,'03  AURORA-DOCK','sector3','725632');text(self,360,503,'RELAIS & BEWEGLICHE GEGNER','ffd674',.55)

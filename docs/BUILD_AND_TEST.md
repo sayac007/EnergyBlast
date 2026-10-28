@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.4
+# Bauen und prüfen — Defold 0.4.1
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -49,7 +49,7 @@ python3 tools/check_defold.py
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native **76** Prüfungen: 42 beibehaltene Fälle plus 34 neue. Drei erweiterte
+  Native **106** Prüfungen: 76 bisherige Fälle plus 30 Reflexions-/Energieprüfungen. Drei erweiterte
   Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, 0,30-s-Schwelle,
   langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
 - Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
@@ -105,7 +105,7 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 python3 tools/build_defold_android.py --output /tmp/energyblast-defold04-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.4.0 / Code 4**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.4.1 / Code 5**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.

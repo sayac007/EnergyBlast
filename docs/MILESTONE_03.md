@@ -1,6 +1,6 @@
 # Meilenstein 03 — Defold 0.4, Aurora Hop
 
-**28.10.2026.** Schwerpunkt nach dem Betreiber-Test: Defold. Beauftragt sind
+**Ausgangsstand 0.4.0, 28.10.2026.** Schwerpunkt nach dem Betreiber-Test: Defold. Beauftragt sind
 klare Zeitsteuerung, synthetische Hintergrundmusik, größere Spielfelder und
 animierte Zerstörung. [Aktueller Auftrag](PROJECT_BRIEF.md).
 [0.3-Vergleich erhalten](MILESTONE_02.md), [0.2-Ausgangsvergleich](MILESTONE_01.md).
@@ -113,3 +113,23 @@ Fester APK-Snapshot:
 [`4539cdf`](https://github.com/sayac007/EnergyBlast/tree/4539cdf739582e22046c36aa76e20d7750584fce/downloads).
 Direkter 0.4-Download auf diesen Commit festgelegt; spätere Branchänderungen
 ersetzen den Meilenstein nicht stillschweigend.
+
+## Update 0.4.1 — alle Wände und endliche Energie
+
+Vom Betreiber am 28.10.2026 ergänzt; das große Feld ausdrücklich bestätigt.
+Alle Wandarten reflektieren beide Geschossarten. Normale Schüsse reflektieren
+höchstens einmal, Prisma zweimal, gegnerische einmal. Reichweite und Lebensdauer
+(3 s eigene / 6 s gegnerische) begrenzen zusätzlich. Letzte 0,35 s verblassen,
+anschließend Verpuffen; Trefferwirkung bis dahin konstant. Blaue X-Felder in
+jedem Sektor neutralisieren beide Seiten und sind begehbar. Keine reale Ballistik.
+
+Neue kontinuierliche Kollisionsprüfung verhindert Überspringen naher dünner
+Wände und berücksichtigt Tore zum tatsächlichen Ankunftszeitpunkt. Ecken kehren
+beide Richtungskomponenten um. Keine eingezeichnete Flugbahn.
+
+**106 native Prüfungen** bestanden (76 bisherige + 30 neue), einschließlich
+bewegter Geschosse an jeder Wandart, Schilden nach einem Deckungsabpraller,
+gegnerischer Reflexion, offenen/schließenden Toren, Ablauf und Neutralisation.
+UI, Speicher, tatsächliche Audioausgabe und sieben gemeinsame Testgruppen erneut
+bestanden. Physischer Handytest der neuen APK bleibt offen. GDevelop/Godot und
+Arenengröße/Kamera unverändert. Aktueller Download bei den [Dateien](../downloads/README.md).

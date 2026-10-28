@@ -1,6 +1,6 @@
 [project]
 title = EnergyBlast Defold
-version = 0.4.0
+version = 0.4.1
 custom_resources = /data
 [bootstrap]
 main_collection = /main/main.collectionc
@@ -20,7 +20,7 @@ clear_color_blue = 0.11
 clear_color_alpha = 1
 [android]
 package = org.example.energyblast.defold
-version_code = 4
+version_code = 5
 minimum_sdk_version = 24
 target_sdk_version = 36
 manifest = /main/AndroidManifest.xml

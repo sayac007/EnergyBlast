@@ -87,3 +87,13 @@
   victory overlay. Expire fragments and clear them when switching sectors.
 - Current Defold app is 0.4.0/code 4, same package and development certificate.
   No PR, merge, Release/store publication or writes to another repository.
+
+## Wall reflections and finite energy (operator update, 28 October 2026)
+
+- Defold 0.4.1/code 5: every solid wall type reflects both sides' shots; preserve
+  the large scrolling world and timed touch controls. Closed gates reflect, open
+  gates do not. Use live swept collisions, not a path frozen at firing time.
+- Keep finite budgets: player 1 bounce / Prisma 2, enemy 1; player lifetime 3 s,
+  enemy 6 s, plus range. Fade near expiration and dissipate visibly.
+- Blue X neutralisation fields absorb either side's shots and remain walkable.
+  These are explicit absorption areas; ordinary walls still reflect.

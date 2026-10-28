@@ -1,4 +1,4 @@
-# EnergyBlast — Defold 0.4, Aurora Hop
+# EnergyBlast — Defold 0.4.1, Aurora Hop
 
 Ein Android-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Roboter, aktive
 Kanonen, Deckung, Ausweichen und selbst eingeschätzte Abpraller. Nach deinem Test
@@ -19,13 +19,28 @@ Energieexplosionen beim endgültigen Treffer. Keine berechnete Schussbahn.
 
 ## Herunterladen und aktualisieren
 
-**[Defold 0.4 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.4.1 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
 
-Android 7 / API 24 oder neuer, ARM64. Version **0.4.0 / Code 4** behält Paketkennung
+Android 7 / API 24 oder neuer, ARM64. Version **0.4.1 / Code 5** behält Paketkennung
 und Entwicklungsschlüssel von 0.3. Über die vorhandene App installieren, **vorher
 nicht deinstallieren**, wenn die Sterne erhalten bleiben sollen. Der echte
 Geräte-Update-Test der neuen APK steht aus. Größe, Hash und Quellstand bei den
 [Downloads](downloads/README.md). Debug-Testfassung, keine Play-Upload-Datei.
+
+## Update 0.4.1: reflektieren, verblassen, neutralisieren
+
+**Alle Wandarten reflektieren eigene und gegnerische Schüsse**: Deckungen,
+Arenaränder, leuchtende Wände und geschlossene Tore. Geöffnete Tore sind frei.
+Treffer werden während des Flugs geprüft, auch wenn ein Tor seinen Zustand wechselt.
+
+Geschosse bleiben endlich: ein Abpraller, mit Prisma zwei; gegnerische Schüsse
+bekommen einen. Eigene Energiegeschosse leben höchstens **3 Sekunden**, gegnerische
+**6 Sekunden**, jeweils zusätzlich durch Reichweite begrenzt. In den letzten
+0,35 Sekunden verblassen sie und verpuffen. Die Trefferwirkung bleibt bis dahin
+konstant; es gibt keine behauptete realistische Schadens-/Ballistiksimulation.
+
+Jeder Sektor hat ein **blaues Feld mit X**, das beide Geschossarten neutralisiert.
+Die Figur kann darüber laufen. Das bestätigte große Feld mit folgender Kamera bleibt.
 
 ## Die neue Bedienung
 
@@ -81,7 +96,7 @@ und versteckte Ausrüstung bleiben erhalten. Kein visueller Unsichtbarkeitsshade
 
 ## Was tatsächlich geprüft wurde
 
-**28.10.2026:** 76 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
+**28.10.2026:** 106 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
 Druckdauer, großer Welt, Kamera und Explosionen. Echte Menü-/Feldeingaben per
 XTest: derselbe Punkt kurz gedrückt bewegt, lang gedrückt feuert. Speicherneustart,
 TON-Pause/Fortsetzung und sieben gemeinsame Konsistenztestgruppen bestanden.

@@ -1,4 +1,21 @@
-# Aktueller Prüfstand — Defold 0.4
+# Aktueller Prüfstand — Defold 0.4.1
+
+**28.10.2026:** 106 native Prüfungen bestanden: die bisherigen 76 plus 30 neue
+Fälle für alle Wandarten, Winkel, Ecken, dünne Wände, nächstes Ziel, Prisma-
+Grenze, gegnerische Abpraller, wechselnde Tore, Reichweite, Lebensdauer,
+Verblassen und Neutralisation beider Geschossarten. Große Welt und Kamera bleiben.
+Echte Kurz-/Langdruck-/Menüeingaben, getrennte Speicherstarts und aufgezeichnete
+Musik-/Mute-/Sprach-/Effektmischung erneut bestanden. Sieben gemeinsame
+Konsistenztestgruppen bestanden. Keine neue ASR-Erzeugung; Aufnahmen unverändert.
+
+Manuell offen: neue APK physisch installieren/aktualisieren, Touchgefühl,
+Rotation, Klang, Schwierigkeit mit gegnerischen Abprallern und Neutralisations-
+feldern, längeres Spiel und Hardwareleistung. Keine grüne CI behauptet;
+kein Actions-Workflow, PR, Merge oder GitHub-Release. [Testbefehle](BUILD_AND_TEST.md).
+
+Die folgenden 0.4.0-Ergebnisse bleiben als Ausgangsstand dokumentiert.
+
+# Ausgangsstand 0.4.0
 
 **28.10.2026.** Aktive Weiterentwicklung: **Defold**. GDevelop 0.3 und Godot 0.2
 bleiben eingefroren. [Meilenstein 03](MILESTONE_03.md) dokumentiert Auftrag,

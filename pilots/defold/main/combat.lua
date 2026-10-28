@@ -1,15 +1,10 @@
 -- Pure gameplay math. Native Defold owns rendering, input, storage and audio.
+local Projectiles=require 'main.projectiles'
 local M={}
 function M.dist(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
 function M.norm(a)local n=math.sqrt(a[1]^2+a[2]^2);if n<.000001 then return {1,0}end;return {a[1]/n,a[2]/n}end
 function M.segment(p,a,b)local x,y=b[1]-a[1],b[2]-a[2];local t=math.max(0,math.min(1,((p[1]-a[1])*x+(p[2]-a[2])*y)/math.max(.000001,x*x+y*y)));return M.dist(p,{a[1]+x*t,a[2]+y*t})end
-function M.ray(o,d,length,walls)
- local best=nil
- for _,w in ipairs(walls)do local r=w.r;local sides={{r[1],1,{-1,0}},{r[1]+r[3],1,{1,0}},{r[2],2,{0,-1}},{r[2]+r[4],2,{0,1}}}
-  for _,s in ipairs(sides)do local axis=s[2];local other=3-axis;if math.abs(d[axis])>.000001 then local t=(s[1]-o[axis])/d[axis];local p={o[1]+d[1]*t,o[2]+d[2]*t};if t>.001 and t<length and p[other]>=r[other]-.0001 and p[other]<=r[other]+r[other+2]+.0001 then length=t;best={p=p,n=s[3],type=w.type,t=t}end end end
- end
- return best
-end
+M.ray=Projectiles.ray
 function M.new(data,saved)
  local g={data=data,saved=saved or {earned={},clues={},weapon='pulse'},paused=true,clock=0,say=function()end,changed=function()end}
  g.saved.earned=g.saved.earned or {};g.saved.clues=g.saved.clues or {}
@@ -29,11 +24,6 @@ function M.new(data,saved)
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
   self.status='KURZ: LAUFEN - HALTEN: ZIELEN';self.paused=false;self.dialog=nil
  end
- function g:shot()
-  local d={self.aim[1],self.aim[2]};local o={self.p[1]+d[1]*.35,self.p[2]+d[2]*.35};local points={o};local length=data.combat.shot_range or 28;local max=self:total()>=100 and self.saved.weapon=='prism'and 2 or 1
-  for b=0,max+1 do local hit=M.ray(o,d,length,self:active());if not hit then points[#points+1]={o[1]+d[1]*length,o[2]+d[2]*length};break end;points[#points+1]=hit.p;length=length-hit.t;if hit.type~='reflector'or b>=max then break end;local dot=d[1]*hit.n[1]+d[2]*hit.n[2];d={d[1]-2*dot*hit.n[1],d[2]-2*dot*hit.n[2]};o={hit.p[1]+d[1]*.003,hit.p[2]+d[2]*.003}end
-  return points
- end
  function g:navigate(target)
   -- Grid dimensions come from this world's bounds, never the old 14x10 arena.
   local a=data.arena;local spacing=.4;local ox,oy=a[1]+.2,a[2]+.2
@@ -52,7 +42,7 @@ function M.new(data,saved)
   self.path={};if found then local c=finish;while c do table.insert(self.path,1,point(c));c=parents[key(c)]end
   elseif self.m.staging and M.dist(target,self.m.staging)>.5 then self:navigate(self.m.staging)end
  end
- function g:fire()if self.paused or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;local points=self:shot();self.bullets[#self.bullets+1]={points=points,p={points[1][1],points[1][2]},segment=1,enemy=false,speed=data.combat.player_bullet_speed};if self.sfx then self.sfx('fire')end end
+ function g:fire()if self.paused or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
  function g:hit_player()if self.invulnerable>0 or self.over then return end;self.hp=self.hp-1;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
  function g:finish()if self.solved then return end;self.solved=true;self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self.say('combat_win')end
@@ -64,7 +54,7 @@ function M.new(data,saved)
  function g:hit(t,bounces)
   if t.hp<=0 then return end
   if self:locked(t)then self.status='RELAIS ZUERST';self.say('raid_relays');return end
-  if t.shield and bounces==0 then self.status='SCHILD: Nutze die leuchtende Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return end;t.hp=t.hp-1;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.22,age=0,kind='hit'};if self.sfx then self.sfx('hit')end
+  if t.shield and bounces==0 then self.status='SCHILD: Triff ueber eine Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return end;t.hp=t.hp-1;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.22,age=0,kind='hit'};if self.sfx then self.sfx('hit')end
   if t.hp<=0 then t.death_age=0;self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.9,age=0,kind='explosion'};if self.sfx then self.sfx('explode')end;local alive=false;for _,e in ipairs(self.enemies)do alive=alive or e.hp>0 end;if not alive then if not self.m.exit_required then self:finish()else self.status='KANONEN AUS. Erreiche den Energiekern.'end end end
  end
  function g:hint()
@@ -85,19 +75,13 @@ function M.new(data,saved)
   if #self.path>0 then local t=self.path[1];local speed=self.dash_time>0 and data.player.dash_speed or(data.player.speed+(self:total()>=230 and math.min(.5,(self:total()-220)/210)or 0));local d=M.dist(t,self.p);local step=math.min(d,speed*dt);local n=M.norm({t[1]-self.p[1],t[2]-self.p[2]});local p={self.p[1]+n[1]*step,self.p[2]+n[2]*step};if not self:blocked(p)then self.p=p;self.facing=math.atan2(n[1],n[2])else self.path={}end;if #self.path>0 and M.dist(self.path[1],self.p)<.04 then table.remove(self.path,1)end end
   for _,t in ipairs(self.enemies)do if t.hp>0 and t.kind~='relay' then
    if t.warning>0 then t.warning=t.warning-dt;if t.warning<=0 then
-    for j=1,t.burst do local a=(j-(t.burst+1)/2)*.16;local d={t.direction[1]*math.cos(a)-t.direction[2]*math.sin(a),t.direction[1]*math.sin(a)+t.direction[2]*math.cos(a)};local start={t.p[1],t.p[2]};local hit=M.ray(start,d,data.combat.enemy_range or 20,self:active());self.bullets[#self.bullets+1]={points={start,hit and hit.p or{start[1]+d[1]*(data.combat.enemy_range or 20),start[2]+d[2]*(data.combat.enemy_range or 20)}},p={start[1],start[2]},segment=1,enemy=true,speed=data.combat.enemy_bullet_speed}end
+    for j=1,t.burst do local a=(j-(t.burst+1)/2)*.16;local d={t.direction[1]*math.cos(a)-t.direction[2]*math.sin(a),t.direction[1]*math.sin(a)+t.direction[2]*math.cos(a)};Projectiles.spawn(self,t.p,d,true)end
     t.timer=data.combat.enemy_interval end
    else
     if t.patrol then local p=t.patrol[t.waypoint];local d=M.dist(t.p,p);if d<t.speed*dt then t.p={p[1],p[2]};t.waypoint=t.waypoint%#t.patrol+1 else local n=M.norm({p[1]-t.p[1],p[2]-t.p[2]});t.p={t.p[1]+n[1]*t.speed*dt,t.p[2]+n[2]*t.speed*dt}end end
     t.timer=t.timer-dt;local cloak=self:total()>=300 and math.min(.35,(self:total()-280)/180)or 0;if t.timer<=0 and M.dist(t.p,self.p)<(data.combat.detection_range or 13)*(1-cloak*.5)*((self.saved.earned['secret:guardian']or self.saved.earned['secret:citadel'])and .9 or 1)then t.warning=data.combat.enemy_warning;t.direction=M.norm({self.p[1]-t.p[1],self.p[2]-t.p[2]})end end
   end end
-  for i=#self.bullets,1,-1 do local b=self.bullets[i];local distance=b.speed*dt;local removed=false
-   while distance>0 and b.segment<#b.points do local t=b.points[b.segment+1];local step=math.min(distance,M.dist(t,b.p));local n=M.norm({t[1]-b.p[1],t[2]-b.p[2]});local q={b.p[1]+n[1]*step,b.p[2]+n[2]*step}
-    if b.enemy then if M.segment(self.p,b.p,q)<.36 then self:hit_player();removed=true end else for _,e in ipairs(self.enemies)do if e.hp>0 and M.segment(e.p,b.p,q)<((self.saved.earned['secret:bank']or self.saved.earned['secret:reactor'])and .56 or .48) then self:hit(e,b.segment-1);removed=true;break end end end
-    b.p=q;distance=distance-step;if removed then break end;if M.dist(q,t)<.001 then b.segment=b.segment+1 end;if step<.00001 then break end
-   end
-   if removed or b.segment>=#b.points then table.remove(self.bullets,i)end
-  end
+  Projectiles.update(self,dt)
   if self.m.heal and not self.heal_used and self.hp<self.max_hp and M.dist(self.p,self.m.heal)<.65 then self.hp=math.min(self.max_hp,self.hp+1);self.heal_used=true;self.status='+1 ENERGIE';if self.sfx then self.sfx('bounce')end end
   local sp=self.m.secret.position;local d=M.dist(self.p,sp);self.secret_visible=not self.saved.earned['secret:'..self.m.id]and d<2 and not M.ray(self.p,M.norm({sp[1]-self.p[1],sp[2]-self.p[2]}),d-.05,self.walls)
   if self.secret_visible and d<.7 then self:award('secret:'..self.m.id);self.say('combat_loot');self.secret_visible=false end

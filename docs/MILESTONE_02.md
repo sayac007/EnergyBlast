@@ -102,3 +102,15 @@ Der unabhängige Whisper-small-Screen der drei neuen Ansagen erkennt **2/3**
 normalisiert exakt. Bei „Triff“ erkennt er „trifft“; Satz und Kerninhalt werden
 sonst erkannt. Das ist kein bestätigter Aussprachefehler und keine menschliche
 Hörabnahme. Der ältere 25/26-Screen bleibt ein historischer 0.2-Nachweis.
+
+## Erzeugte Android-Dateien
+
+Am 28.10.2026 vom sauberen Quellcommit
+[`4352737`](https://github.com/sayac007/EnergyBlast/commit/43527374e1705a9608a9ddb11ccc8e4af31ef69e)
+wirklich gebaut: **Defold 9.065.658 Bytes**, **GDevelop 2.153.923 Bytes**.
+Version 0.3.0 / Code 3, API 24–36, Paketkennungen unverändert.
+Paket-/Versionsprüfung, Entwicklungssignatur/v2, gleiches Zertifikat wie 0.2,
+keine Berechtigungen, Backup aus, ZIP-CRC und Ausrichtung bestanden. GDevelop
+enthält nachweislich die neuen Regeln und unveränderte Kopien der neuen Audios.
+Hashes und Dateilinks: [Downloads](../downloads/README.md). Godot-APK unverändert.
+Keine physische Installation oder Spielrunde mit den neuen APKs behauptet.

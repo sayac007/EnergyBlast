@@ -60,3 +60,9 @@ Der unabhängige Whisper-small-Screen der drei neuen Ansagen erkennt **2/3**
 normalisiert exakt. Bei „Triff“ erkennt er „trifft“; Satz und Kerninhalt werden
 sonst erkannt. Das ist kein bestätigter Aussprachefehler und keine menschliche
 Hörabnahme. Der ältere 25/26-Screen bleibt ein historischer 0.2-Nachweis.
+
+**Abschließende APK-Prüfung 28.10.2026:** Defold und GDevelop 0.3 vom sauberen
+Quellcommit `43527374e1705a9608a9ddb11ccc8e4af31ef69e` gebaut. Alle technischen
+Paketprüfungen bestanden, einschließlich Vergleich des Signaturzertifikats mit 0.2,
+ZIP-CRC und Prüfung auf fehlende Schlüsseldateien. Die konkreten Größen und
+SHA-256 stehen bei den Downloads. Godots APK bleibt bytegleich zu `defd791`.

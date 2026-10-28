@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.6.0
+# Bauen und prüfen — Defold 0.7.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -22,7 +22,7 @@ python3 tools/setup_defold.py --output /tmp/energyblast-defold-tools
 python3 tools/sync_defold.py
 ```
 
-Defold konsumiert `shared/defold04.json` und `shared/assets/defold06`. Die alte
+Defold konsumiert `shared/defold04.json`, Weltgeometrie aus `shared/assets/defold06` und originale Animationsbilder aus `shared/assets/defold07`. Die alte
 `shared/raid.json` wird zusätzlich als unveränderte Arenageometrie für Kampf-
 Regressionsfixtures mitgeliefert. GDevelop-/Godot-Projekte und Exporte für diese
 Iteration nicht neu erzeugen; ihre aktuellen Vergleichsdateien bleiben unverändert.
@@ -37,11 +37,17 @@ python3 tools/make_defold_music.py
 python3 tools/sync_defold.py
 ```
 
-Die beiden originalen, generierten Bodenillustrationen liegen bereits versioniert
-vor; für einen Build ist kein Bildgeneratorzugang nötig. Die Modelle binden
-AO-Texturen und echte Gelenkpunkte; `.runtime.gltf` fasst identische statische
-Geometrie nach Material zusammen. `-- --world-only` hinter dem Blender-Befehl
-aktualisiert nur die Arenen, bei beibehaltenen Figuren.
+Die ursprünglichen zehn generierten Illustrations-/Animationsquellen liegen in
+`shared/assets/defold07/*-original.png`; `PROVENANCE.json` enthält ihre Hashes.
+Für einen normalen Build ist kein Bildgenerator nötig. Der optionale technische
+Import lässt sich mit einer JSON-Zuordnung der IDs hero/dragon/fox/enemies/icons/
+cards/floor/lobby/explosion/props zu diesen Dateien wiederholen:
+`python3 tools/import_defold07_art.py --sources /tmp/sources.json`.
+Das ist eine Atlas-Aufbereitung, keine Zusicherung identischer neuer KI-Erzeugung.
+Weltgeometrie separat erneuern: Blender-Befehl mit `-- --world-only` ergänzen.
+Die aktuelle 2,5D-Darstellung verwendet Front-/Rückansicht mit jeweils vier
+Laufphasen und Spiegelung. Gegner haben vier Zustandsbilder. Alle sind native
+Weltmodelle mit Alpha-Ausschnitt und Tiefenprüfung; keine GUI-Projektilbilder.
 
 Danach Herkunftshashes in `shared/asset-origins.json` aktualisieren und prüfen.
 Blender **4.3.2** wurde hier verwendet. Keine Bilder-/Modell-/Musikdownloads nötig.
@@ -54,18 +60,19 @@ python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** elf Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 34 Sprach-
+- **check_shared:** zwölf Testgruppen. Daten/Modelle/Provenienz, unveränderte
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 41 Sprach-
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native **199** Prüfungen: bisherige 187 und zwölf zusätzliche Querformat-/Gelenk-/Darstellungsfälle. Sechs
+  Native **231** Prüfungen, einschließlich 33 Fällen für den neuen Fallenkatalog und nativer Animationsbindung. Sechs
   Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, 0,30-s-Schwelle,
   langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
 - Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
   Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
   UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
+- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
   WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
   Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
@@ -78,13 +85,13 @@ python3 tools/check_defold.py
 Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast06-images
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast07-images
 ```
 
 Bewegungs-/Schusssequenz mit tatsächlichen XTest-Eingaben aufnehmen:
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast06-motion
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast07-motion
 ```
 
 Das schreibt echte Laufzeitbilder/GIF außerhalb des Repositories, keine
@@ -103,7 +110,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.6 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.7 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 
@@ -133,10 +140,10 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold06-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold07-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.6.0 / Code 7**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.7.0 / Code 8**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.

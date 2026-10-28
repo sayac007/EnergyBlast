@@ -128,3 +128,16 @@
   boundaries and all HUD/control surfaces outside. Keep 0.30-second tap/hold input.
 - Six missions, purchases, score and save migration stay. Other engines stay frozen.
   No PR, game merge, Actions or Release/store publication or other-repo writes.
+
+## Neon Frontier 0.7 — latest operator instruction
+
+- 0.6 graphics were rejected too. Use original illustrated directional animation
+  on native depth-tested world quads, with actual futuristic 3D collision geometry;
+  do not call these full skeletal 3D models. Active art adds shared/assets/defold07.
+- Traps explicitly belong ON THE PLAYFIELD: badge near actor, catalogue, placement
+  preview, floor tap, cancel. This overrides the old outside-HUD rule for these
+  tactical controls only. Keep .30s hold-to-aim unchanged; no hidden hold shortcut.
+- Catalogue/placement freezes combat and camera. Validate range, free floor and
+  line of sight. Contextual speech replaces stale instructions immediately.
+- 0.7.0/code8, same package/debug certificate/save location. Actual native render,
+  input, occlusion, audio and Android artifact checks remain necessary.

@@ -16,5 +16,6 @@ void main(){
  float spec=pow(max(0.0,dot(n,normalize(l+v))),28.0)*.10;
  float rim=pow(1.0-max(0.0,dot(n,v)),3.0)*.055;
  vec3 lit=base*ambient*(.57+.43*diffuse)+vec3(1.0,.88,.66)*spec+vec3(.24,.60,.66)*rim;
+ lit=mix(lit,base*1.55,surface.y);
  out_fragColor=vec4(pow(max(lit,vec3(0.0)),vec3(1.0/2.2)),1.0);
 }

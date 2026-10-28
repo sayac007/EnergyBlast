@@ -1,2 +1,2 @@
 mesh: "/models/reactor_ground.gltf"
-materials { name: "Painted ground material" material: "/models/reactor_ground-0.material" textures { sampler: "tex0" texture: "/models/ground-garden.png" } }
+materials { name: "Orbital deck floor material" material: "/models/reactor_ground-0.material" textures { sampler: "tex0" texture: "/models/floor.png" } }

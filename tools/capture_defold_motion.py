@@ -13,7 +13,7 @@ def event(px,py,pressed):
  xt.XTestFakeMotionEvent(d,0,px,py,0);xt.XTestFakeButtonEvent(d,1,int(pressed),0);x.XFlush(d)
 env=dict(os.environ,ALSOFT_DRIVERS='null',LIBGL_ALWAYS_SOFTWARE='1',XDG_DATA_HOME=str(root/'data'),XDG_CACHE_HOME=str(root/'cache'),XDG_CONFIG_HOME=str(root/'config'))
 with(root/'runtime.log').open('w')as log:
- proc=subprocess.Popen(['/tmp/energyblast-defold-tools/dmengine','--config=project.capture_mode=1','--config=project.capture_sector=4','--config=project.capture_character=dragon','--config=project.capture_motion=1',str(R/'pilots/defold/build/default/game.projectc')],env=env,stdout=log,stderr=subprocess.STDOUT)
+ proc=subprocess.Popen(['/tmp/energyblast-defold-tools/dmengine','--config=project.capture_mode=1','--config=project.capture_sector=3','--config=project.capture_character=dragon','--config=project.capture_motion=1',str(R/'pilots/defold/build/default/game.projectc')],env=env,stdout=log,stderr=subprocess.STDOUT)
  try:
   deadline=time.monotonic()+7;match=None
   while time.monotonic()<deadline:
@@ -32,5 +32,7 @@ with(root/'runtime.log').open('w')as log:
   frames[0].save(root/'gameplay.gif',save_all=True,append_images=frames[1:],duration=90,loop=0,optimize=False)
   frames[len(frames)//2].save(root/'action.png')
  finally:proc.terminate();proc.wait(timeout=5)
-assert 'ERROR:'not in(root/'runtime.log').read_text(),(root/'runtime.log').read_text()
+runtime=(root/'runtime.log').read_text()
+assert 'ERROR:'not in runtime,runtime
+assert 'DEFOLD CAPTURE WALK FRAME PASS'in runtime and 'DEFOLD CAPTURE FIRED PASS'in runtime,runtime
 print('ACTUAL NATIVE MOVEMENT / AIM / FIRE CAPTURE PASS:',len(frames),'frames; scripted XTest input, not a physical phone round')

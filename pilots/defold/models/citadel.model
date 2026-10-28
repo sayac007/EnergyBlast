@@ -1,9 +1,8 @@
 mesh: "/models/citadel.runtime.gltf"
-materials { name: "citadel mortar" material: "/models/citadel-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "citadel cap" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "citadel masonry" material: "/models/citadel-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Jade" material: "/models/citadel-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Mint light" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Deep blue ink" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Coral" material: "/models/citadel-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "citadel deep indigo hull" material: "/models/citadel-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "citadel naval ceramic" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "citadel porcelain edge" material: "/models/citadel-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "citadel recessed glass" material: "/models/citadel-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous citadel reactor seam" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "citadel satin brass" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -1,130 +1,101 @@
-# EnergyBlast — Defold 0.6, Prism Frontier
+# EnergyBlast — Defold 0.7, Neon Frontier
 
-Ein echter Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren:
-aktive Kanonen, Deckung, Ausweichen und klug eingeschätzte Abpraller.
-**Sechs Sektoren, drei wählbare Helden und tatsächlich kaufbare Ausrüstung.**
-Brawl Stars ist die visuelle Referenz; sämtliche Spielmodelle und die Musik
-sind eigenständig erstellt. Defold ist der Schwerpunkt. GDevelop 0.3 und
-Godot 0.2 bleiben als eingefrorene Vergleiche erhalten.
+Ein echter Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Deckung,
+Ausweichen, Energiegeschosse und selbst eingeschätzte Abpraller. **Sechs Sektoren,
+drei Helden, kaufbare Ausrüstung und drei taktische Fallen.** Defold ist der
+Schwerpunkt; GDevelop 0.3 und Godot 0.2 bleiben unveränderte Vergleiche.
 
-| Einstieg | Hier weiterlesen |
+| Einstieg | Weiterlesen |
 |---|---|
-| Installierbare Test-App | [APK mit Größe, Hash und Update-Hinweisen](downloads/README.md) |
-| Abgleich mit euren sieben Testpunkten | [Meilenstein 05](docs/MILESTONE_05.md) |
-| Was geprüft wurde und was offen ist | [Qualitätsüberblick](docs/QUALITY.md) |
-| Ausgangsauftrag und aktuelle Entscheidungen | [Projektauftrag](docs/PROJECT_BRIEF.md), [unverändertes Original](docs/pilot-brief.md) |
-| Selbst bauen und prüfen | [Build-/Testanleitung](docs/BUILD_AND_TEST.md) |
-| Frühere Versionen | [0.5](docs/MILESTONE_04.md), [0.4](docs/MILESTONE_03.md), [0.3](docs/MILESTONE_02.md), [0.2](docs/MILESTONE_01.md) |
+| Installierbare Test-App | [Download, Hash und Update-Hinweise](downloads/README.md) |
+| Neue Grafik und Fallen | [Meilenstein 06](docs/MILESTONE_06.md), [Fallenbedienung](docs/TRAPS.md) |
+| Tatsächlich geprüft / offen | [Qualitätsübersicht](docs/QUALITY.md) |
+| Auftrag / Herkunft / selbst bauen | [Projektauftrag](docs/PROJECT_BRIEF.md), [Recherche](docs/ART_DIRECTION.md), [Befehle](docs/BUILD_AND_TEST.md) |
+| Historie | [0.6](docs/MILESTONE_05.md), [0.5](docs/MILESTONE_04.md), [Ausgangsvergleich](docs/MILESTONE_01.md) |
 
-## Installieren
+## Neu in 0.7
 
-**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads/energyblast-defold-debug.apk)** — **28,4 MB**.
-Android 7/API 24+, ARM64; Version 0.6.0/Code 7. Das fertige APK ist auf Querformat
-festgelegt. Gleiche Paketkennung und Entwicklungssignatur wie 0.5: als Update
-installieren, **vorher nicht deinstallieren**. [Hash/Metadaten](downloads/README.md).
-Der physische Handytest und eure grafische Abnahme bleiben offen.
+- **Originale Figurenbilder im Spiel:** Nova, Drache Flammi und Fennek laufen
+  mit Front-/Rückansicht und wechselnden Animationsbildern. Native tiefengeprüfte
+  Weltflächen ersetzen die bisherigen Baukastenfiguren. Bewusst 2,5D-Hybrid,
+  keine Behauptung vollständiger dreidimensionaler Skelettanimation.
+- **Drei markante Gegnerbilder:** Sentinel, Magnetwächter und schwebender Boss;
+  sichtbares Aufladen, Schusszustand, Rückstoß und Trefferreaktion.
+- **Neue futuristische Kulisse:** Metallböden, gepanzerte Deckung, Lichtnähte,
+  äußere Reaktoren und Dockarchitektur. Gleiche verlässliche Kollisionsflächen.
+- **Bebilderte Missionen und Arsenal:** eigene Illustrationen, Ausrüstungsbilder,
+  Piktogramme zusätzlich zu Text, kurze Menüanimation, orbitaler Hintergrund.
+- **Energieexplosion:** acht animierte Phasen plus räumlich bewegte Fragmente.
+- **Fallen direkt auf dem Feld:** Bild neben der Figur antippen, Magnet/Eis/Impuls
+  wählen, Vorschau prüfen, freien Boden antippen. Auswahl pausiert Kampf/Kamera.
+  Gesprochene Anleitung passt zu den tatsächlichen Gesten. Kein Fallenknopf unten.
 
-## Grafik neu aufbauen statt nur umfärben
+Brawl Stars ist gestalterische Referenz; keine fremden Spielfiguren, Grafiken,
+Videoaufnahmen oder Melodien werden in der App verwendet. Die Grafik von 0.6 wurde
+vom Betreiber abgelehnt. Testzahlen ersetzen keine persönliche grafische Abnahme.
 
-Nach der Ablehnung von 0.5 wurden offizielle **Brawl-Stars-Spielbilder** und
-Produktionsberichte recherchiert und die tatsächliche Laufzeit überarbeitet.
-[Quellen, Beobachtungen und konkrete Entscheidungen](docs/ART_DIRECTION.md).
+## Tatsächliche Laufzeitbilder
 
-- **Gestaltete Landschaft:** eigene Sandstein-/Gartenmaterialien, gegliederte
-  Mauern mit Steinlagen und Kappen, erkennbare Umgebung statt Kachelbrett.
-- **Plastische Figuren:** neu modellierte Entdecker-, Drachen- und Fuchsfigur.
-  Gebackene Kontaktschattierung und weichere Beleuchtung erreichen tatsächlich
-  den nativen Renderer. Kein besseres Konzeptbild als Ersatz für das Spielmodell.
-- **Tatsächliche Animation:** bewegliche Arme/Beine, Flügel und Schwanz, kleine
-  Leerlaufbewegungen, geglättetes Drehen, Rückstoß und sichtbare Trefferreaktion.
-- **Animiertes 3D-Menü:** dieselbe Spielfigur auf einer Bühne; eigene plastische
-  Bedienelemente mit Stern-, Herz-, Ziel- und Funksymbolen.
-- **Klares Querformat:** zusammenhängende 992×528-Spielfläche im 1280×720-Layout.
-  Steuerung und HUD liegen außen. Die große Welt und folgende Kamera bleiben.
-- **Räumliche Effekte:** Feuerbälle, Licht und kurze vergangene Spuren sind
-  tiefengeprüft; keine darübergelegten GUI-Schüsse und kein vorhergesagter Weg.
-- **Geprüfte Zusammenfassung der Geometrie:** pro Arena 8 statt rund 450–480
-  statischer Batches; dieselben Positionen bleiben erhalten. Keine versprochene
-  Handy-Bildrate ohne Gerätetest.
+![Native Missionsauswahl](docs/images/07-defold-menu.png)
+![Tatsächlicher Kampf](docs/images/07-defold-forge.png)
+![Fallen direkt auf dem Spielfeld](docs/images/07-defold-traps.png)
 
-Alle sechs Missionen, Punkte, Käufe, Hinweise und Spielstände bleiben.
-[Umsetzung und Grenzen](docs/MILESTONE_05.md). Die persönliche grafische Abnahme
-ist offen; technische Prüfungen erklären eine Darstellung nicht automatisch für gelungen.
+Native Linux-/OpenGL-Aufnahmen; keine behauptete Handyaufnahme.
+[Bewegung und Schüsse](docs/images/07-defold-gameplay.gif).
 
-## Drei Helden und drei zusätzliche Kampfsituationen
+## Sechs Missionen und dauerhafte Sterne
 
-**Nova**, **Drache Flammi** mit sichtbaren Feuerbällen und bewegten Flügeln sowie
-**Fennek** sind frei wählbar. Gleiche Spielstärke, keine Figur gegen Echtgeld.
-Die Auswahl wird lokal gespeichert.
-
-| Sektor | Was tatsächlich gespielt wird |
+| Sektor | Spielziel |
 |---|---|
-| Prisma-Station | Schildkanone durch einen klugen Abpraller treffen |
-| Neon-Zitadelle | Zwei Kanonen, Deckung und zeitweise geöffnetes Tor |
-| Aurora-Dock | Patrouille, Fächersalven, zwei Abprall-Schalter und geschützter Boss |
-| **Magnetwerk** | Falle vorbereiten, patrouillierenden Wächter hineinlocken und den vorübergehend ausgeschalteten Schild nutzen |
-| **Echo-Kammer** | Lichterfolge beobachten und Kristalle in dieser Reihenfolge treffen; gleichzeitig eine Kanone ausschalten |
-| **Drohnen-Rettung** | Eine verwundbare Drohne um Deckungen begleiten und ihren Weg schützen |
+| Prisma-Station | Schildkanone durch Abpraller treffen |
+| Neon-Zitadelle | Deckung, zwei Kanonen und zeitweise offenes Tor |
+| Aurora-Dock | Patrouille, Fächersalven, Abprall-Schalter und geschützter Boss |
+| Magnetwerk | Wächter in vorbereitete Falle locken und Schildöffnung nutzen |
+| Echo-Kammer | Lichterfolge merken und Kristalle in dieser Reihenfolge treffen |
+| Drohnen-Rettung | Verwundbare Drohne um Deckungen begleiten und schützen |
 
-Ein frisches Profil erreicht bis **1.200 Gesamtsterne**; mit alten 0.1-Erfolgen
-bis 1.525. Wiederholen und Warten erzeugen keine doppelten Belohnungen.
-Bedienung und Missionsziel werden gesprochen; die Lichtfolge lässt sich kostenlos
-wiederholen. Kein vorgeschalteter Fragebogen, kein Joystick, keine berechnete Flugbahn.
-
-## Tatsächliche Laufzeit — keine Konzeptbilder
-
-![Neue animierte Menüfigur](docs/images/06-defold-menu.png)
-
-![Tatsächliche Lauf-, Ziel- und Schusssequenz](docs/images/06-defold-gameplay.gif)
-
-Native Linux-/OpenGL-Laufzeit mit wirklichen XTest-Eingaben. Keine behauptete
-Handyaufnahme. [Echo-Kammer](docs/images/06-defold-echo.png),
-[Figurenwahl](docs/images/06-defold-characters.png).
+Bis **1.200 Gesamtsterne** im frischen Profil, mit alten 0.1-Erfolgen bis 1.525.
+Keine doppelten Belohnungen durch Wiederholung/Warten. Sterne kaufen Prisma-Kanone,
+Rüstung, Tempostiefel und Tarnmodul; Gesamtpunktzahl bleibt erhalten. Geheimnisse
+haben kostenlose Umwelthinweise; zusätzliche Hinweise kosten verdiente Credits.
+Alles lokal gespeichert. Kein Konto, Werbung, Telemetrie oder Netzwerkzugriff.
 
 ## Bedienung
 
 | Eingabe | Wirkung |
 |---|---|
-| Kurz drücken und loslassen | Laufen, unabhängig davon, welches Objekt angetippt wurde |
-| Mindestens **0,30 s** halten | An beliebiger Stelle zielen |
+| Kurz antippen | Laufen, auch beim Tipp auf Gegner/Wand |
+| Mindestens 0,30 Sekunden halten | Zielen an beliebiger Stelle |
 | Nach dem Halten loslassen | Ein Schuss / Feuerball |
-| FEUER halten | Wiederholt schießen |
-| DASH | Kurz geschützt ausweichen |
-| FALLE im Magnetwerk | Magnetfalle am aktuellen Standort vorbereiten |
-| Funk | Mission/Bedienung wiederholen; in der Echo-Kammer Lichtfolge neu vorführen |
-| Hinweis | Verdientes Guthaben für die optionale Schatzsuche einsetzen |
+| FEUER halten / DASH | Wiederholtes Schießen / geschütztes Ausweichen |
+| Fallenbild **neben der Figur** im Magnetwerk | Pausierter Katalog → Auswahl → Vorschau → Boden antippen |
+| Kreuz im Feld | Fallenwahl abbrechen; kein versehentlicher Schuss |
+| FUNK / HINWEIS | Mission wiederholen / verdienten Schatzhinweis einsetzen |
 
-Manchmal muss man die Deckung verlassen. Warten allein ist keine Lösung.
-Musik kann im Arsenal separat ausgeschaltet werden; TON schaltet alle Audios um.
+Magnet hält 6 Sekunden, Eis 9; Impuls verursacht zwei Schaden und öffnet 5 Sekunden.
+Nur freie erreichbare Plätze im hellen Kreis; maximal zwei Geräte gleichzeitig.
+[Fallen vollständig erklärt](docs/TRAPS.md). Kein Joystick, keine berechnete Flugbahn.
 
-## Tatsächliche Prüfungen und Grenzen
+## Prüfstand und Grenzen
 
-**28.10.2026:** **199 native Prüfungen** und **elf gemeinsame Testgruppen**
-bestanden. Echte Menü-/Kauf-/Figuren-/Touch-Eingaben bei 1280×720 und nach
-Fensteränderung auf 1280×800 geprüft. Wirklich bewegte Gliedmaßen und getrennte
-Speicherneustarts geprüft. Wandverdeckung: 0 veränderte Pixel beim verdeckten
-Geschoss, sichtbares Kontrollgeschoss einschließlich Licht vorhanden.
+**28.10.2026:** 231 native Prüfungen und 12 gemeinsame Testgruppen bestanden.
+Echte Menü-/Kauf-/Touch-Eingaben bei 1280×720 und 1280×800, drei Fallenarten plus
+Abbruch, getrennte Speicherneustarts, tatsächliche Audioausgabe und verdeckte /
+sichtbare Kontrollgeschosse geprüft. Zwölf Sprachclips im unabhängigen ASR-Screen
+normalisiert exakt. [Details](docs/QUALITY.md), [Befehle](docs/BUILD_AND_TEST.md).
 
-Exportierte Wandpositionen, AO-/Texturbindung und Erhaltung der statischen
-Geometrie beim Batching geprüft. Native Musik-/Sprach-/Effektausgabe erneut
-aufgezeichnet. Musik und Sprachdateien sind unverändert.
-[Qualitätsüberblick](docs/QUALITY.md), [Befehle](docs/BUILD_AND_TEST.md).
+Physischer Handy-/Tablet-Test, Hörverständnis des Kindes, längere Runden,
+Geräteleistung und grafische Betreiberabnahme bleiben offen. Kein behauptetes
+kommerzielles Brawl-Stars-Produktionsniveau, keine empirische Lernwirkung oder
+Store-Freigabe. Die neue APK wird nach Abschluss der Artefaktprüfung verlinkt.
 
-**Offen für die neue APK:** physische Installation/Update und Spielstandübernahme,
-Touch-/Klanggefühl, Geräte-Seitenverhältnisse, längere Runden und Geräteleistung.
-Grafische Abnahme durch euch offen. Kein Hardwarebenchmark, keine empirisch
-nachgewiesene Lernwirkung oder Store-Reife und keine grüne CI behauptet.
+## Arbeitsweise und Quellen
 
-## Arbeitsweise und Herkunft
+Spielcode auf `feat/touch-shooter-v2`; `main` bleibt Dokumentationsstartseite.
+Keine PRs, Spielmerges, neuen Actions-Workflows oder Releases. Kinderwelt und
+andere Repositories unverändert. Keine privaten Familienbilder oder Schlüssel.
 
-Spielcode: `feat/touch-shooter-v2`. `main` bleibt die Dokumentationsstartseite.
-Keine PRs, automatischen Merges, Actions-Workflows oder GitHub-Releases.
-Kinderwelt und andere Repositories bleiben unverändert. Keine privaten Bilder,
-Konten, Werbung, Telemetrie oder neuen Berechtigungen. Lokale Daten, Backup aus.
-
-[Regeln](shared/defold04.json), [Originalmodelle/Porträts](shared/assets/defold06/),
-[Blender-Generator](tools/make_defold06_models.py), [Musikgenerator](tools/make_defold_music.py),
-[Kollision/Geschosse](pilots/defold/main/projectiles.lua),
-[Käufe/Migration](pilots/defold/main/progression.lua),
-[neue Ziele](pilots/defold/main/objectives.lua),
-[Herkunft/Lizenzen](THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
+[Regeln](shared/defold04.json), [Originalbilder / Herkunft](shared/assets/defold07/PROVENANCE.json),
+[technischer Bildimport](tools/import_defold07_art.py), [Weltgeometrie](tools/make_defold06_models.py),
+[Musik](tools/make_defold_music.py), [Kollision](pilots/defold/main/projectiles.lua),
+[Lizenzen](THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).

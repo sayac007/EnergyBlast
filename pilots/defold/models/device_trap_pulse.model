@@ -1,0 +1,2 @@
+mesh: "/models/device_trap_pulse.gltf"
+materials { name: "Original illustrated device_trap_pulse" material: "/models/device_trap_pulse-0.material" textures { sampler: "tex0" texture: "/models/ui_trap_pulse.png" } }

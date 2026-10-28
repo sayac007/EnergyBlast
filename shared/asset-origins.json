@@ -774,27 +774,27 @@
     },
     {
       "path": "shared/assets/defold06/citadel.bin",
-      "sha256": "cdff1f52838a4b182aba1fc2ad8c9d67f083771911e7a90a5d6841f0ef35fc57",
+      "sha256": "0b2bc717a71a606f5c328f585487f901d65cd2959dd6d54ed7b6dbde7f7d5c32",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/citadel.glb",
-      "sha256": "cd7b0e7a2a8ccca8f9b1ba29c4c566f415fdecb83bbb5be38c94c122dd7213ca",
+      "sha256": "5f180a2e301d2a1935ba49bb49672d2ebc587186bbdd54b5ff391e974e0c37be",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/citadel.gltf",
-      "sha256": "f4fb9000ccc8a863070d2dd9087c401078f9dd96d8a2a8a4738ac1d3db1d365c",
+      "sha256": "1c051e61e9169743ed8ef4e28462bc66518fbe0b2e32e101162ac625de39f016",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/citadel.runtime.bin",
-      "sha256": "c088bceb27ac3b70fcfaa630f4c0f2f1fae29807d845c34117de367d2224be70",
+      "sha256": "f6ab6abb98bcb51c81982901dced3b13fc5b404cc57a33c339ed413f487aa2ab",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/citadel.runtime.gltf",
-      "sha256": "a80c6c77cb8c629fd9591aad61732be9b1fd2a58de0500fd7fa92ab5157a8b64",
+      "sha256": "b4c2eb1b9dd62c4a6b424fe73dbc9fae6dd5c4e620254a0ba9feff5ec4290040",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -804,42 +804,42 @@
     },
     {
       "path": "shared/assets/defold06/citadel_ground.glb",
-      "sha256": "0075f3ea071113c20b7e62bf19abd18f41651e506f451d5d4ec2f3ba2a7f808c",
+      "sha256": "24f5b0d442cb953f03d28cf2ba126f9a762a4a9c2b216dbe671eca47991208aa",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/citadel_ground.gltf",
-      "sha256": "b30f5b5dc6fb569413bea94a7ce3cbfb73115a20109e446c788a43452f27bc4f",
+      "sha256": "a86712a8712d974580cba091f667f90ad55ae87741bb640b31e7641c40a43915",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dimensions.json",
-      "sha256": "2272db9889985b0f9e54f2eb791d70270bbd17984b1aa82d6598ecfe552f0550",
+      "sha256": "653624cd39561d32bd2bb6f7bc8c53b75310c50154daba069e5bdef0103edc7f",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock.bin",
-      "sha256": "7d1fed97d2b04774890369da2d1c47439d82aa73a7464a8e16b827c40091dae7",
+      "sha256": "2cc6cae8b0ac3a3180b736cc3a888c5a788d5bb2d8343f1ec97601dfde6bff82",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock.glb",
-      "sha256": "5d55a34c7f550491d631a3503bb0c6bbfa47eee1900e97ebde6202fb70bc432a",
+      "sha256": "5fa92941c91a12a19e95b80426c71c157b6ec1015f134f8487246af510b32ca1",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock.gltf",
-      "sha256": "590af411da6bd9b582e17cee4769f0b94ba7f378ccd9be60586019986fa5f316",
+      "sha256": "11ce81247839f206718fdc3a4cdeb16b8d894dcb3d1c2dfe8b36e652cec9f981",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock.runtime.bin",
-      "sha256": "770f76a6ee3c02788d44de6210bf1aa5a20a8a6e5a390ca4c9d02d22d19b7ec5",
+      "sha256": "abdb1a99b162c9626bac075d192332cefe39aa41530e6f9bbbf68217fdd71718",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock.runtime.gltf",
-      "sha256": "f52c448da17396c5bf5dd3d32b7f94653b9ca0a9deca18f21ea421bd6f9471d5",
+      "sha256": "d1de33b7f043b624ad22dfa7d9b13ae0ed2664090c9dd82714632c0389d63cf7",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -849,12 +849,12 @@
     },
     {
       "path": "shared/assets/defold06/dock_ground.glb",
-      "sha256": "4b230d08529371b0c1827b427e3d139f136496f3ca9f260539c8045b4901e259",
+      "sha256": "44a7b39435b3cf596b15b06d5a46fd9eef20a5c38be5c781648856a31eabeaec",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/dock_ground.gltf",
-      "sha256": "2ab495425b42a4b3dd925bb30b985d738ec3a7241a00673e06c98bea62c50e0a",
+      "sha256": "b49fb22ec960b42c55a7134b9aaefdd7dca0bc8d55c7fdebc7a7a2f57bd1dae1",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1014,27 +1014,27 @@
     },
     {
       "path": "shared/assets/defold06/echo.bin",
-      "sha256": "2235faa551fdb74b7636f1367414fbda642c4e80b92d3b265d806ccf6ad4d01a",
+      "sha256": "bc0337eede5fa92bbd50cb2fcb47dc793f36f0b2a1f47844fa93be59692409d1",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/echo.glb",
-      "sha256": "eda02a6d6e0ef480bf06ba5186790d260acaa74512bac7765cba01078f11c52d",
+      "sha256": "999e15f9ff3b1160ac58ff9096a61f7f6c08e56a99328f13ba9d86beeeb7662f",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/echo.gltf",
-      "sha256": "d0225dffc94da6798861e4629380b530e506c445a59f1f9bf0d6bb15f5745807",
+      "sha256": "0a5fe918523e46b4352ab386760434658b6326a31d080c383b06bb9ad9dff1ad",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/echo.runtime.bin",
-      "sha256": "098d2281fff5484988882081ce0611deec1de6056245d181ca9634380eb2a1cf",
+      "sha256": "53dce0f4972ee5b0049c6202a81ffb2587ae55caddfc56e6e3e13869b422f688",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/echo.runtime.gltf",
-      "sha256": "7d3fc1e4c96cc9cd69348bfa649a5f43f6bb4af8e0cd82fb943c04f52383c7c9",
+      "sha256": "10a637edfbcb18e7ce4988683773ce9969bb69c62928866ba09ca400e9f2567d",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1044,12 +1044,12 @@
     },
     {
       "path": "shared/assets/defold06/echo_ground.glb",
-      "sha256": "700dc6e8c77151b27034d2c1ce5fd422441f334f02657f297d6f3dd2aa6dc214",
+      "sha256": "5d970c4d1f991a79f68ca5aa1ff542e7ff77cedd7b580df9bd5af6c439f6a71c",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/echo_ground.gltf",
-      "sha256": "6886d8d3ed011fe3a91c3293efca1e418d5120d22a693bbb15bcef00929379b3",
+      "sha256": "01bc42f092d2af67960475e4f275b96992cea244f944eceb70f7c16915f922c1",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1094,27 +1094,27 @@
     },
     {
       "path": "shared/assets/defold06/forge.bin",
-      "sha256": "32466a220cef6f95d14fc146b5d0e6400f98252de8b1105635b6aba67dcd58ad",
+      "sha256": "137b9788b37e9d6485cecceafab11be17beef7805ac5459df7aee16ca4138883",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/forge.glb",
-      "sha256": "6e6143617bd500c23d155f4b8355a61c4efd60cd92fe4c66909721083fe1a1f8",
+      "sha256": "3d86434839c5ec4cce2c46adf489ea49383b13046f01d796188f0b1b0d495564",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/forge.gltf",
-      "sha256": "968b625a2c120a373742e86791f24dff2d59cc702728c88d712b1a85d44cef16",
+      "sha256": "d80dbe1f347b7004f87a0dec59f41555d2ceb206ef2a0d6219f5bc887745a689",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/forge.runtime.bin",
-      "sha256": "4bf39bb5351498c12d08a45b8be2fb499a55aecd678a77c965bded4adb372e36",
+      "sha256": "25d0d74291c0b21a5b4d28c3bd9bafa5a27312f240a63b32ce42cc4286aa583e",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/forge.runtime.gltf",
-      "sha256": "35e0cf8884ba00768f9399235ef03c4a32876adb53a66bd9a466e9038754b57d",
+      "sha256": "813ab4894041380de88223ba6ed4b9d83c59c6f49c187c9d9efc31f02fa8dc5f",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1124,12 +1124,12 @@
     },
     {
       "path": "shared/assets/defold06/forge_ground.glb",
-      "sha256": "540628d94fe11122d2d9ed68d96b6f0db4f62c29ec801633483b32b3e471033d",
+      "sha256": "16a0945d7d0ed170ec560dd86f8a67fdb1dd14f10f79c75a316f38c6294f4fc1",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/forge_ground.gltf",
-      "sha256": "d3dc6662dc3d7eb48b7adda4fc463c2a24d44c61f8d59cff989e3f2df8861aa9",
+      "sha256": "7c79c26feaf9ff8118e4e574ae0d3403230bd45517c0d59d022f523faa33e8f5",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1264,12 +1264,12 @@
     },
     {
       "path": "shared/assets/defold06/glow.glb",
-      "sha256": "75af8bac6e207b6e7b42b9725adfc8473ea683aa1bbd1c04aa256d9120ff5fc3",
+      "sha256": "06f37a09adfac06763da64f5b46c24fc37b270861ef41b1d63fb1db6ed55c85f",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/glow.gltf",
-      "sha256": "b74b7bd49d7cbceb35f06aa20a54c557fa7de346e72674b6a6182338c5224ed5",
+      "sha256": "487589744c361ee139afe1f1ea373cf9baaa5f8830797ccbe801fc4077e4fc42",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1369,32 +1369,32 @@
     },
     {
       "path": "shared/assets/defold06/lobby.bin",
-      "sha256": "a126a9ad6d92f09ad7ca4d5fc98ab42250c0b54113fbe0d10a203cca37c75b5d",
+      "sha256": "0af8ada27690544279ef972d4f493933da57d5bac66a1558ec2f0381f6932c6f",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/lobby.glb",
-      "sha256": "b5cf1278f5a150ce41ee7a3a7357dda82543dcc9c7f5db4d8a8cdd4dc762b8ce",
+      "sha256": "0eea56a2104c39004cb085c74e9fcfc4ea23743dedd923293c2bd8d59c6dca82",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/lobby.gltf",
-      "sha256": "0a33d5ab2f4f05b734bba0970eab3367a192d467a044dc1862c7c8e923d7d682",
+      "sha256": "6a67d5640680d3e18faa28a7924f179c307b1f8682e9ccc417ff522896f79a85",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/lobby.runtime.bin",
-      "sha256": "373ced8208b416d52ab98c7cf3bd49b541943eed59d750e5662426a012a427f3",
+      "sha256": "6b8c62b9c6c06995db105a05f52647822c6c24a563fc70188ec51d8fc2a175f0",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/lobby.runtime.gltf",
-      "sha256": "3c3f15cf7048e0d38adc80896a5815397bf76fcef30603a74dabb90ae42e838a",
+      "sha256": "da24fb80108e5a082c53172b04dc72aa23ac6ba06403c46d65cf7a1747829b61",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/models.json",
-      "sha256": "b36597e94363eece641fde94835b68e1dc3b59d6b2e4cfa7765606778b81d839",
+      "sha256": "e3933b9a765efb7288d0b1c818a2e8948f5a9071b552fe44c16ea3cc5d746755",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1429,27 +1429,27 @@
     },
     {
       "path": "shared/assets/defold06/reactor.bin",
-      "sha256": "738f5a4165de7c787ba29da26e7c02ed7dbf13988dfd253ef995ad3566bde08e",
+      "sha256": "d9ca2b47348d2894324e09e933b6f32c8ced30dd6f775336a54424c8b153bc48",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/reactor.glb",
-      "sha256": "a5f3ac62487cef616fc54855e8bbe27e47674356e10e874d2d2ff960e6248d17",
+      "sha256": "c8a17c4b78642f183e232085bdbebd4c2aacb33855dc319f21eda39516b65ac2",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/reactor.gltf",
-      "sha256": "fe3f42a02430449fa9dc5033ad2660a76da6a1fe3f86e74288e2c941ac50c073",
+      "sha256": "6f9ed2aaf666b85df157b93623dfe7e00251838c4a9c1292936b93718adbf76a",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/reactor.runtime.bin",
-      "sha256": "dded95783b1cd4ff2d4db6cb79a2edf52a288eb7adf4291c160fa27d2358f44c",
+      "sha256": "d0788eb54fee4ed9d0e9439130916fe9ae604bcd6bbe456d8898a3fc3d595cf0",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/reactor.runtime.gltf",
-      "sha256": "e63f9db9627210d55ee5ac538383eb59553a08ec6adc3736a3abef8f86ebacf3",
+      "sha256": "e60f6f4f7142fba44bf8a4b9e945e22c8236a2cc418f1210812d52e470af1c64",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1459,12 +1459,12 @@
     },
     {
       "path": "shared/assets/defold06/reactor_ground.glb",
-      "sha256": "1fed6e951226c842635ca12f06fbd5329ba1bf5d33aa0fff22b1b602f29376ca",
+      "sha256": "b0eab2bc83160c85439afb390dfb9ee385f9088b0739a473dd22f2d15f09ea1b",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/reactor_ground.gltf",
-      "sha256": "93bfa06c4069daadfb56d761f79b0f0388b7e5ce8354334c2c1c1f0e72011ac9",
+      "sha256": "bfd3d3b7b66d7e5ac93021f14798ce9672aa42dd221627820bb9d296c842b752",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1494,27 +1494,27 @@
     },
     {
       "path": "shared/assets/defold06/rescue.bin",
-      "sha256": "72dda10bd40b8a43035164e0bde0791bd47595717a76852c59352c664c24c1c5",
+      "sha256": "e7f259635c1c6cfa6c670cf19f1152d103a7c64956f7d1ea8e6f31dd9e1197b9",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/rescue.glb",
-      "sha256": "ef213c88b27f8b74005a70fbb9f6f46164faa1c5dd9ba647664dd8761f591a19",
+      "sha256": "acc43365887cfe1487942acf64e9dc1133b64f5dee4b09094b2d086a75cfbec5",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/rescue.gltf",
-      "sha256": "b198d030219bc159c58f4bcac6c4d11540fbb06fdea9f19e9d28f4f88b7f9c3a",
+      "sha256": "55f409c4ea4d6657b6061acf3b4dfbee47205d5cb9bc8ee88f99e658c0d23544",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/rescue.runtime.bin",
-      "sha256": "b7adeac3b6d454ee8b31502b3f405d369ab4030ebadbb2a54f66e8bc33f4b062",
+      "sha256": "34737eedafb93a750eb7bfcaae59c0862f3d13d8ca0becfb13cda636fa78ef25",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/rescue.runtime.gltf",
-      "sha256": "f045f1b24e2f772ce35d984de0f39bbe186db38c1d1711c09e14a76f0b0ea37d",
+      "sha256": "be079880dc8df36f5aca87f259404326c447ced433a22849d8f70772f71b3dad",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1524,12 +1524,12 @@
     },
     {
       "path": "shared/assets/defold06/rescue_ground.glb",
-      "sha256": "c2cf125b11c7cf9eb2341f4bb8c819714cf8c353f15801081ba4011b65762b72",
+      "sha256": "43105f06c3f854dd4ae3a411f4413b3ad1cd75b9302ecaadb884f4aa6d42ae53",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/rescue_ground.gltf",
-      "sha256": "ecacfb9e00dfa36cd8f5bedfb1831cf2d9df9ba5a7c8ed2a6b0dc07f61ea129c",
+      "sha256": "7204dcceecdce5acf64aa6335ef4de3d4cb609ada46be15115df5ca3acd818c3",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1544,12 +1544,12 @@
     },
     {
       "path": "shared/assets/defold06/selection_ring.glb",
-      "sha256": "195b7b0a458d91bf7f48807158b2610eae547dc78f67b8a24334ed755245d305",
+      "sha256": "8251164f1016b71577edcd3880f1a0636965da133f8e6c13c6c69e9ae09d5ad7",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
       "path": "shared/assets/defold06/selection_ring.gltf",
-      "sha256": "a645900d044518536ef4b13d69a1057bea51604ae5283896c38efd6cc89869ed",
+      "sha256": "036dfbdf5aa9f6a52c75d491d8ce08188bf17d9b30445db67db1ed47be4e4a42",
       "origin": "Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py"
     },
     {
@@ -1656,6 +1656,356 @@
       "path": "shared/assets/defold06/ui_trap.png",
       "sha256": "fb29e52873eb4d07c14c606b2793320ea3d2393afc90bf9f69d696e4cb33040f",
       "origin": "Original layered UI/vector drawing from tools/make_defold_ui.py"
+    },
+    {
+      "path": "shared/assets/defold07/PROVENANCE.json",
+      "sha256": "6ac963a3d734900651fb5537e7170e31af64d5ca6b93be16c78b532707b77d7a",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/boss-states.png",
+      "sha256": "43f42752eb3845600160a135986a479bd2ce4694d3931657a249163f27d0adac",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/cards-original.png",
+      "sha256": "833e565940bb0653f432cdefaf26e97f7cde94b6dea6f54147cde8194ab29f25",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/chest-prop.png",
+      "sha256": "e4d0e685afed3629c1bf4ab2fff4a0334e4e24516ef33f8be710c7e526c63b50",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_frost.bin",
+      "sha256": "59f0b3be9a01fecc10b891cc42e1864dfeaf0984bb7c09602a3d3313dc0fcff3",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_frost.gltf",
+      "sha256": "8f8cc6a1d53c2d27a6119b4b3df123d0b2655c431bce8339c6f1505b1f6584d8",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_magnet.bin",
+      "sha256": "59f0b3be9a01fecc10b891cc42e1864dfeaf0984bb7c09602a3d3313dc0fcff3",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_magnet.gltf",
+      "sha256": "0b03bd4ba95ae80e33be8e9a171323a0a0865a2708c504a64e0ded870e3cf971",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_pulse.bin",
+      "sha256": "59f0b3be9a01fecc10b891cc42e1864dfeaf0984bb7c09602a3d3313dc0fcff3",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/device_trap_pulse.gltf",
+      "sha256": "e3cbeb3d78d9faf5ce31acc09ac7f5c9ed08894c5f17aa2c43ff828ee4852305",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/dragon-original.png",
+      "sha256": "a8928091d28e73824beb49e0b5f58f44562fefc05d7313f66dfab19199034274",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/dragon-portrait.png",
+      "sha256": "0f77970a5982cdf65f9004971d1cdf8e91ecfc6dd85db4a5910de1d12be9bdec",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/dragon-walk.png",
+      "sha256": "a5ab6c17272ab27fc4ab20bb1df3feadcebdc535731a4143832984907aefdfc0",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/drone-prop.png",
+      "sha256": "f63843ef9efa451632baecae09d16803b032e5bef604624dae0ced4cece81adf",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/enemies-original.png",
+      "sha256": "6499855509d574afa3c56e68eb7b1d02fdbf87223746c7ac0c10d2064c121884",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/explosion-frames.png",
+      "sha256": "17c41bde0a516932fd8b141e5df4aac100a8e7bdc69103b8d9b67e40954dfa9f",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/explosion-original.png",
+      "sha256": "a3e695c67f828a7999a5cfcef1d3c06ef1efd212e74d940578ddf54fe9145e1d",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/floor-original.png",
+      "sha256": "aa681ab224ef5b82bd723edf62b9fd747a9074d7448d782e9b6d5ea4d718d007",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/floor.png",
+      "sha256": "7561b5c6f199d563588b2582293f64e5e5f2db40ec9caf8c5e2b459f31b773d6",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/fox-original.png",
+      "sha256": "fa9007689029b5268ce9177580336d42d2ce57e4f27e364a852df7bd4041ebb2",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/fox-portrait.png",
+      "sha256": "26047171dc5c54cbf62650926b5e60eb9a4fdf351c0809018adaddf4b5040a03",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/fox-walk.png",
+      "sha256": "920ea10627c9410b27af2800045610aaa030c2ad349d79b117266244ade99963",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/guardian-states.png",
+      "sha256": "25415861f4269effb8a7d875baf7b99a01431c22b7fd102680905429589725fc",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/heal-prop.png",
+      "sha256": "5035a918040b917d35f2716b43b00a517eef81a59d8c6bb74747acb9b8946cb1",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/hero-original.png",
+      "sha256": "9e047d780ae097da5d1ff4fef2afe0355bb9d3954f8cbb47d648a6e146178afc",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/hero-portrait.png",
+      "sha256": "b40cbcf2b6ebc70ff10e266d77a1fe3499be0fee05f8e17ecd6ba52d4dfe1004",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/hero-walk.png",
+      "sha256": "532236bc53eab7a4e2be505eb873a08d5e04daac968d80eec2bb43a488156da7",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/icons-original.png",
+      "sha256": "7ec8ccd5b937eac02aa07014278ad2263661ce80d8ff86eca43e3bf7e69dfd9f",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_boss.bin",
+      "sha256": "d6f902c6e04c0c3bac5a69ac5a27dd739f3bb30502e57e0df1eca1c216186d96",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_boss.gltf",
+      "sha256": "e6a4ee8811712ba7ea6d9448bc80af0b51b771118dee2eb71d1ba01f241f80cd",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_chest.bin",
+      "sha256": "bd91c2daea3d5a735a8f30587798e25aa3659b0ca21534314fbc13d616ca6850",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_chest.gltf",
+      "sha256": "0df9bb903a1589fcc9b9b73a69cb01ba323364c821dbbec1b1344b977bd74d4f",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_dragon.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_dragon.gltf",
+      "sha256": "9e8728b3816fda0828b56afa26700f4cc2b9c12c07c4c322d120b630ce4d689e",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_drone.bin",
+      "sha256": "bd91c2daea3d5a735a8f30587798e25aa3659b0ca21534314fbc13d616ca6850",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_drone.gltf",
+      "sha256": "9c6704d0931b9972c35cd809549dd5ecd181ed5d577947c25dbc9274ade15e93",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_explosion.bin",
+      "sha256": "d1dfc2aba4f1331eae7985c652320043928e2dbffcfda7768a1d90ef74602279",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_explosion.gltf",
+      "sha256": "46396b1d0fc5ebfef2f4da2b423204758d1e954969d8b97856e7f2c2095d1d89",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_fox.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_fox.gltf",
+      "sha256": "a48ae45a1775e0380830ab4a5b65f5f9957f19acb3fe84c5d03eb8f238bac53c",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_guardian.bin",
+      "sha256": "e8e956358be4b20e4ac070d7a1486244842d8734d7acdd46882be9e4d322f762",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_guardian.gltf",
+      "sha256": "f65597cda1b0e9657ace64867a27d72006c0d2d3d20757826dc3e4040327bcbf",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_heal.bin",
+      "sha256": "bd91c2daea3d5a735a8f30587798e25aa3659b0ca21534314fbc13d616ca6850",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_heal.gltf",
+      "sha256": "285edd8afc5e347028f02b65d5651b6987e0d4692f1f3362bff7c544dda84bf1",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_hero.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_hero.gltf",
+      "sha256": "5c734b80c77913ebbe5ae182db46df9c48d7bdc218fd0949e949f17f4dbcc435",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_relay.bin",
+      "sha256": "727ff41d4d80c72267a0c196d4913dfb1365e8699ae0c58783220841141ef5d6",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_relay.gltf",
+      "sha256": "ddc4b94265b38f6fb3792170868565594ff40e32a4121ac0f605087007f06704",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_sentinel.bin",
+      "sha256": "e8e956358be4b20e4ac070d7a1486244842d8734d7acdd46882be9e4d322f762",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/illustrated_sentinel.gltf",
+      "sha256": "547dd9e834fab29d21cfe229bc23c008a576958d036c1923591e617afa3f8161",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/lobby-original.png",
+      "sha256": "ad1dcecea782b99234b2bb799df188e080aa55c11ed6c38d666d39b688f466a8",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/lobby.png",
+      "sha256": "dd3aedb281e187445a29ea4aa8eb02a6bbded76f38ffde6cf565af480f0dda2e",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_citadel.png",
+      "sha256": "afb6524a95303f28b0e2aa9b3f117503b8da354b25b1b6ea8930c4e340e73e35",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_dock.png",
+      "sha256": "5463c7ae69d983b33028e3497bab19c344b134c4cdcfcd27949f4650279fa627",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_echo.png",
+      "sha256": "9209c9a9d4bf03b02d2679e3be1456da7964b47e44a7dc43f2075d657d27e297",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_forge.png",
+      "sha256": "fbf4c6443d4005e187468bed7c6ad177289afb0bb7311ead5db8ddd1652ae709",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_reactor.png",
+      "sha256": "b0ae3d5399dd5329c0044c20328cc16bc9a6b1656d7da88bc0e2d43d7fcb47dd",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/mission_rescue.png",
+      "sha256": "31b2ded70a3b0127abbc27345682f6c3a7107028c130c2ef8d7524b61435049d",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/models.json",
+      "sha256": "2bb94bb0b82931046ad1a0c1fb3836634ccf3a1ea09015909af976ae1eb3cd93",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/props-original.png",
+      "sha256": "ab7aa8e915f4ca46dd929cae91113557a92aace964a1b133f2e27236a8c9fff2",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/relay-prop.png",
+      "sha256": "6613dc79ae54585bf13fa2155ed28720d39aa9fcf58572509552190de650addf",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/sentinel-states.png",
+      "sha256": "657831c9c3b1b58c3b518c9bc8101e8ede3e8b921ab4028bc5c945d9a82a45ae",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_armor.png",
+      "sha256": "757392d3d4a8865e6a00d86eb20101e34deebb63415b4466cc6b4c776dc52bdf",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_boots.png",
+      "sha256": "47c1086919acf07138dd679f738bdf7aa1585694833226048987a6076d3b351d",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_cannon.png",
+      "sha256": "60652dcdcb9ea4ef7bad22d05730a60c23d3bc1142df1cca9c1abe9c40440e29",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_cloak.png",
+      "sha256": "23a57db23491c74dd193a5a395f23daee98a918e9ae7b5c453a82e17f6863a14",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_trap_cancel.png",
+      "sha256": "919e475164644b99a3a66f60f8a3226277c72754690007f8424a3ee2b81eebb9",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_trap_frost.png",
+      "sha256": "ebda2b168c7380ca24effcce00b33545d589a33920043a8ffada385852dfdd06",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_trap_magnet.png",
+      "sha256": "f8016ee170b1ee3bfbe685e13bb376564008cb5929420107f1eb05a1f5a1903c",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
+    },
+    {
+      "path": "shared/assets/defold07/ui_trap_pulse.png",
+      "sha256": "854c333c9f0b699ba00d470ca705fee1c4637a52116f24e2dd6d06303ee78693",
+      "origin": "Original OpenAI-generated EnergyBlast illustration/animation sheet, no reference-game asset input; technical import/quad geometry tools/import_defold07_art.py; PROVENANCE.json retains original-sheet hashes"
     }
   ],
   "audio": "shared/audio/de/manifest.json",

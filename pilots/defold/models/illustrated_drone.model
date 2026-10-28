@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_drone.gltf"
+materials { name: "Original illustrated illustrated_drone" material: "/models/illustrated_drone-0.material" textures { sampler: "tex0" texture: "/models/drone-prop.png" } }

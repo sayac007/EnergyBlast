@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Torus.019",
+			"name":"Torus.029",
 			"translation":[
 				0,
 				0.09000000357627869,
@@ -41,7 +41,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Torus.019",
+			"name":"Torus.029",
 			"primitives":[
 				{
 					"attributes":{

@@ -14,4 +14,19 @@ images { image: "/models/ui_menu.png" }
 images { image: "/models/ui_sound.png" }
 images { image: "/models/ui_trap.png" }
 images { image: "/models/ui_background.png" }
+images { image: "/models/ui_trap_magnet.png" }
+images { image: "/models/ui_trap_frost.png" }
+images { image: "/models/ui_trap_pulse.png" }
+images { image: "/models/ui_trap_cancel.png" }
+images { image: "/models/ui_cannon.png" }
+images { image: "/models/ui_armor.png" }
+images { image: "/models/ui_boots.png" }
+images { image: "/models/ui_cloak.png" }
+images { image: "/models/mission_reactor.png" }
+images { image: "/models/mission_citadel.png" }
+images { image: "/models/mission_dock.png" }
+images { image: "/models/mission_forge.png" }
+images { image: "/models/mission_echo.png" }
+images { image: "/models/mission_rescue.png" }
+images { image: "/models/lobby.png" }
 extrude_borders: 2

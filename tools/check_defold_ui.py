@@ -39,7 +39,7 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-ui-',dir='/tmp')as d
    click(1090,647);click(772,325) # Menu, actual third-sector card.
    text=wait_for('DEFOLD UI READY dock');match=re.search(r'DEFOLD UI READY dock (\d+) (\d+)',text);assert match,text
    px,py=map(int,match.groups());py=720-py
-   click(px,py);wait_for('DEFOLD UI SHORT TAP shots=0');wait_for('DEFOLD ACTUAL ARTICULATED WALK PASS')
+   click(px,py);wait_for('DEFOLD UI SHORT TAP shots=0');wait_for('DEFOLD ACTUAL ILLUSTRATED WALK PASS')
    click(px,py,.65);wait_for('DEFOLD UI LONG HOLD shots=1')
    time.sleep(.5);click(1208,380) # Retained visible FIRE control.
    click(1105,46);time.sleep(.3);click(1105,46);wait_for('DEFOLD AUDIO PAUSE RESUME PASS')

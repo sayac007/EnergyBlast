@@ -1,9 +1,8 @@
 mesh: "/models/rescue.runtime.gltf"
-materials { name: "rescue mortar" material: "/models/rescue-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "rescue cap" material: "/models/rescue-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "rescue masonry" material: "/models/rescue-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Jade" material: "/models/rescue-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Mint light" material: "/models/rescue-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/rescue-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Deep blue ink" material: "/models/rescue-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Warm leather" material: "/models/rescue-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "rescue deep indigo hull" material: "/models/rescue-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "rescue naval ceramic" material: "/models/rescue-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "rescue porcelain edge" material: "/models/rescue-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "rescue recessed glass" material: "/models/rescue-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous rescue reactor seam" material: "/models/rescue-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "rescue satin brass" material: "/models/rescue-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/rescue-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

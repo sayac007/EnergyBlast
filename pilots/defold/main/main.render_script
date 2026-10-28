@@ -1,5 +1,6 @@
 local View=require 'main.view'
 function init(self)
+ self.billboard=render.predicate({'billboard'})
  self.glow=render.predicate({'glow'});self.model=render.predicate({'model'});self.actor=render.predicate({'actor'});self.shadow=render.predicate({'shadow'});self.stage=render.predicate({'stage'});self.backdrop=render.predicate({'backdrop'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.hero={0,0};self.scene=true
 end
 function on_message(self,id,m)
@@ -16,11 +17,13 @@ function update(self)
   local v,p=View.matrices(w,h,self.center);render.set_view(v);render.set_projection(p);render.draw(self.model)
   render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.set_depth_mask(false);render.draw(self.shadow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
   render.draw(self.actor)
+  render.disable_state(graphics.STATE_CULL_FACE);render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.draw(self.billboard);render.disable_state(graphics.STATE_BLEND);render.enable_state(graphics.STATE_CULL_FACE)
   render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.draw(self.glow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
  else
   render.set_viewport(w*30/1280,h*85/720,w*530/1280,h*535/720)
-  local x,z=self.hero[1],self.hero[2];render.set_view(vmath.matrix4_look_at(vmath.vector3(x+2.8,2.8,z+5),vmath.vector3(x,.95,z),vmath.vector3(0,1,0)))
-  render.set_projection(vmath.matrix4_orthographic(-1.62*(w*530/1280)/(h*535/720),1.62*(w*530/1280)/(h*535/720),-1.62,1.62,.1,100));render.draw(self.stage);render.draw(self.actor)
+  local x,z=self.hero[1],self.hero[2];render.set_view(vmath.matrix4_look_at(vmath.vector3(x,24.5,z+17.2),vmath.vector3(x,.5,z-.8),vmath.vector3(0,1,0)))
+  render.set_projection(vmath.matrix4_orthographic(-1.48*(w*530/1280)/(h*535/720),1.48*(w*530/1280)/(h*535/720),-1.48,1.48,.1,100))
+  render.disable_state(graphics.STATE_CULL_FACE);render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.draw(self.billboard);render.disable_state(graphics.STATE_BLEND)
  end
  render.set_viewport(0,0,w,h);render.disable_state(graphics.STATE_DEPTH_TEST);render.disable_state(graphics.STATE_CULL_FACE);render.set_depth_mask(false)
  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA)

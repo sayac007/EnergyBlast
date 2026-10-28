@@ -42,7 +42,7 @@ class SharedChecks(unittest.TestCase):
    raw=f.read_bytes();self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
    self.assertEqual(raw,(ROOT/'pilots/gdevelop/assets'/f.name).read_bytes())
   for f in (ROOT/'shared/assets/defold06').iterdir():
-   if f.suffix in ['.gltf','.bin','.png']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
+   if f.suffix in ['.gltf','.bin','.png'] and f.name not in ['hero.png','dragon.png','fox.png']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
   raid=json.loads((ROOT/'shared/audio/raid/manifest.json').read_text());self.assertEqual(len(raid['clips']),3)
   for c in raid['clips']:
    raw=(ROOT/'shared/audio/raid'/c['file']).read_bytes();self.assertEqual(hashlib.sha256(raw).hexdigest(),c['sha256'])
@@ -54,7 +54,7 @@ class SharedChecks(unittest.TestCase):
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
   self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]==v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),5)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),12)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -99,7 +99,7 @@ class SharedChecks(unittest.TestCase):
    values=samples[i*15*8000*2:(i+1)*15*8000*2];sections.append(math.sqrt(sum(v*v for v in values)/len(values)))
   self.assertGreater(max(sections)/min(sections),1.5)
   self.assertGreater(math.sqrt(sum((l-r)**2 for l,r in zip(samples[::2],samples[1::2]))/(len(samples)//2)),.005)
- def test_rigs_ao_and_textures_reach_runtime(self):
+ def test_preserved_legacy_rigs_and_active_ground_bindings(self):
   from PIL import Image,ImageStat
   art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text());rigs=json.loads((art/'rigs.json').read_text())
   for hero in ['hero','dragon','fox']:
@@ -110,9 +110,27 @@ class SharedChecks(unittest.TestCase):
     binding=(ROOT/'pilots/defold/models'/(piece['model']+'.model')).read_text();self.assertIn(hero+'-ao.png',binding)
     self.assertIn('tags: "actor"',(ROOT/'pilots/defold/models'/(piece['model']+'-0.material')).read_text())
   for mission in ['reactor','citadel','dock','forge','echo','rescue']:
-   model=mission+'_ground';texture=models[model]['texture'];self.assertIn(texture,(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
-   self.assertEqual((art/texture).read_bytes(),(ROOT/'pilots/defold/models'/texture).read_bytes())
+   model=mission+'_ground';texture='floor.png';self.assertIn(texture,(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
+   self.assertEqual((ROOT/'shared/assets/defold07'/texture).read_bytes(),(ROOT/'pilots/defold/models'/texture).read_bytes())
   self.assertIn('self.glow',(ROOT/'pilots/defold/main/main.render_script').read_text())
+ def test_illustrated_actors_have_real_transparent_distinct_animation_frames(self):
+  from PIL import Image
+  art=ROOT/'shared/assets/defold07';models=json.loads((art/'models.json').read_text())
+  for name in ['hero','dragon','fox']:
+   image=Image.open(art/(name+'-walk.png'));self.assertEqual(image.size,(1024,768));self.assertEqual(image.mode,'RGBA')
+   frames=[image.crop((x*256,y*384,(x+1)*256,(y+1)*384))for y in range(2)for x in range(4)]
+   self.assertEqual(len({hashlib.sha256(f.tobytes()).hexdigest()for f in frames}),8)
+   for frame in frames:
+    alpha=frame.getchannel('A');self.assertEqual(alpha.getextrema()[0],0);self.assertGreater(alpha.getextrema()[1],240)
+    self.assertEqual(alpha.crop((0,0,8,384)).getextrema()[1],0,'atlas margin avoids adjacent-cell bleed')
+   model='illustrated_'+name
+   self.assertIn(name+'-walk.png',(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
+   self.assertIn('tags: "billboard"',(ROOT/'pilots/defold/models'/(model+'-0.material')).read_text())
+  for name,meta in models.items():
+   self.assertEqual((art/meta['texture']).read_bytes(),(ROOT/'pilots/defold/models'/meta['texture']).read_bytes())
+  origins=json.loads((art/'PROVENANCE.json').read_text())
+  self.assertEqual(len(origins['sheets']),10)
+  for row in origins['sheets']:self.assertEqual(hashlib.sha256((art/row['path']).read_bytes()).hexdigest(),row['sha256'])
  def test_static_batches_preserve_source_geometry(self):
   import numpy as np
   art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text())

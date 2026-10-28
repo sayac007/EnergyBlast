@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_sentinel.gltf"
+materials { name: "Original illustrated illustrated_sentinel" material: "/models/illustrated_sentinel-0.material" textures { sampler: "tex0" texture: "/models/sentinel-states.png" } }

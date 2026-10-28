@@ -314,16 +314,6 @@
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
     },
     {
-      "id": "defold_forge",
-      "text": "Lege eine Magnetfalle. Locke den Wächter hinein. Dann ist sein Schild aus.",
-      "file": "defold_forge.ogg",
-      "sha256": "ad360aa65810c6f4be8860d34ed5ef737c56f620f57ef17289f2f4152d847120",
-      "seconds": 6.76,
-      "playback_gain_db": 8.011446506004912,
-      "source": "New complete raid sentence; same local synthetic speaker",
-      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
-    },
-    {
       "id": "defold_rescue",
       "text": "Begleite die Drohne. Bleibe in ihrer Nähe und schütze sie vor den Kanonen.",
       "file": "defold_rescue.ogg",
@@ -352,6 +342,91 @@
       "playback_gain_db": 9.371813840788787,
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_forge",
+      "text": "Tippe auf das Fallenbild neben deiner Figur. Wähle eine Falle. Tippe dann auf einen freien Platz in deiner Nähe.",
+      "file": "defold_forge.ogg",
+      "sha256": "6ff08549372998971d18885b0d0a5a382bc378e67dea557e51eb01ba9bb19ad6",
+      "seconds": 8.52,
+      "playback_gain_db": 4.136839635669686,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_trap_select",
+      "text": "Tippe auf freien Boden im hellen Kreis. Dort liegt gleich deine Falle.",
+      "file": "defold_trap_select.ogg",
+      "sha256": "93b6eb2066b036e619839c02b16f398c5328e1fd824881f94fe167f9f59df42b",
+      "seconds": 6.2,
+      "playback_gain_db": 7.269291013547966,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_trap_place",
+      "text": "Falle bereit. Locke den Wächter hinein.",
+      "file": "defold_trap_place.ogg",
+      "sha256": "0cae47bb33bfbdf12aec538aa2c1a2e56184e17cc233b3deef3f2c83b54831e4",
+      "seconds": 3.8,
+      "playback_gain_db": 7.4872839706615135,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    },
+    {
+      "id": "defold_trap_magnet",
+      "text": "Magnet. Hält den Wächter fest. Tippe zum Ablegen auf freien Boden im hellen Kreis.",
+      "file": "defold_trap_magnet.ogg",
+      "sha256": "53f01ba1278635a196f5a2175dad6431ca1d2823dafedfdc5e377d0ec45caf39",
+      "seconds": 7.0,
+      "playback_gain_db": 2.924030762712473,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3287255326
+    },
+    {
+      "id": "defold_trap_frost",
+      "text": "Eis. Hält länger fest. Tippe zum Ablegen auf freien Boden im hellen Kreis.",
+      "file": "defold_trap_frost.ogg",
+      "sha256": "1a6f29eca0489f52def7f604884b0580bd9def41d16a10fe902d27e458f84fc4",
+      "seconds": 6.2,
+      "playback_gain_db": 3.470250592825436,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3826936179
+    },
+    {
+      "id": "defold_trap_open",
+      "text": "Wähle eine Magnetfalle, eine Eisfalle oder eine Impulsfalle. Das Kreuz bricht ab.",
+      "file": "defold_trap_open.ogg",
+      "sha256": "8481d0603f353e45008604d017ccca3b0d07235855c4c196430c817ed87fd0f8",
+      "seconds": 7.08,
+      "playback_gain_db": 6.324247173351365,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 222123597
+    },
+    {
+      "id": "defold_trap_trigger",
+      "text": "Schild aus. Jetzt treffen!",
+      "file": "defold_trap_trigger.ogg",
+      "sha256": "1919e3109fa173ee7477dce38bd6d3df314e0e83146bc956f28aaf8ded072e14",
+      "seconds": 2.2500226757369615,
+      "playback_gain_db": 7.886046873422023,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 894531018
+    },
+    {
+      "id": "defold_trap_pulse",
+      "text": "Der Wächter verliert zwei Energiepunkte. Tippe zum Ablegen auf freien Boden im hellen Kreis.",
+      "file": "defold_trap_pulse.ogg",
+      "sha256": "70ac2136004fb38dba5d0eba3ba1c5a1f78d173a158b3e4032e73b966bbea2b4",
+      "seconds": 6.44,
+      "playback_gain_db": 8.128162128269981,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 4021369858
     }
   ]
 }

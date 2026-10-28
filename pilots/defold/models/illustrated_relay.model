@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_relay.gltf"
+materials { name: "Original illustrated illustrated_relay" material: "/models/illustrated_relay-0.material" textures { sampler: "tex0" texture: "/models/relay-prop.png" } }

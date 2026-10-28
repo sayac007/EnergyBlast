@@ -27,7 +27,7 @@ function M.follow(g,dt,snap)
  local ex=math.max(0,(r[3]-size*aspect)/2+.3);local ez=math.max(0,(r[4]-size/.8)/2+.3)
  local x=math.max(cx-ex,math.min(cx+ex,g.p[1]));local z=math.max(cz-ez,math.min(cz+ez,g.p[2]))
  if snap or not g.camera then g.camera={x,z};return end
- if g.pending_hold or g.aiming then return end
+ if g.pending_hold or g.aiming or g.tactical_pause then return end
  local blend=1-math.exp(-7*dt);g.camera[1]=g.camera[1]+(x-g.camera[1])*blend;g.camera[2]=g.camera[2]+(z-g.camera[2])*blend
 end
 return M

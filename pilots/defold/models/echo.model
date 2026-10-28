@@ -1,9 +1,8 @@
 mesh: "/models/echo.runtime.gltf"
-materials { name: "echo mortar" material: "/models/echo-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "echo cap" material: "/models/echo-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "echo masonry" material: "/models/echo-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Jade" material: "/models/echo-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Mint light" material: "/models/echo-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/echo-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Deep blue ink" material: "/models/echo-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Warm leather" material: "/models/echo-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "echo deep indigo hull" material: "/models/echo-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "echo naval ceramic" material: "/models/echo-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "echo porcelain edge" material: "/models/echo-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "echo recessed glass" material: "/models/echo-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous echo reactor seam" material: "/models/echo-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "echo satin brass" material: "/models/echo-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/echo-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

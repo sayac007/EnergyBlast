@@ -134,3 +134,21 @@ images were generated with OpenAI image_gen in this session without input refere
 images; `shared/assets/defold06/TEXTURE_PROVENANCE.json` records hashes/origin.
 These are actual native game textures, not conceptual screenshots. Existing
 engine/font/model/audio notices and project licence status remain unchanged.
+
+## Defold 0.7 — Neon Frontier
+
+Original AI-generated character walk sheets, three robot enemy state sheets,
+equipment icons, mission illustrations, props, energy-burst frames, deck material
+and orbital lobby live in `shared/assets/defold07`. `PROVENANCE.json` retains the
+ten unmodified source images and SHA-256; `tools/import_defold07_art.py` performs
+technical cropping/resampling and generates native camera-facing quad meshes.
+These are runtime assets, not screenshots substituted for gameplay. No reference
+game image, character model, video frame or animation is included. Brawl Stars
+and the supplied Instagram cover were inspected only as references in temporary
+storage. World geometry remains our own Blender generator, now a futuristic kit.
+
+The Defold speech manifest now contains twelve complete synthetic Serena cues,
+including the actual on-field trap gestures and differentiated trap effects.
+Existing model/font/engine notices and licence status above remain applicable.
+AI provenance alone does not establish every possible intellectual-property
+clearance or imply a new licence grant.

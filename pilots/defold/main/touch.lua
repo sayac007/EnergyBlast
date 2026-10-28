@@ -1,9 +1,12 @@
 -- One decision only: elapsed press time. No enemy/wall hit-test or drag shortcut.
 local M={}
+local Traps=require 'main.trap_controls'
 function M.new(g,ground)
  local c={pointer=nil,threshold=g.data.hold_seconds or .3}
+ g.trap_control=Traps.new(g,ground)
  function c:cancel()
   self.pointer=nil;g.aiming=false;g.pending_hold=false;g.hold_progress=0;g.held=false
+  g.trap_control:cancel(false)
  end
  function c:aim()
   local p=self.pointer;if not p then return end
@@ -20,6 +23,7 @@ function M.new(g,ground)
   if self.pointer.seconds+1e-7>=self.threshold then self:aim()end
  end
  function c:input(a)
+  if g.trap_ui then return g.trap_control:input(a)end
   if g.paused or g.over or g.background then return end
   if a.pressed then
    if self.pointer then return end

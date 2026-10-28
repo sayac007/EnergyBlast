@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_heal.gltf"
+materials { name: "Original illustrated illustrated_heal" material: "/models/illustrated_heal-0.material" textures { sampler: "tex0" texture: "/models/heal-prop.png" } }

@@ -1,7 +1,15 @@
 -- Three tactical situations: prepare a trap, remember a sequence, escort a drone.
 local O={}
+O.catalogue={
+ {id='magnet',name='MAGNET',duration=6,cooldown=4,radius=.85,color='b994ff',icon='trap_magnet',label='SCHILD AUS · 6 s'},
+ {id='frost',name='EIS',duration=9,cooldown=7,radius=1,color='80ecff',icon='trap_frost',label='LAENGER FEST · 9 s'},
+ {id='pulse',name='IMPULS',duration=5,cooldown=8,radius=1.15,damage=2,color='ffd477',icon='trap_pulse',label='2 ENERGIEPUNKTE'}
+}
+function O.trap_spec(id)
+ for _,spec in ipairs(O.catalogue)do if spec.id==(id or'magnet')then return spec end end
+end
 function O.load(g)
- g.traps={};g.trap_cooldown=0;g.sequence_progress=0;g.sequence_clock=0;g.sequence_wrong=0
+ g.traps={};g.trap_cooldown=0;g.trap_ui=nil;g.tactical_pause=false;g.sequence_progress=0;g.sequence_clock=0;g.sequence_wrong=0
  for i,p in ipairs(g.m.sequence_nodes or{})do g.enemies[#g.enemies+1]={p={p[1],p[2]},hp=1,max_hp=1,kind='sequence',order=i,timer=999,warning=0,direction={0,1}}end
  if g.m.escort then local e=g.m.escort;g.drone={p={e.spawn[1],e.spawn[2]},hp=e.hp,waypoint=1,invulnerable=0,arrived=false}else g.drone=nil end
 end
@@ -16,10 +24,11 @@ function O.sequence_hit(g,t)
   local alive=false;for _,e in ipairs(g.enemies)do alive=alive or e.hp>0 end;if not alive then g:finish()end
  end
 end
-function O.trap(g)
- if g.paused or g.over or g.trap_cooldown>0 or g.m.kind~='trap'or g:blocked(g.p)then return false end
+function O.trap(g,p,id)
+ local spec=O.trap_spec(id);p=p or g.p
+ if not spec or g.paused or g.over or g.trap_cooldown>0 or g.m.kind~='trap'or g:blocked(p)then return false end
  if #g.traps>=2 then table.remove(g.traps,1)end
- g.traps[#g.traps+1]={p={g.p[1],g.p[2]},life=12};g.trap_cooldown=4;g.status='FALLE LIEGT - LOCKE DEN WAECHTER';return true
+ g.traps[#g.traps+1]={p={p[1],p[2]},life=12,type=spec.id,radius=spec.radius};g.trap_cooldown=spec.cooldown;g.status=spec.name..' BEREIT - LOCKE DEN WAECHTER';return true
 end
 function O.drone_hit(g)
  if not g.drone or g.drone.invulnerable>0 or g.over then return end
@@ -29,7 +38,12 @@ end
 function O.update(g,dt,dist)
  g.trap_cooldown=math.max(0,g.trap_cooldown-dt);g.sequence_clock=g.sequence_clock+dt;g.sequence_wrong=math.max(0,g.sequence_wrong-dt)
  for i=#g.traps,1,-1 do local trap=g.traps[i];trap.life=trap.life-dt
-  for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='relay'and e.kind~='sequence'and dist(e.p,trap.p)<.85 then e.trapped=3.5;trap.life=0;g.fx[#g.fx+1]={kind='absorb',p={e.p[1],e.p[2]},age=0,life=.35};g.status='SCHILD AUS - JETZT TREFFEN';break end end
+  local spec=O.trap_spec(trap.type)
+  for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='relay'and e.kind~='sequence'and dist(e.p,trap.p)<spec.radius then
+   e.trapped=math.max(e.trapped or 0,spec.duration);trap.life=0;g.fx[#g.fx+1]={kind='trap_'..spec.id,p={e.p[1],e.p[2]},age=0,life=.8};g.status='SCHILD AUS - JETZT TREFFEN';g.say('defold_trap_trigger')
+   for hit=1,(spec.damage or 0)do g:hit(e,0)end
+   break
+  end end
   if trap.life<=0 then table.remove(g.traps,i)end
  end
  for _,e in ipairs(g.enemies)do e.trapped=math.max(0,(e.trapped or 0)-dt);e.lit=math.max(0,(e.lit or 0)-dt)end

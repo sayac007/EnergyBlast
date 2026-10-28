@@ -45,7 +45,7 @@ function M.new(data,saved)
   self.path={};if found then local c=finish;while c do table.insert(self.path,1,point(c));c=parents[key(c)]end
   elseif self.m.staging and M.dist(target,self.m.staging)>.5 then self:navigate(self.m.staging)end
  end
- function g:fire()if self.paused or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
+ function g:fire()if self.paused or self.tactical_pause or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
  function g:hit_player()if self.invulnerable>0 or self.over then return end;self.hp=self.hp-1;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
  function g:finish()if self.solved then return end;self.solved=true;self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self.say('combat_win')end
@@ -74,6 +74,7 @@ function M.new(data,saved)
   if self.pending_win then self.pending_win=self.pending_win-dt;if self.pending_win<=0 then self.pending_win=nil;if not self.dialog then self.dialog='win'end end end
  end
  function g:update(dt)
+  if self.tactical_pause then return end
   self:effects_update(dt)
   if self.paused or self.background or self.over then return end;if self.control_tick then self.control_tick(dt)end;dt=math.min(.05,dt);self.clock=self.clock+dt
   for _,k in ipairs({'invulnerable','cooldown','dash_time','dash_cooldown','clue_time','hint_debounce','feedback'})do self[k]=math.max(0,self[k]-dt)end
@@ -94,7 +95,7 @@ function M.new(data,saved)
   if self.secret_visible and d<.7 then self:award('secret:'..self.m.id);self.say('combat_loot');self.secret_visible=false end
   if self.m.kind~='escort'and self.m.exit_required and self:open() and M.dist(self.p,self.m.goal)<.8 then local alive=false;for _,t in ipairs(self.enemies)do alive=alive or t.hp>0 end;if not alive then self:finish()end end
  end
- function g:trap()return Objectives.trap(self)end
+ function g:trap(p,id)return Objectives.trap(self,p,id)end
  function g:hit_drone()Objectives.drone_hit(self)end
  Progression.bind(g)
  g:load(1);return g

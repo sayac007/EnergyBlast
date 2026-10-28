@@ -1,4 +1,4 @@
-"""Original detailed rigid-part characters, AO baking and themed arena geometry.
+"""Original rigid-part fixtures and the 0.7 orbital arena architecture.
 Reference research: docs/ART_DIRECTION.md. No reference-game geometry is imported.
 Run with Blender 4.3.2; output contains real, runtime-consumed meshes and textures.
 """
@@ -22,7 +22,7 @@ def finish(o,m):
 def box(n,p,s,m,b=.08):
  bpy.ops.mesh.primitive_cube_add(size=1,location=p);o=bpy.context.object;o.name=n;o.scale=s;bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
  if b:
-  mod=o.modifiers.new('Sculpted edges','BEVEL');mod.width=min(b,min(s)*.42);mod.segments=4;o.modifiers.new('Weighted normals','WEIGHTED_NORMAL')
+  mod=o.modifiers.new('Sculpted edges','BEVEL');mod.width=min(b,min(s)*.42);mod.segments=2 if globals().get('WORLD_GEOMETRY',False) else 4;o.modifiers.new('Weighted normals','WEIGHTED_NORMAL')
  return finish(o,m)
 def ball(n,p,s,m):
  bpy.ops.mesh.primitive_uv_sphere_add(segments=24,ring_count=12,location=p);o=bpy.context.object;o.name=n;o.scale=s;return finish(o,m)
@@ -183,60 +183,143 @@ def plane(name,w,h,texture,scale=1):
  bpy.ops.mesh.primitive_plane_add(size=1,location=(0,0,.065));o=bpy.context.object;o.name=name;o.scale=(w,h,1);bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);finish(o,white)
  # Pack a shared base-color image material for sync_defold's explicit binding.
  material=mat(name+' material',(1,1,1));o.data.materials.clear();o.data.materials.append(material);return o
-# Themed walls preserve exactly the previous collider rectangles.
+# Original 23rd-century orbital architecture. Static decoration never changes gameplay.
+WORLD_GEOMETRY=True
+# Semantic SOLID source meshes preserve every exact collider footprint, and batching
+# only joins this same evaluated geometry. Flush floor markings are walkable.
 data=json.loads((R/'shared/defold04.json').read_text());surfaces={}
-palettes={'reactor':((.25,.60,.48),(.66,.39,.20),'ground-garden.png'),'citadel':((.33,.31,.62),(.33,.20,.55),'ground-sand.png'),'dock':((.12,.40,.57),(.16,.38,.50),'ground-sand.png'),'forge':((.65,.36,.22),(.60,.25,.16),'ground-sand.png'),'echo':((.20,.41,.55),(.25,.33,.55),'ground-garden.png'),'rescue':((.27,.57,.32),(.50,.36,.20),'ground-garden.png')}
+palettes={
+ 'reactor':((.025,.82,.68),(.025,.09,.15),'ground-garden.png',[.70,.92,.95,1]),
+ 'citadel':((.60,.23,1),(.065,.035,.16),'ground-sand.png',[.75,.71,.98,1]),
+ 'dock':((.05,.63,1),(.018,.07,.19),'ground-sand.png',[.66,.84,1,1]),
+ 'forge':((1,.43,.035),(.09,.05,.12),'ground-sand.png',[.92,.81,.77,1]),
+ 'echo':((.28,.61,1),(.03,.06,.18),'ground-garden.png',[.71,.84,1,1]),
+ 'rescue':((.12,.92,.45),(.02,.10,.12),'ground-garden.png',[.73,.95,.85,1]),
+}
 for mission in data['missions']:
- clear();name=mission['id'];ground,wallcolor,texture=palettes[name];stone=mat(name+' masonry',wallcolor);cap=mat(name+' cap',tuple(min(1,c*1.22+.08)for c in wallcolor));mortar=mat(name+' mortar',tuple(c*.64 for c in wallcolor))
- # Ground is exported separately: real textured material, no checkerboard boxes.
- o=plane('Painted ground',21.5,15.5,texture);export(name+'_ground',[o],texture)
- metadata[name+'_ground']['color_tint']={'reactor':[1,1,.94,1],'citadel':[.72,.65,1,1],'dock':[.64,.87,1,1],'forge':[1,.87,.74,1],'echo':[.72,.89,1,1],'rescue':[.95,1,.91,1]}[name]
- bpy.data.objects.remove(o,do_unlink=True)
+ clear();name=mission['id'];accent,wallcolor,texture,tint=palettes[name]
+ hull=mat(name+' deep indigo hull',(.007,.017,.045));plate=mat(name+' naval ceramic',wallcolor)
+ ivory=mat(name+' porcelain edge',(.44,.59,.69));brass=mat(name+' satin brass',(.56,.25,.045))
+ glow=mat('Luminous '+name+' reactor seam',accent);darkglass=mat(name+' recessed glass',(.004,.013,.025))
+ # Root can replace these explicit bindings with the new clean original floor art.
+ o=plane('Orbital deck floor',21.5,15.5,texture);export(name+'_ground',[o],texture)
+ metadata[name+'_ground']['color_tint']=tint;bpy.data.objects.remove(o,do_unlink=True)
  a=data['arena'];rows=[{'r':r,'type':'border'}for r in [[a[0],a[1],a[2],.3],[a[0],a[1]+a[3]-.3,a[2],.3],[a[0],a[1],.3,a[3]],[a[0]+a[2]-.3,a[1],.3,a[3]]]]+[{'r':v,'type':'cover'}for v in mission['covers']]+[{'r':v,'type':'reflector'}for v in mission['reflectors']];surfaces[name]=rows
  for i,row in enumerate(rows):
-  x,z,w,h=row['r'];height=.86 if row['type']=='reflector'else 1.12
-  body=box('SOLID '+str(i)+' '+row['type'],point(x+w/2,z+h/2,height/2),(w if row['type']=='reflector'else max(.05,w-.05),h if row['type']=='reflector'else max(.05,h-.05),height),teal if row['type']=='reflector'else mortar,.055)
-  crown=box('SOLID crown '+str(i)+' '+row['type'],point(x+w/2,z+h/2,height+.035),(w,h,.07),cyan if row['type']=='reflector'else mortar,.025)
-  row['geometry_r']=list(row['r'])
-  if row['type']!='reflector':
-   nx=max(1,math.ceil(w/.85));nz=max(1,math.ceil(h/.85))
-   for ix in range(nx):
-    for iz in range(nz):box('Inset crown tile',point(x+(ix+.5)*w/nx,z+(iz+.5)*h/nz,height+.095),(max(.03,w/nx-.025),max(.03,h/nz-.025),.10),cap,.025)
-  # Staggered masonry panels and bevel highlights stay strictly within footprint.
-  if row['type']!='reflector':
-   length=max(w,h);horizontal=w>=h;n=max(1,math.ceil(length/.85))
-   for layer in range(2):
-    for j in range(n):
-     lo=j*length/n;hi=(j+1)*length/n
-     if horizontal:pos=point(x+(lo+hi)/2,z+h/2,.29+layer*.45);dims=(max(.03,hi-lo-.035),max(.05,h-.035),.40)
-     else:pos=point(x+w/2,z+(lo+hi)/2,.29+layer*.45);dims=(max(.05,w-.035),max(.03,hi-lo-.035),.40)
-     box('Inset masonry',pos,dims,stone,.045)
-  else:
-   for j in range(max(1,int(max(w,h)/.65))):
-    px=x+min(w-.05,.15+j*.65)if w>h else x+w/2;pz=z+h/2 if w>h else z+min(h-.05,.15+j*.65)
-    ball('Reflective stud',point(px,pz,.94),(.035,.035,.025),gold)
+  x,z,w,h=row['r'];kind=row['type'];height=.86 if kind=='reflector'else 1.12
+  box('SOLID '+str(i)+' '+kind,point(x+w/2,z+h/2,height/2),(max(.05,w-.035),max(.05,h-.035),height),hull,.065)
+  box('SOLID crown '+str(i)+' '+kind,point(x+w/2,z+h/2,height+.035),(w,h,.07),plate,.025)
+  row['geometry_r']=list(row['r']);horizontal=w>=h;length=max(w,h);width=min(w,h);count=max(1,math.ceil(length/1.25))
+  def aligned(label,along,cross,high,lng,across,thick,material,bevel=.025):
+   # along/cross and all dimensions are inside the unchanged footprint.
+   px=x+along if horizontal else x+w/2+cross
+   pz=z+h/2+cross if horizontal else z+along
+   return box(label,point(px,pz,high),(lng,across,thick)if horizontal else(across,lng,thick),material,0 if min(lng,across,thick)<.05 else bevel)
+  for j in range(count):
+   c=(j+.5)*length/count;segment=length/count
+   aligned('Armored module',c,0,height+.10,max(.04,segment-.055),max(.06,width-.045),.12,ivory,.035)
+   aligned('Recessed reactor window',c,0,height+.17,max(.035,segment-.15),max(.045,width*.69),.025,darkglass,.025)
+   # A narrow luminous channel is readable as reflection technology, not brick grout.
+   aligned('Luminous inset channel',c,0,height+.188,max(.025,segment-.25),min(.075,width*.24),.014,glow,.006)
+   # Vent fingers, braces and tiny brass fasteners give the armor a designed hierarchy.
+   if width>.7:
+    for k in [-1,1]:
+     aligned('Raised shoulder casing',c,k*width*.38,height+.18,max(.05,segment-.13),min(.16,width*.14),.095,plate,.025)
+     aligned('Luminous shoulder line',c,k*width*.38,height+.235,max(.03,segment-.29),.027,.014,glow,.004)
+    for q in [-.25,0,.25]:
+     aligned('Reactor grille',c+q*segment,0,height+.195,.025,min(.43,width*.48),.017,brass,.004)
+   else:
+    aligned('Brass latch',c+segment*.32,0,height+.20,.05,width*.68,.025,brass,.006)
+   # Long visible faces remain nested within collider instead of decorative wall overhang.
+   for k in [-1,1]:
+    aligned('Side ceramic face',c,k*(width/2-.025),height*.55,max(.04,segment-.08),.027,height*.52,plate,.012)
+    aligned('Luminous side circuit',c,k*(width/2-.007),height*.72,max(.025,segment-.22),.009,.036,glow,.003)
+  if kind=='cover':
+   # Braced end caps with small inset lights. No column extends beyond the rectangle.
+   for q in [.10,length-.10]:
+    aligned('Heavy terminal brace',q,0,height*.57,.13,max(.045,width-.08),height*.74,plate,.035)
+    aligned('Terminal brass key',q,0,height+.205,.09,max(.03,width*.58),.045,brass,.01)
+ # Sparse inlaid guidance traces read as paint; never as uncollidable walls.
+ for side in [-1,1]:
+  x=side*8.85
+  for j in range(5):
+   z=-5.5+j*2.35
+   box('Flush navigation trace',point(x,z,.078),(.026,1.25,.012),glow,.003)
+   box('Flush trace crossbar',point(x-side*.16,z+.61,.078),(.34,.025,.012),plate,.003)
+ # Existing treasure clues remain visible with exactly the same semantic locations.
  for mark in mission['secret']['marks']:
   x,z=mark['position']
   if mark['kind']=='arrow':
-   mesh=bpy.data.meshes.new('Treasure arrow');mesh.from_pydata([point(x-.20,z+.20,.08),point(x+.20,z+.20,.08),point(x,z-.29,.08)],[],[(0,1,2)]);o=bpy.data.objects.new('Treasure trail',mesh);bpy.context.collection.objects.link(o);finish(o,gold)
+   mesh=bpy.data.meshes.new('Treasure arrow');mesh.from_pydata([point(x-.20,z+.20,.085),point(x+.20,z+.20,.085),point(x,z-.29,.085)],[],[(0,1,2)]);o=bpy.data.objects.new('Treasure trail',mesh);bpy.context.collection.objects.link(o);finish(o,gold)
   else:
-   ball('Dark hatch',point(x,z,.075),(.30,.23,.009),ink)
-   for j in range(3):box('Scratch',point(x-.12+j*.12,z,.085),(.032,.24,.012),gold,.003)
- for x,z in [mission['spawn'],mission['goal']]:ring('Inlaid portal',point(x,z,.075),.60,.035,gold)
- # Lush original scenery is OUTSIDE the collision border, never fake in-field cover.
+   box('Flush maintenance hatch',point(x,z,.082),(.63,.44,.018),darkglass,.06)
+   for j in range(3):box('Treasure scratch',point(x-.12+j*.12,z,.095),(.032,.24,.012),gold,.003)
+ for x,z in [mission['spawn'],mission['goal']]:
+  ring('Inlaid energy portal',point(x,z,.083),.60,.025,glow)
+  for q in range(4):
+   a=q*math.pi/2;box('Landing marker',point(x+math.cos(a)*.70,z+math.sin(a)*.70,.085),(.10,.10,.014),brass,.015)
+ # Scenery stays entirely outside every playable border. The battle deck is an
+ # orbital place, not a garden with a few glowing boxes: towers, conduits and a
+ # different themed far-horizon installation establish a coherent environment.
  for side in [-1,1]:
-  for j in range(9):
-   x=side*(11.0+rng.uniform(.2,.8));z=-7.4+j*1.85
-   box('Outer retaining stone',point(x,z,.20),(.8,1.4,.6),stone,.14)
-   if texture=='ground-garden.png':
-    cone('Tree trunk',point(x,z,.85),.10,.065,1.2,leather)
-    for dx,dz,h in [(-.18,0,1.65),(.20,.09,1.8),(0,-.14,2.1)]:ball('Sculpted canopy',point(x+dx,z+dz,h),(.47,.48,.48),teal)
-   else:
-    cone('Exterior cactus',point(x,z,.9),.16,.13,1.35,teal);ball('Cactus crown',point(x,z,1.58),(.14,.14,.14),teal);ball('Cactus blossom',point(x,z,1.74),(.10,.10,.06),coral)
- # Foundation and generous outer terrain remove the black floating-board void.
- box('Raised arena foundation',point(0,0,-.23),(22.1,16.1,.46),stone,.18)
+  for j in range(5):
+   x=side*12.1;z=-6.6+j*3.2;ht=1.65+((j+len(name))%3)*.48
+   box('Exterior dock pylon',point(x,z,ht/2-.20),(1.25,1.55,ht),hull,.17)
+   box('Pylon porcelain shoulder',point(x,z,ht-.16),(1.31,1.61,.20),ivory,.06)
+   box('Pylon recessed face',point(x-side*.64,z,ht*.46),(.05,.97,ht*.60),darkglass,.015)
+   for q in [-1,0,1]:box('Luminous pylon vent',point(x-side*.67,z+q*.25,ht*.46),(.025,.065,ht*.47),glow,.008)
+   cone('Signal cap',point(x,z,ht+.14),.20,.08,.45,brass)
+   ball('Signal beacon',point(x,z,ht+.44),(.095,.095,.095),glow)
+  # Parallel protected exterior conduits tie the environment to its reactors.
+  for k in [-1,1]:
+   tube('Exterior energy conduit',[point(side*11.55+k*.13,-7.3,-.05),point(side*11.55+k*.13,0,-.05),point(side*11.55+k*.13,7.3,-.05)],.055,glow)
+ # Large landmark beyond far border. Silhouette and accent differ per sector.
+ far=-9.2
+ box('Horizon installation platform',point(0,far,-.15),(8.2,2.1,.50),hull,.18)
+ if name in ['reactor','forge']:
+  cone('Reactor base',point(0,far,.27),1.15,1.0,.48,plate)
+  cone('Reactor energy column',point(0,far,1.60),.55,.55,2.4,darkglass)
+  for q in range(5):ring('Luminous containment coil',point(0,far,.60+q*.45),.68,.055,glow)
+  cone('Reactor crown',point(0,far,2.88),.95,.67,.28,ivory)
+  for side in [-1,1]:
+   x=side*2.1;box('Reactor retaining arm',point(x,far,1.16),(.55,.8,2.6),plate,.13)
+   box('Retaining arm light',point(x,far+.405,1.25),(.16,.025,1.8),glow,.015)
+ elif name=='citadel':
+  for side in [-1,1]:
+   x=side*2.65
+   box('Citadel spire',point(x,far,1.65),(1.4,1.4,3.7),plate,.28)
+   box('Citadel light blade',point(x,far+.71,1.95),(.25,.025,2.5),glow,.025)
+   cone('Citadel crown',point(x,far,3.8),.48,.02,.65,brass)
+  box('Horizon gateway',point(0,far,3.15),(5.3,.85,.35),ivory,.1)
+  box('Luminous gateway',point(0,far+.44,3.15),(4.5,.025,.08),glow,.01)
+ elif name=='dock':
+  for side in [-1,1]:
+   x=side*2.7;box('Orbital docking tower',point(x,far,1.35),(.75,1.2,3.0),plate,.12)
+   box('Landing gantry',point(x-side*.8,far,2.8),(2.3,.7,.28),ivory,.06)
+   box('Luminous gantry edge',point(x-side*.8,far+.36,2.8),(1.9,.025,.06),glow,.01)
+  box('Distant shuttle hull',point(0,far,1.3),(2.5,1.35,.62),ivory,.25)
+  for side in [-1,1]:cone('Shuttle thruster',point(side*1.35,far,1.20),.32,.26,.70,glow)
+ elif name=='echo':
+  for j in range(3):
+   x=(j-1)*2.6;box('Resonator pedestal',point(x,far,.30),(1.3,1.3,.75),plate,.18)
+   r=ring('Harmonic arch',point(x,far,1.65),.90,.12,ivory);r.rotation_euler[0]=math.pi/2
+   r=ring('Luminous harmonic core',point(x,far,1.65),.70,.045,glow);r.rotation_euler[0]=math.pi/2
+   ball('Echo crystal',point(x,far,1.65),(.16,.16,.32),glow)
+ else:
+  box('Rescue control hub',point(0,far,1.08),(4.2,1.55,2.5),plate,.30)
+  box('Wide observation window',point(0,far+.79,1.38),(3.3,.035,.72),darkglass,.08)
+  for j in range(5):box('Luminous control readout',point((j-2)*.50,far+.815,1.38),(.22,.02,.40-(j%2)*.14),glow,.015)
+  box('Hub ivory canopy',point(0,far,2.44),(4.5,1.8,.22),ivory,.10)
+  cone('Drone communication mast',point(0,far,3.05),.055,.035,1.1,brass)
+  ball('Transmission orb',point(0,far,3.6),(.20,.20,.20),glow)
+ # Hull, brass belt and suspended keel tie the arena to the same orbital station.
+ box('Raised orbital deck',point(0,0,-.27),(22.1,16.1,.54),hull,.18)
+ for side in [-1,1]:
+  box('Deck exterior armor belt',point(side*10.96,0,-.24),(.17,15.7,.30),plate,.05)
+  box('Luminous deck exterior seam',point(side*11.06,0,-.22),(.025,15.2,.05),glow,.006)
  export(name)
 # The lobby has no rectangular floor or clipped trees: a clean hero pedestal.
+WORLD_GEOMETRY=False
 clear();ring('Pedestal rim',(0,0,.035),.85,.065,gold);cone('Hero pedestal',(0,0,-.11),.91,.85,.23,teal)
 for side in [-1,1]:
  x=side*.97
@@ -246,4 +329,4 @@ export('lobby',tag='stage')
 clear();ring('Hero selection ring',(0,0,.09),.40,.024,cyan);export('selection_ring')
 clear();bpy.ops.mesh.primitive_plane_add(size=.60,location=(0,0,0),rotation=(math.pi/2,0,0));finish(bpy.context.object,cyan);export('glow',tag='glow')
 (OUT/'models.json').write_text(json.dumps(metadata,indent=2)+'\n');(OUT/'rigs.json').write_text(json.dumps(rigs,indent=2)+'\n');(OUT/'surfaces.json').write_text(json.dumps(surfaces,indent=2)+'\n');(OUT/'dimensions.json').write_text(json.dumps(bounds,indent=2)+'\n')
-print('Original 0.6 detailed actors / baked AO / arena kit COMPLETE')
+print('Original actors / baked AO fixtures / 0.7 orbital arena kit COMPLETE')

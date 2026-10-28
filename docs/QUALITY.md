@@ -1,4 +1,43 @@
-# Aktueller Prüfstand — Defold 0.6, Prism Frontier
+# Aktueller Prüfstand — Defold 0.7, Neon Frontier
+
+**28.10.2026.** [Umsetzung](MILESTONE_06.md), [Fallen](TRAPS.md),
+[Testbefehle](BUILD_AND_TEST.md), [APK-Metadaten](../downloads/defold-verification.json).
+
+| Tatsächlich ausgeführt | Ergebnis |
+|---|---|
+| Native Regeln / Darstellung | **231 PASS**; frühere Kampf-/Speicher-/Bedienfälle erhalten, 33 neue Fallenfälle, tatsächliche Animationsuniform statt alter Gelenkannahme |
+| Echte native Eingaben | **PASS**, Menü, Figuren, zwei Käufe, Kurz-/Langdruck, FEUER und TON bei 1280×720 sowie 1280×800 |
+| Fallen direkt im Feld | **PASS**, XTest öffnet Katalog, wählt jede der drei Arten, platziert und bricht ab; keine ungewollten Schüsse |
+| Separate Speicherprozesse | **PASS**, Gesamtsterne, Guthaben, Käufe, Figur, Hinweise, Musik |
+| Geschosse hinter Wänden | **PASS**, verdeckter Fall 0 veränderte Pixel, davor sichtbarer Kontrollfall 250 Pixel |
+| Gemeinsame Tests | **12 Gruppen PASS**, echte Wandpuffer, unveränderte Vergleichs-Engines, Audio/Hashes, transparente unterschiedliche Animationsframes, aktive Texturbindungen, identisches statisches Batching |
+| Tatsächliche Audioaufnahme | **PASS**, Musik an RMS 0,01130, aus 0, gemischt 0,03704; geprüfter Ausgang ohne Übersteuerung |
+| Unabhängiges Sprach-Screening | **12/12** normalisiert exakt; tatsächliche Decodierung, Hash, Dauer und Pegel 12/12 bestanden |
+| Eigene Sichtprüfung | Menü, Figuren, Arsenal und sechs Sektoren angesehen; 34 echte Bewegungs-/Schussframes plus Fallenwahl/Vorschau aufgenommen; keine Geräteabnahme |
+| Android-Artefakt | Separater Abschlussnachweis in den Download-Metadaten; bis dahin kein neues APK behauptet |
+
+Aktualisierte Darstellung verwendet originale Animationsbilder auf nativen
+Weltflächen und echte 3D-Deckung. Frühere Gelenkmodelle bleiben historische
+Quelldaten; sie werden nicht als aktive 0.7-Skelettanimation ausgegeben. Die
+Bauweise reduziert statische Arenen auf sieben Materialbatches; keine daraus
+abgeleitete Behauptung einer gemessenen Handy-Bildrate.
+
+Neue Fallenprüfungen sichern freie/erreichbare Positionen, Sichtlinie, Reichweite,
+Pause/Kamera, fremde Finger, Abbruch, Ressourcenlimits und unterschiedliche Effekte.
+Kontextwechsel stoppen überholte Ansagen. Die wichtige Triggeransage ist 2,25s
+lang, Beginn nach 0,116s; Öffnungen 5–9s lassen Zeit zum Reagieren.
+
+**Offen:** physische Installation/Update und echte Spielstandübernahme,
+Touch-/Klanggefühl, kindliches Verständnis, Geräte-Seitenverhältnisse und Leistung,
+längere Spielrunden, Schwierigkeit und grafische Abnahme. 0.5 und 0.6 wurden
+optisch abgelehnt. Kein Testzähler begründet eine kommerzielle Gleichwertigkeit,
+Store-Reife oder pädagogische Wirksamkeit. Keine neue CI ausgeführt/behauptet.
+
+## Historische Prüfstände
+
+Die folgenden Ergebnisse gelten für ihre damaligen Quellstände.
+
+## Historischer Prüfstand — Defold 0.6, Prism Frontier
 
 **28.10.2026.** [Sorgfältiger Grafikauftrag und Recherche](ART_DIRECTION.md),
 [Umsetzung/Bilder](MILESTONE_05.md), [Kommandos](BUILD_AND_TEST.md),

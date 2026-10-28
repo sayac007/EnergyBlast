@@ -1,0 +1,2 @@
+mesh: "/models/device_trap_frost.gltf"
+materials { name: "Original illustrated device_trap_frost" material: "/models/device_trap_frost-0.material" textures { sampler: "tex0" texture: "/models/ui_trap_frost.png" } }

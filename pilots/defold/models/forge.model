@@ -1,9 +1,8 @@
 mesh: "/models/forge.runtime.gltf"
-materials { name: "forge mortar" material: "/models/forge-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "forge cap" material: "/models/forge-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "forge masonry" material: "/models/forge-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Jade" material: "/models/forge-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Mint light" material: "/models/forge-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/forge-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Deep blue ink" material: "/models/forge-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Coral" material: "/models/forge-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "forge deep indigo hull" material: "/models/forge-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "forge naval ceramic" material: "/models/forge-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "forge porcelain edge" material: "/models/forge-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "forge recessed glass" material: "/models/forge-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous forge reactor seam" material: "/models/forge-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "forge satin brass" material: "/models/forge-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/forge-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

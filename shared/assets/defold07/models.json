@@ -1,0 +1,86 @@
+{
+  "illustrated_hero": {
+    "texture": "hero-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_dragon": {
+    "texture": "dragon-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_fox": {
+    "texture": "fox-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_sentinel": {
+    "texture": "sentinel-states.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 1
+  },
+  "illustrated_guardian": {
+    "texture": "guardian-states.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 1
+  },
+  "illustrated_boss": {
+    "texture": "boss-states.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 1
+  },
+  "illustrated_explosion": {
+    "texture": "explosion-frames.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_chest": {
+    "texture": "chest-prop.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "illustrated_drone": {
+    "texture": "drone-prop.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "illustrated_relay": {
+    "texture": "relay-prop.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "illustrated_heal": {
+    "texture": "heal-prop.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "device_trap_magnet": {
+    "texture": "ui_trap_magnet.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "device_trap_frost": {
+    "texture": "ui_trap_frost.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  },
+  "device_trap_pulse": {
+    "texture": "ui_trap_pulse.png",
+    "tag": "billboard",
+    "columns": 1,
+    "rows": 1
+  }
+}

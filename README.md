@@ -11,6 +11,11 @@ Die Grafik von 0.7 bleibt erhalten; Defold ist der Schwerpunkt.
 | Tatsächliche Prüfungen / offene Geräteprobe | [Qualitätsstatus](docs/QUALITY.md) |
 | Bauen / Auftrag / Recherche | [Befehle](docs/BUILD_AND_TEST.md), [Projektauftrag](docs/PROJECT_BRIEF.md), [Art Direction](docs/ART_DIRECTION.md) |
 
+**[EnergyBlast 0.8 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads/energyblast-defold-debug.apk) — 44,1 MB.**
+Android 7/API 24+, ARM64. Über die bisherige Defold-App installieren; **nicht vorher
+deinstallieren**, damit lokale Sterne und Käufe erhalten bleiben. Entwicklungssignatur,
+Paketkennung und Speicherort sind unverändert. [Hash/Metadaten](downloads/README.md).
+
 ## Wo finde ich was?
 
 - **Drache wählen:** Auf der Startseite direkt das Bild **Drache Flammi** antippen.

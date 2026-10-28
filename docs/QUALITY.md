@@ -13,9 +13,9 @@
 | Geschossverdeckung | **PASS**, verdeckt 0 Pixel verändert, sichtbarer Kontrollfall 250 Pixel |
 | Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01148, aus 0, Mischung 0,03704; kein Überlauf im geprüften Ausgang |
 | Sprachdateien | **26/26 technisch bestanden**: Hash, Dauer, Decodierung, Pegel;12 bisherige unverändert |
-| Unabhängiger ASR-Screen | **25/26 wörtlich normalisiert exakt**; einmal gültiges „Geh jetzt“ statt „Gehe jetzt“, keine Bedeutungsabweichung behauptet |
+| Unabhängiger ASR-Screen | **25/26 wörtlich normalisiert exakt**; einmal gültiges „Geh jetzt“ statt „Gehe jetzt“, gültige Imperativvariante; kein menschlicher Hörnachweis |
 | Eigene Sichtprüfung | Menü, Drachenwahl, Kaufen/Guthaben, Sieg/Weiter, Schatz-/Bonusführung und neue Missionsanzeige in echter nativer Laufzeit angesehen |
-| Android-Artefakt | Abschlussnachweis folgt in den Download-Metadaten; vor Prüfung kein neues APK behauptet |
+| Android-Artefakt | **PASS**, 0.8.0 / Code 9, 44.094.650 Bytes; Manifest/APIs, v2/gleiches Zertifikat, CRC, keine Schlüssel, Projektabzug, ZIP-Ausrichtung |
 
 Die bisherigen Spieltests laufen mit unveränderter0.7-Regelfixture weiter.
 Neue Prüfungen kontrollieren echte reflektierte Geschosse, Reihenfolge, ein grünes
@@ -39,6 +39,10 @@ Spielstandübernahme, kindliches Verständnis, Klang, Schwierigkeit, längere Ru
 und Geräteleistung. Keine neue grüne CI, Store-Reife oder pädagogische Wirksamkeit.
 Die Sieg-UI-Prüfung verwendet kontrolliert den echten Abschlussweg; sie ist kein
 behaupteter manuell bestandener Android-Level.
+
+Sauberer APK-Quellstand [`6b1afee`](https://github.com/sayac007/EnergyBlast/commit/6b1afee89855c737358859ce4fd2f83100f53583),
+Artefakt [`5c8e1ca`](https://github.com/sayac007/EnergyBlast/commit/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce),
+gebaut 28.10.2026, 20:39 MEZ. [Direkter Download und SHA-256](../downloads/README.md).
 
 ## Historische Nachweise
 

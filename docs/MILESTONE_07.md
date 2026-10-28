@@ -52,3 +52,10 @@ Eingaben für Drachenwahl, Käufe und unmittelbare Gesundheit, fehlendes Guthabe
 Schatz-/Bonusführung und Wechsel trotz offenem Schatz. Physische Geräteprobe,
 Hörverständnis des Kindes, längere Runden und Schwierigkeit bleiben offen.
 Keine Änderungen an anderen Repositories, Release-Schlüsseln oder Store-Freigaben.
+
+Abschlussbuild 0.8.0 / Code 9: 44.094.650 Bytes, gebaut 28.10.2026, 20:39 MEZ.
+Quellcommit `6b1afee89855c737358859ce4fd2f83100f53583`, APK-Snapshot `5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce`.
+SHA-256 `752fe1693ce08be266a0871b8ad5cd5cbf1569ddabdff5921269faa918849bfd`.
+Paket/APIs, Querformat, v2/gleiches Zertifikat, fehlende Berechtigungen, Backup aus,
+CRC/ZIP-Ausrichtung, keine Schlüsseldateien und vollständiger Projektabzug bestanden.
+[Direkter APK-Download](https://raw.githubusercontent.com/sayac007/EnergyBlast/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads/energyblast-defold-debug.apk).

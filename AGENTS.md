@@ -35,3 +35,19 @@
 - Follow docs/DOCUMENTATION_STANDARD.md for future work: useful README, traceable
   brief, honest test/limit reporting, stable milestone/download references.
 - Keep scope proportional; minor changes need no new milestone or full game tests.
+
+## Shortlist iteration (operator feedback, 28 October 2026)
+
+- Continue **Defold and GDevelop** with a more complex, more attractive playable
+  prototype. Godot stays at the frozen 0.2 comparison; do not update its app/assets.
+- Remove computed player-shot trajectories. Show a reticle and actual projectiles,
+  never the calculated reflected route. Enemy charge warnings remain local effects.
+- Preserve the clear distinction between movement taps and shooting gestures;
+  use visible target hit testing before projecting the floor behind a character.
+- Current shortlist rules/assets: `shared/raid.json`, `shared/assets/raid`.
+  Godot still consumes `shared/combat.json` and `shared/assets/shooter`.
+- Current apps are 0.3.0/code 3; keep package IDs and the outside-repo development
+  key stable for updates. No PR, merge, Release or Play publication is authorized.
+- Native UI actions which create/delete game objects must send messages to the
+  main script. Calling a captured Lua closure from a GUI script does not switch
+  Defold's script context. Test real menu clicks as well as the pure combat loop.

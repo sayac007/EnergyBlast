@@ -75,3 +75,17 @@ weitere Sprachen und die nächste Grafik-/Animationsstufe sind noch festzulegen.
 „Spielbar“ und „technisch geprüft“ ersetzen weder die persönliche Abnahme des
 Spielgefühls noch eine pädagogische Evaluation. Die nächste Anweisung kann sich
 auf die konkreten [Ergebnisse und offenen Punkte](MILESTONE_01.md) beziehen.
+
+## Nächste Iteration nach dem Gerätetest — 28.10.2026
+
+Der Betreiber bevorzugt **Defold und GDevelop**. Besonders Defolds Unterscheidung
+zwischen Gehen und Zielen gefällt ihm; Godot verwechselt diese Absichten auf
+seinem Gerät gelegentlich. Deshalb wird Godot vorerst eingefroren und nur als
+bestehende Regression erhalten. Das ist eine Auswahl für die nächste Runde,
+noch keine endgültige Entscheidung zwischen Defold und GDevelop.
+
+Beauftragt sind komplexere, grafisch ansprechendere Prototypen dieser beiden
+Engines. Die berechnete Schussbahn soll ausdrücklich verschwinden. Der Spieler
+muss Abprallwinkel selbst einschätzen. Maßgeblich ist jetzt
+[Meilenstein 02 — Aurora Raid](MILESTONE_02.md); die obigen Drei-Engine-Anforderungen
+und Meilenstein 01 beschreiben den erhaltenen Ausgangsvergleich.

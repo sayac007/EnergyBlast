@@ -4,8 +4,8 @@ Aktuell weiterentwickelt: **Defold und GDevelop**, jeweils mit drei Sektoren.
 Neue Grafik, beweglicher Gegner, Abprall-Schalter, geschützter Boss und
 Fächersalven. Keine berechnete Schussbahn. [Umfang und Prüfungen](../docs/MILESTONE_02.md).
 
-- **[Defold 0.3 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
-- **[GDevelop 0.3 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-gdevelop-debug.apk)**
+- **[Defold 0.3 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk)**
+- **[GDevelop 0.3 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk)**
 - [Godot 0.2, unverändert](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk).
 
 ## Anforderungen und Update

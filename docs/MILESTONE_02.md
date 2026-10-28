@@ -114,3 +114,8 @@ keine Berechtigungen, Backup aus, ZIP-CRC und Ausrichtung bestanden. GDevelop
 enthält nachweislich die neuen Regeln und unveränderte Kopien der neuen Audios.
 Hashes und Dateilinks: [Downloads](../downloads/README.md). Godot-APK unverändert.
 Keine physische Installation oder Spielrunde mit den neuen APKs behauptet.
+
+Fester APK-Snapshot:
+[`943f934`](https://github.com/sayac007/EnergyBlast/tree/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads).
+Die direkten 0.3-Downloadlinks sind auf diesen Commit festgelegt. Spätere
+Branchänderungen ersetzen diesen Vergleich nicht stillschweigend.

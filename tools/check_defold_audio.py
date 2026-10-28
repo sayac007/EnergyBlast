@@ -14,9 +14,11 @@ with tempfile.TemporaryDirectory(prefix='energyblast-audio-',dir='/tmp')as folde
   proc=subprocess.run([str(a.engine),'--config=project.capture_music='+mode,str(R/'pilots/defold/build/default/game.projectc')],env=env,capture_output=True,text=True,timeout=15)
   log=proc.stdout+proc.stderr;assert proc.returncode==0 and 'ERROR:'not in log,log
   assert wave.is_file()and wave.stat().st_size>32000,log
-  raw=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(wave),'-ss','0.5','-ac','2','-ar','22050','-f','f32le','-'])
+  raw=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(wave),'-ac','2','-ar','22050','-f','f32le','-'])
   samples=struct.unpack('<'+'f'*(len(raw)//4),raw);assert len(samples)>22050
-  rms=math.sqrt(sum(x*x for x in samples)/len(samples));peak=max(abs(x)for x in samples);levels[mode]=rms
+  peak=max(abs(x)for x in samples) # Include the initial explosion/voice transient.
+  settled=samples[22050:];assert settled
+  rms=math.sqrt(sum(x*x for x in settled)/len(settled));levels[mode]=rms
   assert peak<.99
  assert levels['on']>.01,levels
  assert levels['off']<.0001,levels

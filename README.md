@@ -1,126 +1,123 @@
-# EnergyBlast — Aurora Raid 0.3
+# EnergyBlast — Defold 0.4, Aurora Hop
 
 Ein Android-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Roboter, aktive
-Kanonen, Deckung, Ausweichen und selbst eingeschätzte Abpraller. Nach dem ersten
-Gerätetest entwickeln wir **Defold und GDevelop** weiter. Godot bleibt als
-unveränderter 0.2-Vergleich erhalten. Eine endgültige Engine ist noch nicht gewählt.
+Kanonen, Deckung, Ausweichen und selbst eingeschätzte Abpraller. Nach deinem Test
+liegt der Schwerpunkt jetzt auf **Defold**. GDevelop 0.3 und Godot 0.2 bleiben
+als frühere Vergleichsfassungen erhalten.
 
-**Neu am 28.10.2026:** dritter, anspruchsvollerer Sektor, überarbeitete Original-
-3D-Modelle/Arenen, beweglicher Gegner, Fächersalven, Schalter und geschützter Boss.
-**Keine berechnete Schussbahn:** Du siehst eine Zielmarke und echte Geschosse;
-den richtigen Winkel musst du selbst finden.
+**Neu am 28.10.2026:** klare Unterscheidung nach Druckdauer, 2,25-mal so große
+Arenen mit folgender Kamera, eigene synthetische Hintergrundmusik und animierte
+Energieexplosionen beim endgültigen Treffer. Keine berechnete Schussbahn.
 
-| Beurteilen und weiterplanen | Einstieg |
+| Einstieg | Dokumentation |
 |---|---|
-| Direkt ausprobieren | [Zwei aktuelle Android-APKs und technische Nachweise](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/downloads/README.md) |
-| Was genau ist neu / geprüft / offen? | [Meilenstein 02](docs/MILESTONE_02.md), [Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/QUALITY.md) |
-| Woher stammt der Auftrag? | [Auftrag und spätere Entscheidungen](docs/PROJECT_BRIEF.md), [unverändertes Originalzitat](docs/pilot-brief.md) |
-| Wie war der erste Vergleich? | [Meilenstein 01 mit festen 0.2-Downloads](docs/MILESTONE_01.md) |
-| Selbst bauen und prüfen | [Build-/Testanleitung](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md) |
+| App ausprobieren | [Defold-APK und technische Nachweise](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md) |
+| Änderungen, Auftragsabgleich und Grenzen | [Meilenstein 03](docs/MILESTONE_03.md), [Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/QUALITY.md) |
+| Ausgangsauftrag und spätere Entscheidungen | [Projektauftrag](docs/PROJECT_BRIEF.md), [unverändertes Originalzitat](docs/pilot-brief.md) |
+| Frühere Vergleiche | [Defold/GDevelop 0.3](docs/MILESTONE_02.md), [Drei-Engine-Vergleich 0.2](docs/MILESTONE_01.md) |
+| Selbst bauen und prüfen | [Build-/Testanleitung](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/BUILD_AND_TEST.md) |
 
-## Die Apps herunterladen
+## Herunterladen und aktualisieren
 
-- **[Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk)** — native ARM64-Engine.
-- **[GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk)** — echte GDJS/WebGL-Laufzeit in lokaler Android-WebView.
-- [Godot 0.2, unveränderter Ausgangsvergleich](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk).
+**[Defold 0.4 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk)**
 
-Android 7 / API 24 oder neuer; Defold benötigt ARM64, GDevelop eine System-WebView
-mit WebGL. Beide können nebeneinander installiert werden und speichern getrennt.
-Version 0.3.0 / Code 3 behält Paketkennung und Entwicklungssignatur von 0.2.
-Update über die vorhandene App installieren; nicht vorher deinstallieren, wenn
-Sterne erhalten bleiben sollen. Der tatsächliche Geräte-Update-Test ist offen.
-Größe, SHA-256, Quellstand und Signaturstatus stehen bei den [Downloads](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/downloads/README.md).
-Das sind Debug-Testfassungen, keine Google-Play-Upload-Dateien.
+Android 7 / API 24 oder neuer, ARM64. Version **0.4.0 / Code 4** behält Paketkennung
+und Entwicklungsschlüssel von 0.3. Über die vorhandene App installieren, **vorher
+nicht deinstallieren**, wenn die Sterne erhalten bleiben sollen. Der echte
+Geräte-Update-Test der neuen APK steht aus. Größe, Hash und Quellstand bei den
+[Downloads](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md). Debug-Testfassung, keine Play-Upload-Datei.
 
-## Was du spielen kannst
+## Die neue Bedienung
 
-**Prisma-Station:** Die Schildkanone trifft dich direkt; du kannst ihren Schild
-mit einem passenden Schuss über eine leuchtende Wand überwinden.
-
-**Neon-Zitadelle:** Zwei Kanonen, Deckungen und ein angekündigtes Torfenster.
-Nach den Gegnern den Energiekern erreichen.
-
-**Aurora-Dock:** Drei Kanonen und zwei goldene Schalter. Die Schalter brauchen
-Abpraller, bevor der Boss verwundbar wird. Ein Gegner patrouilliert und bleibt
-zum Laden stehen. Breite Salven verlangen andere Ausweichbewegungen. Eine
-Energiezelle heilt einmal; versteckte Bonusausrüstung verbessert DASH.
-
-| Eingabe | Aktion |
+| Auf dem Spielfeld | Wirkung |
 |---|---|
-| Boden oder Deckung antippen | Laufen / nächsten erreichbaren Ort suchen |
-| Sichtbares Ziel oder Reflektor antippen | Schießen |
-| Ziehen und loslassen | Frei zielen und schießen |
-| FEUER halten | Wiederholt feuern |
-| DASH | Kurz geschützt ausweichen; danach Abklingzeit |
-| Funk / Hinweis | Ansage wiederholen / verdientes Guthaben für die Beutesuche einsetzen |
+| Kürzer als 0,30 Sekunden drücken und loslassen | Ausschließlich laufen — auch bei einem Tipp auf Gegner, Schalter oder Wand |
+| Mindestens 0,30 Sekunden gedrückt halten | Frei zielen, an jeder Stelle; eine Füllanzeige bestätigt den Wechsel |
+| Nach dem längeren Drücken loslassen | Ein Schuss in die gewählte Richtung |
+| FEUER halten | Wiederholte Schüsse |
+| DASH | Kurz geschützt ausweichen |
+| Funk | Kurze Mission und neue Bedienansage wiederholen |
+| Hinweis | Verdientes Guthaben für die optionale Beutesuche verwenden |
 
-Kein Joystick, keine Antwortabfrage vor dem Schuss. Gegner laden sichtbar und
-halten ihre Zielrichtung. Geschosse, Treffer, Energie und Deckung wirken wirklich.
-Die Zielmarke verrät weder den Abprallpunkt noch den weiteren Weg des Geschosses.
+Du musst keine dünne Wand präzise antippen. Die Dauer entscheidet zwischen Laufen
+und Zielen, nicht Bewegungsrichtung, Wischstrecke oder Zieltyp. Ein schneller
+Wischer feuert nicht. Zielmarke ja, vorausberechnete Abpralllösung nein.
+Kein Joystick und keine Antwortabfrage vor dem Schuss.
 
-## So sehen die laufenden Prototypen aus
+## Größere Arenen und sichtbare Treffer
 
-| Defold 0.3 | GDevelop 0.3 |
+Alle drei Sektoren wachsen von **14×10 auf 21×15**. Kamera und Miniübersicht helfen
+beim Erkunden, ohne die Figur winzig herauszuzoomen. Spielfeldmarkierungen bleiben
+von HUD und Tasten getrennt. Neue Bodenplatten, Leitungen, Dachdetails und ein
+hellerer eigener Shader ergänzen die rotierende Radarschüssel.
+
+Beim letzten Treffer schrumpft und dreht sich die Kanone; zehn goldene/türkise
+Energiefragmente fliegen auseinander, ein Ring breitet sich aus. Der Ergebnis-
+dialog wartet kurz, damit die letzte Explosion sichtbar bleibt.
+
+| Erweiterte Arena | Echter endgültiger Treffer |
 |---|---|
-| ![Native Defold-Arena](docs/images/03-defold-dock.png) | ![Tatsächliche GDevelop-WebGL-Arena](docs/images/03-gdevelop-dock.png) |
+| ![Native Defold-Arena](docs/images/04-defold-arena.png) | ![Native Explosion](docs/images/04-defold-explosion.gif) |
 
-Gerenderte Cloud-Laufzeiten, keine Konzeptbilder und kein Android-Leistungsnachweis.
-Die unterschiedlichen Materialien/Beleuchtungen gehören zum Engine-Vergleich.
+Tatsächlich gerenderte Cloud-Laufzeit. Für die Aufnahme wurde der letzte Treffer
+kontrolliert ausgelöst; kein Konzeptbild und keine behauptete Handy-Spielrunde.
 
-## Fortschritt
+## Musik und Spielumfang
 
-Sterne bleiben lokal gespeichert. Erstmalige Missionen, schadensfreie Abschlüsse
-und Geheimfunde bringen zusammen **600 Sterne** für ein frisches Profil; mit
-zusätzlichen historischen 0.1-Punkten sind bis zu 925 möglich. Wiederholungen und
-bloßes Warten zahlen nicht erneut. Alte Sterne und bezahlte Beutehinweise bleiben
-im Speicherformat erhalten.
+**Aurora Hop** ist eine eigene 60-Sekunden-Chiptune-Komposition: fröhliche
+synthetische Melodie, Bass, Arpeggios und weiche Schlaginstrumente, 32 Takte bei
+128 BPM. Sie läuft in Schleife, wird unter Ansagen leiser und lässt sich im
+**Arsenal → Musik** separat ausschalten. Die Einstellung bleibt gespeichert.
+TON schaltet auch Musik stumm. Keine übernommene Referenzmelodie oder Aufnahme.
 
-100 Sterne schalten Prisma mit zwei Abprallern frei, 160 zusätzliche Startenergie,
-230 höheres Tempo und 300 eine geringere gegnerische Erfassungsreichweite. Kein
-visueller Unsichtbarkeitsshader. Der neue geheime Kondensator verkürzt DASH von
-2,8 auf 2,24 Sekunden. Missionswahl ist frei, auch ohne diese Ausrüstung.
+Drei frei wählbare Sektoren bleiben spielbar: **Prisma-Station** mit Schildkanone,
+**Neon-Zitadelle** mit zwei Gegnern und Torfenster, **Aurora-Dock** mit Patrouille,
+Fächersalven, zwei Abprall-Schaltern vor dem geschützten Boss, Heilzelle und Kern.
+
+Sterne bleiben lokal gespeichert. Ein frisches Profil erreicht insgesamt **600**,
+mit historischen 0.1-Sternen bis 925. Wiederholungen und Warten zahlen nicht doppelt.
+Prisma, zusätzliche Startenergie, Tempo, geringere gegnerische Erfassungsreichweite
+und versteckte Ausrüstung bleiben erhalten. Kein visueller Unsichtbarkeitsshader.
 
 ## Was tatsächlich geprüft wurde
 
-Am **28.10.2026**: Defold 42 Kampf-/Eingabeprüfungen, echte Menü-/FEUER-Klicks und
-getrennte Speicherstarts; GDevelop 51 Prüfungen in Chromium/WebGL, ohne
-Seitenfehler oder externe Requests; sechs gemeinsame Daten-/Medientestgruppen.
-Auch die unveränderten Godot-Prüfungen (43 + 24) und die alte GDevelop-Regression
-(32) bestehen. Beide aktuellen Fassungen wurden gerendert und selbst angesehen.
+**28.10.2026:** 76 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
+Druckdauer, großer Welt, Kamera und Explosionen. Echte Menü-/Feldeingaben per
+XTest: derselbe Punkt kurz gedrückt bewegt, lang gedrückt feuert. Speicherneustart,
+TON-Pause/Fortsetzung und sieben gemeinsame Konsistenztestgruppen bestanden.
 
-Das sind Cloud-/Desktop-Prüfungen. **Noch offen für 0.3:** tatsächliche Android-
-Installation/Update, Touchgefühl, Rotation, Ton/Hörverständlichkeit, längeres
-Spiel und Leistung auf demselben Handy. Der Betreiber bevorzugt die beiden
-Engines nach seinem 0.2-Test; das ersetzt keinen Test der neuen APKs. Keine
-behauptete Lernwirksamkeit oder Store-Reife. Es gibt keinen Actions-Workflow und
-keinen behaupteten grünen CI-Lauf. [Ausführliche Ergebnisse und Grenzen](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/QUALITY.md).
+Die tatsächliche native Audioausgabe wurde als WAVE aufgezeichnet: Musik an
+liefert Signal, Musik aus Nullsignal; Sprache und Explosion wurden mitgemischt
+und auf Pegel geprüft. Eine doppelte Lautstärkeabsenkung wurde dadurch gefunden
+und behoben. Die neue Bedienansage wurde unabhängig per ASR 1/1 exakt erkannt.
+
+**Offen:** neue APK physisch installieren/aktualisieren, Touchgefühl, Rotation,
+Ton-/Klangabnahme, längeres Spiel und Gerätebildrate. Keine behauptete Lernwirkung
+oder Store-Reife. Kein Actions-Workflow und keine behauptete grüne CI.
+[Prüfungen und Aussagegrenzen](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/QUALITY.md).
 
 ## Nächste Rückmeldung
 
-Bitte beide Apps auf demselben Gerät vergleichen, besonders im Dock:
-
 ```text
-Engine / Gerät / Android:
-Update von 0.2: Sterne erhalten?
-Gehen und Schießen eindeutig getrennt?
-Relais/Schalter und Boss verständlich? Schwierigkeit?
-Welche Engine fühlt sich besser an?
+Gerät / Android:
+Update von 0.3: Sterne erhalten?
+Kurzes und langes Drücken jetzt eindeutig?
+Musik gut hörbar, Ansagen verständlich?
+Kamera und Explosionen angenehm?
 Nächste wichtigste Verbesserung:
 ```
 
-## Implementierung und Herkunft
+## Code, Herkunft und Arbeitsweise
 
-- [Gemeinsame 0.3-Regeln](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/shared/raid.json), [Originalmodelle](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/shared/assets/raid/), [Blender-Generator](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/tools/make_raid_models.py).
-- [Defold-Kampf](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/pilots/defold/main/combat.lua), [native Laufzeit](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/pilots/defold/main/main.script), [GUI](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/pilots/defold/main/ui.gui_script).
-- [GDevelop-Shooter](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/pilots/gdevelop/shooter.js), [nativer GDJS-Export](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/tools/gdevelop_export.mjs).
-- [Herkunft/Lizenzen](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/THIRD_PARTY.md), [verbindlicher Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
+[Defold-Regeln](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/shared/defold04.json), [Originalmodelle](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/shared/assets/defold04/),
+[Blender-Generator](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/tools/make_defold04_models.py), [Musiksynthese](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/tools/make_defold_music.py),
+[Zeitsteuerung](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/touch.lua), [Kamera](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/view.lua),
+[Kampf](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/combat.lua), [Laufzeit](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/main.script).
+[Herkunft/Lizenzen](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
 
-`main` bleibt die Dokumentationsstartseite, Spielcode isoliert auf
-`feat/touch-shooter-v2`. Keine Pull Requests, automatischen Merges oder Releases.
-Der erste Vergleich bleibt über feste Commits in Meilenstein 01 erhalten.
-Unity ist ein historischer, nicht ausgeführter Importkit; BRUTAL wurde geprüft,
-aber nicht ausgewählt. Kinderwelt und andere Repositories bleiben unverändert.
-
-Keine privaten Familien-Assets, Konten, Werbung oder Spiel-Telemetrie. Die Apps
-verlangen keine Berechtigungen, Spielstände liegen lokal, Android-Backup ist aus.
-Die eigenen Inhalte haben noch keine gewählte Nutzungslizenz; Fremdlizenzen bleiben erhalten.
+`main` bleibt die Dokumentationsstartseite. Spielcode liegt auf
+`feat/touch-shooter-v2`; keine PRs, automatischen Merges oder Releases.
+Kinderwelt und andere Repositories bleiben unverändert. Keine privaten Familien-
+Assets, Konten, Werbung oder Telemetrie. Spielstände/Musikpräferenz bleiben lokal,
+Backup ist aus, keine neuen Berechtigungen. Eigene Inhalte haben noch keine
+gewählte Nutzungslizenz; Fremdlizenzen bleiben erhalten.

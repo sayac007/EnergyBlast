@@ -1,0 +1,4 @@
+sound: "/audio/flow_need_stars.ogg"
+looping: 0
+group: "master"
+gain: 2.1273828278978693

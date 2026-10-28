@@ -141,3 +141,15 @@
   line of sight. Contextual speech replaces stale instructions immediately.
 - 0.7.0/code8, same package/debug certificate/save location. Actual native render,
   input, occlusion, audio and Android artifact checks remain necessary.
+
+## Clear mission flow 0.8 — operator playtest
+
+- Preserve0.7art. Explicit next-mission flow, optional treasure and integrated
+  in-arena bonuses; never block next on unfinished optional rewards. Persist the
+  validated current mission. Solved missions resume as safe exploration.
+- Main menu exposes all three illustrated heroes and explicit star spending;
+  purchase controls say Kaufen and show wallet vs lifetime total.
+- Active rules now define 300completion+100skill+75treasure+100/150two bonuses.
+  Preserve the old0.7JSON under shared/defold07-regression.json for original tests.
+- 0.8.0/code9, same package/certificate;64sound components for expanded speech.
+  Test actual hero/shop/next/loot input in addition to the pure simulation.

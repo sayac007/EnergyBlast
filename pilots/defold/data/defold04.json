@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-05",
+  "id": "energyblast-defold-08",
   "language": "de",
   "controls": "short_tap_move_long_hold_aim_release_fire",
   "arena": [
@@ -36,24 +36,36 @@
     "mission:guardian": 100,
     "skill:guardian": 25,
     "secret:guardian": 50,
-    "mission:reactor": 75,
-    "skill:reactor": 25,
-    "secret:reactor": 50,
-    "mission:citadel": 100,
-    "skill:citadel": 25,
-    "secret:citadel": 50,
-    "mission:dock": 150,
-    "skill:dock": 50,
+    "mission:reactor": 300,
+    "skill:reactor": 100,
+    "secret:reactor": 75,
+    "mission:citadel": 300,
+    "skill:citadel": 100,
+    "secret:citadel": 75,
+    "mission:dock": 300,
+    "skill:dock": 100,
     "secret:dock": 75,
-    "mission:forge": 125,
-    "skill:forge": 25,
-    "secret:forge": 50,
-    "mission:echo": 125,
-    "skill:echo": 25,
-    "secret:echo": 50,
-    "mission:rescue": 125,
-    "skill:rescue": 25,
-    "secret:rescue": 50
+    "mission:forge": 300,
+    "skill:forge": 100,
+    "secret:forge": 75,
+    "mission:echo": 300,
+    "skill:echo": 100,
+    "secret:echo": 75,
+    "mission:rescue": 300,
+    "skill:rescue": 100,
+    "secret:rescue": 75,
+    "bonus:prism:reactor": 100,
+    "bonus:pattern:reactor": 150,
+    "bonus:prism:citadel": 100,
+    "bonus:pattern:citadel": 150,
+    "bonus:prism:dock": 100,
+    "bonus:pattern:dock": 150,
+    "bonus:prism:forge": 100,
+    "bonus:pattern:forge": 150,
+    "bonus:prism:echo": 100,
+    "bonus:pattern:echo": 150,
+    "bonus:prism:rescue": 100,
+    "bonus:pattern:rescue": 150
   },
   "unlocks": [
     {
@@ -174,7 +186,41 @@
         }
       ],
       "kind": "combat",
-      "voice": "combat_reactor"
+      "voice": "combat_reactor",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            -5.8,
+            -5.5
+          ],
+          "nodes": [
+            [
+              -7.5,
+              -5.5
+            ],
+            [
+              -5.8,
+              -5.5
+            ],
+            [
+              -4.1,
+              -5.5
+            ]
+          ],
+          "sequence": [
+            2,
+            1,
+            3
+          ]
+        }
+      }
     },
     {
       "id": "citadel",
@@ -310,7 +356,22 @@
         }
       ],
       "kind": "combat",
-      "voice": "combat_citadel"
+      "voice": "combat_citadel",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -7.5,
+            1
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            1,
+            -4.5
+          ]
+        }
+      }
     },
     {
       "id": "dock",
@@ -469,7 +530,41 @@
         }
       ],
       "kind": "combat",
-      "voice": "raid_dock"
+      "voice": "raid_dock",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            0.7
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            1.6,
+            -2.8
+          ],
+          "nodes": [
+            [
+              0,
+              -2.8
+            ],
+            [
+              1.7,
+              -2.8
+            ],
+            [
+              3.4,
+              -2.8
+            ]
+          ],
+          "sequence": [
+            3,
+            1,
+            2
+          ]
+        }
+      }
     },
     {
       "id": "forge",
@@ -584,7 +679,41 @@
           "speed": 1.5,
           "phase": 0.4
         }
-      ]
+      ],
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1.5
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            -4.2,
+            -5.8
+          ],
+          "nodes": [
+            [
+              -6,
+              -5.8
+            ],
+            [
+              -4.2,
+              -5.8
+            ],
+            [
+              -2.4,
+              -5.8
+            ]
+          ],
+          "sequence": [
+            1,
+            3,
+            2
+          ]
+        }
+      }
     },
     {
       "id": "echo",
@@ -697,7 +826,22 @@
           4,
           -3.6
         ]
-      ]
+      ],
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            2
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            -5,
+            4.5
+          ]
+        }
+      }
     },
     {
       "id": "rescue",
@@ -825,6 +969,21 @@
         ],
         "hp": 3,
         "speed": 1.7
+      },
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1.5
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            1.6,
+            4.7
+          ]
+        }
       }
     }
   ],
@@ -885,5 +1044,6 @@
       "name": "FENNEK",
       "shot": "energy"
     }
-  ]
+  ],
+  "bonuses_enabled": true
 }

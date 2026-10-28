@@ -19,7 +19,7 @@ local function picture(self,x,y,w,h,name,atlas,sliced)
  if sliced then gui.set_slice9(n,vmath.vector4(24,24,24,24))end;return n
 end
 local function panel(self,x,y,w,h)return picture(self,x,y,w,h,'panel',nil,true)end
-local function icon(self,x,y,name,size)return picture(self,x,y,size or 46,size or 46,'ui_'..name)end
+local function icon(self,x,y,name,size)return picture(self,x,y,size or 46,size or 46,name=='treasure'and'chest-prop'or'ui_'..name)end
 local function circle(self,x,y,r,c)
  local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,32);return track(self,n)
 end
@@ -49,7 +49,9 @@ local function mission_card(self,g,m,i,x,y,subtitle)
  local first=#self.nodes+1
  picture(self,x,y+8,300,169,'mission_'..m.id)
  local shade=box(self,x,y-38,300,62,'07152c');gui.set_color(shade,vmath.vector4(.025,.06,.13,.90))
- text(self,x,y-26,m.title,'ffffff',.77,278);text(self,x,y-51,subtitle,'bdebf1',.43,280)
+ local done=(g.saved.earned['bonus:prism:'..m.id]and 1 or 0)+(g.saved.earned['bonus:pattern:'..m.id]and 1 or 0)
+ text(self,x,y-26,m.title,'ffffff',.77,278);text(self,x,y-51,subtitle..' · BONI '..done..'/2','bdebf1',.41,280)
+ if i>=4 and not g.saved.earned['mission:'..m.id]then local tag=box(self,x,y+53,88,24,'d79125');text(self,x,y+53,'NEU','ffffff',.55,80)end
  circle(self,x-123,y+45,19,'142b47')
  if g.saved.earned['mission:'..m.id]then icon(self,x-123,y+46,'star',32)else text(self,x-123,y+45,tostring(i),'ffffff',.70)end
  local symbols={'aim','armor','cannon','trap_magnet','radio','heart'}
@@ -65,6 +67,22 @@ local function ground_ring(self,g,p,r,c,width)
   local x1,y1=g.project(g,{p[1]+r*math.cos(a),p[2]+r*math.sin(a)},.08)
   local x2,y2=g.project(g,{p[1]+r*math.cos(b),p[2]+r*math.sin(b)},.08)
   line(self,x1,y1,x2,y2,c,width or 3)
+ end
+end
+local function field_guide(self,g,state)
+ if state.goal and not g.trap_ui then
+  local tx,ty=g.project(g,state.goal,.15);local x=clamp(tx,Layout.left+48,Layout.right-48);local y=clamp(ty,Layout.bottom+44,Layout.top-44)
+  local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local guide_color=state.goal_kind=='exit'and'78ffb7'or state.goal_kind=='bonus'and'c5a0ff'or'ffe5a0'
+  local symbol=state.goal_kind=='treasure'and'treasure'or state.goal_kind=='exit'and'dash'or state.goal_kind=='drone'and'heart'or state.goal_kind=='sequence'and'radio'or state.goal_kind=='bonus'and'star'or'aim'
+  if off then
+   circle(self,x,y,23,'112a42');icon(self,x,y,symbol,30)
+   local dx,dy=tx-x,ty-y;local d=math.sqrt(dx*dx+dy*dy);if d>0 then
+    local ux,uy=dx/d,dy/d;local ax,ay=x+ux*28,y+uy*28
+    line(self,x+ux*19,y+uy*19,ax,ay,guide_color,4);line(self,ax,ay,ax-ux*8-uy*5,ay-uy*8+ux*5,guide_color,3);line(self,ax,ay,ax-ux*8+uy*5,ay-uy*8-ux*5,guide_color,3)
+   end
+  else ground_ring(self,g,state.goal,.65,state.goal_kind=='treasure'and'ffda79'or state.goal_kind=='exit'and'78ffb7'or'8cebe7',2)end
+  local title=state.goal_kind=='treasure'and'SCHATZSPUR'or state.goal_kind=='exit'and'AUSGANG'or state.goal_kind=='drone'and'DROHNE'or state.goal_kind=='sequence'and'LICHTER'or state.goal_kind=='bonus'and'BONUS'or'ZIEL'
+  text(self,clamp(x,Layout.left+85,Layout.right-85),clamp(y-34,Layout.bottom+16,Layout.top-16),title,guide_color,.43,160)
  end
 end
 local function field_traps(self,g)
@@ -114,72 +132,107 @@ local function field_traps(self,g)
 end
 local function page(self,g,title)
  -- The background is a separate earlier render pass; the animated 3D hero stays visible.
- text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'NEON FRONTIER  ·  0.7','a3e7df',.61)
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'MISSIONEN & STERNE  ·  0.8','a3e7df',.61)
  glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
  icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
- text(self,1080,652,g:wallet()..' GUTHABEN','a4f3d5',.56,220)
- text(self,284,153,g:character().name,'fff0a6',1.15)
- text(self,284,119,g:character().shot=='fireball'and'DRACHE · FEUERBALL'or'ENTDECKER · ENERGIE','a3e7df',.57,480)
+ text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
+ text(self,284,316,g:character().shot=='fireball'and'DRACHE FLAMMI'or g:character().name,'fff0a6',1.02,500)
+ text(self,284,285,g:character().shot=='fireball'and'FEUERBAELLE' or'DEIN HELD','a3e7df',.55,480)
+end
+local function hero_choices(self,g)
+ for i,c in ipairs(g.data.characters)do
+  local x=110+(i-1)*174;local y=193;local chosen=g:character().id==c.id
+  local n=picture(self,x,y,156,176,chosen and'button_green'or'panel',nil,true)
+  portrait(self,x,y+17,c.id,134)
+  text(self,x,y-57,c.id=='dragon'and'DRACHE'or c.name,'ffffff',.61,144)
+  text(self,x,y-77,chosen and'GEWAEHLT'or'ANTIPPEN',chosen and'b7ffdf'or'b9dce6',.38,140)
+  self.buttons[#self.buttons+1]={node=n,action='character:'..c.id,rect={x,y,156,176}}
+ end
 end
 local function dialog(self,g)
- self.buttons={};page(self,g,g.dialog=='menu'and'DEINE MISSION'or g.dialog=='gear'and'ARSENAL'or g.dialog=='characters'and'DEIN HELD'or'ENERGYBLAST')
+ self.buttons={};local state=g:mission_state()
+ page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or'GESCHAFFT!')
  if g.dialog=='menu'then
-  local names={'WINKEL & ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','FALLE VORBEREITEN','LICHTERFOLGE MERKEN','DROHNE BESCHUETZEN'}
+  local names={'ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','MAGNETFALLEN','LICHTERFOLGE','DROHNE RETTEN'}
   for i,m in ipairs(g.data.missions)do
    local x=i%2==1 and 772 or 1090;local y=534-math.floor((i-1)/2)*153
    mission_card(self,g,m,i,x,y,names[i])
   end
-  button(self,807,83,366,78,'WEITER SPIELEN','continue','green','dash');button(self,1130,83,250,78,'ARSENAL','gear','gold','cannon')
-  button(self,284,63,490,78,'HELDEN WAEHLEN','characters','blue','heart')
+  hero_choices(self,g)
+  local next=g.solved and g:next_index()
+  button(self,807,83,366,78,next and'NAECHSTE MISSION'or'MISSION '..g.index..' STARTEN',next and'next'or'continue','green','dash')
+  button(self,1130,83,250,78,'ALLE HELDEN','characters','blue','heart')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
   if g.ui_test and not self.menu_ready then self.menu_ready=true;print('DEFOLD MENU READY')end
+  if g.flow_ui_test then print('DEFOLD FLOW MENU READY mission='..g.index..' wallet='..g:wallet()..' hero='..g:character().id)end
  elseif g.dialog=='characters'then
   for i,c in ipairs(g.data.characters)do local x=725+(i-1)*205;local chosen=g:character().id==c.id
-   glass(self,x,389,195,380,.82);portrait(self,x,448,c.id,203)
-   text(self,x,325,c.name,chosen and'ffe493'or'ffffff',.84,175)
+   glass(self,x,389,195,380,.82);local n=portrait(self,x,448,c.id,203)
+   self.buttons[#self.buttons+1]={node=n,action='character:'..c.id,rect={x,448,195,240}}
+   text(self,x,325,c.id=='dragon'and'DRACHE FLAMMI'or c.name,chosen and'ffe493'or'ffffff',.70,180)
    text(self,x,291,c.shot=='fireball'and'FEUERBALL'or'ENERGIE','b8dce4',.50,170)
    button(self,x,237,190,77,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'green'or'violet','heart')
   end
-  button(self,930,83,615,78,'ZURUECK','menu','blue','menu')
+  button(self,930,83,615,78,'ZURUECK ZU DEN MISSIONEN','menu','blue','menu')
  elseif g.dialog=='gear'then
-  text(self,930,592,g.shop_status or'KAUFEN · DAUERHAFT AUSRUESTEN','ffe38b',.60,590)
-  local names={prism='PRISMA-KANONE',armor='RUESTUNG',boots='TEMPOSTIEFEL',cloak='TARNMODUL'}
-  local effects={prism='2 ABPRALLER',armor='+1 ENERGIE',boots='MEHR TEMPO',cloak='SPAETER ENTDECKT'}
-  for i,u in ipairs(g.data.unlocks)do local y=521-(i-1)*103;local owned=g:owns(u.id)
-   glass(self,930,y,625,92,.87);circle(self,668,y,37,'0c203c');icon(self,668,y+2,i==2 and'armor'or i==3 and'boots'or i==4 and'cloak'or'cannon',82)
-   text(self,855,y+18,names[u.id],'ffffff',.74,275);text(self,855,y-15,effects[u.id],'afd9e0',.53,275)
-   local label=owned and(u.id=='prism'and(g.saved.weapon=='prism'and'AN'or'AUS')or'AKTIV')or tostring(u.price)
-   button(self,1130,y,183,75,label,'buy:'..u.id,owned and'green'or'gold',owned and'gear'or'star')
+  text(self,930,592,g.shop_status or'DEINE STERNE GEGEN AUSRUESTUNG','ffe38b',.60,590)
+  local names={prism='PRISMA-WAFFE',armor='MEHR GESUNDHEIT',boots='TEMPOSTIEFEL',cloak='TARNMODUL'}
+  local effects={prism='2 ABPRALLER PRO SCHUSS',armor='+1 HERZ · SOFORT AKTIV',boots='SCHNELLER LAUFEN',cloak='SPAETER ENTDECKT'}
+  for i,u in ipairs(g.data.unlocks)do local y=521-(i-1)*103;local owned=g:owns(u.id);local affordable=g:wallet()>=u.price
+   glass(self,930,y,625,92,.90);circle(self,668,y,37,'0c203c');icon(self,668,y+2,i==2 and'armor'or i==3 and'boots'or i==4 and'cloak'or'cannon',82)
+   text(self,850,y+18,names[u.id],'ffffff',.72,265);text(self,850,y-15,effects[u.id],'afd9e0',.48,268)
+   local label=owned and(u.id=='prism'and(g.saved.weapon=='prism'and'AN · GEKAUFT'or'AUS · GEKAUFT')or'GEKAUFT')or('KAUFEN '..u.price)
+   button(self,1130,y,183,75,label,'buy:'..u.id,owned and'green'or affordable and'gold'or'blue',owned and'gear'or'star')
+   if not owned and not affordable then text(self,1130,y-31,'NOCH '..(u.price-g:wallet())..' STERNE','c9d5eb',.31,170)end
   end
-  text(self,930,145,'Gesamtsterne bleiben · Guthaben wird ausgegeben','b8dce4',.51,610)
-  button(self,770,73,295,75,'WEITER','continue','green','dash');button(self,1090,73,295,75,'SEKTOREN','menu','blue','menu')
+  text(self,930,145,'Ausgeben: '..g:wallet()..'  ·  Gesamtsterne bleiben: '..g:total(),'b8dce4',.51,610)
+  button(self,770,73,295,75,'ZUM SPIEL','continue','green','dash');button(self,1090,73,295,75,'MISSIONEN','menu','blue','menu')
   button(self,284,63,490,78,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','violet','sound')
+  if g.flow_ui_test then print('DEFOLD FLOW SHOP READY wallet='..g:wallet())end
  elseif g.dialog=='win'then
-  panel(self,930,389,628,422);text(self,930,535,'SEKTOR GESICHERT','ffe38b',1.05,580);star(self,930,432,57);text(self,930,338,'+ '..g.reward..' STERNE','ffe38b',1.15)
-  button(self,930,231,585,79,'BEUTE SUCHEN','loot','violet','hint');button(self,930,99,615,80,'SEKTOREN','menu','green','menu');button(self,284,63,490,78,'NOCH EINMAL','retry','blue','dash')
+  panel(self,930,403,628,450);text(self,930,556,'MISSION GESCHAFFT!','ffe38b',1.05,580)
+  star(self,930,477,40);text(self,930,405,'+ '..g.reward..' STERNE','ffe38b',1.07)
+  text(self,930,354,state.treasures_remaining>0 and'1 SCHATZ NOCH OFFEN · FREIWILLIG'or'SCHATZ GEFUNDEN','d6e9ec',.60,560)
+  text(self,930,319,'BONI '..state.bonus_done..' / '..state.bonus_total..' · FREIWILLIG','c1dbe4',.55,555)
+  local next=g:next_index()
+  button(self,930,231,585,79,next and'NAECHSTE MISSION'or'ZUR MISSIONSAUSWAHL',next and'next'or'menu','green','dash')
+  button(self,930,99,615,80,state.treasures_remaining>0 and'SCHATZ SUCHEN · FREIWILLIG'or'BONI SUCHEN · FREIWILLIG',state.treasures_remaining>0 and'loot'or'bonus_search','violet',state.treasures_remaining>0 and'treasure'or'star')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
+  hero_choices(self,g)
+  if g.flow_ui_test then print('DEFOLD FLOW WIN READY remaining='..state.treasures_remaining..' next='..tostring(next))end
  else
   panel(self,930,387,628,420);text(self,930,493,'NEUER ANLAUF?','ffa6c3',1.14);text(self,930,420,'Deine Sterne bleiben erhalten.','d0e5e9',.79,565)
-  button(self,930,303,580,89,'NOCH EINMAL','retry','gold','dash');button(self,930,99,615,80,'SEKTOREN','menu','blue','menu')
+  button(self,930,303,580,89,'NOCH EINMAL','retry','gold','dash');button(self,930,99,615,80,'MISSIONEN','menu','blue','menu')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star');hero_choices(self,g)
  end
 end
-function init(self)self.nodes={};self.buttons={};self.ui_pointers={};self.counter=0;self.trap_test=sys.get_config_string('project.trap_test','0')=='1';msg.post('.','acquire_input_focus')end
+function init(self)self.nodes={};self.buttons={};self.ui_pointers={};self.counter=0;self.trap_test=sys.get_config_string('project.trap_test','0')=='1';self.flow_test=sys.get_config_string('project.flow_ui_test','0')=='1';msg.post('.','acquire_input_focus')end
 function update(self,dt)
  local g=_G.energyblast;if not g then return end
- if self.trap_test then g.trap_test=true end
+ if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
  if g.dialog then
-  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',tostring(g.reward)},'|')
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
   if key==self.dialog_key then return end;self.dialog_key=key
  else self.dialog_key=nil end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
- if g.dialog then dialog(self,g);return end
+ if g.dialog then self.counter=g:total();dialog(self,g);return end
  panel(self,640,673,1280,96);panel(self,72,360,144,528);panel(self,1208,360,144,528);panel(self,640,48,1280,96)
  self.counter=self.counter+(g:total()-self.counter)*math.min(1,dt*10)
  icon(self,38,678,'star',46);text(self,121,680,tostring(math.floor(self.counter+.5)),'ffe590',1.08,125);text(self,120,649,'GESAMTSTERNE','a6d3e5',.42,185)
  text(self,634,682,g.m.title,'ffffff',1.0,650)
- local alive=0;for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='sequence'then alive=alive+1 end end
- text(self,634,650,g.drone and('DROHNE '..g.drone.hp..'/3')or g.m.kind=='sequence'and('LICHTERFOLGE '..g.sequence_progress..'/3')or('KANONEN '..alive),'b9dfe5',.52,530)
- portrait(self,72,548,g:character().id,135)
+ local state=g:mission_state()
+ local target_node=box(self,441,648,350,42,'ffffff');gui.set_color(target_node,vmath.vector4(1,1,1,0))
+ text(self,441,650,state.headline,'b9dfe5',.49,340)
+ self.buttons[#self.buttons+1]={node=target_node,action='track_objective',rect={441,648,350,42}}
+ local bonus_node=box(self,720,648,168,42,'ffffff');gui.set_color(bonus_node,vmath.vector4(1,1,1,0));icon(self,655,649,'star',24);text(self,720,650,'BONI '..state.bonus_done..'/'..state.bonus_total,'c0e6dc',.45,140);self.buttons[#self.buttons+1]={node=bonus_node,action='track_bonus',rect={720,648,168,42}}
+ local chest_node=picture(self,904,648,190,42,'button_'..(state.treasures_remaining>0 and'gold'or'green'),nil,true)
+ picture(self,835,650,31,31,'chest-prop');text(self,919,650,state.treasures_remaining>0 and'SCHATZ 0/1'or'SCHATZ 1/1','ffffff',.38,143)
+ self.buttons[#self.buttons+1]={node=chest_node,action='track_treasure',rect={904,648,190,42}}
+ if g.flow_ui_test and self.flow_play_mission~=g.index then self.flow_play_mission=g.index;print('DEFOLD FLOW PLAY READY mission='..g.index..' treasure='..state.treasures_remaining..' bonus='..state.bonus_total)end
+
+ local hero_thumb=portrait(self,72,548,g:character().id,135);self.buttons[#self.buttons+1]={node=hero_thumb,action='characters',rect={72,548,135,135}}
  for i=1,g.max_hp do local h=icon(self,15+i*27,460,'heart',27);if i>g.hp then gui.set_color(h,vmath.vector4(.25,.35,.4,.6))end end
- for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='ARSENAL'})[name]
+ for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='STERNE'})[name]
   if name=='menu'or name=='sound'then button(self,r[1],r[2],r[3],r[4],'',name,'blue');icon(self,r[1],r[2]+2,name,37)
   else
    local n=picture(self,r[1],r[2],r[3],r[4],'button_blue',nil,true);icon(self,r[1],r[2]+11,name=='gear'and'cannon'or name,36);text(self,r[1],r[2]-19,title,'ffffff',.48,r[3]-12)
@@ -193,11 +246,12 @@ function update(self,dt)
   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
  text(self,551,57,g.status,'d2e9ec',.64,780);text(self,551,27,'KURZ TIPPEN: LAUFEN     HALTEN: ZIELEN     LOSLASSEN: FEUERN','8db8cd',.45,790)
+ if g.solved then button(self,72,124,120,62,g:next_index()and'WEITER'or'MISSIONEN',g:next_index()and'next'or'menu','green')end
  text(self,72,45,'? '..g:credits(),'ffe590',.73)
  panel(self,1051,47,151,72);local bounds=g.data.arena
  local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
  for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
- local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');local gx,gy=mini(g.m.goal);circle(self,gx,gy,3,'ffdf58')
+ local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
  if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
   for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
  end
@@ -206,7 +260,11 @@ function update(self,dt)
  for _,e in ipairs(g.enemies)do if e.hp>0 then
   local x,y=g.project(g,e.p,e.boss and 6.4 or e.illustrated and 4.0 or 3.2)
   if e.warning>0 and(x<Layout.left+12 or x>Layout.right-12 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(Layout.left+22,math.min(Layout.right-22,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
-  if e.kind=='sequence'then
+  if e.optional then
+   local bx,by=g.project(g,e.p,1.4);icon(self,bx,by+22,'star',29)
+   if e.kind=='bonus_sequence'then if e.bonus_lit or(e.lit or 0)>0 then ring(self,bx,by+5,28,'fff1a0',4)end;text(self,bx,by,tostring(e.bonus_order),'fff3a7',.70)elseif e.kind=='bonus_wait'then text(self,bx,by,e.bonus_green and'JETZT!'or'WARTE',e.bonus_green and'a7ffe0'or'ffb1b6',.45,100)else text(self,bx,by,'ABPRALLER','ffe5a0',.40,110)end
+   if e.bonus_task then text(self,bx,by-22,'+'..e.bonus_task.reward,'ffe5a0',.46,105)end
+  elseif e.kind=='sequence'then
    local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
    ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
   else
@@ -234,9 +292,10 @@ function update(self,dt)
  if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);ring(self,x,y,20+math.sin(g.clock*3)*2,'ffdf58',3)end
  if g.clue_time>0 then local p=g:level()>1 and g.m.secret.position or g.m.secret.hint_landmark;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
  if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
+ field_guide(self,g,state)
  field_traps(self,g)
  self.world_parent=nil
- if g.ui_test or g.trap_test then
+ if g.ui_test or g.trap_test or g.flow_ui_test then
   for _,b in ipairs(self.buttons)do local r=b.rect
    if b.world then assert(r[1]-r[3]/2>=Layout.left and r[1]+r[3]/2<=Layout.right and r[2]-r[4]/2>=Layout.bottom and r[2]+r[4]/2<=Layout.top,'field control leaves scene: '..b.action)
    else assert(Layout.safe(r[1],r[2],r[3],r[4]),'HUD overlaps scene: '..b.action)end
@@ -260,17 +319,26 @@ local function handle(self,a)
  end
  if not a.pressed then g.input(a);return true end
  for _,b in ipairs(self.buttons)do if gui.pick_node(b.node,a.x,a.y)then
-  local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end
+  local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end;if g.flow_ui_test then print('DEFOLD FLOW ACTION '..action)end
   if action~='fire'and action~='dash'and action~='hint'and action~='trap'then g.cancel_controls()end
   self.ui_pointers[key]=action
   if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
   elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
-  elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11))
-  elseif action:sub(1,4)=='buy:'then g:buy(action:sub(5));if g.ui_test then assert(g:owns(action:sub(5)));print('DEFOLD SHOP PURCHASE PASS '..action)end
-  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action
-  elseif action=='continue'then g.paused=false;g.dialog=nil
+  elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11));if action:sub(11)=='dragon'then g.say('flow_dragon')end
+  elseif action:sub(1,4)=='buy:'then
+   local owned=g:owns(action:sub(5));local bought=g:buy(action:sub(5))
+   if not owned then g.say(bought and'flow_purchase'or'flow_need_stars')end
+   if g.ui_test then assert(g:owns(action:sub(5)));print('DEFOLD SHOP PURCHASE PASS '..action)end
+   if g.flow_ui_test then print('DEFOLD FLOW PURCHASE '..action:sub(5)..' owned='..tostring(g:owns(action:sub(5)))..' wallet='..g:wallet()..' hp='..g.hp..' max='..g.max_hp)end
+  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'flow_shop'or'flow_menu')end
+  elseif action=='continue'then g:resume_mission();if g.intro_needed then g.intro_needed=false;g.replay()end
   elseif action=='retry'then g.choose(g.index)
-  elseif action=='loot'then g.paused=false;g.over=false;g.dialog=nil
+  elseif action=='loot'then g:search_loot()
+  elseif action=='bonus_search'then g:resume_mission();g:track_bonus()
+  elseif action=='next'then g:next_mission()
+  elseif action=='track_treasure'then if not g:track_treasure()then g.say('flow_no_treasure')end;if g.flow_ui_test then print('DEFOLD FLOW TREASURE TRACK PASS remaining='..g:mission_state().treasures_remaining)end
+  elseif action=='track_bonus'then g:track_bonus();if g.flow_ui_test then print('DEFOLD FLOW BONUS TRACK PASS total='..g:mission_state().bonus_total)end
+  elseif action=='track_objective'then g:track_objective();g:guide()
   elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
   return true
  end end

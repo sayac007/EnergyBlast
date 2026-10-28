@@ -29,11 +29,10 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-ui-',dir='/tmp')as d
     root_id=ctypes.c_ulong();parent=ctypes.c_ulong();children=ctypes.POINTER(ctypes.c_ulong)();count=ctypes.c_uint()
     assert x.XQueryTree(display,x.XDefaultRootWindow(display),ctypes.byref(root_id),ctypes.byref(parent),ctypes.byref(children),ctypes.byref(count))and count.value>0
     x.XResizeWindow.argtypes=[ctypes.c_void_p,ctypes.c_ulong,ctypes.c_uint,ctypes.c_uint];x.XResizeWindow(display,children[count.value-1],*a.resize);x.XFlush(display);time.sleep(.35)
-   click(284,657) # Actual full-screen character picker.
-   click(930,483);wait_for('DEFOLD CHARACTER PICK PASS dragon')
-   click(1135,483);wait_for('DEFOLD CHARACTER PICK PASS fox')
-   click(930,483);wait_for('DEFOLD CHARACTER PICK PASS dragon')
-   click(930,637);click(1130,637) # Main menu, Arsenal.
+   click(284,527);wait_for('DEFOLD CHARACTER PICK PASS dragon') # Direct illustrated dragon tile on main menu.
+   click(458,527);wait_for('DEFOLD CHARACTER PICK PASS fox')
+   click(284,527);wait_for('DEFOLD CHARACTER PICK PASS dragon')
+   click(284,657) # Explicit stars-to-equipment menu.
    click(1130,199);wait_for('DEFOLD SHOP PURCHASE PASS buy:prism')
    click(1130,302);wait_for('DEFOLD SHOP PURCHASE PASS buy:armor')
    click(1090,647);click(772,325) # Menu, actual third-sector card.

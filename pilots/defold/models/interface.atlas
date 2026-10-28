@@ -29,4 +29,5 @@ images { image: "/models/mission_forge.png" }
 images { image: "/models/mission_echo.png" }
 images { image: "/models/mission_rescue.png" }
 images { image: "/models/lobby.png" }
+images { image: "/models/chest-prop.png" }
 extrude_borders: 2

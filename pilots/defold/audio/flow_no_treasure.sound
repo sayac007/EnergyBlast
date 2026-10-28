@@ -1,0 +1,4 @@
+sound: "/audio/flow_no_treasure.ogg"
+looping: 0
+group: "master"
+gain: 2.1247272949022378

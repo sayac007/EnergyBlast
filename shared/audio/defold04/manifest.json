@@ -132,6 +132,160 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 4021369858
+    },
+    {
+      "id": "flow_menu",
+      "text": "Wähle eine Mission. Links kannst du auch den Drachen wählen.",
+      "file": "flow_menu.ogg",
+      "sha256": "e39963a04ccbadb14231e21156c1ea03541b9e99b46c77fdfc14ba7c3c8acce4",
+      "seconds": 6.12,
+      "playback_gain_db": 11.393273133872217,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 1790574048
+    },
+    {
+      "id": "flow_shop",
+      "text": "Hier gibst du Sterne aus. Tippe auf Kaufen. Deine Gesamtsterne bleiben.",
+      "file": "flow_shop.ogg",
+      "sha256": "152d0ab9a8d331ad7f9b4c6432debed2252594c71e4f25880c298a6e3f688873",
+      "seconds": 6.2,
+      "playback_gain_db": 4.843071224973932,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2397307731
+    },
+    {
+      "id": "flow_purchase",
+      "text": "Gekauft und ausgerüstet.",
+      "file": "flow_purchase.ogg",
+      "sha256": "ec95b243286d8f316b3ce11962da4cc3e91300fd54e9a01fe688fd89556a7e06",
+      "seconds": 3.56,
+      "playback_gain_db": 3.66529669553639,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2217435986
+    },
+    {
+      "id": "flow_need_stars",
+      "text": "Dafür fehlen noch Sterne. Spiele eine Mission.",
+      "file": "flow_need_stars.ogg",
+      "sha256": "23697c73a03fa02f41394b03136f4fd18bef0f5cb640c99597d68a862a4cea06",
+      "seconds": 4.84,
+      "playback_gain_db": 7.556912986425139,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 320377816
+    },
+    {
+      "id": "flow_next",
+      "text": "Geschafft! Weiter geht es mit der nächsten Mission.",
+      "file": "flow_next.ogg",
+      "sha256": "b49bc394ee5392340516a48481c1d83f2650ed2af364fb0438683304977eec0b",
+      "seconds": 3.8,
+      "playback_gain_db": 0.18041536531930003,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3875442750
+    },
+    {
+      "id": "flow_loot",
+      "text": "Der Schatz ist freiwillig. Folge den goldenen Spuren. Danach kannst du weitergehen.",
+      "file": "flow_loot.ogg",
+      "sha256": "e27d768394cf6c3125ed7a41a5628d040e1fd776f957a0777f83c42f8ec7ab1c",
+      "seconds": 6.76,
+      "playback_gain_db": 5.4195407644831795,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 838614064
+    },
+    {
+      "id": "bonus_sequence",
+      "text": "Bonus. Merke dir die Lichter. Triff die Kristalle in dieser Reihenfolge.",
+      "file": "bonus_sequence.ogg",
+      "sha256": "d517933ef7ae41e0e8ad704abff4ce3ea0a29055e1faa6a491abe1f9beb29a6c",
+      "seconds": 6.52,
+      "playback_gain_db": 5.980472642377931,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 1124711937
+    },
+    {
+      "id": "flow_treasure",
+      "text": "Hier ist noch ein Schatz. Er ist freiwillig. Suche bei den goldenen Spuren.",
+      "file": "flow_treasure.ogg",
+      "sha256": "22faa4c05a9eed9b97d002de47f18984e9a681ccae3e746ad7345a92c209aa2a",
+      "seconds": 6.12,
+      "playback_gain_db": 2.2392556786410376,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 711153407
+    },
+    {
+      "id": "flow_final",
+      "text": "Diese Mission ist geschafft. Du kannst noch offene Bonusziele sammeln.",
+      "file": "flow_final.ogg",
+      "sha256": "416541e561ad11cbf4863ccf069fd3b0a1ad910e598d097759d362b8c1e0dbfb",
+      "seconds": 6.6,
+      "playback_gain_db": 9.096130192970534,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2586416363
+    },
+    {
+      "id": "bonus_wait",
+      "text": "Der Kristall muss grün leuchten. Dann kannst du schießen.",
+      "file": "bonus_wait.ogg",
+      "sha256": "03693036628b7578c9f416e2999a1576a82bffb676daf905e2d2d25a93cf63d6",
+      "seconds": 4.44,
+      "playback_gain_db": 9.466051294531999,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2855794736
+    },
+    {
+      "id": "flow_no_treasure",
+      "text": "Schatz gefunden. Du kannst die nächste Mission starten.",
+      "file": "flow_no_treasure.ogg",
+      "sha256": "9144360f2b9ac221ab65131102e5e2cebb651932a0e57ab03b942f97d7f86a73",
+      "seconds": 4.6,
+      "playback_gain_db": 7.546063940251402,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3209484080
+    },
+    {
+      "id": "flow_dragon",
+      "text": "Dein Drache ist bereit. Er spuckt Feuer.",
+      "file": "flow_dragon.ogg",
+      "sha256": "4a6e04aca89d8287293e3801fcf1c7ad68ce01566cc8de35d6571530ae8f265c",
+      "seconds": 3.96,
+      "playback_gain_db": 10.509692374074131,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2301269662
+    },
+    {
+      "id": "flow_exit",
+      "text": "Alle Gegner sind weg. Gehe jetzt zum Ausgang.",
+      "file": "flow_exit.ogg",
+      "sha256": "50a0e0216cc03172d2cb2bc90eceaf037279c879fff467dc81984bf0cc7b56a6",
+      "seconds": 4.04,
+      "playback_gain_db": 5.644299778180917,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 1784661751
+    },
+    {
+      "id": "bonus_prism",
+      "text": "Dein Schuss trifft erst die Wand und dann den goldenen Kristall.",
+      "file": "bonus_prism.ogg",
+      "sha256": "754b699025c718d2a58c1bd298d274ea0b05b5b4703cce5f06d63f8e3525350f",
+      "seconds": 4.36,
+      "playback_gain_db": 6.3075176358315606,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2728832979
     }
   ]
 }

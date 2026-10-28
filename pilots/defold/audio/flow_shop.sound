@@ -1,0 +1,4 @@
+sound: "/audio/flow_shop.ogg"
+looping: 0
+group: "master"
+gain: 1.5565158994134218

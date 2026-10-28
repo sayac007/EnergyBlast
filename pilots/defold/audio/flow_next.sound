@@ -1,0 +1,4 @@
+sound: "/audio/flow_next.ogg"
+looping: 0
+group: "master"
+gain: 0.9099567863619611

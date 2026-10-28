@@ -53,8 +53,8 @@ class SharedChecks(unittest.TestCase):
    self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
-  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]==v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),12)
+  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),26)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -68,6 +68,15 @@ class SharedChecks(unittest.TestCase):
     self.assertLess(abs(samples[0]-samples[-1]),.005)
   sound=(ROOT/'pilots/defold/audio/music.sound').read_text();self.assertIn('looping: 1',sound);self.assertIn('gain: 1.0',sound)
   self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
+ def test_integrated_bonuses_and_non_decreasing_rewards(self):
+  d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/defold07-regression.json').read_text())
+  self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()))
+  self.assertEqual(sum(d['rewards'][p+':'+m['id']]for m in d['missions']for p in ['mission','skill','secret','bonus:prism','bonus:pattern']),4350)
+  for m in d['missions']:
+   self.assertEqual(d['rewards']['mission:'+m['id']],300)
+   self.assertEqual(set(m['bonuses']),{'prism','pattern'})
+   self.assertIn(m['bonuses']['pattern']['kind'],['sequence','wait'])
+  self.assertEqual(old,(json.loads((ROOT/'pilots/defold/data/defold07.json').read_text())))
  def test_exported_wall_geometry_matches_every_collider(self):
   # Read actual exported POSITION buffers, not just the generator's claims.
   surfaces=json.loads((ROOT/'shared/assets/defold06/surfaces.json').read_text())
@@ -192,5 +201,9 @@ class SharedChecks(unittest.TestCase):
   self.assertIn('permissions/internet=false',preset);self.assertIn('user_data_backup/allow=false',preset)
   native=(ROOT/'pilots/defold/main/AndroidManifest.xml').read_text();self.assertNotIn('<uses-permission',native);self.assertIn('android:allowBackup="false"',native)
   import configparser
-  cfg=configparser.ConfigParser();cfg.read(ROOT/'pilots/defold/game.project');self.assertEqual(cfg['bootstrap']['render'],'/main/main.renderc')
+  cfg=configparser.ConfigParser();cfg.read(ROOT/'pilots/defold/game.project');
+  import re
+  sound_components=len(re.findall('component: \"/audio/',(ROOT/'pilots/defold/main/main.go').read_text()))
+  self.assertGreaterEqual(int(cfg['sound']['max_component_count']),sound_components,'new voice clips must fit actual native sound-component capacity')
+  self.assertEqual(cfg['bootstrap']['render'],'/main/main.renderc')
 if __name__=='__main__':unittest.main(verbosity=2)

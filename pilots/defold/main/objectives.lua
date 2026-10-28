@@ -21,7 +21,7 @@ function O.sequence_hit(g,t)
  g.sequence_progress=g.sequence_progress+1;t.lit=.7;g.status='FOLGE '..g.sequence_progress..'/3'
  if g.sequence_progress==#g.m.sequence then
   for _,e in ipairs(g.enemies)do if e.kind=='sequence'then e.hp=0;e.death_age=0;g.fx[#g.fx+1]={kind='explosion',p={e.p[1],e.p[2]},life=.9,age=0}end end
-  local alive=false;for _,e in ipairs(g.enemies)do alive=alive or e.hp>0 end;if not alive then g:finish()end
+  local alive=false;for _,e in ipairs(g.enemies)do alive=alive or(not e.optional and e.hp>0)end;if not alive then g:finish()end
  end
 end
 function O.trap(g,p,id)
@@ -39,7 +39,7 @@ function O.update(g,dt,dist)
  g.trap_cooldown=math.max(0,g.trap_cooldown-dt);g.sequence_clock=g.sequence_clock+dt;g.sequence_wrong=math.max(0,g.sequence_wrong-dt)
  for i=#g.traps,1,-1 do local trap=g.traps[i];trap.life=trap.life-dt
   local spec=O.trap_spec(trap.type)
-  for _,e in ipairs(g.enemies)do if e.hp>0 and e.kind~='relay'and e.kind~='sequence'and dist(e.p,trap.p)<spec.radius then
+  for _,e in ipairs(g.enemies)do if e.hp>0 and not e.optional and e.kind~='relay'and e.kind~='sequence'and dist(e.p,trap.p)<spec.radius then
    e.trapped=math.max(e.trapped or 0,spec.duration);trap.life=0;g.fx[#g.fx+1]={kind='trap_'..spec.id,p={e.p[1],e.p[2]},age=0,life=.8};g.status='SCHILD AUS - JETZT TREFFEN';g.say('defold_trap_trigger')
    for hit=1,(spec.damage or 0)do g:hit(e,0)end
    break

@@ -3,6 +3,7 @@ from pathlib import Path
 import json,shutil,zipfile
 R=Path(__file__).resolve().parents[1];D=R/'pilots/defold'
 shutil.copyfile(R/'shared/defold04.json',D/'data/defold04.json')
+shutil.copyfile(R/'shared/defold07-regression.json',D/'data/defold07.json')
 shutil.copytree(R/'shared/notices',D/'data/notices',dirs_exist_ok=True)
 shutil.copyfile(R/'shared/audio/de/manifest.json',D/'data/audio.json')
 shutil.copyfile(R/'shared/audio/de/LICENSE.txt',D/'data/AUDIO_LICENSE.txt')
@@ -36,6 +37,7 @@ fragment_constants { name: "surface" type: CONSTANT_TYPE_USER value { x: %s y: %
 fragment_constants { name: "frame" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: %s w: %s } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }
 '''%(key,tag,fragment,*color,ground,emissive,models[name].get('columns',1),models[name].get('rows',1))
+  material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment=='shadow.fp')or('name: \"frame\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')
  (D/'models'/(name+'.model')).write_text('\n'.join(model)+'\n')
@@ -48,8 +50,8 @@ raid=json.loads((R/'shared/audio/raid/manifest.json').read_text());manifest['cli
 manifest['clips']+=json.loads((R/'shared/audio/defold04/manifest.json').read_text())['clips']
 (D/'data/audio.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 for c in manifest['clips']:
- if c['id'].startswith(('combat_','raid_','defold_')) or c['id'] in ['hint_bank','hint_guardian','hints_empty']:
-  shutil.copyfile(R/('shared/audio/defold04'if c['id'].startswith('defold_')else'shared/audio/raid'if c['id'].startswith('raid_')else'shared/audio/de')/c['file'],D/'audio'/c['file'])
+ if c['id'].startswith(('combat_','raid_','defold_','flow_','bonus_')) or c['id'] in ['hint_bank','hint_guardian','hints_empty']:
+  shutil.copyfile(R/('shared/audio/defold04'if c['id'].startswith(('defold_','flow_','bonus_'))else'shared/audio/raid'if c['id'].startswith('raid_')else'shared/audio/de')/c['file'],D/'audio'/c['file'])
   (D/'audio'/(c['id']+'.sound')).write_text('sound: "/audio/'+c['file']+'"\nlooping: 0\ngroup: "master"\ngain: '+str(10**((c['playback_gain_db']-1)/20))+'\n')
 # Keep Android entirely offline. Native Defold's default manifest requests network permissions.
 z=zipfile.ZipFile('/tmp/energyblast-defold-tools/bob.jar');text=z.read('builtins/manifests/android/AndroidManifest.xml').decode()
@@ -89,7 +91,7 @@ shutil.copyfile(art/'surfaces.json',D/'data/surfaces.json')
 shutil.copyfile(art/'rigs.json',D/'data/rigs.json')
 
 ui_names=['button_blue','button_gold','button_green','button_violet','panel']+['ui_'+n for n in ['star','heart','aim','dash','hint','radio','gear','menu','sound','trap']]+['ui_background']
-if illustrations.exists():ui_names += ['ui_'+n for n in ['trap_magnet','trap_frost','trap_pulse','trap_cancel','cannon','armor','boots','cloak']]+['mission_'+n for n in ['reactor','citadel','dock','forge','echo','rescue']]+['lobby']
+if illustrations.exists():ui_names += ['ui_'+n for n in ['trap_magnet','trap_frost','trap_pulse','trap_cancel','cannon','armor','boots','cloak']]+['mission_'+n for n in ['reactor','citadel','dock','forge','echo','rescue']]+['lobby','chest-prop']
 (D/'models/interface.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ui_names)+'\nextrude_borders: 2\n')
 components.append('components { id: "backdrop" component: "/main/backdrop.gui" }')
 (D/'main/main.go').write_text('\n'.join(components)+'\n')

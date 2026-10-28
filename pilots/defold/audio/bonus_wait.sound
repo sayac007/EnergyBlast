@@ -1,0 +1,4 @@
+sound: "/audio/bonus_wait.ogg"
+looping: 0
+group: "master"
+gain: 2.6503459413021324

@@ -1,4 +1,4 @@
-"""Optional offline synthesis for the new press-duration control cue; no actor voice cloning."""
+"""Optional offline synthesis for touch, navigation and bonus cues; no actor voice cloning."""
 import argparse,hashlib,json,math,os,subprocess,tempfile
 from pathlib import Path
 R=Path(__file__).resolve().parents[1]
@@ -15,6 +15,20 @@ TEXTS={
  'defold_trap_magnet':'Magnet. Hält den Wächter fest. Tippe zum Ablegen auf freien Boden im hellen Kreis.',
  'defold_trap_frost':'Eis. Hält länger fest. Tippe zum Ablegen auf freien Boden im hellen Kreis.',
  'defold_trap_pulse':'Der Wächter verliert zwei Energiepunkte. Tippe zum Ablegen auf freien Boden im hellen Kreis.',
+ 'flow_menu':'Wähle eine Mission. Links kannst du auch den Drachen wählen.',
+ 'flow_shop':'Hier gibst du Sterne aus. Tippe auf Kaufen. Deine Gesamtsterne bleiben.',
+ 'flow_dragon':'Dein Drache ist bereit. Er spuckt Feuer.',
+ 'flow_purchase':'Gekauft und ausgerüstet.',
+ 'flow_need_stars':'Dafür fehlen noch Sterne. Spiele eine Mission.',
+ 'flow_next':'Geschafft! Weiter geht es mit der nächsten Mission.',
+ 'flow_loot':'Der Schatz ist freiwillig. Folge den goldenen Spuren. Danach kannst du weitergehen.',
+ 'bonus_prism':'Dein Schuss trifft erst die Wand und dann den goldenen Kristall.',
+ 'bonus_sequence':'Bonus. Merke dir die Lichter. Triff die Kristalle in dieser Reihenfolge.',
+ 'bonus_wait':'Der Kristall muss grün leuchten. Dann kannst du schießen.',
+ 'flow_exit':'Alle Gegner sind weg. Gehe jetzt zum Ausgang.',
+ 'flow_treasure':'Hier ist noch ein Schatz. Er ist freiwillig. Suche bei den goldenen Spuren.',
+ 'flow_no_treasure':'Schatz gefunden. Du kannst die nächste Mission starten.',
+ 'flow_final':'Diese Mission ist geschafft. Du kannst noch offene Bonusziele sammeln.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

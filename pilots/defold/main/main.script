@@ -4,7 +4,7 @@ local View=require 'main.view'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
- local contextual=id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
+ local contextual=id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
  if contextual then
   if self.voice_id then sound.stop('#'..self.voice_id)end
   self.voice_left=0;self.voice_next=nil
@@ -104,9 +104,9 @@ local function rebuild(self,index)
  self.heal=self.g.m.heal and make('illustrated_heal',self.g.m.heal)or nil
  for _,id in pairs(self.device_nodes or{})do go.delete(id)end;self.device_nodes={}
  self.radar=make('illustrated_relay',self.g.m.radar);go.set_position(vmath.vector3(self.g.m.radar[1],1.17,self.g.m.radar[2]),self.radar);go.set_scale(.55,self.radar)
- for _,t in ipairs(self.g.enemies)do t.shadow=make('shadow',t.p);t.illustrated=t.kind~='relay'and t.kind~='sequence';t.node=make(t.illustrated and('illustrated_'..(t.boss and'boss'or t.trap_shield and'guardian'or'sentinel'))or'illustrated_relay',t.p)end
+ for _,t in ipairs(self.g.enemies)do t.shadow=make('shadow',t.p);t.illustrated=not t.optional and t.kind~='relay'and t.kind~='sequence';t.node=make(t.illustrated and('illustrated_'..(t.boss and'boss'or t.trap_shield and'guardian'or'sentinel'))or'illustrated_relay',t.p)end
  View.follow(self.g,0,true)
- self.g.say(self.g.m.voice or(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id));if self.g.m.kind~='trap'then self.voice_next='defold_controls'end
+ if not self.suppress_intro then self.g.say(self.g.m.voice or(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id));if self.g.m.kind~='trap'then self.voice_next='defold_controls'end end
 end
 local function render_fragments(self)
  local alive={}
@@ -139,12 +139,17 @@ local function run_tests(self)
  local prior=Combat.new(json.decode(sys.load_resource('/data/raid-03.json')))
  prior.camera={0,0};bind_controls(prior);prior.cancel_controls=function()prior.touch:cancel()end
  local n=require('main.regression_checks').run(prior)
- self.g.data.shop_enabled=false
- n=n+require('main.defold04_checks').run(self.g)
- n=n+require('main.reflection_checks').run(self.g)
- self.g.data.shop_enabled=true
- n=n+require('main.toybox_checks').run(self.g)
- n=n+require('main.trap_checks').run(self.g)
+ -- Historical0.7data preserves the original assertions while new rewards grow.
+ local legacy=Combat.new(json.decode(sys.load_resource('/data/defold07.json')))
+ legacy.camera={0,0};bind_controls(legacy);legacy.cancel_controls=function()legacy.touch:cancel()end
+ legacy.data.shop_enabled=false
+ n=n+require('main.defold04_checks').run(legacy)
+ n=n+require('main.reflection_checks').run(legacy)
+ legacy.data.shop_enabled=true
+ n=n+require('main.toybox_checks').run(legacy)
+ n=n+require('main.trap_checks').run(legacy)
+ n=n+require('main.flow_checks').run(self.g)
+ n=n+require('main.bonus_checks').run(self.g.data)
  self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
  n=n+require('main.presentation_checks').run(self)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
@@ -162,7 +167,9 @@ function init(self)
  end
  self.g.say=function(id)if not self.test_mode then voice(self,id)end end
  self.g.sfx=function(id)if not self.muted then sound.play('#fx_'..id)end end
- self.logic_url=msg.url();self.ui_test=sys.get_config_string('project.ui_test','0')=='1';self.g.ui_test=self.ui_test;if self.ui_test then self.g.saved={earned={},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={}};for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end end
+ self.logic_url=msg.url();self.g.flow_ui_test=sys.get_config_string('project.flow_ui_test','0')=='1'
+ if self.g.flow_ui_test then self.g.saved={earned={['mission:reactor']=true},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={},current_mission=1}end
+ self.ui_test=sys.get_config_string('project.ui_test','0')=='1';self.g.ui_test=self.ui_test;if self.ui_test then self.g.saved={earned={},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={}};for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end end
  self.g.cancel_controls=function()self.g.touch:cancel();msg.post('#ui','cancel_controls')end
  self.g.choose=function(index)msg.post(self.logic_url,'choose',{index=index})end
  self.g.pick_character=function(id)msg.post(self.logic_url,'character',{id=id})end
@@ -178,17 +185,19 @@ function init(self)
   music_update(self)
  end)
  sound.set_group_gain('master',.75);sound.play('#music');self.g.music_started=true
- _G.energyblast=self.g;rebuild(self,1);self.g.paused=true;self.g.dialog=sys.get_config_string('project.capture_page','menu');music_update(self)
+ _G.energyblast=self.g;self.suppress_intro=true;rebuild(self,self.g:start_index());self.suppress_intro=false;self.g.intro_needed=true;self.g.paused=true;self.g.dialog=sys.get_config_string('project.capture_page','menu');music_update(self)
+ if not self.test_mode then voice(self,'flow_menu')end
+ if sys.get_config_string('project.flow_win','0')=='1'then self.g.saved.earned={};for _,e in ipairs(self.g.enemies)do if not e.optional then e.hp=0 end end;self.g.paused=false;self.g:finish()end
  local save_test=sys.get_config_string('project.save_test','')
  if save_test=='write'then
   self.muted=true;self.g.saved={earned={},clues={},weapon='pulse',music=false,schema=2,purchases={},spent={}}
   self.g:award('mission:reactor');self.g:award('skill:reactor');self.g:hint()
   self.g:award('mission:dock');self.g:award('skill:dock');self.g:award('secret:dock');self.g:load(3);self.g:hint()
-  assert(self.g:buy('armor')and self.g:buy('prism')and self.g:set_character('dragon'));assert(self.g:total()==375 and self.g:wallet()==115 and self.g:credits()==2);print('DEFOLD SAVE WRITE PASS');msg.post('@system:','exit',{code=0})
+  assert(self.g:buy('armor')and self.g:buy('prism')and self.g:set_character('dragon'));assert(self.g:total()==875 and self.g:wallet()==615 and self.g:credits()==2);print('DEFOLD SAVE WRITE PASS');self.save_exit=true;msg.post('@system:','exit',{code=0})
  elseif save_test=='read'then
-  assert(self.g:total()==375 and self.g:credits()==2 and self.g:level()==1 and self.g.saved.music==false and self.g:wallet()==115 and self.g:character().id=='dragon'and self.g:owns('armor'))
+  assert(self.g:total()==875 and self.g:credits()==2 and self.g:level()==1 and self.g.saved.music==false and self.g:wallet()==615 and self.g:character().id=='dragon'and self.g:owns('armor'))
   self.g:load(3);assert(self.g:level()==1 and self.g.saved.earned['secret:dock']);assert(self.g:award('mission:reactor')==0)
-  print('DEFOLD SAVE RESTART PASS');msg.post('@system:','exit',{code=0})
+  print('DEFOLD SAVE RESTART PASS');self.save_exit=true;msg.post('@system:','exit',{code=0})
  end
  if sys.get_config_string('project.capture_mode','0')=='1'then self.g:set_character(sys.get_config_string('project.capture_character','hero'));self.g.choose(tonumber(sys.get_config_string('project.capture_sector','1')))end
  local capture_audio=sys.get_config_string('project.capture_music','')
@@ -201,6 +210,7 @@ function init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
+ if self.save_exit then return end
  self.visual_clock=self.capture_depth and 0 or self.visual_clock+dt
  if self.capture_audio_left then self.capture_audio_left=self.capture_audio_left-dt;if self.capture_audio_left<=0 then msg.post('@system:','exit',{code=0});return end end
  if self.test_wait then
@@ -224,7 +234,7 @@ function update(self,dt)
   self.voice_left=math.max(0,self.voice_left-dt)
   if self.voice_left<=0 and self.voice_next then local id=self.voice_next;self.voice_next=nil;voice(self,id)end
  end
- self.g:update(dt);music_update(self)
+ self.g.voice_busy=self.voice_left>0;self.g:update(dt);music_update(self)
  View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2]})
  go.set_rotation(vmath.quat_rotation_z(math.sin(self.visual_clock*2)*.025),self.radar)
  local p=self.g.p
@@ -232,7 +242,7 @@ function update(self,dt)
  go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow);go.set_position(vmath.vector3(p[1],0,p[2]),self.selection)
  go.set_position(vmath.vector3(p[1],0,p[2]),self.lobby)
  for _,t in ipairs(self.g.enemies)do
-  local age=t.death_age;local scale=t.hp>0 and(t.boss and 1.2 or 1)or(age and age<.32 and math.max(.001,1-age/.32)*1.2 or .001)
+  local age=t.death_age;local scale=t.hp>0 and(t.optional and .7 or t.boss and 1.2 or 1)or(age and age<.32 and math.max(.001,1-age/.32)*1.2 or .001)
   go.set_position(vmath.vector3(t.p[1],0,t.p[2]),t.shadow);go.set_scale(t.hp>0 and 1 or .001,t.shadow)
   go.set_position(vmath.vector3(t.p[1],t.kind=='relay'and math.sin(self.g.clock*2)*.08 or 0,t.p[2]),t.node)
   if t.illustrated then
@@ -241,7 +251,9 @@ function update(self,dt)
    local phase=t.firing_age>0 and 3 or t.warning>0 and(t.warning<.3 and 2 or 1)or 0
    sprite_frame(t.node,phase,0,4,1,t.direction[1]<0,(t.hit_timer or 0)>0)
    go.set_rotation(vmath.quat_rotation_z(math.sin(self.visual_clock*3)*.012+(age or 0)*2),t.node)
-  else go.set_rotation(vmath.quat_rotation_z(math.sin(self.visual_clock*2)*.015),t.node)end;go.set_scale(vmath.vector3(scale*(1+(t.hit_timer or 0)*.7),scale*(1-(t.hit_timer or 0)*.5),scale),t.node)
+  else go.set_rotation(vmath.quat_rotation_z(math.sin(self.visual_clock*2)*.015),t.node)
+   if t.optional then local kind=t.bonus_task.kind;local tint=kind=='prism'and vmath.vector4(1.8,1.2,.35,1)or kind=='wait'and(t.bonus_green and vmath.vector4(.35,1.8,.75,1)or vmath.vector4(1.4,.45,.3,1))or vmath.vector4(.6,1.4,1.8,1);go.set(msg.url(nil,t.node,'model'),'tint',tint)end
+  end;go.set_scale(vmath.vector3(scale*(1+(t.hit_timer or 0)*.7),scale*(1-(t.hit_timer or 0)*.5),scale),t.node)
  end
  draw_projectiles(self,dt)
  local devices={}
@@ -253,13 +265,14 @@ function update(self,dt)
  for trap,id in pairs(self.device_nodes)do if not devices[trap]then go.delete(id);self.device_nodes[trap]=nil end end
  if self.heal then go.set_scale(self.g.heal_used and .001 or(1+math.sin(self.visual_clock*2)*.025),self.heal)end
  if self.gate then local r=self.g.m.gate_rect;go.set_position(vmath.vector3(r[1]+r[3]/2,0,r[2]+r[4]/2),self.gate);go.set_scale(vmath.vector3(r[3],self.g:open()and .001 or 1,r[4]),self.gate)end
- go.set_scale(self.g.secret_visible and 1 or .001,self.chest)
+ go.set_scale(self.g.secret_visible and 1.4 or .001,self.chest)
+ go.set_position(vmath.vector3(self.g.m.secret.position[1],.04+math.sin(self.visual_clock*3)*.025,self.g.m.secret.position[2]),self.chest)
  if self.drone then local e=self.g.drone;go.set_position(vmath.vector3(e.p[1],.08*math.sin(self.g.clock*5),e.p[2]),self.drone)end
  render_fragments(self)
 end
 function on_message(self,id,message)
  if id==hash('choose')then
-  if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,message.index)
+  if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,message.index);self.g.intro_needed=false
   if sys.get_config_string('project.capture_motion','0')=='1'then
    self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-1},0);local ax,ay=View.project(self.g,{3,-4},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))
   end
@@ -272,7 +285,7 @@ function on_message(self,id,message)
   if sys.get_config_string('project.capture_fx','0')=='1'then
    local t=self.g.enemies[2]or self.g.enemies[1];self.g.p={t.p[1]-1.5,t.p[2]+1};View.follow(self.g,0,true);t.shield=false;t.boss=false;while t.hp>0 do self.g:hit(t,1)end;self.g.paused=true;print('DEFOLD FX CAPTURE READY')
   end
-  if self.ui_test then assert(self.g.m.id=='dock'and #self.g.enemies==5);print('DEFOLD UI SECTOR SELECTED dock');self.ui_exit=8 end
+  if self.ui_test then local mandatory=0;for _,e in ipairs(self.g.enemies)do if not e.optional then mandatory=mandatory+1 end end;assert(self.g.m.id=='dock'and mandatory==5);print('DEFOLD UI SECTOR SELECTED dock');self.ui_exit=8 end
  elseif id==hash('character')then
   if self.g:set_character(message.id)then replace_hero(self);if self.ui_test then assert(self.g:character().id==message.id and self.hero~=nil and #self.hero_ids==1);print('DEFOLD CHARACTER PICK PASS '..message.id)end end
  elseif id==hash('radio')then

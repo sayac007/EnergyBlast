@@ -15,3 +15,17 @@
 - Use friendly robots and non-graphic effects. Keep rapid retries and respectful
   feedback. Reward suitable decisions, not maximum waiting. Do not infer general
   everyday impulse-control improvements from performance on these missions.
+
+## Published milestone and current brief (28 October 2026)
+
+- Read docs/PROJECT_BRIEF.md and docs/MILESTONE_01.md before planning new work.
+  They consolidate the operator's later decisions; the original brief is historical.
+- The selected comparison is Godot / GDevelop / Defold, with active cannon combat,
+  tap-to-move, drag/release fire, FIRE hold and DASH. No joystick or compulsory quiz.
+- `main` currently publishes the documentation/index. Current game implementation
+  is on `feat/touch-shooter-v2`, source `1006cde`, APK snapshot `defd791`.
+  Do not mistake the absence of game files on main for an unimplemented prototype.
+- The operator authorized this README/brief/milestone publication on GitHub.
+  No game branch merge, pull request or release publication is authorized by it.
+- Matching finished public Kinderwelt audio was explicitly authorized read-only,
+  with provenance/notices. Never copy private family assets or signing material.

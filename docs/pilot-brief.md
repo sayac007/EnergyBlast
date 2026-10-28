@@ -1,5 +1,13 @@
 # Engine pilot work order
 
+**Historisches Original, kein aktueller Statusbericht.** Die ursprüngliche
+Aufgabe unten bleibt als Zitat erhalten. Ihre Angaben zu Repository, Joystick,
+Engine-Kandidaten und damaligem Teststand wurden später teilweise ersetzt.
+Der konsolidierte Auftrag steht in [PROJECT_BRIEF.md](PROJECT_BRIEF.md), der
+erste dokumentierte Vergleichsstand in [MILESTONE_01.md](MILESTONE_01.md).
+Insbesondere bezeichnet „AKTUELLER STATUS“ innerhalb des Zitats den damaligen
+Ausgangspunkt und nicht den heute veröffentlichten Stand.
+
 **Operator update, 27 October 2026:** use the new **public** repository
 `sayac007/EnergyBlast`. Do not change Kinderwelt or create pull/merge requests
 at this stage. These updates override the repository/branch references in the

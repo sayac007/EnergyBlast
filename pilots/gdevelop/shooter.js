@@ -2,22 +2,38 @@ class Shooter extends Pilot {
   constructor(scene) {
     super(scene);
     this.sound = true;
-    window.addEventListener("pointermove", (e) =>
-      this.drag(e.clientX, e.clientY),
+    window.addEventListener(
+      "pointermove",
+      (e) =>
+        (this.pointerId === undefined || e.pointerId === this.pointerId) &&
+        this.drag(e.clientX, e.clientY),
     );
-    window.addEventListener("pointercancel",()=>this.cancelControls());
+    window.addEventListener("pointercancel", () => this.cancelControls());
     window.addEventListener("pointerup", (e) => {
-      this.held = false;
-      this.release(e.clientX, e.clientY);
+      if (e.pointerId === this.firePointerId) {
+        this.held = false;
+        this.firePointerId = undefined;
+      }
+      if (this.pointerId === undefined || e.pointerId === this.pointerId)
+        this.release(e.clientX, e.clientY);
     });
   }
-  cancelControls(){this.held=false;this.pointer=false;this.aiming=false;}
-  setBackground(value){super.setBackground(value);if(value)this.cancelControls();}
+  cancelControls() {
+    this.held = false;
+    this.pointer = false;
+    this.aiming = false;
+    this.pointerId = undefined;
+    this.firePointerId = undefined;
+  }
+  setBackground(value) {
+    super.setBackground(value);
+    if (value) this.cancelControls();
+  }
   ui() {
     super.ui();
     let style = document.createElement("style");
     style.textContent =
-      "@font-face{font-family:EnergyBlast;src:url(LilitaOne-Regular.ttf)}#eb{font-family:EnergyBlast,system-ui}#eb button{font-family:EnergyBlast,system-ui}#eb button{background:#20314b;border-radius:24px;font-weight:750}#eb .top{flex-wrap:wrap}#eb-stars{font-size:26px}#eb .bottom{bottom:max(12px,env(safe-area-inset-bottom))}#eb-modes{gap:14px;margin-bottom:10px}#eb-modes button{height:76px;font-size:20px}#eb-modes button b{display:none}#eb-extra button{min-height:42px;font-size:12px}#eb-extra button b{display:inline;font-size:18px;margin-right:6px}#eb-status{font-size:12px;min-height:28px;margin-bottom:0;color:#b8e5ed}#eb .dialog{background:#18253e;border:1px solid #45627c;border-radius:28px}#eb .dialog button{min-height:70px;font-size:16px}#eb-health{color:#ff7394;width:100%;font-weight:800;font-size:22px}#eb-mission{color:#9db5ce;font-size:12px;width:100%}";
+      "@font-face{font-family:EnergyBlast;src:url(LilitaOne-Regular.ttf)}#eb{font-family:EnergyBlast,system-ui}#eb button{font-family:EnergyBlast,system-ui}#eb button{background:#20314b;border-radius:24px;font-weight:750}#eb .top{flex-wrap:wrap}#eb-stars{font-size:26px}#eb .bottom{bottom:max(12px,env(safe-area-inset-bottom))}#eb-modes{gap:14px;margin-bottom:10px}#eb-modes button{height:76px;font-size:20px}#eb-modes button b{display:none}#eb-extra button{min-height:42px;font-size:12px}#eb-extra button b{display:inline;font-size:18px;margin-right:6px}#eb-status{font-size:12px;min-height:28px;margin-bottom:0;color:#b8e5ed}#eb .dialog{background:#18253e;border:1px solid #45627c;border-radius:28px}#eb .dialog button{min-height:70px;font-size:16px}#eb .top{background:linear-gradient(135deg,#14243ee8,#202e4bd9);padding:12px;border-radius:22px;border:1px solid #486378;box-shadow:0 8px 20px #050d2140}#eb-stars{color:#ffe299;text-shadow:0 2px 8px #f9b34b66}#eb-modes button{box-shadow:0 5px 0 #0a152c,0 8px 18px #040e2b77}#eb .dialog{box-shadow:0 25px 80px #020921cc;background:linear-gradient(145deg,#20344d,#172038)}#eb .dialog button{border:1px solid #536c86}#eb .dialog button:nth-of-type(3){background:#715337;color:#ffde9b}#eb-objective{font-size:12px;color:#ffdf8c}#eb-health{color:#ff7394;width:100%;font-weight:800;font-size:22px}#eb-mission{color:#9db5ce;font-size:12px;width:100%}";
     document.head.append(style);
     let row = this.hud.querySelector("#eb-modes");
     row.replaceChildren();
@@ -26,19 +42,24 @@ class Shooter extends Pilot {
     this.fireButton.style.background = "#d63969";
     this.fireButton.onpointerdown = (e) => {
       e.stopPropagation();
+      this.firePointerId = e.pointerId;
       this.held = true;
+      this.fireButton.setPointerCapture(e.pointerId);
       this.fire();
     };
     this.fireButton.onpointerup = (e) => {
       e.stopPropagation();
-      this.held = false;
+      if (e.pointerId === this.firePointerId) {
+        this.held = false;
+        this.firePointerId = undefined;
+      }
     };
     this.fireButton.onpointercancel = () => (this.held = false);
     row = this.hud.querySelector("#eb-extra");
     row.replaceChildren();
     this.button("Hinweis", "?", row, () => this.hint());
     this.button("Funk", "♫", row, () => {
-      this.say("combat_" + this.m.id);
+      this.say(this.m.id === "dock" ? "raid_dock" : "combat_" + this.m.id);
       this.next = "combat_controls";
     });
     this.button("Arsenal", "◇", row, () => this.gear());
@@ -48,8 +69,16 @@ class Shooter extends Pilot {
     h = document.createElement("div");
     h.id = "eb-mission";
     this.hud.querySelector(".top").append(h);
+    h = document.createElement("div");
+    h.id = "eb-objective";
+    this.hud.querySelector(".top").append(h);
   }
   model(name, p, width, height, depth) {
+    const dimensions = /*ENERGYBLAST_DIMENSIONS*/ {};
+    if (dimensions[name.toLowerCase()])
+      [width, height, depth] = dimensions[name.toLowerCase()].map(
+        (n) => n * 100,
+      );
     let o = this.scene.createObject(name);
     o.setWidth(width);
     o.setHeight(height);
@@ -58,7 +87,7 @@ class Shooter extends Pilot {
     o.setZ(0);
     this.models.push(o);
     o.get3DRendererObject().scale.y =
-      (name === "Reactor" || name === "Citadel" ? 1 : -1) *
+      (["Reactor", "Citadel", "Dock"].includes(name) ? 1 : -1) *
       Math.abs(o.get3DRendererObject().scale.y);
     return o;
   }
@@ -85,12 +114,18 @@ class Shooter extends Pilot {
     this.aiming = false;
     this.clueTime = 0;
     this.hintDebounce = 0;
+    this.healUsed = false;
+    this.target = null;
+    this.feedback = 0;
     this.bullets = [];
+    this.shotsFired = 0;
     this.fx = [];
     this.hp = 3 + (this.total() >= 160 ? 1 : 0);
     this.maxHp = this.hp;
-    this.model(index ? "Citadel" : "Reactor", [0, 0], 1470, 1070, 205);
+    this.model(["Reactor", "Citadel", "Dock"][index], [0, 0], 1620, 1190, 305);
     this.hero = this.model("Hero", this.p, 134, 110, 190);
+    this.radar = this.model("Radar", this.m.radar, 110, 100, 120);
+    this.radar.setZ(117);
     this.walls = [
       { r: [-7, -5, 14, 0.3], type: "border" },
       { r: [-7, 4.7, 14, 0.3], type: "border" },
@@ -102,12 +137,27 @@ class Shooter extends Pilot {
     this.enemies = this.m.turrets.map((t) => ({
       ...t,
       p: [...t.position],
-      hp: 2,
+      hp: t.hp || 2,
       timer: t.phase + 0.7,
       warning: 0,
       direction: [-1, 0],
       node: this.model("Cannon", t.position, 110, 152, 120),
+      maxHp: t.hp || 2,
+      burst: t.burst || 1,
+      waypoint: 1,
     }));
+    for (const t of this.m.relays || [])
+      this.enemies.push({
+        ...t,
+        p: [...t.position],
+        hp: 1,
+        maxHp: 1,
+        shield: true,
+        kind: "relay",
+        warning: 0,
+        direction: [0, 1],
+        node: this.model("Relay", t.position, 97, 85, 142),
+      });
     this.secret = this.cube(
       this.m.secret.position[0] - 0.35,
       this.m.secret.position[1] - 0.25,
@@ -117,6 +167,16 @@ class Shooter extends Pilot {
       "157;99;233",
     );
     this.secret.hide(true);
+    this.heal = this.m.heal
+      ? this.cube(
+          this.m.heal[0] - 0.2,
+          this.m.heal[1] - 0.2,
+          0.4,
+          0.4,
+          0.25,
+          "116;255;210",
+        )
+      : null;
     this.gate = null;
     this.lights = [];
     if (this.m.gate_rect) {
@@ -163,10 +223,10 @@ class Shooter extends Pilot {
   menu() {
     this.cancelControls();
     this.modal(
-      "ENERGYBLAST · RICOCHET RAID",
+      "ENERGYBLAST · AURORA RAID 0.3",
       DEF.missions
         .map((m, i) => [
-          (i ? "02 · " : "01 · ") + m.title,
+          String(i + 1).padStart(2, "0") + " · " + m.title,
           "ϟ",
           () => {
             this.load(i);
@@ -174,7 +234,7 @@ class Shooter extends Pilot {
             if (this.audio) this.audio.pause();
             this.next = "combat_controls";
             this.important = [];
-            this.say("combat_" + m.id);
+            this.say(m.id === "dock" ? "raid_dock" : "combat_" + m.id);
           },
         ])
         .concat([["▶ WEITER", "", () => this.close()]]),
@@ -187,7 +247,9 @@ class Shooter extends Pilot {
     s.quiet ||= !!this.saved.earned["secret:citadel"];
     return s;
   }
-  tap(x, y) {
+  tap(x, y, id) {
+    if (this.pointer) return;
+    this.pointerId = id;
     this.pointer = true;
     this.start = [x, y];
     this.current = [x, y];
@@ -221,27 +283,53 @@ class Shooter extends Pilot {
       this.path = [];
       let q = this.world(x, y);
       this.aim = this.norm([q[0] - this.p[0], q[1] - this.p[1]]);
+      this.target = q;
     }
   }
   release(x, y) {
     if (!this.pointer || this.paused) return;
+    // A release can cross the drag threshold even when the last move was coalesced.
+    if (this.distance(this.start, [x, y]) > 12) this.drag(x, y);
     this.pointer = false;
     if (this.aiming) this.fire();
     else {
-      let q = this.world(x, y);
-      if (
-        this.blocked(q) ||
-        this.enemies.some((t) => t.hp > 0 && this.distance(t.p, q) < 0.8)
-      ) {
-        this.aim = this.norm([q[0] - this.p[0], q[1] - this.p[1]]);
+      let q = this.world(x, y),
+        target = null,
+        nearest = 26;
+      for (const t of this.enemies)
+        if (t.hp > 0) {
+          const p = this.project(t.p, 80),
+            d = Math.hypot(p[0] - x, p[1] - y);
+          if (d < nearest) {
+            target = t.p;
+            nearest = d;
+          }
+        }
+      const reflector = this.walls.some(
+        (w) =>
+          w.type === "reflector" &&
+          q[0] > w.r[0] - 0.2 &&
+          q[0] < w.r[0] + w.r[2] + 0.2 &&
+          q[1] > w.r[1] - 0.2 &&
+          q[1] < w.r[1] + w.r[3] + 0.2,
+      );
+      this.target = target || q;
+      if (target || reflector) {
+        this.path = [];
+        this.aim = this.norm([
+          this.target[0] - this.p[0],
+          this.target[1] - this.p[1],
+        ]);
         this.fire();
       } else this.navigate(q);
     }
+    this.pointerId = undefined;
     this.aiming = false;
   }
   fire() {
     if (this.over || this.paused || this.cooldown > 0) return;
     this.cooldown = DEF.combat.fire_cooldown;
+    this.shotsFired++;
     this.bullets.push({
       points: this.shot(),
       segment: 0,
@@ -275,7 +363,8 @@ class Shooter extends Pilot {
     if (!this.path.length)
       this.navigate([this.p[0] + this.aim[0] * 2, this.p[1] + this.aim[1] * 2]);
     this.dashTime = DEF.player.dash_seconds;
-    this.dashCooldown = DEF.player.dash_cooldown;
+    this.dashCooldown =
+      DEF.player.dash_cooldown * (this.saved.earned["secret:dock"] ? 0.8 : 1);
     this.invulnerable = Math.max(this.invulnerable, this.dashTime);
     this.beep(400, 0.08);
   }
@@ -284,6 +373,7 @@ class Shooter extends Pilot {
     this.hp--;
     this.damage++;
     this.invulnerable = DEF.combat.hit_invulnerability;
+    this.feedback = 0.35;
     this.score();
     this.beep(130, 0.15);
     if (this.hp <= 0) {
@@ -298,17 +388,27 @@ class Shooter extends Pilot {
           () => {
             this.load(this.index);
             this.close();
-            this.say("combat_" + this.m.id);
+            this.say(
+              this.m.id === "dock" ? "raid_dock" : "combat_" + this.m.id,
+            );
           },
         ],
         ["≡ SEKTOREN", "", () => this.menu()],
       ]);
     }
   }
+  locked(t) {
+    return t.boss && this.enemies.some((e) => e.kind === "relay" && e.hp > 0);
+  }
   hit(t, bounces) {
+    if (this.locked(t)) {
+      this.status("RELAIS ZUERST");
+      this.say("raid_relays");
+      return;
+    }
     if (t.shield && !bounces) {
       this.status("SCHILD · Triff über die leuchtende Wand.");
-      this.say("combat_shield");
+      this.say(t.kind === "relay" ? "raid_relays" : "combat_shield");
       return;
     }
     t.hp--;
@@ -364,7 +464,13 @@ class Shooter extends Pilot {
       this.save();
     }
     this.clueTime = 8;
-    this.say(this.m.id === "reactor" ? "hint_bank" : "hint_guardian");
+    this.say(
+      this.m.id === "dock"
+        ? "raid_hint"
+        : this.m.id === "reactor"
+          ? "hint_bank"
+          : "hint_guardian",
+    );
     this.score();
   }
   gear() {
@@ -392,22 +498,37 @@ class Shooter extends Pilot {
         .concat([["WEITER", "▶", () => this.close()]]),
     );
   }
-  dot(p, color, r = 6, height = 75) {
-    let v = new THREE.Vector3(p[0] * 100, -p[1] * 100, height).project(
+  project(p, height = 75) {
+    const v = new THREE.Vector3(p[0] * 100, -p[1] * 100, height).project(
         this.layer.getRenderer().getThreeCamera(),
       ),
-      rect = this.canvas.getBoundingClientRect(),
+      r = this.canvas.getBoundingClientRect();
+    return [
+      r.left + ((v.x + 1) * r.width) / 2,
+      r.top + ((1 - v.y) * r.height) / 2,
+    ];
+  }
+  dot(p, color, r = 6, height = 75) {
+    const v = this.project(p, height),
       o = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    o.setAttribute("cx", rect.left + ((v.x + 1) * rect.width) / 2);
-    o.setAttribute("cy", rect.top + ((1 - v.y) * rect.height) / 2);
+    o.setAttribute("cx", v[0]);
+    o.setAttribute("cy", v[1]);
     o.setAttribute("r", r);
     o.setAttribute("fill", color);
     this.svg.append(o);
+    return o;
+  }
+  ring(p, color, r = 12, height = 0) {
+    const o = this.dot(p, "none", r, height);
+    o.setAttribute("stroke", color);
+    o.setAttribute("stroke-width", 2);
+    return o;
   }
   update(dt) {
     if (this.paused || this.background || this.over) return;
     this.clock += dt;
     this.svg.replaceChildren();
+    this.feedback = Math.max(0, this.feedback - dt);
     this.cooldown = Math.max(0, this.cooldown - dt);
     this.invulnerable = Math.max(0, this.invulnerable - dt);
     this.dashTime = Math.max(0, this.dashTime - dt);
@@ -429,8 +550,14 @@ class Shooter extends Pilot {
       if (!this.held && !this.aiming)
         this.hero.setAngle((Math.atan2(n[1], n[0]) * 180) / Math.PI);
     }
+    this.dot(this.p, "#050d2155", 18, 3);
+    this.radar.setAngle(this.clock * 26);
     this.hero.setPosition(this.p[0] * 100, this.p[1] * 100);
     this.hero.hide(this.invulnerable > 0 && this.clock % 0.13 < 0.05);
+    if (this.aiming || this.held)
+      this.hero.setAngle(
+        (Math.atan2(this.aim[1], this.aim[0]) * 180) / Math.PI,
+      );
     const model = this.hero.get3DRendererObject();
     if (model)
       for (const name of ["Leg_L", "Leg_R", "Arm_L", "Arm_R"]) {
@@ -443,22 +570,47 @@ class Shooter extends Pilot {
       }
     for (const t of this.enemies) {
       if (t.hp <= 0) continue;
+      if (t.kind === "relay") {
+        t.node.setZ(8 * Math.sin(this.clock * 2));
+        this.ring(t.p, "#ffd674", 20, 10);
+        continue;
+      }
+      if (t.patrol && t.warning <= 0) {
+        const q = t.patrol[t.waypoint],
+          d = this.distance(t.p, q),
+          step = (t.speed || 1) * dt;
+        if (d < step) {
+          t.p = [...q];
+          t.waypoint = (t.waypoint + 1) % t.patrol.length;
+        } else {
+          const n = this.norm([q[0] - t.p[0], q[1] - t.p[1]]);
+          t.p = [t.p[0] + n[0] * step, t.p[1] + n[1] * step];
+        }
+        t.node.setPosition(t.p[0] * 100, t.p[1] * 100);
+      }
+
       if (t.warning > 0) {
         t.warning -= dt;
         if (t.warning <= 0) {
-          let hit = this.ray(t.p, t.direction, 20, this.activeWalls());
-          this.bullets.push({
-            points: [
-              t.p,
-              hit
-                ? hit.p
-                : [t.p[0] + t.direction[0] * 20, t.p[1] + t.direction[1] * 20],
-            ],
-            segment: 0,
-            p: [...t.p],
-            enemy: true,
-            speed: DEF.combat.enemy_bullet_speed,
-          });
+          for (let j = 0; j < t.burst; j++) {
+            const a = (j - (t.burst - 1) / 2) * 0.16,
+              d = [
+                t.direction[0] * Math.cos(a) - t.direction[1] * Math.sin(a),
+                t.direction[0] * Math.sin(a) + t.direction[1] * Math.cos(a),
+              ],
+              start = [...t.p],
+              hit = this.ray(start, d, 20, this.activeWalls());
+            this.bullets.push({
+              points: [
+                start,
+                hit ? hit.p : [start[0] + d[0] * 20, start[1] + d[1] * 20],
+              ],
+              segment: 0,
+              p: [...start],
+              enemy: true,
+              speed: DEF.combat.enemy_bullet_speed,
+            });
+          }
           t.timer = DEF.combat.enemy_interval;
           this.beep(190, 0.08);
         }
@@ -476,20 +628,15 @@ class Shooter extends Pilot {
       t.node.setAngle(
         (Math.atan2(t.direction[1], t.direction[0]) * 180) / Math.PI,
       );
-      if (t.shield) this.dot(t.p, "#b688ff33", 28);
+      if (t.shield || this.locked(t)) {
+        this.ring(t.p, "#b688ff", 26, 65);
+        this.dot(t.p, "#b688ff22", 26, 65);
+      }
       for (let i = 0; i < t.hp; i++)
         this.dot([t.p[0] - 0.15 + i * 0.3, t.p[1]], "#ff7394", 4, 145);
       if (t.warning > 0) {
-        let hit = this.ray(t.p, t.direction, 20, this.activeWalls());
-        this.line(
-          [
-            t.p,
-            hit
-              ? hit.p
-              : [t.p[0] + t.direction[0] * 20, t.p[1] + t.direction[1] * 20],
-          ],
-          "#ff6d8555",
-        );
+        this.ring(t.p, "#ffb47b", 12 + 4 * Math.sin(this.clock * 28) ** 2, 100);
+        this.dot(t.p, "#ffd674", 5, 100);
       }
     }
     for (const b of [...this.bullets]) {
@@ -532,8 +679,11 @@ class Shooter extends Pilot {
     }
     this.fx = this.fx.filter((f) => (f.life -= dt) > 0);
     for (const f of this.fx) this.dot(f.p, "#ffd77988", 12 * (1 - f.life));
-    if (this.aiming) this.line(this.shot(), "#b6ffebaa");
-    if (this.path.length) this.line([this.p, ...this.path], "#74efcc55");
+    if (this.aiming && this.target) {
+      this.ring(this.target, "#b6ffeb", 13, 0);
+      this.dot(this.target, "#b6ffeb", 3, 0);
+    }
+    if (this.path.length) this.ring(this.path.at(-1), "#74efcc", 10, 0);
     const sp = this.m.secret.position,
       dist = this.distance(sp, this.p);
     this.secret.hide(
@@ -565,10 +715,37 @@ class Shooter extends Pilot {
     }
     if (
       this.m.exit_required &&
+      this.open() &&
       this.enemies.every((t) => t.hp <= 0) &&
       this.distance(this.p, this.m.goal) < 0.8
     )
       this.finish();
+    if (
+      this.heal &&
+      !this.healUsed &&
+      this.hp < this.maxHp &&
+      this.distance(this.p, this.m.heal) < 0.65
+    ) {
+      this.hp++;
+      this.healUsed = true;
+      this.heal.hide(true);
+      this.score();
+      this.beep(600, 0.15);
+    }
+    if (this.heal && !this.healUsed)
+      this.heal.setZ(15 + 8 * Math.sin(this.clock * 3));
+    const relays = this.enemies.filter(
+        (e) => e.kind === "relay" && e.hp > 0,
+      ).length,
+      alive = this.enemies.filter((e) => e.kind !== "relay" && e.hp > 0).length;
+    this.hud.querySelector("#eb-objective").textContent =
+      (this.m.id === "dock" ? `RELAIS ${2 - relays}/2 · ` : "") +
+      `KANONEN ${alive}` +
+      (this.m.exit_required
+        ? ` · TOR ${this.open() ? "OFFEN" : Math.ceil(5 - (this.clock % 8)) + " s"}`
+        : "");
+    this.hud.querySelector(".top").style.borderColor =
+      this.feedback > 0 ? "#ff6b8e" : "#486378";
     this.dashButton.textContent =
       this.dashCooldown > 0 ? "» " + this.dashCooldown.toFixed(1) : "» DASH";
   }

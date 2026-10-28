@@ -77,3 +77,14 @@ Upstream notices may cover optional/editor/platform components as well; retainin
 them does not assert every listed library executes on Android. The actual debug
 APKs request no network permissions. Development-only runtime/profiler facilities
 are not a Google Play production hardening claim.
+
+## Aurora Raid 0.3 update
+
+The operator shortlisted **Defold and GDevelop**; Godot remains at 0.2. New art in
+`shared/assets/raid/` comes solely from `tools/make_raid_models.py`, an original
+Blender geometry generator extending our own 0.2 kit. It adds the revised robot,
+relay, rotating radar dish and three arena variants. Hashes and dimensions are
+recorded in `shared/asset-origins.json`; there is no new downloaded game artwork.
+Three complete German cues in `shared/audio/raid/manifest.json` use the same
+pinned model/synthetic speaker and existing notices as above. Human listening
+review remains open. No new runtime dependency or licence grant is implied.

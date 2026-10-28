@@ -1,0 +1,8 @@
+mesh: "/models/dock.gltf"
+materials { name: "Midnight titanium" material: "/models/dock-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Dock enamel" material: "/models/dock-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/dock-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ultramarine" material: "/models/dock-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/dock-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/dock-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Mint foliage" material: "/models/dock-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }

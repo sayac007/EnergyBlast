@@ -1,156 +1,126 @@
-# EnergyBlast — erster Shooter-Vergleich
+# EnergyBlast — Aurora Raid 0.3
 
-**Stand 28.10.2026: Meilenstein 01, Testfassung 0.2.** Ein eigenständiger
-Android-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: aktive Kanonen,
-Deckung, Ausweichen und kluge Abpraller. Winkel und Timing werden beim Spielen
-relevant. Die endgültige Engine und die Qualität des Spielgefühls sind noch
-nicht abgenommen.
+Ein Android-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Roboter, aktive
+Kanonen, Deckung, Ausweichen und selbst eingeschätzte Abpraller. Nach dem ersten
+Gerätetest entwickeln wir **Defold und GDevelop** weiter. Godot bleibt als
+unveränderter 0.2-Vergleich erhalten. Eine endgültige Engine ist noch nicht gewählt.
 
-| Für deine Beurteilung | Einstieg |
+**Neu am 28.10.2026:** dritter, anspruchsvollerer Sektor, überarbeitete Original-
+3D-Modelle/Arenen, beweglicher Gegner, Fächersalven, Schalter und geschützter Boss.
+**Keine berechnete Schussbahn:** Du siehst eine Zielmarke und echte Geschosse;
+den richtigen Winkel musst du selbst finden.
+
+| Beurteilen und weiterplanen | Einstieg |
 |---|---|
-| Was war beauftragt, was wurde später geändert? | [Ausgangsauftrag und aktuelle Entscheidungen](docs/PROJECT_BRIEF.md) |
-| Was ist umgesetzt, was fehlt und welche Nachweise gibt es? | [Meilenstein 01 mit Auftragsabgleich](docs/MILESTONE_01.md) |
-| Wo ist das unveränderte ursprüngliche Auftragszitat? | [Historisches Briefing](docs/pilot-brief.md) |
-| Wie wird gebaut und geprüft? | [Build-/Testanleitung](docs/BUILD_AND_TEST.md) und [Qualitätsbericht](docs/QUALITY.md) |
+| Direkt ausprobieren | [Zwei aktuelle Android-APKs und technische Nachweise](downloads/README.md) |
+| Was genau ist neu / geprüft / offen? | [Meilenstein 02](docs/MILESTONE_02.md), [Qualitätsüberblick](docs/QUALITY.md) |
+| Woher stammt der Auftrag? | [Auftrag und spätere Entscheidungen](docs/PROJECT_BRIEF.md), [unverändertes Originalzitat](docs/pilot-brief.md) |
+| Wie war der erste Vergleich? | [Meilenstein 01 mit festen 0.2-Downloads](docs/MILESTONE_01.md) |
+| Selbst bauen und prüfen | [Build-/Testanleitung](docs/BUILD_AND_TEST.md) |
 
-## Die drei Apps ausprobieren
+## Die Apps herunterladen
 
-Die folgenden Downloads sind auf den ersten APK-Commit festgelegt; spätere
-Branchänderungen ersetzen diesen dokumentierten Ausgangsstand nicht.
+- **[Defold 0.3 APK](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)** — native ARM64-Engine.
+- **[GDevelop 0.3 APK](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-gdevelop-debug.apk)** — echte GDJS/WebGL-Laufzeit in lokaler Android-WebView.
+- [Godot 0.2, unveränderter Ausgangsvergleich](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk).
 
-| Testfassung | Direkter Download | Größe | Laufzeit |
-|---|---|---:|---|
-| Godot 4.7.2 | [Godot-APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk) | 30,3 MB | native ARM64-3D-Engine |
-| GDevelop 5.6.269 | [GDevelop-APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-gdevelop-debug.apk) | 1,7 MB | GDJS/WebGL in einer Offline-Android-WebView |
-| Defold 1.14.0 | [Defold-APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-defold-debug.apk) | 8,7 MB | native ARM64-3D-Engine |
+Android 7 / API 24 oder neuer; Defold benötigt ARM64, GDevelop eine System-WebView
+mit WebGL. Beide können nebeneinander installiert werden und speichern getrennt.
+Version 0.3.0 / Code 3 behält Paketkennung und Entwicklungssignatur von 0.2.
+Update über die vorhandene App installieren; nicht vorher deinstallieren, wenn
+Sterne erhalten bleiben sollen. Der tatsächliche Geräte-Update-Test ist offen.
+Größe, SHA-256, Quellstand und Signaturstatus stehen bei den [Downloads](downloads/README.md).
+Das sind Debug-Testfassungen, keine Google-Play-Upload-Dateien.
 
-Alle drei lassen sich nebeneinander installieren und haben getrennte lokale
-Spielstände. Benötigt werden Android 7 / API 24 oder neuer, für Godot/Defold ARM64,
-für Godot OpenGL ES 3 und für GDevelop eine funktionierende System-WebView mit
-WebGL. Deren Größe steckt nicht in der GDevelop-APK-Größe. Es sind Debug-Builds
-für den Vergleich, keine Play-Upload-Dateien. [Details und Dateinachweise](downloads/README.md).
+## Was du spielen kannst
 
-## Was du tatsächlich spielen kannst
+**Prisma-Station:** Die Schildkanone trifft dich direkt; du kannst ihren Schild
+mit einem passenden Schuss über eine leuchtende Wand überwinden.
 
-**Prisma-Station:** Eine stationäre Schildkanone lädt sichtbar und feuert auf
-dich. Gerade Schüsse überwinden ihren Schild nicht; ein Treffer über die
-leuchtende Wand wirkt. Zwei wirksame Treffer sichern den Sektor.
+**Neon-Zitadelle:** Zwei Kanonen, Deckungen und ein angekündigtes Torfenster.
+Nach den Gegnern den Energiekern erreichen.
 
-**Neon-Zitadelle:** Zwei unabhängig angreifende Kanonen, Deckungen und ein
-Energiekern hinter einem angekündigten, wiederkehrenden Torfenster. Die Kanonen
-stehen derzeit auf Sockeln; es ist noch keine große Gegnerwelt.
+**Aurora-Dock:** Drei Kanonen und zwei goldene Schalter. Die Schalter brauchen
+Abpraller, bevor der Boss verwundbar wird. Ein Gegner patrouilliert und bleibt
+zum Laden stehen. Breite Salven verlangen andere Ausweichbewegungen. Eine
+Energiezelle heilt einmal; versteckte Bonusausrüstung verbessert DASH.
 
-| Bedienung | Wirkung |
+| Eingabe | Aktion |
 |---|---|
-| Boden antippen | Figur läuft dorthin |
-| Ziehen und loslassen | Zielen und schießen |
-| Kanone oder leuchtende Wand antippen | Gezielt feuern |
-| FEUER halten | Wiederholt schießen |
-| DASH | Kurz ausweichen; anschließend Abklingzeit |
-| Funk | Kurze deutsche Ansage wiederholen, ohne Hinweisguthaben zu verbrauchen |
+| Boden oder Deckung antippen | Laufen / nächsten erreichbaren Ort suchen |
+| Sichtbares Ziel oder Reflektor antippen | Schießen |
+| Ziehen und loslassen | Frei zielen und schießen |
+| FEUER halten | Wiederholt feuern |
+| DASH | Kurz geschützt ausweichen; danach Abklingzeit |
+| Funk / Hinweis | Ansage wiederholen / verdientes Guthaben für die Beutesuche einsetzen |
 
-Treffer ziehen sichtbare Energie ab, Deckung hält Geschosse auf. Bei einer
-Niederlage ist ein direkter Neustart möglich; gespeicherte Sterne bleiben erhalten.
-Es gibt keinen verpflichtenden Antwort-/Vorhersagemodus vor dem Schießen.
+Kein Joystick, keine Antwortabfrage vor dem Schuss. Gegner laden sichtbar und
+halten ihre Zielrichtung. Geschosse, Treffer, Energie und Deckung wirken wirklich.
+Die Zielmarke verrät weder den Abprallpunkt noch den weiteren Weg des Geschosses.
 
-## Fortschritt und aktueller Umfang
+## So sehen die laufenden Prototypen aus
 
-- Zwei Sektoren, eine gemeinsame stilisierte Roboterfigur und selbst erstellte
-  3D-Arenen/Kanonen. Godot/GDevelop animieren Körperteile; Defold bisher
-  Gesamtdrehung und Lauf-Bob. Materialien, Schatten und UI-Details unterscheiden sich.
-- Lokale Sterne für erstmaligen Abschluss, schadensfreien Abschluss und
-  Geheimfunde. Ein frisches 0.2-Profil kann **325 Sterne** erreichen. Mit
-  übernommenen 0.1-Punkten sind bis zu **650** möglich; Wiederholungen zahlen nicht doppelt.
-- **100 Sterne:** Prisma mit zwei möglichen Abprallern. **160:** zusätzliche Energie
-  beim Sektorstart. **230:** höheres Tempo. **300:** kürzere gegnerische Erfassungsreichweite;
-  ein visueller Tarnshader ist noch nicht umgesetzt.
-- Versteckte Linse/leise Stiefel und Sterne. Pro unterschiedlichem Missionsabschluss
-  entstehen zwei Hinweisguthaben; gekaufte Hinweisstufen bleiben gespeichert.
-- Deutsche synthetische Funkansagen und Toneffekte. Noch keine Charakter-/Kostümwahl,
-  kein Musiksystem und keine längere Kampagne.
-
-Der erste geometrische Pilot 0.1 wurde auf ausdrücklichen Wunsch zum aktiven
-Shooter weiterentwickelt. Seine Tests sind weiterhin eine zusätzliche Regression,
-seine alten Aufgaben sind nicht die normalen Startszenen von 0.2.
-
-## Was belegt ist — und was noch offen ist
-
-Die Spiel-/Buildprüfungen stammen vom **27.10.2026**. Für diese Dokumentations-
-veröffentlichung am 28.10. wurden keine neuen Spieltests oder APKs erzeugt.
-
-| Belegter Lauf | Ergebnis | Grenze |
-|---|---|---|
-| Godot-Shooter | 24 Prüfungen bestanden | echte Szene mit simulierten Touch-/Zeitschritten in der Cloud |
-| GDevelop-Shooter | 28 Prüfungen bestanden | echter Chromium/WebGL-Lauf mit Touch-Emulation |
-| Defold-Shooter | 17 Prüfungen bestanden | native Linux/OpenGL-Laufzeit, Sound-Nullgerät |
-| Zusätzliche Regression | 43 Godot- und 32 GDevelop-Prüfungen bestanden | alter 0.1-Kern |
-| Speicher, Regeln und Medien | Neustart-/Migrationsprüfungen und vier gemeinsame Testgruppen bestanden | kein physischer Android-Update-Test |
-| APKs | Paket/Version, Entwicklungssignatur, fehlende Berechtigungen, Backup aus und ZIP-Ausrichtung geprüft | kein vollständiger Play-/Gerätenachweis |
-
-Alle drei Szenen wurden tatsächlich gerendert und visuell geprüft. Der unabhängige
-Spracherkennungs-Screen erkennt 25/26 Texte exakt nach Normalisierung; eine
-menschliche Hörabnahme ersetzt das nicht. Es gibt in diesem Stand keinen
-GitHub-Actions-Workflow und keinen behaupteten grünen CI-Lauf.
-
-**Offen:** echtes Handy-/Tablet-Bediengefühl, Rotation, Ton, Launcher-Icon,
-Datenübernahme beim Geräte-Update, längere Spielrunde und Leistung auf demselben
-Gerät. Deshalb gibt es noch keinen belegten Engine-Sieger. Auch die gewünschte
-Spielqualität ähnlich Kinderwelt und ein tatsächlicher Lerntransfer sind nicht
-als erreicht abgenommen. [Einzelheiten und Testprotokoll](docs/QUALITY.md).
-
-## Ausgangsauftrag, Auswahl und feste Referenzen
-
-Ausgangspunkt war ein kleiner Drei-Engine-Vergleich für räumliche Orientierung,
-Abpraller und situationsgerechtes Handeln. Der Betreiber entschied anschließend:
-öffentliches eigenes Repository, Touch ohne Joystick, gespeicherte Sterne/
-Ausrüstung, verdiente Beutehinweise und ein echter Shooter mit Lerneffekt.
-Die bestätigte Auswahl ist **Godot, GDevelop und Defold**. Unity blieb ein
-historischer unkompilierter Importkit. BRUTAL wurde als Framework geprüft und
-nach der Desktop-/Android-Bauweg-Prüfung nicht in diese Dreierauswahl übernommen.
-
-| Referenz | Commit |
+| Defold 0.3 | GDevelop 0.3 |
 |---|---|
-| Shooter-Quellstand | [`1006cde`](https://github.com/sayac007/EnergyBlast/tree/1006cde8595b4249d0375ddf8bc4ea60fd2a93c9) |
-| Drei APKs samt Metadaten | [`defd791`](https://github.com/sayac007/EnergyBlast/tree/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads) |
-| Aktive Implementierung | [`feat/touch-shooter-v2`](https://github.com/sayac007/EnergyBlast/tree/feat/touch-shooter-v2) |
+| ![Native Defold-Arena](docs/images/03-defold-dock.png) | ![Tatsächliche GDevelop-WebGL-Arena](docs/images/03-gdevelop-dock.png) |
 
-`main` dient derzeit als aktuelle Dokumentationsstartseite. Der Spielcode liegt
-isoliert auf dem Arbeitsbranch; es wurde kein Spielcode automatisch gemergt,
-kein PR erstellt und kein GitHub-Release veröffentlicht. Die auf Commit
-festgelegten APK-Dateien sind regulär versioniert und laufen nicht wie Actions-
-Artefakte nach einer Aufbewahrungsfrist ab.
+Gerenderte Cloud-Laufzeiten, keine Konzeptbilder und kein Android-Leistungsnachweis.
+Die unterschiedlichen Materialien/Beleuchtungen gehören zum Engine-Vergleich.
 
-## Eine ergänzende Anweisung formulieren
+## Fortschritt
 
-Nach einer Spielrunde helfen vor allem konkrete Beobachtungen und höchstens drei
-Prioritäten. Beispielsweise:
+Sterne bleiben lokal gespeichert. Erstmalige Missionen, schadensfreie Abschlüsse
+und Geheimfunde bringen zusammen **600 Sterne** für ein frisches Profil; mit
+zusätzlichen historischen 0.1-Punkten sind bis zu 925 möglich. Wiederholungen und
+bloßes Warten zahlen nicht erneut. Alte Sterne und bezahlte Beutehinweise bleiben
+im Speicherformat erhalten.
+
+100 Sterne schalten Prisma mit zwei Abprallern frei, 160 zusätzliche Startenergie,
+230 höheres Tempo und 300 eine geringere gegnerische Erfassungsreichweite. Kein
+visueller Unsichtbarkeitsshader. Der neue geheime Kondensator verkürzt DASH von
+2,8 auf 2,24 Sekunden. Missionswahl ist frei, auch ohne diese Ausrüstung.
+
+## Was tatsächlich geprüft wurde
+
+Am **28.10.2026**: Defold 42 Kampf-/Eingabeprüfungen, echte Menü-/FEUER-Klicks und
+getrennte Speicherstarts; GDevelop 51 Prüfungen in Chromium/WebGL, ohne
+Seitenfehler oder externe Requests; sechs gemeinsame Daten-/Medientestgruppen.
+Auch die unveränderten Godot-Prüfungen (43 + 24) und die alte GDevelop-Regression
+(32) bestehen. Beide aktuellen Fassungen wurden gerendert und selbst angesehen.
+
+Das sind Cloud-/Desktop-Prüfungen. **Noch offen für 0.3:** tatsächliche Android-
+Installation/Update, Touchgefühl, Rotation, Ton/Hörverständlichkeit, längeres
+Spiel und Leistung auf demselben Handy. Der Betreiber bevorzugt die beiden
+Engines nach seinem 0.2-Test; das ersetzt keinen Test der neuen APKs. Keine
+behauptete Lernwirksamkeit oder Store-Reife. Es gibt keinen Actions-Workflow und
+keinen behaupteten grünen CI-Lauf. [Ausführliche Ergebnisse und Grenzen](docs/QUALITY.md).
+
+## Nächste Rückmeldung
+
+Bitte beide Apps auf demselben Gerät vergleichen, besonders im Dock:
 
 ```text
-Getestete Engine(s) und Gerät/Android-Version:
-Sektor und konkrete Situation:
-Was gefällt / was stört:
-Priorität 1:
-Priorität 2:
-Priorität 3:
-Engine-Auswahl offen / bevorzugt:
+Engine / Gerät / Android:
+Update von 0.2: Sterne erhalten?
+Gehen und Schießen eindeutig getrennt?
+Relais/Schalter und Boss verständlich? Schwierigkeit?
+Welche Engine fühlt sich besser an?
+Nächste wichtigste Verbesserung:
 ```
 
-## Wo die Implementierung liegt
+## Implementierung und Herkunft
 
-| Bestandteil | Einstieg im Arbeitsbranch |
-|---|---|
-| Gemeinsame Arenen, Gegner, Punkte und Kampfparameter | [shared/combat.json](shared/combat.json) |
-| Aktueller Godot-Shooter | [pilots/godot/shooter.gd](pilots/godot/shooter.gd) |
-| Aktueller GDevelop-Shooter | [pilots/gdevelop/shooter.js](pilots/gdevelop/shooter.js) |
-| Aktueller Defold-Kampf und Laufzeit | [combat.lua](pilots/defold/main/combat.lua), [main.script](pilots/defold/main/main.script) |
-| Originale 3D-Modelle und Erzeugung | [gemeinsame Assets](shared/assets/shooter/), [Blender-Generator](tools/make_shooter_models.py) |
-| Ausgelieferte Dateien und technische Herkunft | [downloads](downloads/) |
+- [Gemeinsame 0.3-Regeln](shared/raid.json), [Originalmodelle](shared/assets/raid/), [Blender-Generator](tools/make_raid_models.py).
+- [Defold-Kampf](pilots/defold/main/combat.lua), [native Laufzeit](pilots/defold/main/main.script), [GUI](pilots/defold/main/ui.gui_script).
+- [GDevelop-Shooter](pilots/gdevelop/shooter.js), [nativer GDJS-Export](tools/gdevelop_export.mjs).
+- [Herkunft/Lizenzen](THIRD_PARTY.md), [verbindlicher Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
 
-Die Entwicklungs-/Prüfbefehle und Voraussetzungen stehen zentral in
-[BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md). [Herkunft und Lizenzen](THIRD_PARTY.md)
-dokumentieren die Originalmodelle, zusätzliche Schrift und genehmigten Audioquellen.
-Kinderwelt bleibt unverändert. Die APKs enthalten keine Benutzerkonten, Werbung
-oder Spiel-Telemetrie und fordern keine Berechtigungen an. Eigene neue Projekt-
-inhalte haben noch keine gewählte Nutzungslizenz; Fremdlizenzen bleiben erhalten.
+`main` bleibt die Dokumentationsstartseite, Spielcode isoliert auf
+`feat/touch-shooter-v2`. Keine Pull Requests, automatischen Merges oder Releases.
+Der erste Vergleich bleibt über feste Commits in Meilenstein 01 erhalten.
+Unity ist ein historischer, nicht ausgeführter Importkit; BRUTAL wurde geprüft,
+aber nicht ausgewählt. Kinderwelt und andere Repositories bleiben unverändert.
 
-Für die weitere Arbeit gilt der [verbindliche Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
+Keine privaten Familien-Assets, Konten, Werbung oder Spiel-Telemetrie. Die Apps
+verlangen keine Berechtigungen, Spielstände liegen lokal, Android-Backup ist aus.
+Die eigenen Inhalte haben noch keine gewählte Nutzungslizenz; Fremdlizenzen bleiben erhalten.

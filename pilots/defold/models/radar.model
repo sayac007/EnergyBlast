@@ -1,0 +1,5 @@
+mesh: "/models/radar.gltf"
+materials { name: "Midnight titanium" material: "/models/radar-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/radar-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/radar-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/radar-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }

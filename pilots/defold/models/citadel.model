@@ -1,9 +1,9 @@
 mesh: "/models/citadel.gltf"
 materials { name: "Midnight titanium" material: "/models/citadel-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Blue slate" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Indigo stone" material: "/models/citadel-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ion cyan" material: "/models/citadel-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Ultramarine" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Porcelain armor" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Solar gold" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Citadel enamel" material: "/models/citadel-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Pulse coral" material: "/models/citadel-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ultramarine" material: "/models/citadel-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/citadel-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/citadel-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ion cyan" material: "/models/citadel-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
 materials { name: "Mint foliage" material: "/models/citadel-7.material" textures { sampler: "tex0" texture: "/models/white.png" } }

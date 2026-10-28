@@ -1,4 +1,4 @@
-# Bauen und prüfen — Shooter 0.2
+# Bauen und prüfen — Aurora Raid 0.3
 
 Vom Repository-Hauptverzeichnis ausführen. Build-Ausgaben außerhalb des Checkouts
 oder unter ignoriertem `build/`; keine Schlüssel in Git. Die bisherigen 0.1-
@@ -26,8 +26,6 @@ Tests bleiben separat ausführbar, sind aber keine Tests der neuen Startszenen.
 npm ci --prefix tools/gdevelop-tools --ignore-scripts
 export ENERGYBLAST_GD_TOOLS="$PWD/tools/gdevelop-tools"
 python3 tools/setup_defold.py --output /tmp/energyblast-defold-tools
-python3 tools/sync_assets.py
-python3 tools/sync_unity.py
 python3 tools/sync_defold.py
 node tools/gdevelop_export.mjs
 ```
@@ -39,16 +37,16 @@ installieren das gepinnte Werkzeug im Checkout und setzen den passenden
 `ENERGYBLAST_GD_OUTPUT` ändert den HTML5-Ausgabepfad; die Browserprüfung nutzt
 standardmäßig `/tmp/energyblast-gdevelop-web`.
 
-`sync_unity` aktualisiert ausschließlich gemeinsame Kopien im archivierten
-Importkit; Unity gehört nicht zum ausgewählten Vergleich. Alle drei aktuellen
-Engine-Versuche beziehen Regeln aus `shared/combat.json`. Die `.gltf`/`.bin`-Paare
-für Defold und `.glb` für die anderen stammen aus demselben Blender-Generator.
+Die beiden aktiven Versuche konsumieren `shared/raid.json` und
+`shared/assets/raid/`. Godot bleibt mit `shared/combat.json` und dem alten
+`shared/assets/shooter/` unverändert. `sync_assets.py` und `sync_unity.py` gehören
+zum älteren Vergleich; für diese Runde nicht ausführen. Die GDevelop-/Defold-
+Kopien werden durch ihren Export beziehungsweise `sync_defold.py` aktualisiert.
 
 Optionale Neuerzeugung der Originalmodelle/Töne:
 
 ```bash
-blender -b --python tools/make_shooter_models.py
-python3 tools/make_sfx.py
+blender -b --python tools/make_raid_models.py
 ```
 
 Danach synchronisieren, neu exportieren und die Herkunftshashes aktualisieren.
@@ -64,18 +62,18 @@ python3 tools/check_gdevelop_combat.py
 python3 tools/check_defold.py
 ```
 
-- `check_shared`: Regeln/Modellkopien, Herkunft/Audiohashes, alle 26 Ogg-Dateien mit
+- `check_shared`: Regeln/Modellkopien, Herkunft/Audiohashes, 26 bestehende und drei neue Ogg-Dateien mit
   FFmpeg decodiert, Dauer/Pegel/Verstärkung, begrenzte Belohnungen, Android-Manifeste
   und der tatsächlich verwendete Defold-Render-Einstieg.
 - `check_godot`: 43 alte Kern- und 24 neue Kampfprüfungen, Touch-/Weltprojektion,
   wirkliche Schüsse/Schild/Treffer/Deckung/Dash, Sterne/Hint-Migration und getrennte
   Speicherprozesse. `--godot /pfad/zu/godot` überschreibt den Cloud-Pfad.
-- `check_gdevelop_combat`: reale exportierte WebGL-Laufzeit, echter Touch-Drag über
+- `check_gdevelop_combat`: 51 Prüfungen der realen exportierten WebGL-Laufzeit, echter Touch-Drag über
   Chromium/CDP, sichtbare Deckung gegen Kollisionskoordinaten, Kampf, gespeicherte
   Sterne/alte Hinweise, Neustartfläche, keine JS-Seitenfehler/externe Requests.
 - `check_defold`: baut zuerst und stoppt bei Fehlern, startet dann die native Engine
-  in Xvfb. 17 Prüfungen einschließlich Eingabeprojektion und Kampf, anschließend
-  getrennte Prozesse für Speichern/Neustart. Sound nutzt ein Nullgerät; keine
+  in Xvfb. 42 Prüfungen einschließlich Eingabeprojektion, Kampf und neuem Relais-/Boss-Sektor, anschließend
+  getrennte Prozesse für Speichern/Neustart und echter nativer Menü-/FEUER-Klick via XTest. Benötigt `libXtst.so.6` / `libX11.so.6`. Sound nutzt ein Nullgerät; keine
   menschliche Audioabnahme. `--sdk` überschreibt das externe SDK-Verzeichnis.
 
 Zusätzliche unveränderte GDevelop-Regression (separater Export, anschließend den
@@ -94,6 +92,18 @@ Defold braucht `bootstrap.render`, nicht einen unbeachteten `render.render`-Eint
 
 ## Sprachausgabe
 
+Die drei neuen Raid-Aufnahmen liegen separat unter `shared/audio/raid`, damit
+Godots 0.2-Assets unverändert bleiben. Optionale Erzeugung:
+
+```bash
+/workspace/tools/qwen-env/bin/python tools/prepare_raid_audio.py --model /workspace/tools/qwen-female
+```
+
+Für deren unabhängigen ASR-Screen beim folgenden Befehl zusätzlich
+`--manifest shared/audio/raid/manifest.json` angeben; standardmäßig werden die
+26 erhaltenen Aufnahmen geprüft.
+
+
 Bereits enthaltene Aufnahmen reichen für Builds. Vier genehmigte alte Clips,
 15 ältere Pilotansagen und sieben neue Kampfansagen stehen mit Text/Hash/Quelle
 im Manifest. Im neuen Spiel werden die kurzen Kampfansagen verwendet. Es werden
@@ -111,10 +121,9 @@ Optionaler unabhängiger ASR-Screen mit lokalem Whisper-small-int8:
 gepinntem Qwen-Modell/Serena. Keine Modellgewichte oder privaten Aufnahmen im Repo.
 ASR ist kein menschlicher Verständlichkeits-/Betonungsnachweis.
 
-## Die drei Android-APKs
+## Die zwei aktuellen Android-APKs
 
 ```bash
-python3 tools/build_android.py --output /tmp/energyblast-godot-build
 python3 tools/build_gdevelop_android.py --output /tmp/energyblast-gdevelop-build
 python3 tools/build_defold_android.py --output /tmp/energyblast-defold-build
 ```
@@ -137,7 +146,7 @@ Cloud-Proxys `--trust-store /lokaler/pfad/cacerts`. Zertifikatsprüfung bleibt a
 Die Android-/Java-Benutzerverzeichnisse sind isoliert; `$HOME` wird nicht umgebogen.
 
 Die Skripte erzeugen APK, technische Auszüge und `verification.json`: Paket,
-Version 0.2.0 / Code 2, fehlende Berechtigungen, deaktiviertes Backup, gültige
+Version 0.3.0 / Code 3, fehlende Berechtigungen, deaktiviertes Backup, gültige
 Entwicklungssignatur, ZIP-Ausrichtung mit 16-KB-Seiten, Größe, SHA-256 und Quellcommit.
 Das sind nachvollziehbare Befehle, keine zugesicherte Bit-für-Bit-Reproduktion.
 Keine Aussage über eine auf echter Hardware bereits bestandene Installation.

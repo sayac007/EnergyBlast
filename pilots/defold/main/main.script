@@ -10,9 +10,9 @@ end
 local function rebuild(self,index)
  for _,id in ipairs(self.objects or{})do go.delete(id)end;self.objects={};self.g:load(index)
  local function make(name,p)local id=factory.create('#'..name,vmath.vector3(p[1],0,p[2]));self.objects[#self.objects+1]=id;return id end
- self.arena=make(self.g.m.id,{0,0});self.hero=make('hero',self.g.p)
- for _,t in ipairs(self.g.enemies)do t.node=make('cannon',t.p)end
- self.g.say('combat_'..self.g.m.id);self.voice_next='combat_controls'
+ self.arena=make(self.g.m.id,{0,0});self.hero=make('hero',self.g.p);self.radar=make('radar',self.g.m.radar);go.set_position(vmath.vector3(self.g.m.radar[1],1.17,self.g.m.radar[2]),self.radar)
+ for _,t in ipairs(self.g.enemies)do t.node=make(t.kind=='relay'and'relay'or'cannon',t.p)end
+ self.g.say(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id);self.voice_next='combat_controls'
 end
 local function voice(self,id)
  if self.muted then return end
@@ -25,11 +25,12 @@ local function test(self)
  g.paused=false;local x,y=project(g,{-4,2},0);g.input({x=x,y=y,pressed=true});g.input({x=x,y=y,released=true});check(#g.path>0,'tap-to-move');g:load(1);local sx,sy=project(g,{-3,2},0);local tx,ty=project(g,{1.392857,-4.35},0);g.input({x=sx,y=sy,pressed=true});g.input({x=tx,y=ty});g.input({x=tx,y=ty,released=true});check(#g.bullets>0,'drag-release fires');check(math.abs(g.aim[1]-.581238)<.01,'native gesture/world projection');g.held=true;g.aiming=true;g.cancel_controls();check(not g.held and not g.aiming,'cancel held combat input');g:load(1);check(#g.enemies==1 and g.enemies[1].hp==2,'live cannon');g.p={3,2};g.aim=Combat.norm({1.5,-2});g:fire();step(.4);check(g.enemies[1].hp==2,'shield blocks direct fire')
  g:load(1);g.p={4.5,3.2};step(1);check(g.enemies[1].warning>0,'windup');step(2);check(g.hp<3,'real enemy hit');local hp=g.hp;g:hit_player();check(g.hp==hp,'invulnerability')
  g:load(1);step(4);check(g.hp==3,'cover intercepts shells');check(g:total()==0,'no wait farming');g.aim=Combat.norm({8.5,-11.9});g:fire();step(1.8);check(g.enemies[1].hp==1,'bank shot');g:fire();step(1.8);check(g.solved,'enemy destroyed');check(g:total()==100 and g:credits()==2,'one-time combat reward');g:finish();check(g:total()==100,'no replay double award');g:load(2);check(#g.enemies==2,'second sector');g:navigate({5.2,-3.5});check(#g.path>0 and g.path[#g.path][2]>-1.1,'staging at closed gate')
+ n=n+require('main.raid_checks').run(g)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
 end
 function init(self)
  self.objects={};self.voice_left=0;self.clips={};self.muted=false;self.voice_next=nil
- local data=json.decode(sys.load_resource('/data/combat.json'));local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
+ local data=json.decode(sys.load_resource('/data/raid.json'));local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
  self.test_mode=sys.get_config_string('project.test_mode','0')=='1';local path=sys.get_save_file('energyblast','progress');self.save_path=path;local saved=nil;if not self.test_mode then saved=sys.load(path)end
  if saved and not saved.earned then saved=nil end
  self.g=Combat.new(data,saved);self.g.changed=function()if not self.test_mode then local ok=sys.save(path,self.g.saved);if not ok then self.g.status='Spielstand konnte nicht gespeichert werden.'end end end
@@ -39,38 +40,59 @@ function init(self)
   if event==window.WINDOW_EVENT_FOCUS_LOST then self.g.background=true;self.g.cancel_controls();if self.voice_id then sound.pause('#'..self.voice_id,true)end
   elseif event==window.WINDOW_EVENT_FOCUS_GAINED then self.g.background=false;if self.voice_id and not self.muted then sound.pause('#'..self.voice_id,false)end end
  end)
- self.g.cancel_controls=function()self.pointer=nil;self.g.held=false;self.g.aiming=false end
+ self.g.cancel_controls=function()self.pointer=nil;self.g.held=false;self.g.aiming=false;msg.post('#ui','cancel_controls')end
  self.g.project=project
- self.g.choose=function(index)if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,index)end
- self.g.replay=function()if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;voice(self,'combat_'..self.g.m.id);self.voice_next='combat_controls'end
+ self.logic_url=msg.url();self.ui_test=sys.get_config_string('project.ui_test','0')=='1';self.g.ui_test=self.ui_test
+ self.g.choose=function(index)msg.post(self.logic_url,'choose',{index=index})end
+ self.g.replay=function()if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;voice(self,self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id);self.voice_next='combat_controls'end
  self.g.toggle_sound=function()self.muted=not self.muted;if self.muted and self.voice_id then sound.stop('#'..self.voice_id);self.voice_left=0;self.voice_next=nil end end
+ -- Classify a tap against what is visible, before projecting the floor behind it.
  self.g.input=function(a)
-  if self.g.paused or self.g.over then return end
-  if a.pressed then self.pointer={x=a.x,y=a.y};self.g.aiming=false
-  elseif self.pointer and a.released then
-   if self.g.aiming then self.g:fire()else local p=ground(a.x,a.y);local enemy=false;for _,t in ipairs(self.g.enemies)do enemy=enemy or(t.hp>0 and Combat.dist(t.p,p)<.8)end;if enemy or self.g:blocked(p)then self.g.aim=Combat.norm({p[1]-self.g.p[1],p[2]-self.g.p[2]});self.g:fire()else self.g:navigate(p)end end;self.pointer=nil;self.g.aiming=false
-  elseif self.pointer and((a.x-self.pointer.x)^2+(a.y-self.pointer.y)^2)>196 then self.g.aiming=true;self.g.path={};local p=ground(a.x,a.y);self.g.aim=Combat.norm({p[1]-self.g.p[1],p[2]-self.g.p[2]})end
+  local g=self.g
+  if g.paused or g.over then return end
+  if a.pressed then
+   if self.pointer then return end
+   self.pointer={x=a.x,y=a.y,id=a.id};g.aiming=false
+  elseif self.pointer and(self.pointer.id==nil or a.id==nil or a.id==self.pointer.id)then
+   local moved=((a.x-self.pointer.x)^2+(a.y-self.pointer.y)^2)>196
+   if moved then g.aiming=true;g.path={};local p=ground(a.x,a.y);g.aim=Combat.norm({p[1]-g.p[1],p[2]-g.p[2]});g.target=p end
+   if a.released then
+    if g.aiming then g:fire()else
+     local p=ground(a.x,a.y);local target=nil;local nearest=42^2
+     for _,t in ipairs(g.enemies)do if t.hp>0 then local x,y=project(g,t.p,.8);local d=(a.x-x)^2+(a.y-y)^2;if d<nearest then target=t.p;nearest=d end end end
+     local reflector=false;for _,w in ipairs(g.walls)do local rr=w.r;if w.type=='reflector'and p[1]>rr[1]-.2 and p[1]<rr[1]+rr[3]+.2 and p[2]>rr[2]-.2 and p[2]<rr[2]+rr[4]+.2 then reflector=true end end
+     if target or reflector then target=target or p;g.path={};g.aim=Combat.norm({target[1]-g.p[1],target[2]-g.p[2]});g.target=target;g:fire()else g.target=p;g:navigate(p)end
+    end
+    self.pointer=nil;g.aiming=false
+   end
+  end
  end
  _G.energyblast=self.g;rebuild(self,1);self.g.paused=true;self.g.dialog='menu'
  local save_test=sys.get_config_string('project.save_test','')
  if save_test=='write' then
-  self.muted=true;self.g.saved={earned={},clues={},weapon='pulse'};self.g:award('mission:reactor');self.g:award('skill:reactor');self.g:hint();assert(self.g:total()==100 and self.g:credits()==1);print('DEFOLD SAVE WRITE PASS');msg.post('@system:','exit',{code=0})
+  self.muted=true;self.g.saved={earned={},clues={},weapon='pulse'};self.g:award('mission:reactor');self.g:award('skill:reactor');self.g:hint();assert(self.g:total()==100 and self.g:credits()==1);self.g:award('mission:dock');self.g:award('skill:dock');self.g:award('secret:dock');self.g:load(3);self.g:hint();assert(self.g:total()==375 and self.g:credits()==2);print('DEFOLD SAVE WRITE PASS');msg.post('@system:','exit',{code=0})
  elseif save_test=='read' then
-  assert(self.g:total()==100 and self.g:credits()==1 and self.g:level()==1);assert(self.g:award('mission:reactor')==0);print('DEFOLD SAVE RESTART PASS');msg.post('@system:','exit',{code=0})
+  assert(self.g:total()==375 and self.g:credits()==2 and self.g:level()==1);self.g:load(3);assert(self.g:level()==1 and self.g.saved.earned['secret:dock']);assert(self.g:award('mission:reactor')==0);print('DEFOLD SAVE RESTART PASS');msg.post('@system:','exit',{code=0})
  end
- if sys.get_config_string('project.capture_mode','0')=='1' then self.g.choose(1);self.muted=true end
+ if sys.get_config_string('project.capture_mode','0')=='1' then self.g.choose(tonumber(sys.get_config_string('project.capture_sector','1')));self.muted=true end
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
- if self.test_wait then self.test_wait=self.test_wait-dt;if self.test_wait<=0 then self.test_wait=nil;test(self);return end end
+ if self.ui_exit then self.ui_exit=self.ui_exit-dt;if self.ui_exit<=0 then if self.g.shots_fired==0 then print('DEFOLD UI FAILURE: no GUI fire');msg.post('@system:','exit',{code=1})else print('DEFOLD NATIVE MENU CLICK PASS');msg.post('@system:','exit',{code=0})end;return end end
+ if self.test_wait then self.test_wait=self.test_wait-dt;if self.test_wait<=0 then self.test_wait=nil;local ok,err=pcall(test,self);if not ok then print("DEFOLD TEST FAILURE: "..tostring(err));msg.post("@system:","exit",{code=1})end;return end end
  if self.g.background then return end
  self.voice_left=math.max(0,self.voice_left-dt)
  if self.voice_left<=0 and self.voice_next then local id=self.voice_next;self.voice_next=nil;voice(self,id)end
  self.g:update(dt)
+ go.set_rotation(vmath.quat_rotation_y(self.g.clock*.45),self.radar)
  local p=self.g.p;go.set_position(vmath.vector3(p[1],#self.g.path>0 and math.abs(math.sin(self.g.clock*11))*.05 or 0,p[2]),self.hero)
  go.set_rotation(vmath.quat_rotation_y(self.g.aiming and math.atan2(self.g.aim[1],self.g.aim[2])or(self.g.facing or 0)),self.hero)
- for _,t in ipairs(self.g.enemies)do go.set_rotation(vmath.quat_rotation_y(math.atan2(t.direction[1],t.direction[2])),t.node);go.set_scale(t.hp>0 and 1 or .001,t.node)end
+ for _,t in ipairs(self.g.enemies)do go.set_position(vmath.vector3(t.p[1],t.kind=='relay'and math.sin(self.g.clock*2)*.08 or 0,t.p[2]),t.node);go.set_rotation(vmath.quat_rotation_y(math.atan2(t.direction[1],t.direction[2])),t.node);go.set_scale(t.hp>0 and(t.boss and 1.2 or 1)or .001,t.node)end
 end
 function on_message(self,id,message,sender)
+ if id==hash('choose')then
+  if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;rebuild(self,message.index)
+  if self.ui_test then assert(self.g.m.id=='dock'and #self.objects==8);print('DEFOLD UI SECTOR SELECTED dock');self.ui_exit=1.2 end
+ end
  if id==hash('window_event')then self.g.background=message.event==window.WINDOW_EVENT_FOCUS_LOST end
 end

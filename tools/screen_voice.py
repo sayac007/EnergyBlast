@@ -1,9 +1,9 @@
 """Independent offline transcription screen; never a human-listening certificate."""
 import argparse,hashlib,json,re,subprocess
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--manifest',type=Path,default=Path(__file__).resolve().parents[1]/'shared/audio/de/manifest.json');a=p.parse_args()
 import numpy as np,sherpa_onnx
-root=Path(__file__).resolve().parents[1]/'shared/audio/de';m=json.loads((root/'manifest.json').read_text())
+root=a.manifest.resolve().parent;m=json.loads(a.manifest.read_text())
 r=sherpa_onnx.OfflineRecognizer.from_whisper(encoder=str(a.model/'small-encoder.int8.onnx'),decoder=str(a.model/'small-decoder.int8.onnx'),tokens=str(a.model/'small-tokens.txt'),language='de',num_threads=2)
 rows=[]
 for c in m['clips']:

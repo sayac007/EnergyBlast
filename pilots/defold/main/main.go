@@ -2,8 +2,11 @@ components { id: "logic" component: "/main/main.script" }
 components { id: "ui" component: "/main/ui.gui" }
 components { id: "hero" component: "/models/hero.factory" }
 components { id: "cannon" component: "/models/cannon.factory" }
+components { id: "relay" component: "/models/relay.factory" }
+components { id: "radar" component: "/models/radar.factory" }
 components { id: "reactor" component: "/models/reactor.factory" }
 components { id: "citadel" component: "/models/citadel.factory" }
+components { id: "dock" component: "/models/dock.factory" }
 components { id: "hints_empty" component: "/audio/hints_empty.sound" }
 components { id: "hint_bank" component: "/audio/hint_bank.sound" }
 components { id: "hint_guardian" component: "/audio/hint_guardian.sound" }
@@ -14,6 +17,9 @@ components { id: "combat_citadel" component: "/audio/combat_citadel.sound" }
 components { id: "combat_controls" component: "/audio/combat_controls.sound" }
 components { id: "combat_shield" component: "/audio/combat_shield.sound" }
 components { id: "combat_loot" component: "/audio/combat_loot.sound" }
+components { id: "raid_hint" component: "/audio/raid_hint.sound" }
+components { id: "raid_dock" component: "/audio/raid_dock.sound" }
+components { id: "raid_relays" component: "/audio/raid_relays.sound" }
 components { id: "fx_hit" component: "/audio/fx_hit.sound" }
 components { id: "fx_fire" component: "/audio/fx_fire.sound" }
 components { id: "fx_dash" component: "/audio/fx_dash.sound" }

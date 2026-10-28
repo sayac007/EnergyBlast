@@ -10,7 +10,7 @@ const { gd, exportProject } = await import(
 const legacy = process.env.ENERGYBLAST_GD_LEGACY === "1";
 const p = gd.ProjectHelper.createNewGDJSProject();
 p.setName("EnergyBlast Touch Pilot");
-p.setVersion("0.2.0");
+p.setVersion(legacy ? "0.2.0" : "0.3.0");
 p.setPackageName("org.example.energyblast.gdevelop");
 p.setGameResolutionSize(720, 1280);
 p.setOrientation("default");
@@ -28,7 +28,15 @@ layer.setAmbientLightColor(200, 220, 230);
 const objects = scene.getObjects();
 objects.insertNewObject(p, "Scene3D::Cube3DObject", "Cube", 0);
 objects.insertNewObject(p, "Scene3D::Model3DObject", "Robot", 1);
-for (const name of ["Hero", "Cannon", "Reactor", "Citadel"])
+for (const name of [
+  "Hero",
+  "Cannon",
+  "Relay",
+  "Radar",
+  "Reactor",
+  "Citadel",
+  "Dock",
+])
   objects.insertNewObject(
     p,
     "Scene3D::Model3DObject",
@@ -72,10 +80,19 @@ data.resources.resources = [
 const manifest = JSON.parse(
   fs.readFileSync(path.join(root, "shared/audio/de/manifest.json"), "utf8"),
 );
+manifest.clips.push(
+  ...JSON.parse(
+    fs.readFileSync(path.join(root, "shared/audio/raid/manifest.json"), "utf8"),
+  ).clips,
+);
 const audio = Object.fromEntries(manifest.clips.map((c) => [c.id, c]));
 for (const c of manifest.clips) {
   fs.copyFileSync(
-    path.join(root, "shared/audio/de", c.file),
+    path.join(
+      root,
+      c.id.startsWith("raid_") ? "shared/audio/raid" : "shared/audio/de",
+      c.file,
+    ),
     path.join(root, "pilots/gdevelop/assets", c.file),
   );
   data.resources.resources.push({
@@ -90,20 +107,34 @@ let code = fs
   .replace(
     "/*ENERGYBLAST_DEF*/ {}",
     fs.readFileSync(
-      path.join(root, legacy ? "shared/pilot.json" : "shared/combat.json"),
+      path.join(root, legacy ? "shared/pilot.json" : "shared/raid.json"),
       "utf8",
     ),
   )
   .replace("/*ENERGYBLAST_AUDIO*/ {}", JSON.stringify(audio));
-for (const name of ["Hero", "Cannon", "Reactor", "Citadel"]) {
+for (const name of [
+  "Hero",
+  "Cannon",
+  "Relay",
+  "Radar",
+  "Reactor",
+  "Citadel",
+  "Dock",
+]) {
   const file = name.toLowerCase() + ".glb";
   data.layouts[0].objects.find(
     (o) => o.name === name,
   ).content.modelResourceName = file;
-  data.layouts[0].objects.find((o) => o.name === name).content.rotationZ =
-    name === "Hero" || name === "Cannon" ? 90 : 0;
+  data.layouts[0].objects.find((o) => o.name === name).content.rotationZ = [
+    "Hero",
+    "Cannon",
+    "Relay",
+    "Radar",
+  ].includes(name)
+    ? 90
+    : 0;
   fs.copyFileSync(
-    path.join(root, "shared/assets/shooter", file),
+    path.join(root, "shared/assets/raid", file),
     path.join(root, "pilots/gdevelop/assets", file),
   );
   data.resources.resources.push({
@@ -123,6 +154,13 @@ if (!legacy) {
       marker,
   );
 }
+code = code.replace(
+  "/*ENERGYBLAST_DIMENSIONS*/ {}",
+  fs.readFileSync(
+    path.join(root, "shared/assets/raid/dimensions.json"),
+    "utf8",
+  ),
+);
 data.layouts[0].events = [
   {
     type: "BuiltinCommonInstructions::JsCode",

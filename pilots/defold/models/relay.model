@@ -1,0 +1,4 @@
+mesh: "/models/relay.gltf"
+materials { name: "Midnight titanium" material: "/models/relay-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/relay-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain armor" material: "/models/relay-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }

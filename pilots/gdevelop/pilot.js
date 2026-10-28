@@ -20,7 +20,7 @@ if (!runtimeScene.energyblast) {
         ),
       );
       this.saved.clues = [...new Set(this.saved.clues)]
-        .filter((x) => /^(bank|guardian|reactor|citadel):[12]$/.test(x))
+        .filter((x) => new Set((DEF.progress_mission_ids || ["bank","guardian"]).flatMap(id=>[id+":1",id+":2"])).has(x))
         .slice(0, this.cluesEarned());
       this.layer.setCameraX(0);
       this.layer.setCameraY(1300);
@@ -42,7 +42,7 @@ if (!runtimeScene.energyblast) {
       this.important = [];
       window.addEventListener("pointerdown", (e) => {
         if (e.target.closest("[data-ebui]") || this.paused) return;
-        this.tap(e.clientX, e.clientY);
+        if(e.isPrimary)this.tap(e.clientX, e.clientY, e.pointerId);
       });
       document.addEventListener("energyblast-pause", () =>
         this.setBackground(true),

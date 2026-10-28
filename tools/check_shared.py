@@ -14,9 +14,9 @@ class SharedChecks(unittest.TestCase):
   self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
   project=json.loads((ROOT/'pilots/gdevelop/game.json').read_text())
   js=project['layouts'][0]['events'][0]['inlineCode']
-  self.assertIn((ROOT/'shared/combat.json').read_text(),js)
+  self.assertIn((ROOT/'shared/raid.json').read_text(),js)
   self.assertEqual((ROOT/'shared/combat.json').read_bytes(),(ROOT/'pilots/godot/assets/combat.json').read_bytes())
-  self.assertEqual((ROOT/'shared/combat.json').read_bytes(),(ROOT/'pilots/defold/data/combat.json').read_bytes())
+  self.assertEqual((ROOT/'shared/raid.json').read_bytes(),(ROOT/'pilots/defold/data/raid.json').read_bytes())
  def test_all_audio_decodes_matches_manifest_and_will_not_clip(self):
   m=json.loads((ROOT/'shared/audio/de/manifest.json').read_text())
   self.assertEqual(len(m['clips']),26);self.assertEqual(len({c['id'] for c in m['clips']}),26)
@@ -34,6 +34,29 @@ class SharedChecks(unittest.TestCase):
     self.assertLess(peak*10**((c['playback_gain_db']-1)/20),.95)
     self.assertAlmostEqual(len(values)/22050,c['seconds'],places=2)
     self.assertGreater(c['seconds'],1);self.assertLess(c['seconds'],16)
+ def test_raid_provenance_models_and_new_audio(self):
+  m=json.loads((ROOT/'shared/asset-origins.json').read_text())
+  for row in m['assets']:
+   self.assertEqual(hashlib.sha256((ROOT/row['path']).read_bytes()).hexdigest(),row['sha256'],row['path'])
+  for f in (ROOT/'shared/assets/raid').glob('*.glb'):
+   raw=f.read_bytes();self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
+   self.assertEqual(raw,(ROOT/'pilots/gdevelop/assets'/f.name).read_bytes())
+  for f in (ROOT/'shared/assets/raid').iterdir():
+   if f.suffix in ['.gltf','.bin']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
+  raid=json.loads((ROOT/'shared/audio/raid/manifest.json').read_text());self.assertEqual(len(raid['clips']),3)
+  for c in raid['clips']:
+   raw=(ROOT/'shared/audio/raid'/c['file']).read_bytes();self.assertEqual(hashlib.sha256(raw).hexdigest(),c['sha256'])
+   for dest in ['pilots/gdevelop/assets','pilots/defold/audio']:self.assertEqual(raw,(ROOT/dest/c['file']).read_bytes())
+   pcm=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(ROOT/'shared/audio/raid'/c['file']),'-ac','1','-ar','22050','-f','f32le','-'])
+   samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);peak=max(abs(x)for x in samples)
+   self.assertGreater(peak,.005);self.assertLess(peak*10**((c['playback_gain_db']-1)/20),.95)
+   self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
+ def test_shortlisted_engines_do_not_render_ballistic_previews(self):
+  gui=(ROOT/'pilots/defold/main/ui.gui_script').read_text();js=(ROOT/'pilots/gdevelop/shooter.js').read_text()
+  self.assertNotIn('g:shot()',gui);self.assertNotIn('this.line(this.shot()',js)
+  d=json.loads((ROOT/'shared/raid.json').read_text());self.assertFalse(d['preview_trajectory'])
+  self.assertEqual(len(d['missions']),3);self.assertEqual(sum(d['rewards'].values()),925)
+  self.assertEqual(sum(v for k,v in d['rewards'].items()if not k.endswith((':bank',':guardian'))),600)
  def test_unlocks_and_rewards_have_a_bounded_unique_economy(self):
   d=json.loads((ROOT/'shared/pilot.json').read_text())
   self.assertEqual(sum(d['rewards'].values()),325)

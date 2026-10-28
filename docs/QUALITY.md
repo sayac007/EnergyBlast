@@ -1,112 +1,62 @@
-# Aktueller Prüfstand — Shooter 0.2
+# Aktueller Prüfstand — Aurora Raid 0.3
 
-**Dokumentationsprüfung 28.10.2026:** Der Spielcode und die APKs bleiben unverändert.
-Ihre lokalen SHA-256-Werte, ZIP-Integrität und Build-Metadaten wurden erneut geprüft;
-auch alle drei auf Commit festgelegten öffentlichen Downloads stimmen per Hash überein.
-Die folgenden Spiel-/Engine-Testergebnisse stammen vom 27.10.; für diese
-Dokumentationsänderung wurden keine neuen Spieltests oder Builds ausgeführt.
-Den eingefrorenen Nachweis und den Auftragsabgleich enthält
-[MILESTONE_01.md](MILESTONE_01.md).
+**28.10.2026.** Aktive Weiterentwicklung: Defold und GDevelop. Godot bleibt im
+unveränderten 0.2-Stand. Der [Meilenstein 02](MILESTONE_02.md) beschreibt Umfang,
+Abgleich, Testergebnisse und offene Geräteabnahme. Der eingefrorene
+[Meilenstein 01](MILESTONE_01.md) erhält die Nachweise des ersten Vergleichs.
 
-**27.10.2026.** Die aktuellen Startszenen sind echte Kampfarenen. Der alte 0.1-
-Geometriepilot ist eine zusätzliche Regression. Maßgeblich für die ausgelieferten
-Dateien ist der Quellcommit in den [Download-Metadaten](../downloads/README.md).
-Eine erfolgreiche alte Prüfung ersetzt keine Prüfung des neuen Shooters.
+## Ausgeführt und bestanden
 
-## Ausgeführt
+| Prüfbereich | Ergebnis am 28.10.2026 |
+|---|---|
+| Defold native Engine | 42 Kampf-/Eingabeprüfungen in Linux/OpenGL |
+| Defold tatsächliche GUI-Eingabe | Menüwahl Dock und FEUER per XTest bestanden; keine Script-Kontextfehler |
+| Defold lokaler Spielstand | Neuer Prozess erhält alte/neue Sterne, Dock-Ausrüstung und bezahlte Hinweise |
+| GDevelop tatsächliche WebGL-Laufzeit | 51 Prüfungen, Touch-Emulation, 0 Seitenfehler / 0 externe Requests |
+| Gemeinsame Regeln/Modelle/Audios/Manifeste | Sechs Testgruppen; 26 bestehende + 3 neue Oggs tatsächlich decodiert; Hash/Pegel/Dauer geprüft |
+| Erhaltenes Godot | 43 alte + 24 Shooter-Prüfungen; Prozessneustart bestanden |
+| Alte GDevelop-Regression | 32 Prüfungen; separater Legacy-Export, danach aktuellen Export wiederhergestellt |
+| Sichtprüfung | Gerenderte Menüs/Dock beider Apps selbst angesehen |
 
-| Prüfung | Tatsächliches Ergebnis | Grenze |
-|---|---|---|
-| Godot alter Geometriekern | 43 Prüfungen, 0 Fehler | archivierter Ablauf |
-| Godot Shooter | 24 Prüfungen, 0 Fehler | echte Szene, simulierte Touch-Ereignisse/Zeitschritte, Testaudio ausgeschaltet |
-| Godot lokaler Spielstand | getrennter Schreib-/Neustartprozess bestanden | kein physischer Android-Update-Test |
-| GDevelop alter Ablauf | 32 Browserprüfungen bestanden | separater Legacy-Export |
-| GDevelop Shooter | 28 Browserprüfungen bestanden | echte WebGL-Laufzeit mit Touch-Emulation, kein Android-Gerät |
-| Defold Shooter | 17 Prüfungen in der nativen 1.14.0-Laufzeit bestanden | Linux/OpenGL unter Xvfb, Sound-Nullgerät |
-| Defold lokaler Spielstand | Schreiben und neuer Prozess bestanden | tatsächlicher privater lokaler Dateipfad, keine Gerätemessung |
-| Gemeinsame Daten/Assets/Medien/Manifeste | vier Testgruppen bestanden; alle 26 Ogg-Dateien decodiert, Hash/Dauer/Pegel geprüft | kein menschlicher Hörtest |
-| Unabhängiger ASR-Screen | 25/26 Texte normalisiert exakt erkannt; neue Kampfansagen 6/7 | „Triff“ als „Trift“ erkannt; menschliche Artikulationsprüfung offen |
-| Visueller Lauf | Godot, GDevelop und Defold tatsächlich gerendert und Bilder selbst geprüft | Software-Grafik/Cloud, keine gemessene Android-Bildrate |
-| Android | drei Debug-APKs tatsächlich gebaut; technische Nachweise bei den Downloads | keine physische Installation/Spielrunde hier ausgeführt |
+Die neuen Tests sichern reale Relais-Abpraller, geschützten Boss, beweglichen
+Gegner mit Ladestopp, drei Geschosse pro Fächer, einmalige Heilung, erreichbare
+Flanken, Torfenster, Ende des Sektors und begrenzte Belohnungen ab. Direkte
+Treffer dürfen die Relais nicht umgehen. Die graphische Vorschau wird auch an
+den tatsächlichen GDevelop-SVG-Elementen kontrolliert; Defolds GUI zeichnet die
+ballistische Berechnung nicht mehr.
 
-Die Abschlussexporte erfolgen vom committeten sauberen Quellstand. APK-Nachweise
-enthalten Datum, SHA-256, Bytes, Version, Paket, Signaturart und Quellcommit.
-Die Dateien werden nach dem Push zusätzlich heruntergeladen und gegen ihre
-Hashes geprüft. Keine Schlüsseldateien in Repository oder APKs.
+Der echte Defold-Menütest wurde ergänzt, weil die vorherige reine Kampfprüfung
+den Wechsel in den falschen Script-Kontext nicht erfasste. Native Testfehler
+beenden jetzt die Engine mit Fehlercode; der Teststarter räumt bei einem Timeout
+die komplette eigene Prozessgruppe auf, damit keine verwaiste Engine Ports belegt.
 
-## Was die Kampfprüfungen absichern
+## Builds und Aussagegrenzen
 
-- Kanonen laden sichtbar, fixieren die Schussrichtung und erzeugen bewegte
-  Projektile. Ausweichen kann helfen; die Ladung verfolgt nicht unsichtbar jede Bewegung.
-- Gegnergeschosse können Energie abziehen. Deckung stoppt sie. Kurze Treffer-
-  Unverwundbarkeit verhindert sofortiges Leeren mehrerer Energieeinheiten.
-- Direkte Treffer überwinden den ersten Schild nicht. Ein tatsächliches Projektil
-  nach einem Abpraller beschädigt die Kanone; zwei Treffer sichern den ersten Sektor.
-- Tap-to-move ohne Moduswahl; Ziehen/Loslassen mit Projektion in Weltkoordinaten.
-  GDevelop verwendet dafür echte Chromium-Touch-Ereignisse. Sichtbare Deckung und
-  Kollisionskoordinaten werden nach dem glTF-Achsenwechsel verglichen.
-- Dash, Abklingzeit, Niederlage und direkte Neustartfläche; Sterne bleiben erhalten.
-- Einmalige Zahlungen, verdiente Hinweise, kein Punktegewinn durch Warten und keine
-  doppelte Siegesvergütung. Ein später gelungener schadensfreier Bonus bleibt möglich.
-- Migration alter Godot-/GDevelop-Sterne und bereits bezahlter Hinweise, zusätzliche
-  neue Missionsbelohnungen. Defold besitzt einen eigenen unabhängigen Spielstand.
-- Geschlossenes Tor führt zur Warteposition; das wiederkehrende Fenster verlangt
-  eine neue aktive Bewegung. Keine automatisch vorgemerkte Durchquerung.
+Die [Download-Nachweise](../downloads/README.md) und die maschinenlesbaren
+`verification.json`-Dateien ordnen jedes APK dem Quellcommit zu. Geprüft werden
+Paket, Version, Mindest-/Ziel-API, Entwicklungssignatur, fehlende Berechtigungen,
+deaktiviertes Backup, ZIP-Integrität/Ausrichtung und Hash. Es gibt keinen
+GitHub-Actions-Workflow; die genannten Prüfungen wurden lokal in der Cloud
+wirklich ausgeführt. Keine behauptete grüne CI und keine Release-Schlüssel.
 
-Alte Kernprüfungen erhalten zusätzlich Reflexionsgesetz, Sichtlinien, Fangfeld,
-Speicherökonomie und Torzyklus. Das Fangfeld gehört zum alten Pilotablauf; im
-aktuellen Shooter ersetzt der direkte Dash die frühere Modusleiste.
+**Offen:** physische Installation/Update von 0.2, Touch mit mehreren Fingern,
+Rotation, Ton/Hörverständlichkeit, Launcher, längeres Spiel, Gerätebildrate,
+Akkuverbrauch und subjektives Spielgefühl. Native Audio-Prüfungen verwenden ein
+Nullgerät. Die neuen Sätze sind komplett erzeugte synthetische Aufnahmen derselben
+Stimme, keine Silbenmontage oder Schauspielerimitation. Ein automatischer
+Spracherkennungs-Screen ersetzt keine menschliche Hörabnahme.
 
-## Konkrete behobene Darstellungsfehler
+Die Arenen enthalten ausschließlich selbst erzeugte Geometrie; Herkunft und
+Hashes stehen in `shared/asset-origins.json`. Kein Familienpaket, keine privaten
+Bilder/Schlüssel und keine neue Drittanbieter-Grafik. Spielstände bleiben lokal,
+Android-Backup ist aus, das Spiel verlangt keine Berechtigungen. Die GDevelop-
+WebView akzeptiert nur lokale Inhalte; Netzwerk-Telemetrie ist abgeschaltet.
 
-GDevelop dreht und normalisiert glTF-Modelle anders. Arenen und lokale Figuren
-benötigen unterschiedliche Achsen-/Ursprungskonvertierung; die Deckung passt jetzt
-auch sichtbar zur Kollision. Die Kamera verwendet dieselbe schräge Draufsicht wie
-Godot/Defold. Ein sichtbarer Import allein hätte diesen Fehler nicht nachgewiesen.
+Keine pädagogische Wirksamkeit/Übertragung in den Alltag und keine Store-Reife
+behauptet. Prüfkommandos zentral in [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
+Laufzeitlogs bleiben außerhalb von Git; keine neuen Einzelberichte pro Testlauf.
 
-Defold las zunächst seine Standard-2D-Renderkonfiguration, weil die Renderdatei
-unter dem falschen Konfigurationsabschnitt stand. Die 3D-Datei gehört unter
-`bootstrap.render`. Das wurde korrigiert und durch Konfigurationsprüfung plus
-native gerenderte Bilder überprüft. Ein erfolgreicher Logiktest war dafür nicht genug.
-Die Prüfskripte brechen vor dem Start ab, wenn der native Build fehlschlägt, damit
-kein alter kompilierter Stand versehentlich als neuer Test gilt.
-
-## APK-Technik und Grenzen
-
-Erwartet sind Version 0.2.0 / Code 2, drei getrennte Paketkennungen, gültige
-Entwicklungssignatur, keine angeforderten Berechtigungen, deaktiviertes Backup und
-geprüfte ZIP-Ausrichtung mit 16-KB-Seiten. Das ist keine vollständige Play- oder
-16-KB-Zertifizierung der nativen Bibliotheken. Release-Schlüssel werden nicht benutzt.
-
-Die ursprüngliche Godot-Vorlage warnt bei `aapt2` über einen Verweis auf
-`themed_icon.xml`. Das Launcher-Icon bleibt Bestandteil des manuellen Gerätechecks.
-GDevelop ist eine echte GDJS/WebGL-Implementierung in einer lokalen Android-
-WebView-Hülle; die APK-Größe enthält nicht die bereits installierte System-WebView.
-Defold verwendet native Modelle, hat aber erst Lauf-Bob/Gesamtdrehung statt derselben
-Einzelteilanimation. Keine erfundenen Entwicklungsstunden oder Leistungsranglisten.
-
-## Gemeinsames Geräteprotokoll — offen
-
-1. Die drei APKs auf demselben Handy/Tablet installieren. Geräte-/Android-/WebView-
-   Version und Build-SHA lokal notieren; keine Namen oder Aufnahmen des Kindes.
-2. Prisma-Station: Tippen, Ziehen/Loslassen, FEUER halten, Dash und Schild ausprobieren.
-   Ist die Treffer-/Abprallerwirkung ohne Lesen verständlich? Start/Ende der Funk-
-   Ansagen vollständig anhören und bei Bedarf wiederholen.
-3. Neon-Zitadelle: Deckung, zwei Gegner und Lichtfolge testen. Auch falsches Timing,
-   Niederlage und Neustart prüfen. Reaktion/Symbole/Touch-Abdeckung vergleichen.
-4. Sterne/Hinweise erspielen, vollständig beenden und neu starten. Godot/GDevelop
-   als Update über 0.1 installieren und vorhandene Sterne vergleichen. Deinstallation
-   löscht lokale Daten; sie ist kein geeigneter Test für Erhalt beim Update.
-5. Hintergrund/Vordergrund, Stummschaltung, Rotation, kleine/große Bildschirme,
-   System-Zurück, Launcher-Icon und längere Spielrunde prüfen.
-6. Dieselbe Strecke mit vergleichbarem Ausrüstungsstand spielen. Ruckeln, Touch-
-   Verzögerung, Erwärmung und Akkuverbrauch beobachten; Messmethode mit angeben.
-
-Die Engine-Wahl ist nach diesen echten Gerätetests zu treffen. Das Ziel ist ein
-unterhaltsamer Shooter mit möglichem Lerneffekt durch Winkel, Deckung und Timing.
-Lerntransfer oder Alltags-Impulskontrolle sind hier nicht empirisch nachgewiesen.
-Keine personenbezogene Forschung, Telemetrie oder Fernübertragung ist eingebaut.
-
-Befehle: [BUILD_AND_TEST](BUILD_AND_TEST.md). Laufzeitlogs/ASR-Ausgaben bleiben
-außerhalb von Git; aktuell gepflegt werden Übersicht, Anleitung und Download-
-Provenienz. Keine PRs, automatischen Merges oder Releases. Kinderwelt ist unverändert.
+Der unabhängige Whisper-small-Screen der drei neuen Ansagen erkennt **2/3**
+normalisiert exakt. Bei „Triff“ erkennt er „trifft“; Satz und Kerninhalt werden
+sonst erkannt. Das ist kein bestätigter Aussprachefehler und keine menschliche
+Hörabnahme. Der ältere 25/26-Screen bleibt ein historischer 0.2-Nachweis.

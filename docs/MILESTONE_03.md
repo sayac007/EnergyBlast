@@ -96,3 +96,15 @@ Musik gut hörbar, Ansagen verständlich?
 Kamera und Explosionen angenehm?
 Nächste wichtigste Verbesserung:
 ```
+
+## Tatsächlich erzeugtes APK
+
+Vom sauberen Quellcommit
+[`d070a60`](https://github.com/sayac007/EnergyBlast/commit/d070a6021ac1ecfd84556da40cb1e852bbc2e593)
+am 28.10.2026 gebaut: **9.540.794 Bytes**, Version 0.4.0 / Code 4.
+SHA-256: `022936f1e22b78d8205ff69352238a7c3b94d3830c0df1f31b19a974c09bbb1b`.
+Paket, APIs, Entwicklungssignatur/v2, gleiches Zertifikat wie 0.3, keine
+Berechtigungen, Backup aus, ZIP-CRC und Ausrichtung bestanden. Keine Schlüsseldatei
+im Paket. Externer Buildprojekt-Abzug mit Quellskript und neuen Audios verglichen.
+[Downloads und technische Metadaten](../downloads/README.md).
+Kein physischer Android-Test der neuen Datei behauptet.

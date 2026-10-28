@@ -1,65 +1,71 @@
-# EnergyBlast — Aurora Raid 0.3 herunterladen
+# EnergyBlast — Defold 0.4 herunterladen
 
-Aktuell weiterentwickelt: **Defold und GDevelop**, jeweils mit drei Sektoren.
-Neue Grafik, beweglicher Gegner, Abprall-Schalter, geschützter Boss und
-Fächersalven. Keine berechnete Schussbahn. [Umfang und Prüfungen](../docs/MILESTONE_02.md).
+**[Defold 0.4 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
 
-- **[Defold 0.3 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk)**
-- **[GDevelop 0.3 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk)**
-- [Godot 0.2, unverändert](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk).
+Kurzer Feldkontakt läuft, längerer Kontakt zielt, Loslassen schießt. Neue eigene
+Chiptune-Musik, 2,25-fache Arenenfläche mit folgender Kamera und animierte
+Energieexplosionen. [Umfang, Bilder und Prüfungen](../docs/MILESTONE_03.md).
 
-## Anforderungen und Update
+## Aktuelle Datei
 
-Android 7 / API 24 oder neuer. Defold benötigt ARM64. GDevelop benötigt eine
-funktionierende Android System WebView mit WebGL; deren installierte Größe
-steckt nicht in der kleinen APK-Größe. Godot 0.2 benötigt ARM64 und OpenGL ES 3.
-
-| App | Paketkennung | Version / Code | Bytes |
-|---|---|---|---:|
-| Defold | `org.example.energyblast.defold` | 0.3.0 / 3 | 9.065.658 |
-| GDevelop | `org.example.energyblast.gdevelop` | 0.3.0 / 3 | 2.153.923 |
-| Godot, archivierter Vergleich | `org.example.energyblast.pilot` | 0.2.0 / 2 | 30.317.360 |
-
-Beide neuen Pakete sind mit demselben extern gespeicherten Entwicklungsschlüssel
-wie 0.2 signiert; Zertifikatsgleichheit und v2-Signatur wurden tatsächlich geprüft.
-Sie können als Update angeboten werden. Vorher **nicht deinstallieren**, wenn
-Sterne erhalten bleiben sollen. Die Speicherformate wurden mit alten/neuen Sternen
-und bezahlten Hinweisen geprüft; ein physischer Geräte-Update-Test steht aus.
-Apps verschiedener Engines lassen sich nebeneinander installieren und speichern getrennt.
-
-Debug-Testfassungen, keine Play-Upload-Dateien. Keine Release-Schlüssel und keine
-angeforderten App-Berechtigungen, kein Backup oder Datenupload. Android kann eine
-Freigabe für die Installation aus dieser Downloadquelle verlangen; die Apps
-fordern selbst keine Medien-/Speicherberechtigung an.
-
-## Prüfsummen und Herkunft
+| Merkmal | Tatsächlicher Wert |
+|---|---|
+| Engine / Laufzeit | Defold 1.14.0, native ARM64-App |
+| Paket | `org.example.energyblast.defold` |
+| Version / Code | **0.4.0 / 4** |
+| Größe | **9.540.794 Bytes** — rund 9,5 MB |
+| Android | minSdk 24, targetSdk 36 |
+| Quellcommit | [`d070a60`](https://github.com/sayac007/EnergyBlast/commit/d070a6021ac1ecfd84556da40cb1e852bbc2e593) |
+| Gebaut | 28.10.2026 vom sauberen Quellstand |
+| Gerätetest der neuen APK | **NOT VERIFIED** |
 
 ```text
-Defold 0.3
-SHA-256 eb77c0e9248f29e4f3c9181555905dc02e03ae8d35ebf8b3f49365cc8cd859a6
-
-GDevelop 0.3
-SHA-256 5eb4a25ba88d88ebd853fb6d812cf012572d62f333936dd54406fb7a297f814f
-
-Godot 0.2
-SHA-256 5808ed6027c6d336acc223839d2127b9188966fe555c39fa6bac4c5a13b4b470
+SHA-256 022936f1e22b78d8205ff69352238a7c3b94d3830c0df1f31b19a974c09bbb1b
 ```
 
-Neue APKs gebaut am **28.10.2026**, vom sauberen Quellcommit
-[`4352737`](https://github.com/sayac007/EnergyBlast/commit/43527374e1705a9608a9ddb11ccc8e4af31ef69e).
-[Defold-Metadaten](defold-verification.json) und
-[GDevelop-Metadaten](gdevelop-verification.json) nennen Buildzeit, Quellstand,
-Hash, Größe, Paket/Version, APIs, Signaturstatus und ausdrücklich
-`manual_android_test: NOT VERIFIED`.
+[Maschinenlesbare Metadaten](defold-verification.json) nennen Buildzeit, Größe,
+Hash, Version, Paket, APIs, Signaturstatus und Quellstand mit `source_dirty: false`.
 
-Tatsächlich bestanden: APK-Build, Paketkennung, Version/Code, minSdk 24,
-targetSdk 36, gültige Entwicklungssignatur, identisches Zertifikat zu 0.2,
-keine Berechtigungen, Backup deaktiviert, ZIP-CRC und ZIP-Ausrichtung mit
-16-KB-Seiten. Keine Schlüsseldateien im APK. Der GDevelop-Inhalt wurde zusätzlich
-auf die neue Regelversion und die Hashwerte der drei neuen Sprachdateien geprüft.
-ZIP-Ausrichtung allein ist keine vollständige 16-KB-/Play-Konformitätszertifizierung.
+## Installation und Update
 
-Die Dateien sind regulär versioniert und laufen nicht wie CI-Artefakte ab.
-Keine Actions-Speicherbelegung durch neue Workflow-Uploads und kein automatisches
-GitHub-Release. Die ursprünglichen drei 0.2-APKs bleiben dauerhaft im
-[festen Ausgangssnapshot](https://github.com/sayac007/EnergyBlast/tree/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads).
+Android 7 / API 24 oder neuer, ARM64. **Über die bisherige Defold-App installieren,
+nicht vorher deinstallieren**, wenn die Sterne erhalten bleiben sollen. Gleiches
+Paket und gleiche Entwicklungssignatur wie 0.3 wurden tatsächlich geprüft.
+Speicherneustart mit alten/neuen Sternen, Ausrüstung, bezahlten Hinweisen und
+Musikpräferenz bestanden; physische Datenübernahme auf dem Gerät bleibt offen.
+
+Debug-Testfassung, keine Google-Play-Upload-Datei. Keine Release-Schlüssel.
+Android kann die Installation aus dieser Downloadquelle freigeben lassen; die App
+verlangt selbst keine Medien-/Speicherberechtigung. Keine angeforderten App-
+Berechtigungen, Backup aus, kein Upload von Spielständen.
+
+## Technische Prüfungen
+
+Tatsächlich bestanden: Android-Build, Paket/Version/Code, minSdk/targetSdk,
+gültige v2-Entwicklungssignatur, identisches Zertifikat zu 0.3, keine Berechtigungen,
+Backup deaktiviert, ZIP-CRC und ZIP-Ausrichtung mit 16-KB-Seiten, keine
+Schlüsseldateien im APK. Der externe Buildprojekt-Abzug stimmt mit dem
+committeten Hauptskript und den drei neuen Audio-Dateien überein.
+ZIP-Ausrichtung allein ist keine vollständige 16-KB-/Play-Zertifizierung.
+
+Die native Laufzeit wurde separat mit 76 Kampf-/Eingabe-/Kamera-/Effekttests,
+echten Kurz-/Langdruck-Eingaben, Speicherneustarts und aufgezeichneter Audio-
+ausgabe geprüft. [Ergebnisse und offene Handy-/Tablet-Prüfungen](../docs/QUALITY.md).
+
+## Erhaltene Vergleichsfassungen
+
+Diese Apps wurden für 0.4 nicht verändert oder neu gebaut:
+
+- [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
+- [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.
+- [Godot 0.2 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads/energyblast-godot-debug.apk) — 30.317.360 Bytes.
+
+[0.3-Nachweise](https://github.com/sayac007/EnergyBlast/tree/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads),
+[0.2-Ausgangssnapshot](https://github.com/sayac007/EnergyBlast/tree/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads).
+GDevelop benötigt eine funktionsfähige Android System WebView mit WebGL; deren
+installierte Größe steckt nicht in der APK-Größe. Godot benötigt ARM64/OpenGL ES 3.
+Verschiedene Engines lassen sich parallel installieren und speichern getrennt.
+
+Dateien und Nachweise sind regulär versioniert; keine ablaufenden Actions-
+Artefakte, kein automatisches Release/PR/Merge. Quellstand und APKs haben getrennte
+Commits. Frühere Vergleichsdateien bleiben über ihre festen Referenzen erreichbar.

@@ -52,3 +52,10 @@ bleiben lokal, Android-Backup ist aus; keine neuen Berechtigungen.
 
 Kommandos zentral in [BUILD_AND_TEST.md](BUILD_AND_TEST.md). Laufzeitlogs bleiben
 außerhalb von Git; nur der aktuelle Überblick und wesentliche Meilensteine werden gepflegt.
+
+**APK-Abschlussprüfung:** Defold 0.4 vom sauberen Quellcommit
+`d070a6021ac1ecfd84556da40cb1e852bbc2e593`, 9.540.794 Bytes, Version 0.4.0 / Code 4.
+Paket/APIs, Signatur/v2, Zertifikatsgleichheit zu 0.3, keine Berechtigungen,
+Backup aus, ZIP-CRC/Ausrichtung und Abwesenheit von Schlüsseldateien bestanden.
+Hash und Download werden gegen die veröffentlichte Datei geprüft. Die
+installierten Vergleichsdateien der anderen Engines bleiben unverändert.

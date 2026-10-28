@@ -1,6 +1,6 @@
 # EnergyBlast — Defold 0.4.1 herunterladen
 
-**[Defold 0.4.1 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.4.1 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/bd3d6f1374a7aca4e79fe4b9ba512ff67244e78f/downloads/energyblast-defold-debug.apk)**
 
 Kurzer Feldkontakt läuft, längerer Kontakt zielt, Loslassen schießt. Neue eigene
 Chiptune-Musik, 2,25-fache Arenenfläche mit folgender Kamera und animierte

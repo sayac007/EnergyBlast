@@ -1,68 +1,54 @@
-# Aktueller Prüfstand — Aurora Raid 0.3
+# Aktueller Prüfstand — Defold 0.4
 
-**28.10.2026.** Aktive Weiterentwicklung: Defold und GDevelop. Godot bleibt im
-unveränderten 0.2-Stand. Der [Meilenstein 02](MILESTONE_02.md) beschreibt Umfang,
-Abgleich, Testergebnisse und offene Geräteabnahme. Der eingefrorene
-[Meilenstein 01](MILESTONE_01.md) erhält die Nachweise des ersten Vergleichs.
+**28.10.2026.** Aktive Weiterentwicklung: **Defold**. GDevelop 0.3 und Godot 0.2
+bleiben eingefroren. [Meilenstein 03](MILESTONE_03.md) dokumentiert Auftrag,
+Umsetzung und Grenzen. Frühere Nachweise: [0.3](MILESTONE_02.md), [0.2](MILESTONE_01.md).
 
 ## Ausgeführt und bestanden
 
-| Prüfbereich | Ergebnis am 28.10.2026 |
+| Prüfbereich | Ergebnis |
 |---|---|
-| Defold native Engine | 42 Kampf-/Eingabeprüfungen in Linux/OpenGL |
-| Defold tatsächliche GUI-Eingabe | Menüwahl Dock und FEUER per XTest bestanden; keine Script-Kontextfehler |
-| Defold lokaler Spielstand | Neuer Prozess erhält alte/neue Sterne, Dock-Ausrüstung und bezahlte Hinweise |
-| GDevelop tatsächliche WebGL-Laufzeit | 51 Prüfungen, Touch-Emulation, 0 Seitenfehler / 0 externe Requests |
-| Gemeinsame Regeln/Modelle/Audios/Manifeste | Sechs Testgruppen; 26 bestehende + 3 neue Oggs tatsächlich decodiert; Hash/Pegel/Dauer geprüft |
-| Erhaltenes Godot | 43 alte + 24 Shooter-Prüfungen; Prozessneustart bestanden |
-| Alte GDevelop-Regression | 32 Prüfungen; separater Legacy-Export, danach aktuellen Export wiederhergestellt |
-| Sichtprüfung | Gerenderte Menüs/Dock beider Apps selbst angesehen |
+| Defold native Engine | **76** Prüfungen: 42 beibehaltene Kampf-/Regressionsfälle und 34 neue Zeitsteuerungs-/Welt-/Kamera-/Effektprüfungen |
+| Tatsächliche native GUI | Menü, derselbe Punkt mit kurzem Tipp und langem Hold, anschließend FEUER per XTest; keine Script-Kontextfehler |
+| Vollständige neue Arenen | Abpraller, zwei Schalter/Boss und Abschluss aller drei vergrößerten Sektoren mit real bewegten Geschossen |
+| Speicher | Getrennte Prozesse erhalten Sterne, Ausrüstung, bezahlte Hinweise und Musikpräferenz |
+| Tatsächlicher Audioausgang | OpenAL-WAVE-Aufzeichnung: Musik an Signal, aus Nullsignal; Mischung aus Musik/Sprache/Explosion ohne gemessenes Clipping |
+| Gemeinsame Daten/Medien/Provenienz | Sieben Testgruppen; Modellkopien/Hashes, 30 Sprachaufnahmen, 60-s-Musik und Explosionsklang tatsächlich decodiert |
+| Bedienansage | Whisper-small: 1/1 normalisiert exakt erkannt |
+| Native Sichtprüfung | Größere Arena und unterschiedliche Explosionsframes selbst angesehen |
 
-Die neuen Tests sichern reale Relais-Abpraller, geschützten Boss, beweglichen
-Gegner mit Ladestopp, drei Geschosse pro Fächer, einmalige Heilung, erreichbare
-Flanken, Torfenster, Ende des Sektors und begrenzte Belohnungen ab. Direkte
-Treffer dürfen die Relais nicht umgehen. Die graphische Vorschau wird auch an
-den tatsächlichen GDevelop-SVG-Elementen kontrolliert; Defolds GUI zeichnet die
-ballistische Berechnung nicht mehr.
+Die Druckdauer steuert die Aktion. Ein kurzer Tipp auf Gegner oder Wand darf
+keinen Schuss auslösen; ein ruhiger Hold auf gewöhnlichem Boden muss zielen.
+Schnelle Wischbewegungen, fremde Finger, Pause/Hintergrund und langsame Frames
+werden ausdrücklich geprüft. Rendering und Unprojektion nutzen dasselbe Kameramodul.
+Effekte laufen nach dem Sieg weiter und verschwinden vor dem Ergebnisdialog.
 
-Der echte Defold-Menütest wurde ergänzt, weil die vorherige reine Kampfprüfung
-den Wechsel in den falschen Script-Kontext nicht erfasste. Native Testfehler
-beenden jetzt die Engine mit Fehlercode; der Teststarter räumt bei einem Timeout
-die komplette eigene Prozessgruppe auf, damit keine verwaiste Engine Ports belegt.
+Die Musikprüfung wurde am tatsächlichen Engine-Ausgang durchgeführt und fand
+zunächst eine doppelte Gain-Absenkung. Statischer Musik-Gain jetzt 1, Lautstärke
+nur zur Laufzeit; Hintergrundmusik, Sprach-Ducking und Gesamtmischung getrennt.
+Musik und Klang sind originale mathematische Synthese, keine übernommenen Songs.
 
-## Builds und Aussagegrenzen
+Die früheren 51 GDevelop- und 43+24 Godot-Ergebnisse gehören zum dokumentierten
+0.3-Vergleich. Für die 0.4-Änderung wurden diese Apps nicht verändert oder neu gebaut;
+die historischen Ergebnisse werden nicht als frisch ausgeführte Tests ausgegeben.
+Die alte Arenageometrie bleibt als Defold-Regressionsfixture erhalten.
 
-Die [Download-Nachweise](../downloads/README.md) und die maschinenlesbaren
-`verification.json`-Dateien ordnen jedes APK dem Quellcommit zu. Geprüft werden
-Paket, Version, Mindest-/Ziel-API, Entwicklungssignatur, fehlende Berechtigungen,
-deaktiviertes Backup, ZIP-Integrität/Ausrichtung und Hash. Es gibt keinen
-GitHub-Actions-Workflow; die genannten Prüfungen wurden lokal in der Cloud
-wirklich ausgeführt. Keine behauptete grüne CI und keine Release-Schlüssel.
+## Builds und Grenzen
 
-**Offen:** physische Installation/Update von 0.2, Touch mit mehreren Fingern,
-Rotation, Ton/Hörverständlichkeit, Launcher, längeres Spiel, Gerätebildrate,
-Akkuverbrauch und subjektives Spielgefühl. Native Audio-Prüfungen verwenden ein
-Nullgerät. Die neuen Sätze sind komplett erzeugte synthetische Aufnahmen derselben
-Stimme, keine Silbenmontage oder Schauspielerimitation. Ein automatischer
-Spracherkennungs-Screen ersetzt keine menschliche Hörabnahme.
+APK-Metadaten und SHA-256 bei den [Downloads](../downloads/README.md) ordnen die
+Datei ihrem Quellcommit zu. Paket/Version/APIs, Entwicklungssignatur, fehlende
+Berechtigungen, deaktiviertes Backup, ZIP-Integrität und Ausrichtung werden geprüft.
+Keine Release-Schlüssel und kein GitHub-Actions-Workflow; keine behauptete grüne CI.
 
-Die Arenen enthalten ausschließlich selbst erzeugte Geometrie; Herkunft und
-Hashes stehen in `shared/asset-origins.json`. Kein Familienpaket, keine privaten
-Bilder/Schlüssel und keine neue Drittanbieter-Grafik. Spielstände bleiben lokal,
-Android-Backup ist aus, das Spiel verlangt keine Berechtigungen. Die GDevelop-
-WebView akzeptiert nur lokale Inhalte; Netzwerk-Telemetrie ist abgeschaltet.
+**Manuell offen:** neue APK physisch installieren/aktualisieren, Touch mit mehreren
+Fingern, Rotation, tatsächliche Lautstärke/Sprachklarheit, längere Spielrunde,
+Handy-/Tablet-Bildrate und Akkuverbrauch. Die Audioaufzeichnung ist ein technischer
+Nachweis für ein ausgegebenes Signal, keine menschliche Klang- oder Geräteabnahme.
+Die kontrollierte Explosionsaufnahme ist keine manuell bestandene Mission.
 
-Keine pädagogische Wirksamkeit/Übertragung in den Alltag und keine Store-Reife
-behauptet. Prüfkommandos zentral in [BUILD_AND_TEST.md](BUILD_AND_TEST.md).
-Laufzeitlogs bleiben außerhalb von Git; keine neuen Einzelberichte pro Testlauf.
+Keine Lernwirksamkeit/Übertragung in den Alltag oder Store-Reife behauptet. Keine
+privaten Familien-Assets, Konten, Werbung oder Telemetrie. Spielstände/Musikpräferenz
+bleiben lokal, Android-Backup ist aus; keine neuen Berechtigungen.
 
-Der unabhängige Whisper-small-Screen der drei neuen Ansagen erkennt **2/3**
-normalisiert exakt. Bei „Triff“ erkennt er „trifft“; Satz und Kerninhalt werden
-sonst erkannt. Das ist kein bestätigter Aussprachefehler und keine menschliche
-Hörabnahme. Der ältere 25/26-Screen bleibt ein historischer 0.2-Nachweis.
-
-**Abschließende APK-Prüfung 28.10.2026:** Defold und GDevelop 0.3 vom sauberen
-Quellcommit `43527374e1705a9608a9ddb11ccc8e4af31ef69e` gebaut. Alle technischen
-Paketprüfungen bestanden, einschließlich Vergleich des Signaturzertifikats mit 0.2,
-ZIP-CRC und Prüfung auf fehlende Schlüsseldateien. Die konkreten Größen und
-SHA-256 stehen bei den Downloads. Godots APK bleibt bytegleich zu `defd791`.
+Kommandos zentral in [BUILD_AND_TEST.md](BUILD_AND_TEST.md). Laufzeitlogs bleiben
+außerhalb von Git; nur der aktuelle Überblick und wesentliche Meilensteine werden gepflegt.

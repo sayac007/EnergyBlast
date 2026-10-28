@@ -16,7 +16,7 @@ class SharedChecks(unittest.TestCase):
   js=project['layouts'][0]['events'][0]['inlineCode']
   self.assertIn((ROOT/'shared/raid.json').read_text(),js)
   self.assertEqual((ROOT/'shared/combat.json').read_bytes(),(ROOT/'pilots/godot/assets/combat.json').read_bytes())
-  self.assertEqual((ROOT/'shared/raid.json').read_bytes(),(ROOT/'pilots/defold/data/raid.json').read_bytes())
+  self.assertEqual((ROOT/'shared/defold04.json').read_bytes(),(ROOT/'pilots/defold/data/defold04.json').read_bytes())
  def test_all_audio_decodes_matches_manifest_and_will_not_clip(self):
   m=json.loads((ROOT/'shared/audio/de/manifest.json').read_text())
   self.assertEqual(len(m['clips']),26);self.assertEqual(len({c['id'] for c in m['clips']}),26)
@@ -41,7 +41,7 @@ class SharedChecks(unittest.TestCase):
   for f in (ROOT/'shared/assets/raid').glob('*.glb'):
    raw=f.read_bytes();self.assertEqual(raw[:4],b'glTF');self.assertEqual(struct.unpack_from('<II',raw,4),(2,len(raw)))
    self.assertEqual(raw,(ROOT/'pilots/gdevelop/assets'/f.name).read_bytes())
-  for f in (ROOT/'shared/assets/raid').iterdir():
+  for f in (ROOT/'shared/assets/defold04').iterdir():
    if f.suffix in ['.gltf','.bin']:self.assertEqual(f.read_bytes(),(ROOT/'pilots/defold/models'/f.name).read_bytes())
   raid=json.loads((ROOT/'shared/audio/raid/manifest.json').read_text());self.assertEqual(len(raid['clips']),3)
   for c in raid['clips']:
@@ -51,6 +51,23 @@ class SharedChecks(unittest.TestCase):
    samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);peak=max(abs(x)for x in samples)
    self.assertGreater(peak,.005);self.assertLess(peak*10**((c['playback_gain_db']-1)/20),.95)
    self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
+ def test_defold_music_voice_and_larger_world(self):
+  d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
+  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertEqual(d['rewards'],old['rewards'])
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),1)
+  music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
+  for c in manifest['clips']+music['files']:
+   file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
+   self.assertEqual(hashlib.sha256(raw).hexdigest(),c['sha256'])
+   self.assertEqual(raw,(ROOT/'pilots/defold/audio'/file).read_bytes())
+   pcm=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(ROOT/'shared/audio/defold04'/file),'-ac','1','-ar','22050','-f','f32le','-'])
+   samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);peak=max(abs(x)for x in samples)
+   self.assertLess(peak,.95);self.assertGreater(peak,.01);self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
+   if file=='aurora-hop.ogg':
+    self.assertEqual(c['seconds'],60);self.assertGreater(math.sqrt(sum(x*x for x in samples)/len(samples)),.05)
+    self.assertLess(abs(samples[0]-samples[-1]),.005)
+  sound=(ROOT/'pilots/defold/audio/music.sound').read_text();self.assertIn('looping: 1',sound);self.assertIn('gain: 1.0',sound)
+  self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
  def test_shortlisted_engines_do_not_render_ballistic_previews(self):
   gui=(ROOT/'pilots/defold/main/ui.gui_script').read_text();js=(ROOT/'pilots/gdevelop/shooter.js').read_text()
   self.assertNotIn('g:shot()',gui);self.assertNotIn('this.line(this.shot()',js)

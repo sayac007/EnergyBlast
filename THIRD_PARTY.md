@@ -88,3 +88,19 @@ recorded in `shared/asset-origins.json`; there is no new downloaded game artwork
 Three complete German cues in `shared/audio/raid/manifest.json` use the same
 pinned model/synthetic speaker and existing notices as above. Human listening
 review remains open. No new runtime dependency or licence grant is implied.
+
+## Defold 0.4 update
+
+Defold is the current development focus; the other two app versions remain frozen.
+`shared/assets/defold04` is original Blender geometry from
+`tools/make_defold04_models.py`, extending our own kit: larger arenas, floor details
+and angular energy fragments. `main/bright.fp` provides original lifted lighting
+through Defold's standard model-shader interface. Hashes remain in the central
+asset-origin manifest. No downloaded game graphics or animations.
+
+**Aurora Hop** is an original deterministic 32-bar composition, mathematically
+synthesized at 128 BPM by `tools/make_defold_music.py`, along with an energy-burst
+sound. No external recording, sample or reference melody is used. Source/metrics/
+hashes: `shared/audio/defold04/music.json`. One new complete synthetic control cue
+uses the existing pinned model/Serena speaker and existing model notices; its
+manifest is `shared/audio/defold04/manifest.json`. No new runtime dependency.

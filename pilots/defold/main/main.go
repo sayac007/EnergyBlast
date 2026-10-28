@@ -4,6 +4,8 @@ components { id: "hero" component: "/models/hero.factory" }
 components { id: "cannon" component: "/models/cannon.factory" }
 components { id: "relay" component: "/models/relay.factory" }
 components { id: "radar" component: "/models/radar.factory" }
+components { id: "spark" component: "/models/spark.factory" }
+components { id: "spark_hot" component: "/models/spark_hot.factory" }
 components { id: "reactor" component: "/models/reactor.factory" }
 components { id: "citadel" component: "/models/citadel.factory" }
 components { id: "dock" component: "/models/dock.factory" }
@@ -20,7 +22,10 @@ components { id: "combat_loot" component: "/audio/combat_loot.sound" }
 components { id: "raid_hint" component: "/audio/raid_hint.sound" }
 components { id: "raid_dock" component: "/audio/raid_dock.sound" }
 components { id: "raid_relays" component: "/audio/raid_relays.sound" }
+components { id: "defold_controls" component: "/audio/defold_controls.sound" }
 components { id: "fx_hit" component: "/audio/fx_hit.sound" }
 components { id: "fx_fire" component: "/audio/fx_fire.sound" }
 components { id: "fx_dash" component: "/audio/fx_dash.sound" }
 components { id: "fx_bounce" component: "/audio/fx_bounce.sound" }
+components { id: "music" component: "/audio/music.sound" }
+components { id: "fx_explode" component: "/audio/fx_explode.sound" }

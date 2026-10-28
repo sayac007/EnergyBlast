@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "origin": "Original deterministic composition and mathematical synthesis by tools/make_defold_music.py; no sampled or transcribed reference melody",
+  "title": "Aurora Hop",
+  "bpm": 128,
+  "bars": 32,
+  "music_gain": 0.28,
+  "voice_duck_gain": 0.065,
+  "model_or_external_recording": null,
+  "files": [
+    {
+      "file": "aurora-hop.ogg",
+      "sha256": "35547c7cee655d5170da6ec514fa85c79c7c02c553824f59312d9257fcd196df",
+      "seconds": 60.0,
+      "peak": 0.7194725275039673,
+      "rms": 0.20106802880764008
+    },
+    {
+      "file": "energy-burst.ogg",
+      "sha256": "59e691367530e147ca77c446e89cae12773a741b9b69a9fcd91221e7418ff0df",
+      "seconds": 0.646,
+      "peak": 0.5920129418373108,
+      "rms": 0.07554962486028671
+    }
+  ]
+}

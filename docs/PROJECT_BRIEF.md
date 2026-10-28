@@ -89,3 +89,18 @@ Engines. Die berechnete Schussbahn soll ausdrücklich verschwinden. Der Spieler
 muss Abprallwinkel selbst einschätzen. Maßgeblich ist jetzt
 [Meilenstein 02 — Aurora Raid](MILESTONE_02.md); die obigen Drei-Engine-Anforderungen
 und Meilenstein 01 beschreiben den erhaltenen Ausgangsvergleich.
+
+## Schwerpunkt Defold — Rückmeldung zur 0.3 am 28.10.2026
+
+Der Betreiber bevorzugt Defold, erlebt aber auch dort noch eine unklare Trennung
+zwischen Laufen und Zielen. Er legt deshalb eine neue, eindeutige Regel fest:
+**kurzes Drücken bewegt, längeres Drücken zielt**. Ort/Richtung und die Art des
+angetippten Objekts dürfen diese Entscheidung nicht beeinflussen. Ein präziser
+Tipp auf eine dünne reflektierende Wand soll nicht erforderlich sein.
+
+Zusätzlich beauftragt: synthetische Hintergrundmusik mit fröhlichem Retro-
+Plattformspiel-Charakter, ein vergrößertes Spielfeld und bessere animierte Grafik,
+insbesondere eine sichtbare Explosion bei endgültig besiegten Zielen. Die Musik
+wird eigenständig komponiert und synthetisiert; keine Referenzmelodie übernehmen.
+Aktueller Stand: [Meilenstein 03 — Defold 0.4](MILESTONE_03.md). GDevelop 0.3 und
+Godot 0.2 bleiben erhaltene Vergleichsfassungen.

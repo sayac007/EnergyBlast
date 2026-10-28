@@ -1,0 +1,4 @@
+sound: "/audio/aurora-hop.ogg"
+looping: 1
+group: "master"
+gain: 1.0

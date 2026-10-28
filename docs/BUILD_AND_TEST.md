@@ -1,156 +1,122 @@
-# Bauen und prüfen — Aurora Raid 0.3
+# Bauen und prüfen — Defold 0.4
 
-Vom Repository-Hauptverzeichnis ausführen. Build-Ausgaben außerhalb des Checkouts
-oder unter ignoriertem `build/`; keine Schlüssel in Git. Die bisherigen 0.1-
-Tests bleiben separat ausführbar, sind aber keine Tests der neuen Startszenen.
+Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
+keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
+GDevelop-0.3-/Godot-0.2-Anleitungen bleiben über [Meilenstein 02](MILESTONE_02.md)
+und dessen feste Quell-/APK-Referenzen erreichbar.
 
-## Werkzeuge
+## Werkzeuge und Vorbereitung
 
-- Python 3.12, FFmpeg, Node.js >=18; hier Node 24.
-- Godot **4.7.2 official** mit exakt passenden Android-Vorlagen; Compatibility /
-  OpenGL ES 3, ARM64, ETC2/ASTC-Import aktiviert.
-- Android SDK platform **36**, build-tools **36.1.0**, platform-tools; JDK 17 für
-  Godot/GDevelop. Standard-Toolverzeichnis `/workspace/tools`, via `--tools` änderbar.
-- GDevelop: `gdcore-tools` **2.0.0-gd-v5.6.269-autobuild**, `gdexporter`
-  **4.0.0-beta7**, exakt im Lockfile. Tatsächliche GDJS-3D-Laufzeit.
-- GDevelop Android: Gradle **8.11.1**, AGP **8.6.1**. compileSdk-36-Warnung dieses
-  älteren Plugins ausdrücklich unterdrückt; keine daraus abgeleitete Play-Freigabe.
-- Defold **1.14.0**: Bob und native Engine sowie Java **25** aus derselben offiziellen
-  Linux-Distribution. `tools/setup_defold.py` lädt gepinnte Dateien nach `/tmp`.
-- Browserprüfung: Python-Paket `playwright`, Chromium unter `/usr/bin/chromium`.
-  Native Render-/Defold-Prüfungen brauchen Xvfb und OpenGL; hier Software-Mesa.
-
-## Vorbereitung
+- Python 3.12, FFmpeg; NumPy für die optionale eigene Audiosynthese.
+- Defold **1.14.0**, Bob und native Engine; Java **25** aus dessen offizieller
+  Linux-Distribution. SDK-Dateien sind in `tools/defold-sdk.json` per Hash gepinnt.
+- Android SDK platform **36**, build-tools **36.1.0**, JDK 17 für die APK-Prüfwerkzeuge.
+  Standardverzeichnis `/workspace/tools`, über `--tools` anpassbar.
+- Native Linux-Tests: Xvfb/OpenGL, `libX11.so.6`, `libXtst.so.6`, OpenAL Soft mit
+  Null- und WAVE-Backend. Die Audioausgabe wird tatsächlich aufgezeichnet.
 
 ```bash
-npm ci --prefix tools/gdevelop-tools --ignore-scripts
-export ENERGYBLAST_GD_TOOLS="$PWD/tools/gdevelop-tools"
 python3 tools/setup_defold.py --output /tmp/energyblast-defold-tools
 python3 tools/sync_defold.py
-node tools/gdevelop_export.mjs
 ```
 
-Der Standardpfad des Exportskripts ist `/tmp/energyblast-gd-tools`. Dieser
-temporäre Cache kann nach einem Umgebungsneustart fehlen. Die obigen Befehle
-installieren das gepinnte Werkzeug im Checkout und setzen den passenden
-`ENERGYBLAST_GD_TOOLS`-Pfad.
-`ENERGYBLAST_GD_OUTPUT` ändert den HTML5-Ausgabepfad; die Browserprüfung nutzt
-standardmäßig `/tmp/energyblast-gdevelop-web`.
+Defold konsumiert `shared/defold04.json` und `shared/assets/defold04`. Die alte
+`shared/raid.json` wird zusätzlich als unveränderte Arenageometrie für Kampf-
+Regressionsfixtures mitgeliefert. GDevelop-/Godot-Projekte und Exporte für diese
+Iteration nicht neu erzeugen; ihre aktuellen Vergleichsdateien bleiben unverändert.
 
-Die beiden aktiven Versuche konsumieren `shared/raid.json` und
-`shared/assets/raid/`. Godot bleibt mit `shared/combat.json` und dem alten
-`shared/assets/shooter/` unverändert. `sync_assets.py` und `sync_unity.py` gehören
-zum älteren Vergleich; für diese Runde nicht ausführen. Die GDevelop-/Defold-
-Kopien werden durch ihren Export beziehungsweise `sync_defold.py` aktualisiert.
-
-Optionale Neuerzeugung der Originalmodelle/Töne:
+Optionale Neuerzeugung der eigenen Modelle und Töne:
 
 ```bash
-blender -b --python tools/make_raid_models.py
+blender -b --python tools/make_defold04_models.py
+python3 tools/make_defold_music.py
+python3 tools/sync_defold.py
 ```
 
-Danach synchronisieren, neu exportieren und die Herkunftshashes aktualisieren.
-Kein Bilder-/Assetdownload ist zur Erzeugung der eigenen 3D-Modelle erforderlich.
-Die unveränderte zusätzliche Lilita-One-Schrift wird mit OFL-Hinweis mitgeliefert.
+Danach Herkunftshashes in `shared/asset-origins.json` aktualisieren und prüfen.
+Blender **4.3.2** wurde hier verwendet. Keine Bilder-/Modell-/Musikdownloads nötig.
+Schrift und Engine-/Modellhinweise bleiben mit ihren Fremdlizenzen enthalten.
 
-## Aktuelle Tests
+## Aktuelle Prüfungen
 
 ```bash
 python3 tools/check_shared.py
-python3 tools/check_godot.py
-python3 tools/check_gdevelop_combat.py
 python3 tools/check_defold.py
 ```
 
-- `check_shared`: Regeln/Modellkopien, Herkunft/Audiohashes, 26 bestehende und drei neue Ogg-Dateien mit
-  FFmpeg decodiert, Dauer/Pegel/Verstärkung, begrenzte Belohnungen, Android-Manifeste
-  und der tatsächlich verwendete Defold-Render-Einstieg.
-- `check_godot`: 43 alte Kern- und 24 neue Kampfprüfungen, Touch-/Weltprojektion,
-  wirkliche Schüsse/Schild/Treffer/Deckung/Dash, Sterne/Hint-Migration und getrennte
-  Speicherprozesse. `--godot /pfad/zu/godot` überschreibt den Cloud-Pfad.
-- `check_gdevelop_combat`: 51 Prüfungen der realen exportierten WebGL-Laufzeit, echter Touch-Drag über
-  Chromium/CDP, sichtbare Deckung gegen Kollisionskoordinaten, Kampf, gespeicherte
-  Sterne/alte Hinweise, Neustartfläche, keine JS-Seitenfehler/externe Requests.
-- `check_defold`: baut zuerst und stoppt bei Fehlern, startet dann die native Engine
-  in Xvfb. 42 Prüfungen einschließlich Eingabeprojektion, Kampf und neuem Relais-/Boss-Sektor, anschließend
-  getrennte Prozesse für Speichern/Neustart und echter nativer Menü-/FEUER-Klick via XTest. Benötigt `libXtst.so.6` / `libX11.so.6`. Sound nutzt ein Nullgerät; keine
-  menschliche Audioabnahme. `--sdk` überschreibt das externe SDK-Verzeichnis.
+- **check_shared:** sieben Testgruppen. Daten/Modelle/Provenienz, unveränderte
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 30 Sprach-
+  aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
+  Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
+- **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
+  Native **76** Prüfungen: 42 beibehaltene Fälle plus 34 neue. Drei erweiterte
+  Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, 0,30-s-Schwelle,
+  langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
+- Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
+  Musikpräferenz. Echte XTest-Eingaben prüfen Menü, kurzen Tipp und langen Hold
+  am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer.
+- `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
+  WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
+  Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
 
-Zusätzliche unveränderte GDevelop-Regression (separater Export, anschließend den
-aktuellen Export wiederherstellen):
+`--sdk` ändert den SDK-Pfad. Der Starter isoliert private Zustandsverzeichnisse
+und beendet bei Timeout seine gesamte Prozessgruppe. Laufzeitberichte verbleiben
+unter temporären Pfaden, keine Einzelprotokolle pro Testlauf in Git.
 
-```bash
-ENERGYBLAST_GD_LEGACY=1 ENERGYBLAST_GD_OUTPUT=/tmp/energyblast-gdevelop-legacy node tools/gdevelop_export.mjs
-ENERGYBLAST_GD_OUTPUT=/tmp/energyblast-gdevelop-legacy python3 tools/check_gdevelop.py
-node tools/gdevelop_export.mjs
-```
-
-Der Community-Exporter setzte einen WASM-Decoder fälschlich als JavaScript-Script
-in HTML ein. Nur dieser ungültige Script-Verweis wird entfernt; der Decoder bleibt.
-GDevelop braucht außerdem die explizite glTF-Achsenanpassung für sichtbare Deckung.
-Defold braucht `bootstrap.render`, nicht einen unbeachteten `render.render`-Eintrag.
-
-## Sprachausgabe
-
-Die drei neuen Raid-Aufnahmen liegen separat unter `shared/audio/raid`, damit
-Godots 0.2-Assets unverändert bleiben. Optionale Erzeugung:
+Die ältere reine GDevelop-/Godot-Regression ist weiterhin ausführbar:
 
 ```bash
-/workspace/tools/qwen-env/bin/python tools/prepare_raid_audio.py --model /workspace/tools/qwen-female
+python3 tools/check_godot.py
+python3 tools/check_gdevelop_combat.py
 ```
 
-Für deren unabhängigen ASR-Screen beim folgenden Befehl zusätzlich
-`--manifest shared/audio/raid/manifest.json` angeben; standardmäßig werden die
-26 erhaltenen Aufnahmen geprüft.
+GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
+Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
+erhalten. Für 0.4 werden diese unveränderten Apps nicht erneut gebaut.
 
+## Bedienansage und Musik
 
-Bereits enthaltene Aufnahmen reichen für Builds. Vier genehmigte alte Clips,
-15 ältere Pilotansagen und sieben neue Kampfansagen stehen mit Text/Hash/Quelle
-im Manifest. Im neuen Spiel werden die kurzen Kampfansagen verwendet. Es werden
-keine Silben zusammengeschnitten und keine Schauspielerstimmen nachgeahmt.
+Bereits enthaltene Aufnahmen reichen für Builds. Die neue Ansage liegt separat
+in `shared/audio/defold04/manifest.json`; alte Audioquellen bleiben unverändert.
+Optionale Offline-Erzeugung derselben synthetischen Serena-Stimme:
 
-Optionaler unabhängiger ASR-Screen mit lokalem Whisper-small-int8:
+```bash
+/workspace/tools/qwen-env/bin/python tools/prepare_defold_voice.py --model /workspace/tools/qwen-female
+```
+
+Unabhängiger ASR-Screen, ohne Referenztext als Prompt:
 
 ```bash
 /workspace/tools/piper-env/bin/python tools/screen_voice.py \
   --model /workspace/tools/asr/sherpa-onnx-whisper-small \
-  --output /tmp/energyblast-asr.json
+  --manifest shared/audio/defold04/manifest.json \
+  --output /tmp/energyblast-defold04-asr.json
 ```
 
-`tools/prepare_audio.py --help` beschreibt die optionale Offline-Erzeugung mit
-gepinntem Qwen-Modell/Serena. Keine Modellgewichte oder privaten Aufnahmen im Repo.
-ASR ist kein menschlicher Verständlichkeits-/Betonungsnachweis.
+Musik-/Klangherkunft, Hash und Messwerte in `shared/audio/defold04/music.json`.
+60 Sekunden, 32 Takte bei 128 BPM, vollständig eigene Synthese. Statischer
+Musik-Gain **1**; Laufzeitpegel 0,28 im Spiel, 0,16 im Menü, 0,065 unter Ansagen.
+Master-Gain 0,75, SFX separat gedämpft. Musikpräferenz wird lokal gespeichert.
+Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 
-## Die zwei aktuellen Android-APKs
+## Android-APK
 
 ```bash
-python3 tools/build_gdevelop_android.py --output /tmp/energyblast-gdevelop-build
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold04-build
 ```
 
-Ausgabeverzeichnisse müssen neu sein. Godot verwendet einen für diese Piloten
-angelegten Entwicklungsschlüssel außerhalb des Repositories unter
-`<tools>/energyblast-pilot-signing/debug.keystore`; die beiden anderen verwenden
-denselben Debug-Schlüssel. Keine Play-Upload-Identität und keine Release-Secrets.
-Defolds bekannte Debug-Passwortdatei liegt temporär nur im externen Buildordner
-und wird nach dem Aufruf entfernt.
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.4.0 / Code 4**,
+`org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
+für Entwicklung angelegte Schlüssel außerhalb des Repositories:
+`<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.
+Die temporäre bekannte Debug-Passwortdatei wird nach dem Export gelöscht.
 
-GDevelop verpackt die echte GDJS/WebGL-Laufzeit in eine eigene lokale Android-
-WebView-Hülle. Keine Internet-/Medienberechtigung, keine JavaScript-Native-Bridge,
-keine externen Navigationsziele. Die System-WebView bleibt eine Geräteabhängigkeit.
-Defold und Godot verwenden native ARM64-Engines. Alle Spielstände bleiben im
-privaten App-Speicher, Backup ist deaktiviert.
+Ausgabe: APK, Build-/Signatur-/Manifestauszüge und `verification.json` mit Quell-
+commit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur und
+ZIP-Ausrichtung. Zusätzlich vor Veröffentlichung: ZIP-CRC, keine Schlüsseldateien,
+Zertifikatsgleichheit mit 0.3 und Hash der veröffentlichten Download-Datei prüfen.
 
-GDevelop unterstützt nach Auflösung seiner Abhängigkeiten `--offline` und bei
-Cloud-Proxys `--trust-store /lokaler/pfad/cacerts`. Zertifikatsprüfung bleibt an.
-Die Android-/Java-Benutzerverzeichnisse sind isoliert; `$HOME` wird nicht umgebogen.
-
-Die Skripte erzeugen APK, technische Auszüge und `verification.json`: Paket,
-Version 0.3.0 / Code 3, fehlende Berechtigungen, deaktiviertes Backup, gültige
-Entwicklungssignatur, ZIP-Ausrichtung mit 16-KB-Seiten, Größe, SHA-256 und Quellcommit.
-Das sind nachvollziehbare Befehle, keine zugesicherte Bit-für-Bit-Reproduktion.
-Keine Aussage über eine auf echter Hardware bereits bestandene Installation.
-
-Abschlussdateien entstehen vom sauberen Quellcommit; anschließend kommen APKs und
-Provenienz in einen eigenen Download-Commit. Laufzeitlogs bleiben außerhalb von
-Git, keine CI-Artefaktflut und kein automatisches Release/PR/Merge.
+Abschlussexport vom sauberen Quellcommit, anschließend APK/Metadaten separat
+versionieren. Das ist ein nachvollziehbarer Bauweg, keine Zusicherung bitidentischer
+Ausgaben oder einer bereits bestandenen physischen Android-Installation.
+Keine Actions-Artefaktflut, PRs, Merges oder automatischen Releases.

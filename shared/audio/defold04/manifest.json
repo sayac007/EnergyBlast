@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "language": "de",
+  "speaker": "Serena",
+  "model": "Qwen3-TTS-12Hz-0.6B-CustomVoice",
+  "model_source": "https://huggingface.co/Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice/tree/85e237c12c027371202489a0ec509ded67b5e4b5",
+  "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+  "dataset_license": "Not separately specified by publisher",
+  "human_listening_review": "OPEN for new mission clips",
+  "clips": [
+    {
+      "id": "defold_controls",
+      "text": "Kurz tippen zum Laufen. Halte zum Zielen. Lass los zum Schießen.",
+      "file": "defold_controls.ogg",
+      "sha256": "345f9cd8a3672c4e7bc09793c8623039762687a368c7795779d9035056cf42a8",
+      "seconds": 6.52,
+      "playback_gain_db": 7.2174242535535065,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
+    }
+  ]
+}

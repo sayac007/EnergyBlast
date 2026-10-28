@@ -1,0 +1,410 @@
+{
+  "schema": 1,
+  "id": "energyblast-defold-04",
+  "language": "de",
+  "controls": "short_tap_move_long_hold_aim_release_fire",
+  "arena": [
+    -10.5,
+    -7.5,
+    21.0,
+    15.0
+  ],
+  "player": {
+    "speed": 4.8,
+    "radius": 0.27,
+    "hit_points": 3,
+    "dash_speed": 12,
+    "dash_seconds": 0.18,
+    "dash_cooldown": 2.8
+  },
+  "guardian": {
+    "speed": 1.6,
+    "range": 5.5,
+    "fov_degrees": 70,
+    "notice_seconds": 1.0
+  },
+  "gate": {
+    "period": 8.0,
+    "open_seconds": 3.0,
+    "warning_seconds": 3.0
+  },
+  "hint_reward_per_mission": 2,
+  "rewards": {
+    "mission:bank": 75,
+    "skill:bank": 25,
+    "secret:bank": 50,
+    "mission:guardian": 100,
+    "skill:guardian": 25,
+    "secret:guardian": 50,
+    "mission:reactor": 75,
+    "skill:reactor": 25,
+    "secret:reactor": 50,
+    "mission:citadel": 100,
+    "skill:citadel": 25,
+    "secret:citadel": 50,
+    "mission:dock": 150,
+    "skill:dock": 50,
+    "secret:dock": 75
+  },
+  "unlocks": [
+    {
+      "id": "prism",
+      "stars": 100,
+      "effect": "two_bounces"
+    },
+    {
+      "id": "armor",
+      "stars": 160,
+      "effect": "one_extra_hit_point_on_sector_start"
+    },
+    {
+      "id": "boots",
+      "stars": 230,
+      "effect": "speed_plus_0.35"
+    },
+    {
+      "id": "cloak",
+      "stars": 300,
+      "effect": "vision_range_times_0.75"
+    }
+  ],
+  "missions": [
+    {
+      "id": "reactor",
+      "title": "PRISMA-STATION",
+      "spawn": [
+        -6.0,
+        4.8
+      ],
+      "goal": [
+        6.75,
+        0.0
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -1.05,
+          -0.9,
+          2.1,
+          5.4
+        ],
+        [
+          -7.95,
+          -2.7,
+          2.25,
+          1.5
+        ]
+      ],
+      "secret": {
+        "position": [
+          -6.75,
+          -3.75
+        ],
+        "item": "wide_lens",
+        "hint_landmark": [
+          -6.75,
+          -1.95
+        ]
+      },
+      "description": "Kanone voraus. Nutze die leuchtende Wand.",
+      "turrets": [
+        {
+          "position": [
+            6.75,
+            0.0
+          ],
+          "shield": true,
+          "phase": 0.2
+        }
+      ],
+      "exit_required": false,
+      "radar": [
+        0.0,
+        1.8
+      ]
+    },
+    {
+      "id": "citadel",
+      "title": "NEON-ZITADELLE",
+      "spawn": [
+        -8.25,
+        5.25
+      ],
+      "goal": [
+        7.8,
+        -5.25
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -4.5,
+          -2.25,
+          3.0,
+          4.5
+        ],
+        [
+          1.2,
+          0.6,
+          2.4,
+          2.7
+        ],
+        [
+          5.25,
+          -7.05,
+          0.375,
+          5.55
+        ]
+      ],
+      "gate_rect": [
+        5.625,
+        -1.725,
+        4.425,
+        0.45
+      ],
+      "staging": [
+        7.65,
+        0.0
+      ],
+      "patrol": [
+        [
+          -6.0,
+          -3.9
+        ],
+        [
+          4.425,
+          -3.9
+        ],
+        [
+          4.425,
+          4.35
+        ],
+        [
+          -6.0,
+          4.35
+        ]
+      ],
+      "secret": {
+        "position": [
+          -2.7,
+          -3.6
+        ],
+        "item": "quiet_boots",
+        "hint_landmark": [
+          -3.0,
+          -0.6
+        ]
+      },
+      "description": "Zwei Kanonen. Nutze die Deckung.",
+      "turrets": [
+        {
+          "position": [
+            7.2,
+            3.75
+          ],
+          "shield": false,
+          "phase": 0.3
+        },
+        {
+          "position": [
+            -6.75,
+            -5.1
+          ],
+          "shield": false,
+          "phase": 1.4
+        }
+      ],
+      "exit_required": true,
+      "radar": [
+        -3.0,
+        0.0
+      ]
+    },
+    {
+      "id": "dock",
+      "title": "AURORA-DOCK",
+      "spawn": [
+        -8.25,
+        5.1
+      ],
+      "goal": [
+        7.8,
+        -5.55
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -5.4,
+          -1.8,
+          2.55,
+          4.2
+        ],
+        [
+          0.0,
+          1.5,
+          2.4,
+          2.1
+        ],
+        [
+          4.05,
+          -7.05,
+          0.45,
+          5.55
+        ]
+      ],
+      "gate_rect": [
+        4.5,
+        -1.725,
+        5.55,
+        0.45
+      ],
+      "staging": [
+        7.2,
+        0.15
+      ],
+      "secret": {
+        "position": [
+          -4.2,
+          -3.45
+        ],
+        "item": "reactor_cell",
+        "hint_landmark": [
+          -4.2,
+          -0.6
+        ]
+      },
+      "description": "Relais ausschalten. Dann den Kern sichern.",
+      "heal": [
+        -8.25,
+        -3.75
+      ],
+      "relays": [
+        {
+          "position": [
+            -1.5,
+            -5.175
+          ]
+        },
+        {
+          "position": [
+            7.95,
+            3.75
+          ]
+        }
+      ],
+      "turrets": [
+        {
+          "position": [
+            7.35,
+            -5.1
+          ],
+          "shield": false,
+          "boss": true,
+          "hp": 3,
+          "phase": 1.0,
+          "burst": 3
+        },
+        {
+          "position": [
+            -7.05,
+            -4.65
+          ],
+          "shield": false,
+          "phase": 0.6,
+          "patrol": [
+            [
+              -7.05,
+              -4.65
+            ],
+            [
+              -0.3,
+              -4.65
+            ]
+          ],
+          "speed": 1.15
+        },
+        {
+          "position": [
+            5.7,
+            1.5
+          ],
+          "shield": false,
+          "phase": 1.8,
+          "burst": 3
+        }
+      ],
+      "exit_required": true,
+      "radar": [
+        -4.125,
+        0.3
+      ]
+    }
+  ],
+  "combat": {
+    "enemy_bullet_speed": 4.5,
+    "player_bullet_speed": 18,
+    "fire_cooldown": 0.45,
+    "enemy_warning": 0.85,
+    "enemy_interval": 2.35,
+    "hit_invulnerability": 1.0,
+    "turret_hp": 2,
+    "shot_range": 48,
+    "enemy_range": 30,
+    "detection_range": 19.5
+  },
+  "progress_mission_ids": [
+    "bank",
+    "guardian",
+    "reactor",
+    "citadel",
+    "dock"
+  ],
+  "hint_completion_keys": [
+    "mission:bank",
+    "mission:guardian",
+    "mission:reactor",
+    "mission:citadel",
+    "mission:dock"
+  ],
+  "preview_trajectory": false,
+  "world_scale": 1.5,
+  "hold_seconds": 0.3
+}

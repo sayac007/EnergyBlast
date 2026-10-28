@@ -69,3 +69,21 @@
 - Native UI actions which create/delete game objects must send messages to the
   main script. Calling a captured Lua closure from a GUI script does not switch
   Defold's script context. Test real menu clicks as well as the pure combat loop.
+
+## Defold focus and duration input (operator feedback, 28 October 2026)
+
+- Continue **Defold**. GDevelop 0.3 and Godot 0.2 stay frozen as comparisons.
+- A short field press ALWAYS moves, even on an enemy or reflector. Only elapsed
+  press duration arms aim (0.30 s); holding anywhere aims, releasing fires once.
+  Movement distance and target type must never decide between move and shoot.
+  Preserve separate FIRE hold, DASH, cancellation and finger ownership.
+- Current Defold rules/art: `shared/defold04.json`, `shared/assets/defold04`.
+  Arenas are 21x15 with a following camera; rendering and unprojection share
+  `main/view.lua`. Keep world overlays inside the play viewport, away from HUD.
+- Add original synthetic upbeat platform-game music, not a copied song/melody.
+  Test actual native audio output, mute, voice ducking and mix headroom. Avoid
+  multiplying a baked music gain with the runtime gain a second time.
+- Animate final-hit destruction, including during the short delay before the
+  victory overlay. Expire fragments and clear them when switching sectors.
+- Current Defold app is 0.4.0/code 4, same package and development certificate.
+  No PR, merge, Release/store publication or writes to another repository.

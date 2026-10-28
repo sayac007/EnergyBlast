@@ -10,6 +10,7 @@ with tempfile.TemporaryDirectory(prefix='energyblast-defold-test-',dir='/tmp')as
  commands=[[str(java),'-Duser.home='+str(state/'java-user'),'-jar',str(a.sdk/'bob.jar'),'--root',str(ROOT/'pilots/defold'),'--platform','x86_64-linux','--max-cpu-threads','2','build'],['xvfb-run','-a',str(a.sdk/'dmengine'),'--config=project.test_mode=1',str(ROOT/'pilots/defold/build/default/game.projectc')]]
  commands+=[['xvfb-run','-a',str(a.sdk/'dmengine'),'--config=project.save_test='+mode,str(ROOT/'pilots/defold/build/default/game.projectc')]for mode in ['write','read']]
  commands.append(['xvfb-run','-a','-s','-screen 0 1600x1600x24',sys.executable,str(ROOT/'tools/check_defold_ui.py'),'--engine',str(a.sdk/'dmengine')])
+ commands.append(['xvfb-run','-a','-s','-screen 0 1600x1600x24',sys.executable,str(ROOT/'tools/check_defold_audio.py'),'--engine',str(a.sdk/'dmengine')])
  for i,cmd in enumerate(commands):
   process=subprocess.Popen(cmd,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,cwd=ROOT,start_new_session=True)
   try:log,_=process.communicate(timeout=90)
@@ -18,6 +19,6 @@ with tempfile.TemporaryDirectory(prefix='energyblast-defold-test-',dir='/tmp')as
   code=process.returncode
   if code or 'ERROR:'in log:print(log[-7000:]);raise SystemExit(code or 1)
   if i>0:
-   expected=r'DEFOLD COMBAT: \d+ native checks PASS'if i==1 else('DEFOLD SAVE WRITE PASS'if i==2 else'DEFOLD SAVE RESTART PASS'if i==3 else'DEFOLD NATIVE MENU AND FIRE CLICK PASS')
+   expected=r'DEFOLD COMBAT: \d+ native checks PASS'if i==1 else('DEFOLD SAVE WRITE PASS'if i==2 else'DEFOLD SAVE RESTART PASS'if i==3 else'DEFOLD NATIVE MENU AND FIRE CLICK PASS'if i==4 else'DEFOLD ACTUAL MUSIC OUTPUT / MUTE PASS')
    assert re.search(expected,log),log
    print('\n'.join(line for line in log.splitlines()if 'PASS'in line))

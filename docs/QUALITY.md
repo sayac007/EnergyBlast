@@ -14,7 +14,7 @@
 | Tatsächliche Audioaufnahme | **PASS**, Musik an RMS 0,01130, aus 0, gemischt 0,03704; geprüfter Ausgang ohne Übersteuerung |
 | Unabhängiges Sprach-Screening | **12/12** normalisiert exakt; tatsächliche Decodierung, Hash, Dauer und Pegel 12/12 bestanden |
 | Eigene Sichtprüfung | Menü, Figuren, Arsenal und sechs Sektoren angesehen; 34 echte Bewegungs-/Schussframes plus Fallenwahl/Vorschau aufgenommen; keine Geräteabnahme |
-| Android-Artefakt | Separater Abschlussnachweis in den Download-Metadaten; bis dahin kein neues APK behauptet |
+| Android-Artefakt | **PASS**, 0.7.0/Code8, 43.340.986 Bytes, sauberer Quellstand; Manifest/APIs, v2/gleiches Zertifikat, CRC, keine Schlüssel, Projektabzug und ZIP-Ausrichtung |
 
 Aktualisierte Darstellung verwendet originale Animationsbilder auf nativen
 Weltflächen und echte 3D-Deckung. Frühere Gelenkmodelle bleiben historische
@@ -32,6 +32,10 @@ Touch-/Klanggefühl, kindliches Verständnis, Geräte-Seitenverhältnisse und Le
 längere Spielrunden, Schwierigkeit und grafische Abnahme. 0.5 und 0.6 wurden
 optisch abgelehnt. Kein Testzähler begründet eine kommerzielle Gleichwertigkeit,
 Store-Reife oder pädagogische Wirksamkeit. Keine neue CI ausgeführt/behauptet.
+
+Sauberer APK-Quellstand [`080ddfd`](https://github.com/sayac007/EnergyBlast/commit/080ddfda31332b542f99fdcebc59fc1e6c885bf0),
+Artefakt [`f8e8542`](https://github.com/sayac007/EnergyBlast/commit/f8e8542b30cf1691bedf8f28a2403936f9bafcb9),
+gebaut 28.10.2026, 19:42 MEZ. SHA-256 und direkter Download im [Downloadnachweis](../downloads/README.md).
 
 ## Historische Prüfstände
 

@@ -1,60 +1,58 @@
-# EnergyBlast — Defold 0.6 herunterladen
+# EnergyBlast — Defold 0.7 herunterladen
 
-**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads/energyblast-defold-debug.apk)** — rund **28,4 MB**.
+**[EnergyBlast 0.7 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/f8e8542b30cf1691bedf8f28a2403936f9bafcb9/downloads/energyblast-defold-debug.apk) — 43,3 MB.**
 
-Neue Grafik nach eingehender Brawl-Stars-Recherche: tatsächliche Landschafts-
-materialien, modellierte und artikulierte Figuren, weicheres Licht/AO, animierte
-3D-Menüfigur, freie Querformat-Spielfläche und native Lichtspuren. Alle sechs
-Missionen, Sterne, Käufe und Spielstände bleiben. [Bilder/Bewegung](../docs/MILESTONE_05.md),
-[Recherchequellen](../docs/ART_DIRECTION.md).
+Neue originale animierte Helden/Gegner, futuristische Kulisse, Missionsbilder,
+Arsenal-Piktogramme, Energieexplosion und **Fallen direkt auf dem Spielfeld**.
+[Reale Laufzeitbilder](../docs/MILESTONE_06.md), [Fallenbedienung](../docs/TRAPS.md).
 
 | Merkmal | Tatsächlicher Wert |
 |---|---|
-| Engine / Laufzeit | Defold 1.14.0, native ARM64-App |
+| Engine / App | Defold 1.14.0, native ARM64-Test-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.6.0 / 7** |
-| Größe | **28.366.010 Bytes** — rund 28,4 MB |
-| Android | minSdk 24, targetSdk 36 |
-| Ausrichtung | **userLandscape**, im fertigen Manifest tatsächlich geprüft |
-| Quellcommit | [`19856c1`](https://github.com/sayac007/EnergyBlast/commit/19856c195a8b51d1136ef8e7e8f57efd744caf05) |
-| Gebaut | 28.10.2026 vom sauberen Quellstand, 18:25 MEZ |
-| Physischer Gerätetest / grafische Betreiberabnahme | **OFFEN** |
+| Version / Code | **0.7.0 / 8** |
+| Größe | **43,340,986 Bytes** |
+| Android | minSdk24, targetSdk36, festes userLandscape |
+| Quellcommit | [`080ddfd`](https://github.com/sayac007/EnergyBlast/commit/080ddfda31332b542f99fdcebc59fc1e6c885bf0) |
+| APK-Snapshot | [`f8e8542`](https://github.com/sayac007/EnergyBlast/commit/f8e8542b30cf1691bedf8f28a2403936f9bafcb9) |
+| Gebaut | 28.10.2026, 19:42 MEZ, sauberer Quellstand |
+| Signatur | v2 geprüft, dasselbe Entwicklungszertifikat wie 0.6 |
+| Gerätetest / grafische Betreiberabnahme | **OFFEN** |
 
 ```text
-SHA-256 8e65bc2c2391c7cceda5e0200dd2cfd7b7b5dfc3e5d50ac2d069bfe2167f31e2
+SHA-256 5260d36ec54e42608a71cf3d9071379ff5beafab3c005a4dac2dfe9bbdfb7a21
 ```
 
-[Maschinenlesbare Metadaten](defold-verification.json) enthalten Quellcommit,
-`source_dirty: false`, Buildzeit, Paket/Version/APIs, Signatur, Hash und Größe.
+[Maschinenlesbare Metadaten](defold-verification.json): Buildzeit, Quellcommit,
+`source_dirty: false`, Größe, Hash, Zertifikat und tatsächlich bestandene Prüfungen.
 
 ## Installation und Update
 
-Android 7/API 24 oder neuer, ARM64. **Über die vorhandene Defold-App installieren;
-nicht vorher deinstallieren**, wenn Sterne, Käufe und Hinweise bleiben sollen.
-Gleiche Paketkennung und tatsächlich verglichenes Entwicklungssignatur-Zertifikat
-wie 0.5. Android kann die Freigabe der Downloadquelle verlangen. Debug-Testfassung,
-keine Play-Upload-Datei; keine Release-Schlüssel verwendet.
+Als Update über die vorhandene Defold-App installieren; **nicht vorher
+ deinstallieren**, wenn Sterne/Käufe/Hinweise erhalten bleiben sollen. Android
+kann die Freigabe der Downloadquelle verlangen. Keine Play- oder Release-Signatur.
+Gleicher Speicherort und erhaltene Datenmigration. Getrennte Speicherstarts sind
+geprüft; echte Datenübernahme auf deinem Gerät bleibt offen.
 
-Die bisherige einmalige Migration und alle Speicherfunktionen bleiben. Getrennte
-Prozessstarts sind geprüft; echte Datenübernahme auf dem Handy bleibt offen.
-Die neue Querformatfestlegung verhindert einen Wechsel zur gestauchten
-Portrait-Szene. Zwei native Fensterformate wurden geprüft; Geräteleistung und
-persönliches Touch-/Klang-/Grafikurteil werden dadurch nicht vorweggenommen.
+## Tatsächlich geprüft
 
-## Tatsächliche technische Prüfungen
+APK erzeugt; Paket/Version/APIs, Querformatmanifest, v2-Signatur und identisches
+Zertifikat zu 0.6, keine Berechtigungen, Backup aus, ZIP-CRC, keine Schlüsseldateien,
+ZIP-Ausrichtung und vollständiger Buildprojekt-Abzug bestanden. Ausrichtung
+allein ist keine vollständige Play-/16-KB-Zertifizierung.
 
-Android-Build, Paket/Version/Code, APIs, **userLandscape** im Manifest, gültige
-v2-Signatur, identisches Zertifikat zu 0.5, keine Berechtigungen, Backup aus,
-ZIP-CRC und ZIP-Ausrichtung mit 16-KB-Seiten bestanden. Keine Schlüsseldateien
-im APK. Vollständiger Buildprojekt-Abzug gegen den Quellstand verglichen.
-ZIP-Ausrichtung allein ist keine vollständige 16-KB-/Play-Zertifizierung.
+231 native Prüfungen und 12 gemeinsame Gruppen bestanden. Echte Eingaben für
+Menüs/Käufe/Figuren, Bewegung/Zielen/Feuern, alle drei Fallen und Abbruch geprüft.
+Fenster1280×720/1280×800, separate Speicherprozesse, tatsächliche Audioausgabe,
+exportierte Wandgeometrie und native Verdeckung mit sichtbarem Kontrollfall.
+Zwölf Sprachclips unabhängig normalisiert exakt erkannt. [Status/Grenzen](../docs/QUALITY.md).
+Keine neue CI und keine physische Android-Abnahme behauptet.
 
-**199 native Prüfungen und elf gemeinsame Testgruppen** bestanden. Echte
-Eingaben bei 1280×720 und 1280×800, Käufe, Figurenauswahl, Speicherneustarts,
-Audioaufnahme und verdeckte/sichtbare Kontrollgeschosse mit Licht erneut geprüft.
-Quell-/Laufzeit-Geometrie vor/nach dem Batching beidseitig geprüft. Echte native
-Spielbilder und eine Sequenz aus Bewegung, Zielen und Feuerbällen aufgenommen.
-[Qualitätsstatus und Grenzen](../docs/QUALITY.md). Keine grüne CI behauptet.
+## Vorherige 0.6 dauerhaft erhalten
+
+[Defold 0.6 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads/energyblast-defold-debug.apk)
+— 28.366.010 Bytes. Grafischer Stand vom Betreiber abgelehnt;
+[damalige Nachweise](../docs/MILESTONE_05.md) bleiben erhalten.
 
 ## Vorheriger Stand 0.5 dauerhaft erhalten
 
@@ -72,7 +70,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.6 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.7 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

@@ -13,6 +13,11 @@ Schwerpunkt; GDevelop 0.3 und Godot 0.2 bleiben unveränderte Vergleiche.
 | Auftrag / Herkunft / selbst bauen | [Projektauftrag](docs/PROJECT_BRIEF.md), [Recherche](docs/ART_DIRECTION.md), [Befehle](docs/BUILD_AND_TEST.md) |
 | Historie | [0.6](docs/MILESTONE_05.md), [0.5](docs/MILESTONE_04.md), [Ausgangsvergleich](docs/MILESTONE_01.md) |
 
+**[EnergyBlast 0.7 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/f8e8542b30cf1691bedf8f28a2403936f9bafcb9/downloads/energyblast-defold-debug.apk) — 43,3 MB.**
+Android 7/API24+, ARM64, festes Querformat. Als Update über die vorhandene
+Defold-App installieren; vorher nicht deinstallieren, damit lokale Sterne bleiben.
+Gleiche Paketkennung und verifiziertes Entwicklungssignatur-Zertifikat wie 0.6.
+
 ## Neu in 0.7
 
 - **Originale Figurenbilder im Spiel:** Nova, Drache Flammi und Fennek laufen
@@ -87,7 +92,7 @@ normalisiert exakt. [Details](docs/QUALITY.md), [Befehle](docs/BUILD_AND_TEST.md
 Physischer Handy-/Tablet-Test, Hörverständnis des Kindes, längere Runden,
 Geräteleistung und grafische Betreiberabnahme bleiben offen. Kein behauptetes
 kommerzielles Brawl-Stars-Produktionsniveau, keine empirische Lernwirkung oder
-Store-Freigabe. Die neue APK wird nach Abschluss der Artefaktprüfung verlinkt.
+Store-Freigabe. Die APK vom sauberen Quellstand wurde technisch geprüft; Geräteabnahme bleibt offen.
 
 ## Arbeitsweise und Quellen
 

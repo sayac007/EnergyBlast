@@ -147,3 +147,14 @@ kein Multiplayer-/Store-Release und keine ausgebaute Kampagne.
 GDevelop 0.3 und Godot 0.2, deren Dateien und APKs bleiben unverändert. Keine PRs,
 Merges, Actions-Workflows, GitHub-Releases oder Schreibzugriffe auf andere Repos.
 Keine Konten, Werbung, Telemetrie, privaten Familienbilder oder neuen Berechtigungen.
+
+## Tatsächlich erzeugtes APK
+
+Vom sauberen Quellcommit
+[`321d5cf`](https://github.com/sayac007/EnergyBlast/commit/321d5cf6f50f7b038a2f7f8189ac421770af9013)
+am 28.10.2026 gebaut: **10,474,682 Bytes**, Version **0.5.0 / Code 6**.
+SHA-256: `1dd5d3372f759f55f4c3f04229040874fcad88f46b0971a03a5d36f5cd8aaa66`.
+Paket/APIs, v2-Signatur, Zertifikatsgleichheit mit 0.4.1, fehlende Berechtigungen,
+Backup aus, ZIP-CRC/-Ausrichtung und fehlende Schlüsseldateien bestanden.
+Vollständiger Projektabzug gegen den committeten Quellstand verglichen.
+[Download/Metadaten](../downloads/README.md). Kein physischer Android-Test behauptet.

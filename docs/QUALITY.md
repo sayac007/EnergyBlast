@@ -23,6 +23,13 @@ Touchgefühl, Rotation/Seitenverhältnisse, Klang, längere Runden, Schwierigkei
 Geräteleistung. Keine behauptete empirische Lernwirkung oder Store-Reife.
 Kein Actions-Workflow und keine behauptete grüne CI. Andere Engines eingefroren.
 
+Quellstand: [`321d5cf`](https://github.com/sayac007/EnergyBlast/commit/321d5cf6f50f7b038a2f7f8189ac421770af9013).
+APK **0.5.0 / Code 6**, **10,474,682 Bytes** vom sauberen Quellstand gebaut.
+Paket/APIs, v2-Signatur und gleiche Entwicklungssignatur wie 0.4.1, keine
+Berechtigungen/Schlüsseldateien, Backup aus, ZIP-CRC/-Ausrichtung und kompletter
+Projektabzug bestanden. [Metadaten](../downloads/defold-verification.json).
+ZIP-Ausrichtung ersetzt keine vollständige 16-KB-/Store-Freigabe.
+
 ## Historische Nachweise
 
 Die folgenden Ergebnisse gehören zu älteren Versionen; sie ersetzen keinen

@@ -16,6 +16,14 @@ Godot 0.2 bleiben als eingefrorene Vergleiche erhalten.
 | Selbst bauen und prüfen | [Build-/Testanleitung](docs/BUILD_AND_TEST.md) |
 | Frühere Versionen | [0.4](docs/MILESTONE_03.md), [0.3](docs/MILESTONE_02.md), [0.2](docs/MILESTONE_01.md) |
 
+## Installieren
+
+**[Defold 0.5 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)** — rund **10,5 MB**.
+Android 7/API 24+, ARM64; Version 0.5.0/Code 6, gleiche Entwicklungssignatur wie
+0.4.1. Über die vorhandene App installieren, **vorher nicht deinstallieren**.
+[Hash, Quellstand und technische Prüfungen](downloads/README.md).
+Der physische Update-/Spieltest der neuen Datei bleibt offen.
+
 ## Jetzt neu
 
 - **Geschosse bleiben hinter Wänden.** Sie sind echte 3D-Modelle mit Tiefenprüfung,

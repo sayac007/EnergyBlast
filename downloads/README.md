@@ -1,6 +1,6 @@
 # EnergyBlast — Defold 0.5 herunterladen
 
-**[Defold 0.5 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.5 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4315cf73fe6fd5b8688e7d397766394010fe2e5d/downloads/energyblast-defold-debug.apk)**
 
 Sechs Sektoren, drei wählbare Originalfiguren, tatsächliche Käufe, klare freie
 Bedienflächen und neues Ensemble-Arrangement. [Umfang/Bilder/Tests](../docs/MILESTONE_04.md).
@@ -10,7 +10,7 @@ Bedienflächen und neues Ensemble-Arrangement. [Umfang/Bilder/Tests](../docs/MIL
 | Engine / Laufzeit | Defold 1.14.0, native ARM64-App |
 | Paket | `org.example.energyblast.defold` |
 | Version / Code | **0.5.0 / 6** |
-| Größe | **10,474,682 Bytes** — rund 10,5 MB |
+| Größe | **10.474.682 Bytes** — rund 10,5 MB |
 | Android | minSdk 24, targetSdk 36 |
 | Quellcommit | [`321d5cf`](https://github.com/sayac007/EnergyBlast/commit/321d5cf6f50f7b038a2f7f8189ac421770af9013) |
 | Gebaut | 28.10.2026 vom sauberen Quellstand, 16:59 MEZ |
@@ -75,4 +75,3 @@ Verschiedene Engines lassen sich parallel installieren und speichern getrennt.
 Dateien und Nachweise sind regulär versioniert; keine ablaufenden Actions-
 Artefakte, kein automatisches Release/PR/Merge. Quellstand und APKs haben getrennte
 Commits. Frühere Vergleichsdateien bleiben über ihre festen Referenzen erreichbar.
-

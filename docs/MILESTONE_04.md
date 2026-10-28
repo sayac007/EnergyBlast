@@ -152,9 +152,11 @@ Keine Konten, Werbung, Telemetrie, privaten Familienbilder oder neuen Berechtigu
 
 Vom sauberen Quellcommit
 [`321d5cf`](https://github.com/sayac007/EnergyBlast/commit/321d5cf6f50f7b038a2f7f8189ac421770af9013)
-am 28.10.2026 gebaut: **10,474,682 Bytes**, Version **0.5.0 / Code 6**.
+am 28.10.2026 gebaut: **10.474.682 Bytes**, Version **0.5.0 / Code 6**.
 SHA-256: `1dd5d3372f759f55f4c3f04229040874fcad88f46b0971a03a5d36f5cd8aaa66`.
 Paket/APIs, v2-Signatur, Zertifikatsgleichheit mit 0.4.1, fehlende Berechtigungen,
 Backup aus, ZIP-CRC/-Ausrichtung und fehlende Schlüsseldateien bestanden.
 Vollständiger Projektabzug gegen den committeten Quellstand verglichen.
 [Download/Metadaten](../downloads/README.md). Kein physischer Android-Test behauptet.
+
+Fester APK-Snapshot: [`4315cf7`](https://github.com/sayac007/EnergyBlast/tree/4315cf73fe6fd5b8688e7d397766394010fe2e5d/downloads).

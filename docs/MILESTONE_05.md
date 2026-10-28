@@ -120,3 +120,5 @@ Entwicklungszertifikat wie 0.5, keine Berechtigungen/Schlüsseldateien, Backup a
 ZIP-CRC/-Ausrichtung und vollständiger Projektabzug bestanden.
 [APK und maschinenlesbare Daten](../downloads/README.md).
 Keine neue physische Android-Installation oder grafische Betreiberabnahme behauptet.
+
+Fester APK-Snapshot: [`24b24dd`](https://github.com/sayac007/EnergyBlast/tree/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads).

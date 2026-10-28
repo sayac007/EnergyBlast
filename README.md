@@ -18,7 +18,7 @@ Godot 0.2 bleiben als eingefrorene Vergleiche erhalten.
 
 ## Installieren
 
-**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)** — **28,4 MB**.
+**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads/energyblast-defold-debug.apk)** — **28,4 MB**.
 Android 7/API 24+, ARM64; Version 0.6.0/Code 7. Das fertige APK ist auf Querformat
 festgelegt. Gleiche Paketkennung und Entwicklungssignatur wie 0.5: als Update
 installieren, **vorher nicht deinstallieren**. [Hash/Metadaten](downloads/README.md).

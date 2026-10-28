@@ -1,6 +1,6 @@
 # EnergyBlast — Defold 0.6 herunterladen
 
-**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)** — rund **28,4 MB**.
+**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads/energyblast-defold-debug.apk)** — rund **28,4 MB**.
 
 Neue Grafik nach eingehender Brawl-Stars-Recherche: tatsächliche Landschafts-
 materialien, modellierte und artikulierte Figuren, weicheres Licht/AO, animierte

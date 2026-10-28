@@ -133,3 +133,5 @@ gegnerischer Reflexion, offenen/schließenden Toren, Ablauf und Neutralisation.
 UI, Speicher, tatsächliche Audioausgabe und sieben gemeinsame Testgruppen erneut
 bestanden. Physischer Handytest der neuen APK bleibt offen. GDevelop/Godot und
 Arenengröße/Kamera unverändert. Aktueller Download bei den [Dateien](../downloads/README.md).
+
+0.4.1-APK vom sauberen Quellcommit `02a2b409830600bdaa85b10f6accc58f18a5f085` gebaut: 9540794 Bytes, Version 0.4.1 / Code 5. Paket/APIs, Signatur/v2 und Zertifikatsgleichheit, fehlende Berechtigungen, Backup aus, ZIP-CRC/Ausrichtung und fehlende Schlüsseldateien bestanden. SHA-256: `4d2b60a32d53af1c4e2f94b4806dd4fc23261925d88c19fd377594166f728bc5`.

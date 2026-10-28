@@ -1,6 +1,6 @@
-# EnergyBlast — Defold 0.4 herunterladen
+# EnergyBlast — Defold 0.4.1 herunterladen
 
-**[Defold 0.4 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.4.1 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
 
 Kurzer Feldkontakt läuft, längerer Kontakt zielt, Loslassen schießt. Neue eigene
 Chiptune-Musik, 2,25-fache Arenenfläche mit folgender Kamera und animierte
@@ -12,15 +12,15 @@ Energieexplosionen. [Umfang, Bilder und Prüfungen](../docs/MILESTONE_03.md).
 |---|---|
 | Engine / Laufzeit | Defold 1.14.0, native ARM64-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.4.0 / 4** |
+| Version / Code | **0.4.1 / 5** |
 | Größe | **9.540.794 Bytes** — rund 9,5 MB |
 | Android | minSdk 24, targetSdk 36 |
-| Quellcommit | [`d070a60`](https://github.com/sayac007/EnergyBlast/commit/d070a6021ac1ecfd84556da40cb1e852bbc2e593) |
+| Quellcommit | [`02a2b40`](https://github.com/sayac007/EnergyBlast/commit/02a2b409830600bdaa85b10f6accc58f18a5f085) |
 | Gebaut | 28.10.2026 vom sauberen Quellstand |
 | Gerätetest der neuen APK | **NOT VERIFIED** |
 
 ```text
-SHA-256 022936f1e22b78d8205ff69352238a7c3b94d3830c0df1f31b19a974c09bbb1b
+SHA-256 4d2b60a32d53af1c4e2f94b4806dd4fc23261925d88c19fd377594166f728bc5
 ```
 
 [Maschinenlesbare Metadaten](defold-verification.json) nennen Buildzeit, Größe,
@@ -48,7 +48,7 @@ Schlüsseldateien im APK. Der externe Buildprojekt-Abzug stimmt mit dem
 committeten Hauptskript und den drei neuen Audio-Dateien überein.
 ZIP-Ausrichtung allein ist keine vollständige 16-KB-/Play-Zertifizierung.
 
-Die native Laufzeit wurde separat mit 76 Kampf-/Eingabe-/Kamera-/Effekttests,
+Die native Laufzeit wurde separat mit 107 Kampf-/Eingabe-/Kamera-/Effekttests,
 echten Kurz-/Langdruck-Eingaben, Speicherneustarts und aufgezeichneter Audio-
 ausgabe geprüft. [Ergebnisse und offene Handy-/Tablet-Prüfungen](../docs/QUALITY.md).
 
@@ -69,3 +69,14 @@ Verschiedene Engines lassen sich parallel installieren und speichern getrennt.
 Dateien und Nachweise sind regulär versioniert; keine ablaufenden Actions-
 Artefakte, kein automatisches Release/PR/Merge. Quellstand und APKs haben getrennte
 Commits. Frühere Vergleichsdateien bleiben über ihre festen Referenzen erreichbar.
+
+## Ergänzung 0.4.1
+
+Alle Wandarten reflektieren, einschließlich gegnerischer Geschosse. Normale
+Schüsse ein Abpraller, Prisma zwei, gegnerische ein Abpraller; Lebensdauer 3/6 s,
+Reichweite und sichtbares Verblassen. Blaue, begehbare X-Felder neutralisieren.
+Größe des Spielfelds, Kamera, Steuerung, Musik und Spielstände bleiben erhalten.
+107 native Fälle, Speicher-/GUI-/Audio-Prüfungen und sieben gemeinsame Gruppen
+bestanden. Neue physische Android-Spielrunde bleibt offen.
+
+[Defold 0.4.0 als fester Ausgangsstand](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk).

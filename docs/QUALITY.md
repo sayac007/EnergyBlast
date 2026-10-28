@@ -76,3 +76,5 @@ Paket/APIs, Signatur/v2, Zertifikatsgleichheit zu 0.3, keine Berechtigungen,
 Backup aus, ZIP-CRC/Ausrichtung und Abwesenheit von Schlüsseldateien bestanden.
 Hash und Download werden gegen die veröffentlichte Datei geprüft. Die
 installierten Vergleichsdateien der anderen Engines bleiben unverändert.
+
+0.4.1-APK vom sauberen Quellcommit `02a2b409830600bdaa85b10f6accc58f18a5f085` gebaut: 9540794 Bytes, Version 0.4.1 / Code 5. Paket/APIs, Signatur/v2 und Zertifikatsgleichheit, fehlende Berechtigungen, Backup aus, ZIP-CRC/Ausrichtung und fehlende Schlüsseldateien bestanden. SHA-256: `4d2b60a32d53af1c4e2f94b4806dd4fc23261925d88c19fd377594166f728bc5`.

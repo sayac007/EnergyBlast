@@ -91,3 +91,16 @@
   Real purchases spend wallet balance, never lifetime score. Migrate old gear.
 - `main` remains documentation-only. GDevelop 0.3/Godot 0.2 stay frozen. No PR,
   game branch merge, Actions workflow, Release/store publication or other repo writes.
+
+## Visual rejection and Prism Frontier 0.6 (28 October 2026)
+
+- The operator explicitly rejected 0.5 graphics. Read docs/ART_DIRECTION.md and
+  docs/MILESTONE_05.md; primary reference research and actual runtime visual review
+  are required. Functional checks are not an aesthetic acceptance.
+- Current clean source `19856c1`, APK snapshot `24b24dd`, Defold 0.6.0/code 7.
+  Native textured arenas, AO-lit articulated original characters, animated 3D
+  menu stage, fixed landscape and depth-tested light/trails. Six missions/saves stay.
+- The implementation branch uses shared/assets/defold06, real source geometry
+  and identical material-batched runtime geometry. Verify actual exported positions.
+- Main remains documentation only. Other engines/repositories remain unchanged.
+  No PR, game merge, Actions workflow or Release/store publication is authorized.

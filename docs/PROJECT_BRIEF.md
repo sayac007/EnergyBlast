@@ -127,3 +127,14 @@ Kampfsituationen sowie auswählbare nicht-robotische Figuren sind beauftragt.
 
 Umsetzung und Grenzen: [Meilenstein 04 — Toybox Raid](MILESTONE_04.md).
 Defold bleibt Schwerpunkt, die beiden Vergleichs-Engines bleiben eingefroren.
+
+## Visuelle Abnahme abgelehnt — neuer Qualitätsauftrag für 0.6
+
+Der Betreiber lehnt den visuellen Stand 0.5 ausdrücklich ab. Er fordert eine
+sorgfältige Recherche zu Brawl Stars und einen grundlegenden grafischen Sprung
+im tatsächlichen Spiel; zusätzliche Funktionen oder Dokumentation ersetzen dies
+nicht. Ziel ist eine überzeugendere Spielerfahrung als der bisherige Kinderwelt-
+Maßstab. Eine Gleichwertigkeit mit einer kommerziellen Gesamtproduktion wird
+nicht allein aus Testergebnissen behauptet. [Recherche](ART_DIRECTION.md),
+[nächste Laufzeitfassung](MILESTONE_05.md). Fokus bleiben Defold und die bereits
+funktionierenden sechs Missionen. Keine Änderungen an anderen Repositories.

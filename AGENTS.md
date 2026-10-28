@@ -79,3 +79,15 @@
   enemy 6 s, plus range. Fade near expiration and dissipate visibly.
 - Blue X neutralisation fields absorb either side's shots and remain walkable.
   These are explicit absorption areas; ordinary walls still reflect.
+
+## Current Toybox Raid milestone (28 October 2026)
+
+- Defold **0.5.0/code 6**, clean source `321d5cf`, APK snapshot `4315cf7`.
+  Read docs/MILESTONE_04.md and the linked current quality/build documents.
+- Six sectors: original three plus trap preparation, light sequence and escorted
+  drone. Three original selectable characters, including dragon/fireballs.
+- Use native depth-tested shots and matching visual/collision wall footprints.
+  All interactive HUD stays outside the field; menus replace the paused scene.
+  Real purchases spend wallet balance, never lifetime score. Migrate old gear.
+- `main` remains documentation-only. GDevelop 0.3/Godot 0.2 stay frozen. No PR,
+  game branch merge, Actions workflow, Release/store publication or other repo writes.

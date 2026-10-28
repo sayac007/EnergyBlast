@@ -63,7 +63,7 @@ keine neue Handy-Bildrate behauptet.
 ![Echte Bewegung, Zielen und Feuerbälle](images/06-defold-gameplay.gif)
 
 Direkt aus Defold/Linux/OpenGL aufgenommen. Die Sequenz verwendet echte XTest-
-Eingaben und enthält 35 gerenderte Frames, keine erfundenen Animationsbilder.
+Eingaben und enthält 33 gerenderte Frames, keine erfundenen Animationsbilder.
 Es handelt sich um eine geskriptete Cloud-Aufnahme, keine physische Handy-Spielrunde.
 
 ## Erhaltene Funktionen
@@ -109,3 +109,14 @@ Die zwei neuen originalen Bodentexturen stammen aus dem Bildgenerator; Herkunft
 und Hashwerte sind dokumentiert. Keine Supercell-Assets im Repository/APK.
 GDevelop 0.3 und Godot 0.2, andere Repositories und Release-Schlüssel unverändert.
 Kein PR, Merge, Actions-Workflow oder GitHub-Release.
+
+## Tatsächlich erzeugtes Android-Paket
+
+Sauberer Quellcommit [`19856c1`](https://github.com/sayac007/EnergyBlast/commit/19856c195a8b51d1136ef8e7e8f57efd744caf05).
+Am 28.10.2026 gebaut: **28.366.010 Bytes**, **0.6.0 / Code 7**.
+SHA-256: `8e65bc2c2391c7cceda5e0200dd2cfd7b7b5dfc3e5d50ac2d069bfe2167f31e2`.
+Paket/APIs, Querformatmanifest (`userLandscape`), v2-Signatur und gleiches
+Entwicklungszertifikat wie 0.5, keine Berechtigungen/Schlüsseldateien, Backup aus,
+ZIP-CRC/-Ausrichtung und vollständiger Projektabzug bestanden.
+[APK und maschinenlesbare Daten](../downloads/README.md).
+Keine neue physische Android-Installation oder grafische Betreiberabnahme behauptet.

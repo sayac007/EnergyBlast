@@ -18,11 +18,11 @@ Godot 0.2 bleiben als eingefrorene Vergleiche erhalten.
 
 ## Installieren
 
-**[Defold 0.5 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4315cf73fe6fd5b8688e7d397766394010fe2e5d/downloads/energyblast-defold-debug.apk)** — rund **10,5 MB**.
-Android 7/API 24+, ARM64; Version 0.5.0/Code 6, gleiche Entwicklungssignatur wie
-0.4.1. Über die vorhandene App installieren, **vorher nicht deinstallieren**.
-[Hash, Quellstand und technische Prüfungen](downloads/README.md).
-Der physische Update-/Spieltest der neuen Datei bleibt offen.
+**[Defold 0.6 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)** — **28,4 MB**.
+Android 7/API 24+, ARM64; Version 0.6.0/Code 7. Das fertige APK ist auf Querformat
+festgelegt. Gleiche Paketkennung und Entwicklungssignatur wie 0.5: als Update
+installieren, **vorher nicht deinstallieren**. [Hash/Metadaten](downloads/README.md).
+Der physische Handytest und eure grafische Abnahme bleiben offen.
 
 ## Grafik neu aufbauen statt nur umfärben
 

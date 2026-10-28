@@ -12,7 +12,7 @@
 | Geschossverdeckung einschließlich Licht | **PASS**, verdeckt 0 veränderte Pixel, davor sichtbarer Kontrollfall |
 | Gemeinsame Prüfungen | **11 Gruppen PASS**, Medien/Hashes/Privatsphäre, tatsächliche Wandgeometrie, AO-/Texturbindung, beidseitiger Vergleich vor/nach statischem Batching |
 | Native Audioausgabe | **PASS**, Musik an/aus und Sprach-/Effektmischung aufgezeichnet; kein Überlauf im geprüften Fall |
-| Eigene Sichtprüfung | Menü, Figurenwahl und sechs Sektoren in echter Laufzeit angesehen; 35 native Animationsframes mit wirklichen XTest-Eingaben aufgezeichnet |
+| Eigene Sichtprüfung | Menü, Figurenwahl und sechs Sektoren in echter Laufzeit angesehen; 33 native Animationsframes mit wirklichen XTest-Eingaben aufgezeichnet |
 | Grafische Abnahme durch Betreiber | **OFFEN**; 0.5 wurde ausdrücklich abgelehnt. Testzahlen ersetzen diese Entscheidung nicht. |
 
 Die neue Shader-Ausgabe verwendet tatsächliche Texturen und gebackenes AO.
@@ -24,6 +24,12 @@ Die sechs Missionen, Punkteökonomie, Käufe und alten Spielstände bleiben erha
 Spielstandübernahme, Touch-/Klanggefühl, Geräteformat, längere Runden, Schwierigkeit
 und Geräteleistung. Keine Store-Reife, empirische Lernwirkung oder grüne CI.
 Andere Engines und Repositories unverändert. [Historie](MILESTONE_04.md).
+
+Quellstand [`19856c1`](https://github.com/sayac007/EnergyBlast/commit/19856c195a8b51d1136ef8e7e8f57efd744caf05),
+sauber gebautes APK **0.6.0 / Code 7**, **28.366.010 Bytes**.
+Paket/APIs, Querformatmanifest, v2-Signatur/Zertifikatsgleichheit, keine
+Berechtigungen/Schlüsseldateien, Backup aus, ZIP-CRC/-Ausrichtung und vollständiger
+Projektabzug bestanden. [Metadaten](../downloads/defold-verification.json).
 
 ## Historische Nachweise
 

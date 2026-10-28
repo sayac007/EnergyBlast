@@ -152,3 +152,5 @@ dokumentieren die Originalmodelle, zusätzliche Schrift und genehmigten Audioque
 Kinderwelt bleibt unverändert. Die APKs enthalten keine Benutzerkonten, Werbung
 oder Spiel-Telemetrie und fordern keine Berechtigungen an. Eigene neue Projekt-
 inhalte haben noch keine gewählte Nutzungslizenz; Fremdlizenzen bleiben erhalten.
+
+Für die weitere Arbeit gilt der [verbindliche Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).

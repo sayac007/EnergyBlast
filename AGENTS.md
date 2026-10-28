@@ -44,3 +44,12 @@
   `defd791bd94809045cf5a8ed9429ead92c8bd959` as the first shooter comparison.
 - Distinguish the 27 October game/build test results from later documentation/link
   checks. Do not invent fresh game tests for a documentation-only update.
+
+## Binding documentation standard (operator decision, 28 October 2026)
+
+- Apply docs/DOCUMENTATION_STANDARD.md to future work. The operator explicitly
+  requested the published milestone/readme quality as the standard.
+- Maintain a useful README, traceable brief, honest test/limit reporting and
+  immutable milestone/download provenance for substantial results.
+- Scale documentation and verification to the change. No new milestone or full
+  game-test rerun is required for every minor documentation correction.

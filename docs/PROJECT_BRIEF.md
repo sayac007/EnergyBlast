@@ -138,3 +138,18 @@ Maßstab. Eine Gleichwertigkeit mit einer kommerziellen Gesamtproduktion wird
 nicht allein aus Testergebnissen behauptet. [Recherche](ART_DIRECTION.md),
 [nächste Laufzeitfassung](MILESTONE_05.md). Fokus bleiben Defold und die bereits
 funktionierenden sechs Missionen. Keine Änderungen an anderen Repositories.
+
+## 0.6 ebenfalls abgelehnt — Neon Frontier 0.7
+
+Der Betreiber verlangt einen deutlich größeren visuellen Sprung: futuristische
+Kulisse, ausdrucksstarke animierte Figuren/Gegner, bebilderte Missionen und
+Menüs mit Piktogrammen. Zusätzlich muss das Fallenlegen durch passende Sprache
+verständlich werden. Neueste Präzisierung: **Fallen vollständig auf dem Spielfeld
+bedienen, kein Knopf unten.** Die bisherige Halten-/Schießen-Regel bleibt.
+
+Umsetzung: Original-Animationsbilder auf tiefengeprüften Weltflächen, neue
+Sci-Fi-Architektur, Gegnerzustände und Energieexplosion; Magnet-/Eis-/Impulsauswahl
+neben der Figur, pausierte Platzierungsvorschau, Boden antippen, Abbruch.
+[Bedienung](TRAPS.md), [aktueller Meilenstein](MILESTONE_06.md). Das zugesandte
+Instagram-Reel lieferte öffentliche Metadaten und ein sichtbares Gameplay-Cover;
+das Video selbst war nicht abrufbar. Keine vorgetäuschte Videoansicht.

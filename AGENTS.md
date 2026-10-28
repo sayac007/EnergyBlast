@@ -5,36 +5,54 @@
 - The operator's latest instruction overrides references to Kinderwelt in the
   original work order. Do not create pull/merge requests yet. Do not merge or
   publish a release automatically.
-- Read README.md and docs/pilot-brief.md before implementing the first mission.
+- Read README.md, docs/pilot-brief.md and docs/touch-pilot.md before implementation.
+  Also read docs/PROJECT_BRIEF.md and docs/MILESTONE_01.md for the consolidated
+  brief and frozen first comparison. Latest controls are tap-to-move and
+  drag/release to aim/fire, plus FIRE hold and DASH; no joystick.
   Keep engine attempts small and comparable; use the same original arena/assets
   and an engine-neutral mission specification. Do not prebuild a general framework.
 - Do not include family photos/artwork, private signing keys, passwords, tokens
-  or proprietary reference-game assets in this public repository.
+  or proprietary reference-game assets in this public repository. The operator
+  authorizes only matching finished public audio clips from Kinderwelt, read-only,
+  with hashes/notices; no private audio/image pack or unrelated asset copying.
 - Document actual execution/tests and blocked or manual checks separately. A
   project file, import or attractive screenshot is not a successful Android test.
 - Use friendly robots and non-graphic effects. Keep rapid retries and respectful
   feedback. Reward suitable decisions, not maximum waiting. Do not infer general
   everyday impulse-control improvements from performance on these missions.
 
-## Published milestone and current brief (28 October 2026)
+## Current shooter milestone (operator update, 27 October 2026)
 
-- Read docs/PROJECT_BRIEF.md and docs/MILESTONE_01.md before planning new work.
-  They consolidate the operator's later decisions; the original brief is historical.
-- The selected comparison is Godot / GDevelop / Defold, with active cannon combat,
-  tap-to-move, drag/release fire, FIRE hold and DASH. No joystick or compulsory quiz.
-- `main` currently publishes the documentation/index. Current game implementation
-  is on `feat/touch-shooter-v2`, source `1006cde`, APK snapshot `defd791`.
-  Do not mistake the absence of game files on main for an unimplemented prototype.
-- The operator authorized this README/brief/milestone publication on GitHub.
-  No game branch merge, pull request or release publication is authorized by it.
-- Matching finished public Kinderwelt audio was explicitly authorized read-only,
-  with provenance/notices. Never copy private family assets or signing material.
+- The operator explicitly selected **Godot, GDevelop and Defold**. All three need
+  playable Android comparison builds. Unity is an archived unexecuted import kit;
+  BRUTAL was assessed but not selected after its desktop/framework limitations.
+- Build an actual touch shooter with indirect learning through play: hostile
+  cannons, visible projectiles, energy/damage, cover, dash and reflected attacks.
+  No compulsory answer/prediction mode and no classroom/retry coaching phrases.
+- Current shared rules are `shared/combat.json`; `shared/pilot.json` describes the
+  archived 0.1 regression. Do not confuse an old successful test/build with 0.2.
+- Native Defold builds require Bob 1.14.0 / Java 25. Check build success before
+  running the engine so a failed compile can never reuse a stale binary.
+- Keep the new branch isolated, no PR, no automatic merge or release publication.
+
+## Documentation publication (operator request, 28 October 2026)
+
+- Publish the current milestone and original brief clearly on GitHub. The `main`
+  README is the repository landing page and may link to the isolated implementation
+  branch. Updating that documentation does not authorize merging the game branch.
+- Preserve source commit `1006cde8595b4249d0375ddf8bc4ea60fd2a93c9` and APK snapshot
+  `defd791bd94809045cf5a8ed9429ead92c8bd959` as the first shooter comparison.
+- Distinguish the 27 October game/build test results from later documentation/link
+  checks. Do not invent fresh game tests for a documentation-only update.
 
 ## Binding documentation standard (operator decision, 28 October 2026)
 
-- Follow docs/DOCUMENTATION_STANDARD.md for future work: useful README, traceable
-  brief, honest test/limit reporting, stable milestone/download references.
-- Keep scope proportional; minor changes need no new milestone or full game tests.
+- Apply docs/DOCUMENTATION_STANDARD.md to future work. The operator explicitly
+  requested the published milestone/readme quality as the standard.
+- Maintain a useful README, traceable brief, honest test/limit reporting and
+  immutable milestone/download provenance for substantial results.
+- Scale documentation and verification to the change. No new milestone or full
+  game-test rerun is required for every minor documentation correction.
 
 ## Shortlist iteration (operator feedback, 28 October 2026)
 
@@ -80,27 +98,46 @@
 - Blue X neutralisation fields absorb either side's shots and remain walkable.
   These are explicit absorption areas; ordinary walls still reflect.
 
-## Current Toybox Raid milestone (28 October 2026)
+## Toybox Raid (operator playtest, 28 October 2026)
 
-- Defold **0.5.0/code 6**, clean source `321d5cf`, APK snapshot `4315cf7`.
-  Read docs/MILESTONE_04.md and the linked current quality/build documents.
-- Six sectors: original three plus trap preparation, light sequence and escorted
-  drone. Three original selectable characters, including dragon/fireballs.
-- Use native depth-tested shots and matching visual/collision wall footprints.
-  All interactive HUD stays outside the field; menus replace the paused scene.
-  Real purchases spend wallet balance, never lifetime score. Migrate old gear.
-- `main` remains documentation-only. GDevelop 0.3/Godot 0.2 stay frozen. No PR,
-  game branch merge, Actions workflow, Release/store publication or other repo writes.
+- Defold 0.5.0/code 6, six sectors, three selectable original characters. Brawl
+  Stars is a visual direction, never an asset source. Preserve tap/hold controls.
+- All shots must be native depth-tested models. Never restore GUI projectile
+  circles. All solid arena meshes/caps must match collision footprints; verify
+  actual exported POSITION buffers and the native occlusion image regression.
+- Keep every interactive HUD element outside Layout.bottom..Layout.top. Menus
+  replace the paused world entirely, rather than covering a playable scene.
+- Free environmental treasure marks, optional earned clues. Real persistent
+  purchases spend wallet balance, never lifetime score. One-time migration keeps
+  pre-shop gear. New missions: magnetic trap, light sequence, escorted drone.
+- Use MILESTONE_04.md, QUALITY.md and BUILD_AND_TEST.md for actual scope/results.
+  Other engines stay frozen; no PR, merge, Actions or Release/store publication.
 
-## Visual rejection and Prism Frontier 0.6 (28 October 2026)
+## Visual quality rejection and Prism Frontier 0.6 (operator update)
 
-- The operator explicitly rejected 0.5 graphics. Read docs/ART_DIRECTION.md and
-  docs/MILESTONE_05.md; primary reference research and actual runtime visual review
-  are required. Functional checks are not an aesthetic acceptance.
-- Current clean source `19856c1`, APK snapshot `24b24dd`, Defold 0.6.0/code 7.
-  Native textured arenas, AO-lit articulated original characters, animated 3D
-  menu stage, fixed landscape and depth-tested light/trails. Six missions/saves stay.
-- The implementation branch uses shared/assets/defold06, real source geometry
-  and identical material-batched runtime geometry. Verify actual exported positions.
-- Main remains documentation only. Other engines/repositories remain unchanged.
-  No PR, game merge, Actions workflow or Release/store publication is authorized.
+- The operator rejected the graphics of 0.5. Read docs/ART_DIRECTION.md and
+  docs/MILESTONE_05.md. Research primary visuals and verify the actual runtime;
+  passing functional tests is not an aesthetic acceptance.
+- Active art is shared/assets/defold06, generated by make_defold06_models.py and
+  make_defold_ui.py. Ground illustrations are original image-generation outputs.
+  Source .gltf preserves semantic surfaces; .runtime.gltf batches identical static
+  geometry by material. Verify exported positions, not just generator metadata.
+- Actors use actual baked AO, rigid articulated parts and the same animated model
+  on the menu stage. Projectiles/halos/trails must remain native and depth-tested.
+- 0.6.0/code 7 is fixed landscape 1280x720, with the arena inside Layout's four
+  boundaries and all HUD/control surfaces outside. Keep 0.30-second tap/hold input.
+- Six missions, purchases, score and save migration stay. Other engines stay frozen.
+  No PR, game merge, Actions or Release/store publication or other-repo writes.
+
+## Neon Frontier 0.7 — latest operator instruction
+
+- 0.6 graphics were rejected too. Use original illustrated directional animation
+  on native depth-tested world quads, with actual futuristic 3D collision geometry;
+  do not call these full skeletal 3D models. Active art adds shared/assets/defold07.
+- Traps explicitly belong ON THE PLAYFIELD: badge near actor, catalogue, placement
+  preview, floor tap, cancel. This overrides the old outside-HUD rule for these
+  tactical controls only. Keep .30s hold-to-aim unchanged; no hidden hold shortcut.
+- Catalogue/placement freezes combat and camera. Validate range, free floor and
+  line of sight. Contextual speech replaces stale instructions immediately.
+- 0.7.0/code8, same package/debug certificate/save location. Actual native render,
+  input, occlusion, audio and Android artifact checks remain necessary.

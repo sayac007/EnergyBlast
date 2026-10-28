@@ -72,3 +72,35 @@ Bewegungs-/Angriffssequenz muss aufgenommen werden. Dabei prüfen:
 Die persönliche ästhetische Abnahme liegt beim Betreiber. Ein technischer
 Regressionstest kann sie nicht ersetzen. Ebenso wenig wird eine Gleichwertigkeit
 mit einer jahrelang entwickelten kommerziellen Gesamtproduktion behauptet.
+
+
+## Neuer Auftrag nach Ablehnung auch von 0.6 — Neon Frontier 0.7
+
+Die technische 0.6-Abnahme war keine visuelle Abnahme. Erneute Sichtprüfung:
+Grundkörperfiguren, winzige Kugelkanonen, unruhiger Fotoboden und sechs ähnliche
+Textknöpfe ergeben keinen überzeugenden kommerziellen Spielcharakter.
+
+Zusätzlich tatsächlich eingesehen:
+
+- [Pedro Jones: Brawl Stars Environment Design](https://pedrojonesart.myportfolio.com/brawl-stars-environment-design):
+  Künstlerbericht und vier Konzeptbilder. Thematische Eingänge und lebendige
+  Arenaränder erhalten eine lesbare zentrale Kampffläche. Konzept, kein Laufzeitbeleg.
+- [Modma-Animationssequenz](https://framerusercontent.com/assets/dsMm7LmhcE4FyCXCeSqpMlVYYhs.mp4):
+  4,949s lange öffentlich zugängliche Studio-Präsentation; zehn zeitlich verteilte
+  Frames angesehen. Sprung, Drehung, Landestauchung und Erholung ändern die Silhouette.
+  Kein Gameplayvideo und keine Behauptung, die gesamte Produktion angesehen zu haben.
+- [Vom Betreiber zugesandtes Instagram-Reel](https://www.instagram.com/reel/DcZNsZyTveA/):
+  öffentliches Cover und Metadaten geprüft. Ruhiger Boden, kräftige Deckungen,
+  deutliche Figuren und große kontrastierende Effekte. Das eigentliche Video war
+  ohne Anmeldung nicht abrufbar; keine Videoansicht behauptet.
+
+0.7 setzt originale Illustrationsanimation auf native tiefengeprüfte Weltflächen,
+markante Gegner, ruhigen futuristischen Deckboden, gepanzerte Lichtarchitektur,
+illustrierte Missionskarten und echte mehrphasige Explosionen um. Das sind bewusst
+2,5D-Figuren, keine vollwertigen Skelettmodelle. Originalquellen und Ableitungen:
+[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
+wird übernommen. Neue Bedienausnahme auf Betreiberwunsch: der pausierte
+Fallenkatalog liegt direkt im Feld; normale HUD-Flächen bleiben außerhalb.
+
+[Reale korrigierte Laufzeitbilder und Prüfgrenzen](MILESTONE_06.md). Die persönliche
+Abnahme bleibt beim Betreiber, unabhängig von bestandenen technischen Prüfungen.

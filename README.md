@@ -19,7 +19,7 @@ Energieexplosionen beim endgültigen Treffer. Keine berechnete Schussbahn.
 
 ## Herunterladen und aktualisieren
 
-**[Defold 0.4 APK herunterladen](https://github.com/sayac007/EnergyBlast/raw/refs/heads/feat/touch-shooter-v2/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.4 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk)**
 
 Android 7 / API 24 oder neuer, ARM64. Version **0.4.0 / Code 4** behält Paketkennung
 und Entwicklungsschlüssel von 0.3. Über die vorhandene App installieren, **vorher

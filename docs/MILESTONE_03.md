@@ -108,3 +108,8 @@ Berechtigungen, Backup aus, ZIP-CRC und Ausrichtung bestanden. Keine Schlüsseld
 im Paket. Externer Buildprojekt-Abzug mit Quellskript und neuen Audios verglichen.
 [Downloads und technische Metadaten](../downloads/README.md).
 Kein physischer Android-Test der neuen Datei behauptet.
+
+Fester APK-Snapshot:
+[`4539cdf`](https://github.com/sayac007/EnergyBlast/tree/4539cdf739582e22046c36aa76e20d7750584fce/downloads).
+Direkter 0.4-Download auf diesen Commit festgelegt; spätere Branchänderungen
+ersetzen den Meilenstein nicht stillschweigend.

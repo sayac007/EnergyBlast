@@ -152,3 +152,10 @@ including the actual on-field trap gestures and differentiated trap effects.
 Existing model/font/engine notices and licence status above remain applicable.
 AI provenance alone does not establish every possible intellectual-property
 clearance or imply a new licence grant.
+
+## Defold 0.8 — navigation and integrated bonuses
+
+No new graphics or external dependencies. Fourteen complete synthetic Serena
+sentences extend the Defold voice manifest to 26; twelve existing clips are
+preserved. Same pinned model/notices, no actor imitation. New task scripts and
+mission-flow logic are original project work.

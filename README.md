@@ -1,106 +1,89 @@
-# EnergyBlast — Defold 0.7, Neon Frontier
+# EnergyBlast — Defold 0.8
 
-Ein echter Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Deckung,
-Ausweichen, Energiegeschosse und selbst eingeschätzte Abpraller. **Sechs Sektoren,
-drei Helden, kaufbare Ausrüstung und drei taktische Fallen.** Defold ist der
-Schwerpunkt; GDevelop 0.3 und Godot 0.2 bleiben unveränderte Vergleiche.
+Ein Offline-Touch-Shooter mit Deckung, Abprall-Schüssen und drei wählbaren Helden.
+Die neue Fassung macht Fortschritt, Schatzsuche, Käufe und Bonusziele sichtbar.
+Die Grafik von 0.7 bleibt erhalten; Defold ist der Schwerpunkt.
 
 | Einstieg | Weiterlesen |
 |---|---|
-| Installierbare Test-App | [Download, Hash und Update-Hinweise](downloads/README.md) |
-| Neue Grafik und Fallen | [Meilenstein 06](docs/MILESTONE_06.md), [Fallenbedienung](docs/TRAPS.md) |
-| Tatsächlich geprüft / offen | [Qualitätsübersicht](docs/QUALITY.md) |
-| Auftrag / Herkunft / selbst bauen | [Projektauftrag](docs/PROJECT_BRIEF.md), [Recherche](docs/ART_DIRECTION.md), [Befehle](docs/BUILD_AND_TEST.md) |
-| Historie | [0.6](docs/MILESTONE_05.md), [0.5](docs/MILESTONE_04.md), [Ausgangsvergleich](docs/MILESTONE_01.md) |
+| Installierbare APK / Update | [Download und geprüfte Metadaten](downloads/README.md) |
+| Was sich nach dem Spieltest geändert hat | [Meilenstein 07](docs/MILESTONE_07.md) |
+| Tatsächliche Prüfungen / offene Geräteprobe | [Qualitätsstatus](docs/QUALITY.md) |
+| Bauen / Auftrag / Recherche | [Befehle](docs/BUILD_AND_TEST.md), [Projektauftrag](docs/PROJECT_BRIEF.md), [Art Direction](docs/ART_DIRECTION.md) |
 
-**[EnergyBlast 0.7 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/f8e8542b30cf1691bedf8f28a2403936f9bafcb9/downloads/energyblast-defold-debug.apk) — 43,3 MB.**
-Android 7/API24+, ARM64, festes Querformat. Als Update über die vorhandene
-Defold-App installieren; vorher nicht deinstallieren, damit lokale Sterne bleiben.
-Gleiche Paketkennung und verifiziertes Entwicklungssignatur-Zertifikat wie 0.6.
+**[EnergyBlast 0.8 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads/energyblast-defold-debug.apk) — 44,1 MB.**
+Android 7/API 24+, ARM64. Über die bisherige Defold-App installieren; **nicht vorher
+deinstallieren**, damit lokale Sterne und Käufe erhalten bleiben. Entwicklungssignatur,
+Paketkennung und Speicherort sind unverändert. [Hash/Metadaten](downloads/README.md).
 
-## Neu in 0.7
+## Wo finde ich was?
 
-- **Originale Figurenbilder im Spiel:** Nova, Drache Flammi und Fennek laufen
-  mit Front-/Rückansicht und wechselnden Animationsbildern. Native tiefengeprüfte
-  Weltflächen ersetzen die bisherigen Baukastenfiguren. Bewusst 2,5D-Hybrid,
-  keine Behauptung vollständiger dreidimensionaler Skelettanimation.
-- **Drei markante Gegnerbilder:** Sentinel, Magnetwächter und schwebender Boss;
-  sichtbares Aufladen, Schusszustand, Rückstoß und Trefferreaktion.
-- **Neue futuristische Kulisse:** Metallböden, gepanzerte Deckung, Lichtnähte,
-  äußere Reaktoren und Dockarchitektur. Gleiche verlässliche Kollisionsflächen.
-- **Bebilderte Missionen und Arsenal:** eigene Illustrationen, Ausrüstungsbilder,
-  Piktogramme zusätzlich zu Text, kurze Menüanimation, orbitaler Hintergrund.
-- **Energieexplosion:** acht animierte Phasen plus räumlich bewegte Fragmente.
-- **Fallen direkt auf dem Feld:** Bild neben der Figur antippen, Magnet/Eis/Impuls
-  wählen, Vorschau prüfen, freien Boden antippen. Auswahl pausiert Kampf/Kamera.
-  Gesprochene Anleitung passt zu den tatsächlichen Gesten. Kein Fallenknopf unten.
+- **Drache wählen:** Auf der Startseite direkt das Bild **Drache Flammi** antippen.
+  Alle drei Helden bleiben sichtbar. Auch das Heldenbild im Spiel öffnet die Wahl.
+- **Sterne ausgeben:** Goldene Schaltfläche auf der Startseite → Bild/Effekt ansehen
+  → **Kaufen**. Prisma-Waffe, mehr Gesundheit, Tempo und Tarnung. Gesundheitskauf
+  wirkt sofort; Gesamtsterne bleiben, nur das verfügbare Guthaben sinkt.
+- **Offene Schätze:** Oben steht **Schatz 0/1** oder **1/1**. Antippen aktiviert
+  einen kostenlosen goldenen Wegweiser zum Suchgebiet. Bei Annäherung wird die
+  Truhe sichtbar. Nach Missionsabschluss führt er direkt zum verbliebenen Schatz.
+- **Nächste Mission:** Nach dem Sieg ausdrücklich **Nächste Mission** antippen.
+  Der Schatz und die Bonusziele sind freiwillig. Wer weitersucht, kann jederzeit
+  über **Weiter** wechseln. Die aktuelle Mission bleibt beim Neustart gespeichert.
+- **Neue Aufgaben:** Magnetfallen, Lichterfolge und Drohnenrettung sind deutlich
+  markiert. Außerdem enthält **jede Mission zwei Bonusziele direkt im Spielfeld**.
 
-Brawl Stars ist gestalterische Referenz; keine fremden Spielfiguren, Grafiken,
-Videoaufnahmen oder Melodien werden in der App verwendet. Die Grafik von 0.6 wurde
-vom Betreiber abgelehnt. Testzahlen ersetzen keine persönliche grafische Abnahme.
+## Mehr Sterne und integrierte Boni
 
-## Tatsächliche Laufzeitbilder
+| Erfolg | Einmalige Sterne |
+|---|---:|
+| Mission geschafft | 300 |
+| Ohne Schaden / Drohne unbeschädigt | 100 |
+| Schatz gefunden | 75 |
+| Goldenen Kristall durch einen echten Abpraller treffen | 100 |
+| Lichterfolge oder grünes Zeitfenster lösen | 150 |
+| Maximum pro Mission | **725** |
 
-![Native Missionsauswahl](docs/images/07-defold-menu.png)
-![Tatsächlicher Kampf](docs/images/07-defold-forge.png)
-![Fallen direkt auf dem Spielfeld](docs/images/07-defold-traps.png)
+Sechs Missionen ergeben bis **4.350 Sterne**, mit alten 0.1-Erfolgen bis 4.675.
+Vorhandene Erfolge werden mit den erhöhten Werten bewertet; Käufe, Figur, Hinweise
+und Musik bleiben erhalten. Wiederholen erzeugt keine doppelten Belohnungen.
 
-Native Linux-/OpenGL-Aufnahmen; keine behauptete Handyaufnahme.
-[Bewegung und Schüsse](docs/images/07-defold-gameplay.gif).
+Die Boni sind tatsächliche Schussaufgaben in der normalen Arena, keine zusätzliche
+Bonusmission und kein vorgeschalteter Fragebogen. Die Lichterfolge wird beobachtet
+und nachgespielt. Beim Zeitfenster muss das Kind auf Grün warten; Dauerfeuer startet
+nur die Wartephase neu. Kein Verlust von Gesundheit oder schon verdienten Punkten.
+Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
 
-## Sechs Missionen und dauerhafte Sterne
+## Tatsächliche neue Laufzeit
 
-| Sektor | Spielziel |
-|---|---|
-| Prisma-Station | Schildkanone durch Abpraller treffen |
-| Neon-Zitadelle | Deckung, zwei Kanonen und zeitweise offenes Tor |
-| Aurora-Dock | Patrouille, Fächersalven, Abprall-Schalter und geschützter Boss |
-| Magnetwerk | Wächter in vorbereitete Falle locken und Schildöffnung nutzen |
-| Echo-Kammer | Lichterfolge merken und Kristalle in dieser Reihenfolge treffen |
-| Drohnen-Rettung | Verwundbare Drohne um Deckungen begleiten und schützen |
+![Direkte Heldenwahl und Missionen](docs/images/08-defold-menu.png)
+![Klare Käufe](docs/images/08-defold-shop.png)
+![Nächste Mission trotz offenem Schatz](docs/images/08-defold-win.png)
 
-Bis **1.200 Gesamtsterne** im frischen Profil, mit alten 0.1-Erfolgen bis 1.525.
-Keine doppelten Belohnungen durch Wiederholung/Warten. Sterne kaufen Prisma-Kanone,
-Rüstung, Tempostiefel und Tarnmodul; Gesamtpunktzahl bleibt erhalten. Geheimnisse
-haben kostenlose Umwelthinweise; zusätzliche Hinweise kosten verdiente Credits.
-Alles lokal gespeichert. Kein Konto, Werbung, Telemetrie oder Netzwerkzugriff.
+Native Linux-/OpenGL-/XTest-Aufnahmen, keine behaupteten Handyaufnahmen.
+[Bonusziele](docs/images/08-defold-bonus.png), [Schatzsuche](docs/images/08-defold-treasure.png).
 
-## Bedienung
+## Bedienung bleibt
 
-| Eingabe | Wirkung |
-|---|---|
-| Kurz antippen | Laufen, auch beim Tipp auf Gegner/Wand |
-| Mindestens 0,30 Sekunden halten | Zielen an beliebiger Stelle |
-| Nach dem Halten loslassen | Ein Schuss / Feuerball |
-| FEUER halten / DASH | Wiederholtes Schießen / geschütztes Ausweichen |
-| Fallenbild **neben der Figur** im Magnetwerk | Pausierter Katalog → Auswahl → Vorschau → Boden antippen |
-| Kreuz im Feld | Fallenwahl abbrechen; kein versehentlicher Schuss |
-| FUNK / HINWEIS | Mission wiederholen / verdienten Schatzhinweis einsetzen |
-
-Magnet hält 6 Sekunden, Eis 9; Impuls verursacht zwei Schaden und öffnet 5 Sekunden.
-Nur freie erreichbare Plätze im hellen Kreis; maximal zwei Geräte gleichzeitig.
-[Fallen vollständig erklärt](docs/TRAPS.md). Kein Joystick, keine berechnete Flugbahn.
+Kurz antippen läuft, mindestens **0,30 Sekunden halten** zielt, Loslassen feuert.
+FEUER und DASH bleiben. Fallen werden im Magnetwerk vollständig auf dem Spielfeld
+gewählt und platziert. [Fallenbedienung](docs/TRAPS.md). Kein Joystick und keine
+berechnete Flugbahn. Gegner-/Relais-/Ausgangsziele, Schatz und Boni haben getrennte
+Zähler und Richtungszeichen. Angetippte Zähler erklären ihr aktuelles Ziel.
 
 ## Prüfstand und Grenzen
 
-**28.10.2026:** 231 native Prüfungen und 12 gemeinsame Testgruppen bestanden.
-Echte Menü-/Kauf-/Touch-Eingaben bei 1280×720 und 1280×800, drei Fallenarten plus
-Abbruch, getrennte Speicherneustarts, tatsächliche Audioausgabe und verdeckte /
-sichtbare Kontrollgeschosse geprüft. Zwölf Sprachclips im unabhängigen ASR-Screen
-normalisiert exakt. [Details](docs/QUALITY.md), [Befehle](docs/BUILD_AND_TEST.md).
+Die bisherigen Spieltests bleiben mit unveränderter 0.7-Regelfixture erhalten;
+zusätzliche Prüfungen decken den neuen Spielfluss und die Bonusaufgaben ab.
+Tatsächlich ausgeführte Tests und Artefaktprüfung: [Qualitätsstatus](docs/QUALITY.md).
+Die neue Handy-/Tablet-Probe, Hörverständnis, Schwierigkeit und Geräteleistung
+bleiben offen. Keine behauptete Store-Reife oder empirische Lernwirkung.
 
-Physischer Handy-/Tablet-Test, Hörverständnis des Kindes, längere Runden,
-Geräteleistung und grafische Betreiberabnahme bleiben offen. Kein behauptetes
-kommerzielles Brawl-Stars-Produktionsniveau, keine empirische Lernwirkung oder
-Store-Freigabe. Die APK vom sauberen Quellstand wurde technisch geprüft; Geräteabnahme bleibt offen.
+Spielcode: `feat/touch-shooter-v2`; `main` bleibt Dokumentationsstartseite.
+Keine PRs, Spielmerges, neuen Actions oder Releases. Kinderwelt, Godot-0.2- und
+GDevelop-0.3-Vergleichsfassungen bleiben unverändert. Keine privaten Familienbilder,
+Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.
 
-## Arbeitsweise und Quellen
-
-Spielcode auf `feat/touch-shooter-v2`; `main` bleibt Dokumentationsstartseite.
-Keine PRs, Spielmerges, neuen Actions-Workflows oder Releases. Kinderwelt und
-andere Repositories unverändert. Keine privaten Familienbilder oder Schlüssel.
-
-[Regeln](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/shared/defold04.json), [Originalbilder / Herkunft](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/shared/assets/defold07/PROVENANCE.json),
-[technischer Bildimport](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/tools/import_defold07_art.py), [Weltgeometrie](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/tools/make_defold06_models.py),
-[Musik](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/tools/make_defold_music.py), [Kollision](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/pilots/defold/main/projectiles.lua),
-[Lizenzen](THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
+[Regeln](https://github.com/sayac007/EnergyBlast/blob/952a5639c69267cb8d9a78a8e168d33886ef7a3b/shared/defold04.json), [Spielfluss](https://github.com/sayac007/EnergyBlast/blob/952a5639c69267cb8d9a78a8e168d33886ef7a3b/pilots/defold/main/mission_flow.lua),
+[Boni](https://github.com/sayac007/EnergyBlast/blob/952a5639c69267cb8d9a78a8e168d33886ef7a3b/pilots/defold/main/bonus.lua), [Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/952a5639c69267cb8d9a78a8e168d33886ef7a3b/shared/assets/defold07/PROVENANCE.json),
+[Lizenzen](THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md),
+[vorheriger Stand](docs/MILESTONE_06.md).

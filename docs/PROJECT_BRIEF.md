@@ -153,3 +153,12 @@ neben der Figur, pausierte Platzierungsvorschau, Boden antippen, Abbruch.
 [Bedienung](TRAPS.md), [aktueller Meilenstein](MILESTONE_06.md). Das zugesandte
 Instagram-Reel lieferte öffentliche Metadaten und ein sichtbares Gameplay-Cover;
 das Video selbst war nicht abrufbar. Keine vorgetäuschte Videoansicht.
+
+## Verständlicher Fortschritt — 0.8
+
+Der Betreiber akzeptiert die grafische Richtung zunehmend, vermisst aber auffindbare
+Schätze, Restzähler, einen funktionierenden Nachfolger, sichtbare Drachenwahl und
+verständliche Käufe. Boni sollen in normalen Missionen liegen und mehr Sterne
+bringen. Umsetzung/Abnahme in [Meilenstein 07](MILESTONE_07.md): neue Spielfluss-APIs,
+Ziel-/Schatz-/Bonusführung, direkte Heldenbilder, explizites Kaufen, zwei optionale
+Schussaufgaben je Mission und erhöhte einmalige Belohnungen.

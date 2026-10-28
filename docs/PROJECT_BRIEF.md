@@ -104,3 +104,12 @@ insbesondere eine sichtbare Explosion bei endgültig besiegten Zielen. Die Musik
 wird eigenständig komponiert und synthetisiert; keine Referenzmelodie übernehmen.
 Aktueller Stand: [Meilenstein 03 — Defold 0.4](MILESTONE_03.md). GDevelop 0.3 und
 Godot 0.2 bleiben erhaltene Vergleichsfassungen.
+
+## Ergänzung: alle Wände und endliche Geschosse — 28.10.2026
+
+Der Betreiber bestätigt das größere, über den Bildschirm hinausreichende Feld.
+Alle Wände sollen reflektieren. Zusätzlich sollen Geschosse endlich bleiben und
+Bereiche sie neutralisieren können. Umsetzung in 0.4.1: Abpraller an Deckungen,
+Rändern und geschlossenen Toren für beide Seiten; begrenzte Zahl, Reichweite und
+Lebensdauer sowie blau markierte, begehbare Neutralisationsfelder. Das sind
+Spielregeln für Energiegeschosse, keine realistische Ballistiksimulation.

@@ -1,6 +1,6 @@
 # Meilenstein 03 — Defold 0.4, Aurora Hop
 
-**28.10.2026.** Schwerpunkt nach dem Betreiber-Test: Defold. Beauftragt sind
+**Ausgangsstand 0.4.0, 28.10.2026.** Schwerpunkt nach dem Betreiber-Test: Defold. Beauftragt sind
 klare Zeitsteuerung, synthetische Hintergrundmusik, größere Spielfelder und
 animierte Zerstörung. [Aktueller Auftrag](PROJECT_BRIEF.md).
 [0.3-Vergleich erhalten](MILESTONE_02.md), [0.2-Ausgangsvergleich](MILESTONE_01.md).
@@ -63,8 +63,8 @@ die Lautstärke wird an einer Stelle geregelt. Ein Regressionstest kontrolliert
 Sound-Konfiguration und tatsächliches Ausgangssignal. Muting wird am Signal,
 nicht bloß an einem UI-Schalter geprüft.
 
-[Befehle/Voraussetzungen](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/BUILD_AND_TEST.md), [aktueller Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/QUALITY.md).
-Quellstand, Paketprüfung, Dateigröße und Hash stehen bei den [Downloads](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md).
+[Befehle/Voraussetzungen](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/docs/BUILD_AND_TEST.md), [aktueller Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/docs/QUALITY.md).
+Quellstand, Paketprüfung, Dateigröße und Hash stehen bei den [Downloads](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/downloads/README.md).
 APKs werden vom sauberen Quellcommit erzeugt und separat versioniert.
 
 ## Tatsächliche Laufzeitbilder
@@ -106,10 +106,34 @@ SHA-256: `022936f1e22b78d8205ff69352238a7c3b94d3830c0df1f31b19a974c09bbb1b`.
 Paket, APIs, Entwicklungssignatur/v2, gleiches Zertifikat wie 0.3, keine
 Berechtigungen, Backup aus, ZIP-CRC und Ausrichtung bestanden. Keine Schlüsseldatei
 im Paket. Externer Buildprojekt-Abzug mit Quellskript und neuen Audios verglichen.
-[Downloads und technische Metadaten](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md).
+[Downloads und technische Metadaten](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/downloads/README.md).
 Kein physischer Android-Test der neuen Datei behauptet.
 
 Fester APK-Snapshot:
 [`4539cdf`](https://github.com/sayac007/EnergyBlast/tree/4539cdf739582e22046c36aa76e20d7750584fce/downloads).
 Direkter 0.4-Download auf diesen Commit festgelegt; spätere Branchänderungen
 ersetzen den Meilenstein nicht stillschweigend.
+
+## Update 0.4.1 — alle Wände und endliche Energie
+
+Vom Betreiber am 28.10.2026 ergänzt; das große Feld ausdrücklich bestätigt.
+Alle Wandarten reflektieren beide Geschossarten. Normale Schüsse reflektieren
+höchstens einmal, Prisma zweimal, gegnerische einmal. Reichweite und Lebensdauer
+(3 s eigene / 6 s gegnerische) begrenzen zusätzlich. Letzte 0,35 s verblassen,
+anschließend Verpuffen; Trefferwirkung bis dahin konstant. Blaue X-Felder in
+jedem Sektor neutralisieren beide Seiten und sind begehbar. Keine reale Ballistik.
+
+Neue kontinuierliche Kollisionsprüfung verhindert Überspringen naher dünner
+Wände und berücksichtigt Tore zum tatsächlichen Ankunftszeitpunkt. Ecken kehren
+beide Richtungskomponenten um. Keine eingezeichnete Flugbahn.
+
+**107 native Prüfungen** bestanden (76 bisherige + 31 neue), einschließlich
+bewegter Geschosse an jeder Wandart, Schilden nach einem Deckungsabpraller,
+gegnerischer Reflexion, offenen/schließenden Toren, Ablauf und Neutralisation.
+UI, Speicher, tatsächliche Audioausgabe und sieben gemeinsame Testgruppen erneut
+bestanden. Physischer Handytest der neuen APK bleibt offen. GDevelop/Godot und
+Arenengröße/Kamera unverändert. Aktueller Download bei den [Dateien](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/downloads/README.md).
+
+0.4.1-APK vom sauberen Quellcommit `02a2b409830600bdaa85b10f6accc58f18a5f085` gebaut: 9540794 Bytes, Version 0.4.1 / Code 5. Paket/APIs, Signatur/v2 und Zertifikatsgleichheit, fehlende Berechtigungen, Backup aus, ZIP-CRC/Ausrichtung und fehlende Schlüsseldateien bestanden. SHA-256: `4d2b60a32d53af1c4e2f94b4806dd4fc23261925d88c19fd377594166f728bc5`.
+
+Fester 0.4.1-APK-Snapshot: [`bd3d6f1`](https://github.com/sayac007/EnergyBlast/tree/bd3d6f1374a7aca4e79fe4b9ba512ff67244e78f/downloads).

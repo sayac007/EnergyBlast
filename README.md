@@ -1,4 +1,4 @@
-# EnergyBlast — Defold 0.4, Aurora Hop
+# EnergyBlast — Defold 0.4.1, Aurora Hop
 
 Ein Android-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: Roboter, aktive
 Kanonen, Deckung, Ausweichen und selbst eingeschätzte Abpraller. Nach deinem Test
@@ -11,21 +11,36 @@ Energieexplosionen beim endgültigen Treffer. Keine berechnete Schussbahn.
 
 | Einstieg | Dokumentation |
 |---|---|
-| App ausprobieren | [Defold-APK und technische Nachweise](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md) |
-| Änderungen, Auftragsabgleich und Grenzen | [Meilenstein 03](docs/MILESTONE_03.md), [Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/QUALITY.md) |
+| App ausprobieren | [Defold-APK und technische Nachweise](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/downloads/README.md) |
+| Änderungen, Auftragsabgleich und Grenzen | [Meilenstein 03](docs/MILESTONE_03.md), [Qualitätsüberblick](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/docs/QUALITY.md) |
 | Ausgangsauftrag und spätere Entscheidungen | [Projektauftrag](docs/PROJECT_BRIEF.md), [unverändertes Originalzitat](docs/pilot-brief.md) |
 | Frühere Vergleiche | [Defold/GDevelop 0.3](docs/MILESTONE_02.md), [Drei-Engine-Vergleich 0.2](docs/MILESTONE_01.md) |
-| Selbst bauen und prüfen | [Build-/Testanleitung](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/BUILD_AND_TEST.md) |
+| Selbst bauen und prüfen | [Build-/Testanleitung](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/docs/BUILD_AND_TEST.md) |
 
 ## Herunterladen und aktualisieren
 
-**[Defold 0.4 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/4539cdf739582e22046c36aa76e20d7750584fce/downloads/energyblast-defold-debug.apk)**
+**[Defold 0.4.1 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/bd3d6f1374a7aca4e79fe4b9ba512ff67244e78f/downloads/energyblast-defold-debug.apk)**
 
-Android 7 / API 24 oder neuer, ARM64. Version **0.4.0 / Code 4** behält Paketkennung
+Android 7 / API 24 oder neuer, ARM64. Version **0.4.1 / Code 5** behält Paketkennung
 und Entwicklungsschlüssel von 0.3. Über die vorhandene App installieren, **vorher
 nicht deinstallieren**, wenn die Sterne erhalten bleiben sollen. Der echte
 Geräte-Update-Test der neuen APK steht aus. Größe, Hash und Quellstand bei den
-[Downloads](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/downloads/README.md). Debug-Testfassung, keine Play-Upload-Datei.
+[Downloads](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/downloads/README.md). Debug-Testfassung, keine Play-Upload-Datei.
+
+## Update 0.4.1: reflektieren, verblassen, neutralisieren
+
+**Alle Wandarten reflektieren eigene und gegnerische Schüsse**: Deckungen,
+Arenaränder, leuchtende Wände und geschlossene Tore. Geöffnete Tore sind frei.
+Treffer werden während des Flugs geprüft, auch wenn ein Tor seinen Zustand wechselt.
+
+Geschosse bleiben endlich: ein Abpraller, mit Prisma zwei; gegnerische Schüsse
+bekommen einen. Eigene Energiegeschosse leben höchstens **3 Sekunden**, gegnerische
+**6 Sekunden**, jeweils zusätzlich durch Reichweite begrenzt. In den letzten
+0,35 Sekunden verblassen sie und verpuffen. Die Trefferwirkung bleibt bis dahin
+konstant; es gibt keine behauptete realistische Schadens-/Ballistiksimulation.
+
+Jeder Sektor hat ein **blaues Feld mit X**, das beide Geschossarten neutralisiert.
+Die Figur kann darüber laufen. Das bestätigte große Feld mit folgender Kamera bleibt.
 
 ## Die neue Bedienung
 
@@ -81,7 +96,7 @@ und versteckte Ausrüstung bleiben erhalten. Kein visueller Unsichtbarkeitsshade
 
 ## Was tatsächlich geprüft wurde
 
-**28.10.2026:** 76 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
+**28.10.2026:** 107 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
 Druckdauer, großer Welt, Kamera und Explosionen. Echte Menü-/Feldeingaben per
 XTest: derselbe Punkt kurz gedrückt bewegt, lang gedrückt feuert. Speicherneustart,
 TON-Pause/Fortsetzung und sieben gemeinsame Konsistenztestgruppen bestanden.
@@ -94,7 +109,7 @@ und behoben. Die neue Bedienansage wurde unabhängig per ASR 1/1 exakt erkannt.
 **Offen:** neue APK physisch installieren/aktualisieren, Touchgefühl, Rotation,
 Ton-/Klangabnahme, längeres Spiel und Gerätebildrate. Keine behauptete Lernwirkung
 oder Store-Reife. Kein Actions-Workflow und keine behauptete grüne CI.
-[Prüfungen und Aussagegrenzen](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/docs/QUALITY.md).
+[Prüfungen und Aussagegrenzen](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/docs/QUALITY.md).
 
 ## Nächste Rückmeldung
 
@@ -109,11 +124,11 @@ Nächste wichtigste Verbesserung:
 
 ## Code, Herkunft und Arbeitsweise
 
-[Defold-Regeln](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/shared/defold04.json), [Originalmodelle](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/shared/assets/defold04/),
-[Blender-Generator](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/tools/make_defold04_models.py), [Musiksynthese](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/tools/make_defold_music.py),
-[Zeitsteuerung](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/touch.lua), [Kamera](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/view.lua),
-[Kampf](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/combat.lua), [Laufzeit](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/pilots/defold/main/main.script).
-[Herkunft/Lizenzen](https://github.com/sayac007/EnergyBlast/blob/40edbcdee1dae2e9281c02baa2f3e47b2d7b67bc/THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
+[Defold-Regeln](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/shared/defold04.json), [Originalmodelle](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/shared/assets/defold04/),
+[Blender-Generator](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/tools/make_defold04_models.py), [Musiksynthese](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/tools/make_defold_music.py),
+[Zeitsteuerung](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/pilots/defold/main/touch.lua), [Kamera](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/pilots/defold/main/view.lua),
+[Kampf](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/pilots/defold/main/combat.lua), [Laufzeit](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/pilots/defold/main/main.script).
+[Herkunft/Lizenzen](https://github.com/sayac007/EnergyBlast/blob/d6ba4d8b87c1649f4ddc479e660d7190fcedee66/THIRD_PARTY.md), [Dokumentationsstandard](docs/DOCUMENTATION_STANDARD.md).
 
 `main` bleibt die Dokumentationsstartseite. Spielcode liegt auf
 `feat/touch-shooter-v2`; keine PRs, automatischen Merges oder Releases.

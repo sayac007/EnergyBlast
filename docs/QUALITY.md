@@ -1,6 +1,6 @@
 # Aktueller Prüfstand — Defold 0.4.1
 
-**28.10.2026:** 106 native Prüfungen bestanden: die bisherigen 76 plus 30 neue
+**28.10.2026:** 107 native Prüfungen bestanden: die bisherigen 76 plus 31 neue
 Fälle für alle Wandarten, Winkel, Ecken, dünne Wände, nächstes Ziel, Prisma-
 Grenze, gegnerische Abpraller, wechselnde Tore, Reichweite, Lebensdauer,
 Verblassen und Neutralisation beider Geschossarten. Große Welt und Kamera bleiben.

@@ -127,7 +127,7 @@ Neue kontinuierliche Kollisionsprüfung verhindert Überspringen naher dünner
 Wände und berücksichtigt Tore zum tatsächlichen Ankunftszeitpunkt. Ecken kehren
 beide Richtungskomponenten um. Keine eingezeichnete Flugbahn.
 
-**106 native Prüfungen** bestanden (76 bisherige + 30 neue), einschließlich
+**107 native Prüfungen** bestanden (76 bisherige + 31 neue), einschließlich
 bewegter Geschosse an jeder Wandart, Schilden nach einem Deckungsabpraller,
 gegnerischer Reflexion, offenen/schließenden Toren, Ablauf und Neutralisation.
 UI, Speicher, tatsächliche Audioausgabe und sieben gemeinsame Testgruppen erneut

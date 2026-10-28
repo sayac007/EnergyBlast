@@ -86,9 +86,10 @@ function P.update(g,dt)
      if g.sfx then g.sfx('bounce')end
      local gap=math.min(EPS,b.remaining)
      b.p={b.p[1]+b.direction[1]*gap,b.p[2]+b.direction[2]*gap};b.remaining=b.remaining-gap;distance=math.max(0,distance-gap)
-    else removed=true end
+    else g.fx[#g.fx+1]={kind='dissipate',p={b.p[1],b.p[2]},age=0,life=.18};removed=true end
    else break end
   end
+  b.alpha=math.min(1,math.max(0,math.min(b.lifetime-b.age,b.remaining/b.speed)/.35))
   if not removed and(b.remaining<=EPS or b.age>=b.lifetime)then g.fx[#g.fx+1]={kind='dissipate',p={b.p[1],b.p[2]},age=0,life=.18};removed=true end
   if removed then table.remove(g.bullets,i)end
  end

@@ -60,6 +60,8 @@ function M.run(g)
  check(#g.bullets==0 and g.damage==0 and b.bounces==0,'neutraliser consumes enemy shot before the player')
  sandbox(nil,{0,0});b=P.spawn(g,{-2,2},{1,0},true);b.remaining=999;step(6.1)
  check(#g.bullets==0 and b.age<=6.00001,'enemy shot has finite lifetime too')
+ sandbox(nil,{0,0});g:fire();b=g.bullets[1];b.remaining=3;step(.025)
+ check(b.alpha<1 and b.alpha>0,'range exhaustion fades visibly before its earlier cutoff too')
  return n
 end
 return M

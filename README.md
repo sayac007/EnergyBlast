@@ -96,7 +96,7 @@ und versteckte Ausrüstung bleiben erhalten. Kein visueller Unsichtbarkeitsshade
 
 ## Was tatsächlich geprüft wurde
 
-**28.10.2026:** 106 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
+**28.10.2026:** 107 native Defold-Prüfungen einschließlich bisheriger Kampffälle,
 Druckdauer, großer Welt, Kamera und Explosionen. Echte Menü-/Feldeingaben per
 XTest: derselbe Punkt kurz gedrückt bewegt, lang gedrückt feuert. Speicherneustart,
 TON-Pause/Fortsetzung und sieben gemeinsame Konsistenztestgruppen bestanden.

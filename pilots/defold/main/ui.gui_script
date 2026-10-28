@@ -53,7 +53,7 @@ function update(self,dt)
    local mx,my=g.project(g,t.p,.95);local pulse=8+4*math.sin(g.clock*28)^2;circle(self,mx,my,pulse,'ffb47b');text(self,x,y+23,'!','ffd674',1.1)
   end
  end end
- for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05);circle(self,x,y,25,'123e63');circle(self,x,y,20,'207a9a');circle(self,x,y,13,'123e63');text(self,x,y,'X','9befff',.65)end
+ for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05);for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;local x1,y1=g.project(g,{zone.position[1]+zone.radius*math.cos(a),zone.position[2]+zone.radius*math.sin(a)},.05);local x2,y2=g.project(g,{zone.position[1]+zone.radius*math.cos(b),zone.position[2]+zone.radius*math.sin(b)},.05);line(self,x1,y1,x2,y2,'52cde4',3)end;circle(self,x,y,13,'123e63');text(self,x,y,'X','9befff',.65)end
  for _,b in ipairs(g.bullets)do local x,y=g.project(g,b.p,.75);local glow=circle(self,x,y,9,b.enemy and'783a59'or'23666c');local core=circle(self,x,y,5,b.enemy and'ff6485'or'cafff5');gui.set_alpha(glow,b.alpha);gui.set_alpha(core,b.alpha)end
  if g.aiming and g.target then local x,y=g.project(g,g.target,0);circle(self,x,y,13,'bcf8e8');circle(self,x,y,10,'173a4a');circle(self,x,y,3,'bcf8e8')end
  if #g.path>0 then local x,y=g.project(g,g.path[#g.path],.1);circle(self,x,y,10,'23666c');circle(self,x,y,4,'a1fff0')end

@@ -32,8 +32,10 @@ python3 tools/sync_defold.py
 node tools/gdevelop_export.mjs
 ```
 
-Das gepinnte GDevelop-Werkzeug ist in dieser Cloud bereits unter
-`/tmp/energyblast-gd-tools` installiert, dem Standard des Exportskripts.
+Der Standardpfad des Exportskripts ist `/tmp/energyblast-gd-tools`. Dieser
+temporäre Cache kann nach einem Umgebungsneustart fehlen. Die obigen Befehle
+installieren das gepinnte Werkzeug im Checkout und setzen den passenden
+`ENERGYBLAST_GD_TOOLS`-Pfad.
 `ENERGYBLAST_GD_OUTPUT` ändert den HTML5-Ausgabepfad; die Browserprüfung nutzt
 standardmäßig `/tmp/energyblast-gdevelop-web`.
 

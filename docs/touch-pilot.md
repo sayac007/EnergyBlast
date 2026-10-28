@@ -1,5 +1,10 @@
 # Touch pilot — current operator decisions, 27 October 2026
 
+> Historical decision log, starting with version 0.1. The current consolidated
+> operator brief is [PROJECT_BRIEF.md](PROJECT_BRIEF.md); the frozen first shooter
+> comparison is [MILESTONE_01.md](MILESTONE_01.md). The original aim/prediction modes
+> and Unity candidate below are not the current 0.2 controls/engine selection.
+
 The operator accepted the mission/observe-plan-act ideas from the supplied
 10-page Claude PDF and rejected joystick controls. This update supersedes the
 movement-stick proposals in the earlier work order. The PDF is design input;

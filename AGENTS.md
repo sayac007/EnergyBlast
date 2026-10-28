@@ -6,7 +6,9 @@
   original work order. Do not create pull/merge requests yet. Do not merge or
   publish a release automatically.
 - Read README.md, docs/pilot-brief.md and docs/touch-pilot.md before implementation.
-  Latest controls are touchscreen tap-to-move and explicit aim/fire; no joystick.
+  Also read docs/PROJECT_BRIEF.md and docs/MILESTONE_01.md for the consolidated
+  brief and frozen first comparison. Latest controls are tap-to-move and
+  drag/release to aim/fire, plus FIRE hold and DASH; no joystick.
   Keep engine attempts small and comparable; use the same original arena/assets
   and an engine-neutral mission specification. Do not prebuild a general framework.
 - Do not include family photos/artwork, private signing keys, passwords, tokens
@@ -32,3 +34,13 @@
 - Native Defold builds require Bob 1.14.0 / Java 25. Check build success before
   running the engine so a failed compile can never reuse a stale binary.
 - Keep the new branch isolated, no PR, no automatic merge or release publication.
+
+## Documentation publication (operator request, 28 October 2026)
+
+- Publish the current milestone and original brief clearly on GitHub. The `main`
+  README is the repository landing page and may link to the isolated implementation
+  branch. Updating that documentation does not authorize merging the game branch.
+- Preserve source commit `1006cde8595b4249d0375ddf8bc4ea60fd2a93c9` and APK snapshot
+  `defd791bd94809045cf5a8ed9429ead92c8bd959` as the first shooter comparison.
+- Distinguish the 27 October game/build test results from later documentation/link
+  checks. Do not invent fresh game tests for a documentation-only update.

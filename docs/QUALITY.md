@@ -1,5 +1,13 @@
 # Aktueller Prüfstand — Shooter 0.2
 
+**Dokumentationsprüfung 28.10.2026:** Der Spielcode und die APKs bleiben unverändert.
+Ihre lokalen SHA-256-Werte, ZIP-Integrität und Build-Metadaten wurden erneut geprüft;
+auch alle drei auf Commit festgelegten öffentlichen Downloads stimmen per Hash überein.
+Die folgenden Spiel-/Engine-Testergebnisse stammen vom 27.10.; für diese
+Dokumentationsänderung wurden keine neuen Spieltests oder Builds ausgeführt.
+Den eingefrorenen Nachweis und den Auftragsabgleich enthält
+[MILESTONE_01.md](MILESTONE_01.md).
+
 **27.10.2026.** Die aktuellen Startszenen sind echte Kampfarenen. Der alte 0.1-
 Geometriepilot ist eine zusätzliche Regression. Maßgeblich für die ausgelieferten
 Dateien ist der Quellcommit in den [Download-Metadaten](../downloads/README.md).

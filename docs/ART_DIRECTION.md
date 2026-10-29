@@ -98,9 +98,20 @@ Zusätzlich tatsächlich eingesehen:
 markante Gegner, ruhigen futuristischen Deckboden, gepanzerte Lichtarchitektur,
 illustrierte Missionskarten und echte mehrphasige Explosionen um. Das sind bewusst
 2,5D-Figuren, keine vollwertigen Skelettmodelle. Originalquellen und Ableitungen:
-[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
+[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
 wird übernommen. Neue Bedienausnahme auf Betreiberwunsch: der pausierte
 Fallenkatalog liegt direkt im Feld; normale HUD-Flächen bleiben außerhalb.
 
 [Reale korrigierte Laufzeitbilder und Prüfgrenzen](MILESTONE_06.md). Die persönliche
 Abnahme bleibt beim Betreiber, unabhängig von bestandenen technischen Prüfungen.
+
+## 0.9 — tatsächliche Kampfansichten weiter ausbauen
+
+Dem Betreiber ist die Grafik von 0.8 weiterhin zu einfach. Diese Iteration ändert
+die laufenden Arenen: sechs eigene Bodenbilder in voller Auflösung, plastische
+Deckungstypen je Bereich mit echten 1024-AO-Texturen, weiche Kontaktschatten,
+animierte tiefengeprüfte Energieschilde, dünne Figurenkonturen und nähere Kamera.
+Die ursprünglichen 2,5D-Figuren bleiben erhalten; keine Behauptung vollständig
+skelettanimierter 3D-Figuren. [Echte Bilder und Gestenbelege](MILESTONE_08.md),
+[neue Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
+ersetzen weder persönliche grafische Abnahme noch einen physischen Gerätebenchmark.

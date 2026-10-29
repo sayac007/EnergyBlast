@@ -2,7 +2,8 @@
 
 Die Fallenwahl ist eine ausdrücklich gestartete taktische Aktion im **Magnetwerk**.
 Es gibt keinen Fallenknopf unter dem Spielfeld. Kurzes Tippen auf normalen Boden
-bleibt Laufen; mindestens 0,30 Sekunden Halten bleibt Zielen und Loslassen Feuern.
+bleibt Laufen; Bodenhalten ab 0,14 Sekunden feuert, Gegnertipp schießt sofort und Ziehen der
+eigenen Figur bewegt sie. Loslassen erzeugt keinen weiteren Schuss.
 Ein langes Drücken öffnet deshalb keinen konkurrierenden Fallenkatalog.
 
 1. Auf das **Fallenbild direkt neben der Spielfigur** tippen. Die Handlung hält an;
@@ -32,10 +33,10 @@ stehen. Auch FEUER erzeugt in dieser Phase keinen Schuss. Menüwechsel, Verlust 
 Fensterfokus oder Missionswechsel beenden den Modus. Die generösen Wirkungszeiten
 lassen Raum, den gesprochenen Hinweis zu hören und anschließend zu reagieren.
 
-Die Regeln liegen in [objectives.lua](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/pilots/defold/main/objectives.lua),
-Gesten und Validierung in [trap_controls.lua](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/pilots/defold/main/trap_controls.lua).
-[trap_checks.lua](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/pilots/defold/main/trap_checks.lua) prüft die echte Simulation;
-[check_defold_traps.py](https://github.com/sayac007/EnergyBlast/blob/e7564ba42e1f665aeb11b66caec7b9f06d0447eb/tools/check_defold_traps.py) betätigt den nativen Katalog
+Die Regeln liegen in [objectives.lua](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/pilots/defold/main/objectives.lua),
+Gesten und Validierung in [trap_controls.lua](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/pilots/defold/main/trap_controls.lua).
+[trap_checks.lua](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/pilots/defold/main/trap_checks.lua) prüft die echte Simulation;
+[check_defold_traps.py](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/tools/check_defold_traps.py) betätigt den nativen Katalog
 über XTest und prüft alle drei Varianten einschließlich Abbruch, Koordinaten und
 ausbleibenden versehentlichen Schüssen. Diese Dateien sind Prüfverfahren; ihre
 Existenz allein belegt keinen bestandenen Testlauf. Tatsächlich ausgeführte Läufe

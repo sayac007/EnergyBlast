@@ -159,3 +159,15 @@ No new graphics or external dependencies. Fourteen complete synthetic Serena
 sentences extend the Defold voice manifest to 26; twelve existing clips are
 preserved. Same pinned model/notices, no actor imitation. New task scripts and
 mission-flow logic are original project work.
+
+## Defold 0.9 — original sector materials and native effects
+
+Six new original OpenAI-generated floor paintings and their original design atlas
+are recorded with hashes in shared/assets/defold09/PROVENANCE.json. Only our own
+original atlas was used as reference, with no reference-game image input.
+Technical import/quad geometry: tools/import_defold09_art.py. Newly sculpted sector
+cover models and real AO bakes come from our versioned Blender generator, rather
+than downloaded game assets. Contact-shadow, energy-shield and actor-outline
+shaders are original project code. Two full control cues describe the current
+gestures, with the same pinned Serena model; 25 other clips remain unchanged.
+No new runtime dependency, private asset, actor imitation or licence grant.

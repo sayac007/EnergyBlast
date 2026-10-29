@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.8.0
+# Bauen und prüfen — Defold 0.9.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -37,6 +37,11 @@ python3 tools/make_defold_music.py
 python3 tools/sync_defold.py
 ```
 
+Zusätzlich aktiv: `shared/assets/defold09` mit sechs neuen Original-Bodenbildern
+und analytischen Effektquads. Reimport: `python3 tools/import_defold09_art.py
+--sources /tmp/sources.json` mit einer JSON-Zuordnung der sechs Missions-IDs zu
+ihren versionierten Original-PNGs. Keine Bildgenerierung für den Build nötig.
+
 Die ursprünglichen zehn generierten Illustrations-/Animationsquellen liegen in
 `shared/assets/defold07/*-original.png`; `PROVENANCE.json` enthält ihre Hashes.
 Für einen normalen Build ist kein Bildgenerator nötig. Der optionale technische
@@ -60,18 +65,19 @@ python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** dreizehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 55 Sprach-
+- **check_shared:** vierzehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 56 Sprach-
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native Regelsuite einschließlich der unveränderten0.7-Fixture, neuer Spielfluss- und Bonusprüfungen; aktuelle tatsächlich ausgeführte Anzahl in QUALITY.md. Sechs
-  Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, 0,30-s-Schwelle,
+  Native Regelsuite einschließlich der unveränderten 0.7-Fixture, neuer Spielfluss- und Bonusprüfungen; aktuelle tatsächlich ausgeführte Anzahl in QUALITY.md. Sechs
+  Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, aktive 0,14-s-Schwelle und historische 0,30-s-Fixtures,
   langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
 - Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
   Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
   UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
+- `check_defold_direct_touch.py` prüft fünf neue echte Gesten, ausdrücklich vor dem Loslassen. `check_defold_energy.py` vergleicht tatsächliche Pixel mit Schild an/aus.
 - `check_defold_flow_ui.py` prüft zusätzlich drei reale GUI-Abläufe für Heldenwahl/Käufe, Weiter trotz offenem Schatz und freiwillige Suche mit anschließendem Weiter.
 - `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
@@ -86,13 +92,13 @@ python3 tools/check_defold.py
 Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast08-images
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast09-images
 ```
 
 Bewegungs-/Schusssequenz mit tatsächlichen XTest-Eingaben aufnehmen:
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast08-motion
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast09-motion
 ```
 
 Das schreibt echte Laufzeitbilder/GIF außerhalb des Repositories, keine
@@ -111,7 +117,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.8 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.9 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 
@@ -141,10 +147,10 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold08-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold09-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.8.0 / Code 9**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.9.0 / Code 10**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.
@@ -153,7 +159,7 @@ Die temporäre bekannte Debug-Passwortdatei wird nach dem Export gelöscht.
 Ausgabe: APK, Build-/Signatur-/Manifestauszüge und `verification.json` mit Quell-
 commit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur und
 ZIP-Ausrichtung. Zusätzlich vor Veröffentlichung: ZIP-CRC, keine Schlüsseldateien,
-Zertifikatsgleichheit mit 0.3 und Hash der veröffentlichten Download-Datei prüfen.
+Zertifikatsgleichheit mit der vorherigen 0.8 und Hash der veröffentlichten Download-Datei prüfen.
 
 Abschlussexport vom sauberen Quellcommit, anschließend APK/Metadaten separat
 versionieren. Das ist ein nachvollziehbarer Bauweg, keine Zusicherung bitidentischer

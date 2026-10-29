@@ -1,13 +1,15 @@
 # EnergyBlast — Defold 0.11
 
-> **Neuer Teststand 0.11 — Zoom, sichtbare Schätze und HD-Figuren:**
-> [Android-APK herunterladen – 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk).
-> 75–175% Weltzoom, korrigierte Schatzhinweise, größere leuchtende Truhen und
-> neu gezeichnete Figuren mit Schimmer. **820 native Prüfungen und 15 Testgruppen bestanden.**
-> [Bilder, Bedienung und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/1cd1be18bfb8d316454279bbb756b128d373da3c/docs/MILESTONE_10.md) ·
-> [Quellcode des Testbranches](https://github.com/sayac007/EnergyBlast/tree/feat/zoom-treasure-polish).
-> Der unten beschriebene, integrierte Spielstand auf `main` bleibt 0.10;
-> der neue Spielcode wurde nicht automatisch zusammengeführt.
+> **Neuer Teststand 0.12 — Boni und Fallen korrigiert:**
+> [Android-APK herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk).
+> Bonusziele und Truhen bleiben bei erneutem Missionsbesuch spielbar; Hinweise und
+> Funk erklären offene Ziele. Der Fallenkreis wächst um 50%, die anfängliche Wirkzeit
+> ist verdreifacht und nimmt später nach erfolgreicher Anwendung behutsam ab.
+> **1.066 native Prüfungen und 15 Testgruppen bestanden.**
+> [Ursache, Bilder, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) ·
+> [Vollständiger aktueller Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/zoom-treasure-polish).
+> Der unten beschriebene Spielcode in `main` ist 0.11. Diese Ankündigung übernimmt
+> ausschließlich Dokumentation; der 0.12-Spielcode bleibt auf seinem Arbeitsbranch.
 
 Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
 sechs Missionen, reflektierten Schüssen,
@@ -22,8 +24,8 @@ Defold bleibt der Schwerpunkt.
 
 ## Aktueller Stand
 
-**Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Die neue Iteration liegt
-auf `feat/zoom-treasure-polish`; der integrierte 0.10-Stand bleibt auf `main`.
+**Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Diese Version liegt
+seit PR #1 auf `main`. Die zusätzliche 0.12-Korrekturfassung ist oben verlinkt.
 Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
 nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 
@@ -95,8 +97,8 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 28.10.2026 | 0.8 | Klarer Missionswechsel, sichtbare Helden/Käufe, Schatzführung, je zwei integrierte Bonusziele und höhere Belohnungen. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6b1afee89855c737358859ce4fd2f83100f53583) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads) · [Bericht](docs/MILESTONE_07.md) |
 | 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
-| 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
-| 29.10.2026 | 0.11 | Zoom für die ganze Welt, korrigierte Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf separatem Branch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/1cd1be18bfb8d316454279bbb756b128d373da3c/docs/MILESTONE_10.md) |
+| 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Durch PR #1 in main übernommen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
+| 29.10.2026 | 0.12 | Bereits belohnte Boni und Truhen erneut spielbar, passende Hinweise/Funk, größerer Fallenkreis und an Lernerfolg angepasste längere Zeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.
@@ -216,7 +218,8 @@ längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
 kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
 
 Der 0.10-Stand wurde am 29.10.2026 mit erhaltener Commit-Historie in `main`
-integriert. Die neue 0.11-Testfassung wird separat entwickelt und veröffentlicht.
+integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die neue 0.12-Korrekturfassung
+wird separat entwickelt und veröffentlicht.
 Kein automatischer Spielmerge, GitHub-Release oder Store-Upload. Andere Repositories und
 Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
 Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.

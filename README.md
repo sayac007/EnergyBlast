@@ -1,15 +1,16 @@
 # EnergyBlast — Defold 0.11
 
-> **Neuer Teststand 0.12 — Boni und Fallen korrigiert:**
-> [Android-APK herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk).
-> Bonusziele und Truhen bleiben bei erneutem Missionsbesuch spielbar; Hinweise und
-> Funk erklären offene Ziele. Der Fallenkreis wächst um 50%, die anfängliche Wirkzeit
-> ist verdreifacht und nimmt später nach erfolgreicher Anwendung behutsam ab.
-> **1.066 native Prüfungen und 15 Testgruppen bestanden.**
-> [Ursache, Bilder, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) ·
-> [Vollständiger aktueller Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/zoom-treasure-polish).
-> Der unten beschriebene Spielcode in `main` ist 0.11. Diese Ankündigung übernimmt
-> ausschließlich Dokumentation; der 0.12-Spielcode bleibt auf seinem Arbeitsbranch.
+> **Neuer Teststand 0.13 — dauerhafte Bonus-Macht:**
+> [Android-APK herunterladen — 68,3 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk).
+> Jeder neue Bonus bringt mehr Gesundheit bis 1.000.000 plus Rüstung, sichtbares
+> Wachstum, Schutzschild, Feuerkraft und Tarnung. Vorhandene Erfolge zählen sofort.
+> **1.311 native Prüfungen und 15 Testgruppen bestanden.**
+> [Bilder, Werte, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/e557d93/docs/MILESTONE_12.md) ·
+> [Aktueller vollständiger Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/bonus-power).
+> Die Bonus-Macht wurde ausdrücklich vorgezogen. 20 zusätzliche Missionen und die
+> FPV-Spiel-Drohne sind noch der nachfolgende Auftrag und in 0.13 nicht enthalten.
+> Der unten beschriebene Spielcode in `main` bleibt 0.11; diese Ankündigung
+> aktualisiert Dokumentation und führt keinen Spielcode automatisch zusammen.
 
 Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
 sechs Missionen, reflektierten Schüssen,
@@ -25,7 +26,7 @@ Defold bleibt der Schwerpunkt.
 ## Aktueller Stand
 
 **Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Diese Version liegt
-seit PR #1 auf `main`. Die zusätzliche 0.12-Korrekturfassung ist oben verlinkt.
+seit PR #1 auf `main`. Die zusätzliche 0.13-Testfassung ist oben verlinkt.
 Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
 nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 
@@ -99,6 +100,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
 | 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Durch PR #1 in main übernommen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
 | 29.10.2026 | 0.12 | Bereits belohnte Boni und Truhen erneut spielbar, passende Hinweise/Funk, größerer Fallenkreis und an Lernerfolg angepasste längere Zeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) |
+| 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis eine Million Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e557d93/docs/MILESTONE_12.md) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.
@@ -218,8 +220,8 @@ längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
 kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
 
 Der 0.10-Stand wurde am 29.10.2026 mit erhaltener Commit-Historie in `main`
-integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die neue 0.12-Korrekturfassung
-wird separat entwickelt und veröffentlicht.
+integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die 0.12-Korrekturfassung bleibt erhalten. Die vorgezogene 0.13-Bonus-Macht
+wird separat auf `feat/bonus-power` entwickelt und veröffentlicht.
 Kein automatischer Spielmerge, GitHub-Release oder Store-Upload. Andere Repositories und
 Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
 Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.

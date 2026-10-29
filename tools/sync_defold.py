@@ -19,6 +19,11 @@ if effects.exists():
  models.update(json.loads((effects/'models.json').read_text()))
  for f in effects.iterdir():
   if f.suffix in ['.gltf','.bin','.png']and '-original'not in f.name:shutil.copyfile(f,D/'models'/f.name)
+sanctuary=R/'shared/assets/defold10'
+if sanctuary.exists():
+ models.update(json.loads((sanctuary/'models.json').read_text()))
+ for f in sanctuary.iterdir():
+  if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
 for key in models:
  if key.endswith('_ground'):
   mission=key[:-7];models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png';models[key]['color_tint']=[.84,.88,.96,1]

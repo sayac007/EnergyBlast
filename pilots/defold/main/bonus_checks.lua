@@ -29,7 +29,7 @@ function M.run(data)
  seq:hit(t.targets[t.sequence[2]],0);check(t.progress==0 and not t.done,'wrong bonus order resets without awarding')
  for _,order in ipairs(t.sequence)do seq:hit(t.targets[order],0)end
  check(t.done and seq:total()==150,'correct remembered sequence awards150')
- check(seq.hp==3,'sequence mistakes cause no health penalty')
+ check(seq.hp==seq.max_hp,'sequence mistakes cause no health penalty')
  local wait=fresh(2);local w=wait.bonus.tasks[2];local target=w.targets[1]
  Bonus.update(wait,2.99);wait:hit(target,0);check(not w.done,'red timing phase cannot be claimed')
  for i=1,20 do Bonus.update(wait,.45);wait:hit(target,0)end

@@ -44,9 +44,10 @@ end
 function P.spawn(g,origin,direction,enemy)
  local n=math.sqrt(direction[1]^2+direction[2]^2);if n<1e-9 then return nil end
  local cfg=g.data.combat
- local budget=enemy and(cfg.enemy_bounces or 0)or(g:owns('prism') and g.saved.weapon=='prism'and 2 or 1)
+ local weapon=g:weapon_stats()
+ local budget=enemy and(cfg.enemy_bounces or 0)or weapon.bounces
  local b={p={origin[1],origin[2]},direction={direction[1]/n,direction[2]/n},enemy=enemy,
-  visual=not enemy and g:character().shot or 'enemy',age=0,alpha=1,lifetime=enemy and(cfg.enemy_seconds or 6)or(cfg.player_seconds or 3),bounces=0,max_bounces=budget,segment=1,remaining=enemy and(cfg.enemy_range or 20)or(cfg.shot_range or 28),
+  damage=enemy and 1 or weapon.damage,visual=not enemy and g:character().shot or 'enemy',age=0,alpha=1,lifetime=enemy and(cfg.enemy_seconds or 6)or(cfg.player_seconds or 3),bounces=0,max_bounces=budget,segment=1,remaining=enemy and(cfg.enemy_range or 20)or(cfg.shot_range or 28),
   speed=enemy and cfg.enemy_bullet_speed or cfg.player_bullet_speed}
  g.bullets[#g.bullets+1]=b;return b
 end
@@ -73,10 +74,20 @@ function P.update(g,dt)
     local t=circle_hit(b.p,b.direction,travel,zone.position,zone.radius)
     if t and t<=target_t then target_t=t;target='absorber'end
    end
+   -- Absorb at the first swept boundary, even after a reflection or when a
+   -- projectile starts inside. Neither side can fire through this refuge.
+   local refuge=g.data.recovery and g.m.sanctuary
+   if refuge then
+    local t=circle_hit(b.p,b.direction,travel,refuge.position,refuge.radius)
+    if t and t<=target_t then target_t=t;target='sanctuary'end
+   end
    if target then travel=target_t end
    b.p={b.p[1]+b.direction[1]*travel,b.p[2]+b.direction[2]*travel};b.remaining=b.remaining-travel;distance=distance-travel
    if target then
-    if target=='absorber'then g.fx[#g.fx+1]={kind='absorb',p={b.p[1],b.p[2]},age=0,life=.22}elseif target=='player'then g:hit_player()elseif target=='drone'then g:hit_drone()else g:hit(target,b.bounces)end;removed=true
+    if target=='absorber'or target=='sanctuary'then
+     if target=='sanctuary'then g.sanctuary_absorbed=(g.sanctuary_absorbed or 0)+1 end
+     g.fx[#g.fx+1]={kind='absorb',p={b.p[1],b.p[2]},age=0,life=.22}
+    elseif target=='player'then g:hit_player()elseif target=='drone'then g:hit_drone()else g:hit(target,b.bounces,b.damage)end;removed=true
    elseif wall then
     local reflective=g.data.combat.reflect_all_walls or wall.type=='reflector'
     if reflective and b.bounces<b.max_bounces then

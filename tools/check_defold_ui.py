@@ -33,8 +33,8 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-ui-',dir='/tmp')as d
    click(458,527);wait_for('DEFOLD CHARACTER PICK PASS fox')
    click(284,527);wait_for('DEFOLD CHARACTER PICK PASS dragon')
    click(284,657) # Explicit stars-to-equipment menu.
-   click(1130,199);wait_for('DEFOLD SHOP PURCHASE PASS buy:prism')
-   click(1130,302);wait_for('DEFOLD SHOP PURCHASE PASS buy:armor')
+   click(1130,210);wait_for('DEFOLD SHOP PURCHASE PASS buy:prism')
+   click(930,142);click(1130,210);wait_for('DEFOLD SHOP PURCHASE PASS buy:armor')
    click(1090,647);click(772,325) # Menu, actual third-sector card.
    text=wait_for('DEFOLD UI READY dock');match=re.search(r'DEFOLD UI READY dock (\d+) (\d+)',text);assert match,text
    px,py=map(int,match.groups());py=720-py

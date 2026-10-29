@@ -4,7 +4,7 @@ local View=require 'main.view'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
- local contextual=id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
+ local contextual=id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
  if contextual then
   if self.voice_id then sound.stop('#'..self.voice_id)end
   self.voice_left=0;self.voice_next=nil;self.follow_enemy_tap=false
@@ -19,7 +19,7 @@ local function music_update(self)
  local paused=self.muted or self.g.background or self.g.saved.music==false
  sound.pause('#music',paused)
  self.g.music_active=not paused
- local volume=self.voice_left>0 and .065 or(self.g.dialog and .24 or .28)
+ local volume=self.voice_left>0 and .065 or(self.g.dialog and .24 or self.g.in_sanctuary and .20 or .28)
  sound.set_gain('#music',volume);self.g.music_gain=paused and 0 or volume
 end
 local function clear_fragments(self)
@@ -66,6 +66,9 @@ local function clear_projectiles(self)
 end
 local function glow_color(b,alpha)
  if b.visual=='fireball'then return vmath.vector4(1,.34,.045,alpha)end
+ if not b.enemy and(b.damage or 1)>=4 then return vmath.vector4(1,.24,.65,alpha)end
+ if not b.enemy and(b.damage or 1)>=3 then return vmath.vector4(1,.65,.12,alpha)end
+ if not b.enemy and(b.damage or 1)>=2 then return vmath.vector4(.55,.35,1,alpha)end
  return b.enemy and vmath.vector4(1,.10,.22,alpha)or vmath.vector4(.09,.76,1,alpha)
 end
 local function glow(self,p,b,alpha)
@@ -85,7 +88,7 @@ local function draw_projectiles(self,dt)
   local id=self.projectile_nodes[b]
   go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),id);go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),self.halo_nodes[b])
   go.set_rotation(vmath.quat_rotation_y(math.atan2(b.direction[1],b.direction[2])),id)
-  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1),id);go.set_scale(math.max(.01,b.alpha)*.70,self.halo_nodes[b])
+  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1)*(1+math.max(0,(b.damage or 1)-1)*.10),id);go.set_scale(math.max(.01,b.alpha)*.70,self.halo_nodes[b])
   b.trail_clock=(b.trail_clock or 0)+dt
   if not self.g.paused and b.trail_clock>.045 then
    b.trail_clock=0
@@ -108,6 +111,11 @@ local function rebuild(self,index)
  self.gate=self.g.m.gate_rect and make('gate',{0,0})or nil
  self.drone=self.g.drone and make('illustrated_drone',self.g.drone.p)or nil
  self.lobby=make('lobby',self.g.p)
+ self.sanctuary=nil;self.sanctuary_field=nil
+ if self.g.m.sanctuary then
+  local zone=self.g.m.sanctuary
+  self.sanctuary=make('sanctuary',zone.position);self.sanctuary_field=make('energy_field',zone.position)
+ end
  self.heal=self.g.m.heal and make('illustrated_heal',self.g.m.heal)or nil
  for _,id in pairs(self.device_nodes or{})do go.delete(id)end;self.device_nodes={}
  for _,t in ipairs(self.g.enemies)do t.shadow=make('shadow',t.p);t.illustrated=not t.optional and t.kind~='relay'and t.kind~='sequence';t.node=make(t.illustrated and('illustrated_'..(t.boss and'boss'or t.trap_shield and'guardian'or'sentinel'))or'illustrated_relay',t.p);if t.shield or t.boss then t.field=make('energy_field',t.p)end end
@@ -157,6 +165,7 @@ local function run_tests(self)
  n=n+require('main.flow_checks').run(self.g)
  n=n+require('main.bonus_checks').run(self.g.data)
  n=n+require('main.direct_touch_checks').run(self.g.data)
+ n=n+require('main.resilience_checks').run(self.g.data)
  self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
  n=n+require('main.presentation_checks').run(self)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
@@ -176,6 +185,12 @@ function init(self)
  self.g.sfx=function(id)if not self.muted then sound.play('#fx_'..id)end end
  self.logic_url=msg.url();self.g.flow_ui_test=sys.get_config_string('project.flow_ui_test','0')=='1'
  if self.g.flow_ui_test then self.g.saved={earned={['mission:reactor']=true},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={},current_mission=1}end
+ self.resilience_ui_test=sys.get_config_string('project.resilience_ui_test','0')=='1'
+ if self.resilience_ui_test then
+  self.muted=true;self.g.resilience_ui_test=true;self.g.flow_ui_test=true
+  self.g.saved={earned={},clues={},weapon='pulse',music=false,schema=2,purchases={},spent={}}
+  for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end
+ end
  self.ui_test=sys.get_config_string('project.ui_test','0')=='1';self.g.ui_test=self.ui_test;if self.ui_test then self.g.saved={earned={},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={}};for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end end
  self.g.cancel_controls=function()self.g.touch:cancel();msg.post('#ui','cancel_controls')end
  self.g.choose=function(index)msg.post(self.logic_url,'choose',{index=index})end
@@ -193,6 +208,7 @@ function init(self)
  end)
  sound.set_group_gain('master',.75);sound.play('#music');self.g.music_started=true
  _G.energyblast=self.g;self.suppress_intro=true;rebuild(self,self.g:start_index());self.suppress_intro=false;self.g.intro_needed=true;self.g.paused=true;self.g.dialog=sys.get_config_string('project.capture_page','menu');music_update(self)
+ if self.resilience_ui_test then self.g.hp=5 end
  if not self.test_mode then voice(self,'flow_menu')end
  if sys.get_config_string('project.flow_win','0')=='1'then self.g.saved.earned={};for _,e in ipairs(self.g.enemies)do if not e.optional then e.hp=0 end end;self.g.paused=false;self.g:finish()end
  local save_test=sys.get_config_string('project.save_test','')
@@ -244,6 +260,21 @@ function update(self,dt)
   elseif self.voice_left<=0 and self.follow_enemy_tap then self.follow_enemy_tap=false;voice(self,'defold_enemy_tap')end
  end
  self.g.voice_busy=self.voice_left>0;self.g:update(dt);music_update(self)
+ if self.resilience_safe_test then
+  local g=self.g
+  if not self.safe_started and g:is_safe(g.p)then
+   self.safe_started=true;self.safe_clock=0;g.hp=5;g.damage=0;self.safe_blocked=0
+  end
+  if self.safe_started and not self.safe_done then
+   self.safe_clock=self.safe_clock+dt
+   -- The fixture repeatedly sends real swept enemy projectiles into the refuge.
+   if math.floor(self.safe_clock*10)>self.safe_blocked then
+    self.safe_blocked=math.floor(self.safe_clock*10);local z=g.m.sanctuary;local x=z.position[1];local y=z.position[2]
+    require('main.projectiles').spawn(g,{x+z.radius+1,y},{g.p[1]-x-z.radius-1,g.p[2]-y},true)
+   end
+   if self.safe_clock>6 and g.hp==g.max_hp and g.damage==0 and g.sanctuary_absorbed>=10 then self.safe_done=true;print('DEFOLD RESILIENCE SHIELD PASS hp='..g.hp..' injected='..self.safe_blocked..' absorbed='..g.sanctuary_absorbed..' damage='..g.damage)end
+  end
+ end
  View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2]})
  local p=self.g.p
  animate_hero(self,dt)
@@ -278,6 +309,11 @@ function update(self,dt)
   local pulse=1+math.sin(self.visual_clock*4)*.035;go.set_scale(pulse,self.device_nodes[trap])
  end
  for trap,id in pairs(self.device_nodes)do if not devices[trap]then go.delete(id);self.device_nodes[trap]=nil end end
+ if self.sanctuary_field then
+  local zone=self.g.m.sanctuary;local id=self.sanctuary_field
+  go.set_position(vmath.vector3(zone.position[1],.04,zone.position[2]+.13),id);go.set_scale(zone.radius/1.35,id)
+  go.set(msg.url(nil,id,'model'),'frame',vmath.vector4(self.visual_clock,0,0,0));go.set(msg.url(nil,id,'model'),'tint',vmath.vector4(.16,1,.62,self.g.in_sanctuary and 1.0 or .68))
+ end
  if self.heal then go.set_scale(self.g.heal_used and .001 or(1+math.sin(self.visual_clock*2)*.025),self.heal)end
  if self.gate then local r=self.g.m.gate_rect;go.set_position(vmath.vector3(r[1]+r[3]/2,0,r[2]+r[4]/2),self.gate);go.set_scale(vmath.vector3(r[3],self.g:open()and .001 or 1,r[4]),self.gate)end
  go.set_scale(self.g.secret_visible and 1.4 or .001,self.chest)
@@ -288,9 +324,15 @@ end
 function on_message(self,id,message)
  if id==hash('choose')then
   if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0;self.voice_next=nil;self.follow_enemy_tap=false;rebuild(self,message.index);self.g.intro_needed=false
+  if self.resilience_ui_test then
+   self.g.peaceful=false;self.g.over=false;self.g.solved=false;self.g.paused=false;self.g.dialog=nil;self.g.invulnerable=0
+   for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end
+   View.follow(self.g,0,true);local x,y=View.project(self.g,self.g.m.sanctuary.position,0)
+   print('DEFOLD RESILIENCE ZONE '..math.floor(x)..' '..math.floor(y));self.resilience_safe_test=true
+  end
   if self.g.direct_touch_test then self.g.p={4,4.8};self.g.invulnerable=999;for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end;self.g.paused=false;self.g.dialog=nil;View.follow(self.g,0,true)end
   if sys.get_config_string('project.capture_motion','0')=='1'then
-   self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-1},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-1.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))
+   self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-3},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-4.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))
   end
   local depth=sys.get_config_string('project.capture_depth','')
   if depth~=''then

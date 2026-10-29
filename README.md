@@ -1,13 +1,35 @@
-# EnergyBlast — Defold 0.9
+# EnergyBlast — Defold 0.10
 
 Offline-Touch-Shooter mit drei Helden, sechs Missionen, reflektierten Schüssen,
-integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Neue Direktsteuerung
-und überarbeitete Kampfansichten.** Defold bleibt der Schwerpunkt.
+integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Mehr Gesundheit,
+ein geschützter Zikurrat, ein größerer Stufenshop und neue Science-Fiction-Musik.**
+Defold bleibt der Schwerpunkt.
 
 **[Android 0.9 herunterladen — 63,9 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/e49218e7015e365a0913961a0f1e005436c271f2/downloads/energyblast-defold-debug.apk)** ·
 [Update und geprüfte Metadaten](downloads/README.md) ·
-[Änderungen und tatsächliche Tests](docs/MILESTONE_08.md) ·
+[Änderungen und tatsächliche Tests](docs/MILESTONE_09.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
+
+## Weniger Frust, mehr Ausrüstung
+
+- **15 statt 3 Energie.** Nach vier Sekunden ohne Treffer erholt sich die Figur
+  um einen Punkt alle zwei Sekunden. Die Anzeige zeigt Energie und Erholung.
+- **Zikurrat in jeder Arena:** mintfarben leuchtender Schutzort nahe dem Start,
+  mit eigenem Wegknopf und Minikartenzeichen. Feindliche Schüsse werden an seinem
+  Rand neutralisiert, auch nach Abprallern. Dort regenerieren zwei Punkte pro
+  Sekunde. Zum Schießen verlässt man den geschützten Bereich.
+- **Gesundheit immer im Shop:** 40 Sterne füllen die Energie vollständig auf.
+  Wiederholt kaufbar; bei voller Gesundheit wird nichts abgebucht. Die kostenlose
+  Erholung bleibt jederzeit als Alternative erhalten.
+- **Vier Waffen- und vier Rüstungsstufen:** Waffen werden stärker, Rüstung erhöht
+  die maximale Energie bis 35. Nächste Stufen bleiben gedimmt mit Preis sichtbar.
+  Dazu zwei Tarnstufen und ein Erholungskern. Keine neuen Tempokäufe; alte Käufe
+  und Spielstände bleiben erhalten. Verfügbare und gesamte Sterne sind getrennt.
+- **Neue Musik:** originale 80-Sekunden-Komposition bei 96 BPM in D-Moll/modal,
+  mit tiefem Puls, warmen Flächen, sparsamen Signalen und gedämpfter Percussion.
+  Im Schutzort wird sie leiser; Ansagen senken sie weiterhin ab.
+
+[Umsetzung, Preise, Laufzeitbilder und Grenzen](docs/MILESTONE_09.md).
 
 ## Neue Steuerung
 
@@ -34,20 +56,20 @@ echte gebackene AO-Schattierung pro Arena, weiche Bodenschatten, animierte
 Energieschilde und eine nähere Kamera. Keine übernommenen Referenzspiel-Assets.
 Die Figuren bleiben ein 2,5D-Hybrid aus Original-Animationsbildern und nativer 3D-Welt.
 
-![Neue Reaktoransicht](docs/images/09-defold-prisma.png)
-![Magnetwerk](docs/images/09-defold-forge.png)
-![Echte Bewegung und Feuern während des Haltens](docs/images/09-defold-gameplay.gif)
+![Neue Reaktoransicht](docs/images/10-defold-prisma.png)
+![Magnetwerk](docs/images/10-defold-forge.png)
+![Echte Bewegung und Feuern während des Haltens](docs/images/10-defold-gameplay.gif)
 
 Native Linux/OpenGL-/XTest-Aufnahmen, keine behaupteten Handyaufnahmen.
-[Alle sechs Bereiche und Gestenbelege](docs/MILESTONE_08.md).
+[Alle sechs Bereiche und Gestenbelege](docs/MILESTONE_09.md).
 
 ## Wo finde ich was?
 
 - **Drache wählen:** Auf der Startseite direkt das Bild **Drache Flammi** antippen.
   Alle drei Helden bleiben sichtbar. Auch das Heldenbild im Spiel öffnet die Wahl.
 - **Sterne ausgeben:** Goldene Schaltfläche auf der Startseite → Bild/Effekt ansehen
-  → **Kaufen**. Prisma-Waffe, mehr Gesundheit, Tempo und Tarnung. Gesundheitskauf
-  wirkt sofort; Gesamtsterne bleiben, nur das verfügbare Guthaben sinkt.
+  → **Kaufen**. Waffen, Rüstung, wiederholte Heilung, Tarnung und Erholung. Käufe
+  wirken sofort; Gesamtsterne bleiben, nur das verfügbare Guthaben sinkt.
 - **Offene Schätze:** Oben steht **Schatz 0/1** oder **1/1**. Antippen aktiviert
   einen kostenlosen goldenen Wegweiser zum Suchgebiet. Bei Annäherung wird die
   Truhe sichtbar. Nach Missionsabschluss führt er direkt zum verbliebenen Schatz.
@@ -80,11 +102,11 @@ Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
 
 ## Prüfungen und Grenzen
 
-**29.10.2026:** 440 native Prüfungen, 14 gemeinsame Testgruppen, fünf tatsächliche
-neue Gestenabläufe und alle bisherigen Menü-/Kauf-/Speicher-/Fallenabläufe bestanden.
-Zwei Fenstergrößen, Audioausgabe, tatsächliche Wandverdeckung und ein positiver
-Pixeltest der Energieschilde geprüft. Zwei neue Gestenansagen unabhängig exakt
-erkannt, 25 andere Sprachdateien unverändert. [Details](docs/QUALITY.md).
+**29.10.2026:** Aktuelle Prüfungen zu Gesundheit, Schutzort und Stufenshop stehen
+im [zentralen Qualitätsstatus](docs/QUALITY.md). Die fünf direkten Gesten sowie
+Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
+Geschossverdeckung bleiben Teil der vollständigen Suite. Drei neue kurze
+Schutzort-/Shopansagen wurden unabhängig exakt erkannt, 27 andere bleiben erhalten.
 
 Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
 längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete

@@ -30,6 +30,9 @@ TEXTS={
  'flow_treasure':'Hier ist noch ein Schatz. Er ist freiwillig. Suche bei den goldenen Spuren.',
  'flow_no_treasure':'Schatz gefunden. Du kannst die nächste Mission starten.',
  'flow_final':'Diese Mission ist geschafft. Du kannst noch offene Bonusziele sammeln.',
+ 'defold_sanctuary_intro':'Im leuchtenden Schutzort bist du sicher. Keine Schüsse treffen dich. Deine Energie erholt sich schnell.',
+ 'defold_shop_tiers':'Sterne kaufen stärkere Waffen und Rüstung. Die dunkle Karte zeigt die nächste Stufe und ihren Preis.',
+ 'defold_health_refill':'Hier kannst du deine Energie mit Sternen auffüllen. Sie erholt sich auch von selbst.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

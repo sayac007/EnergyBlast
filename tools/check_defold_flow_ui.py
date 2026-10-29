@@ -39,14 +39,14 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-flow-',dir='/tmp')as
      wait('DEFOLD FLOW MENU READY');capture('menu')
      click(284,193);wait('hero=dragon');capture('dragon')
      click(284,63);wait('DEFOLD FLOW SHOP READY');capture('shop')
-     click(1130,521);text=wait('DEFOLD FLOW PURCHASE prism owned=true')
+     click(1130,510);text=wait('DEFOLD FLOW PURCHASE prism owned=true')
      first=int(re.search(r'DEFOLD FLOW PURCHASE prism owned=true wallet=(\d+)',text).group(1))
-     click(1130,418);text=wait('DEFOLD FLOW PURCHASE armor owned=true')
+     click(930,578);wait('DEFOLD SHOP TAB armor');click(1130,510);text=wait('DEFOLD FLOW PURCHASE armor owned=true')
      match=re.search(r'DEFOLD FLOW PURCHASE armor owned=true wallet=(\d+) hp=(\d+) max=(\d+)',text);assert match,text
-     remaining,hp,max_hp=map(int,match.groups());assert remaining==first-160 and hp==max_hp==4,text
-     # Cannot buy the boots with the remaining balance. Existing purchases stay.
-     click(1130,315);text=wait('DEFOLD FLOW PURCHASE boots owned=false')
-     actual=int(re.search(r'DEFOLD FLOW PURCHASE boots owned=false wallet=(\d+)',text).group(1));assert actual==remaining,text
+     remaining,hp,max_hp=map(int,match.groups());assert remaining==first-160 and hp==max_hp==20,text
+     # The next weapon remains visible but cannot be bought with 40 stars.
+     click(720,578);wait('DEFOLD SHOP TAB weapon');click(1130,409);text=wait('DEFOLD FLOW PURCHASE arc owned=false')
+     actual=int(re.search(r'DEFOLD FLOW PURCHASE arc owned=false wallet=(\d+)',text).group(1));assert actual==remaining,text
      capture('purchased')
      click(1090,73);wait('DEFOLD FLOW ACTION menu');click(772,534)
      wait('DEFOLD FLOW PLAY READY mission=1 treasure=1 bonus=2');capture('mission')

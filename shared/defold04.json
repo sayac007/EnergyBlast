@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-09",
+  "id": "energyblast-defold-10",
   "language": "de",
   "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
@@ -12,7 +12,7 @@
   "player": {
     "speed": 4.8,
     "radius": 0.27,
-    "hit_points": 3,
+    "hit_points": 15,
     "dash_speed": 12,
     "dash_seconds": 0.18,
     "dash_cooldown": 2.8
@@ -77,7 +77,7 @@
     {
       "id": "armor",
       "stars": 160,
-      "effect": "one_extra_hit_point_on_sector_start",
+      "effect": "five_extra_hit_points",
       "price": 160
     },
     {
@@ -220,6 +220,13 @@
             3
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -8.2,
+          4.8
+        ],
+        "radius": 1.2
       }
     },
     {
@@ -371,6 +378,13 @@
             -4.5
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -6.1,
+          5.1
+        ],
+        "radius": 1.2
       }
     },
     {
@@ -564,6 +578,13 @@
             2
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -6.1,
+          5.1
+        ],
+        "radius": 1.2
       }
     },
     {
@@ -713,6 +734,13 @@
             2
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -8.4,
+          3.4
+        ],
+        "radius": 1.2
       }
     },
     {
@@ -841,6 +869,13 @@
             4.5
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -6,
+          2.7
+        ],
+        "radius": 1.2
       }
     },
     {
@@ -984,6 +1019,13 @@
             4.7
           ]
         }
+      },
+      "sanctuary": {
+        "position": [
+          -8.4,
+          3.4
+        ],
+        "radius": 1.2
       }
     }
   ],
@@ -1027,7 +1069,7 @@
   "world_scale": 1.5,
   "hold_seconds": 0.14,
   "shop_enabled": true,
-  "save_schema": 2,
+  "save_schema": 3,
   "characters": [
     {
       "id": "hero",
@@ -1046,5 +1088,124 @@
     }
   ],
   "bonuses_enabled": true,
-  "visual_wall_height": 1.7
+  "visual_wall_height": 1.7,
+  "recovery": {
+    "delay_seconds": 4,
+    "rate": 0.5,
+    "sanctuary_rate": 2,
+    "refill_price": 40
+  },
+  "shop_catalog": [
+    {
+      "id": "health",
+      "category": "health",
+      "title": "VOLLE GESUNDHEIT",
+      "description": "Sofort alle Herzen auffuellen. Immer wieder kaufbar.",
+      "price": 40,
+      "repeatable": true
+    },
+    {
+      "id": "prism",
+      "category": "weapon",
+      "title": "PRISMA I",
+      "description": "Zwei Abpraller pro Schuss.",
+      "price": 100,
+      "damage": 1,
+      "cooldown": 0.24,
+      "bounces": 2
+    },
+    {
+      "id": "arc",
+      "category": "weapon",
+      "title": "PLASMA II",
+      "description": "Doppelte Kraft. Zwei Abpraller.",
+      "price": 220,
+      "requires": "prism",
+      "damage": 2,
+      "cooldown": 0.22,
+      "bounces": 2
+    },
+    {
+      "id": "nova",
+      "category": "weapon",
+      "title": "NOVA III",
+      "description": "Dreifache Kraft. Schnelleres Feuern.",
+      "price": 400,
+      "requires": "arc",
+      "damage": 3,
+      "cooldown": 0.2,
+      "bounces": 2
+    },
+    {
+      "id": "nova2",
+      "category": "weapon",
+      "title": "SUPERNOVA IV",
+      "description": "Vierfache Kraft. Staerkste Energiewaffe.",
+      "price": 650,
+      "requires": "nova",
+      "damage": 4,
+      "cooldown": 0.18,
+      "bounces": 2
+    },
+    {
+      "id": "armor",
+      "category": "armor",
+      "title": "SCHUTZ I",
+      "description": "20 Gesundheit. Sofort 5 Herzen mehr.",
+      "price": 160,
+      "health_bonus": 5
+    },
+    {
+      "id": "armor2",
+      "category": "armor",
+      "title": "PANZER II",
+      "description": "25 Gesundheit. Noch mehr Schutz.",
+      "price": 300,
+      "requires": "armor",
+      "health_bonus": 10
+    },
+    {
+      "id": "armor3",
+      "category": "armor",
+      "title": "AEGIS III",
+      "description": "30 Gesundheit. Starke Energieruestung.",
+      "price": 450,
+      "requires": "armor2",
+      "health_bonus": 15
+    },
+    {
+      "id": "armor4",
+      "category": "armor",
+      "title": "TITAN IV",
+      "description": "35 Gesundheit. Maximale Ruestung.",
+      "price": 650,
+      "requires": "armor3",
+      "health_bonus": 20
+    },
+    {
+      "id": "cloak",
+      "category": "extra",
+      "title": "TARNFELD I",
+      "description": "Gegner bemerken dich aus kuerzerer Entfernung.",
+      "price": 300,
+      "detection_multiplier": 0.825
+    },
+    {
+      "id": "cloak2",
+      "category": "extra",
+      "title": "TARNFELD II",
+      "description": "Halbe gegnerische Erfassungsreichweite.",
+      "price": 450,
+      "requires": "cloak",
+      "detection_multiplier": 0.5
+    },
+    {
+      "id": "regen_core",
+      "category": "extra",
+      "title": "REGEN-KERN",
+      "description": "Erholung beginnt nach 2 Sekunden statt 4.",
+      "price": 280,
+      "regen_delay": 2
+    }
+  ]
 }

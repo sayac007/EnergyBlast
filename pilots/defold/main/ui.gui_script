@@ -132,7 +132,7 @@ local function field_traps(self,g)
 end
 local function page(self,g,title)
  -- The background is a separate earlier render pass; the animated 3D hero stays visible.
- text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'DIREKTSTEUERUNG  ·  0.9','a3e7df',.61)
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'SCHUTZ & AUSRUESTUNG  ·  0.10','a3e7df',.61)
  glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
  icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
  text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
@@ -149,6 +149,56 @@ local function hero_choices(self,g)
   self.buttons[#self.buttons+1]={node=n,action='character:'..c.id,rect={x,y,156,176}}
  end
 end
+
+local function shop_row(self,g,u,y)
+ local tint=u.locked and '7790ad'or 'ffffff'
+ local n=glass(self,930,y,625,92,u.locked and .68 or .94)
+ circle(self,668,y,35,u.locked and '15263a'or '0c203c')
+ local ico=u.category=='armor'and 'armor'or u.category=='weapon'and 'cannon'or u.id=='regen_core'and 'heart'or 'cloak'
+ local image=icon(self,668,y+2,ico,74)
+ if u.locked then gui.set_color(image,vmath.vector4(.55,.62,.72,.7))end
+ text(self,850,y+20,u.title or u.id,tint,.65,265)
+ text(self,850,y-8,u.description or '',u.locked and '7991a7'or 'afd9e0',.42,265)
+ local label,style
+ if u.owned then
+  label=u.category=='weapon'and(u.equipped and 'AUSGERUESTET'or 'AUSWAEHLEN')or 'GEKAUFT'
+  style=u.equipped and 'green'or u.category=='weapon'and 'violet'or 'green'
+ elseif u.locked then label='DANACH '..u.price;style='blue'
+ else label='KAUFEN '..u.price;style=u.available and 'gold'or 'blue'end
+ local b=button(self,1130,y,183,75,label,'buy:'..u.id,style,u.owned and 'gear'or 'star')
+ if u.locked then
+  gui.set_color(b,vmath.vector4(.48,.57,.70,.74))
+  text(self,850,y-31,'NAECHSTE STUFE · '..u.price..' STERNE','9aafc6',.34,265)
+ elseif not u.owned and(u.missing or 0)>0 then
+  text(self,1130,y-31,'NOCH '..u.missing..' STERNE','c9d5eb',.31,170)
+ end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP ITEM '..u.id..' 1130 '..y..' can='..tostring(u.available)..' owned='..tostring(u.owned)..' locked='..tostring(u.locked))end
+end
+local function shop(self,g)
+ local category=self.shop_category or 'weapon'
+ text(self,930,612,g.shop_status or 'WAFFEN UND RUESTUNG STUFENWEISE VERBESSERN','ffe38b',.45,605)
+ for i,t in ipairs({{'weapon','WAFFEN','cannon'},{'armor','RUESTUNG','armor'},{'extra','EXTRAS','cloak'}})do
+  button(self,720+(i-1)*210,578,198,49,t[2],'shop_tab:'..t[1],category==t[1]and 'violet'or 'blue',t[3])
+ end
+ local items=g:shop_items(category)
+ for i,u in ipairs(items)do if i<=4 then shop_row(self,g,u,510-(i-1)*101)end end
+ -- This permanent refill stays visible in every category; no permanent purchase
+ -- flag is used, so damage can always be healed again for the advertised price.
+ local health=g:shop_item('health')
+ glass(self,284,199,490,168,.94);icon(self,77,235,'heart',54)
+ text(self,295,252,'GESUNDHEIT AUFFUELLEN','ffffff',.72,365)
+ text(self,284,216,tostring(g.hp)..' / '..tostring(g.max_hp)..' ENERGIE','b9e9df',.64,390)
+ local full=g.hp>=g.max_hp
+ button(self,284,166,430,63,full and 'VOLL · '..health.price..' STERNE BEI BEDARF'or 'HEILEN · '..health.price..' STERNE','buy:health',full and 'blue'or health.available and 'green'or 'blue','heart')
+ if not full and(health.missing or 0)>0 then text(self,284,123,'NOCH '..health.missing..' STERNE','c9d5eb',.40,435)else text(self,284,123,'BEI SCHADEN IMMER WIEDER KAUFBAR','a4dacd',.37,435)end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP ITEM health 284 166 can='..tostring(health.available)..' full='..tostring(full)..' hp='..g.hp..' max='..g.max_hp)end
+ text(self,930,119,'VERFUEGBAR '..g:wallet()..'  ·  GESAMT '..g:total(),'b8dce4',.49,610)
+ button(self,770,63,295,75,'ZUM SPIEL','continue','green','dash');button(self,1090,63,295,75,'MISSIONEN','menu','blue','menu')
+ button(self,284,63,490,78,g.saved.music==false and 'MUSIK AUS'or 'MUSIK AN','music','violet','sound')
+ if g.flow_ui_test then print('DEFOLD FLOW SHOP READY wallet='..g:wallet())end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP TAB '..category)end
+end
+
 local function dialog(self,g)
  self.buttons={};local state=g:mission_state()
  page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or'GESCHAFFT!')
@@ -175,20 +225,7 @@ local function dialog(self,g)
   end
   button(self,930,83,615,78,'ZURUECK ZU DEN MISSIONEN','menu','blue','menu')
  elseif g.dialog=='gear'then
-  text(self,930,592,g.shop_status or'DEINE STERNE GEGEN AUSRUESTUNG','ffe38b',.60,590)
-  local names={prism='PRISMA-WAFFE',armor='MEHR GESUNDHEIT',boots='TEMPOSTIEFEL',cloak='TARNMODUL'}
-  local effects={prism='2 ABPRALLER PRO SCHUSS',armor='+1 HERZ · SOFORT AKTIV',boots='SCHNELLER LAUFEN',cloak='SPAETER ENTDECKT'}
-  for i,u in ipairs(g.data.unlocks)do local y=521-(i-1)*103;local owned=g:owns(u.id);local affordable=g:wallet()>=u.price
-   glass(self,930,y,625,92,.90);circle(self,668,y,37,'0c203c');icon(self,668,y+2,i==2 and'armor'or i==3 and'boots'or i==4 and'cloak'or'cannon',82)
-   text(self,850,y+18,names[u.id],'ffffff',.72,265);text(self,850,y-15,effects[u.id],'afd9e0',.48,268)
-   local label=owned and(u.id=='prism'and(g.saved.weapon=='prism'and'AN · GEKAUFT'or'AUS · GEKAUFT')or'GEKAUFT')or('KAUFEN '..u.price)
-   button(self,1130,y,183,75,label,'buy:'..u.id,owned and'green'or affordable and'gold'or'blue',owned and'gear'or'star')
-   if not owned and not affordable then text(self,1130,y-31,'NOCH '..(u.price-g:wallet())..' STERNE','c9d5eb',.31,170)end
-  end
-  text(self,930,145,'Ausgeben: '..g:wallet()..'  ·  Gesamtsterne bleiben: '..g:total(),'b8dce4',.51,610)
-  button(self,770,73,295,75,'ZUM SPIEL','continue','green','dash');button(self,1090,73,295,75,'MISSIONEN','menu','blue','menu')
-  button(self,284,63,490,78,g.saved.music==false and'MUSIK AUS'or'MUSIK AN','music','violet','sound')
-  if g.flow_ui_test then print('DEFOLD FLOW SHOP READY wallet='..g:wallet())end
+  shop(self,g)
  elseif g.dialog=='win'then
   panel(self,930,403,628,450);text(self,930,556,'MISSION GESCHAFFT!','ffe38b',1.05,580)
   star(self,930,477,40);text(self,930,405,'+ '..g.reward..' STERNE','ffe38b',1.07)
@@ -211,7 +248,7 @@ function update(self,dt)
  local g=_G.energyblast;if not g then return end
  if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
  if g.dialog then
-  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
   if key==self.dialog_key then return end;self.dialog_key=key
  else self.dialog_key=nil end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
@@ -231,7 +268,11 @@ function update(self,dt)
  if g.flow_ui_test and self.flow_play_mission~=g.index then self.flow_play_mission=g.index;print('DEFOLD FLOW PLAY READY mission='..g.index..' treasure='..state.treasures_remaining..' bonus='..state.bonus_total)end
 
  local hero_thumb=portrait(self,72,548,g:character().id,135);self.buttons[#self.buttons+1]={node=hero_thumb,action='characters',rect={72,548,135,135}}
- for i=1,g.max_hp do local h=icon(self,15+i*27,460,'heart',27);if i>g.hp then gui.set_color(h,vmath.vector4(.25,.35,.4,.6))end end
+ icon(self,26,466,'heart',25);text(self,85,467,'ENERGIE','c7e3ef',.41,92)
+ text(self,72,443,tostring(g.hp)..' / '..tostring(g.max_hp),'ffffff',.73,126)
+ local ratio=clamp(g.hp/math.max(1,g.max_hp),0,1);box(self,72,421,112,16,'0a1830')
+ if ratio>0 then box(self,17+55*ratio,421,110*ratio,12,g.regenerating and '80f9bd'or ratio<.3 and 'ffb878'or '56d8cf')end
+ text(self,72,405,g.in_sanctuary and 'GESCHUETZT'or g.regenerating and 'ERHOLUNG'or g.hp>=g.max_hp and 'VOLLE ENERGIE'or 'ERHOLUNG BALD','99dfcd',.32,125)
  for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='STERNE'})[name]
   if name=='menu'or name=='sound'then button(self,r[1],r[2],r[3],r[4],'',name,'blue');icon(self,r[1],r[2]+2,name,37)
   else
@@ -246,17 +287,26 @@ function update(self,dt)
   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
  text(self,551,57,g.status,'d2e9ec',.64,780);text(self,551,27,'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.45,790)
+ if g.m.sanctuary and not g.solved then button(self,72,136,120,54,'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
  if g.solved then button(self,72,124,120,62,g:next_index()and'WEITER'or'MISSIONEN',g:next_index()and'next'or'menu','green')end
  text(self,72,45,'? '..g:credits(),'ffe590',.73)
  panel(self,1051,47,151,72);local bounds=g.data.arena
  local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
  for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
+ if g.m.sanctuary then local sx,sy=mini(g.m.sanctuary.position);ring(self,sx,sy,5,'8fffc7',2)end
  local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
  if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
   for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
  end
  -- World-only annotations are clipped at the exact render/input viewport.
  local clip=box(self,(Layout.left+Layout.right)/2,(Layout.bottom+Layout.top)/2,Layout.right-Layout.left,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
+ if g.m.sanctuary then
+  local safe=g.m.sanctuary
+  ground_ring(self,g,safe.position,safe.radius,'8fffd0',3)
+  local sx,sy=g.project(g,safe.position,.12)
+  text(self,sx,sy+39,'ZIKURRAT','baffdf',.49,160)
+  text(self,sx,sy+20,'SCHUTZ & ERHOLUNG','9cdbc9',.30,174)
+ end
  for _,e in ipairs(g.enemies)do if e.hp>0 then
   local x,y=g.project(g,e.p,e.boss and 6.4 or e.illustrated and 4.0 or 3.2)
   if e.warning>0 and(x<Layout.left+12 or x>Layout.right-12 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(Layout.left+22,math.min(Layout.right-22,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
@@ -325,12 +375,19 @@ local function handle(self,a)
   if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
   elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
   elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11));if action:sub(11)=='dragon'then g.say('flow_dragon')end
+  elseif action:sub(1,9)=='shop_tab:'then self.shop_category=action:sub(10);g.shop_status=nil
+  elseif action=='sanctuary'then if g.m.sanctuary then g:navigate(g.m.sanctuary.position);g.status='ZUM ZIKURRAT - HIER BIST DU GESCHUETZT';g.say('defold_sanctuary_intro')end
   elseif action:sub(1,4)=='buy:'then
    local owned=g:owns(action:sub(5));local bought=g:buy(action:sub(5))
-   if not owned then g.say(bought and'flow_purchase'or'flow_need_stars')end
-   if g.ui_test then assert(g:owns(action:sub(5)));print('DEFOLD SHOP PURCHASE PASS '..action)end
+   if not owned then
+    if bought then g.say(action:sub(5)=='health'and 'defold_health_refill'or 'flow_purchase')else
+     local item=g.shop_item and g:shop_item(action:sub(5))
+     if not item or g:wallet()<item.price then g.say('flow_need_stars')end
+    end
+   end
+   if g.ui_test then if bought or g:owns(action:sub(5))then print('DEFOLD SHOP PURCHASE PASS '..action)else print('DEFOLD SHOP BLOCKED '..action)end end
    if g.flow_ui_test then print('DEFOLD FLOW PURCHASE '..action:sub(5)..' owned='..tostring(g:owns(action:sub(5)))..' wallet='..g:wallet()..' hp='..g.hp..' max='..g.max_hp)end
-  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'flow_shop'or'flow_menu')end
+  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'defold_shop_tiers'or'flow_menu')end
   elseif action=='continue'then g:resume_mission();if g.intro_needed then g.intro_needed=false;g.replay()end
   elseif action=='retry'then g.choose(g.index)
   elseif action=='loot'then g:search_loot()

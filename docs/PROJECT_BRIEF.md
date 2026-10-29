@@ -169,3 +169,12 @@ Die neueste Anweisung ersetzt ausdrücklich die alte Zeit-/Loslassen-Regel:
 kurzer Bodentipp läuft, Bodenhalten feuert, eigene Figur ziehen bewegt und
 Gegnertipp feuert ohne vorherige Halteschwelle mit großzügiger Antippzone. Dazu
 werden die tatsächlichen Kampfansichten weiter ausgebaut. [Umsetzung/Belege](MILESTONE_08.md).
+
+## Betreiberergänzung — 29.10.2026: weniger Frust und echte Ausrüstung
+
+Fünffache Gesundheit und zeitliche Erholung; ein deutlich leuchtender, schnell
+erreichbarer Zikurrat in jeder Arena, der feindliche Schüsse zuverlässig ausschließt.
+Mehr Käufe für Sterne, Gesundheit dauerhaft wiederholt kaufbar, mächtigere Waffen
+und Rüstung in sichtbaren Stufen mit Vorschaupreis. Keine neuen Tempokäufe.
+Musik soll die Science-Fiction-Kampfatmosphäre tragen, statt hüpfender Feenwelt.
+Die direkte Steuerung, bisherigen Missionen und lokalen Spielstände bleiben.

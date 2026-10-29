@@ -54,7 +54,7 @@ class SharedChecks(unittest.TestCase):
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
   self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),27)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),30)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -64,7 +64,7 @@ class SharedChecks(unittest.TestCase):
    samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);peak=max(abs(x)for x in samples)
    self.assertLess(peak,.95);self.assertGreater(peak,.01);self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
    if file=='aurora-hop.ogg':
-    self.assertEqual(c['seconds'],60);self.assertGreater(math.sqrt(sum(x*x for x in samples)/len(samples)),.05)
+    self.assertEqual(c['seconds'],80);self.assertGreater(math.sqrt(sum(x*x for x in samples)/len(samples)),.05)
     self.assertLess(abs(samples[0]-samples[-1]),.005)
   sound=(ROOT/'pilots/defold/audio/music.sound').read_text();self.assertIn('looping: 1',sound);self.assertIn('gain: 1.0',sound)
   self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
@@ -105,7 +105,7 @@ class SharedChecks(unittest.TestCase):
   pcm=subprocess.check_output(['ffmpeg','-nostdin','-v','error','-i',str(ROOT/'shared/audio/defold04/aurora-hop.ogg'),'-ar','8000','-ac','2','-f','f32le','-'])
   samples=struct.unpack('<'+'f'*(len(pcm)//4),pcm);sections=[]
   for i in range(4):
-   values=samples[i*15*8000*2:(i+1)*15*8000*2];sections.append(math.sqrt(sum(v*v for v in values)/len(values)))
+   values=samples[i*len(samples)//4:(i+1)*len(samples)//4];sections.append(math.sqrt(sum(v*v for v in values)/len(values)))
   self.assertGreater(max(sections)/min(sections),1.5)
   self.assertGreater(math.sqrt(sum((l-r)**2 for l,r in zip(samples[::2],samples[1::2]))/(len(samples)//2)),.005)
  def test_preserved_legacy_rigs_and_active_ground_bindings(self):

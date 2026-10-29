@@ -2131,6 +2131,26 @@
       "path": "shared/assets/defold09/rescue-original.png",
       "sha256": "db55afc68ffed54da2c20d2aa53f837fc3aa8f865f8fbac5fa05a29c3e1bbda2",
       "origin": "Original OpenAI-generated per-sector floor paintings 2026-10-29, no external game inputs; technical import/analytic effect geometry tools/import_defold09_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold10/PROVENANCE.json",
+      "sha256": "120f242e550fbc3a6f1c953a4578606acdc9f9ad8af76bf99264b53bf1518c90",
+      "origin": "Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets"
+    },
+    {
+      "path": "shared/assets/defold10/models.json",
+      "sha256": "1dc637801852fb2e0f481113ac26615d624fa389b8fae0c17c77fdba086be03e",
+      "origin": "Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets"
+    },
+    {
+      "path": "shared/assets/defold10/sanctuary.bin",
+      "sha256": "49a22edb982ce15a81d2e83e4eb2aa0109b8f9528308fca3105621ebada0a2bc",
+      "origin": "Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets"
+    },
+    {
+      "path": "shared/assets/defold10/sanctuary.gltf",
+      "sha256": "b2e9d4266f5e4efff7766094af7cc9344f2bc0a941b0e96dff89cd1cb6907162",
+      "origin": "Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets"
     }
   ],
   "audio": "shared/audio/de/manifest.json",

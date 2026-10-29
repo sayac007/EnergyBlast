@@ -167,3 +167,19 @@
   camera. Surface heights come from actual exported geometry metadata.
 - 0.9.0/code 10, same package/certificate. model.max_count=384 bounds the new effects
   and rapid fire. No PR, game merge, Actions, Release/Play or other-repository writes.
+
+## Recovery and tiered equipment 0.10 — operator playtest
+
+- Base health is now 15 (fivefold), armor tiers 20/25/30/35. Free recovery after
+  four undamaged active seconds restores 0.5 HP/sec; sanctuary restores 2 HP/sec.
+- Every mission has a reachable, labelled Zikurrat sanctuary. Swept collisions
+  absorb both sides' projectiles at its boundary, including reflections and
+  inside spawns. Do not permit firing outward from this invulnerable location.
+- Shop keeps health refill visible/repeatable, charges only on actual healing,
+  and offers sequential weapon/armor tiers with dimmed next prices. No new speed
+  purchase; preserve legacy boots, ledgers, weapons, scores and save migration.
+- New original 80-second,96-BPM minor/modal science-fiction score replaces the
+  platform track. Historical aurora-hop.ogg path stays only for stable resources.
+- 0.10.0/code11, same package/debug certificate. Other engines remain frozen.
+  Preserve actual gesture/save/audio/depth tests and new sanctuary/shop UI test.
+  No PR, game merge, Actions, Release/Play or other-repository changes.

@@ -593,6 +593,39 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 3008655541
+    },
+    {
+      "id": "defold_shop_tiers",
+      "text": "Sterne kaufen stärkere Waffen und Rüstung. Die dunkle Karte zeigt die nächste Stufe und ihren Preis.",
+      "file": "defold_shop_tiers.ogg",
+      "sha256": "a12598be78fb48da89d97f29ee19084cdaad8eb7e4fa92907a39049007e27bfa",
+      "seconds": 8.12,
+      "playback_gain_db": 4.407913551659604,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2983324138
+    },
+    {
+      "id": "defold_health_refill",
+      "text": "Hier kannst du deine Energie mit Sternen auffüllen. Sie erholt sich auch von selbst.",
+      "file": "defold_health_refill.ogg",
+      "sha256": "1767bf78756d8d744951b70bf8bde005cc6f713f0e296c2740b18d59f1aa84a9",
+      "seconds": 5.88,
+      "playback_gain_db": 6.707956093958379,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2243620503
+    },
+    {
+      "id": "defold_sanctuary_intro",
+      "text": "Im leuchtenden Schutzort bist du sicher. Keine Schüsse treffen dich. Deine Energie erholt sich schnell.",
+      "file": "defold_sanctuary_intro.ogg",
+      "sha256": "2517056329284d29c4f595e4c2c62c5f724374e7237ec06d161136b416a78a45",
+      "seconds": 7.64,
+      "playback_gain_db": 2.210280837036237,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2332248811
     }
   ]
 }

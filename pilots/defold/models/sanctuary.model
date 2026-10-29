@@ -1,0 +1,4 @@
+mesh: "/models/sanctuary.gltf"
+materials { name: "Luminous sanctuary mint" material: "/models/sanctuary-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Sanctuary ceramic" material: "/models/sanctuary-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Sanctuary gold" material: "/models/sanctuary-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }

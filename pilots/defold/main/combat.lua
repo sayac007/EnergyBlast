@@ -24,7 +24,7 @@ function M.new(data,saved)
   if self.cancel_controls then self.cancel_controls()end
   if type(index)~='number'or index%1~=0 or not data.missions[index]then index=self:start_index()end
   self.peaceful=false;self.navigation_focus='objective';self.exit_announced=false;self:remember_mission(index)
-  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=3+(self:owns('armor') and 1 or 0);self.max_hp=self.hp;self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil
+  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil
   self.walls=Surfaces.for_mission(data,self.m)
   for _,t in ipairs(self.m.turrets)do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=t.hp or 2,max_hp=t.hp or 2,shield=t.shield,trap_shield=t.trap_shield,boss=t.boss,burst=t.burst or 1,patrol=t.patrol,waypoint=2,speed=t.speed or 1,timer=t.phase+.7,warning=0,direction={-1,0}}end
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
@@ -50,16 +50,16 @@ function M.new(data,saved)
   self.path={};if found then local c=finish;while c do table.insert(self.path,1,point(c));c=parents[key(c)]end
   elseif self.m.staging and M.dist(target,self.m.staging)>.5 then self:navigate(self.m.staging)end
  end
- function g:fire()if self.paused or self.tactical_pause or self.over or self.cooldown>0 then return end;self.cooldown=data.combat.fire_cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
+ function g:fire()if self.paused or self.tactical_pause or self.over or self.cooldown>0 then return end;if self:is_safe()then self.status='ZIKURRAT: GESCHUETZT - ZUM FEUERN HINAUSGEHEN';return end;self.cooldown=self:weapon_stats().cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
- function g:hit_player()if self.peaceful or self.invulnerable>0 or self.over then return end;self.hp=self.hp-1;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
+ function g:hit_player()if self.peaceful or self.invulnerable>0 or self.over or self:is_safe()then return end;self.hp=self.hp-1;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
  function g:finish()if self.solved then return end;self.solved=true;self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self:remember_mission(self:next_index()or self.index);self.say('combat_win')end
  function g:locked(t)
   if not t.boss then return false end
   for _,e in ipairs(self.enemies)do if e.kind=='relay'and e.hp>0 then return true end end
   return false
  end
- function g:hit(t,bounces)
+ function g:hit(t,bounces,damage)
   if t.hp<=0 then return end
   if Bonus.hit(self,t,bounces)then return end
   if t.kind=='sequence'then Objectives.sequence_hit(self,t);return end
@@ -68,7 +68,7 @@ function M.new(data,saved)
   if t.shield and not t.trap_shield and bounces==0 then
    self.status='SCHILD: Triff ueber eine Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return
   end
-  t.hp=t.hp-1;t.hit_timer=.18
+  t.hp=math.max(0,t.hp-(damage or 1));t.hit_timer=.18
   self.fx[#self.fx+1]={p={t.p[1],t.p[2]},life=.22,age=0,kind='hit'}
   if self.sfx then self.sfx('hit')end
   if t.hp<=0 then
@@ -87,6 +87,25 @@ function M.new(data,saved)
  end
  function g:hint()
   if self.hint_debounce>0 then return end;self.hint_debounce=1.2;local level=self:level();if level<2 then if self:credits()<=0 then self.say('hints_empty');return end;self.saved.clues[#self.saved.clues+1]=self.m.id..':'..(level+1);self.changed()end;self.clue_time=8;self.say(self.m.kind~='combat'and'defold_secret'or(self.m.id=='dock'and'raid_hint'or(self.m.id=='reactor'and'hint_bank'or'hint_guardian')))
+ end
+ -- A hero must fit fully inside the field, including the swept hit radius.
+ function g:is_safe(p)
+  local zone=self.m and self.m.sanctuary
+  if not data.recovery or not zone then return false end
+  return M.dist(p or self.p,zone.position)<=zone.radius-.36+.000001
+ end
+ function g:recover(dt)
+  local cfg=data.recovery;if not cfg then return end
+  self.in_sanctuary=self:is_safe();self.regen_since_hit=(self.regen_since_hit or 0)+dt
+  local delay=self:owns('regen_core')and 2 or cfg.delay_seconds
+  self.regenerating=self.hp>0 and self.hp<self.max_hp and(self.in_sanctuary or self.regen_since_hit>=delay)
+  if not self.regenerating then self.regen_charge=0;return end
+  self.regen_charge=(self.regen_charge or 0)+dt*(self.in_sanctuary and cfg.sanctuary_rate or cfg.rate)
+  local points=math.floor(self.regen_charge+.000001)
+  if points>0 then
+   self.hp=math.min(self.max_hp,self.hp+points);self.regen_charge=self.regen_charge-points
+   if self.hp>=self.max_hp then self.regen_charge=0;self.regenerating=false end
+  end
  end
  function g:effects_update(dt)
   if self.background then return end
@@ -109,8 +128,9 @@ function M.new(data,saved)
     t.timer=data.combat.enemy_interval end
    else
     if t.patrol then local p=t.patrol[t.waypoint];local d=M.dist(t.p,p);if d<t.speed*dt then t.p={p[1],p[2]};t.waypoint=t.waypoint%#t.patrol+1 else local n=M.norm({p[1]-t.p[1],p[2]-t.p[2]});t.p={t.p[1]+n[1]*t.speed*dt,t.p[2]+n[2]*t.speed*dt}end end
-    t.timer=t.timer-dt;local cloak=self:owns('cloak')and .35 or 0;if t.timer<=0 and M.dist(t.p,self.p)<(data.combat.detection_range or 13)*(1-cloak*.5)*((self.saved.earned['secret:guardian']or self.saved.earned['secret:citadel'])and .9 or 1)then t.warning=data.combat.enemy_warning;local aim=self.drone and self.drone.hp>0 and M.dist(t.p,self.drone.p)<M.dist(t.p,self.p)and self.drone.p or self.p;t.direction=M.norm({aim[1]-t.p[1],aim[2]-t.p[2]})end end
+    t.timer=t.timer-dt;local cloak=self:owns('cloak2')and 1 or(self:owns('cloak')and .35 or 0);if t.timer<=0 and M.dist(t.p,self.p)<(data.combat.detection_range or 13)*(1-cloak*.5)*((self.saved.earned['secret:guardian']or self.saved.earned['secret:citadel'])and .9 or 1)then t.warning=data.combat.enemy_warning;local aim=self.drone and self.drone.hp>0 and M.dist(t.p,self.drone.p)<M.dist(t.p,self.p)and self.drone.p or self.p;t.direction=M.norm({aim[1]-t.p[1],aim[2]-t.p[2]})end end
   end end
+  self:recover(dt)
   Bonus.update(self,dt)
   Projectiles.update(self,dt)
   Objectives.update(self,dt,M.dist)

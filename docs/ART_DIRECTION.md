@@ -115,3 +115,16 @@ Die ursprünglichen 2,5D-Figuren bleiben erhalten; keine Behauptung vollständig
 skelettanimierter 3D-Figuren. [Echte Bilder und Gestenbelege](MILESTONE_08.md),
 [neue Bildherkunft](../shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
 ersetzen weder persönliche grafische Abnahme noch einen physischen Gerätebenchmark.
+
+## 0.10 — protection and restrained tension
+
+Preserve 0.9 floors, sculpted cover and native illustrated actors. Add a mint
+protection platform with a stepped luminous beacon, a clearly drawn boundary,
+short label and navigation button. The dome and platform render in the native
+world; the game collision handles projectile absorption independently of art.
+A compact numeric energy bar replaces the old row of hearts so 15–35 HP fits.
+The shop separates weapons, armor and extras into icon tabs, with a permanent
+health refill and dimmed future stages. Higher weapon tiers change projectile
+halo colour/size without changing collision footprints. The new slower original
+minor/modal soundtrack supplies space, tension and recovery. Whether it feels
+right is a human listening/playtest decision, not an RMS measurement.

@@ -1,0 +1,15 @@
+{
+  "created": "2026-10-29",
+  "origin": "Original procedural geometry by tools/make_sanctuary.py; no downloaded art or reference-game assets",
+  "role": "Passable protection platform and stepped light beacon; real projectile absorption is enforced in gameplay",
+  "files": [
+    {
+      "path": "sanctuary.gltf",
+      "sha256": "b2e9d4266f5e4efff7766094af7cc9344f2bc0a941b0e96dff89cd1cb6907162"
+    },
+    {
+      "path": "sanctuary.bin",
+      "sha256": "49a22edb982ce15a81d2e83e4eb2aa0109b8f9528308fca3105621ebada0a2bc"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 -- Current-round objectives and optional treasure are deliberately separate.
 -- This module owns navigation state, never native game objects or shot previews.
 local F={}
+local Shots=require 'main.projectiles'
 local function distance(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
 local function valid_index(g,index)
  return type(index)=='number'and index==index and index%1==0 and index>=1 and index<=#g.data.missions
@@ -24,6 +25,42 @@ local function open_bonus(g)
  return best,point
 end
 function F.bind(g)
+ -- Discovery persists independently of a temporary spoken hint and is harmless
+ -- to old saves: only known mission IDs with boolean true values are retained.
+ if type(g.saved.discovered)~='table'then g.saved.discovered={}end
+ local valid={};for _,mission in ipairs(g.data.missions)do valid[mission.id]=true end
+ for id,value in pairs(g.saved.discovered)do if not valid[id]or value~=true then g.saved.discovered[id]=nil end end
+ function g:discover_treasure()
+  if not self.m.secret or self.saved.earned['secret:'..self.m.id]then return false end
+  if type(self.saved.discovered)~='table'then self.saved.discovered={}end
+  if not self.saved.discovered[self.m.id]then self.saved.discovered[self.m.id]=true;self.changed();return true end
+  return false
+ end
+ function g:treasure_state()
+  local cfg=self.data.treasure_guidance or{}
+  local secret=self.m.secret
+  if not secret then return{available=false,discovered=false,tracking=false,visible=false,distance=0,proximity=0,scale=cfg.far_scale or 1.4,search_radius=cfg.search_radius or 1.8}end
+  local d=distance(self.p,secret.position);local available=not self.saved.earned['secret:'..self.m.id]
+  local discovered=(type(self.saved.discovered)=='table'and self.saved.discovered[self.m.id]==true)or self:level()>0 or self.solved or d<(cfg.discover_radius or 4)
+  local delta={secret.position[1]-self.p[1],secret.position[2]-self.p[2]};local dir=d>.000001 and{delta[1]/d,delta[2]/d}or{1,0}
+  local occluded=d>.05 and Shots.ray(self.p,dir,d-.05,self:active())~=nil
+  local proximity=math.max(0,math.min(1,1-d/(cfg.discover_radius or 4)))
+  return{available=available,position=secret.position,hint=secret.hint_landmark or secret.position,discovered=discovered==true,
+   distance=d,proximity=proximity,tracking=available and(self.navigation_focus=='treasure'or self.solved==true),
+   visible=available and discovered==true,occluded=occluded,scale=(cfg.far_scale or 1.4)+((cfg.near_scale or 2.3)-(cfg.far_scale or 1.4))*proximity,
+   search_radius=cfg.search_radius or 1.8}
+ end
+ function g:update_treasure()
+  local cfg=self.data.treasure_guidance;if not cfg then return end
+  local state=self:treasure_state()
+  if state.available and state.discovered then self:discover_treasure()end
+  self.secret_visible=state.visible
+  if state.available and state.distance<cfg.pickup_radius and not state.occluded and not self:blocked(state.position)then
+   self:award('secret:'..self.m.id);self.secret_visible=false
+   self.say(self.solved and'flow_no_treasure'or'combat_loot')
+   if self.solved then self.status='ALLES GEFUNDEN - NAECHSTE MISSION';self.navigation_focus='objective'end
+  end
+ end
  function g:start_index()
   if valid_index(self,self.saved.current_mission)then return self.saved.current_mission end
   for index,mission in ipairs(self.data.missions)do
@@ -123,7 +160,8 @@ function F.bind(g)
   else state.headline='MISSION ABSCHLIESSEN'end
   if state.treasures_remaining>0 and(self.solved or self.navigation_focus=='treasure')then
    local secret=self.m.secret
-   local revealed=self.solved or self:level()>0 or distance(self.p,secret.position)<4
+   local revealed
+   if self.data.treasure_guidance then revealed=self:treasure_state().discovered else revealed=self.solved or self:level()>0 or distance(self.p,secret.position)<4 end
    state.goal=revealed and secret.position or secret.hint_landmark;state.goal_kind='treasure'
   end
   if self.navigation_focus=='bonus'or(self.solved and state.treasures_remaining==0)then

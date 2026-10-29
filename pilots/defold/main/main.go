@@ -44,6 +44,7 @@ components { id: "device_trap_pulse" component: "/models/device_trap_pulse.facto
 components { id: "cover_shadow" component: "/models/cover_shadow.factory" }
 components { id: "energy_field" component: "/models/energy_field.factory" }
 components { id: "sanctuary" component: "/models/sanctuary.factory" }
+components { id: "hero_aura" component: "/models/hero_aura.factory" }
 components { id: "hints_empty" component: "/audio/hints_empty.sound" }
 components { id: "hint_bank" component: "/audio/hint_bank.sound" }
 components { id: "hint_guardian" component: "/audio/hint_guardian.sound" }
@@ -87,6 +88,8 @@ components { id: "defold_enemy_tap" component: "/audio/defold_enemy_tap.sound" }
 components { id: "defold_shop_tiers" component: "/audio/defold_shop_tiers.sound" }
 components { id: "defold_health_refill" component: "/audio/defold_health_refill.sound" }
 components { id: "defold_sanctuary_intro" component: "/audio/defold_sanctuary_intro.sound" }
+components { id: "defold_treasure_hint" component: "/audio/defold_treasure_hint.sound" }
+components { id: "defold_zoom_help" component: "/audio/defold_zoom_help.sound" }
 components { id: "fx_hit" component: "/audio/fx_hit.sound" }
 components { id: "fx_fire" component: "/audio/fx_fire.sound" }
 components { id: "fx_dash" component: "/audio/fx_dash.sound" }

@@ -33,6 +33,8 @@ TEXTS={
  'defold_sanctuary_intro':'Im leuchtenden Schutzort bist du sicher. Keine Schüsse treffen dich. Deine Energie erholt sich schnell.',
  'defold_shop_tiers':'Sterne kaufen stärkere Waffen und Rüstung. Die dunkle Karte zeigt die nächste Stufe und ihren Preis.',
  'defold_health_refill':'Hier kannst du deine Energie mit Sternen auffüllen. Sie erholt sich auch von selbst.',
+ 'defold_treasure_hint':'Folge dem goldenen Schatzzeichen. Wenn du näher kommst, leuchtet die Truhe. Geh zu ihr.',
+ 'defold_zoom_help':'Mit Plus siehst du alles größer. Mit Minus siehst du mehr vom Feld. Mit zwei Fingern kannst du auch zoomen.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

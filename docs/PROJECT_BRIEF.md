@@ -187,3 +187,12 @@ im Haupt-README. Dafür wird der vollständige 0.10-Arbeitsbranch mit erhaltener
 Commit-Historie in `main` integriert. Die bisherige reine Dokumentationsstartseite
 auf `main` wird damit abgelöst. Die geprüfte APK bleibt unverändert; ein
 Store-Upload oder eine GitHub-Release-Publikation gehört nicht zu diesem Auftrag.
+
+## Betreiberergänzung — 29.10.2026: Zoom, Schatzhinweise und Figurengrafik
+
+Schatzhinweise müssen zu tatsächlich auffindbaren Funden führen; bei Annäherung
+sollen diese größer werden oder leuchten. Zoomen vergrößert bzw. verkleinert den
+betrachteten Spielfeldbereich einschließlich Figuren und verbessert die Lesbarkeit
+kleiner Weltbeschriftungen, besonders am Handy. Figuren sollen ansprechendere,
+höher aufgelöste Bilder, leuchtenden Schimmer und komplexere Animationen erhalten.
+Der übrige 0.10-Funktionsumfang und gespeicherter Fortschritt bleiben erhalten.

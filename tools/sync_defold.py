@@ -24,6 +24,12 @@ if sanctuary.exists():
  models.update(json.loads((sanctuary/'models.json').read_text()))
  for f in sanctuary.iterdir():
   if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
+polished=R/'shared/assets/defold11'
+if (polished/'models.json').exists():
+ models.update(json.loads((polished/'models.json').read_text()))
+ for f in polished.iterdir():
+  if f.suffix in ['.gltf','.bin','.png']and '-original'not in f.name:shutil.copyfile(f,D/'models'/f.name)
+models['hero_aura']={'runtime':'glow.gltf','tag':'hero_aura','texture':None,'fragment':'glow.fp'}
 for key in models:
  if key.endswith('_ground'):
   mission=key[:-7];models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png';models[key]['color_tint']=[.84,.88,.96,1]
@@ -45,10 +51,11 @@ vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -40 y: 100 
 fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: %s y: %s z: %s w: %s } }
 fragment_constants { name: "surface" type: CONSTANT_TYPE_USER value { x: %s y: %s z: 0 w: 0 } }
 fragment_constants { name: "edge" type: CONSTANT_TYPE_USER value { x: %s y: 0 z: 0 w: 0 } }
+fragment_constants { name: "hero_fx" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: 0 w: 0 } }
 fragment_constants { name: "frame" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: %s w: %s } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }
 '''%(key,tag,fragment,*color,ground,emissive,1.25 if name in ['illustrated_hero','illustrated_dragon','illustrated_fox','illustrated_sentinel','illustrated_guardian','illustrated_boss']else 0,models[name].get('columns',1),models[name].get('rows',1))
-  material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
+  material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"hero_fx\"'in line and fragment!='billboard.fp')or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')
  (D/'models'/(name+'.model')).write_text('\n'.join(model)+'\n')
@@ -95,7 +102,9 @@ for file,name,loop,gain in [('aurora-hop.ogg','music',1,1.0),('energy-burst.ogg'
 (D/'main/main.go').write_text('\n'.join(components)+'\n')
 
 # Original portrait renders, not external character art.
-for name in ['hero','dragon','fox']:shutil.copyfile((illustrations/(name+'-portrait.png'))if illustrations.exists()else(art/(name+'.png')),D/'models'/(name+'.png'))
+for name in ['hero','dragon','fox']:
+ portrait=(polished/(name+'-hd-portrait.png'))if (polished/(name+'-hd-portrait.png')).exists()else(illustrations/(name+'-portrait.png'))if illustrations.exists()else(art/(name+'.png'))
+ shutil.copyfile(portrait,D/'models'/(name+'.png'))
 (D/'models/portraits.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ['hero','dragon','fox'])+'\nextrude_borders: 2\n')
 shutil.copyfile(art/'surfaces.json',D/'data/surfaces.json')
 

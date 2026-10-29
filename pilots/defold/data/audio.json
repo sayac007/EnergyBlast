@@ -626,6 +626,28 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 2332248811
+    },
+    {
+      "id": "defold_treasure_hint",
+      "text": "Folge dem goldenen Schatzzeichen. Wenn du näher kommst, leuchtet die Truhe. Geh zu ihr.",
+      "file": "defold_treasure_hint.ogg",
+      "sha256": "e2e0952880c87be7c593795c5a9255635331a5686025313986c7475968fb0038",
+      "seconds": 6.6,
+      "playback_gain_db": 10.916913374235545,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2268886316
+    },
+    {
+      "id": "defold_zoom_help",
+      "text": "Mit Plus siehst du alles größer. Mit Minus siehst du mehr vom Feld. Mit zwei Fingern kannst du auch zoomen.",
+      "file": "defold_zoom_help.ogg",
+      "sha256": "a46ba729cfaf2c2ec1aa4d3fea864eb3a119029e5f6452901578296b67824049",
+      "seconds": 8.2,
+      "playback_gain_db": 6.921328713234111,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 375857410
     }
   ]
 }

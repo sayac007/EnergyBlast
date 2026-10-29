@@ -17,6 +17,9 @@ function M.run(self)
  check(math.abs(p.x-self.g.p[1])<.001 and math.abs(p.z-self.g.p[2])<.001,'animated drawing stays foot-anchored to actual collider')
  check(go.get_rotation(self.hero).y==0,'camera-facing actor never spins its picture edge-on')
  check(self.projectile_nodes~=nil and self.halo_nodes~=nil and self.trails~=nil,'native depth-tested effect state exists')
+ local fx=go.get(msg.url(nil,self.hero,'model'),'hero_fx')
+ check(fx.w>=1 and fx.w<=3,'actual character shader receives its coloured shimmer state')
+ check(#self.hero_sparks==6,'bounded orbit lights are actual native model objects')
  return n
 end
 return M

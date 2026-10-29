@@ -1,0 +1,4 @@
+sound: "/audio/defold_treasure_hint.ogg"
+looping: 0
+group: "master"
+gain: 3.132172474820951

@@ -3,7 +3,7 @@ from pathlib import Path
 import hashlib,json
 R=Path(__file__).resolve().parents[1];p=R/'shared/asset-origins.json';d=json.loads(p.read_text());prefix='shared/assets/defold06/'
 d['assets']=[row for row in d['assets']if not row['path'].startswith(prefix)]
-d['assets']=[row for row in d['assets']if not row['path'].startswith(('shared/assets/defold07/','shared/assets/defold09/','shared/assets/defold10/'))]
+d['assets']=[row for row in d['assets']if not row['path'].startswith(('shared/assets/defold07/','shared/assets/defold09/','shared/assets/defold10/','shared/assets/defold11/'))]
 for f in sorted((R/prefix).iterdir()):
  if not f.is_file():continue
  origin='Original detailed Blender 4.3.2 geometry, rigid-part rigs and AO bake from tools/make_defold06_models.py'
@@ -18,4 +18,7 @@ for f in sorted((R/'shared/assets/defold09').iterdir()):
  d['assets'].append({'path':f.relative_to(R).as_posix(),'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'origin':'Original OpenAI-generated per-sector floor paintings 2026-10-29, no external game inputs; technical import/analytic effect geometry tools/import_defold09_art.py; PROVENANCE.json'})
 for f in sorted((R/'shared/assets/defold10').iterdir()):
  if f.is_file():d['assets'].append({'path':f.relative_to(R).as_posix(),'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'origin':'Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets'})
+if (R/'shared/assets/defold11').exists():
+ for f in sorted((R/'shared/assets/defold11').iterdir()):
+  if f.is_file():d['assets'].append({'path':f.relative_to(R).as_posix(),'sha256':hashlib.sha256(f.read_bytes()).hexdigest(),'origin':'Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json'})
 p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\n')

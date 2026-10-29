@@ -3,13 +3,13 @@
 in mediump vec2 var_texcoord0;
 out vec4 out_fragColor;
 uniform mediump sampler2D tex0;
-uniform fs_uniforms { mediump vec4 tint; mediump vec4 frame; mediump vec4 edge; mediump vec4 hero_fx; };
+uniform fs_uniforms { mediump vec4 tint; mediump vec4 frame; mediump vec4 edge; mediump vec4 hero_fx; mediump vec4 atlas_texel; };
 void main(){
  vec2 local_uv=vec2(var_texcoord0.x,1.0-var_texcoord0.y);
  if(tint.w<0.0)local_uv.x=1.0-local_uv.x;
  vec2 cell=vec2(frame.x,frame.w-1.0-frame.y),grid=vec2(frame.z,frame.w);
  vec2 uv=(local_uv+cell)/grid;
- vec2 texel=1.0/vec2(textureSize(tex0,0));
+ vec2 texel=atlas_texel.xy;
  vec2 lo=cell/grid+texel*.5,hi=(cell+1.0)/grid-texel*.5;
  vec4 color=texture(tex0,clamp(uv,lo,hi));
  vec2 dx=dFdx(uv),dy=dFdy(uv);

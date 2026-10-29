@@ -103,3 +103,8 @@ Truhen werden durch echte Bewegung gesammelt, nicht per Fixture vergeben.
 Update/Spielstandübernahme, Geräteleistung bei maximalem Zoom, menschlicher Hörtest
 und ästhetische Abnahme. Native Touchpaketprüfungen sind kein physischer
 Android-Mehrfingertest. Keine neue grüne CI, Store-Freigabe oder Lernwirkung behauptet.
+
+Beim ersten Android-Export wurde eine nicht für ESSL 100 verfügbare Texturabfrage
+im neuen Schimmer gefunden. Texturabmessungen werden deshalb als Materialkonstante
+übergeben. Die nativen Prüfungen und der positive Schimmervergleich wurden danach
+erneut bestanden; der ältere Shaderpfad wird beibehalten.

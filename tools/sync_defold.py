@@ -1,6 +1,6 @@
 """Generate a native Defold project from the same original glTFs and rules."""
 from pathlib import Path
-import json,shutil,zipfile
+import json,shutil,zipfile,struct
 R=Path(__file__).resolve().parents[1];D=R/'pilots/defold'
 shutil.copyfile(R/'shared/defold04.json',D/'data/defold04.json')
 shutil.copyfile(R/'shared/defold07-regression.json',D/'data/defold07.json')
@@ -55,6 +55,9 @@ fragment_constants { name: "hero_fx" type: CONSTANT_TYPE_USER value { x: 0 y: 0 
 fragment_constants { name: "frame" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: %s w: %s } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }
 '''%(key,tag,fragment,*color,ground,emissive,1.25 if name in ['illustrated_hero','illustrated_dragon','illustrated_fox','illustrated_sentinel','illustrated_guardian','illustrated_boss']else 0,models[name].get('columns',1),models[name].get('rows',1))
+  if fragment=='billboard.fp':
+   width,height=struct.unpack('>II',(D/'models'/texture).read_bytes()[16:24])
+   material+='fragment_constants { name: \"atlas_texel\" type: CONSTANT_TYPE_USER value { x: '+str(1/width)+' y: '+str(1/height)+' z: 0 w: 0 } }\n'
   material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"hero_fx\"'in line and fragment!='billboard.fp')or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')

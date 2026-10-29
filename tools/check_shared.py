@@ -165,6 +165,7 @@ class SharedChecks(unittest.TestCase):
     self.assertEqual(c.getchannel('A').crop((0,0,8,512)).getextrema()[1],0)
    self.assertEqual((art/(name+'-hd-walk.png')).read_bytes(),(ROOT/'pilots/defold/models'/(name+'-hd-walk.png')).read_bytes())
    material=(ROOT/'pilots/defold/models'/('illustrated_'+name+'-0.material')).read_text();self.assertIn('name: "hero_fx"',material)
+  shader=(ROOT/'pilots/defold/main/billboard.fp').read_text();self.assertNotIn('textureSize(',shader);self.assertIn('atlas_texel.xy',shader)
   self.assertIn('zoom=self.g.zoom',(ROOT/'pilots/defold/main/main.script').read_text())
   self.assertIn('View.matrices(w,h,self.center,self.zoom)',(ROOT/'pilots/defold/main/main.render_script').read_text())
  def test_static_batches_preserve_source_geometry(self):

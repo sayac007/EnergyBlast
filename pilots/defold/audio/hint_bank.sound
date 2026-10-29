@@ -1,0 +1,4 @@
+sound: "/audio/hint_bank.ogg"
+looping: 0
+group: "master"
+gain: 1.3156541067233771

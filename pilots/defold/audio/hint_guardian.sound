@@ -1,0 +1,4 @@
+sound: "/audio/hint_guardian.ogg"
+looping: 0
+group: "master"
+gain: 3.1804278784474094

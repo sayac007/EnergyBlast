@@ -1,0 +1,2 @@
+mesh: "/models/cover_shadow.gltf"
+materials { name: "cover_shadow" material: "/models/cover_shadow-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -178,3 +178,12 @@ Mehr Käufe für Sterne, Gesundheit dauerhaft wiederholt kaufbar, mächtigere Wa
 und Rüstung in sichtbaren Stufen mit Vorschaupreis. Keine neuen Tempokäufe.
 Musik soll die Science-Fiction-Kampfatmosphäre tragen, statt hüpfender Feenwelt.
 Die direkte Steuerung, bisherigen Missionen und lokalen Spielstände bleiben.
+
+## Betreiberergänzung — 29.10.2026: vollständiger Stand auf main
+
+Der Betreiber beauftragt die Übernahme aller fertigen Änderungen in das Repository
+und die ausdrückliche Dokumentation von Entwicklungshistorie und aktuellem Stand
+im Haupt-README. Dafür wird der vollständige 0.10-Arbeitsbranch mit erhaltener
+Commit-Historie in `main` integriert. Die bisherige reine Dokumentationsstartseite
+auf `main` wird damit abgelöst. Die geprüfte APK bleibt unverändert; ein
+Store-Upload oder eine GitHub-Release-Publikation gehört nicht zu diesem Auftrag.

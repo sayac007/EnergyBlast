@@ -1,0 +1,5 @@
+script: "/main/backdrop.gui_script"
+material: "/main/backdrop.material"
+textures {name:"interface" texture:"/models/interface.atlas"}
+adjust_reference: ADJUST_REFERENCE_PARENT
+max_nodes: 4

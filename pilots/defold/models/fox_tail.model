@@ -1,0 +1,3 @@
+mesh: "/models/fox_tail.gltf"
+materials { name: "Fox copper" material: "/models/fox_tail-0.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }
+materials { name: "Warm ivory" material: "/models/fox_tail-1.material" textures { sampler: "tex0" texture: "/models/fox-ao.png" } }

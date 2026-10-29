@@ -1,0 +1,19 @@
+{
+  "version": "1.14.0",
+  "engine": "d295ed4",
+  "java_major": 25,
+  "assets": [
+    {
+      "file": "bob.jar",
+      "url": "https://github.com/defold/defold/releases/download/1.14.0/bob.jar",
+      "bytes": 229993330,
+      "sha256": "d8cbe667757ca1c5f4dfd251bc98660c35e7a65ac84bf0207ccef7607de6d1a1"
+    },
+    {
+      "file": "Defold-x86_64-linux.zip",
+      "url": "https://github.com/defold/defold/releases/download/1.14.0/Defold-x86_64-linux.zip",
+      "bytes": 366716597,
+      "sha256": "56669a17bd4e56355a215e09623e17c26dd1333e100ecc1123326d9e6f4a8299"
+    }
+  ]
+}

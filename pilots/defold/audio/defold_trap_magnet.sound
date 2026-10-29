@@ -1,0 +1,4 @@
+sound: "/audio/defold_trap_magnet.ogg"
+looping: 0
+group: "master"
+gain: 1.2479625077564924

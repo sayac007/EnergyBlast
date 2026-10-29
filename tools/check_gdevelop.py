@@ -1,0 +1,98 @@
+"""Touch/mission/save regression against an actual exported GDevelop WebGL game."""
+from pathlib import Path
+import functools,threading,http.server,json,re,os
+from playwright.sync_api import sync_playwright
+folder=Path(os.environ.get('ENERGYBLAST_GD_OUTPUT','/tmp/energyblast-gdevelop-web'))
+class Handler(http.server.SimpleHTTPRequestHandler):
+ def log_message(self,*args):pass
+server=http.server.ThreadingHTTPServer(('127.0.0.1',0),functools.partial(Handler,directory=str(folder)))
+threading.Thread(target=server.serve_forever,daemon=True).start()
+checks=0
+with sync_playwright() as p:
+ browser=p.chromium.launch(executable_path='/usr/bin/chromium',headless=True,args=['--no-sandbox','--enable-unsafe-swiftshader'])
+ page=browser.new_page(viewport={'width':450,'height':800},has_touch=True,is_mobile=True)
+ errors=[];external=[]
+ page.on('pageerror',lambda e:errors.append(str(e)))
+ def route(r):
+  if not r.request.url.startswith(('http://127.0.0.1:', 'data:', 'blob:')):external.append(r.request.url);r.abort()
+  else:r.continue_()
+ page.route('**/*',route)
+ def check(expression,message):
+  global checks
+  checks+=1
+  assert page.evaluate(expression),message
+ def tap_world(point):
+  coords=page.evaluate('''p=>{let g=globalThis.__energyblast,v=new THREE.Vector3(p[0]*100,-p[1]*100,0).project(g.layer.getRenderer().getThreeCamera()),r=g.canvas.getBoundingClientRect();return [r.left+(v.x+1)*.5*r.width,r.top+(1-v.y)*.5*r.height];}''',point)
+  page.touchscreen.tap(*coords)
+ page.goto(f'http://127.0.0.1:{server.server_port}/')
+ page.wait_for_function('!!globalThis.__energyblast')
+ check('globalThis.__energyblast.scene.getGame()._disableMetrics===true','GDevelop runtime metrics explicitly disabled')
+ page.evaluate('globalThis.__energyblast.sound=false')
+ page.get_by_role('button',name='Bandenschalter').tap()
+ check('globalThis.__energyblast.m.id==="bank"','First touch mission selected')
+ page.get_by_role('button',name='Zielen').tap();tap_world([1.392857,-4.35])
+ check('Math.abs(globalThis.__energyblast.aim[0]-.581238)<.01','Touchscreen unprojection/aim')
+ page.get_by_role('button',name=re.compile(r'Tipp$')).tap();tap_world([4.5,0])
+ check('globalThis.__energyblast.distance(globalThis.__energyblast.prediction,[4.5,0])<.05','Prediction marker touch')
+ page.get_by_role('button',name=re.compile(r'Schuss$')).tap()
+ page.wait_for_function('globalThis.__energyblast.solved',timeout=12000)
+ check('globalThis.__energyblast.total()===100','Reflection activates switch and earns first/skill stars')
+ check('globalThis.__energyblast.hints()===2','Two earned mission clues')
+ page.get_by_role('button',name='Geheimnisse suchen').tap()
+ page.get_by_role('button',name=re.compile(r'Hinweis$')).tap()
+ check('globalThis.__energyblast.hints()===1','First secret clue costs one')
+ page.get_by_role('button',name=re.compile(r'Hinweis$')).tap()
+ check('globalThis.__energyblast.hints()===1','Debounce prevents accidental double spending')
+ page.wait_for_timeout(1400);page.get_by_role('button',name=re.compile(r'Hinweis$')).tap()
+ check('globalThis.__energyblast.hints()===0','Second stage purchased')
+ page.get_by_role('button',name=re.compile(r'Laufen$')).tap();tap_world([-4.5,-2.5])
+ page.wait_for_function('globalThis.__energyblast.saved.earned["secret:bank"]',timeout=25000)
+ check('globalThis.__energyblast.total()===150','Hidden bonus reachable by native touch path')
+ page.reload();page.wait_for_function('!!globalThis.__energyblast')
+ check('globalThis.__energyblast.total()===150&&globalThis.__energyblast.hints()===0','Browser restart restores scores and paid clues')
+ page.evaluate('globalThis.__energyblast.sound=false')
+ page.get_by_role('button',name='Wächter und Energietor').tap()
+ check('globalThis.__energyblast.m.id==="guardian"','Second touch mission selected')
+ page.evaluate("let g=globalThis.__energyblast;g.paused=true;g.p=[-3.5,0];g.mode='trap';g.touch([-.5,0])")
+ check('globalThis.__energyblast.trap===null','Cannot place capture field through cover')
+ page.evaluate("let g=globalThis.__energyblast;g.p=[-5,-3];g.mode='trap';g.touch([-4.5,-2.6])")
+ check('!!globalThis.__energyblast.trap&&globalThis.__energyblast.trapUsed','Visible nearby field is placeable')
+ page.evaluate('globalThis.__energyblast.tickGuard(.01)')
+ check('globalThis.__energyblast.frozen>3&&!globalThis.__energyblast.trap','Guardian triggers field')
+ page.evaluate('globalThis.__energyblast.tickGuard(3.6)')
+ check('globalThis.__energyblast.frozen<=0','Field restraint expires')
+ page.evaluate('globalThis.__energyblast.load(1)')
+ page.evaluate('''()=>{let g=globalThis.__energyblast;g.paused=true;g.clock=0;g.navigate(g.m.goal);}''')
+ check('globalThis.__energyblast.path.length>0&&globalThis.__energyblast.path.at(-1)[1]>-1.1','Closed gate path stages rather than automatically crossing')
+ page.evaluate('''()=>{let g=globalThis.__energyblast;g.p=[5.1,0];g.clock=5.01;g.frozen=100;g.navigate(g.m.goal);for(let i=0;i<40;i++){g.paused=false;g.update(.05);}g.paused=true;}''')
+ check('globalThis.__energyblast.solved&&globalThis.__energyblast.total()===275','Announced window solvable at base speed')
+ check('globalThis.__energyblast.award("mission:guardian")===0','No duplicate mission payment')
+ check('globalThis.__energyblast.hints()===2','No hint farming on replay')
+ page.get_by_role('button',name='Geheimnisse suchen').tap()
+ page.evaluate('''()=>{let g=globalThis.__energyblast;g.p=[...g.m.secret.position];g.update(.01);g.paused=true;}''')
+ check('globalThis.__energyblast.total()===325','Both hidden bonuses and all rewards bounded')
+ check('globalThis.__energyblast.stats().speed>3&&globalThis.__energyblast.stats().cloak>0&&globalThis.__energyblast.stats().grace>1','Unlocked equipment changes actual game stats')
+ check('globalThis.__energyblast.ray([0,0],[1,0],3,[{r:[1,-1,.4,2],type:"cover"}])!==null','Cover blocks sight ray')
+ check('globalThis.__energyblast.ray([0,0],[1,0],.8,[{r:[1,-1,.4,2],type:"cover"}])===null','Unoccluded short sight ray')
+ before=page.evaluate('globalThis.__energyblast.total()');page.evaluate('''()=>{let g=globalThis.__energyblast;g.paused=false;for(let i=0;i<100;i++)g.update(.05);g.paused=true;}''')
+ check('globalThis.__energyblast.total()==='+str(before),'Waiting generates no stars')
+ page.evaluate('''()=>{let g=globalThis.__energyblast;g.paused=false;document.dispatchEvent(new Event('energyblast-pause'));let before=g.clock;g.update(.5);globalThis.backgroundClockUnchanged=g.clock===before;}''')
+ check('globalThis.__energyblast.background&&globalThis.backgroundClockUnchanged','Native background event pauses simulation')
+ page.evaluate("document.dispatchEvent(new Event('energyblast-resume'));globalThis.__energyblast.paused=true;globalThis.__energyblast.sound=true")
+ page.get_by_role('button',name=re.compile(r'Erklären$')).tap()
+ page.wait_for_function('globalThis.__energyblast.audio&&!globalThis.__energyblast.audio.paused&&globalThis.__energyblast.audio.currentTime>.1',timeout=10000)
+ check('!globalThis.__energyblast.background','Native resume event restores simulation')
+ page.evaluate("globalThis.firstAudio=globalThis.__energyblast.audio;globalThis.__energyblast.say('gate')")
+ check('globalThis.__energyblast.audio===globalThis.firstAudio&&globalThis.__energyblast.next==="gate"','New instruction queued without cutting current sentence')
+ page.wait_for_function('globalThis.__energyblast.audio!==globalThis.firstAudio',timeout=12000)
+ check('globalThis.firstAudio.ended&&globalThis.firstAudio.currentTime>=globalThis.firstAudio.duration-.1','Complete first sentence plays before queued instruction')
+ page.locator('#eb-sound').tap()
+ page.evaluate("document.dispatchEvent(new Event('energyblast-pause'));document.dispatchEvent(new Event('energyblast-resume'))")
+ check('!globalThis.__energyblast.sound&&globalThis.__energyblast.audio.paused','Muted speech stays stopped across app resume')
+ page.screenshot(path='/tmp/energyblast-gdevelop-guardian.png')
+ assert not errors,errors
+ assert not external,external
+ checks+=2
+ print(json.dumps({'status':'PASS','checks':checks,'page_errors':errors,'external_requests':external,'scope':'Desktop Chromium touch emulation and real GDevelop/WebGL, not a physical Android benchmark'},indent=2))
+ browser.close()
+server.shutdown()

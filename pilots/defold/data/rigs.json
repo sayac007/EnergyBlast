@@ -1,0 +1,179 @@
+{
+  "hero": [
+    {
+      "model": "hero",
+      "part": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "model": "hero_leg_l",
+      "part": "leg_l",
+      "pivot": [
+        -0.21,
+        0.63,
+        0
+      ]
+    },
+    {
+      "model": "hero_arm_l",
+      "part": "arm_l",
+      "pivot": [
+        -0.43,
+        1.08,
+        0
+      ]
+    },
+    {
+      "model": "hero_leg_r",
+      "part": "leg_r",
+      "pivot": [
+        0.21,
+        0.63,
+        0
+      ]
+    },
+    {
+      "model": "hero_arm_r",
+      "part": "arm_r",
+      "pivot": [
+        0.43,
+        1.08,
+        0
+      ]
+    }
+  ],
+  "dragon": [
+    {
+      "model": "dragon",
+      "part": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "model": "dragon_leg_l",
+      "part": "leg_l",
+      "pivot": [
+        -0.26,
+        0.6,
+        0
+      ]
+    },
+    {
+      "model": "dragon_arm_l",
+      "part": "arm_l",
+      "pivot": [
+        -0.43,
+        1.0,
+        0
+      ]
+    },
+    {
+      "model": "dragon_wing_l",
+      "part": "wing_l",
+      "pivot": [
+        -0.32,
+        1.17,
+        -0.19
+      ]
+    },
+    {
+      "model": "dragon_leg_r",
+      "part": "leg_r",
+      "pivot": [
+        0.26,
+        0.6,
+        0
+      ]
+    },
+    {
+      "model": "dragon_arm_r",
+      "part": "arm_r",
+      "pivot": [
+        0.43,
+        1.0,
+        0
+      ]
+    },
+    {
+      "model": "dragon_wing_r",
+      "part": "wing_r",
+      "pivot": [
+        0.32,
+        1.17,
+        -0.19
+      ]
+    },
+    {
+      "model": "dragon_tail",
+      "part": "tail",
+      "pivot": [
+        0,
+        0.64,
+        -0.25
+      ]
+    }
+  ],
+  "fox": [
+    {
+      "model": "fox",
+      "part": "body",
+      "pivot": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "model": "fox_leg_l",
+      "part": "leg_l",
+      "pivot": [
+        -0.2,
+        0.62,
+        0
+      ]
+    },
+    {
+      "model": "fox_arm_l",
+      "part": "arm_l",
+      "pivot": [
+        -0.41,
+        1.06,
+        0
+      ]
+    },
+    {
+      "model": "fox_leg_r",
+      "part": "leg_r",
+      "pivot": [
+        0.2,
+        0.62,
+        0
+      ]
+    },
+    {
+      "model": "fox_arm_r",
+      "part": "arm_r",
+      "pivot": [
+        0.41,
+        1.06,
+        0
+      ]
+    },
+    {
+      "model": "fox_tail",
+      "part": "tail",
+      "pivot": [
+        0.15,
+        0.58,
+        -0.27
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+sound: "/audio/defold_forge.ogg"
+looping: 0
+group: "master"
+gain: 1.4349672249724414

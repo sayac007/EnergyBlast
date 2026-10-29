@@ -1,0 +1,407 @@
+local Layout=require 'main.layout'
+local Traps=require 'main.trap_controls'
+local Objectives=require 'main.objectives'
+local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
+local function track(self,n)
+ gui.set_adjust_mode(n,gui.ADJUST_STRETCH)
+ if self.world_parent then gui.set_parent(n,self.world_parent,true)end;self.nodes[#self.nodes+1]=n;return n
+end
+local function box(self,x,y,w,h,c)
+ local n=gui.new_box_node(vmath.vector3(x,y,0),vmath.vector3(w,h,0));gui.set_color(n,color(c));return track(self,n)
+end
+local function text(self,x,y,s,c,scale,max_width)
+ local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ffffff'))
+ local scale=scale or 1;local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),s);if max_width and metrics.width*scale>max_width then scale=max_width/metrics.width end
+ gui.set_scale(n,vmath.vector3(scale));return track(self,n)
+end
+local function picture(self,x,y,w,h,name,atlas,sliced)
+ local n=box(self,x,y,w,h,'ffffff');gui.set_texture(n,atlas or'interface');gui.play_flipbook(n,name)
+ if sliced then gui.set_slice9(n,vmath.vector4(24,24,24,24))end;return n
+end
+local function panel(self,x,y,w,h)return picture(self,x,y,w,h,'panel',nil,true)end
+local function icon(self,x,y,name,size)return picture(self,x,y,size or 46,size or 46,name=='treasure'and'chest-prop'or'ui_'..name)end
+local function circle(self,x,y,r,c)
+ local n=gui.new_pie_node(vmath.vector3(x,y,0),vmath.vector3(r*2,r*2,0));gui.set_color(n,color(c));gui.set_perimeter_vertices(n,32);return track(self,n)
+end
+local function button(self,x,y,w,h,title,action,c,ico)
+ local palette={['3b5391']='blue',['268974']='green',['b67422']='gold',['804bd1']='violet'}
+ local style=palette[c]or c or'blue';local n=picture(self,x,y,w,h,'button_'..style,nil,true)
+ if ico then icon(self,x-w/2+35,y+3,ico,36)end
+ text(self,x+(ico and 15 or 0),y+3,title,'ffffff',.85,w-(ico and 75 or 22))
+ self.buttons[#self.buttons+1]={node=n,action=action,rect={x,y,w,h},world=self.world_parent~=nil};return n
+end
+local function line(self,x1,y1,x2,y2,c,width)
+ local dx,dy=x2-x1,y2-y1;local n=box(self,(x1+x2)/2,(y1+y2)/2,math.sqrt(dx*dx+dy*dy),width or 3,c);gui.set_rotation(n,vmath.vector3(0,0,math.atan2(dy,dx)*180/math.pi))
+end
+local function ring(self,x,y,r,c,width)
+ for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;line(self,x+math.cos(a)*r,y+math.sin(a)*r,x+math.cos(b)*r,y+math.sin(b)*r,c,width or 3)end
+end
+local function portrait(self,x,y,id,size)return picture(self,x,y,size,size,id,'portraits')end
+local function star(self,x,y,r)icon(self,x,y,'star',r*2)end
+local function glass(self,x,y,w,h,alpha)
+ local n=panel(self,x,y,w,h);gui.set_color(n,vmath.vector4(1,1,1,alpha or .86));return n
+end
+local function mission_card(self,g,m,i,x,y,subtitle)
+ -- Real illustrations, cropped at their original aspect ratio. Text has its own
+ -- dark contrast strip; the entire image card is one generous touch target.
+ glass(self,x,y-4,306,144,.96)
+ local clip=box(self,x,y,298,136,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false)
+ local first=#self.nodes+1
+ picture(self,x,y+8,300,169,'mission_'..m.id)
+ local shade=box(self,x,y-38,300,62,'07152c');gui.set_color(shade,vmath.vector4(.025,.06,.13,.90))
+ local done=(g.saved.earned['bonus:prism:'..m.id]and 1 or 0)+(g.saved.earned['bonus:pattern:'..m.id]and 1 or 0)
+ text(self,x,y-26,m.title,'ffffff',.77,278);text(self,x,y-51,subtitle..' · BONI '..done..'/2','bdebf1',.41,280)
+ if i>=4 and not g.saved.earned['mission:'..m.id]then local tag=box(self,x,y+53,88,24,'d79125');text(self,x,y+53,'NEU','ffffff',.55,80)end
+ circle(self,x-123,y+45,19,'142b47')
+ if g.saved.earned['mission:'..m.id]then icon(self,x-123,y+46,'star',32)else text(self,x-123,y+45,tostring(i),'ffffff',.70)end
+ local symbols={'aim','armor','cannon','trap_magnet','radio','heart'}
+ circle(self,x+122,y+44,23,'10243c');icon(self,x+122,y+44,symbols[i],41)
+ for j=first,#self.nodes do gui.set_parent(self.nodes[j],clip,true)end
+ self.buttons[#self.buttons+1]={node=clip,action='sector'..i,rect={x,y,298,136}}
+ gui.set_position(clip,vmath.vector3(x,y-10,0));gui.animate(clip,gui.PROP_POSITION,vmath.vector3(x,y,0),gui.EASING_OUTCUBIC,.24,(i-1)*.025)
+end
+local function clamp(v,a,b)return math.max(a,math.min(b,v))end
+local function ground_ring(self,g,p,r,c,width)
+ for j=0,47 do
+  local a=j*math.pi/24;local b=(j+1)*math.pi/24
+  local x1,y1=g.project(g,{p[1]+r*math.cos(a),p[2]+r*math.sin(a)},.08)
+  local x2,y2=g.project(g,{p[1]+r*math.cos(b),p[2]+r*math.sin(b)},.08)
+  line(self,x1,y1,x2,y2,c,width or 3)
+ end
+end
+local function field_guide(self,g,state)
+ if state.goal and not g.trap_ui then
+  local tx,ty=g.project(g,state.goal,.15);local x=clamp(tx,Layout.left+48,Layout.right-48);local y=clamp(ty,Layout.bottom+44,Layout.top-44)
+  local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local guide_color=state.goal_kind=='exit'and'78ffb7'or state.goal_kind=='bonus'and'c5a0ff'or'ffe5a0'
+  local symbol=state.goal_kind=='treasure'and'treasure'or state.goal_kind=='exit'and'dash'or state.goal_kind=='drone'and'heart'or state.goal_kind=='sequence'and'radio'or state.goal_kind=='bonus'and'star'or'aim'
+  if off then
+   circle(self,x,y,23,'112a42');icon(self,x,y,symbol,30)
+   local dx,dy=tx-x,ty-y;local d=math.sqrt(dx*dx+dy*dy);if d>0 then
+    local ux,uy=dx/d,dy/d;local ax,ay=x+ux*28,y+uy*28
+    line(self,x+ux*19,y+uy*19,ax,ay,guide_color,4);line(self,ax,ay,ax-ux*8-uy*5,ay-uy*8+ux*5,guide_color,3);line(self,ax,ay,ax-ux*8+uy*5,ay-uy*8-ux*5,guide_color,3)
+   end
+  else ground_ring(self,g,state.goal,.65,state.goal_kind=='treasure'and'ffda79'or state.goal_kind=='exit'and'78ffb7'or'8cebe7',2)end
+  local title=state.goal_kind=='treasure'and'SCHATZSPUR'or state.goal_kind=='exit'and'AUSGANG'or state.goal_kind=='drone'and'DROHNE'or state.goal_kind=='sequence'and'LICHTER'or state.goal_kind=='bonus'and'BONUS'or'ZIEL'
+  text(self,clamp(x,Layout.left+85,Layout.right-85),clamp(y-34,Layout.bottom+16,Layout.top-16),title,guide_color,.43,160)
+ end
+end
+local function field_traps(self,g)
+ if g.m.kind~='trap'or g.over then return end
+ local px,py=g.project(g,g.p,.4)
+ local bx=clamp(px+87,Layout.left+54,Layout.right-54);local by=clamp(py+20,Layout.bottom+58,Layout.top-58)
+ if not g.trap_ui then
+  local n=picture(self,bx,by,92,92,'button_violet',nil,true);icon(self,bx,by+9,'trap_magnet',61)
+  text(self,bx,by-29,g.trap_cooldown>0 and tostring(math.ceil(g.trap_cooldown))..' s'or'FALLEN','ffffff',.48,83)
+  self.buttons[#self.buttons+1]={node=n,action='trap_open',world=true,rect={bx,by,92,92}}
+  if g.trap_test and not self.trap_ready then self.trap_ready=true;print('DEFOLD FIELD TRAP READY '..math.floor(bx)..' '..math.floor(by))end
+  return
+ end
+ local ui=g.trap_ui
+ local x=clamp(px,Layout.left+240,Layout.right-240);local y=clamp(py,Layout.bottom+190,Layout.top-175)
+ if ui.mode=='catalogue'then
+  local dim=box(self,640,360,Layout.right-Layout.left,Layout.top-Layout.bottom,'111e41');gui.set_color(dim,vmath.vector4(.04,.08,.2,.82))
+  panel(self,x,y,470,329);text(self,x,y+138,'WAEHLE DEINE FALLE','ffffff',.93,430)
+  local offsets={-145,0,145}
+  for i,spec in ipairs(Objectives.catalogue)do
+   local cx=x+offsets[i];local cy=y+31+(i==2 and 16 or 0)
+   local n=picture(self,cx,cy,130,132,'button_'..(i==1 and'violet'or i==2 and'blue'or'gold'),nil,true)
+   icon(self,cx,cy+17,spec.icon,83);text(self,cx,cy-39,spec.name,'ffffff',.65,120)
+   text(self,cx,cy-87,i==3 and'2 SCHADEN'or tostring(spec.duration):gsub('%.',',')..' s FEST','c9eaff',.48,135)
+   self.buttons[#self.buttons+1]={node=n,action='trap_select:'..spec.id,world=true,rect={cx,cy,130,132}}
+   if g.trap_test and self.trap_logged_mode~=ui.mode then print('DEFOLD FIELD TRAP OPTION '..spec.id..' '..math.floor(cx)..' '..math.floor(cy))end
+  end
+  button(self,x,y-123,210,58,'ABBRECHEN','trap_cancel','blue','trap_cancel')
+  if g.trap_test and self.trap_logged_mode~=ui.mode then print('DEFOLD FIELD TRAP CANCEL '..math.floor(x)..' '..math.floor(y-123))end
+ else
+  ground_ring(self,g,g.p,Traps.range,'87e4e2',3)
+  local preview=ui.preview or g.p;local spec=Objectives.trap_spec(ui.selected)
+  ground_ring(self,g,preview,spec.radius,ui.valid and'9cffce'or'ff718e',4)
+  local tx,ty=g.project(g,preview,.12)
+  local n=icon(self,tx,ty+21,spec.icon,64);gui.set_color(n,vmath.vector4(1,1,1,.70))
+  text(self,clamp(tx,Layout.left+160,Layout.right-160),clamp(ty-45,Layout.bottom+24,Layout.top-24),ui.reason,ui.valid and'a7ffd9'or'ff90a8',.57,310)
+  -- Only this cancel control is overlaid; the rest of the floor remains a target.
+  local cy=Layout.top-42
+  button(self,Layout.right-114,cy,214,64,'ABBRECHEN','trap_cancel','blue','trap_cancel')
+  text(self,Layout.left+290,cy,'TIPPE AUF FREIEN BODEN','d6fff0',.75,500)
+  if g.trap_test and self.trap_logged_mode~=ui.mode then
+   local tx,ty=g.project(g,{g.p[1]+1.5,g.p[2]},0)
+   print('DEFOLD FIELD TRAP FLOOR '..math.floor(tx)..' '..math.floor(ty))
+  end
+ end
+ self.trap_logged_mode=ui.mode
+end
+local function page(self,g,title)
+ -- The background is a separate earlier render pass; the animated 3D hero stays visible.
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'SCHUTZ & AUSRUESTUNG  ·  0.10','a3e7df',.61)
+ glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
+ icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
+ text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
+ text(self,284,316,g:character().shot=='fireball'and'DRACHE FLAMMI'or g:character().name,'fff0a6',1.02,500)
+ text(self,284,285,g:character().shot=='fireball'and'FEUERBAELLE' or'DEIN HELD','a3e7df',.55,480)
+end
+local function hero_choices(self,g)
+ for i,c in ipairs(g.data.characters)do
+  local x=110+(i-1)*174;local y=193;local chosen=g:character().id==c.id
+  local n=picture(self,x,y,156,176,chosen and'button_green'or'panel',nil,true)
+  portrait(self,x,y+17,c.id,134)
+  text(self,x,y-57,c.id=='dragon'and'DRACHE'or c.name,'ffffff',.61,144)
+  text(self,x,y-77,chosen and'GEWAEHLT'or'ANTIPPEN',chosen and'b7ffdf'or'b9dce6',.38,140)
+  self.buttons[#self.buttons+1]={node=n,action='character:'..c.id,rect={x,y,156,176}}
+ end
+end
+
+local function shop_row(self,g,u,y)
+ local tint=u.locked and '7790ad'or 'ffffff'
+ local n=glass(self,930,y,625,92,u.locked and .68 or .94)
+ circle(self,668,y,35,u.locked and '15263a'or '0c203c')
+ local ico=u.category=='armor'and 'armor'or u.category=='weapon'and 'cannon'or u.id=='regen_core'and 'heart'or 'cloak'
+ local image=icon(self,668,y+2,ico,74)
+ if u.locked then gui.set_color(image,vmath.vector4(.55,.62,.72,.7))end
+ text(self,850,y+20,u.title or u.id,tint,.65,265)
+ text(self,850,y-8,u.description or '',u.locked and '7991a7'or 'afd9e0',.42,265)
+ local label,style
+ if u.owned then
+  label=u.category=='weapon'and(u.equipped and 'AUSGERUESTET'or 'AUSWAEHLEN')or 'GEKAUFT'
+  style=u.equipped and 'green'or u.category=='weapon'and 'violet'or 'green'
+ elseif u.locked then label='DANACH '..u.price;style='blue'
+ else label='KAUFEN '..u.price;style=u.available and 'gold'or 'blue'end
+ local b=button(self,1130,y,183,75,label,'buy:'..u.id,style,u.owned and 'gear'or 'star')
+ if u.locked then
+  gui.set_color(b,vmath.vector4(.48,.57,.70,.74))
+  text(self,850,y-31,'NAECHSTE STUFE · '..u.price..' STERNE','9aafc6',.34,265)
+ elseif not u.owned and(u.missing or 0)>0 then
+  text(self,1130,y-31,'NOCH '..u.missing..' STERNE','c9d5eb',.31,170)
+ end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP ITEM '..u.id..' 1130 '..y..' can='..tostring(u.available)..' owned='..tostring(u.owned)..' locked='..tostring(u.locked))end
+end
+local function shop(self,g)
+ local category=self.shop_category or 'weapon'
+ text(self,930,612,g.shop_status or 'WAFFEN UND RUESTUNG STUFENWEISE VERBESSERN','ffe38b',.45,605)
+ for i,t in ipairs({{'weapon','WAFFEN','cannon'},{'armor','RUESTUNG','armor'},{'extra','EXTRAS','cloak'}})do
+  button(self,720+(i-1)*210,578,198,49,t[2],'shop_tab:'..t[1],category==t[1]and 'violet'or 'blue',t[3])
+ end
+ local items=g:shop_items(category)
+ for i,u in ipairs(items)do if i<=4 then shop_row(self,g,u,510-(i-1)*101)end end
+ -- This permanent refill stays visible in every category; no permanent purchase
+ -- flag is used, so damage can always be healed again for the advertised price.
+ local health=g:shop_item('health')
+ glass(self,284,199,490,168,.94);icon(self,77,235,'heart',54)
+ text(self,295,252,'GESUNDHEIT AUFFUELLEN','ffffff',.72,365)
+ text(self,284,216,tostring(g.hp)..' / '..tostring(g.max_hp)..' ENERGIE','b9e9df',.64,390)
+ local full=g.hp>=g.max_hp
+ button(self,284,166,430,63,full and 'VOLL · '..health.price..' STERNE BEI BEDARF'or 'HEILEN · '..health.price..' STERNE','buy:health',full and 'blue'or health.available and 'green'or 'blue','heart')
+ if not full and(health.missing or 0)>0 then text(self,284,123,'NOCH '..health.missing..' STERNE','c9d5eb',.40,435)else text(self,284,123,'BEI SCHADEN IMMER WIEDER KAUFBAR','a4dacd',.37,435)end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP ITEM health 284 166 can='..tostring(health.available)..' full='..tostring(full)..' hp='..g.hp..' max='..g.max_hp)end
+ text(self,930,119,'VERFUEGBAR '..g:wallet()..'  ·  GESAMT '..g:total(),'b8dce4',.49,610)
+ button(self,770,63,295,75,'ZUM SPIEL','continue','green','dash');button(self,1090,63,295,75,'MISSIONEN','menu','blue','menu')
+ button(self,284,63,490,78,g.saved.music==false and 'MUSIK AUS'or 'MUSIK AN','music','violet','sound')
+ if g.flow_ui_test then print('DEFOLD FLOW SHOP READY wallet='..g:wallet())end
+ if g.ui_test or g.flow_ui_test then print('DEFOLD SHOP TAB '..category)end
+end
+
+local function dialog(self,g)
+ self.buttons={};local state=g:mission_state()
+ page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or'GESCHAFFT!')
+ if g.dialog=='menu'then
+  local names={'ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','MAGNETFALLEN','LICHTERFOLGE','DROHNE RETTEN'}
+  for i,m in ipairs(g.data.missions)do
+   local x=i%2==1 and 772 or 1090;local y=534-math.floor((i-1)/2)*153
+   mission_card(self,g,m,i,x,y,names[i])
+  end
+  hero_choices(self,g)
+  local next=g.solved and g:next_index()
+  button(self,807,83,366,78,next and'NAECHSTE MISSION'or'MISSION '..g.index..' STARTEN',next and'next'or'continue','green','dash')
+  button(self,1130,83,250,78,'ALLE HELDEN','characters','blue','heart')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
+  if g.ui_test and not self.menu_ready then self.menu_ready=true;print('DEFOLD MENU READY')end
+  if g.flow_ui_test then print('DEFOLD FLOW MENU READY mission='..g.index..' wallet='..g:wallet()..' hero='..g:character().id)end
+ elseif g.dialog=='characters'then
+  for i,c in ipairs(g.data.characters)do local x=725+(i-1)*205;local chosen=g:character().id==c.id
+   glass(self,x,389,195,380,.82);local n=portrait(self,x,448,c.id,203)
+   self.buttons[#self.buttons+1]={node=n,action='character:'..c.id,rect={x,448,195,240}}
+   text(self,x,325,c.id=='dragon'and'DRACHE FLAMMI'or c.name,chosen and'ffe493'or'ffffff',.70,180)
+   text(self,x,291,c.shot=='fireball'and'FEUERBALL'or'ENERGIE','b8dce4',.50,170)
+   button(self,x,237,190,77,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'green'or'violet','heart')
+  end
+  button(self,930,83,615,78,'ZURUECK ZU DEN MISSIONEN','menu','blue','menu')
+ elseif g.dialog=='gear'then
+  shop(self,g)
+ elseif g.dialog=='win'then
+  panel(self,930,403,628,450);text(self,930,556,'MISSION GESCHAFFT!','ffe38b',1.05,580)
+  star(self,930,477,40);text(self,930,405,'+ '..g.reward..' STERNE','ffe38b',1.07)
+  text(self,930,354,state.treasures_remaining>0 and'1 SCHATZ NOCH OFFEN · FREIWILLIG'or'SCHATZ GEFUNDEN','d6e9ec',.60,560)
+  text(self,930,319,'BONI '..state.bonus_done..' / '..state.bonus_total..' · FREIWILLIG','c1dbe4',.55,555)
+  local next=g:next_index()
+  button(self,930,231,585,79,next and'NAECHSTE MISSION'or'ZUR MISSIONSAUSWAHL',next and'next'or'menu','green','dash')
+  button(self,930,99,615,80,state.treasures_remaining>0 and'SCHATZ SUCHEN · FREIWILLIG'or'BONI SUCHEN · FREIWILLIG',state.treasures_remaining>0 and'loot'or'bonus_search','violet',state.treasures_remaining>0 and'treasure'or'star')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
+  hero_choices(self,g)
+  if g.flow_ui_test then print('DEFOLD FLOW WIN READY remaining='..state.treasures_remaining..' next='..tostring(next))end
+ else
+  panel(self,930,387,628,420);text(self,930,493,'NEUER ANLAUF?','ffa6c3',1.14);text(self,930,420,'Deine Sterne bleiben erhalten.','d0e5e9',.79,565)
+  button(self,930,303,580,89,'NOCH EINMAL','retry','gold','dash');button(self,930,99,615,80,'MISSIONEN','menu','blue','menu')
+  button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star');hero_choices(self,g)
+ end
+end
+function init(self)self.nodes={};self.buttons={};self.ui_pointers={};self.counter=0;self.trap_test=sys.get_config_string('project.trap_test','0')=='1';self.flow_test=sys.get_config_string('project.flow_ui_test','0')=='1';msg.post('.','acquire_input_focus')end
+function update(self,dt)
+ local g=_G.energyblast;if not g then return end
+ if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
+ if g.dialog then
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
+  if key==self.dialog_key then return end;self.dialog_key=key
+ else self.dialog_key=nil end
+ for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
+ if g.dialog then self.counter=g:total();dialog(self,g);return end
+ panel(self,640,673,1280,96);panel(self,72,360,144,528);panel(self,1208,360,144,528);panel(self,640,48,1280,96)
+ self.counter=self.counter+(g:total()-self.counter)*math.min(1,dt*10)
+ icon(self,38,678,'star',46);text(self,121,680,tostring(math.floor(self.counter+.5)),'ffe590',1.08,125);text(self,120,649,'GESAMTSTERNE','a6d3e5',.42,185)
+ text(self,634,682,g.m.title,'ffffff',1.0,650)
+ local state=g:mission_state()
+ local target_node=box(self,441,648,350,42,'ffffff');gui.set_color(target_node,vmath.vector4(1,1,1,0))
+ text(self,441,650,state.headline,'b9dfe5',.49,340)
+ self.buttons[#self.buttons+1]={node=target_node,action='track_objective',rect={441,648,350,42}}
+ local bonus_node=box(self,720,648,168,42,'ffffff');gui.set_color(bonus_node,vmath.vector4(1,1,1,0));icon(self,655,649,'star',24);text(self,720,650,'BONI '..state.bonus_done..'/'..state.bonus_total,'c0e6dc',.45,140);self.buttons[#self.buttons+1]={node=bonus_node,action='track_bonus',rect={720,648,168,42}}
+ local chest_node=picture(self,904,648,190,42,'button_'..(state.treasures_remaining>0 and'gold'or'green'),nil,true)
+ picture(self,835,650,31,31,'chest-prop');text(self,919,650,state.treasures_remaining>0 and'SCHATZ 0/1'or'SCHATZ 1/1','ffffff',.38,143)
+ self.buttons[#self.buttons+1]={node=chest_node,action='track_treasure',rect={904,648,190,42}}
+ if g.flow_ui_test and self.flow_play_mission~=g.index then self.flow_play_mission=g.index;print('DEFOLD FLOW PLAY READY mission='..g.index..' treasure='..state.treasures_remaining..' bonus='..state.bonus_total)end
+
+ local hero_thumb=portrait(self,72,548,g:character().id,135);self.buttons[#self.buttons+1]={node=hero_thumb,action='characters',rect={72,548,135,135}}
+ icon(self,26,466,'heart',25);text(self,85,467,'ENERGIE','c7e3ef',.41,92)
+ text(self,72,443,tostring(g.hp)..' / '..tostring(g.max_hp),'ffffff',.73,126)
+ local ratio=clamp(g.hp/math.max(1,g.max_hp),0,1);box(self,72,421,112,16,'0a1830')
+ if ratio>0 then box(self,17+55*ratio,421,110*ratio,12,g.regenerating and '80f9bd'or ratio<.3 and 'ffb878'or '56d8cf')end
+ text(self,72,405,g.in_sanctuary and 'GESCHUETZT'or g.regenerating and 'ERHOLUNG'or g.hp>=g.max_hp and 'VOLLE ENERGIE'or 'ERHOLUNG BALD','99dfcd',.32,125)
+ for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='STERNE'})[name]
+  if name=='menu'or name=='sound'then button(self,r[1],r[2],r[3],r[4],'',name,'blue');icon(self,r[1],r[2]+2,name,37)
+  else
+   local n=picture(self,r[1],r[2],r[3],r[4],'button_blue',nil,true);icon(self,r[1],r[2]+11,name=='gear'and'cannon'or name,36);text(self,r[1],r[2]-19,title,'ffffff',.48,r[3]-12)
+   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
+  end
+ end
+ for _,name in ipairs({'fire','dash'})do local r=Layout.controls[name]
+  local n=picture(self,r[1],r[2],r[3],r[4],name=='fire'and'button_gold'or'button_blue',nil,true)
+  icon(self,r[1],r[2]+15,name=='fire'and'aim'or'dash',62)
+  text(self,r[1],r[2]-36,name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.69)
+  self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
+ end
+ text(self,551,57,g.status,'d2e9ec',.64,780);text(self,551,27,'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.45,790)
+ if g.m.sanctuary and not g.solved then button(self,72,136,120,54,'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
+ if g.solved then button(self,72,124,120,62,g:next_index()and'WEITER'or'MISSIONEN',g:next_index()and'next'or'menu','green')end
+ text(self,72,45,'? '..g:credits(),'ffe590',.73)
+ panel(self,1051,47,151,72);local bounds=g.data.arena
+ local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
+ for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
+ if g.m.sanctuary then local sx,sy=mini(g.m.sanctuary.position);ring(self,sx,sy,5,'8fffc7',2)end
+ local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
+ if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
+  for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
+ end
+ -- World-only annotations are clipped at the exact render/input viewport.
+ local clip=box(self,(Layout.left+Layout.right)/2,(Layout.bottom+Layout.top)/2,Layout.right-Layout.left,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
+ if g.m.sanctuary then
+  local safe=g.m.sanctuary
+  ground_ring(self,g,safe.position,safe.radius,'8fffd0',3)
+  local sx,sy=g.project(g,safe.position,.12)
+  text(self,sx,sy+39,'ZIKURRAT','baffdf',.49,160)
+  text(self,sx,sy+20,'SCHUTZ & ERHOLUNG','9cdbc9',.30,174)
+ end
+ for _,e in ipairs(g.enemies)do if e.hp>0 then
+  local x,y=g.project(g,e.p,e.boss and 6.4 or e.illustrated and 4.0 or 3.2)
+  if e.warning>0 and(x<Layout.left+12 or x>Layout.right-12 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(Layout.left+22,math.min(Layout.right-22,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
+  if e.optional then
+   local bx,by=g.project(g,e.p,1.4);icon(self,bx,by+22,'star',29)
+   if e.kind=='bonus_sequence'then if e.bonus_lit or(e.lit or 0)>0 then ring(self,bx,by+5,28,'fff1a0',4)end;text(self,bx,by,tostring(e.bonus_order),'fff3a7',.70)elseif e.kind=='bonus_wait'then text(self,bx,by,e.bonus_green and'JETZT!'or'WARTE',e.bonus_green and'a7ffe0'or'ffb1b6',.45,100)else text(self,bx,by,'ABPRALLER','ffe5a0',.40,110)end
+   if e.bonus_task then text(self,bx,by-22,'+'..e.bonus_task.reward,'ffe5a0',.46,105)end
+  elseif e.kind=='sequence'then
+   local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
+   ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
+  else
+   box(self,x,y,50,8,'11223b');box(self,x-(1-e.hp/e.max_hp)*25,y,50*e.hp/e.max_hp,8,'ff7394')
+   if e.shield or g:locked(e)then text(self,x,y+26,e.trap_shield and((e.trapped or 0)>0 and'!'or'X')or'+','d4afff',.8)end
+   if e.warning>0 then text(self,x,y+32,'!','ffcf66',1.15)end
+   if (e.trapped or 0)>0 then local tx,ty=g.project(g,e.p,.2);ring(self,tx,ty,28,'97f0ff',4)end
+  end
+ end end
+ for _,zone in ipairs(g.m.absorbers or{})do local x,y=g.project(g,zone.position,.05)
+  for j=0,23 do local a=j*math.pi/12;local b=(j+1)*math.pi/12;local x1,y1=g.project(g,{zone.position[1]+zone.radius*math.cos(a),zone.position[2]+zone.radius*math.sin(a)},.05);local x2,y2=g.project(g,{zone.position[1]+zone.radius*math.cos(b),zone.position[2]+zone.radius*math.sin(b)},.05);line(self,x1,y1,x2,y2,'52cde4',3)end
+  text(self,x,y,'X','9befff',.65)
+ end
+ -- Projectiles are native depth-tested models. No GUI shot can float over cover.
+ if g.aiming and g.target then local x,y=g.project(g,g.target,0);ring(self,x,y,15,'fff4b0',3);circle(self,x,y,3,'fff4b0')end
+ if #g.path>0 then local x,y=g.project(g,g.path[#g.path],.1);ring(self,x,y,11,'9affe0',3)end
+ for _,f in ipairs(g.fx)do local x,y=g.project(g,f.p,.8)
+  if f.kind=='explosion'then ring(self,x,y,8+f.age*75,'ffd674',math.max(1,5*f.life/.9))
+  else for j=0,5 do local a=j*math.pi/3;circle(self,x+math.cos(a)*f.age*60,y+math.sin(a)*f.age*60,3,f.kind=='absorb'and'9befff'or'ffd674')end end
+ end
+ for _,trap in ipairs(g.traps)do local spec=Objectives.trap_spec(trap.type);ground_ring(self,g,trap.p,spec.radius,spec.color,3);local x,y=g.project(g,trap.p,.1);icon(self,x,y+8,spec.icon,43)end
+ if g.pending_hold and g.touch.pointer then local p=g.touch.pointer;for j=1,12 do local a=j*math.pi/6;circle(self,p.x+math.cos(a)*22,p.y+math.sin(a)*22,3,j<=g.hold_progress*12 and'ffd674'or'456073')end end
+ if g.m.heal and not g.heal_used then local x,y=g.project(g,g.m.heal,.4);circle(self,x,y,16,'255a52');text(self,x,y,'+','9affe0',1)end
+ if g.drone then local x,y=g.project(g,g.drone.p,1.2);text(self,x,y,g.drone.moving and'»'or'...','fff4b0',.9)end
+ if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);ring(self,x,y,20+math.sin(g.clock*3)*2,'ffdf58',3)end
+ if g.clue_time>0 then local p=g:level()>1 and g.m.secret.position or g.m.secret.hint_landmark;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
+ if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
+ field_guide(self,g,state)
+ field_traps(self,g)
+ self.world_parent=nil
+ if g.ui_test or g.trap_test or g.flow_ui_test then
+  for _,b in ipairs(self.buttons)do local r=b.rect
+   if b.world then assert(r[1]-r[3]/2>=Layout.left and r[1]+r[3]/2<=Layout.right and r[2]-r[4]/2>=Layout.bottom and r[2]+r[4]/2<=Layout.top,'field control leaves scene: '..b.action)
+   else assert(Layout.safe(r[1],r[2],r[3],r[4]),'HUD overlaps scene: '..b.action)end
+  end
+  if g.m.id=='dock'and not self.ui_ready then self.ui_ready=true;local x,y=g.project(g,{g.p[1]+3,g.p[2]-.5},0);print('DEFOLD UI READY dock '..math.floor(x)..' '..math.floor(y))end
+ end
+end
+local function handle(self,a)
+ local g=_G.energyblast;if not g then return false end
+ local key=a.id or 0;local captured=self.ui_pointers[key]
+ if captured then if a.released then if captured=='fire'then g.held=false end;self.ui_pointers[key]=nil end;return true end
+ if g.trap_ui then
+  if a.pressed then for _,b in ipairs(self.buttons)do if b.world and gui.pick_node(b.node,a.x,a.y)then
+   self.ui_pointers[key]=b.action
+   if b.action=='trap_cancel'then g.trap_control:cancel(true)
+   elseif b.action:sub(1,12)=='trap_select:'then g.trap_control:select(b.action:sub(13))end
+   return true
+  end end end
+  if Layout.field(a.x,a.y)then g.trap_control:input(a)elseif a.released then g.trap_control.pointer=nil end
+  return true
+ end
+ if not a.pressed then g.input(a);return true end
+ for _,b in ipairs(self.buttons)do if gui.pick_node(b.node,a.x,a.y)then
+  local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end;if g.flow_ui_test then print('DEFOLD FLOW ACTION '..action)end
+  if action~='fire'and action~='dash'and action~='hint'and action~='trap'then g.cancel_controls()end
+  self.ui_pointers[key]=action
+  if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
+  elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
+  elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11));if action:sub(11)=='dragon'then g.say('flow_dragon')end
+  elseif action:sub(1,9)=='shop_tab:'then self.shop_category=action:sub(10);g.shop_status=nil
+  elseif action=='sanctuary'then if g.m.sanctuary then g:navigate(g.m.sanctuary.position);g.status='ZUM ZIKURRAT - HIER BIST DU GESCHUETZT';g.say('defold_sanctuary_intro')end
+  elseif action:sub(1,4)=='buy:'then
+   local owned=g:owns(action:sub(5));local bought=g:buy(action:sub(5))
+   if not owned then
+    if bought then g.say(action:sub(5)=='health'and 'defold_health_refill'or 'flow_purchase')else
+     local item=g.shop_item and g:shop_item(action:sub(5))
+     if not item or g:wallet()<item.price then g.say('flow_need_stars')end
+    end
+   end
+   if g.ui_test then if bought or g:owns(action:sub(5))then print('DEFOLD SHOP PURCHASE PASS '..action)else print('DEFOLD SHOP BLOCKED '..action)end end
+   if g.flow_ui_test then print('DEFOLD FLOW PURCHASE '..action:sub(5)..' owned='..tostring(g:owns(action:sub(5)))..' wallet='..g:wallet()..' hp='..g.hp..' max='..g.max_hp)end
+  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'defold_shop_tiers'or'flow_menu')end
+  elseif action=='continue'then g:resume_mission();if g.intro_needed then g.intro_needed=false;g.replay()end
+  elseif action=='retry'then g.choose(g.index)
+  elseif action=='loot'then g:search_loot()
+  elseif action=='bonus_search'then g:resume_mission();g:track_bonus()
+  elseif action=='next'then g:next_mission()
+  elseif action=='track_treasure'then if not g:track_treasure()then g.say('flow_no_treasure')end;if g.flow_ui_test then print('DEFOLD FLOW TREASURE TRACK PASS remaining='..g:mission_state().treasures_remaining)end
+  elseif action=='track_bonus'then g:track_bonus();if g.flow_ui_test then print('DEFOLD FLOW BONUS TRACK PASS total='..g:mission_state().bonus_total)end
+  elseif action=='track_objective'then g:track_objective();g:guide()
+  elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
+  return true
+ end end
+ if not g.dialog and Layout.field(a.x,a.y)then g.input(a)end;return true
+end
+function on_input(self,id,a)
+ if id==hash('multitouch')then for _,t in ipairs(a.touch or{})do handle(self,t)end;return true elseif id==hash('touch')then return handle(self,a)elseif id==hash('back')and a.pressed then _G.energyblast.cancel_controls();_G.energyblast.paused=true;_G.energyblast.dialog='menu';return true end
+end
+function on_message(self,id)if id==hash('cancel_controls')then self.ui_pointers={}end end

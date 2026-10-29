@@ -1,0 +1,4 @@
+mesh: "/models/dragon_leg_l.gltf"
+materials { name: "Dragon jade" material: "/models/dragon_leg_l-0.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Dragon butter" material: "/models/dragon_leg_l-1.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Warm ivory" material: "/models/dragon_leg_l-2.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }

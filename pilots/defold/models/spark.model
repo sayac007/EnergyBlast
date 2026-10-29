@@ -1,0 +1,2 @@
+mesh: "/models/spark.gltf"
+materials { name: "Mint light" material: "/models/spark-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

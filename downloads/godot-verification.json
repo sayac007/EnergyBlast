@@ -1,0 +1,20 @@
+{
+  "built_at_utc": "2026-10-27T13:19:40.348772+00:00",
+  "status": "PASS",
+  "variant": "Godot 4.7.2 native ARM64 shooter",
+  "package": "org.example.energyblast.pilot",
+  "version": "0.2.0",
+  "version_code": 2,
+  "bytes": 30317360,
+  "sha256": "5808ed6027c6d336acc223839d2127b9188966fe555c39fa6bac4c5a13b4b470",
+  "permissions": [],
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "allow_backup": false,
+  "signature": "Development-only key; not a Play release identity",
+  "zip_alignment_16kb": "PASS",
+  "source_commit": "1006cde8595b4249d0375ddf8bc4ea60fd2a93c9",
+  "source_dirty": false,
+  "manual_android_test": "NOT VERIFIED",
+  "key_in_repository": false
+}

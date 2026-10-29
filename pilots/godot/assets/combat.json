@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "id": "energyblast-combat-02",
+  "language": "de",
+  "controls": "tap_move_drag_release_fire",
+  "arena": [
+    -7,
+    -5,
+    14,
+    10
+  ],
+  "player": {
+    "speed": 4.2,
+    "radius": 0.27,
+    "hit_points": 3,
+    "dash_speed": 10,
+    "dash_seconds": 0.18,
+    "dash_cooldown": 2.8
+  },
+  "guardian": {
+    "speed": 1.6,
+    "range": 5.5,
+    "fov_degrees": 70,
+    "notice_seconds": 1.0
+  },
+  "gate": {
+    "period": 8.0,
+    "open_seconds": 3.0,
+    "warning_seconds": 3.0
+  },
+  "hint_reward_per_mission": 2,
+  "rewards": {
+    "mission:bank": 75,
+    "skill:bank": 25,
+    "secret:bank": 50,
+    "mission:guardian": 100,
+    "skill:guardian": 25,
+    "secret:guardian": 50,
+    "mission:reactor": 75,
+    "skill:reactor": 25,
+    "secret:reactor": 50,
+    "mission:citadel": 100,
+    "skill:citadel": 25,
+    "secret:citadel": 50
+  },
+  "unlocks": [
+    {
+      "id": "prism",
+      "stars": 100,
+      "effect": "two_bounces"
+    },
+    {
+      "id": "armor",
+      "stars": 160,
+      "effect": "notice_grace_plus_0.4"
+    },
+    {
+      "id": "boots",
+      "stars": 230,
+      "effect": "speed_plus_0.35"
+    },
+    {
+      "id": "cloak",
+      "stars": 300,
+      "effect": "vision_range_times_0.75"
+    }
+  ],
+  "missions": [
+    {
+      "id": "reactor",
+      "title": "PRISMA-STATION",
+      "spawn": [
+        -4,
+        3.2
+      ],
+      "goal": [
+        4.5,
+        0
+      ],
+      "reflectors": [
+        [
+          -6.7,
+          -4.6,
+          13.4,
+          0.25
+        ],
+        [
+          6.45,
+          -4.1,
+          0.25,
+          8.2
+        ]
+      ],
+      "covers": [
+        [
+          -0.7,
+          -0.6,
+          1.4,
+          3.6
+        ],
+        [
+          -5.3,
+          -1.8,
+          1.5,
+          1.0
+        ]
+      ],
+      "secret": {
+        "position": [
+          -4.5,
+          -2.5
+        ],
+        "item": "wide_lens",
+        "hint_landmark": [
+          -4.5,
+          -1.3
+        ]
+      },
+      "description": "Kanone voraus. Nutze die leuchtende Wand.",
+      "observation": "Predict a point beyond the bounce before firing; show actual trace afterward.",
+      "turrets": [
+        {
+          "position": [
+            4.5,
+            0
+          ],
+          "shield": true,
+          "phase": 0.2
+        }
+      ],
+      "exit_required": false
+    },
+    {
+      "id": "citadel",
+      "title": "NEON-ZITADELLE",
+      "spawn": [
+        -5.5,
+        3.5
+      ],
+      "goal": [
+        5.2,
+        -3.5
+      ],
+      "reflectors": [
+        [
+          -6.7,
+          -4.6,
+          13.4,
+          0.25
+        ],
+        [
+          6.45,
+          -4.1,
+          0.25,
+          8.2
+        ]
+      ],
+      "covers": [
+        [
+          -3,
+          -1.5,
+          2,
+          3
+        ],
+        [
+          0.8,
+          0.4,
+          1.6,
+          1.8
+        ],
+        [
+          3.5,
+          -4.7,
+          0.25,
+          3.7
+        ]
+      ],
+      "gate_rect": [
+        3.75,
+        -1.15,
+        2.95,
+        0.3
+      ],
+      "staging": [
+        5.1,
+        0.0
+      ],
+      "patrol": [
+        [
+          -4,
+          -2.6
+        ],
+        [
+          2.95,
+          -2.6
+        ],
+        [
+          2.95,
+          2.9
+        ],
+        [
+          -4,
+          2.9
+        ]
+      ],
+      "secret": {
+        "position": [
+          -1.8,
+          -2.4
+        ],
+        "item": "quiet_boots",
+        "hint_landmark": [
+          -2,
+          -0.4
+        ]
+      },
+      "description": "Zwei Kanonen. Nutze die Deckung.",
+      "observation": "Use cover or capture field; prepare at the gate, then tap through its visible opening.",
+      "turrets": [
+        {
+          "position": [
+            4.8,
+            2.5
+          ],
+          "shield": false,
+          "phase": 0.3
+        },
+        {
+          "position": [
+            -4.5,
+            -3.4
+          ],
+          "shield": false,
+          "phase": 1.4
+        }
+      ],
+      "exit_required": true
+    }
+  ],
+  "combat": {
+    "enemy_bullet_speed": 3.8,
+    "player_bullet_speed": 14.0,
+    "fire_cooldown": 0.45,
+    "enemy_warning": 0.85,
+    "enemy_interval": 2.35,
+    "hit_invulnerability": 1.0,
+    "turret_hp": 2
+  },
+  "progress_mission_ids": [
+    "bank",
+    "guardian",
+    "reactor",
+    "citadel"
+  ],
+  "hint_completion_keys": [
+    "mission:bank",
+    "mission:guardian",
+    "mission:reactor",
+    "mission:citadel"
+  ]
+}

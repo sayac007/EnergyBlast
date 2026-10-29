@@ -1,0 +1,4 @@
+sound: "/audio/raid_hint.ogg"
+looping: 0
+group: "master"
+gain: 3.761915422858999

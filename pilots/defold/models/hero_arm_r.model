@@ -1,0 +1,6 @@
+mesh: "/models/hero_arm_r.gltf"
+materials { name: "Nova cobalt" material: "/models/hero_arm_r-0.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Jade" material: "/models/hero_arm_r-1.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Honey gold" material: "/models/hero_arm_r-2.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Mint light" material: "/models/hero_arm_r-3.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Warm leather" material: "/models/hero_arm_r-4.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }

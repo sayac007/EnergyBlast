@@ -1,0 +1,2 @@
+mesh: "/models/echo_ground.gltf"
+materials { name: "Orbital deck floor material" material: "/models/echo_ground-0.material" textures { sampler: "tex0" texture: "/models/floor-echo.png" } }

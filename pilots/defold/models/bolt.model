@@ -1,0 +1,2 @@
+mesh: "/models/bolt.gltf"
+materials { name: "Mint light" material: "/models/bolt-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

@@ -1,0 +1,4 @@
+mesh: "/models/relay.runtime.gltf"
+materials { name: "Deep blue ink" material: "/models/relay-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Mint light" material: "/models/relay-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/relay-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }

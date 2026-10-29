@@ -1,0 +1,9 @@
+mesh: "/models/dragon.gltf"
+materials { name: "Dragon jade" material: "/models/dragon-0.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Dragon butter" material: "/models/dragon-1.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Porcelain" material: "/models/dragon-2.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Dragon amber" material: "/models/dragon-3.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Deep blue ink" material: "/models/dragon-4.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Warm ivory" material: "/models/dragon-5.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Royal iris" material: "/models/dragon-6.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }
+materials { name: "Honey gold" material: "/models/dragon-7.material" textures { sampler: "tex0" texture: "/models/dragon-ao.png" } }

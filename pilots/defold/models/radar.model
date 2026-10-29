@@ -1,0 +1,4 @@
+mesh: "/models/radar.runtime.gltf"
+materials { name: "Warm leather" material: "/models/radar-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Warm ivory" material: "/models/radar-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Jade" material: "/models/radar-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }

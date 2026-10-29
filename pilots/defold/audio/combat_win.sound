@@ -1,0 +1,4 @@
+sound: "/audio/combat_win.ogg"
+looping: 0
+group: "master"
+gain: 1.7531656650183702

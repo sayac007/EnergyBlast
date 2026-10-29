@@ -1,0 +1,68 @@
+{
+  "created": "2026-10-28",
+  "generator": "OpenAI image generation",
+  "runtime_import": "tools/import_defold07_art.py",
+  "sheets": [
+    {
+      "path": "hero-original.png",
+      "sha256": "9e047d780ae097da5d1ff4fef2afe0355bb9d3954f8cbb47d648a6e146178afc",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": true
+    },
+    {
+      "path": "dragon-original.png",
+      "sha256": "a8928091d28e73824beb49e0b5f58f44562fefc05d7313f66dfab19199034274",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": true
+    },
+    {
+      "path": "fox-original.png",
+      "sha256": "fa9007689029b5268ce9177580336d42d2ce57e4f27e364a852df7bd4041ebb2",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": true
+    },
+    {
+      "path": "enemies-original.png",
+      "sha256": "6499855509d574afa3c56e68eb7b1d02fdbf87223746c7ac0c10d2064c121884",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": true
+    },
+    {
+      "path": "explosion-original.png",
+      "sha256": "a3e695c67f828a7999a5cfcef1d3c06ef1efd212e74d940578ddf54fe9145e1d",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": false
+    },
+    {
+      "path": "props-original.png",
+      "sha256": "ab7aa8e915f4ca46dd929cae91113557a92aace964a1b133f2e27236a8c9fff2",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": false
+    },
+    {
+      "path": "icons-original.png",
+      "sha256": "7ec8ccd5b937eac02aa07014278ad2263661ce80d8ff86eca43e3bf7e69dfd9f",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": true
+    },
+    {
+      "path": "cards-original.png",
+      "sha256": "833e565940bb0653f432cdefaf26e97f7cde94b6dea6f54147cde8194ab29f25",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": false
+    },
+    {
+      "path": "floor-original.png",
+      "sha256": "aa681ab224ef5b82bd723edf62b9fd747a9074d7448d782e9b6d5ea4d718d007",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": false
+    },
+    {
+      "path": "lobby-original.png",
+      "sha256": "ad1dcecea782b99234b2bb799df188e080aa55c11ed6c38d666d39b688f466a8",
+      "origin": "Original OpenAI image generation, 2026-10-28, no reference-game assets",
+      "transparency": false
+    }
+  ],
+  "animation": "4 walk frames each of front/back, mirrored for left; enemy idle/windup/charge/fire frames. Camera-facing native quads, not skeletal 3D."
+}

@@ -1,0 +1,4 @@
+sound: "/audio/hints_empty.ogg"
+looping: 0
+group: "master"
+gain: 1.9220490866808415

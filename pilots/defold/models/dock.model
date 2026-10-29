@@ -1,0 +1,8 @@
+mesh: "/models/dock.runtime.gltf"
+materials { name: "dock deep indigo hull" material: "/models/dock-0.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "dock naval ceramic" material: "/models/dock-1.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "dock porcelain edge" material: "/models/dock-2.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "dock recessed glass" material: "/models/dock-3.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "Luminous dock reactor seam" material: "/models/dock-4.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "dock satin brass" material: "/models/dock-5.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }
+materials { name: "Honey gold" material: "/models/dock-6.material" textures { sampler: "tex0" texture: "/models/dock-ao.png" } }

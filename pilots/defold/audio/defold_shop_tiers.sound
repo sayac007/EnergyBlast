@@ -1,0 +1,4 @@
+sound: "/audio/defold_shop_tiers.ogg"
+looping: 0
+group: "master"
+gain: 1.4804565902351463

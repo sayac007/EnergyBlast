@@ -1,0 +1,8 @@
+# Upstream notices/model cards are kept verbatim, including their CRLF/spacing.
+**/*MODEL_CARD.txt -whitespace
+**/notices/FONTFACEOBSERVER.txt -whitespace
+**/notices/GDEXPORTER.txt -whitespace
+
+# Upstream notices are redistributed verbatim, including source formatting.
+**/notices/** -whitespace
+**/OFL.txt -whitespace

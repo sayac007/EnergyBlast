@@ -1,0 +1,12 @@
+{
+  "cover_shadow": {
+    "tag": "shadow",
+    "fragment": "cover_shadow.fp",
+    "texture": null
+  },
+  "energy_field": {
+    "tag": "energy",
+    "fragment": "energy_field.fp",
+    "texture": null
+  }
+}

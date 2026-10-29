@@ -1,0 +1,4 @@
+images { image: "/models/hero.png" }
+images { image: "/models/dragon.png" }
+images { image: "/models/fox.png" }
+extrude_borders: 2

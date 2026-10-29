@@ -1,0 +1,13 @@
+name: "radar-1"
+tags: "model"
+vertex_program: "/builtins/materials/model.vp"
+fragment_program: "/main/bright.fp"
+vertex_space: VERTEX_SPACE_LOCAL
+vertex_constants { name: "mtx_worldview" type: CONSTANT_TYPE_WORLDVIEW }
+vertex_constants { name: "mtx_view" type: CONSTANT_TYPE_VIEW }
+vertex_constants { name: "mtx_proj" type: CONSTANT_TYPE_PROJECTION }
+vertex_constants { name: "mtx_normal" type: CONSTANT_TYPE_NORMAL }
+vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -40 y: 100 z: 60 w: 1 } }
+fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: 0.9599999785423279 y: 0.8600000143051147 z: 0.6200000047683716 w: 1 } }
+fragment_constants { name: "surface" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: 0 w: 0 } }
+samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }

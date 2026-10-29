@@ -1,0 +1,1211 @@
+{
+  "schema": 1,
+  "id": "energyblast-defold-10",
+  "language": "de",
+  "controls": "direct_touch_hold_fire_drag_hero",
+  "arena": [
+    -10.5,
+    -7.5,
+    21.0,
+    15.0
+  ],
+  "player": {
+    "speed": 4.8,
+    "radius": 0.27,
+    "hit_points": 15,
+    "dash_speed": 12,
+    "dash_seconds": 0.18,
+    "dash_cooldown": 2.8
+  },
+  "guardian": {
+    "speed": 1.6,
+    "range": 5.5,
+    "fov_degrees": 70,
+    "notice_seconds": 1.0
+  },
+  "gate": {
+    "period": 8.0,
+    "open_seconds": 3.0,
+    "warning_seconds": 3.0
+  },
+  "hint_reward_per_mission": 2,
+  "rewards": {
+    "mission:bank": 75,
+    "skill:bank": 25,
+    "secret:bank": 50,
+    "mission:guardian": 100,
+    "skill:guardian": 25,
+    "secret:guardian": 50,
+    "mission:reactor": 300,
+    "skill:reactor": 100,
+    "secret:reactor": 75,
+    "mission:citadel": 300,
+    "skill:citadel": 100,
+    "secret:citadel": 75,
+    "mission:dock": 300,
+    "skill:dock": 100,
+    "secret:dock": 75,
+    "mission:forge": 300,
+    "skill:forge": 100,
+    "secret:forge": 75,
+    "mission:echo": 300,
+    "skill:echo": 100,
+    "secret:echo": 75,
+    "mission:rescue": 300,
+    "skill:rescue": 100,
+    "secret:rescue": 75,
+    "bonus:prism:reactor": 100,
+    "bonus:pattern:reactor": 150,
+    "bonus:prism:citadel": 100,
+    "bonus:pattern:citadel": 150,
+    "bonus:prism:dock": 100,
+    "bonus:pattern:dock": 150,
+    "bonus:prism:forge": 100,
+    "bonus:pattern:forge": 150,
+    "bonus:prism:echo": 100,
+    "bonus:pattern:echo": 150,
+    "bonus:prism:rescue": 100,
+    "bonus:pattern:rescue": 150
+  },
+  "unlocks": [
+    {
+      "id": "prism",
+      "stars": 100,
+      "effect": "two_bounces",
+      "price": 100
+    },
+    {
+      "id": "armor",
+      "stars": 160,
+      "effect": "five_extra_hit_points",
+      "price": 160
+    },
+    {
+      "id": "boots",
+      "stars": 230,
+      "effect": "speed_plus_0.5",
+      "price": 230
+    },
+    {
+      "id": "cloak",
+      "stars": 300,
+      "effect": "vision_range_times_0.825",
+      "price": 300
+    }
+  ],
+  "missions": [
+    {
+      "id": "reactor",
+      "title": "PRISMA-STATION",
+      "spawn": [
+        -6.0,
+        4.8
+      ],
+      "goal": [
+        6.75,
+        0.0
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -1.05,
+          -0.9,
+          2.1,
+          5.4
+        ],
+        [
+          -7.95,
+          -2.7,
+          2.25,
+          1.5
+        ]
+      ],
+      "secret": {
+        "position": [
+          -6.75,
+          -3.75
+        ],
+        "item": "wide_lens",
+        "hint_landmark": [
+          -6.75,
+          -1.95
+        ],
+        "marks": [
+          {
+            "position": [
+              -6.75,
+              -3.5
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -7.65,
+              -3.5
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Kanone voraus. Nutze die leuchtende Wand.",
+      "turrets": [
+        {
+          "position": [
+            6.75,
+            0.0
+          ],
+          "shield": true,
+          "phase": 0.2
+        }
+      ],
+      "exit_required": false,
+      "radar": [
+        0.0,
+        1.8
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -4,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "kind": "combat",
+      "voice": "combat_reactor",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            -5.8,
+            -5.5
+          ],
+          "nodes": [
+            [
+              -7.5,
+              -5.5
+            ],
+            [
+              -5.8,
+              -5.5
+            ],
+            [
+              -4.1,
+              -5.5
+            ]
+          ],
+          "sequence": [
+            2,
+            1,
+            3
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -8.2,
+          4.8
+        ],
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "citadel",
+      "title": "NEON-ZITADELLE",
+      "spawn": [
+        -8.25,
+        5.25
+      ],
+      "goal": [
+        7.8,
+        -5.25
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -4.5,
+          -2.25,
+          3.0,
+          4.5
+        ],
+        [
+          1.2,
+          0.6,
+          2.4,
+          2.7
+        ],
+        [
+          5.25,
+          -7.05,
+          0.375,
+          5.55
+        ]
+      ],
+      "gate_rect": [
+        5.625,
+        -1.725,
+        4.425,
+        0.45
+      ],
+      "staging": [
+        7.65,
+        0.0
+      ],
+      "patrol": [
+        [
+          -6.0,
+          -3.9
+        ],
+        [
+          4.425,
+          -3.9
+        ],
+        [
+          4.425,
+          4.35
+        ],
+        [
+          -6.0,
+          4.35
+        ]
+      ],
+      "secret": {
+        "position": [
+          -2.7,
+          -3.6
+        ],
+        "item": "quiet_boots",
+        "hint_landmark": [
+          -3.0,
+          -0.6
+        ],
+        "marks": [
+          {
+            "position": [
+              -2.7,
+              -3.1
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -3.7,
+              -3.1
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Zwei Kanonen. Nutze die Deckung.",
+      "turrets": [
+        {
+          "position": [
+            7.2,
+            3.75
+          ],
+          "shield": false,
+          "phase": 0.3
+        },
+        {
+          "position": [
+            -6.75,
+            -5.1
+          ],
+          "shield": false,
+          "phase": 1.4
+        }
+      ],
+      "exit_required": true,
+      "radar": [
+        -3.0,
+        0.0
+      ],
+      "absorbers": [
+        {
+          "position": [
+            0,
+            -3.8
+          ],
+          "radius": 0.65
+        }
+      ],
+      "kind": "combat",
+      "voice": "combat_citadel",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -7.5,
+            1
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            1,
+            -4.5
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -6.1,
+          5.1
+        ],
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "dock",
+      "title": "AURORA-DOCK",
+      "spawn": [
+        -8.25,
+        5.1
+      ],
+      "goal": [
+        7.8,
+        -5.55
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -5.4,
+          -1.8,
+          2.55,
+          4.2
+        ],
+        [
+          0.0,
+          1.5,
+          2.4,
+          2.1
+        ],
+        [
+          4.05,
+          -7.05,
+          0.45,
+          5.55
+        ]
+      ],
+      "gate_rect": [
+        4.5,
+        -1.725,
+        5.55,
+        0.45
+      ],
+      "staging": [
+        7.2,
+        0.15
+      ],
+      "secret": {
+        "position": [
+          -4.2,
+          -3.45
+        ],
+        "item": "reactor_cell",
+        "hint_landmark": [
+          -4.2,
+          -0.6
+        ],
+        "marks": [
+          {
+            "position": [
+              -4.2,
+              -2.6
+            ],
+            "kind": "scorch"
+          },
+          {
+            "position": [
+              -5.2,
+              -2.6
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Relais ausschalten. Dann den Kern sichern.",
+      "heal": [
+        -8.25,
+        -3.75
+      ],
+      "relays": [
+        {
+          "position": [
+            -1.5,
+            -5.175
+          ]
+        },
+        {
+          "position": [
+            7.95,
+            3.75
+          ]
+        }
+      ],
+      "turrets": [
+        {
+          "position": [
+            7.35,
+            -5.1
+          ],
+          "shield": false,
+          "boss": true,
+          "hp": 3,
+          "phase": 1.0,
+          "burst": 3
+        },
+        {
+          "position": [
+            -7.05,
+            -4.65
+          ],
+          "shield": false,
+          "phase": 0.6,
+          "patrol": [
+            [
+              -7.05,
+              -4.65
+            ],
+            [
+              -0.3,
+              -4.65
+            ]
+          ],
+          "speed": 1.15
+        },
+        {
+          "position": [
+            5.7,
+            1.5
+          ],
+          "shield": false,
+          "phase": 1.8,
+          "burst": 3
+        }
+      ],
+      "exit_required": true,
+      "radar": [
+        -4.125,
+        0.3
+      ],
+      "absorbers": [
+        {
+          "position": [
+            1,
+            -3
+          ],
+          "radius": 0.65
+        }
+      ],
+      "kind": "combat",
+      "voice": "raid_dock",
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            0.7
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            1.6,
+            -2.8
+          ],
+          "nodes": [
+            [
+              0,
+              -2.8
+            ],
+            [
+              1.7,
+              -2.8
+            ],
+            [
+              3.4,
+              -2.8
+            ]
+          ],
+          "sequence": [
+            3,
+            1,
+            2
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -6.1,
+          5.1
+        ],
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "forge",
+      "title": "MAGNETWERK",
+      "kind": "trap",
+      "spawn": [
+        -7,
+        4.8
+      ],
+      "goal": [
+        6,
+        -3
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -3,
+          -1,
+          2,
+          4
+        ],
+        [
+          2,
+          -2,
+          2,
+          3
+        ]
+      ],
+      "secret": {
+        "position": [
+          -5,
+          -4.8
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -5,
+          -3.3
+        ],
+        "marks": [
+          {
+            "position": [
+              -5,
+              -3.65
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -6,
+              -4.0
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Lege eine Falle. Locke den Waechter hinein.",
+      "voice": "defold_forge",
+      "radar": [
+        -2.0,
+        1.0
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": false,
+      "turrets": [
+        {
+          "position": [
+            0,
+            -4
+          ],
+          "hp": 3,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              0,
+              -4
+            ],
+            [
+              6,
+              -4
+            ],
+            [
+              6,
+              4
+            ],
+            [
+              0,
+              4
+            ]
+          ],
+          "speed": 1.5,
+          "phase": 0.4
+        }
+      ],
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1.5
+          ]
+        },
+        "pattern": {
+          "kind": "sequence",
+          "p": [
+            -4.2,
+            -5.8
+          ],
+          "nodes": [
+            [
+              -6,
+              -5.8
+            ],
+            [
+              -4.2,
+              -5.8
+            ],
+            [
+              -2.4,
+              -5.8
+            ]
+          ],
+          "sequence": [
+            1,
+            3,
+            2
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -8.4,
+          3.4
+        ],
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "echo",
+      "title": "ECHO-KAMMER",
+      "kind": "sequence",
+      "spawn": [
+        -6,
+        0
+      ],
+      "goal": [
+        5,
+        -4
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -2,
+          -1.5,
+          2,
+          4
+        ],
+        [
+          3,
+          -1,
+          2,
+          2
+        ]
+      ],
+      "secret": {
+        "position": [
+          -7,
+          -4.7
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -7,
+          -3.2
+        ],
+        "marks": [
+          {
+            "position": [
+              -7,
+              -3.5500000000000003
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -8,
+              -3.9000000000000004
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Merke dir die Folge. Triff die Kristalle.",
+      "voice": "defold_echo",
+      "radar": [
+        -1.0,
+        0.5
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": false,
+      "turrets": [
+        {
+          "position": [
+            7,
+            3.7
+          ],
+          "hp": 2,
+          "phase": 0.5
+        }
+      ],
+      "sequence": [
+        2,
+        1,
+        3
+      ],
+      "sequence_nodes": [
+        [
+          -4,
+          -3.6
+        ],
+        [
+          0,
+          -3.6
+        ],
+        [
+          4,
+          -3.6
+        ]
+      ],
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            2
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            -5,
+            4.5
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -6,
+          2.7
+        ],
+        "radius": 1.2
+      }
+    },
+    {
+      "id": "rescue",
+      "title": "DROHNEN-RETTUNG",
+      "kind": "escort",
+      "spawn": [
+        -7,
+        4.8
+      ],
+      "goal": [
+        6,
+        -4.8
+      ],
+      "reflectors": [
+        [
+          -10.05,
+          -6.9,
+          20.1,
+          0.375
+        ],
+        [
+          9.675,
+          -6.15,
+          0.375,
+          12.3
+        ]
+      ],
+      "covers": [
+        [
+          -3,
+          -2.5,
+          2,
+          5
+        ],
+        [
+          2,
+          -1,
+          2,
+          3
+        ]
+      ],
+      "secret": {
+        "position": [
+          -7,
+          -4.8
+        ],
+        "item": "bonus_stars",
+        "hint_landmark": [
+          -7,
+          -3.3
+        ],
+        "marks": [
+          {
+            "position": [
+              -7,
+              -3.65
+            ],
+            "kind": "crack"
+          },
+          {
+            "position": [
+              -8,
+              -4.0
+            ],
+            "kind": "arrow"
+          }
+        ]
+      },
+      "description": "Begleite die Drohne. Schuetze ihren Weg.",
+      "voice": "defold_rescue",
+      "radar": [
+        -2.0,
+        0.0
+      ],
+      "absorbers": [
+        {
+          "position": [
+            -8,
+            0
+          ],
+          "radius": 0.65
+        }
+      ],
+      "exit_required": true,
+      "turrets": [
+        {
+          "position": [
+            7,
+            3.8
+          ],
+          "hp": 2,
+          "phase": 1
+        },
+        {
+          "position": [
+            2,
+            -4.8
+          ],
+          "hp": 2,
+          "phase": 0.6
+        }
+      ],
+      "escort": {
+        "spawn": [
+          -6.5,
+          4.4
+        ],
+        "route": [
+          [
+            -6,
+            3
+          ],
+          [
+            -5,
+            -3.8
+          ],
+          [
+            0,
+            -4.8
+          ],
+          [
+            6,
+            -4.8
+          ]
+        ],
+        "hp": 3,
+        "speed": 1.7
+      },
+      "bonuses": {
+        "prism": {
+          "p": [
+            -8,
+            1.5
+          ]
+        },
+        "pattern": {
+          "kind": "wait",
+          "p": [
+            1.6,
+            4.7
+          ]
+        }
+      },
+      "sanctuary": {
+        "position": [
+          -8.4,
+          3.4
+        ],
+        "radius": 1.2
+      }
+    }
+  ],
+  "combat": {
+    "enemy_bullet_speed": 4.5,
+    "player_bullet_speed": 18,
+    "fire_cooldown": 0.24,
+    "enemy_warning": 0.85,
+    "enemy_interval": 2.35,
+    "hit_invulnerability": 1.0,
+    "turret_hp": 2,
+    "shot_range": 48,
+    "enemy_range": 30,
+    "detection_range": 19.5,
+    "reflect_all_walls": true,
+    "enemy_bounces": 1,
+    "player_seconds": 3,
+    "enemy_seconds": 6
+  },
+  "progress_mission_ids": [
+    "bank",
+    "guardian",
+    "reactor",
+    "citadel",
+    "dock",
+    "forge",
+    "echo",
+    "rescue"
+  ],
+  "hint_completion_keys": [
+    "mission:bank",
+    "mission:guardian",
+    "mission:reactor",
+    "mission:citadel",
+    "mission:dock",
+    "mission:forge",
+    "mission:echo",
+    "mission:rescue"
+  ],
+  "preview_trajectory": false,
+  "world_scale": 1.5,
+  "hold_seconds": 0.14,
+  "shop_enabled": true,
+  "save_schema": 3,
+  "characters": [
+    {
+      "id": "hero",
+      "name": "NOVA",
+      "shot": "energy"
+    },
+    {
+      "id": "dragon",
+      "name": "FLAMMI",
+      "shot": "fireball"
+    },
+    {
+      "id": "fox",
+      "name": "FENNEK",
+      "shot": "energy"
+    }
+  ],
+  "bonuses_enabled": true,
+  "visual_wall_height": 1.7,
+  "recovery": {
+    "delay_seconds": 4,
+    "rate": 0.5,
+    "sanctuary_rate": 2,
+    "refill_price": 40
+  },
+  "shop_catalog": [
+    {
+      "id": "health",
+      "category": "health",
+      "title": "VOLLE GESUNDHEIT",
+      "description": "Sofort alle Herzen auffuellen. Immer wieder kaufbar.",
+      "price": 40,
+      "repeatable": true
+    },
+    {
+      "id": "prism",
+      "category": "weapon",
+      "title": "PRISMA I",
+      "description": "Zwei Abpraller pro Schuss.",
+      "price": 100,
+      "damage": 1,
+      "cooldown": 0.24,
+      "bounces": 2
+    },
+    {
+      "id": "arc",
+      "category": "weapon",
+      "title": "PLASMA II",
+      "description": "Doppelte Kraft. Zwei Abpraller.",
+      "price": 220,
+      "requires": "prism",
+      "damage": 2,
+      "cooldown": 0.22,
+      "bounces": 2
+    },
+    {
+      "id": "nova",
+      "category": "weapon",
+      "title": "NOVA III",
+      "description": "Dreifache Kraft. Schnelleres Feuern.",
+      "price": 400,
+      "requires": "arc",
+      "damage": 3,
+      "cooldown": 0.2,
+      "bounces": 2
+    },
+    {
+      "id": "nova2",
+      "category": "weapon",
+      "title": "SUPERNOVA IV",
+      "description": "Vierfache Kraft. Staerkste Energiewaffe.",
+      "price": 650,
+      "requires": "nova",
+      "damage": 4,
+      "cooldown": 0.18,
+      "bounces": 2
+    },
+    {
+      "id": "armor",
+      "category": "armor",
+      "title": "SCHUTZ I",
+      "description": "20 Gesundheit. Sofort 5 Herzen mehr.",
+      "price": 160,
+      "health_bonus": 5
+    },
+    {
+      "id": "armor2",
+      "category": "armor",
+      "title": "PANZER II",
+      "description": "25 Gesundheit. Noch mehr Schutz.",
+      "price": 300,
+      "requires": "armor",
+      "health_bonus": 10
+    },
+    {
+      "id": "armor3",
+      "category": "armor",
+      "title": "AEGIS III",
+      "description": "30 Gesundheit. Starke Energieruestung.",
+      "price": 450,
+      "requires": "armor2",
+      "health_bonus": 15
+    },
+    {
+      "id": "armor4",
+      "category": "armor",
+      "title": "TITAN IV",
+      "description": "35 Gesundheit. Maximale Ruestung.",
+      "price": 650,
+      "requires": "armor3",
+      "health_bonus": 20
+    },
+    {
+      "id": "cloak",
+      "category": "extra",
+      "title": "TARNFELD I",
+      "description": "Gegner bemerken dich aus kuerzerer Entfernung.",
+      "price": 300,
+      "detection_multiplier": 0.825
+    },
+    {
+      "id": "cloak2",
+      "category": "extra",
+      "title": "TARNFELD II",
+      "description": "Halbe gegnerische Erfassungsreichweite.",
+      "price": 450,
+      "requires": "cloak",
+      "detection_multiplier": 0.5
+    },
+    {
+      "id": "regen_core",
+      "category": "extra",
+      "title": "REGEN-KERN",
+      "description": "Erholung beginnt nach 2 Sekunden statt 4.",
+      "price": 280,
+      "regen_delay": 2
+    }
+  ]
+}

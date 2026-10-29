@@ -1,5 +1,16 @@
 # EnergyBlast repository instructions
 
+## Latest operator request — repository integration, 29 October 2026
+
+The operator explicitly requested integrating all completed work into the repository
+and documenting the full history and current state in README. This authorizes the
+0.10 integration from feat/touch-shooter-v2 into main with a real merge commit,
+preserving both histories and the existing verified APK. The former documentation-
+only main arrangement and earlier no-game-merge rule are superseded for this
+requested integration. It does not authorize a Release/Play upload or unrelated
+repository changes. Keep historical instructions below as a decision log.
+
+
 - This is the independent public EnergyBlast project. Never modify or write to
   `sayac007/Kinderwelt` or another repository as part of this work.
 - The operator's latest instruction overrides references to Kinderwelt in the

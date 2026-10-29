@@ -1,0 +1,4 @@
+sound: "/audio/defold_health_refill.ogg"
+looping: 0
+group: "master"
+gain: 1.9292912947168068

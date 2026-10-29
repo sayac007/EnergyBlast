@@ -1,0 +1,4 @@
+sound: "/audio/combat_reactor.ogg"
+looping: 0
+group: "master"
+gain: 1.7000478611268617

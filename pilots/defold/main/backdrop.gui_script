@@ -1,0 +1,3 @@
+function init(self)
+ local n=gui.new_box_node(vmath.vector3(640,360,0),vmath.vector3(1280,720,0));gui.set_texture(n,'interface');gui.play_flipbook(n,'lobby')
+end

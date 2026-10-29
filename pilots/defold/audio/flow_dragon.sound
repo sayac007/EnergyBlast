@@ -1,0 +1,4 @@
+sound: "/audio/flow_dragon.ogg"
+looping: 0
+group: "master"
+gain: 2.9887157945040554

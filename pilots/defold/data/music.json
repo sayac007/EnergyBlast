@@ -1,0 +1,60 @@
+{
+  "schema": 2,
+  "origin": "Original deterministic composition and mathematical synthesis by tools/make_defold_music.py; no sampled or transcribed reference melody",
+  "title": "Zikurrat \u2014 Signal in the Dark",
+  "runtime_filename_note": "aurora-hop.ogg is retained solely as a stable resource path; the platform score has been replaced",
+  "character": "Restrained cinematic science fiction: tension, space, recovery; no cheerful platform arpeggio",
+  "key": "D minor / modal suspended harmony",
+  "instruments": [
+    "warm detuned pad",
+    "sub drone",
+    "deep synth bass",
+    "sparse tactical signal",
+    "soft brass swells",
+    "electronic pulse",
+    "low tom",
+    "filtered tick",
+    "air texture"
+  ],
+  "section_dynamics": [
+    0.64,
+    0.92,
+    0.42,
+    1.0
+  ],
+  "sections": [
+    "quiet approach",
+    "threat / engagement",
+    "breathing / recovery",
+    "resolve / confrontation"
+  ],
+  "bpm": 96,
+  "bars": 32,
+  "music_gain": 0.28,
+  "voice_duck_gain": 0.065,
+  "model_or_external_recording": null,
+  "files": [
+    {
+      "file": "aurora-hop.ogg",
+      "sha256": "51bd9afce693ba3b30cfd04ff02cc6a2fdc3bd83a9f0fd72a93f55d08d737981",
+      "seconds": 80.0,
+      "peak": 0.5889150500297546,
+      "rms": 0.12297309935092926,
+      "loop_boundary_delta": 0.002089826390147209,
+      "stereo_difference_rms": 0.04495590552687645,
+      "section_rms": [
+        0.1005278006196022,
+        0.14470240473747253,
+        0.0655645877122879,
+        0.15857551991939545
+      ]
+    },
+    {
+      "file": "energy-burst.ogg",
+      "sha256": "1a247f2e92a9595eb407f637c537bb00d1c173e7676fc4c1386f50fba66cec70",
+      "seconds": 0.646,
+      "peak": 0.5792970657348633,
+      "rms": 0.07536163926124573
+    }
+  ]
+}

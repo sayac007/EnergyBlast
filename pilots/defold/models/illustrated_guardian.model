@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_guardian.gltf"
+materials { name: "Original illustrated illustrated_guardian" material: "/models/illustrated_guardian-0.material" textures { sampler: "tex0" texture: "/models/guardian-states.png" } }

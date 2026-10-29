@@ -1,0 +1,5 @@
+mesh: "/models/cannon.runtime.gltf"
+materials { name: "Deep blue ink" material: "/models/cannon-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/cannon-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Coral" material: "/models/cannon-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Warm leather" material: "/models/cannon-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }

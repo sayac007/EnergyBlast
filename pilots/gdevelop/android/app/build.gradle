@@ -1,0 +1,23 @@
+plugins { id 'com.android.application' }
+android {
+    namespace 'org.example.energyblast.gdevelop'
+    compileSdk 36
+    buildToolsVersion "36.1.0"
+    defaultConfig {
+        applicationId 'org.example.energyblast.gdevelop'
+        minSdk 24
+        targetSdk 36
+        versionCode 3
+        versionName '0.3.0'
+    }
+    signingConfigs {
+        pilot {
+            storeFile file(System.getenv('ENERGYBLAST_DEBUG_KEY'))
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes { debug { signingConfig signingConfigs.pilot } }
+    sourceSets { main { assets.srcDirs = [System.getenv('ENERGYBLAST_WEB_EXPORT')] } }
+}

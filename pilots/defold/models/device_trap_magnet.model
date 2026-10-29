@@ -1,0 +1,2 @@
+mesh: "/models/device_trap_magnet.gltf"
+materials { name: "Original illustrated device_trap_magnet" material: "/models/device_trap_magnet-0.material" textures { sampler: "tex0" texture: "/models/ui_trap_magnet.png" } }

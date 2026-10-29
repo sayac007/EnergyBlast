@@ -1,0 +1,20 @@
+{
+  "built_at_utc": "2026-10-28T09:38:28.556744+00:00",
+  "status": "PASS",
+  "variant": "GDevelop 5.6.269 WebGL in offline Android WebView",
+  "package": "org.example.energyblast.gdevelop",
+  "version": "0.3.0",
+  "version_code": 3,
+  "bytes": 2153923,
+  "sha256": "5eb4a25ba88d88ebd853fb6d812cf012572d62f333936dd54406fb7a297f814f",
+  "permissions": [],
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "allow_backup": false,
+  "signature": "Development-only key; not a Play release identity",
+  "zip_alignment_16kb": "PASS",
+  "source_commit": "43527374e1705a9608a9ddb11ccc8e4af31ef69e",
+  "source_dirty": false,
+  "manual_android_test": "NOT VERIFIED",
+  "key_in_repository": false
+}

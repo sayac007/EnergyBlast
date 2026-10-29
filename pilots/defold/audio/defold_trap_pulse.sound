@@ -1,0 +1,4 @@
+sound: "/audio/defold_trap_pulse.ogg"
+looping: 0
+group: "master"
+gain: 2.271998845803967

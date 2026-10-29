@@ -1,0 +1,2 @@
+mesh: "/models/illustrated_chest.gltf"
+materials { name: "Original illustrated illustrated_chest" material: "/models/illustrated_chest-0.material" textures { sampler: "tex0" texture: "/models/chest-prop.png" } }

@@ -1,0 +1,4 @@
+sound: "/audio/defold_trap_place.ogg"
+looping: 0
+group: "master"
+gain: 2.1103971831714547

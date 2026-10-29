@@ -1,0 +1,4 @@
+mesh: "/models/chest.runtime.gltf"
+materials { name: "Warm leather" material: "/models/chest-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/chest-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Mint light" material: "/models/chest-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }

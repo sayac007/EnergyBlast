@@ -1,6 +1,7 @@
 # EnergyBlast — Defold 0.10
 
-Offline-Touch-Shooter mit drei Helden, sechs Missionen, reflektierten Schüssen,
+Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
+sechs Missionen, reflektierten Schüssen,
 integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Mehr Gesundheit,
 ein geschützter Zikurrat, ein größerer Stufenshop und neue Science-Fiction-Musik.**
 Defold bleibt der Schwerpunkt.
@@ -10,7 +11,23 @@ Defold bleibt der Schwerpunkt.
 [Änderungen und tatsächliche Tests](docs/MILESTONE_09.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
-## Weniger Frust, mehr Ausrüstung
+## Aktueller Stand
+
+**Version 0.10.0 / Android-Code 11, Stand 29.10.2026.** Der vollständige Quellcode,
+die Spielinhalte, Originalassets, Buildskripte, Tests und die geprüfte APK liegen
+jetzt auf `main`. Der frühere Arbeitsbranch und alle historischen Commits bleiben
+erhalten. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
+
+| Bestandteil | Aktuell enthalten |
+|---|---|
+| Spiel | Sechs Missionen: Abpraller, Deckung/Timing, Relais/Boss, Magnetfallen, Lichterfolge, Drohnenrettung |
+| Figuren | Drei auswählbare Originalfiguren, darunter Drache Flammi; animierte 2,5D-Bilder in nativer 3D-Welt |
+| Fortschritt | Lokale Gesamtsterne, verfügbares Guthaben, Käufe, Hinweise und aktuelle Mission; zwei freiwillige Bonusziele je Mission |
+| Ausrüstung | Zwölf Shopangebote: wiederholte Heilung, vier Waffen-, vier Rüstungs-, zwei Tarnstufen und Erholungskern |
+| Ton | Deutsche synthetische Ansagen, eigene Science-Fiction-Musik und Effekte; stummschaltbar |
+| Engine | Defold 1.14.0 aktiv; Godot 0.2 und GDevelop 0.3 als unveränderte Vergleichsstände erhalten |
+
+### Was 0.10 ergänzt
 
 - **15 statt 3 Energie.** Nach vier Sekunden ohne Treffer erholt sich die Figur
   um einen Punkt alle zwei Sekunden. Die Anzeige zeigt Energie und Erholung.
@@ -31,7 +48,40 @@ Defold bleibt der Schwerpunkt.
 
 [Umsetzung, Preise, Laufzeitbilder und Grenzen](docs/MILESTONE_09.md).
 
-## Neue Steuerung
+## Entwicklungshistorie
+
+EnergyBlast entstand als eigenständiges Projekt aus einer neuen Shooter-Idee.
+Die Entwicklung wird vollständig erhalten; die folgende Tabelle trennt die
+Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
+ästhetische Freigabe. Frühere Bedienkonzepte wurden durch spätere ersetzt.
+
+| Datum | Version | Entwicklung und Entscheidung | Feste Nachweise |
+|---|---|---|---|
+| 27.10.2026 | 0.1 | Zwei Geometrie-/Timingmissionen, lokale Sterne und verdiente Hinweise. Godot/GDevelop spielbar; Unity nur Importkit, noch keine Defold-APK. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/46c1fecc54356f9fecd8f6144ec00de2fd0df90d) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/c29acbee7fea5f48565719db95f935f0626630ca/downloads) |
+| 27.10.2026 | 0.2 | Erster echter Shootervergleich mit Godot, GDevelop und Defold: aktive Kanonen, Deckung, Abpraller, Schaden und DASH. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/1006cde8595b4249d0375ddf8bc4ea60fd2a93c9) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/defd791bd94809045cf5a8ed9429ead92c8bd959/downloads) · [Bericht](docs/MILESTONE_01.md) |
+| 28.10.2026 | 0.3 | Defold/GDevelop weitergeführt: dritter Sektor, Relais, Boss und Patrouille; berechnete Schussbahn entfernt. Godot bleibt bei 0.2. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/43527374e1705a9608a9ddb11ccc8e4af31ef69e) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads) · [Bericht](docs/MILESTONE_02.md) |
+| 28.10.2026 | 0.4 | Schwerpunkt Defold: größere Welt, folgende Kamera, damalige Zeitsteuerung, eigene Musik und Explosionen. GDevelop bleibt bei 0.3. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d070a6021ac1ecfd84556da40cb1e852bbc2e593) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/4539cdf739582e22046c36aa76e20d7750584fce/downloads) · [Bericht](docs/MILESTONE_03.md) |
+| 28.10.2026 | 0.4.1 | Alle Wände reflektieren; Geschosse verlieren Energie und vergehen. Neutralisationsfelder absorbieren. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/02a2b409830600bdaa85b10f6accc58f18a5f085) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/bd3d6f1374a7aca4e79fe4b9ba512ff67244e78f/downloads) · [Bericht](docs/MILESTONE_03.md) |
+| 28.10.2026 | 0.5 | Sechs Missionen, drei Figuren, tatsächliche Käufe, Beuteführung und native Geschossverdeckung. **Grafik anschließend vom Betreiber abgelehnt.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/321d5cf6f50f7b038a2f7f8189ac421770af9013) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/4315cf73fe6fd5b8688e7d397766394010fe2e5d/downloads) · [Bericht](docs/MILESTONE_04.md) |
+| 28.10.2026 | 0.6 | Texturierte Arenen, detaillierte native Modelle/AO, feste Landschaftsaufteilung und Batching. **Grafik erneut abgelehnt.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/19856c195a8b51d1136ef8e7e8f57efd744caf05) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/24b24dd23d08eb73ebd5fc113c318da3b1f45e7a/downloads) · [Bericht](docs/MILESTONE_05.md) |
+| 28.10.2026 | 0.7 | Originale Illustrationsanimationen als 2,5D-Hybrid, Bildmenüs und Magnet-/Eis-/Impulsfallen direkt im Spielfeld. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/080ddfda31332b542f99fdcebc59fc1e6c885bf0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/f8e8542b30cf1691bedf8f28a2403936f9bafcb9/downloads) · [Bericht](docs/MILESTONE_06.md) |
+| 28.10.2026 | 0.8 | Klarer Missionswechsel, sichtbare Helden/Käufe, Schatzführung, je zwei integrierte Bonusziele und höhere Belohnungen. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6b1afee89855c737358859ce4fd2f83100f53583) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads) · [Bericht](docs/MILESTONE_07.md) |
+| 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
+| 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **Aktuelle Testfassung.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
+
+**29.10.2026 – Repository-Übernahme:** Bis 0.10 erschien auf `main` die aktuelle
+Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.
+Auf Betreiberwunsch sind beide Historien mit einem Merge-Commit
+zusammengeführt. Alle alten Quell-/APK-Commits bleiben erreichbar; kein Squash,
+keine neu geschriebene Historie und keine neue APK nur für die Übernahme.
+
+[Ursprünglicher Auftrag](docs/pilot-brief.md),
+[fortgeschriebene Entscheidungen](docs/PROJECT_BRIEF.md) und
+[historische Downloads](downloads/README.md) bleiben getrennt nachvollziehbar.
+Die [vollständige Commit-Historie](https://github.com/sayac007/EnergyBlast/commits/main/)
+ist weiterhin im Repository verfügbar.
+
+## Steuerung
 
 | Berührung im Spielfeld | Wirkung |
 |---|---|
@@ -43,13 +93,13 @@ Defold bleibt der Schwerpunkt.
 | Loslassen | Halten/Ziehen beenden; **kein zusätzlicher Schuss** |
 
 Die kurze Bodenschwelle unterscheidet Laufen von Feuern. Beim Gegner entfällt
-sie vollständig. Waffenabstand jetzt 0,24 Sekunden; schnelle Gegnertipps während
+sie vollständig. Waffenabstand der Basiswaffe 0,24 Sekunden, höhere Stufen bis 0,18 Sekunden; schnelle Gegnertipps während
 dieser Abklingzeit werden begrenzt gepuffert. Die Zielhilfe verändert nicht die
 Schussphysik: Deckungen reflektieren weiterhin. Reale Android-Eingabelatenz und
 Mehrfingergefühl müssen am Gerät geprüft werden; keine Null-Millisekunden-Zusage.
 Die Stimme erklärt die neuen Gesten. FEUER, DASH und die Fallenwahl bleiben erhalten.
 
-## Neue Kampfansichten
+## Spielansichten
 
 Sechs eigene großformatige Bodenmaterialien, verschiedene plastische Deckungstypen,
 echte gebackene AO-Schattierung pro Arena, weiche Bodenschatten, animierte
@@ -61,7 +111,8 @@ Die Figuren bleiben ein 2,5D-Hybrid aus Original-Animationsbildern und nativer 3
 ![Echte Bewegung und Feuern während des Haltens](docs/images/10-defold-gameplay.gif)
 
 Native Linux/OpenGL-/XTest-Aufnahmen, keine behaupteten Handyaufnahmen.
-[Alle sechs Bereiche und Gestenbelege](docs/MILESTONE_09.md).
+[Sechs Bereichsansichten und Gestenbelege aus 0.9](docs/MILESTONE_08.md),
+[aktuelle Schutzort-/Shopbilder aus 0.10](docs/MILESTONE_09.md).
 
 ## Wo finde ich was?
 
@@ -100,10 +151,30 @@ und nachgespielt. Beim Zeitfenster muss das Kind auf Grün warten; Dauerfeuer st
 nur die Wartephase neu. Kein Verlust von Gesundheit oder schon verdienten Punkten.
 Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
 
+## Repositoryaufbau
+
+| Pfad | Zweck |
+|---|---|
+| [pilots/defold](pilots/defold) | Aktuelles natives Spiel einschließlich Eingabe, Darstellung, Speicher und Audio |
+| [shared](shared) | Regeln, Missionen, Originalassets, Herkunftsnachweise und Audioquellen |
+| [tools](tools) | Synchronisation, reproduzierbare Buildbefehle und Regressionstests |
+| [Prüffälle und Fixtures](pilots/defold/main) | Native `*_checks.lua`-Prüffälle; archivierte Regeldaten unter `pilots/defold/data` |
+| [docs](docs) | Auftrag, Meilensteine, Bauanleitung und zentraler Qualitätsstatus |
+| [downloads](downloads) | Geprüfte APKs und maschinenlesbare Buildmetadaten; frühere Dateien über feste Commits |
+
+Aktuelle Prüfkommandos vom Repository-Hauptverzeichnis; Voraussetzungen und
+Werkzeugversionen stehen in [BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md):
+
+```bash
+python3 tools/check_shared.py
+python3 tools/check_defold.py
+```
+
 ## Prüfungen und Grenzen
 
 **29.10.2026:** **629 native Prüfungen und 14 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
-im [zentralen Qualitätsstatus](docs/QUALITY.md). Die fünf direkten Gesten sowie
+im [zentralen Qualitätsstatus](docs/QUALITY.md). Bei der Übernahme in `main`
+wurde die vollständige Suite erneut ausgeführt. Die fünf direkten Gesten sowie
 Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
 Geschossverdeckung bleiben Teil der vollständigen Suite. Drei neue kurze
 Schutzort-/Shopansagen wurden unabhängig exakt erkannt, 27 andere bleiben erhalten.
@@ -112,13 +183,15 @@ Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
 längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
 kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
 
-Spielcode auf `feat/touch-shooter-v2`; `main` bleibt Dokumentationsstartseite.
-Keine PRs, Spielmerges, neuen Actions oder Releases. Andere Repositories und
+Am 29.10.2026 auf ausdrücklichen Betreiberwunsch in `main` integriert: vollständiger
+Spielstand aus `feat/touch-shooter-v2`, mit erhaltener Commit-Historie. Die zuvor
+veröffentlichte 0.10-APK bleibt bytegleich; diese Übernahme erzeugt keine neue
+Spielversion. Kein GitHub-Release oder Store-Upload. Andere Repositories und
 Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
 Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.
 
 [Auftrag](docs/PROJECT_BRIEF.md), [Art Direction](docs/ART_DIRECTION.md),
-[Regeln](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/defold04.json), [Direktsteuerung](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/pilots/defold/main/touch.lua),
-[Antippzonen](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/pilots/defold/main/hit_regions.lua),
-[neue Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/assets/defold09/PROVENANCE.json),
-[Lizenzen](THIRD_PARTY.md), [vorheriger Stand](docs/MILESTONE_07.md).
+[Regeln](shared/defold04.json), [Direktsteuerung](pilots/defold/main/touch.lua),
+[Antippzonen](pilots/defold/main/hit_regions.lua),
+[neue Bildherkunft](shared/assets/defold09/PROVENANCE.json),
+[Lizenzen](THIRD_PARTY.md), [vorheriger Stand](docs/MILESTONE_08.md).

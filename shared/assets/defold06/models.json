@@ -1,0 +1,236 @@
+{
+  "hero": {
+    "texture": "hero-ao.png",
+    "tag": "actor"
+  },
+  "hero_leg_l": {
+    "texture": "hero-ao.png",
+    "tag": "actor"
+  },
+  "hero_arm_l": {
+    "texture": "hero-ao.png",
+    "tag": "actor"
+  },
+  "hero_leg_r": {
+    "texture": "hero-ao.png",
+    "tag": "actor"
+  },
+  "hero_arm_r": {
+    "texture": "hero-ao.png",
+    "tag": "actor"
+  },
+  "dragon": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_leg_l": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_arm_l": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_wing_l": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_leg_r": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_arm_r": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_wing_r": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "dragon_tail": {
+    "texture": "dragon-ao.png",
+    "tag": "actor"
+  },
+  "fox": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "fox_leg_l": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "fox_arm_l": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "fox_leg_r": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "fox_arm_r": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "fox_tail": {
+    "texture": "fox-ao.png",
+    "tag": "actor"
+  },
+  "cannon": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "cannon.runtime.gltf"
+  },
+  "relay": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "relay.runtime.gltf"
+  },
+  "radar": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "radar.runtime.gltf"
+  },
+  "spark": {
+    "texture": null,
+    "tag": "model"
+  },
+  "spark_hot": {
+    "texture": null,
+    "tag": "model"
+  },
+  "bolt": {
+    "texture": null,
+    "tag": "model"
+  },
+  "enemy_bolt": {
+    "texture": null,
+    "tag": "model"
+  },
+  "fireball": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "fireball.runtime.gltf"
+  },
+  "chest": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "chest.runtime.gltf"
+  },
+  "drone": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "drone.runtime.gltf"
+  },
+  "gate": {
+    "texture": null,
+    "tag": "model",
+    "runtime": "gate.runtime.gltf"
+  },
+  "shadow": {
+    "texture": null,
+    "tag": "shadow"
+  },
+  "reactor_ground": {
+    "texture": "ground-garden.png",
+    "tag": "model",
+    "color_tint": [
+      0.7,
+      0.92,
+      0.95,
+      1
+    ]
+  },
+  "reactor": {
+    "texture": "reactor-ao.png",
+    "tag": "model",
+    "runtime": "reactor.runtime.gltf"
+  },
+  "citadel_ground": {
+    "texture": "ground-sand.png",
+    "tag": "model",
+    "color_tint": [
+      0.75,
+      0.71,
+      0.98,
+      1
+    ]
+  },
+  "citadel": {
+    "texture": "citadel-ao.png",
+    "tag": "model",
+    "runtime": "citadel.runtime.gltf"
+  },
+  "dock_ground": {
+    "texture": "ground-sand.png",
+    "tag": "model",
+    "color_tint": [
+      0.66,
+      0.84,
+      1,
+      1
+    ]
+  },
+  "dock": {
+    "texture": "dock-ao.png",
+    "tag": "model",
+    "runtime": "dock.runtime.gltf"
+  },
+  "forge_ground": {
+    "texture": "ground-sand.png",
+    "tag": "model",
+    "color_tint": [
+      0.92,
+      0.81,
+      0.77,
+      1
+    ]
+  },
+  "forge": {
+    "texture": "forge-ao.png",
+    "tag": "model",
+    "runtime": "forge.runtime.gltf"
+  },
+  "echo_ground": {
+    "texture": "ground-garden.png",
+    "tag": "model",
+    "color_tint": [
+      0.71,
+      0.84,
+      1,
+      1
+    ]
+  },
+  "echo": {
+    "texture": "echo-ao.png",
+    "tag": "model",
+    "runtime": "echo.runtime.gltf"
+  },
+  "rescue_ground": {
+    "texture": "ground-garden.png",
+    "tag": "model",
+    "color_tint": [
+      0.73,
+      0.95,
+      0.85,
+      1
+    ]
+  },
+  "rescue": {
+    "texture": "rescue-ao.png",
+    "tag": "model",
+    "runtime": "rescue.runtime.gltf"
+  },
+  "lobby": {
+    "texture": null,
+    "tag": "stage",
+    "runtime": "lobby.runtime.gltf"
+  },
+  "selection_ring": {
+    "texture": null,
+    "tag": "model"
+  },
+  "glow": {
+    "texture": null,
+    "tag": "glow"
+  }
+}

@@ -1,0 +1,4 @@
+mesh: "/models/hero_arm_l.gltf"
+materials { name: "Nova cobalt" material: "/models/hero_arm_l-0.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Jade" material: "/models/hero_arm_l-1.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }
+materials { name: "Warm leather" material: "/models/hero_arm_l-2.material" textures { sampler: "tex0" texture: "/models/hero-ao.png" } }

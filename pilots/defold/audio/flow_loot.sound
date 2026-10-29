@@ -1,0 +1,4 @@
+sound: "/audio/flow_loot.ogg"
+looping: 0
+group: "master"
+gain: 1.663324705668341

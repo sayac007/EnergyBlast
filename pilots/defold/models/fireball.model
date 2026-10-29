@@ -1,0 +1,3 @@
+mesh: "/models/fireball.runtime.gltf"
+materials { name: "Tangerine" material: "/models/fireball-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Honey gold" material: "/models/fireball-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }

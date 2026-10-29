@@ -98,7 +98,7 @@ Zusätzlich tatsächlich eingesehen:
 markante Gegner, ruhigen futuristischen Deckboden, gepanzerte Lichtarchitektur,
 illustrierte Missionskarten und echte mehrphasige Explosionen um. Das sind bewusst
 2,5D-Figuren, keine vollwertigen Skelettmodelle. Originalquellen und Ableitungen:
-[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
+[PROVENANCE.json](../shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
 wird übernommen. Neue Bedienausnahme auf Betreiberwunsch: der pausierte
 Fallenkatalog liegt direkt im Feld; normale HUD-Flächen bleiben außerhalb.
 
@@ -113,7 +113,7 @@ Deckungstypen je Bereich mit echten 1024-AO-Texturen, weiche Kontaktschatten,
 animierte tiefengeprüfte Energieschilde, dünne Figurenkonturen und nähere Kamera.
 Die ursprünglichen 2,5D-Figuren bleiben erhalten; keine Behauptung vollständig
 skelettanimierter 3D-Figuren. [Echte Bilder und Gestenbelege](MILESTONE_08.md),
-[neue Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
+[neue Bildherkunft](../shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
 ersetzen weder persönliche grafische Abnahme noch einen physischen Gerätebenchmark.
 
 ## 0.10 — protection and restrained tension

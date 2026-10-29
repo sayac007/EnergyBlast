@@ -1,0 +1,4 @@
+sound: "/audio/raid_relays.ogg"
+looping: 0
+group: "master"
+gain: 1.4255867350697844

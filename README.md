@@ -5,7 +5,7 @@ integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Mehr Gesundheit,
 ein geschützter Zikurrat, ein größerer Stufenshop und neue Science-Fiction-Musik.**
 Defold bleibt der Schwerpunkt.
 
-**[Android 0.9 herunterladen — 63,9 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/e49218e7015e365a0913961a0f1e005436c271f2/downloads/energyblast-defold-debug.apk)** ·
+**[Android 0.10 herunterladen — 64,0 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk)** ·
 [Update und geprüfte Metadaten](downloads/README.md) ·
 [Änderungen und tatsächliche Tests](docs/MILESTONE_09.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
@@ -102,7 +102,7 @@ Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
 
 ## Prüfungen und Grenzen
 
-**29.10.2026:** Aktuelle Prüfungen zu Gesundheit, Schutzort und Stufenshop stehen
+**29.10.2026:** **629 native Prüfungen und 14 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
 im [zentralen Qualitätsstatus](docs/QUALITY.md). Die fünf direkten Gesten sowie
 Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
 Geschossverdeckung bleiben Teil der vollständigen Suite. Drei neue kurze

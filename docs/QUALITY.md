@@ -17,7 +17,12 @@
 | Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01337, aus 0, Mischung 0,04183; kein gemessener Überlauf im Test |
 | Sprachdateien | **30/30 technisch PASS**, drei neue Ansagen frisch ASR 3/3 exakt, 27 vorherige Dateien und Metadaten unverändert |
 | Neue Musik | **PASS**, 80 s, 96 BPM, Stereo, Abschnitts-RMS-Verhältnis 2,42, geprüfter Schleifenübergang; keine daraus abgeleitete menschliche Klangabnahme |
-| APK | Abschlussprüfung und sauberer Quellbezug werden nach Export in den Download-Metadaten dokumentiert |
+| APK 0.10.0 / Code 11 | **PASS**, sauberer Quellstand, Paket/APIs/Querformat, keine Berechtigungen, Backup aus, v2-Signatur und Zertifikatsgleichheit mit 0.9, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung und 810 identische Projektdateien |
+
+Quellstand [`6cea6cd`](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94);
+APK-Snapshot [`6ef588b`](https://github.com/sayac007/EnergyBlast/commit/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18),
+gebaut 29.10.2026, 09:19 MEZ. [Größe, Hash und Download](../downloads/README.md).
+Die APK-Prüfung ist kein zusätzlicher physischer Android-Spieltest.
 
 Die XTest-Prüfungen laufen unter Linux/OpenGL mit klar benannten Testprofilen.
 Der Schutzort-Test injiziert echte Geschosse; gezählt wird deren tatsächliche

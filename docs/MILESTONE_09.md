@@ -100,3 +100,15 @@ Musikausgabe ist mit aktiviertem Ton messbar, bei stummer Musik null.
 Schwierigkeit und Wirtschaft, Wahrnehmung des Schutzorts, Klang und musikalische
 Atmosphäre, Touchgefühl und Geräteleistung. Keine empirische Lernwirkung,
 kommerzielle Gesamtgleichwertigkeit oder Store-Abnahme behauptet.
+
+## Nachvollziehbarer Android-Snapshot
+
+Quellcommit [`6cea6cd`](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94),
+APK-Commit [`6ef588b`](https://github.com/sayac007/EnergyBlast/commit/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18),
+gebaut 29.10.2026, 09:19 MEZ vom sauberen Stand. **0.10.0 / Code 11**, 64.033.978 Bytes,
+SHA-256 `2e63aff021048d617febf5415388af6da4237979e54470a39e088bb221c90623`.
+Paket, APIs, Querformat, Berechtigungsfreiheit, deaktiviertes Backup, v2-Signatur,
+Zertifikatsgleichheit, ZIP-CRC, fehlende Schlüsseldateien, ZIP-Ausrichtung und
+identischer Projektabzug mit 810 Dateien geprüft.
+
+[APK direkt herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk) · [Metadaten/Installation](../downloads/README.md).

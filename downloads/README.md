@@ -1,31 +1,31 @@
-# EnergyBlast — Defold 0.12 herunterladen
+# EnergyBlast — Defold 0.13 herunterladen
 
-**[EnergyBlast 0.12 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk) — 68,2 MB.**
+**[EnergyBlast 0.13 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) — 68,3 MB.**
 
-Wieder spielbare Bonusaufgaben und Truhen, passende Hinweise und Funkansagen,
-50 Prozent größerer Fallenkreis und anfangs dreifache Wirkzeit. Gespeicherte
-Sterne, Käufe und Ausrüstung bleiben erhalten. Nur **16 KiB größer als 0.11**.
-[Änderungen und echte Laufzeitbilder](../docs/MILESTONE_11.md).
+Jeder neue Bonus bringt dauerhafte Macht: Gesundheit bis **1.000.000** plus
+gekaufte Rüstung, größerer Held, Schutzschild, stärkere Schüsse und Tarnung.
+Vorhandene Bonus-Erfolge werden sofort angerechnet. Nur **128 KiB größer als 0.12**.
+[Regeln, Bilder und Prüfungen](../docs/MILESTONE_12.md).
 
 | Merkmal | Tatsächlicher Wert |
 |---|---|
 | Engine / App | Defold 1.14.0, native ARM64-Test-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.12.0 / 13** |
-| Größe | **68.211.898 Bytes** |
+| Version / Code | **0.13.0 / 14** |
+| Größe | **68.342.970 Bytes** |
 | Android | Android 7/API 24+, ARM64, targetSdk 36, userLandscape |
-| Quellcommit | [`9554e66`](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) |
-| APK-Snapshot | [`8d0de93`](https://github.com/sayac007/EnergyBlast/commit/8d0de931d121f89e5ad8b6841c4124035a24c12b) |
-| Gebaut | 29.10.2026, 16:31 MEZ, sauberer Quellstand |
-| Signatur | v2/v3 geprüft, identisches Entwicklungszertifikat wie 0.11 |
+| Quellcommit | [`fda39e5`](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) |
+| APK-Snapshot | [`9e486f1`](https://github.com/sayac007/EnergyBlast/commit/9e486f1dec3b6ca67371f1491c8e7b5991885a14) |
+| Gebaut | 29.10.2026, 17:12 MEZ, sauberer Quellstand |
+| Signatur | v2/v3 geprüft, identisches Entwicklungszertifikat wie 0.12 |
 | Physischer Geräte-/Mehrfingertest | **OFFEN** |
 
 ```text
-SHA-256 24f1c6a641e9456f74069cb0882a8d98d04598216d22ac95b55ce03478da94b4
+SHA-256 31e6828183f15578e631c716cbe517fd7e24194c2a6e334d0c4dfb7ef53a2d15
 ```
 
-[Maschinenlesbare Metadaten](defold-verification.json): Buildzeit, Größe, Hash,
-Quellcommit, `source_dirty:false`, Zertifikat und technische APK-Prüfungen.
+[Maschinenlesbare Metadaten](defold-verification.json) dokumentieren Größe, Hash,
+Buildzeit, Quellcommit, `source_dirty:false`, Zertifikat und APK-Prüfungen.
 
 ## Installation und Bedienung
 
@@ -33,36 +33,44 @@ Als Update über die vorhandene Defold-App installieren. **Nicht vorher deinstal
 wenn Sterne, Käufe, Hinweise und Figur bleiben sollen. Android kann die Freigabe
 der Downloadquelle verlangen. Debug-Testfassung, keine Release-/Play-Signatur.
 
-**Boni:** Mission über die bebilderte Auswahl erneut starten. Beide Bonusaufgaben
-und die Truhe erscheinen wieder. „Noch einmal“ bedeutet: erneut spielbar, die
-Sterne sind bereits gespeichert und werden nicht doppelt vergeben. Der obere
-Rundenzähler und die als „geholt“ markierten dauerhaften Menüerfolge sind getrennt.
-Info/Funk/Hinweis erklären offene Ziele. Fortsetzen setzt gelöste Rundenziele nicht zurück.
+**Bonus-Macht:** Beide freiwilligen Bonusaufgaben jeder Mission lösen. Jeder
+verschiedene erstmalige Erfolg bringt eine neue Machtstufe. Vorhandene Erfolge
+zählen sofort, auch nach dem Neustart. Erneutes Spielen derselben bereits
+belohnten Aufgabe gibt keine weitere Macht. Geld oder zusätzliche Sternkosten
+gibt es dafür nicht. Gekaufte Rüstung und Waffen verbessern die Werte weiterhin.
 
-**Fallen:** Fallenbild neben der Figur → Gerät auswählen → freien Boden im hellen
-Kreis antippen. Anfangs Magnet 18 s, Eis 27 s, Impuls 15 s; Bereitschaft 36 s.
-Kreisradius 5,25 statt 3,5. Später sinken Zeiten nur nach erfolgreichen früheren
-Fallenmissionen. [Zeiten und Regeln](../docs/TRAPS.md).
+**POWER:** Rechts oben im Spiel oder neben der Figur im Menü antippen. Die Seite
+zeigt echte Werte, nächste Verbesserung und die großen Meilensteine bei 1, 2, 4,
+8 und 12 Boni. Vollständige Millionenzahlen bleiben lesbar. Figur und Schilde
+wachsen; Bewegung und die Kollisionsgröße bleiben erhalten.
 
-**Zoom:** Plus/Minus oder zwei Finger auf freiem Spielfeld, 75–175%; gesamter
-Bereich und Figuren werden vergrößert. [Gesamte Bedienung](../README.md).
+Zoom, freie Bonussuche, größere Fallenkreise und lange Anfangszeiten aus 0.12
+bleiben enthalten. [Gesamte Bedienung](../README.md).
 
 ## Tatsächliche Prüfung
 
-**1.066 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Alle sechs
-Lichter-/Zeitfensterboni mit echten Bildschirmtaps und Projektilen gelöst, sechs
-Truhen durch Hinlaufen gesammelt; Wiederbesuch und Prozessneustart erhalten
-4.350 Gesamtsterne, 4.090 Guthaben und gekaufte Ausrüstung. Alle drei Fallen bei
-100% und 175% Zoom real außerhalb der alten Reichweite platziert. Bisherige
-Gesten-, Menü-, Shop-, Speicher-, Zoom-, Audio- und Verdeckungstests bestanden.
-[Nachweise und Grenzen](../docs/QUALITY.md).
+**1.311 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Echte Bonusschüsse
+verdienen 20 / 1.005 / 1.000.005 Gesundheit inklusive bestehender Rüstung. Native
+Größe, Schild und Tarnmaterial, Kameragrenzen bei 175% Zoom, POWER-Seite, lesbare
+Millionenzahl, Speicherung und Wiederholung ohne zusätzliche Vergabe sind geprüft.
+Bisherige Eingabe-, Menü-, Shop-, Schatz-, Fallen-, Bonus-, Zoom-, Audio- und
+Verdeckungstests bleiben bestanden. Zwei neue Ansagen unabhängig exakt erkannt;
+34 aktive Ansagen technisch geprüft. [Ausführliche Nachweise und Grenzen](../docs/QUALITY.md).
 
-APK: Paket/Version/APIs, Querformatmanifest, keine Berechtigungen, Backup aus,
+APK: Paket/Version/APIs, Querformat, keine Berechtigungen, Backup aus,
 v2/v3-Signatur und Zertifikatsgleichheit, ZIP-CRC, keine privaten Schlüsseldateien,
-16-KB-ZIP-Ausrichtung und vollständiger Abzug mit **831 identischen Projektdateien**
-bestanden. Die Android-Shader wurden erfolgreich exportiert. ZIP-Ausrichtung allein
-ist keine Play-/16-KB-Zertifizierung. Echte Geräte-/Mehrfinger-/Hörabnahme bleibt offen.
-Keine neue grüne CI oder Store-Veröffentlichung behauptet.
+16-KB-ZIP-Ausrichtung, Android-Shaderexport und **845 identische Projektdateien**
+bestanden. ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+Echte Geräte-/Mehrfinger-/Hörabnahme und Spielbalance bleiben offen.
+
+**Umfang dieser Version:** die sechs bisherigen Missionen mit zwölf Machtboni.
+Die zusätzlichen 20 Missionen und die FPV-Spiel-Drohne sind als nächster Auftrag
+erfasst; die Bonus-Macht wurde vom Betreiber ausdrücklich vorgezogen.
+
+## Vorherige 0.12 dauerhaft erhalten
+
+[Defold 0.12 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk)
+— 68.211.898 Bytes, [damaliger Stand](../docs/MILESTONE_11.md).
 
 ## Vorherige 0.11 dauerhaft erhalten
 
@@ -111,7 +119,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.12 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.13 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

@@ -37,8 +37,13 @@ und Menübühne berücksichtigen jetzt das gewachsene Modell; die neuen Grenzen
 werden gegen seine tatsächliche Welttransformation geprüft. Sichtbare Verdeckung
 durch eine reale Wand bleibt weiterhin zulässig.
 
-**Android-Build 0.13:** folgt vom sauberen Quellcommit. Die finalen Dateiprüfungen
-und festen Quell-/APK-Verweise werden vor Auslieferung ergänzt.
+**APK 0.13.0 / Code 14: PASS.** Gebaut 29.10.2026, 17:12 MEZ vom sauberen
+Quellstand [`fda39e5`](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a);
+APK-Snapshot [`9e486f1`](https://github.com/sayac007/EnergyBlast/commit/9e486f1dec3b6ca67371f1491c8e7b5991885a14).
+Paket/APIs/Querformat, Berechtigungsfreiheit, Backup aus, v2/v3-Signatur,
+identisches Zertifikat zur vorherigen APK, ZIP-CRC, keine privaten Schlüsseldateien,
+16-KB-ZIP-Ausrichtung, Android-Shaderexport und 845 per Hash identische Projektdateien
+bestanden. 68.342.970 Bytes, 128 KiB mehr als 0.12. [SHA-256 und Download](../downloads/README.md).
 
 **Manuell offen:** Android-Update und eigene Spielstände, echte Mehrfinger-Gesten,
 kleine Displays, Klang, GPU-Leistung und Balance der bewusst übermächtigen Stufen.

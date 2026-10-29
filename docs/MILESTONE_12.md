@@ -102,8 +102,14 @@ Kauf-, Fallen-, Bonus-, Schatz-, Zoom-, Verdeckungs- und Audioabläufe. Die exak
 alten Shop-/Erholungswerte werden zusätzlich mit der unveränderten 0.12-Fixture
 geprüft; die übrigen Regeln und Macht-GUI laufen mit dem aktuellen Stand.
 
-Der Android-Build folgt vom sauberen Quellcommit; dessen Metadaten und feste
-Verweise werden vor Auslieferung ergänzt. [Zentraler Qualitätsstatus](QUALITY.md).
+Der Android-Build ist bestanden. Geprüfter Quellstand
+[`fda39e5`](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a),
+APK-Snapshot [`9e486f1`](https://github.com/sayac007/EnergyBlast/commit/9e486f1dec3b6ca67371f1491c8e7b5991885a14),
+gebaut 29.10.2026, 17:12 MEZ. Größe **68.342.970 Bytes**, 128 KiB mehr als 0.12.
+Paket/Version/APIs, Berechtigungsfreiheit, Backup aus, v2/v3-Signatur samt gleichem
+Zertifikat wie 0.12, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung,
+Android-Shaderexport und 845 identische Projektdateien sind geprüft.
+[Zentraler Qualitätsstatus](QUALITY.md), [Download und SHA-256](../downloads/README.md).
 
 **Manuell offen:** Android-Update und Spielstandübernahme, Lesbarkeit auf kleinen
 Displays, Bewegungsgefühl mit größeren Figuren, subjektiver Klang, Leistung und

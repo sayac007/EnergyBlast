@@ -83,7 +83,7 @@ python3 tools/check_defold.py
 ```
 
 - **check_shared:** fünfzehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 61 Sprach-
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 63 Sprach-
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.

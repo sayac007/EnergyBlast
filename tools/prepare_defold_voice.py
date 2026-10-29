@@ -35,6 +35,8 @@ TEXTS={
  'defold_health_refill':'Hier kannst du deine Energie mit Sternen auffüllen. Sie erholt sich auch von selbst.',
  'defold_treasure_hint':'Folge dem goldenen Schatzzeichen. Wenn du näher kommst, leuchtet die Truhe. Geh zu ihr.',
  'defold_zoom_help':'Mit Plus siehst du alles größer. Mit Minus siehst du mehr vom Feld. Mit zwei Fingern kannst du auch zoomen.',
+ 'defold_power_up':'Bonus geschafft. Du bist jetzt größer und stärker. Deine neue Kraft bleibt gespeichert.',
+ 'defold_power_help':'Löse die Bonusaufgaben. So wachsen deine Gesundheit, dein Schild und deine Feuerkraft. Deine neue Kraft bleibt gespeichert.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

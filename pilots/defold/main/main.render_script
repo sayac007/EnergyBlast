@@ -1,10 +1,11 @@
 local View=require 'main.view'
+local Stage=require 'main.stage_view'
 function init(self)
  self.hero_aura=render.predicate({'hero_aura'});self.zoom=1;self.billboard=render.predicate({'billboard'});self.energy=render.predicate({'energy'})
  self.glow=render.predicate({'glow'});self.model=render.predicate({'model'});self.actor=render.predicate({'actor'});self.shadow=render.predicate({'shadow'});self.stage=render.predicate({'stage'});self.backdrop=render.predicate({'backdrop'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.hero={0,0};self.scene=true
 end
 function on_message(self,id,m)
- if id==hash('camera')then self.center={m.x,m.z};self.hero={m.hero_x or 0,m.hero_z or 0};self.scene=m.scene~=false;self.zoom=m.zoom or 1 end
+ if id==hash('camera')then self.center={m.x,m.z};self.hero={m.hero_x or 0,m.hero_z or 0};self.hero_scale=math.max(1,math.min(1.75,m.hero_scale or 1));self.scene=m.scene~=false;self.zoom=m.zoom or 1 end
 end
 function update(self)
  local w,h=render.get_window_width(),render.get_window_height()
@@ -20,9 +21,9 @@ function update(self)
   render.disable_state(graphics.STATE_CULL_FACE);render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.draw(self.billboard);render.disable_state(graphics.STATE_BLEND);render.enable_state(graphics.STATE_CULL_FACE)
   render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.disable_state(graphics.STATE_CULL_FACE);render.draw(self.energy);render.enable_state(graphics.STATE_CULL_FACE);render.draw(self.glow);render.draw(self.hero_aura);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
  else
-  render.set_viewport(w*30/1280,h*290/720,w*530/1280,h*320/720)
-  local x,z=self.hero[1],self.hero[2];render.set_view(vmath.matrix4_look_at(vmath.vector3(x,24.5,z+17.2),vmath.vector3(x,.5,z-.8),vmath.vector3(0,1,0)))
-  render.set_projection(vmath.matrix4_orthographic(-1.48*(w*530/1280)/(h*320/720),1.48*(w*530/1280)/(h*320/720),-1.48,1.48,.1,100))
+  render.set_viewport(w*Stage.left/1280,h*Stage.bottom/720,w*Stage.width/1280,h*Stage.height/720)
+  local view,projection=Stage.matrices(w,h,self.hero,self.hero_scale)
+  render.set_view(view);render.set_projection(projection)
   render.disable_state(graphics.STATE_CULL_FACE);render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.draw(self.billboard);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.draw(self.hero_aura);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
  end
  render.set_viewport(0,0,w,h);render.disable_state(graphics.STATE_DEPTH_TEST);render.disable_state(graphics.STATE_CULL_FACE);render.set_depth_mask(false)

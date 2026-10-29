@@ -22,16 +22,21 @@ function P.bind(g)
   for _,item in ipairs(self.data.shop_catalog)do
    if item.category=='armor'and self:owns(item.id)then bonus=math.max(bonus,item.health_bonus or 0)end
   end
-  return self.data.player.hit_points+bonus
+  return math.max(self.data.player.hit_points,self:power_state().min_health)+bonus
  end
  function g:weapon_stats()
   local base={id='pulse',damage=1,cooldown=self.data.combat.fire_cooldown,bounces=1}
   if self.data.shop_catalog then
    local item=catalogue(self,self.saved.weapon)
    if item and item.category=='weapon'and self:owns(item.id)then
-    return{id=item.id,damage=item.damage or 1,cooldown=item.cooldown or base.cooldown,bounces=item.bounces or 1}
+    base={id=item.id,damage=item.damage or 1,cooldown=item.cooldown or base.cooldown,bounces=item.bounces or 1}
    end
   elseif self:owns('prism')and self.saved.weapon=='prism'then base.id='prism';base.bounces=2 end
+  local power=self:power_state()
+  if power.enabled and power.count>0 then
+   base.damage=base.damage*power.damage_multiplier
+   base.cooldown=math.max(self.data.bonus_power.minimum_fire_cooldown,base.cooldown/(1+power.count*.12))
+  end
   return base
  end
  function g:shop_item(id)

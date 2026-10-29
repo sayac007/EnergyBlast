@@ -1,8 +1,8 @@
-# EnergyBlast — Defold 0.12
+# EnergyBlast — Defold 0.13
 
 Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
 sechs Missionen, reflektierten Schüssen,
-integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Wieder spielbare Boni, ein größerer Fallenkreis und längere Fallenwirkung.**
+integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Dauerhafte Bonus-Macht: wachsen, stärkere Schilde und Feuerkraft, Tarnung und bis zu einer Million Grundgesundheit.**
 Defold bleibt der Schwerpunkt.
 
 **[Android 0.12 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk)** ·
@@ -12,8 +12,9 @@ Defold bleibt der Schwerpunkt.
 
 ## Aktueller Stand
 
-**Testversion 0.12.0 / Android-Code 13, Stand 29.10.2026.** Die Korrekturrunde liegt
-auf `feat/zoom-treasure-polish`; auf `main` wurde inzwischen 0.11 durch PR #1 übernommen.
+**Testversion 0.13.0 / Android-Code 14, Stand 29.10.2026.** Der neue Schritt liegt
+auf `feat/bonus-power`; der Spielcode auf `main` bleibt bei 0.11. Vorhandene 0.12-Korrekturen
+sind enthalten. Zuerst Bonus-Macht, wie zuletzt beauftragt; weitere Missionen und FPV folgen.
 Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
 nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 
@@ -26,7 +27,32 @@ nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speic
 | Ton | Deutsche synthetische Ansagen, eigene Science-Fiction-Musik und Effekte; stummschaltbar |
 | Engine | Defold 1.14.0 aktiv; Godot 0.2 und GDevelop 0.3 als unveränderte Vergleichsstände erhalten |
 
-### Was 0.12 korrigiert
+### Was 0.13 ergänzt
+
+- **Jeder neue Bonus macht stärker:** zwölf dauerhafte Schritte. Der erste bringt
+  20 Grundgesundheit, dann 30, 35, 40 und immer größere Sprünge bis **1.000.000**.
+  Bereits verdiente Boni werden sofort angerechnet. Gekaufte Rüstung kommt hinzu.
+- **Wachsen und mächtiger werden:** größere animierte Figur, stärkerer Schimmer
+  und ein sichtbarer Schutzschild. Bis zu 1,75-fache Bildgröße; Wege bleiben passierbar.
+- **Echte Wirkung:** regenerierender Schild, mehr Projektilschaden, schnelleres
+  Feuern und stärkere Tarnung. Die Figur wird im Spiel durchscheinender und Gegner
+  erkennen sie aus kürzerer Entfernung. Laufgeschwindigkeit bleibt erhalten.
+- **Nächste Belohnung sichtbar:** POWER rechts oben öffnet die Übersicht mit echten
+  Werten und fünf großen Meilensteinen. Große Gesundheitszahlen werden vollständig
+  lesbar angezeigt. Fortschritt bleibt nach Missionswechsel und Neustart erhalten.
+- **Erfolge bleiben einmalig:** erneutes Spielen bleibt möglich. Derselbe bereits
+  verdiente Bonus erzeugt keine zusätzlichen Machtstufen und verändert keine Käufe.
+
+[Regeln, tatsächliche Prüfungen und Grenzen](docs/MILESTONE_12.md).
+
+![Bonus-Macht und Millionengesundheit](docs/images/13-defold-power.png)
+
+**Als Nächstes beauftragt:** 20 weitere, komplexer werdende Missionen und der Ersatz der
+Begleitdrohne durch eine steuerbare FPV-Angriffsdrohne mit stilisierter Sprengladung,
+elektronischer Störung und Blitzanimation. Diese Erweiterungen sind in 0.13 noch
+nicht enthalten; der Betreiber hat die Bonus-Macht ausdrücklich vorgezogen.
+
+### Aus 0.12 erhalten
 
 - **Boni bleiben spielbar:** Bei einem erneuten Missionsbesuch sind beide Bonusaufgaben
   und die Truhe wieder vorhanden. Bereits verdiente Sterne, Käufe und Hinweise bleiben
@@ -214,12 +240,12 @@ python3 tools/check_defold.py
 
 ## Prüfungen und Grenzen
 
-**29.10.2026:** **1.066 native Prüfungen und 15 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
-im [zentralen Qualitätsstatus](docs/QUALITY.md). Die vollständige Suite wurde für 0.12 erneut ausgeführt, einschließlich alter vollständig
-belohnter Spielstände und gespeicherter Ausrüstung. Die fünf direkten Gesten sowie
+**29.10.2026:** **1.311 native Prüfungen und 15 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
+im [zentralen Qualitätsstatus](docs/QUALITY.md). Die vollständige Suite wurde für 0.13 erneut ausgeführt: 245 neue Machtprüfungen,
+echte Wachstums-/Millionen-/Kameragrenzen-Tests sowie bisherige Regressionen. Die fünf direkten Gesten sowie
 Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
-Geschossverdeckung bleiben Teil der vollständigen Suite. Die 32 Sprachdateien sind unverändert; technische Medienprüfungen wurden wiederholt.
-Für diese Korrektur wurde keine neue menschliche Hör- oder ASR-Prüfung behauptet. Zwei-Finger-Pakete sind nativ simuliert geprüft;
+Geschossverdeckung bleiben Teil der vollständigen Suite. 34 aktive Sprachdateien sind technisch geprüft. Zwei neue Machtansagen wurden
+unabhängig exakt erkannt; die bisherigen 32 bleiben unverändert. Zwei-Finger-Pakete sind nativ simuliert geprüft;
 der echte Android-Mehrfingertest bleibt offen.
 
 Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
@@ -227,8 +253,8 @@ längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
 kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
 
 Der 0.10-Stand wurde am 29.10.2026 mit erhaltener Commit-Historie in `main`
-integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die neue 0.12-Korrekturfassung
-wird separat entwickelt und veröffentlicht.
+integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die 0.12-Korrekturfassung bleibt auf ihrem Arbeitsbranch erhalten; 0.13 wird
+auf `feat/bonus-power` separat weiterentwickelt.
 Kein automatischer Spielmerge, GitHub-Release oder Store-Upload. Andere Repositories und
 Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
 Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.

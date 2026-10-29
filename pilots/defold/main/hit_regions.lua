@@ -15,7 +15,13 @@ function H.own(g,x,y)
  if not g.project or not Layout.field(x,y)then return false end
  return inside(H.hero(g),x,y)
 end
-function H.hero(g)return rect(g,g.p,1.45,2.1,8,48,72)end
+function H.hero(g)
+ -- The touch silhouette grows with the drawing; the movement/shot collider
+ -- remains unchanged so a powerful hero can still traverse every existing lane.
+ local state=g.power_state and g:power_state()or nil
+ local size=math.max(1,math.min(1.75,g.hero_visual_scale or(state and state.visual_scale)or 1))
+ return rect(g,g.p,1.45*size,2.1*size,8,48,72)
+end
 function H.dimensions(e)
  if e.optional then return .7,1.19 end
  if e.kind=='relay'or e.kind=='sequence'then return 1,1.7 end

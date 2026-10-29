@@ -5,9 +5,11 @@ local function complete(g,task)
  if task.done then return end
  task.done=true;g.bonus.completed=g.bonus.completed+1
  local amount=g:award(task.key);task.rewarded=true
- g.status=amount>0 and('BONUS GESCHAFFT + '..amount..' STERNE')or'BONUS ERNEUT GESCHAFFT - STERNE SCHON GESPEICHERT'
+ local power=g:power_state()
+ g.status=amount>0 and(power.enabled and('BONUS! '..power.title..' · '..g.max_hp..' ENERGIE')or('BONUS GESCHAFFT + '..amount..' STERNE'))or'BONUS ERNEUT GESCHAFFT - STERNE SCHON GESPEICHERT'
  for _,e in ipairs(task.targets)do e.hp=0;e.death_age=0;g.fx[#g.fx+1]={kind='bonus',p={e.p[1],e.p[2]},age=0,life=.65}end
  if g.sfx then g.sfx('bounce')end
+ if amount>0 and power.enabled then g.say('defold_power_up')end
 end
 local function target(g,task,p,order)
  local e={p={p[1],p[2]},hp=task.done and 0 or 1,max_hp=1,optional=true,kind='bonus_'..task.kind,bonus_order=order,bonus_task=task,timer=999,warning=0,direction={0,1}}

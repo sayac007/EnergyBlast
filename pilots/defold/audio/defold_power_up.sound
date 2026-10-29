@@ -1,0 +1,4 @@
+sound: "/audio/defold_power_up.ogg"
+looping: 0
+group: "master"
+gain: 2.2398804325757102

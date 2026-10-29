@@ -1,6 +1,7 @@
 local Layout=require 'main.layout'
 local Traps=require 'main.trap_controls'
 local Objectives=require 'main.objectives'
+local PowerFormat=require 'main.power_format'
 local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
 local function track(self,n)
  gui.set_adjust_mode(n,gui.ADJUST_STRETCH)
@@ -40,6 +41,49 @@ local function portrait(self,x,y,id,size)return picture(self,x,y,size,size,id,'p
 local function star(self,x,y,r)icon(self,x,y,'star',r*2)end
 local function glass(self,x,y,w,h,alpha)
  local n=panel(self,x,y,w,h);gui.set_color(n,vmath.vector4(1,1,1,alpha or .86));return n
+end
+local function power_state(g)
+ return g.power_state and g:power_state()or{count=0,total=12,tier=0,title='DEIN ANFANG',min_health=g.max_hp or 15,visual_scale=1,damage_multiplier=1,shield_max=0,detection_multiplier=1}
+end
+local function power_button(self,g,x,y,w,h)
+ local state=power_state(g)
+ if not state.enabled then return end
+ local n=picture(self,x,y,w,h,state.count>0 and'button_violet'or'button_blue',nil,true)
+ icon(self,x-w/2+26,y+6,'armor',32)
+ text(self,x+17,y+7,tostring(state.count)..'/'..tostring(state.total),'fff0a3',.61,w-53)
+ text(self,x,y-h/2+12,'BONUS-MACHT','d4eaff',.31,w-10)
+ self.buttons[#self.buttons+1]={node=n,action='power',rect={x,y,w,h}}
+end
+local function power_page(self,g)
+ local state=power_state(g)
+ panel(self,930,376,630,477)
+ text(self,930,587,state.title or'DEINE BONUS-MACHT','fff0a6',1.02,578)
+ text(self,930,551,tostring(state.count)..' VON '..tostring(state.total)..' BONI · GROESSE '..math.floor((state.visual_scale or 1)*100+.5)..'%','a8ebed',.52,578)
+ local cards={
+  {x=778,y=476,icon='heart',title='GESUNDHEIT',value=PowerFormat.number(g.max_hp)},
+  {x=1082,y=476,icon='armor',title='SCHILD',value=PowerFormat.number(g.max_shield or state.shield_max)},
+  {x=778,y=378,icon='cannon',title='FEUERKRAFT',value='x'..PowerFormat.number(state.damage_multiplier)},
+  {x=1082,y=378,icon='cloak',title='TARNUNG',value=PowerFormat.percent(1-(g.detection_multiplier and g:detection_multiplier()or state.detection_multiplier or state.cloak_multiplier or 1))}
+ }
+ for _,card in ipairs(cards)do
+  glass(self,card.x,card.y,282,86,.92);icon(self,card.x-104,card.y+1,card.icon,52)
+  text(self,card.x+22,card.y+19,card.title,'b3dce9',.43,198)
+  text(self,card.x+22,card.y-11,card.value,'ffffff',.84,198)
+ end
+ local next=state.next
+ local target=next and('NOCH '..math.max(0,next.count-state.count)..' BONI: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE')or'ALLE BONI GESCHAFFT · DEINE MACHT BLEIBT'
+ text(self,930,305,target,'ffe590',.57,580)
+ local milestones=state.milestones or{}
+ for i,m in ipairs(milestones)do
+  local x=682+(i-1)*124;local earned=state.count>=m.count
+  picture(self,x,238,113,89,earned and'button_green'or'panel',nil,true)
+  icon(self,x-29,255,earned and'star'or'heart',25)
+  text(self,x+15,255,tostring(m.count)..' BONI',earned and'ffffff'or'aac5d7',.39,77)
+  text(self,x,220,PowerFormat.number(m.min_health),earned and'fff0a3'or'b1cbdf',.55,103)
+ end
+ text(self,930,164,'BONI LOESEN · DAUERHAFT STAERKER WERDEN · KEINE STERNKOSTEN','a3d5e2',.42,595)
+ button(self,930,78,615,78,'ZURUECK','power_close','green','dash')
+ if g.power_ui_test then print('DEFOLD POWER PAGE READY count='..state.count..' hp='..g.max_hp..' shield='..(g.max_shield or 0))end
 end
 local function mission_card(self,g,m,i,x,y,subtitle)
  -- Real illustrations, cropped at their original aspect ratio. Text has its own
@@ -156,7 +200,7 @@ local function field_traps(self,g)
 end
 local function page(self,g,title)
  -- The background is a separate earlier render pass; the animated 3D hero stays visible.
- text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'BONI & FALLEN  ·  0.12','a3e7df',.61)
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'BONUS-MACHT  ·  0.13','a3e7df',.61)
  glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
  icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
  text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
@@ -211,7 +255,7 @@ local function shop(self,g)
  local health=g:shop_item('health')
  glass(self,284,199,490,168,.94);icon(self,77,235,'heart',54)
  text(self,295,252,'GESUNDHEIT AUFFUELLEN','ffffff',.72,365)
- text(self,284,216,tostring(g.hp)..' / '..tostring(g.max_hp)..' ENERGIE','b9e9df',.64,390)
+ text(self,284,216,PowerFormat.number(g.hp)..' / '..PowerFormat.number(g.max_hp)..' ENERGIE','b9e9df',.64,390)
  local full=g.hp>=g.max_hp
  button(self,284,166,430,63,full and 'VOLL · '..health.price..' STERNE BEI BEDARF'or 'HEILEN · '..health.price..' STERNE','buy:health',full and 'blue'or health.available and 'green'or 'blue','heart')
  if not full and(health.missing or 0)>0 then text(self,284,123,'NOCH '..health.missing..' STERNE','c9d5eb',.40,435)else text(self,284,123,'BEI SCHADEN IMMER WIEDER KAUFBAR','a4dacd',.37,435)end
@@ -225,7 +269,8 @@ end
 
 local function dialog(self,g)
  self.buttons={};local state=g:mission_state()
- page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or'GESCHAFFT!')
+ page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or g.dialog=='power'and'DEINE BONUS-MACHT'or'GESCHAFFT!')
+ if g.dialog~='power'then power_button(self,g,493,354,140,68)end
  if g.dialog=='menu'then
   local names={'ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','MAGNETFALLEN','LICHTERFOLGE','DROHNE RETTEN'}
   for i,m in ipairs(g.data.missions)do
@@ -248,6 +293,8 @@ local function dialog(self,g)
    button(self,x,237,190,77,chosen and'GEWAEHLT'or'WAEHLEN','character:'..c.id,chosen and'green'or'violet','heart')
   end
   button(self,930,83,615,78,'ZURUECK ZU DEN MISSIONEN','menu','blue','menu')
+ elseif g.dialog=='power'then
+  power_page(self,g)
  elseif g.dialog=='gear'then
   shop(self,g)
  elseif g.dialog=='win'then
@@ -273,7 +320,8 @@ function update(self,dt)
  self.world_zoom=math.max(1,math.min(1.6,g.zoom or 1))
  if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
  if g.dialog then
-  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
+  local power=power_state(g)
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id]),tostring(power.count),tostring(g.shield)},'|')
   if key==self.dialog_key then return end;self.dialog_key=key
  else self.dialog_key=nil end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
@@ -294,10 +342,21 @@ function update(self,dt)
 
  local hero_thumb=portrait(self,72,548,g:character().id,135);self.buttons[#self.buttons+1]={node=hero_thumb,action='characters',rect={72,548,135,135}}
  icon(self,26,466,'heart',25);text(self,85,467,'ENERGIE','c7e3ef',.41,92)
- text(self,72,443,tostring(g.hp)..' / '..tostring(g.max_hp),'ffffff',.73,126)
+ local hp_node=text(self,72,449,PowerFormat.number(g.hp),'ffffff',.68,126)
+ text(self,72,434,'VON '..PowerFormat.number(g.max_hp),'b8e0e8',.38,126)
  local ratio=clamp(g.hp/math.max(1,g.max_hp),0,1);box(self,72,421,112,16,'0a1830')
  if ratio>0 then box(self,17+55*ratio,421,110*ratio,12,g.regenerating and '80f9bd'or ratio<.3 and 'ffb878'or '56d8cf')end
  text(self,72,405,g.in_sanctuary and 'GESCHUETZT'or g.regenerating and 'ERHOLUNG'or g.hp>=g.max_hp and 'VOLLE ENERGIE'or 'ERHOLUNG BALD','99dfcd',.32,125)
+ local power=power_state(g)
+ power_button(self,g,1208,593,120,52)
+ if (g.max_shield or 0)>0 then
+  icon(self,24,263,'armor',21);text(self,88,264,PowerFormat.number(g.shield),'a5eaff',.41,97)
+ end
+ if g.power_ui_test then
+  local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),PowerFormat.number(g.hp));local scale=gui.get_scale(hp_node)
+  assert(metrics.width*scale.x<=126.01,'large health text leaves its HUD slot')
+  if self.logged_power_hud~=power.count then self.logged_power_hud=power.count;print('DEFOLD POWER HUD READY count='..power.count..' hp='..PowerFormat.number(g.hp)..' width='..string.format('%.2f',metrics.width*scale.x))end
+ end
  for _,name in ipairs({'menu','sound','hint','radio','gear'})do local r=Layout.controls[name];local title=({menu='',sound='',hint='HINWEIS',radio='FUNK',gear='STERNE'})[name]
   if name=='menu'or name=='sound'then button(self,r[1],r[2],r[3],r[4],'',name,'blue');icon(self,r[1],r[2]+2,name,37)
   else
@@ -311,7 +370,11 @@ function update(self,dt)
   text(self,r[1],r[2]-36,name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.69)
   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
- text(self,610,57,g.status,'d2e9ec',.64,620);text(self,610,27,'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.43,620)
+ local growth=(g.power_flash or 0)>0 and g.power_gain
+ local bottom=growth and('BONUS-MACHT '..growth.count..'! '..PowerFormat.number(growth.health)..' ENERGIE · FEUERKRAFT x'..PowerFormat.number(growth.damage_multiplier))or g.status
+ text(self,610,57,bottom,growth and'fff0a3'or'd2e9ec',growth and .68 or .64,620)
+ local next=power.next
+ text(self,610,27,next and('NAECHSTER BONUS: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE · MACHT BLEIBT GESPEICHERT')or power.count>0 and'ALLE BONUSKRAEFTE GESPEICHERT · WIEDER SPIELBAR'or'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.43,620)
  button(self,174,44,56,56,'-','zoom_out','blue');button(self,240,44,56,56,'+','zoom_in','blue')
  text(self,207,83,'ZOOM '..math.floor((g.zoom or 1)*100+.5)..'%','c8eaff',.34,137)
  if g.m.sanctuary and not g.solved then button(self,72,136,120,54,'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
@@ -341,7 +404,7 @@ function update(self,dt)
   if e.optional then
    local bx,by=g.project(g,e.p,1.4);icon(self,bx,by+22,'star',29)
    if e.kind=='bonus_sequence'then if e.bonus_lit or(e.lit or 0)>0 then ring(self,bx,by+5,28,'fff1a0',4)end;text(self,bx,by,tostring(e.bonus_order),'fff3a7',.70)elseif e.kind=='bonus_wait'then text(self,bx,by,e.bonus_green and'JETZT!'or'WARTE',e.bonus_green and'a7ffe0'or'ffb1b6',.45,100)else text(self,bx,by,'ABPRALLER','ffe5a0',.40,110)end
-   if e.bonus_task then text(self,bx,by-22,e.bonus_task.replay and'NOCH EINMAL'or'+'..e.bonus_task.reward,'ffe5a0',.46,150)end
+   if e.bonus_task then text(self,bx,by-22,e.bonus_task.replay and'NOCH EINMAL'or'+'..e.bonus_task.reward..(power.enabled and' · MACHT +1'or''),'ffe5a0',.46,175)end
   elseif e.kind=='sequence'then
    local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
    ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
@@ -419,6 +482,8 @@ local function handle(self,a)
    end
    if g.ui_test then if bought or g:owns(action:sub(5))then print('DEFOLD SHOP PURCHASE PASS '..action)else print('DEFOLD SHOP BLOCKED '..action)end end
    if g.flow_ui_test then print('DEFOLD FLOW PURCHASE '..action:sub(5)..' owned='..tostring(g:owns(action:sub(5)))..' wallet='..g:wallet()..' hp='..g.hp..' max='..g.max_hp)end
+  elseif action=='power'then self.power_return=g.dialog or false;g.paused=true;g.dialog='power';g.say('defold_power_help')
+  elseif action=='power_close'then if self.power_return then g.dialog=self.power_return;g.paused=true else g:resume_mission()end;self.power_return=nil
   elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'defold_shop_tiers'or'flow_menu')end
   elseif action=='continue'then g:resume_mission();if g.intro_needed then g.intro_needed=false;g.replay()end
   elseif action=='retry'then g.choose(g.index)

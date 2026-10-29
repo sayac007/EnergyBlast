@@ -4,6 +4,7 @@ import json,shutil,zipfile,struct
 R=Path(__file__).resolve().parents[1];D=R/'pilots/defold'
 shutil.copyfile(R/'shared/defold04.json',D/'data/defold04.json')
 shutil.copyfile(R/'shared/defold07-regression.json',D/'data/defold07.json')
+shutil.copyfile(R/'shared/defold12-regression.json',D/'data/defold12.json')
 shutil.copytree(R/'shared/notices',D/'data/notices',dirs_exist_ok=True)
 shutil.copyfile(R/'shared/audio/de/manifest.json',D/'data/audio.json')
 shutil.copyfile(R/'shared/audio/de/LICENSE.txt',D/'data/AUDIO_LICENSE.txt')
@@ -30,6 +31,7 @@ if (polished/'models.json').exists():
  for f in polished.iterdir():
   if f.suffix in ['.gltf','.bin','.png']and '-original'not in f.name:shutil.copyfile(f,D/'models'/f.name)
 models['hero_aura']={'runtime':'glow.gltf','tag':'hero_aura','texture':None,'fragment':'glow.fp'}
+models['hero_power_shield']={'runtime':'energy_field.gltf','tag':'hero_aura','texture':None,'fragment':'energy_field.fp'}
 for key in models:
  if key.endswith('_ground'):
   mission=key[:-7];models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png';models[key]['color_tint']=[.84,.88,.96,1]
@@ -58,6 +60,7 @@ samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_
   if fragment=='billboard.fp':
    width,height=struct.unpack('>II',(D/'models'/texture).read_bytes()[16:24])
    material+='fragment_constants { name: \"atlas_texel\" type: CONSTANT_TYPE_USER value { x: '+str(1/width)+' y: '+str(1/height)+' z: 0 w: 0 } }\n'
+   material+='fragment_constants { name: "power_fx" type: CONSTANT_TYPE_USER value { x: 1 y: 0 z: 0 w: 0 } }\n'
   material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"hero_fx\"'in line and fragment!='billboard.fp')or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')

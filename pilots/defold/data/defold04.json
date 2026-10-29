@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-12",
+  "id": "energyblast-defold-13",
   "language": "de",
   "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
@@ -1220,6 +1220,134 @@
     "first_mission_index": 4,
     "placement_range": 5.25,
     "armed_lifetime": 12,
-    "multipliers": [3, 2.5, 2]
+    "multipliers": [
+      3,
+      2.5,
+      2
+    ]
+  },
+  "bonus_power": {
+    "schema": 1,
+    "minimum_fire_cooldown": 0.12,
+    "shield_regen_delay": 3,
+    "shield_regen_fraction": 0.2,
+    "health_regen_fraction": 0.025,
+    "steps": [
+      {
+        "bonuses": 1,
+        "title": "FUNKENHELD",
+        "health": 20,
+        "damage_multiplier": 2,
+        "shield": 3,
+        "detection_multiplier": 0.95,
+        "visual_scale": 1.0625
+      },
+      {
+        "bonuses": 2,
+        "title": "KRAFTHELD",
+        "health": 30,
+        "damage_multiplier": 3,
+        "shield": 5,
+        "detection_multiplier": 0.9,
+        "visual_scale": 1.125
+      },
+      {
+        "bonuses": 3,
+        "title": "KRAFTHELD",
+        "health": 35,
+        "damage_multiplier": 4,
+        "shield": 8,
+        "detection_multiplier": 0.85,
+        "visual_scale": 1.1875
+      },
+      {
+        "bonuses": 4,
+        "title": "STERNENHELD",
+        "health": 40,
+        "damage_multiplier": 6,
+        "shield": 12,
+        "detection_multiplier": 0.8,
+        "visual_scale": 1.25
+      },
+      {
+        "bonuses": 5,
+        "title": "STERNENHELD",
+        "health": 80,
+        "damage_multiplier": 10,
+        "shield": 20,
+        "detection_multiplier": 0.72,
+        "visual_scale": 1.3125
+      },
+      {
+        "bonuses": 6,
+        "title": "STERNENHELD",
+        "health": 160,
+        "damage_multiplier": 16,
+        "shield": 40,
+        "detection_multiplier": 0.65,
+        "visual_scale": 1.375
+      },
+      {
+        "bonuses": 7,
+        "title": "STERNENHELD",
+        "health": 400,
+        "damage_multiplier": 25,
+        "shield": 75,
+        "detection_multiplier": 0.56,
+        "visual_scale": 1.4375
+      },
+      {
+        "bonuses": 8,
+        "title": "TITAN",
+        "health": 1000,
+        "damage_multiplier": 50,
+        "shield": 150,
+        "detection_multiplier": 0.45,
+        "visual_scale": 1.5
+      },
+      {
+        "bonuses": 9,
+        "title": "TITAN",
+        "health": 10000,
+        "damage_multiplier": 100,
+        "shield": 1000,
+        "detection_multiplier": 0.35,
+        "visual_scale": 1.5625
+      },
+      {
+        "bonuses": 10,
+        "title": "TITAN",
+        "health": 100000,
+        "damage_multiplier": 250,
+        "shield": 5000,
+        "detection_multiplier": 0.25,
+        "visual_scale": 1.625
+      },
+      {
+        "bonuses": 11,
+        "title": "TITAN",
+        "health": 400000,
+        "damage_multiplier": 500,
+        "shield": 20000,
+        "detection_multiplier": 0.17,
+        "visual_scale": 1.6875
+      },
+      {
+        "bonuses": 12,
+        "title": "KOSMISCHER RIESE",
+        "health": 1000000,
+        "damage_multiplier": 1000,
+        "shield": 100000,
+        "detection_multiplier": 0.1,
+        "visual_scale": 1.75
+      }
+    ],
+    "milestones": [
+      1,
+      2,
+      4,
+      8,
+      12
+    ]
   }
 }

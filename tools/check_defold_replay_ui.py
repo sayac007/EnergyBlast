@@ -55,12 +55,14 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-replay-',dir='/tmp')
       before=choose(index,mission,1)
       screenshot(root,mission+'-rearmed')
       radio_start=len(log.read_text());click(1208,210)
-      wait('DEFOLD REPLAY VOICE mission='+mission+r' id=bonus_(sequence|wait)',radio_start)
+      # A larger hero needs a different clear firing approach. Guidance may
+      # correctly choose the other, nearer open bonus from that real position.
+      wait('DEFOLD REPLAY VOICE mission='+mission+r' id=bonus_(sequence|wait|prism)',radio_start)
       print('DEFOLD NATIVE REPLAY CONTEXT RADIO '+mission.upper()+' PASS',flush=True)
       # Actual HINWEIS uses the mission guidance path; an earned chest must
       # not suppress an unfinished/rearmed bonus with "already collected".
       click(72,210)
-      wait('DEFOLD REPLAY HINT PASS mission='+mission+r' goal=bonus voice=bonus_(sequence|wait)',before)
+      wait('DEFOLD REPLAY HINT PASS mission='+mission+r' goal=bonus voice=bonus_(sequence|wait|prism)',before)
       screenshot(root,mission+'-hint')
       sequence=mission in ['reactor','dock','forge'];steps=3 if sequence else 1
       for progress in range(steps):

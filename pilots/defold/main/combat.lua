@@ -1,6 +1,7 @@
 -- Pure gameplay math. Native Defold owns rendering, input, storage and audio.
 local Projectiles=require 'main.projectiles'
 local Progression=require 'main.progression'
+local Power=require 'main.power'
 local Objectives=require 'main.objectives'
 local Surfaces=require 'main.surfaces'
 local Flow=require 'main.mission_flow'
@@ -16,7 +17,7 @@ function M.new(data,saved)
  function g:total()local n=0;for k,v in pairs(self.saved.earned)do if v then n=n+(data.rewards[k]or 0)end end;return n end
  function g:credits()local n=0;for _,key in ipairs(data.hint_completion_keys)do if self.saved.earned[key]then n=n+2 end end;return n-#self.saved.clues end
  function g:level()local n=0;for _,id in ipairs(self.saved.clues)do if id:sub(1,#self.m.id+1)==self.m.id..':'then n=n+1 end end;return n end
- function g:award(id)if self.saved.earned[id]then return 0 end;local n=data.rewards[id];if not n then return 0 end;local before=self:total();self.saved.earned[id]=true;if not data.shop_enabled and before<100 and self:total()>=100 then self.saved.weapon='prism'end;self.changed();return n end
+ function g:award(id)if self.saved.earned[id]then return 0 end;local n=data.rewards[id];if not n then return 0 end;local power_before=self:power_state();local before=self:total();self.saved.earned[id]=true;if not data.shop_enabled and before<100 and self:total()>=100 then self.saved.weapon='prism'end;if id:match('^bonus:')then self:refresh_power(power_before)end;self.changed();return n end
  function g:open()return self.peaceful or self.clock%8>=5 end
  function g:active()local walls={};for _,w in ipairs(self.walls)do walls[#walls+1]=w end;if self.m.gate_rect and not self:open()then walls[#walls+1]={r=self.m.gate_rect,type='gate'}end;return walls end
  function g:blocked(p)local a=data.arena;if p[1]<a[1]+.5 or p[1]>a[1]+a[3]-.5 or p[2]<a[2]+.5 or p[2]>a[2]+a[4]-.5 then return true end;for _,w in ipairs(self:active())do local r=w.r;if p[1]>r[1]-.28 and p[1]<r[1]+r[3]+.28 and p[2]>r[2]-.28 and p[2]<r[2]+r[4]+.28 then return true end end;return false end
@@ -30,6 +31,7 @@ function M.new(data,saved)
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
   Objectives.load(self)
   Bonus.load(self)
+  self:reset_power()
   self.status='KURZ: LAUFEN - HALTEN: FEUERN - FIGUR ZIEHEN';self.paused=false;self.dialog=nil
  end
  function g:navigate(target)
@@ -52,7 +54,7 @@ function M.new(data,saved)
  end
  function g:fire()if self.paused or self.tactical_pause or self.over or self.cooldown>0 then return end;if self:is_safe()then self.status='ZIKURRAT: GESCHUETZT - ZUM FEUERN HINAUSGEHEN';return end;self.cooldown=self:weapon_stats().cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
- function g:hit_player()if self.peaceful or self.invulnerable>0 or self.over or self:is_safe()then return end;self.hp=self.hp-1;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
+ function g:hit_player()if self.peaceful or self.invulnerable>0 or self.over or self:is_safe()then return end;if self:power_hit()then return end;self.hp=self.hp-1;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
  function g:finish()if self.solved then return end;self.solved=true;Objectives.complete(self);self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self:remember_mission(self:next_index()or self.index);self.say('combat_win')end
  function g:locked(t)
   if not t.boss then return false end
@@ -115,11 +117,13 @@ function M.new(data,saved)
  end
  function g:recover(dt)
   local cfg=data.recovery;if not cfg then return end
+  self:recover_shield(dt)
   self.in_sanctuary=self:is_safe();self.regen_since_hit=(self.regen_since_hit or 0)+dt
   local delay=self:owns('regen_core')and 2 or cfg.delay_seconds
   self.regenerating=self.hp>0 and self.hp<self.max_hp and(self.in_sanctuary or self.regen_since_hit>=delay)
   if not self.regenerating then self.regen_charge=0;return end
-  self.regen_charge=(self.regen_charge or 0)+dt*(self.in_sanctuary and cfg.sanctuary_rate or cfg.rate)
+  local power=self:power_state();local rate=math.max(self.in_sanctuary and cfg.sanctuary_rate or cfg.rate,self.max_hp*power.regen_fraction*(self.in_sanctuary and 4 or 1))
+  self.regen_charge=(self.regen_charge or 0)+dt*rate
   local points=math.floor(self.regen_charge+.000001)
   if points>0 then
    self.hp=math.min(self.max_hp,self.hp+points);self.regen_charge=self.regen_charge-points
@@ -131,6 +135,7 @@ function M.new(data,saved)
   dt=math.min(.1,dt)
   for i=#self.fx,1,-1 do local f=self.fx[i];f.age=(f.age or 0)+dt;f.life=f.life-dt;if f.life<=0 then table.remove(self.fx,i)end end
   self.recoil=math.max(0,(self.recoil or 0)-dt)
+  self.power_flash=math.max(0,(self.power_flash or 0)-dt)
   for _,t in ipairs(self.enemies)do t.hit_timer=math.max(0,(t.hit_timer or 0)-dt);if t.death_age then t.death_age=t.death_age+dt end end
   if self.pending_win then self.pending_win=self.pending_win-dt;if self.pending_win<=0 then self.pending_win=nil;if not self.dialog then self.dialog='win'end end end
  end
@@ -147,7 +152,7 @@ function M.new(data,saved)
     t.timer=data.combat.enemy_interval end
    else
     if t.patrol then local p=t.patrol[t.waypoint];local d=M.dist(t.p,p);if d<t.speed*dt then t.p={p[1],p[2]};t.waypoint=t.waypoint%#t.patrol+1 else local n=M.norm({p[1]-t.p[1],p[2]-t.p[2]});t.p={t.p[1]+n[1]*t.speed*dt,t.p[2]+n[2]*t.speed*dt}end end
-    t.timer=t.timer-dt;local cloak=self:owns('cloak2')and 1 or(self:owns('cloak')and .35 or 0);if t.timer<=0 and M.dist(t.p,self.p)<(data.combat.detection_range or 13)*(1-cloak*.5)*((self.saved.earned['secret:guardian']or self.saved.earned['secret:citadel'])and .9 or 1)then t.warning=data.combat.enemy_warning;local aim=self.drone and self.drone.hp>0 and M.dist(t.p,self.drone.p)<M.dist(t.p,self.p)and self.drone.p or self.p;t.direction=M.norm({aim[1]-t.p[1],aim[2]-t.p[2]})end end
+    t.timer=t.timer-dt;if t.timer<=0 and M.dist(t.p,self.p)<(data.combat.detection_range or 13)*self:detection_multiplier()*((self.saved.earned['secret:guardian']or self.saved.earned['secret:citadel'])and .9 or 1)then t.warning=data.combat.enemy_warning;local aim=self.drone and self.drone.hp>0 and M.dist(t.p,self.drone.p)<M.dist(t.p,self.p)and self.drone.p or self.p;t.direction=M.norm({aim[1]-t.p[1],aim[2]-t.p[2]})end end
   end end
   self:recover(dt)
   Bonus.update(self,dt)
@@ -163,6 +168,7 @@ function M.new(data,saved)
  end
  function g:trap(p,id)return Objectives.trap(self,p,id)end
  function g:hit_drone()Objectives.drone_hit(self)end
+ Power.bind(g)
  Progression.bind(g)
  Flow.bind(g)
  g:load(g:start_index());return g

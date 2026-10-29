@@ -35,13 +35,27 @@ function M.ground(g,x,y)
  local p=M.unproject(g,x,y);local r=g.data.arena
  return{math.max(r[1]+.5,math.min(r[1]+r[3]-.5,p[1])),math.max(r[2]+.5,math.min(r[2]+r[4]-.5,p[2]))}
 end
+local function power_scale(g)
+ if not g.power_state then return nil end
+ local state=g:power_state()
+ if not state.enabled or state.count==0 then return nil end
+ return math.max(1,math.min(1.75,state.visual_scale or 1))
+end
 function M.clamp_camera(g,center)
  local r=g.data.arena;local w,h=window.get_size();local _,_,aspect,size=M.matrices(w,h,{0,0},g.zoom);local cx,cz=r[1]+r[3]/2,r[2]+r[4]/2
  local ex=math.max(0,(r[3]-size*aspect)/2+.3);local ez=math.max(0,(r[4]-size/.8)/2+.3)
+ local scale=power_scale(g)
+ if scale then
+  -- Allow the camera beyond arena edges so a grown head is never cropped by
+  -- an old floor-only clamp, including at maximum user zoom.
+  ex=ex+.725*scale;ez=ez+2.1*scale/.8
+ end
  return{math.max(cx-ex,math.min(cx+ex,center[1])),math.max(cz-ez,math.min(cz+ez,center[2]))}
 end
 function M.follow(g,dt,snap)
- local target=M.clamp_camera(g,g.p)
+ local scale=power_scale(g)
+ -- The illustrated quad's centre, rather than its feet, follows the camera.
+ local target=M.clamp_camera(g,scale and{g.p[1],g.p[2]-2.1*scale/1.6}or g.p)
  if snap or not g.camera then g.camera=target;g.zoom_focus=nil;return end
  if g.pending_hold or g.aiming or g.dragging or g.tactical_pause or g.zooming then return end
  if g.zoom_focus then

@@ -4,10 +4,11 @@ local View=require 'main.view'
 local Zoom=require 'main.zoom'
 local PolishFixture=require 'main.polish_fixture'
 local ReplayFixture=require 'main.replay_fixture'
+local PowerFixture=require 'main.power_fixture'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
- local contextual=id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
+ local contextual=id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_power_')~=nil or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
  if contextual then
   if self.voice_id then sound.stop('#'..self.voice_id)end
   self.voice_left=0;self.voice_next=nil;self.follow_enemy_tap=false
@@ -35,14 +36,24 @@ local function sprite_frame(id,x,y,columns,rows,flip,flash)
 end
 local function replace_hero(self)
  for _,id in ipairs(self.hero_ids or{})do go.delete(id)end
+ if self.hero_power_shield then go.delete(self.hero_power_shield)end
  for _,id in ipairs(self.hero_sparks or{})do go.delete(id)end;self.hero_sparks={}
  for i=1,6 do self.hero_sparks[i]=factory.create('#hero_aura',vmath.vector3(0,0,0))end
+ self.hero_power_shield=factory.create('#hero_power_shield',vmath.vector3(0,-100,0));go.set_scale(.001,self.hero_power_shield)
  self.hero=factory.create('#illustrated_'..self.g:character().id,vmath.vector3(0,0,0))
  self.hero_ids={self.hero};self.hero_parts={};self.wings={};self.hero_frame=0;self.hero_row=0;self.hero_flip=false
 end
 local function animate_hero(self,dt)
  local g=self.g;local walking=#g.path>0 and not g.paused and not g.tactical_pause
  local stage=g.dialog~=nil;local time=self.visual_clock;local recoil=(g.recoil or 0)/.20
+ local power=g.power_state and g:power_state()or{count=0,total=12,visual_scale=1,cloak_multiplier=1}
+ local strength=math.max(0,math.min(1,power.count/math.max(1,power.total)))
+ local target_scale=math.max(1,math.min(1.75,power.visual_scale or 1))
+ self.hero_visual_scale=(self.hero_visual_scale or target_scale)+(target_scale-(self.hero_visual_scale or target_scale))*math.min(1,dt*4)
+ g.hero_visual_scale=self.hero_visual_scale
+ local size=self.hero_visual_scale
+ local opacity=stage and 1 or(.3+.7*math.max(.1,math.min(1,power.cloak_multiplier or 1)))
+ local power_flash=math.max(0,math.min(1,(g.power_flash or 0)/2))
  local yaw=(g.aiming or g.held or g.cooldown>.1)and math.atan2(g.aim[1],g.aim[2])or(g.facing or 0)
  local frame=walking and math.floor(time*9)%4 or 0
  local row=not stage and math.cos(yaw)<-.15 and 1 or 0
@@ -53,16 +64,26 @@ local function animate_hero(self,dt)
  local sway=math.sin(phase)*.035*self.hero_motion+math.sin(time*1.7)*.012
  go.set_position(vmath.vector3(g.p[1],bob,g.p[2]),self.hero)
  go.set_rotation(vmath.quat_rotation_z(sway-recoil*.075),self.hero)
- go.set_scale(vmath.vector3(1+breathe*.012+recoil*.045,1-breathe*.010-recoil*.065,1),self.hero)
+ go.set_scale(vmath.vector3((1+breathe*.012+recoil*.045)*size,(1-breathe*.010-recoil*.065)*size,size),self.hero)
  sprite_frame(self.hero,frame,row,4,2,flip,g.invulnerable>0 and math.floor(time*12)%2==0)
  local id=g:character().id;local seed=id=='dragon'and 2 or id=='fox'and 3 or 1
  go.set(msg.url(nil,self.hero,'model'),'hero_fx',vmath.vector4(self.capture_hero_fx_off and 0 or time,self.hero_motion,recoil,self.capture_hero_fx_off and 0 or seed))
+ go.set(msg.url(nil,self.hero,'model'),'power_fx',vmath.vector4(opacity,strength,power_flash,0))
  for i,node in ipairs(self.hero_sparks)do
-  local a=time*(.7+i*.055)+i*2.399963;local r=.48+.13*math.sin(time+i);local y=.35+(i%3)*.32+.12*math.sin(time*1.5+i)
+  local a=time*(.7+i*.055+strength*.25)+i*2.399963;local r=(.48+.13*math.sin(time+i))*size;local y=(.35+(i%3)*.32+.12*math.sin(time*1.5+i))*size
   go.set_position(vmath.vector3(g.p[1]+math.cos(a)*r,y,g.p[2]+math.sin(a)*r*.65),node);go.set_rotation(vmath.quat_rotation_x(-math.atan2(24,18)),node)
-  go.set_scale(self.capture_hero_fx_off and .001 or(.075+.025*math.sin(time*2+i)),node)
+  go.set_scale(self.capture_hero_fx_off and .001 or(.075+.025*math.sin(time*2+i))*(1+strength*.85+power_flash*.4),node)
   local color=seed==2 and vmath.vector4(1,.56,.12,.65)or seed==3 and vmath.vector4(.64,.4,1,.65)or vmath.vector4(.15,.86,1,.65)
+  if strength>0 then color=vmath.lerp(strength*.6,color,vmath.vector4(1,.77,.22,.8))end
   go.set(msg.url(nil,node,'model'),'tint',color)
+ end
+ if self.hero_power_shield then
+  local active=power.count>0 and(g.shield or 0)>0
+  local ratio=math.max(0,math.min(1,(g.shield or 0)/math.max(1,g.max_shield or 1)))
+  go.set_position(vmath.vector3(g.p[1],active and .025 or-100,g.p[2]),self.hero_power_shield)
+  go.set_scale(active and size*(.78+(stage and 0 or power_flash*.07))or .001,self.hero_power_shield)
+  go.set(msg.url(nil,self.hero_power_shield,'model'),'frame',vmath.vector4(time,0,1,1))
+  go.set(msg.url(nil,self.hero_power_shield,'model'),'tint',vmath.vector4(.25+strength*.65,.85,1-strength*.55,(.32+strength*.38)*ratio))
  end
  self.hero_frame=frame;self.hero_row=row;self.hero_flip=flip
  if g.motion_capture and walking and frame>0 and not self.capture_walk_proof then self.capture_walk_proof=true;print('DEFOLD CAPTURE WALK FRAME PASS')end
@@ -106,7 +127,8 @@ local function draw_projectiles(self,dt)
   local id=self.projectile_nodes[b]
   go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),id);go.set_position(vmath.vector3(b.p[1],.65,b.p[2]),self.halo_nodes[b])
   go.set_rotation(vmath.quat_rotation_y(math.atan2(b.direction[1],b.direction[2])),id)
-  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1)*(1+math.max(0,(b.damage or 1)-1)*.10),id);go.set_scale(math.max(.01,b.alpha)*.70,self.halo_nodes[b])
+  local amplification=math.min(2.2,1+math.max(0,(b.damage or 1)-1)*.10)
+  go.set_scale(math.max(.01,b.alpha)*(b.visual=='fireball'and 1.35 or 1)*amplification,id);go.set_scale(math.max(.01,b.alpha)*.70,self.halo_nodes[b])
   b.trail_clock=(b.trail_clock or 0)+dt
   if not self.g.paused and b.trail_clock>.045 then
    b.trail_clock=0
@@ -185,11 +207,14 @@ local function run_tests(self)
  n=n+require('main.flow_checks').run(self.g)
  n=n+require('main.bonus_checks').run(self.g.data)
  n=n+require('main.direct_touch_checks').run(self.g.data)
- n=n+require('main.resilience_checks').run(self.g.data)
+ -- Preserve the historical shop's exact 15..35 HP / 1..4 damage checks while
+ -- new power checks and real GUI tests exercise the active combined rules.
+ n=n+require('main.resilience_checks').run(json.decode(sys.load_resource('/data/defold12.json')))
  n=n+require('main.zoom_checks').run(self.g.data)
  n=n+require('main.treasure_checks').run(self.g.data)
  n=n+require('main.replay_checks').run(self.g.data)
  n=n+require('main.trap_training_checks').run(self.g.data)
+ n=n+require('main.power_checks').run(self.g.data)
  self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
  n=n+require('main.presentation_checks').run(self)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
@@ -213,6 +238,7 @@ function init(self)
  self.resilience_ui_test=sys.get_config_string('project.resilience_ui_test','0')=='1'
  if self.resilience_ui_test then
   self.muted=true;self.g.resilience_ui_test=true;self.g.flow_ui_test=true
+  self.g.data.bonus_power=nil -- Explicit historical shop/refuge fixture only.
   self.g.saved={earned={},clues={},weapon='pulse',music=false,schema=2,purchases={},spent={}}
   for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end
  end
@@ -258,6 +284,7 @@ function init(self)
  end
  PolishFixture.init(self)
  ReplayFixture.init(self)
+ PowerFixture.init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
@@ -304,10 +331,11 @@ function update(self,dt)
  end
  PolishFixture.update(self,dt)
  ReplayFixture.update(self,dt)
- View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],zoom=self.g.zoom})
+ PowerFixture.update(self,dt)
+ View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],hero_scale=self.hero_visual_scale or 1,zoom=self.g.zoom})
  local p=self.g.p
  animate_hero(self,dt)
- go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow);go.set_position(vmath.vector3(p[1],0,p[2]),self.selection);go.set_scale(self.g.dragging and 1.25 or 1,self.selection)
+ go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow);go.set_scale(self.hero_visual_scale or 1,self.hero_shadow);go.set_position(vmath.vector3(p[1],0,p[2]),self.selection);go.set_scale((self.hero_visual_scale or 1)*(self.g.dragging and 1.25 or 1),self.selection)
  go.set_position(vmath.vector3(p[1],0,p[2]),self.lobby)
  for _,t in ipairs(self.g.enemies)do
   local age=t.death_age;local scale=t.hp>0 and(t.optional and .7 or t.boss and 1.2 or 1)or(age and age<.32 and math.max(.001,1-age/.32)*1.2 or .001)
@@ -364,6 +392,7 @@ function on_message(self,id,message)
   end
   PolishFixture.choose(self)
   ReplayFixture.choose(self)
+  PowerFixture.choose(self)
   if self.g.direct_touch_test then self.g.p={4,4.8};self.g.invulnerable=999;for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end;self.g.paused=false;self.g.dialog=nil;View.follow(self.g,0,true)end
   if sys.get_config_string('project.capture_motion','0')=='1'then
    self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-3},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-4.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))

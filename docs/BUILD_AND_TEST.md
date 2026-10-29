@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.12.0
+# Bauen und prüfen — Defold 0.13.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -70,6 +70,13 @@ Schrift und Engine-/Modellhinweise bleiben mit ihren Fremdlizenzen enthalten.
 
 ## Aktuelle Prüfungen
 
+Die exakten Shop-/Erholungswerte aus 0.12 bleiben zusätzlich als unveränderte
+Regeldaten unter `shared/defold12-regression.json` erhalten. Nur deren strikte
+15–35-HP-/1–4-Schaden-Prüfungen und die historische Shop-GUI-Fixture verwenden
+diese alten Werte; die übrigen Regel-/GUI-Prüfungen und neuen Machtprüfungen
+laufen mit den aktuellen Bonus-Macht-Regeln.
+
+
 ```bash
 python3 tools/check_shared.py
 python3 tools/check_defold.py
@@ -87,6 +94,7 @@ python3 tools/check_defold.py
   Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
   UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
+- `check_defold_power_ui.py` verdient mit echten Schüssen die Machtstufen 1, 8 und 12, prüft sichtbares Wachstum und Tarnmaterial, lesbare Millionengesundheit, Schutzschild, POWER-Menü, Prozessneustart und Wiederholung ohne Zusatzgewinn.
 - `check_defold_replay_ui.py` lädt einen vollständig belohnten Spielstand, löst alle sechs Lichter-/Timingboni mit echten Schüssen, sammelt die wiederhergestellten Truhen per Laufweg und prüft Wiederbesuch/Prozessneustart ohne zusätzliche Sterne.
 - `check_defold_polish_ui.py` prüft echte Zoomtasten, geänderte Weltpixel/Figurengröße sowie echte Hinweise und Sammlung aller sechs Schätze.
 - `check_defold_hero_glow.py` prüft den tatsächlichen Figurenschimmer mit einem positiven Pixelvergleich an/aus.
@@ -131,7 +139,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.12 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.13 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 

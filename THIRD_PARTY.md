@@ -198,3 +198,10 @@ import, not a claim of skeletal animation. The coloured silhouette shimmer and
 bounded native orbit lights are original shader/code effects. Two new Serena/Qwen
 original generated cues describe treasure guidance and zoom; existing model/audio
 notices and all30 earlier voice recordings remain unchanged.
+
+## Defold 0.13 — permanent bonus powers
+
+Two new complete original Serena/Qwen sentences explain growing bonus powers
+and their local persistence. They use the same pinned synthetic speaker and
+model notices; no actor voice imitation or external recording is used. All32
+earlier spoken recordings and their individual provenance rows are preserved.

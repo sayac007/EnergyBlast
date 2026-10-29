@@ -233,3 +233,30 @@ repository changes. Keep historical instructions below as a decision log.
   active effects and keep repeat visits to earlier missions generous.
 - 0.12.0/code13, same package/debug certificate. Extend native rule and actual GUI
   regressions using previously completed saves; report real Android checks separately.
+
+## Bonus power first 0.13 — latest operator priority, 29 October 2026
+
+- Work on feat/bonus-power. The latest instruction explicitly prioritizes bonus
+  growth FIRST. Preserve the existing six missions; the additional20missions and
+  first-person-view proposal remain the next planned work, not this iteration.
+- Each distinct current bonus achievement permanently increases health, shield,
+  firepower, concealment and the rendered hero's size. Derive power from the known
+  once-earned bonus keys: the twelve existing achievements count immediately,
+  unknown saved keys do not, and replays cannot farm stars or power.
+- Preserve the requested extravagant health progression20/30/35/40/80/160/400/
+  1000/10000/100000/400000/1000000, plus existing purchased armor bonuses. Five
+  named milestones at1/2/4/8/12 bonuses complement growth at every earned bonus.
+  Keep purchases and scores, apply gains in the current round, and do not revive
+  a defeated hero or silently erase damage when increasing maximum health.
+- Bigger visuals must remain bounded and playable: preserve collision/movement
+  size, navigation, depth testing and the ability to use cover. Use real shield,
+  weapon and detection effects, not only labels; preserve finite projectile
+  lifetime/bounces and actual reflection/sequence/timing requirements. No new
+  speed upgrade. Keep a bounded number of aura/shield objects.
+- Explain current and next bonus power through an accessible illustrated page,
+  visible health/shield totals, growth feedback and the existing synthetic voice.
+  Long numbers must fit on the smallest tested HUD without scientific notation.
+- 0.13.0/code14, same package/debug certificate. Preserve the0.12rules as a frozen
+  regression fixture. Test fresh and previously completed saves, actual native
+  growth/shield/cloak output and GUI input; separate physical Android checks.
+  No automatic merge, PR, Actions, Release/Play or other-repository changes.

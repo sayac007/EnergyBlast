@@ -15,7 +15,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Torus.028"
+			"name":"Torus.018"
 		}
 	],
 	"materials":[
@@ -50,7 +50,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Torus.028",
+			"name":"Torus.018",
 			"primitives":[
 				{
 					"attributes":{

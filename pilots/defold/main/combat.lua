@@ -30,7 +30,7 @@ function M.new(data,saved)
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
   Objectives.load(self)
   Bonus.load(self)
-  self.status='KURZ: LAUFEN - HALTEN: ZIELEN';self.paused=false;self.dialog=nil
+  self.status='KURZ: LAUFEN - HALTEN: FEUERN - FIGUR ZIEHEN';self.paused=false;self.dialog=nil
  end
  function g:navigate(target)
   -- Grid dimensions come from this world's bounds, never the old 14x10 arena.

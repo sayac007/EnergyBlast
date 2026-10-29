@@ -1,0 +1,4 @@
+sound: "/audio/defold_enemy_tap.ogg"
+looping: 0
+group: "master"
+gain: 1.2855521948440962

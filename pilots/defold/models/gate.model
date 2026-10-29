@@ -1,3 +1,5 @@
 mesh: "/models/gate.runtime.gltf"
-materials { name: "Jade" material: "/models/gate-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/gate-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Gate navy armor" material: "/models/gate-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Gate porcelain armor" material: "/models/gate-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous gate energy" material: "/models/gate-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Gate brass fittings" material: "/models/gate-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }

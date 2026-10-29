@@ -14,15 +14,20 @@ if illustrations.exists():
  models.update(json.loads((illustrations/'models.json').read_text()))
  for f in illustrations.iterdir():
   if f.suffix in ['.gltf','.bin','.png'] and '-original' not in f.name:shutil.copyfile(f,D/'models'/f.name)
- for key in models:
-  if key.endswith('_ground'):
-   models[key]['texture']='floor.png';models[key]['color_tint']=[.74,.86,1,1]
+effects=R/'shared/assets/defold09'
+if effects.exists():
+ models.update(json.loads((effects/'models.json').read_text()))
+ for f in effects.iterdir():
+  if f.suffix in ['.gltf','.bin','.png']and '-original'not in f.name:shutil.copyfile(f,D/'models'/f.name)
+for key in models:
+ if key.endswith('_ground'):
+  mission=key[:-7];models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png';models[key]['color_tint']=[.84,.88,.96,1]
 for f in art.iterdir():
  if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
 for name in models:
  mesh=models[name].get('runtime',name+'.gltf');gltf=json.loads((D/'models'/mesh).read_text());model=['mesh: "/models/'+mesh+'"']
  for i,m in enumerate(gltf['materials']):
-  color=models[name].get('color_tint',m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1]));key=name+'-'+str(i);tag=models[name]['tag'];fragment='billboard.fp'if tag=='billboard'else'shadow.fp'if tag=='shadow'else'glow.fp'if tag=='glow'else'bright.fp';texture=models[name]['texture']or'white.png';ground=1 if name.endswith('_ground')else 0;emissive=1 if m.get('name','').startswith('Luminous ')else 0;material='''name: "%s"
+  color=models[name].get('color_tint',m.get('pbrMetallicRoughness',{}).get('baseColorFactor',[1,1,1,1]));key=name+'-'+str(i);tag=models[name]['tag'];fragment=models[name].get('fragment')or('billboard.fp'if tag=='billboard'else'shadow.fp'if tag=='shadow'else'glow.fp'if tag=='glow'else'bright.fp');texture=models[name]['texture']or'white.png';ground=1 if name.endswith('_ground')else 0;emissive=1 if m.get('name','').startswith('Luminous ')else 0;material='''name: "%s"
 tags: "%s"
 vertex_program: "/builtins/materials/model.vp"
 fragment_program: "/main/%s"
@@ -34,10 +39,11 @@ vertex_constants { name: "mtx_normal" type: CONSTANT_TYPE_NORMAL }
 vertex_constants { name: "light" type: CONSTANT_TYPE_USER value { x: -40 y: 100 z: 60 w: 1 } }
 fragment_constants { name: "tint" type: CONSTANT_TYPE_USER value { x: %s y: %s z: %s w: %s } }
 fragment_constants { name: "surface" type: CONSTANT_TYPE_USER value { x: %s y: %s z: 0 w: 0 } }
+fragment_constants { name: "edge" type: CONSTANT_TYPE_USER value { x: %s y: 0 z: 0 w: 0 } }
 fragment_constants { name: "frame" type: CONSTANT_TYPE_USER value { x: 0 y: 0 z: %s w: %s } }
 samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_TO_EDGE filter_min: FILTER_MODE_MIN_LINEAR filter_mag: FILTER_MODE_MAG_LINEAR }
-'''%(key,tag,fragment,*color,ground,emissive,models[name].get('columns',1),models[name].get('rows',1))
-  material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment=='shadow.fp')or('name: \"frame\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp'])))+'\n'
+'''%(key,tag,fragment,*color,ground,emissive,1.25 if name in ['illustrated_hero','illustrated_dragon','illustrated_fox','illustrated_sentinel','illustrated_guardian','illustrated_boss']else 0,models[name].get('columns',1),models[name].get('rows',1))
+  material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')
  (D/'models'/(name+'.model')).write_text('\n'.join(model)+'\n')

@@ -1,2 +1,2 @@
 mesh: "/models/rescue_ground.gltf"
-materials { name: "Orbital deck floor material" material: "/models/rescue_ground-0.material" textures { sampler: "tex0" texture: "/models/floor.png" } }
+materials { name: "Orbital deck floor material" material: "/models/rescue_ground-0.material" textures { sampler: "tex0" texture: "/models/floor-rescue.png" } }

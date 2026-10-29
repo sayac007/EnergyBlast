@@ -34,5 +34,5 @@ with(root/'runtime.log').open('w')as log:
  finally:proc.terminate();proc.wait(timeout=5)
 runtime=(root/'runtime.log').read_text()
 assert 'ERROR:'not in runtime,runtime
-assert 'DEFOLD CAPTURE WALK FRAME PASS'in runtime and 'DEFOLD CAPTURE FIRED PASS'in runtime,runtime
+assert 'DEFOLD CAPTURE WALK FRAME PASS'in runtime and 'DEFOLD CAPTURE FIRED PASS'in runtime and 'DEFOLD CAPTURE HELD FIRE PASS'in runtime,runtime
 print('ACTUAL NATIVE MOVEMENT / AIM / FIRE CAPTURE PASS:',len(frames),'frames; scripted XTest input, not a physical phone round')

@@ -162,3 +162,10 @@ verständliche Käufe. Boni sollen in normalen Missionen liegen und mehr Sterne
 bringen. Umsetzung/Abnahme in [Meilenstein 07](MILESTONE_07.md): neue Spielfluss-APIs,
 Ziel-/Schatz-/Bonusführung, direkte Heldenbilder, explizites Kaufen, zwei optionale
 Schussaufgaben je Mission und erhöhte einmalige Belohnungen.
+
+## Direktsteuerung und höhere Grafikqualität — 29.10.2026
+
+Die neueste Anweisung ersetzt ausdrücklich die alte Zeit-/Loslassen-Regel:
+kurzer Bodentipp läuft, Bodenhalten feuert, eigene Figur ziehen bewegt und
+Gegnertipp feuert ohne vorherige Halteschwelle mit großzügiger Antippzone. Dazu
+werden die tatsächlichen Kampfansichten weiter ausgebaut. [Umsetzung/Belege](MILESTONE_08.md).

@@ -2,7 +2,8 @@
 
 Die Fallenwahl ist eine ausdrücklich gestartete taktische Aktion im **Magnetwerk**.
 Es gibt keinen Fallenknopf unter dem Spielfeld. Kurzes Tippen auf normalen Boden
-bleibt Laufen; mindestens 0,30 Sekunden Halten bleibt Zielen und Loslassen Feuern.
+bleibt Laufen; Bodenhalten ab 0,14 Sekunden feuert, Gegnertipp schießt sofort und Ziehen der
+eigenen Figur bewegt sie. Loslassen erzeugt keinen weiteren Schuss.
 Ein langes Drücken öffnet deshalb keinen konkurrierenden Fallenkatalog.
 
 1. Auf das **Fallenbild direkt neben der Spielfigur** tippen. Die Handlung hält an;

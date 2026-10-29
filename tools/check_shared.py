@@ -54,7 +54,7 @@ class SharedChecks(unittest.TestCase):
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
   self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),26)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),27)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -119,8 +119,8 @@ class SharedChecks(unittest.TestCase):
     binding=(ROOT/'pilots/defold/models'/(piece['model']+'.model')).read_text();self.assertIn(hero+'-ao.png',binding)
     self.assertIn('tags: "actor"',(ROOT/'pilots/defold/models'/(piece['model']+'-0.material')).read_text())
   for mission in ['reactor','citadel','dock','forge','echo','rescue']:
-   model=mission+'_ground';texture='floor.png';self.assertIn(texture,(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
-   self.assertEqual((ROOT/'shared/assets/defold07'/texture).read_bytes(),(ROOT/'pilots/defold/models'/texture).read_bytes())
+   model=mission+'_ground';texture='floor-'+mission+'.png';self.assertIn(texture,(ROOT/'pilots/defold/models'/(model+'.model')).read_text())
+   self.assertEqual((ROOT/'shared/assets/defold09'/texture).read_bytes(),(ROOT/'pilots/defold/models'/texture).read_bytes())
   self.assertIn('self.glow',(ROOT/'pilots/defold/main/main.render_script').read_text())
  def test_illustrated_actors_have_real_transparent_distinct_animation_frames(self):
   from PIL import Image
@@ -140,6 +140,19 @@ class SharedChecks(unittest.TestCase):
   origins=json.loads((art/'PROVENANCE.json').read_text())
   self.assertEqual(len(origins['sheets']),10)
   for row in origins['sheets']:self.assertEqual(hashlib.sha256((art/row['path']).read_bytes()).hexdigest(),row['sha256'])
+ def test_six_distinct_floor_materials_real_ao_and_native_effect_bindings(self):
+  from PIL import Image,ImageStat
+  art=ROOT/'shared/assets/defold09';m=json.loads((art/'PROVENANCE.json').read_text())
+  self.assertEqual(len(m['original_images']),6)
+  self.assertEqual(len({r['sha256']for r in m['original_images']}),6)
+  for row in m['original_images']+[m['design_atlas']]:self.assertEqual(hashlib.sha256((art/row['path']).read_bytes()).hexdigest(),row['sha256'])
+  for mission in ['reactor','citadel','dock','forge','echo','rescue']:
+   with Image.open(art/('floor-'+mission+'.png'))as ground:self.assertEqual(ground.size,(1024,1024))
+   ao=Image.open(ROOT/'shared/assets/defold06'/(mission+'-ao.png')).convert('L');self.assertEqual(ao.size,(1024,1024));self.assertGreater(ImageStat.Stat(ao).stddev[0],8)
+   self.assertIn(mission+'-ao.png',(ROOT/'pilots/defold/models'/(mission+'.model')).read_text())
+  for name,fragment in [('cover_shadow','cover_shadow.fp'),('energy_field','energy_field.fp')]:
+   self.assertIn(fragment,(ROOT/'pilots/defold/models'/(name+'-0.material')).read_text())
+   self.assertIn('id: "'+name+'"',(ROOT/'pilots/defold/main/main.go').read_text())
  def test_static_batches_preserve_source_geometry(self):
   import numpy as np
   art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text())

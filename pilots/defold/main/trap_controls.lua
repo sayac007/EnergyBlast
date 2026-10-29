@@ -8,7 +8,7 @@ function T.new(g,ground)
  function c:cancel(spoken)
   local active=g.trap_ui~=nil
   self.pointer=nil;g.trap_ui=nil;g.tactical_pause=false
-  if active then g.status='KURZ TIPPEN: LAUFEN · HALTEN: ZIELEN' end
+  if active then g.status='KURZ TIPPEN: LAUFEN · HALTEN: FEUERN' end
   if active and spoken then g.say('defold_controls')end
   if active and spoken and g.trap_test then print('DEFOLD FIELD TRAP CANCEL PASS traps='..#g.traps..' shots='..g.shots_fired)end
  end

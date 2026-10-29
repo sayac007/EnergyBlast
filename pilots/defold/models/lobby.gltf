@@ -22,7 +22,7 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Torus.028",
+			"name":"Torus.018",
 			"translation":[
 				0,
 				0.03500000014901161,
@@ -179,7 +179,7 @@
 	],
 	"meshes":[
 		{
-			"name":"Torus.028",
+			"name":"Torus.018",
 			"primitives":[
 				{
 					"attributes":{
@@ -193,7 +193,7 @@
 			]
 		},
 		{
-			"name":"Cone.071",
+			"name":"Cone.039",
 			"primitives":[
 				{
 					"attributes":{
@@ -207,7 +207,7 @@
 			]
 		},
 		{
-			"name":"Sphere.064",
+			"name":"Sphere.020",
 			"primitives":[
 				{
 					"attributes":{
@@ -221,7 +221,7 @@
 			]
 		},
 		{
-			"name":"Sphere.065",
+			"name":"Sphere.021",
 			"primitives":[
 				{
 					"attributes":{
@@ -235,7 +235,7 @@
 			]
 		},
 		{
-			"name":"Sphere.066",
+			"name":"Sphere.022",
 			"primitives":[
 				{
 					"attributes":{
@@ -243,13 +243,13 @@
 						"NORMAL":17,
 						"TEXCOORD_0":18
 					},
-					"indices":15,
+					"indices":11,
 					"material":1
 				}
 			]
 		},
 		{
-			"name":"Sphere.067",
+			"name":"Sphere.023",
 			"primitives":[
 				{
 					"attributes":{
@@ -263,7 +263,7 @@
 			]
 		},
 		{
-			"name":"Sphere.068",
+			"name":"Sphere.024",
 			"primitives":[
 				{
 					"attributes":{
@@ -277,7 +277,7 @@
 			]
 		},
 		{
-			"name":"Sphere.069",
+			"name":"Sphere.025",
 			"primitives":[
 				{
 					"attributes":{

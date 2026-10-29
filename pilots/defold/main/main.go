@@ -41,6 +41,8 @@ components { id: "illustrated_heal" component: "/models/illustrated_heal.factory
 components { id: "device_trap_magnet" component: "/models/device_trap_magnet.factory" }
 components { id: "device_trap_frost" component: "/models/device_trap_frost.factory" }
 components { id: "device_trap_pulse" component: "/models/device_trap_pulse.factory" }
+components { id: "cover_shadow" component: "/models/cover_shadow.factory" }
+components { id: "energy_field" component: "/models/energy_field.factory" }
 components { id: "hints_empty" component: "/audio/hints_empty.sound" }
 components { id: "hint_bank" component: "/audio/hint_bank.sound" }
 components { id: "hint_guardian" component: "/audio/hint_guardian.sound" }
@@ -54,7 +56,6 @@ components { id: "combat_loot" component: "/audio/combat_loot.sound" }
 components { id: "raid_hint" component: "/audio/raid_hint.sound" }
 components { id: "raid_dock" component: "/audio/raid_dock.sound" }
 components { id: "raid_relays" component: "/audio/raid_relays.sound" }
-components { id: "defold_controls" component: "/audio/defold_controls.sound" }
 components { id: "defold_rescue" component: "/audio/defold_rescue.sound" }
 components { id: "defold_secret" component: "/audio/defold_secret.sound" }
 components { id: "defold_echo" component: "/audio/defold_echo.sound" }
@@ -80,6 +81,8 @@ components { id: "flow_no_treasure" component: "/audio/flow_no_treasure.sound" }
 components { id: "flow_dragon" component: "/audio/flow_dragon.sound" }
 components { id: "flow_exit" component: "/audio/flow_exit.sound" }
 components { id: "bonus_prism" component: "/audio/bonus_prism.sound" }
+components { id: "defold_controls" component: "/audio/defold_controls.sound" }
+components { id: "defold_enemy_tap" component: "/audio/defold_enemy_tap.sound" }
 components { id: "fx_hit" component: "/audio/fx_hit.sound" }
 components { id: "fx_fire" component: "/audio/fx_fire.sound" }
 components { id: "fx_dash" component: "/audio/fx_dash.sound" }

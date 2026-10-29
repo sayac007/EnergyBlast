@@ -141,7 +141,7 @@
     ]
   },
   "reactor": {
-    "texture": null,
+    "texture": "reactor-ao.png",
     "tag": "model",
     "runtime": "reactor.runtime.gltf"
   },
@@ -156,7 +156,7 @@
     ]
   },
   "citadel": {
-    "texture": null,
+    "texture": "citadel-ao.png",
     "tag": "model",
     "runtime": "citadel.runtime.gltf"
   },
@@ -171,7 +171,7 @@
     ]
   },
   "dock": {
-    "texture": null,
+    "texture": "dock-ao.png",
     "tag": "model",
     "runtime": "dock.runtime.gltf"
   },
@@ -186,7 +186,7 @@
     ]
   },
   "forge": {
-    "texture": null,
+    "texture": "forge-ao.png",
     "tag": "model",
     "runtime": "forge.runtime.gltf"
   },
@@ -201,7 +201,7 @@
     ]
   },
   "echo": {
-    "texture": null,
+    "texture": "echo-ao.png",
     "tag": "model",
     "runtime": "echo.runtime.gltf"
   },
@@ -216,7 +216,7 @@
     ]
   },
   "rescue": {
-    "texture": null,
+    "texture": "rescue-ao.png",
     "tag": "model",
     "runtime": "rescue.runtime.gltf"
   },

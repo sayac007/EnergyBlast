@@ -1,8 +1,8 @@
 mesh: "/models/reactor.runtime.gltf"
-materials { name: "reactor deep indigo hull" material: "/models/reactor-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "reactor naval ceramic" material: "/models/reactor-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "reactor porcelain edge" material: "/models/reactor-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "reactor recessed glass" material: "/models/reactor-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Luminous reactor reactor seam" material: "/models/reactor-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "reactor satin brass" material: "/models/reactor-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }
-materials { name: "Honey gold" material: "/models/reactor-6.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "reactor deep indigo hull" material: "/models/reactor-0.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "reactor naval ceramic" material: "/models/reactor-1.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "reactor porcelain edge" material: "/models/reactor-2.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "reactor recessed glass" material: "/models/reactor-3.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "Luminous reactor reactor seam" material: "/models/reactor-4.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "reactor satin brass" material: "/models/reactor-5.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }
+materials { name: "Honey gold" material: "/models/reactor-6.material" textures { sampler: "tex0" texture: "/models/reactor-ao.png" } }

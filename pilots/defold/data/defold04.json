@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-08",
+  "id": "energyblast-defold-09",
   "language": "de",
-  "controls": "short_tap_move_long_hold_aim_release_fire",
+  "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
     -10.5,
     -7.5,
@@ -990,7 +990,7 @@
   "combat": {
     "enemy_bullet_speed": 4.5,
     "player_bullet_speed": 18,
-    "fire_cooldown": 0.45,
+    "fire_cooldown": 0.24,
     "enemy_warning": 0.85,
     "enemy_interval": 2.35,
     "hit_invulnerability": 1.0,
@@ -1025,7 +1025,7 @@
   ],
   "preview_trajectory": false,
   "world_scale": 1.5,
-  "hold_seconds": 0.3,
+  "hold_seconds": 0.14,
   "shop_enabled": true,
   "save_schema": 2,
   "characters": [
@@ -1045,5 +1045,6 @@
       "shot": "energy"
     }
   ],
-  "bonuses_enabled": true
+  "bonuses_enabled": true,
+  "visual_wall_height": 1.7
 }

@@ -1,0 +1,42 @@
+{
+  "created": "2026-10-29",
+  "original_images": [
+    {
+      "path": "reactor-original.png",
+      "sha256": "d4d0081a3540cddac045c55d52fbf4397f971208da739697f6bc9fe4ee166f8f",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    },
+    {
+      "path": "citadel-original.png",
+      "sha256": "9c7e189926e4b395bd3e9e485bdb1b89fa0e75ebd00f22d23d193b05c5ac1e00",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    },
+    {
+      "path": "dock-original.png",
+      "sha256": "38bf20c10d08c9437b5c85eb020c886c44d9de2697e2108b9bf26960197e9162",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    },
+    {
+      "path": "forge-original.png",
+      "sha256": "593e7270fbda2308a61178a9994602e864a6332565ee4b0846ae4befdd806bc8",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    },
+    {
+      "path": "echo-original.png",
+      "sha256": "dfdade23039a60c7050984b7a148226f6e4319a2bbfff7f921db4c536cc672dc",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    },
+    {
+      "path": "rescue-original.png",
+      "sha256": "db55afc68ffed54da2c20d2aa53f837fc3aa8f865f8fbac5fa05a29c3e1bbda2",
+      "origin": "Original OpenAI image generation 2026-10-29, based only on our own original floor design atlas; no reference-game art input"
+    }
+  ],
+  "geometry": "Original camera-facing and floor quad geometry, tools/import_defold09_art.py",
+  "effects": "Original analytic depth-tested shield and floor contact-shadow shaders",
+  "design_atlas": {
+    "path": "design-atlas-original.png",
+    "sha256": "bb14552c9167ddd83969b3126889bdb7008805634b0a73bea0bc0f9209735d6a",
+    "origin": "Original OpenAI-generated design atlas,2026-10-29, no external game reference input"
+  }
+}

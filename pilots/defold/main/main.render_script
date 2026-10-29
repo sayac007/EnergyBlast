@@ -1,6 +1,6 @@
 local View=require 'main.view'
 function init(self)
- self.billboard=render.predicate({'billboard'})
+ self.billboard=render.predicate({'billboard'});self.energy=render.predicate({'energy'})
  self.glow=render.predicate({'glow'});self.model=render.predicate({'model'});self.actor=render.predicate({'actor'});self.shadow=render.predicate({'shadow'});self.stage=render.predicate({'stage'});self.backdrop=render.predicate({'backdrop'});self.gui=render.predicate({'gui'});self.text=render.predicate({'text'});self.center={0,0};self.hero={0,0};self.scene=true
 end
 function on_message(self,id,m)
@@ -18,7 +18,7 @@ function update(self)
   render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.set_depth_mask(false);render.draw(self.shadow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
   render.draw(self.actor)
   render.disable_state(graphics.STATE_CULL_FACE);render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE_MINUS_SRC_ALPHA);render.draw(self.billboard);render.disable_state(graphics.STATE_BLEND);render.enable_state(graphics.STATE_CULL_FACE)
-  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.draw(self.glow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
+  render.enable_state(graphics.STATE_BLEND);render.set_blend_func(graphics.BLEND_FACTOR_ONE,graphics.BLEND_FACTOR_ONE);render.set_depth_mask(false);render.disable_state(graphics.STATE_CULL_FACE);render.draw(self.energy);render.enable_state(graphics.STATE_CULL_FACE);render.draw(self.glow);render.set_depth_mask(true);render.disable_state(graphics.STATE_BLEND)
  else
   render.set_viewport(w*30/1280,h*290/720,w*530/1280,h*320/720)
   local x,z=self.hero[1],self.hero[2];render.set_view(vmath.matrix4_look_at(vmath.vector3(x,24.5,z+17.2),vmath.vector3(x,.5,z-.8),vmath.vector3(0,1,0)))

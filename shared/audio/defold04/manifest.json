@@ -9,16 +9,6 @@
   "human_listening_review": "OPEN for new mission clips",
   "clips": [
     {
-      "id": "defold_controls",
-      "text": "Kurz tippen zum Laufen. Halte zum Zielen. Lass los zum Schießen.",
-      "file": "defold_controls.ogg",
-      "sha256": "345f9cd8a3672c4e7bc09793c8623039762687a368c7795779d9035056cf42a8",
-      "seconds": 6.52,
-      "playback_gain_db": 7.2174242535535065,
-      "source": "New complete raid sentence; same local synthetic speaker",
-      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb"
-    },
-    {
       "id": "defold_rescue",
       "text": "Begleite die Drohne. Bleibe in ihrer Nähe und schütze sie vor den Kanonen.",
       "file": "defold_rescue.ogg",
@@ -286,6 +276,28 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 2728832979
+    },
+    {
+      "id": "defold_controls",
+      "text": "Kurz tippen zum Laufen. Halten zum Schießen. Ziehe deine Figur zum Bewegen.",
+      "file": "defold_controls.ogg",
+      "sha256": "eea6c50a115de66037dd2824c544b74738d1d765f0a4740b283f042f37fb8a95",
+      "seconds": 6.12,
+      "playback_gain_db": 8.6382082498751,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 440060104
+    },
+    {
+      "id": "defold_enemy_tap",
+      "text": "Tippe auf einen Gegner. Deine Figur schießt sofort. Daneben tippen reicht auch.",
+      "file": "defold_enemy_tap.ogg",
+      "sha256": "296d181553f21de67c08a7c1445e7c52a6beba9849df8cc57d7e3ac9e50c9385",
+      "seconds": 6.36,
+      "playback_gain_db": 3.1817942834841917,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3008655541
     }
   ]
 }

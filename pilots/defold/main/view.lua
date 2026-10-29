@@ -1,6 +1,6 @@
 -- Shared camera mathematics for rendering, touch unprojection and world overlays.
 local Layout=require 'main.layout'
-local M={width=Layout.width,height=Layout.height,bottom=Layout.bottom,top=Layout.top,left=Layout.left,right=Layout.right,size=10.2}
+local M={width=Layout.width,height=Layout.height,bottom=Layout.bottom,top=Layout.top,left=Layout.left,right=Layout.right,size=8.8}
 function M.matrices(w,h,center)
  local pixel_height=h*(M.top-M.bottom)/M.height
  local aspect=(w*(M.right-M.left)/M.width)/pixel_height;local size=math.max(M.size,10/aspect)
@@ -27,7 +27,7 @@ function M.follow(g,dt,snap)
  local ex=math.max(0,(r[3]-size*aspect)/2+.3);local ez=math.max(0,(r[4]-size/.8)/2+.3)
  local x=math.max(cx-ex,math.min(cx+ex,g.p[1]));local z=math.max(cz-ez,math.min(cz+ez,g.p[2]))
  if snap or not g.camera then g.camera={x,z};return end
- if g.pending_hold or g.aiming or g.tactical_pause then return end
+ if g.pending_hold or g.aiming or g.dragging or g.tactical_pause then return end
  local blend=1-math.exp(-7*dt);g.camera[1]=g.camera[1]+(x-g.camera[1])*blend;g.camera[2]=g.camera[2]+(z-g.camera[2])*blend
 end
 return M

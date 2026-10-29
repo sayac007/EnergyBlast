@@ -7,8 +7,8 @@
   publish a release automatically.
 - Read README.md, docs/pilot-brief.md and docs/touch-pilot.md before implementation.
   Also read docs/PROJECT_BRIEF.md and docs/MILESTONE_01.md for the consolidated
-  brief and frozen first comparison. Latest controls are tap-to-move and
-  drag/release to aim/fire, plus FIRE hold and DASH; no joystick.
+  brief and frozen first comparison. Latest 0.9 controls are groundtap-to-move, groundhold-to-fire, own-actor drag
+  to move and immediate padded enemy-press shooting; no joystick.
   Keep engine attempts small and comparable; use the same original arena/assets
   and an engine-neutral mission specification. Do not prebuild a general framework.
 - Do not include family photos/artwork, private signing keys, passwords, tokens
@@ -153,3 +153,17 @@
   Preserve the old0.7JSON under shared/defold07-regression.json for original tests.
 - 0.8.0/code9, same package/certificate;64sound components for expanded speech.
   Test actual hero/shop/next/loot input in addition to the pure simulation.
+
+## Current 0.9 operator instruction — 29 October 2026
+
+- New direct gestures override historical release-to-fire requirements. A ground
+  tap moves, ground hold fires after 0.14 s, enemy press fires without a hold
+  threshold, and dragging the player moves. Release creates no additional shot.
+- Keep old behavior only in touch_legacy.lua for historical fixtures. Actual UI
+  tests must observe firing and movement BEFORE release, padded target selection,
+  buffered presses, cancellation and pointer ownership.
+- Active visuals add shared/assets/defold09 floors/effect quads, real baked AO and
+  sculpted sector cover kits, depth-tested shields, floor shadows and an 8.8-unit
+  camera. Surface heights come from actual exported geometry metadata.
+- 0.9.0/code 10, same package/certificate. model.max_count=384 bounds the new effects
+  and rapid fire. No PR, game merge, Actions, Release/Play or other-repository writes.

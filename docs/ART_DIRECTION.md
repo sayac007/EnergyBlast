@@ -104,3 +104,14 @@ Fallenkatalog liegt direkt im Feld; normale HUD-Flächen bleiben außerhalb.
 
 [Reale korrigierte Laufzeitbilder und Prüfgrenzen](MILESTONE_06.md). Die persönliche
 Abnahme bleibt beim Betreiber, unabhängig von bestandenen technischen Prüfungen.
+
+## 0.9 — tatsächliche Kampfansichten weiter ausbauen
+
+Dem Betreiber ist die Grafik von 0.8 weiterhin zu einfach. Diese Iteration ändert
+die laufenden Arenen: sechs eigene Bodenbilder in voller Auflösung, plastische
+Deckungstypen je Bereich mit echten 1024-AO-Texturen, weiche Kontaktschatten,
+animierte tiefengeprüfte Energieschilde, dünne Figurenkonturen und nähere Kamera.
+Die ursprünglichen 2,5D-Figuren bleiben erhalten; keine Behauptung vollständig
+skelettanimierter 3D-Figuren. [Echte Bilder und Gestenbelege](MILESTONE_08.md),
+[neue Bildherkunft](../shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
+ersetzen weder persönliche grafische Abnahme noch einen physischen Gerätebenchmark.

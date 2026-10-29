@@ -1,2 +1,2 @@
 mesh: "/models/forge_ground.gltf"
-materials { name: "Orbital deck floor material" material: "/models/forge_ground-0.material" textures { sampler: "tex0" texture: "/models/floor.png" } }
+materials { name: "Orbital deck floor material" material: "/models/forge_ground-0.material" textures { sampler: "tex0" texture: "/models/floor-forge.png" } }

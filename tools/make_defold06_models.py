@@ -1,4 +1,4 @@
-"""Original rigid-part fixtures and the 0.7 orbital arena architecture.
+"""Original rigid-part fixtures and the 0.9 sculpted orbital arena architecture.
 Reference research: docs/ART_DIRECTION.md. No reference-game geometry is imported.
 Run with Blender 4.3.2; output contains real, runtime-consumed meshes and textures.
 """
@@ -183,11 +183,141 @@ def plane(name,w,h,texture,scale=1):
  bpy.ops.mesh.primitive_plane_add(size=1,location=(0,0,.065));o=bpy.context.object;o.name=name;o.scale=(w,h,1);bpy.ops.object.transform_apply(location=False,rotation=False,scale=True);finish(o,white)
  # Pack a shared base-color image material for sync_defold's explicit binding.
  material=mat(name+' material',(1,1,1));o.data.materials.clear();o.data.materials.append(material);return o
+def local_round(label,along,cross,high,radius,depth,material,axis='up',vertices=24):
+ # The cover builder binds local coordinates/dimensions for each footprint.
+ px=x+along if horizontal else x+w/2+cross
+ pz=z+h/2+cross if horizontal else z+along
+ rotation=(0,0,0)
+ if axis=='along':rotation=(0,math.pi/2,0)if horizontal else(math.pi/2,0,0)
+ bpy.ops.mesh.primitive_cylinder_add(vertices=vertices,radius=radius,depth=depth,location=point(px,pz,high),rotation=rotation)
+ o=bpy.context.object;o.name=label
+ bevel=o.modifiers.new('Machined rim','BEVEL');bevel.width=min(.022,depth*.18);bevel.segments=2
+ o.modifiers.new('Weighted normals','WEIGHTED_NORMAL');finish(o,material);return o
+def local_torus(label,along,cross,high,radius,minor,material,axis='up'):
+ px=x+along if horizontal else x+w/2+cross
+ pz=z+h/2+cross if horizontal else z+along
+ bpy.ops.mesh.primitive_torus_add(major_radius=radius,minor_radius=minor,major_segments=24,minor_segments=6,location=point(px,pz,high))
+ o=bpy.context.object;o.name=label
+ if axis=='along':o.rotation_euler=(0,math.pi/2,0)if horizontal else(math.pi/2,0,0)
+ finish(o,material);return o
+def local_crystal(label,along,cross,high,radius,depth,material):
+ px=x+along if horizontal else x+w/2+cross;pz=z+h/2+cross if horizontal else z+along
+ bpy.ops.mesh.primitive_cone_add(vertices=6,radius1=radius,radius2=0,depth=depth,location=point(px,pz,high))
+ o=bpy.context.object;o.name=label;finish(o,material);return o
+def sculpt_cover(name,height,length,width):
+ # Large intentional silhouette features, not another array of flat control panels.
+ # Every object remains inside the supplied wall rectangle, including its cap.
+ for side in [-1,1]:
+  aligned('Deep armored shoulder rail',length/2,side*(width/2-.13),height+.09,length-.13,.19,.24,ivory,.065)
+  aligned('Recessed shoulder light',length/2,side*(width/2-.13),height+.217,length-.30,.045,.018,glow,0)
+ for along in [.18,length-.18]:
+  aligned('Sculpted end armor',along,0,height+.12,.29,width-.14,.38,plate,.11)
+  aligned('End armor inlaid insignia',along,0,height+.318,.12,min(.48,width*.35),.026,brass,0)
+ # Low dark front radiator and standoff ribs make the thick side face dimensional.
+ for side in [-1,1]:
+  aligned('Inset side radiator',length/2,side*(width/2-.022),height*.50,length-.50,.018,height*.44,darkglass,0)
+  for j in range(max(1,int(length/.55))):
+   along=.38+j*(length-.76)/max(1,int(length/.55)-1)
+   aligned('Radiator cooling rib',along,side*(width/2-.010),height*.50,.045,.012,height*.38,ivory,0)
+ count=max(1,math.ceil((length-.32)/1.70));segment=(length-.40)/count
+ for j in range(count):
+  c=.20+(j+.5)*segment;r=min(.47,width*.27,segment*.35)
+  if name=='reactor':
+   local_round('Containment socket',c,0,height+.08,r*1.19,.13,brass)
+   local_round('Sculpted reactor chamber',c,0,height+.32,r,.45,darkglass)
+   local_round('Luminous reactor interior',c,0,height+.38,r*.62,.38,glow)
+   for dz in [-.17,.17]:local_torus('Porcelain containment collar',c,0,height+.32+dz,r*1.04,.055,ivory)
+   local_torus('Luminous suspended lens',c,0,height+.57,r*.70,.028,glow)
+   for side in [-1,1]:aligned('Reactor retaining claw',c,side*r*.97,height+.31,.15,.13,.53,plate,.04)
+  elif name=='citadel':
+   local_round('Royal resonator socket',c,0,height+.10,r*1.15,.13,brass,vertices=12)
+   local_torus('Golden orbital crest',c,0,height+.28,r,.065,brass)
+   local_torus('Violet force ring',c,0,height+.43,r*.78,.05,glow)
+   local_crystal('Faceted citadel power crystal',c,0,height+.34,r*.49,.52,glow)
+   for side in [-1,1]:
+    aligned('Royal angled buttress',c,side*r*1.06,height+.25,.18,.13,.48,ivory,.055)
+    local_crystal('Golden finial',c,side*r*1.06,height+.56,.08,.24,brass)
+  elif name=='dock':
+   aligned('Rounded cargo coffer',c,0,height+.28,max(.45,segment-.17),width-.48,.52,ivory,.13)
+   aligned('Cobalt cargo inset',c,0,height+.56,max(.25,segment-.41),width-.76,.045,plate,.04)
+   for side in [-1,1]:aligned('Cargo ratchet strap',c+side*segment*.24,0,height+.595,.085,width-.59,.055,brass,.015)
+   local_round('Vent turbine recess',c,0,height+.598,r*.61,.025,darkglass)
+   for k in range(5):
+    q=k*math.tau/5
+    blade=aligned('Cargo cooling turbine blade',c+math.cos(q)*r*.24,math.sin(q)*r*.24,height+.620,r*.49,.065,.025,plate,0)
+    blade.rotation_euler[2]=(q if horizontal else math.pi/2-q)
+   local_round('Luminous cargo seal',c,0,height+.646,r*.15,.035,glow)
+  elif name=='forge':
+   # A real horizontal magnetic spool instead of a painted rectangle.
+   local_round('Horizontal magnetic drum',c,0,height+.32,r*.72,segment*.57,darkglass,'along')
+   for side in [-1,1]:
+    local_round('Magnet spool flange',c+side*segment*.27,0,height+.32,r,.11,plate,'along')
+    local_torus('Luminous magnet pole',c+side*segment*.325,0,height+.32,r*.73,.035,glow,'along')
+   for k in [-1,0,1]:local_torus('Heavy copper induction turn',c+k*segment*.12,0,height+.32,r*.74,.047,brass,'along')
+   aligned('Magnetic assembly footing',c,0,height+.04,segment*.74,width-.46,.16,ivory,.06)
+  elif name=='echo':
+   local_round('Harmonic crystal cradle',c,0,height+.09,r*1.08,.12,brass,vertices=12)
+   local_crystal('Harmonic facet lower',c,0,height+.26,r*.70,.36,ivory)
+   local_crystal('Luminous harmonic crystal',c,0,height+.46,r*.72,.68,glow)
+   for side in [-1,1]:
+    aligned('Harmonic tuning fork',c,side*r*.97,height+.30,.10,.10,.51,ivory,.03)
+    local_torus('Crystal suspension ring',c,0,height+.39,r*.88,.025,plate)
+  else:
+   local_round('Habitat pod footing',c,0,height+.10,r*1.12,.12,ivory)
+   px=x+c if horizontal else x+w/2;pz=z+h/2 if horizontal else z+c
+   ball('Habitat observation dome',point(px,pz,height+.26),(r*.95,r*.95,.30),darkglass)
+   local_torus('Luminous habitat seal',c,0,height+.20,r,.034,glow)
+   for k in range(3):
+    q=k*math.tau/3
+    leaf=aligned('Bioluminescent botanical vane',c+math.cos(q)*r*.30,math.sin(q)*r*.30,height+.45,r*.58,.13,.085,glow,.035)
+    leaf.rotation_euler[2]=q if horizontal else math.pi/2-q
+   local_round('Habitat air regulator',c,0,height+.60,r*.22,.10,brass)
+
+def bake_world_ao(name):
+ """Bake one real arena AOatlas without sacrificing named wall audit meshes."""
+ # Convert curves once, then apply all mesh modifiers in a single operation.
+ # The earlier per-object conversion caused quadratic dependency-graph updates.
+ bpy.ops.object.select_all(action='DESELECT');curves=[o for o in bpy.context.scene.objects if o.type=='CURVE']
+ if curves:
+  for o in curves:o.select_set(True)
+  bpy.context.view_layer.objects.active=curves[0];bpy.ops.object.convert(target='MESH')
+ objects=[o for o in bpy.context.scene.objects if o.type=='MESH'];names={}
+ for i,o in enumerate(objects):
+  group=o.vertex_groups.new(name='AO_ORIGIN_%04d'%i);group.add(range(len(o.data.vertices)),1,'REPLACE');names[group.name]=o.name
+ bpy.ops.object.select_all(action='SELECT');bpy.context.view_layer.objects.active=objects[0];bpy.ops.object.convert(target='MESH');bpy.ops.object.join();joined=bpy.context.object;joined.name='Temporary AO world'
+ bpy.ops.object.transform_apply(location=True,rotation=True,scale=True)
+ bpy.ops.object.mode_set(mode='EDIT');bpy.ops.mesh.select_all(action='SELECT');bpy.ops.uv.smart_project(angle_limit=1.15,island_margin=.008);bpy.ops.object.mode_set(mode='OBJECT')
+ image=bpy.data.images.new(name+' arena AO',width=1024,height=1024,alpha=False);image.generated_color=(1,1,1,1)
+ for material in joined.data.materials:
+  node=material.node_tree.nodes.new('ShaderNodeTexImage');node.image=image;material.node_tree.nodes.active=node
+ scene=bpy.context.scene;scene.render.engine='CYCLES';scene.cycles.samples=12;scene.cycles.use_denoising=False;scene.render.bake.margin=3;scene.world.color=(1,1,1)
+ bpy.ops.object.bake(type='AO');image.filepath_raw=str(OUT/(name+'-ao.png'));image.file_format='PNG';image.save()
+ source=joined.data;source.update();uv=source.uv_layers.active
+ memberships={v.index:joined.vertex_groups[v.groups[0].group].name for v in source.vertices}
+ face_groups={}
+ for face in source.polygons:face_groups.setdefault(memberships[face.vertices[0]],[]).append(face)
+ vertex_groups={}
+ for v in source.vertices:vertex_groups.setdefault(memberships[v.index],[]).append(v.index)
+ normals=[tuple(n.vector)for n in source.corner_normals];restored=[]
+ for group,indices in vertex_groups.items():
+  faces=face_groups[group];indexmap={v:i for i,v in enumerate(indices)}
+  mesh=bpy.data.meshes.new(names[group]);mesh.from_pydata([source.vertices[i].co[:]for i in indices],[],[[indexmap[i]for i in face.vertices]for face in faces])
+  for material in source.materials:mesh.materials.append(material)
+  layer=mesh.uv_layers.new(name='UVMap');custom=[]
+  for face,original in zip(mesh.polygons,faces):
+   face.material_index=original.material_index;face.use_smooth=original.use_smooth
+   for a,b in zip(face.loop_indices,original.loop_indices):layer.data[a].uv=uv.data[b].uv;custom.append(normals[b])
+  mesh.normals_split_custom_set(custom)
+  obj=bpy.data.objects.new(names[group],mesh);bpy.context.collection.objects.link(obj);restored.append(obj)
+ bpy.data.objects.remove(joined,do_unlink=True)
+ export(name,restored,texture=name+'-ao.png')
+ print('WORLD AO COMPLETE',name,'source pieces',len(restored),flush=True)
+
 # Original 23rd-century orbital architecture. Static decoration never changes gameplay.
 WORLD_GEOMETRY=True
 # Semantic SOLID source meshes preserve every exact collider footprint, and batching
 # only joins this same evaluated geometry. Flush floor markings are walkable.
-data=json.loads((R/'shared/defold04.json').read_text());surfaces={}
+data=json.loads((R/'shared/defold04.json').read_text());surfaces=json.loads((OUT/'surfaces.json').read_text())if('--worlds'in sys.argv or'--first-world'in sys.argv)and(OUT/'surfaces.json').exists()else{}
 palettes={
  'reactor':((.025,.82,.68),(.025,.09,.15),'ground-garden.png',[.70,.92,.95,1]),
  'citadel':((.60,.23,1),(.065,.035,.16),'ground-sand.png',[.75,.71,.98,1]),
@@ -196,7 +326,10 @@ palettes={
  'echo':((.28,.61,1),(.03,.06,.18),'ground-garden.png',[.71,.84,1,1]),
  'rescue':((.12,.92,.45),(.02,.10,.12),'ground-garden.png',[.73,.95,.85,1]),
 }
+selected_worlds=set(sys.argv[sys.argv.index('--worlds')+1].split(','))if '--worlds'in sys.argv else None
 for mission in data['missions']:
+ if selected_worlds and mission['id']not in selected_worlds:continue
+ if '--first-world' in sys.argv and mission['id']!='reactor':continue
  clear();name=mission['id'];accent,wallcolor,texture,tint=palettes[name]
  hull=mat(name+' deep indigo hull',(.007,.017,.045));plate=mat(name+' naval ceramic',wallcolor)
  ivory=mat(name+' porcelain edge',(.44,.59,.69));brass=mat(name+' satin brass',(.56,.25,.045))
@@ -206,7 +339,8 @@ for mission in data['missions']:
  metadata[name+'_ground']['color_tint']=tint;bpy.data.objects.remove(o,do_unlink=True)
  a=data['arena'];rows=[{'r':r,'type':'border'}for r in [[a[0],a[1],a[2],.3],[a[0],a[1]+a[3]-.3,a[2],.3],[a[0],a[1],.3,a[3]],[a[0]+a[2]-.3,a[1],.3,a[3]]]]+[{'r':v,'type':'cover'}for v in mission['covers']]+[{'r':v,'type':'reflector'}for v in mission['reflectors']];surfaces[name]=rows
  for i,row in enumerate(rows):
-  x,z,w,h=row['r'];kind=row['type'];height=.86 if kind=='reflector'else 1.12
+  x,z,w,h=row['r'];kind=row['type'];height=.86 if kind=='reflector'else .90 if kind=='cover'else 1.12
+  cover_objects_before=set(bpy.context.scene.objects)
   box('SOLID '+str(i)+' '+kind,point(x+w/2,z+h/2,height/2),(max(.05,w-.035),max(.05,h-.035),height),hull,.065)
   box('SOLID crown '+str(i)+' '+kind,point(x+w/2,z+h/2,height+.035),(w,h,.07),plate,.025)
   row['geometry_r']=list(row['r']);horizontal=w>=h;length=max(w,h);width=min(w,h);count=max(1,math.ceil(length/1.25))
@@ -215,30 +349,30 @@ for mission in data['missions']:
    px=x+along if horizontal else x+w/2+cross
    pz=z+h/2+cross if horizontal else z+along
    return box(label,point(px,pz,high),(lng,across,thick)if horizontal else(across,lng,thick),material,0 if min(lng,across,thick)<.05 else bevel)
-  for j in range(count):
-   c=(j+.5)*length/count;segment=length/count
-   aligned('Armored module',c,0,height+.10,max(.04,segment-.055),max(.06,width-.045),.12,ivory,.035)
-   aligned('Recessed reactor window',c,0,height+.17,max(.035,segment-.15),max(.045,width*.69),.025,darkglass,.025)
-   # A narrow luminous channel is readable as reflection technology, not brick grout.
-   aligned('Luminous inset channel',c,0,height+.188,max(.025,segment-.25),min(.075,width*.24),.014,glow,.006)
-   # Vent fingers, braces and tiny brass fasteners give the armor a designed hierarchy.
-   if width>.7:
+  if kind=='cover'and width>.85:
+   sculpt_cover(name,height,length,width)
+  else:
+   for j in range(count):
+    c=(j+.5)*length/count;segment=length/count
+    aligned('Armored module',c,0,height+.10,max(.04,segment-.055),max(.06,width-.045),.12,ivory,.035)
+    aligned('Recessed reactor window',c,0,height+.17,max(.035,segment-.15),max(.045,width*.69),.025,darkglass,.025)
+    # A narrow luminous channel is readable as reflection technology, not brick grout.
+    aligned('Luminous inset channel',c,0,height+.188,max(.025,segment-.25),min(.075,width*.24),.014,glow,.006)
+    # Vent fingers, braces and tiny brass fasteners give the armor a designed hierarchy.
+    if width>.7:
+     for k in [-1,1]:
+      aligned('Raised shoulder casing',c,k*width*.38,height+.18,max(.05,segment-.13),min(.16,width*.14),.095,plate,.025)
+      aligned('Luminous shoulder line',c,k*width*.38,height+.235,max(.03,segment-.29),.027,.014,glow,.004)
+     for q in [-.25,0,.25]:
+      aligned('Reactor grille',c+q*segment,0,height+.195,.025,min(.43,width*.48),.017,brass,.004)
+    else:
+     aligned('Brass latch',c+segment*.32,0,height+.20,.05,width*.68,.025,brass,.006)
+    # Long visible faces remain nested within collider instead of decorative wall overhang.
     for k in [-1,1]:
-     aligned('Raised shoulder casing',c,k*width*.38,height+.18,max(.05,segment-.13),min(.16,width*.14),.095,plate,.025)
-     aligned('Luminous shoulder line',c,k*width*.38,height+.235,max(.03,segment-.29),.027,.014,glow,.004)
-    for q in [-.25,0,.25]:
-     aligned('Reactor grille',c+q*segment,0,height+.195,.025,min(.43,width*.48),.017,brass,.004)
-   else:
-    aligned('Brass latch',c+segment*.32,0,height+.20,.05,width*.68,.025,brass,.006)
-   # Long visible faces remain nested within collider instead of decorative wall overhang.
-   for k in [-1,1]:
-    aligned('Side ceramic face',c,k*(width/2-.025),height*.55,max(.04,segment-.08),.027,height*.52,plate,.012)
-    aligned('Luminous side circuit',c,k*(width/2-.007),height*.72,max(.025,segment-.22),.009,.036,glow,.003)
-  if kind=='cover':
-   # Braced end caps with small inset lights. No column extends beyond the rectangle.
-   for q in [.10,length-.10]:
-    aligned('Heavy terminal brace',q,0,height*.57,.13,max(.045,width-.08),height*.74,plate,.035)
-    aligned('Terminal brass key',q,0,height+.205,.09,max(.03,width*.58),.045,brass,.01)
+     aligned('Side ceramic face',c,k*(width/2-.025),height*.55,max(.04,segment-.08),.027,height*.52,plate,.012)
+     aligned('Luminous side circuit',c,k*(width/2-.007),height*.72,max(.025,segment-.22),.009,.036,glow,.003)
+  evaluated=bpy.context.evaluated_depsgraph_get()
+  row['height']=max((o.matrix_world@Vector(c)).z for o in set(bpy.context.scene.objects)-cover_objects_before for c in o.evaluated_get(evaluated).bound_box)
  # Sparse inlaid guidance traces read as paint; never as uncollidable walls.
  for side in [-1,1]:
   x=side*8.85
@@ -317,7 +451,21 @@ for mission in data['missions']:
  for side in [-1,1]:
   box('Deck exterior armor belt',point(side*10.96,0,-.24),(.17,15.7,.30),plate,.05)
   box('Luminous deck exterior seam',point(side*11.06,0,-.22),(.025,15.2,.05),glow,.006)
- export(name)
+ bake_world_ao(name)
+# Native closed energy gate: exact unit X/Z footprint, scaled by the live gate.
+# An open gate still collapses below the floor; no decorative collision overhang.
+clear();gate_ink=mat('Gate navy armor',(.012,.035,.07));gate_white=mat('Gate porcelain armor',(.53,.67,.76));gate_light=mat('Luminous gate energy',(.04,.88,.84));gate_gold=mat('Gate brass fittings',(.53,.28,.055))
+box('Gate solid sill',point(0,0,.08),(1,1,.16),gate_ink,.045)
+for side in [-1,1]:
+ x=side*.44
+ box('Gate sculpted pillar',point(x,0,.60),(.12,1,1.04),gate_white,.035)
+ box('Gate pillar recessed channel',point(x,-.49,.60),(.06,.018,.71),gate_ink,0)
+ box('Gate pillar energy indicator',point(x,-.501,.60),(.025,.012,.58),gate_light,0)
+box('Gate upper bridge',point(0,0,1.145),(1,1,.17),gate_ink,.045)
+box('Gate bridge gold crest',point(0,-.35,1.228),(.48,.20,.018),gate_gold,.008)
+for high in [.30,.50,.70,.90]:box('Gate luminous energy rail',point(0,0,high),(.76,.18,.035),gate_light,.01)
+export('gate')
+
 # The lobby has no rectangular floor or clipped trees: a clean hero pedestal.
 WORLD_GEOMETRY=False
 clear();ring('Pedestal rim',(0,0,.035),.85,.065,gold);cone('Hero pedestal',(0,0,-.11),.91,.85,.23,teal)
@@ -329,4 +477,4 @@ export('lobby',tag='stage')
 clear();ring('Hero selection ring',(0,0,.09),.40,.024,cyan);export('selection_ring')
 clear();bpy.ops.mesh.primitive_plane_add(size=.60,location=(0,0,0),rotation=(math.pi/2,0,0));finish(bpy.context.object,cyan);export('glow',tag='glow')
 (OUT/'models.json').write_text(json.dumps(metadata,indent=2)+'\n');(OUT/'rigs.json').write_text(json.dumps(rigs,indent=2)+'\n');(OUT/'surfaces.json').write_text(json.dumps(surfaces,indent=2)+'\n');(OUT/'dimensions.json').write_text(json.dumps(bounds,indent=2)+'\n')
-print('Original actors / baked AO fixtures / 0.7 orbital arena kit COMPLETE')
+print('Original actors / baked AO fixtures / 0.9 sculpted orbital arena kit COMPLETE')

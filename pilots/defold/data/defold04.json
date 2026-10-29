@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-11",
+  "id": "energyblast-defold-12",
   "language": "de",
   "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
@@ -1214,5 +1214,12 @@
     "far_scale": 1.4,
     "near_scale": 2.3,
     "search_radius": 1.8
+  },
+  "optional_replay": true,
+  "trap_training": {
+    "first_mission_index": 4,
+    "placement_range": 5.25,
+    "armed_lifetime": 12,
+    "multipliers": [3, 2.5, 2]
   }
 }

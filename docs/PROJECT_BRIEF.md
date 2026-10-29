@@ -196,3 +196,22 @@ betrachteten Spielfeldbereich einschließlich Figuren und verbessert die Lesbark
 kleiner Weltbeschriftungen, besonders am Handy. Figuren sollen ansprechendere,
 höher aufgelöste Bilder, leuchtenden Schimmer und komplexere Animationen erhalten.
 Der übrige 0.10-Funktionsumfang und gespeicherter Fortschritt bleiben erhalten.
+
+## Betreiberergänzung — 29.10.2026: spielbare Boni und großzügigere Fallen
+
+Bei erneut besuchten Missionen fehlen die Boni; die Infoansage behauptet nur,
+der Bonus sei bereits gesammelt. Die Bonusaufgaben müssen wieder sichtbar und
+spielbar sein und brauchbare Hinweise erhalten. Bereits verdiente Sterne und
+gekaufte Ausrüstung bleiben erhalten; ein erneutes Spielen setzt den gespeicherten
+Erfolg nicht zurück und verspricht keine zweite Auszahlung.
+
+Der helle Platzierungskreis der Fallen soll größer werden und die tatsächliche
+Platzierung begrenzen. Die Wirkzeit wird zunächst verdreifacht und in späteren
+Missionen vorsichtig reduziert, sobald das Kind mit den Fallen umgehen kann.
+Die Umsetzung knüpft diese Reduktion an tatsächlichen Fang plus erfolgreichen
+Abschluss verschiedener früherer Missionen, nicht bloß an vergangene Spielzeit.
+[Aktuelle Regeln](TRAPS.md), [Umsetzung und Prüfstatus](MILESTONE_11.md).
+
+Der zuvor ausgelieferte 0.11-Stand wurde zwischenzeitlich durch PR #1 nach `main`
+übernommen. Diese Korrekturrunde entwickelt `feat/zoom-treasure-polish` weiter;
+sie beauftragt keinen neuen automatischen Merge, PR oder Release-/Store-Upload.

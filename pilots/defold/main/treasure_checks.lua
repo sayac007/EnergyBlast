@@ -38,9 +38,11 @@ function M.run(data)
   check(g:total()==before+data.rewards['secret:'..mission.id],'walking awards the advertised treasure once '..mission.id)
   check(not g:treasure_state().available and not g.secret_visible,'collected chest and marker vanish '..mission.id)
   g.hint_debounce=0;credits=g:credits();g:hint()
-  check(g:credits()==credits and spoken=='flow_no_treasure','collected chest cannot consume another clue '..mission.id)
+  check(g:credits()==credits and(data.optional_replay and spoken:match('^bonus_')and g:mission_state().goal_kind=='bonus'or not data.optional_replay and spoken=='flow_no_treasure'),'collected chest cannot consume another clue; remaining bonus is explained '..mission.id)
   local restored=fresh(index,g.saved)
-  check(not restored:treasure_state().available,'collected chest stays removed after reload '..mission.id)
+  if data.optional_replay then
+   check(restored:treasure_state().available and restored:treasure_state().reward_earned and restored:treasure_state().replay,'reload restores replay chest without resetting reward '..mission.id)
+  else check(not restored:treasure_state().available,'historical collected chest stays removed after reload '..mission.id)end
   before=g:total();step(g,.2);check(g:total()==before,'proximity cannot double-pay treasure '..mission.id)
   -- The increased radius is useful on a phone, without exact center taps.
   g=fresh(index);g.p={sp[1],sp[2]-.95};step(g,.05)

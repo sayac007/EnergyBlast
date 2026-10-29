@@ -24,7 +24,7 @@ function M.new(data,saved)
   if self.cancel_controls then self.cancel_controls()end
   if type(index)~='number'or index%1~=0 or not data.missions[index]then index=self:start_index()end
   self.peaceful=false;self.navigation_focus='objective';self.exit_announced=false;self:remember_mission(index)
-  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil;self.secret_visible=false
+  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil;self.secret_visible=false;self.treasure_collected=false
   self.walls=Surfaces.for_mission(data,self.m)
   for _,t in ipairs(self.m.turrets)do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=t.hp or 2,max_hp=t.hp or 2,shield=t.shield,trap_shield=t.trap_shield,boss=t.boss,burst=t.burst or 1,patrol=t.patrol,waypoint=2,speed=t.speed or 1,timer=t.phase+.7,warning=0,direction={-1,0}}end
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
@@ -53,7 +53,7 @@ function M.new(data,saved)
  function g:fire()if self.paused or self.tactical_pause or self.over or self.cooldown>0 then return end;if self:is_safe()then self.status='ZIKURRAT: GESCHUETZT - ZUM FEUERN HINAUSGEHEN';return end;self.cooldown=self:weapon_stats().cooldown;self.shots_fired=self.shots_fired+1;self.recoil=.20;Projectiles.spawn(self,self.p,self.aim,false);if self.sfx then self.sfx('fire')end end
  function g:dash()if self.paused or self.over or self.dash_cooldown>0 then return end;if #self.path==0 then self:navigate({self.p[1]+self.aim[1]*2,self.p[2]+self.aim[2]*2})end;self.dash_time=data.player.dash_seconds;self.dash_cooldown=data.player.dash_cooldown*(self.saved.earned['secret:dock']and .8 or 1);self.invulnerable=math.max(self.invulnerable,self.dash_time)end
  function g:hit_player()if self.peaceful or self.invulnerable>0 or self.over or self:is_safe()then return end;self.hp=self.hp-1;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.damage=self.damage+1;self.invulnerable=data.combat.hit_invulnerability;self.feedback=.35;if self.sfx then self.sfx('hit')end;if self.hp<=0 then self.over=true;self.paused=true;self.dialog='defeat';self.held=false;self.say('combat_retry')end end
- function g:finish()if self.solved then return end;self.solved=true;self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self:remember_mission(self:next_index()or self.index);self.say('combat_win')end
+ function g:finish()if self.solved then return end;self.solved=true;Objectives.complete(self);self.over=true;self.held=false;self.path={};local n=self:award('mission:'..self.m.id);if self.damage==0 and(not self.drone or self.drone.hp==self.m.escort.hp)then n=n+self:award('skill:'..self.m.id)end;self.reward=n;self.paused=true;self.pending_win=.95;self.dialog=nil;self:remember_mission(self:next_index()or self.index);self.say('combat_win')end
  function g:locked(t)
   if not t.boss then return false end
   for _,e in ipairs(self.enemies)do if e.kind=='relay'and e.hp>0 then return true end end
@@ -89,7 +89,14 @@ function M.new(data,saved)
   if self.hint_debounce>0 then return end;self.hint_debounce=1.2
   if data.treasure_guidance then
    local state=self:treasure_state()
-   if not state.available then self.say('flow_no_treasure');return false end
+   if not data.optional_replay and not state.available then self.say('flow_no_treasure');return false end
+   -- On revisits the one-time reward must not hide the playable challenges.
+   -- A chest already paid for yields useful bonus guidance before replay loot.
+   if(self.navigation_focus=='bonus'or state.reward_earned)and self:track_bonus()then return true end
+   if not state.available then
+    if self:track_bonus()then return true end
+    self:guide();return false
+   end
    -- The free search-area guide always works. An earned clue optionally reveals
    -- the exact location once; revisiting an already discovered chest costs none.
    if not state.discovered and self:level()<1 and self:credits()>0 then

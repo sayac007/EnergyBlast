@@ -31,7 +31,7 @@ function F.bind(g)
  local valid={};for _,mission in ipairs(g.data.missions)do valid[mission.id]=true end
  for id,value in pairs(g.saved.discovered)do if not valid[id]or value~=true then g.saved.discovered[id]=nil end end
  function g:discover_treasure()
-  if not self.m.secret or self.saved.earned['secret:'..self.m.id]then return false end
+  if not self.m.secret or not self:treasure_state().available then return false end
   if type(self.saved.discovered)~='table'then self.saved.discovered={}end
   if not self.saved.discovered[self.m.id]then self.saved.discovered[self.m.id]=true;self.changed();return true end
   return false
@@ -40,12 +40,13 @@ function F.bind(g)
   local cfg=self.data.treasure_guidance or{}
   local secret=self.m.secret
   if not secret then return{available=false,discovered=false,tracking=false,visible=false,distance=0,proximity=0,scale=cfg.far_scale or 1.4,search_radius=cfg.search_radius or 1.8}end
-  local d=distance(self.p,secret.position);local available=not self.saved.earned['secret:'..self.m.id]
-  local discovered=(type(self.saved.discovered)=='table'and self.saved.discovered[self.m.id]==true)or self:level()>0 or self.solved or d<(cfg.discover_radius or 4)
+  local d=distance(self.p,secret.position);local rewarded=self.saved.earned['secret:'..self.m.id]==true
+  local available=self.data.optional_replay and not self.treasure_collected or(not self.data.optional_replay and not rewarded)
+  local discovered=(self.data.optional_replay and rewarded)or(type(self.saved.discovered)=='table'and self.saved.discovered[self.m.id]==true)or self:level()>0 or self.solved or d<(cfg.discover_radius or 4)
   local delta={secret.position[1]-self.p[1],secret.position[2]-self.p[2]};local dir=d>.000001 and{delta[1]/d,delta[2]/d}or{1,0}
   local occluded=d>.05 and Shots.ray(self.p,dir,d-.05,self:active())~=nil
   local proximity=math.max(0,math.min(1,1-d/(cfg.discover_radius or 4)))
-  return{available=available,position=secret.position,hint=secret.hint_landmark or secret.position,discovered=discovered==true,
+  return{available=available,reward_earned=rewarded,replay=available and rewarded,position=secret.position,hint=secret.hint_landmark or secret.position,discovered=discovered==true,
    distance=d,proximity=proximity,tracking=available and(self.navigation_focus=='treasure'or self.solved==true),
    visible=available and discovered==true,occluded=occluded,scale=(cfg.far_scale or 1.4)+((cfg.near_scale or 2.3)-(cfg.far_scale or 1.4))*proximity,
    search_radius=cfg.search_radius or 1.8}
@@ -56,9 +57,11 @@ function F.bind(g)
   if state.available and state.discovered then self:discover_treasure()end
   self.secret_visible=state.visible
   if state.available and state.distance<cfg.pickup_radius and not state.occluded and not self:blocked(state.position)then
-   self:award('secret:'..self.m.id);self.secret_visible=false
-   self.say(self.solved and'flow_no_treasure'or'combat_loot')
-   if self.solved then self.status='ALLES GEFUNDEN - NAECHSTE MISSION';self.navigation_focus='objective'end
+   self.treasure_collected=true;local amount=self:award('secret:'..self.m.id);self.secret_visible=false
+   self.status=amount>0 and('SCHATZ GEFUNDEN + '..amount..' STERNE')or'SCHATZ ERNEUT GEFUNDEN - STERNE SCHON GESPEICHERT'
+   if self.solved or amount==0 then
+    if not self:track_bonus()then self.navigation_focus='objective';self.say('flow_no_treasure')end
+   else self.say('combat_loot')end
   end
  end
  function g:start_index()
@@ -99,7 +102,7 @@ function F.bind(g)
   return true
  end
  function g:track_treasure()
-  if not self.m.secret or self.saved.earned['secret:'..self.m.id]then return false end
+  if not self.m.secret or not self:treasure_state().available then return false end
   self.navigation_focus='treasure';self.status='FOLGE DEM SCHATZZEICHEN';self.say('flow_treasure');return true
  end
  function g:track_bonus()
@@ -112,12 +115,19 @@ function F.bind(g)
  end
  function g:search_loot()
   if not self.solved then return false end
-  self:resume_mission();self.navigation_focus='treasure'
-  self.say(self.saved.earned['secret:'..self.m.id]and'flow_no_treasure'or'flow_loot')
+  self:resume_mission()
+  if self:treasure_state().available then self.navigation_focus='treasure';self.say('flow_loot')
+  elseif not self:track_bonus()then self:guide()end
   return true
  end
  function g:guide()
   local state=self:mission_state()
+  -- Info must explain a remaining bonus, even if the chest's one-time reward
+  -- was earned in a previous app session. Explicit chest tracking stays valid.
+  if self.data.optional_replay and self.navigation_focus~='treasure'and(state.primary_done or state.treasure_rewarded)then
+   local task=open_bonus(self)
+   if task then self.navigation_focus='bonus';state=self:mission_state()end
+  end
   if state.goal_kind=='treasure'then self.say('flow_treasure')
   elseif state.goal_kind=='exit'then self.say('flow_exit')
   elseif state.goal_kind=='bonus'then local kind=state.goal_bonus_kind;self.say(kind=='wait'and'bonus_wait'or(kind=='sequence'or kind=='pattern')and'bonus_sequence'or'bonus_prism')
@@ -128,15 +138,22 @@ function F.bind(g)
  function g:mission_state()
   local state={enemies=0,relays=0,sequence_remaining=0,treasures_remaining=0,
    primary_done=self.solved==true,exit_required=self.m.exit_required==true,
-   exit_open=self:open(),bonus_done=0,bonus_total=0,headline='',goal=nil,goal_kind=nil}
+   exit_open=self:open(),bonus_done=0,bonus_total=0,bonus_rewarded=0,bonus_replay=0,treasure_rewarded=false,treasure_replay=false,headline='',goal=nil,goal_kind=nil}
   for _,enemy in ipairs(self.enemies)do if not enemy.optional and enemy.hp>0 then
    if enemy.kind=='relay'then state.relays=state.relays+1
    elseif enemy.kind~='sequence'then state.enemies=state.enemies+1 end
   end end
   if self.m.sequence then state.sequence_remaining=math.max(0,#self.m.sequence-self.sequence_progress)end
-  if self.m.secret and not self.saved.earned['secret:'..self.m.id]then state.treasures_remaining=1 end
+  if self.m.secret then
+   local treasure=self:treasure_state();state.treasures_remaining=treasure.available and 1 or 0
+   state.treasure_rewarded=treasure.reward_earned==true;state.treasure_replay=treasure.replay==true
+  end
   local bonuses=self.bonus and self.bonus.tasks or{}
-  for _,bonus in ipairs(bonuses)do state.bonus_total=state.bonus_total+1;if bonus.done or self.saved.earned[bonus.reward_key or'']then state.bonus_done=state.bonus_done+1 end end
+  for _,bonus in ipairs(bonuses)do
+   state.bonus_total=state.bonus_total+1;if bonus.done then state.bonus_done=state.bonus_done+1 end
+   if self.saved.earned[bonus.key]then state.bonus_rewarded=state.bonus_rewarded+1 end
+   if bonus.replay then state.bonus_replay=state.bonus_replay+1 end
+  end
   if self.solved then
    state.headline=state.treasures_remaining>0 and'MISSION GESCHAFFT - SCHATZ OPTIONAL'or state.bonus_done<state.bonus_total and'MISSION GESCHAFFT - BONI OPTIONAL'or'ALLES GEFUNDEN - NAECHSTE MISSION'
   elseif self.m.kind=='escort'and self.drone and not self.drone.arrived then
@@ -164,7 +181,7 @@ function F.bind(g)
    if self.data.treasure_guidance then revealed=self:treasure_state().discovered else revealed=self.solved or self:level()>0 or distance(self.p,secret.position)<4 end
    state.goal=revealed and secret.position or secret.hint_landmark;state.goal_kind='treasure'
   end
-  if self.navigation_focus=='bonus'or(self.solved and state.treasures_remaining==0)then
+  if self.navigation_focus=='bonus'or(self.solved and(state.treasures_remaining==0 or(state.treasure_replay and self.navigation_focus~='treasure')))then
    local task,p=open_bonus(self)
    if task then state.goal=p;state.goal_kind='bonus';state.goal_bonus_kind=task.kind;state.headline='BONUS FREIWILLIG: '..(task.title or'ZUSATZSTERNE')end
   end

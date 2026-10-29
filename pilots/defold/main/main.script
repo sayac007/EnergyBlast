@@ -3,6 +3,7 @@ local Touch=require 'main.touch'
 local View=require 'main.view'
 local Zoom=require 'main.zoom'
 local PolishFixture=require 'main.polish_fixture'
+local ReplayFixture=require 'main.replay_fixture'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
@@ -187,6 +188,8 @@ local function run_tests(self)
  n=n+require('main.resilience_checks').run(self.g.data)
  n=n+require('main.zoom_checks').run(self.g.data)
  n=n+require('main.treasure_checks').run(self.g.data)
+ n=n+require('main.replay_checks').run(self.g.data)
+ n=n+require('main.trap_training_checks').run(self.g.data)
  self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
  n=n+require('main.presentation_checks').run(self)
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
@@ -254,6 +257,7 @@ function init(self)
   music_update(self)
  end
  PolishFixture.init(self)
+ ReplayFixture.init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
@@ -299,6 +303,7 @@ function update(self,dt)
   end
  end
  PolishFixture.update(self,dt)
+ ReplayFixture.update(self,dt)
  View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],zoom=self.g.zoom})
  local p=self.g.p
  animate_hero(self,dt)
@@ -358,6 +363,7 @@ function on_message(self,id,message)
    print('DEFOLD RESILIENCE ZONE '..math.floor(x)..' '..math.floor(y));self.resilience_safe_test=true
   end
   PolishFixture.choose(self)
+  ReplayFixture.choose(self)
   if self.g.direct_touch_test then self.g.p={4,4.8};self.g.invulnerable=999;for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end;self.g.paused=false;self.g.dialog=nil;View.follow(self.g,0,true)end
   if sys.get_config_string('project.capture_motion','0')=='1'then
    self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-3},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-4.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))
@@ -376,7 +382,10 @@ function on_message(self,id,message)
   if self.g:set_character(message.id)then replace_hero(self);if self.ui_test then assert(self.g:character().id==message.id and self.hero~=nil and #self.hero_ids==1);print('DEFOLD CHARACTER PICK PASS '..message.id)end end
  elseif id==hash('radio')then
   if self.voice_id then sound.stop('#'..self.voice_id)end;self.voice_left=0
-  self.follow_enemy_tap=false;self.voice_next=nil;self.g.sequence_clock=0;voice(self,self.g.m.voice or(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id));if self.g.m.kind~='trap'then self.voice_next='defold_controls'end
+  self.follow_enemy_tap=false;self.voice_next=nil
+  local state=self.g:guide()
+  if state.goal_kind=='sequence'then self.g.sequence_clock=0 end
+  if not state.primary_done and state.goal_kind~='bonus'and state.goal_kind~='treasure'and state.goal_kind~='exit'and self.g.m.kind~='trap'then self.voice_next='defold_controls'end
  elseif id==hash('sound')then
   self.muted=not self.muted;self.g.muted=self.muted
   if self.ui_test then if self.muted then self.test_mute_voice_left=self.voice_left else assert(math.abs(self.voice_left-self.test_mute_voice_left)<.1);print('DEFOLD AUDIO PAUSE RESUME PASS')end end

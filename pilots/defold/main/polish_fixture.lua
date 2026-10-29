@@ -2,6 +2,7 @@
 local View=require 'main.view'
 local Regions=require 'main.hit_regions'
 local Shots=require 'main.projectiles'
+local Objectives=require 'main.objectives'
 local F={}
 local function distance(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
 local function clear(g,a,b)
@@ -10,7 +11,7 @@ local function clear(g,a,b)
 end
 local function free_floor_target(g,x,y)
  if Regions.own(g,x,y)or Regions.enemy(g,x,y)then return false end
- if g.m.kind=='trap'then
+ if Objectives.can_trap(g)then
   local px,py=View.project(g,g.p,.4)
   local bx=math.max(198,math.min(1082,px+87));local by=math.max(154,math.min(566,py+20))
   if math.abs(x-bx)<=46 and math.abs(y-by)<=46 then return false end

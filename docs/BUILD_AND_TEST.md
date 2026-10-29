@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.11.0
+# Bauen und prüfen — Defold 0.12.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -87,12 +87,13 @@ python3 tools/check_defold.py
   Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
   UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
+- `check_defold_replay_ui.py` lädt einen vollständig belohnten Spielstand, löst alle sechs Lichter-/Timingboni mit echten Schüssen, sammelt die wiederhergestellten Truhen per Laufweg und prüft Wiederbesuch/Prozessneustart ohne zusätzliche Sterne.
 - `check_defold_polish_ui.py` prüft echte Zoomtasten, geänderte Weltpixel/Figurengröße sowie echte Hinweise und Sammlung aller sechs Schätze.
 - `check_defold_hero_glow.py` prüft den tatsächlichen Figurenschimmer mit einem positiven Pixelvergleich an/aus.
 - `check_defold_resilience_ui.py` prüft tatsächliche Heilung ohne Doppelabbuchung, Waffen-/Rüstungsstufen, alle drei Shopkategorien sowie den echten Weg in den Schutzort mit gezählten Geschossabsorptionen und Erholung.
 - `check_defold_direct_touch.py` prüft fünf neue echte Gesten, ausdrücklich vor dem Loslassen. `check_defold_energy.py` vergleicht tatsächliche Pixel mit Schild an/aus.
 - `check_defold_flow_ui.py` prüft zusätzlich drei reale GUI-Abläufe für Heldenwahl/Käufe, Weiter trotz offenem Schatz und freiwillige Suche mit anschließendem Weiter.
-- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena, zusätzlich bei 175% Zoom.
+- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena, zusätzlich bei 175% Zoom; die tatsächlichen Taps platzieren 4,4 Welteinheiten entfernt, außerhalb der früheren Grenze.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
   WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
   Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
@@ -130,7 +131,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.11 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.12 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 
@@ -163,7 +164,7 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 python3 tools/build_defold_android.py --output /tmp/energyblast-defold11-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.11.0 / Code 12**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.12.0 / Code 13**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.

@@ -1,46 +1,42 @@
-# Aktueller Prüfstand — Defold 0.11
+# Aktueller Prüfstand — Defold 0.12
 
-**29.10.2026.** [Auftrag, Ursache, Umsetzung und Bilder](MILESTONE_10.md),
+**29.10.2026.** [Ursache und Umsetzung](MILESTONE_11.md),
 [Testkommandos](BUILD_AND_TEST.md), [APK-Metadaten](../downloads/README.md).
 
 | Tatsächlich ausgeführt | Ergebnis |
 |---|---|
-| Native Regeln/Darstellung | **820 PASS**, 629 bisherige + 72 Zoom + 117 Schatz + 2 native Materialprüfungen |
-| Gemeinsame Tests | **15 Gruppen PASS**, Daten/Medien/Herkunft, echte Wandpuffer, Batch-Identität, HD-Atlanten und aktive Ressourcen |
-| Zoom-Mathematik/Eingabe | **PASS**, gleiche Projektion/Rückprojektion, drei Größen und drei Fensterformate, Grenzen/Speicherung/Fokus, native Zwei-Finger-Pakete und Abbruch ohne Restgeste |
-| Tatsächliche Zoom-Ausgabe | **PASS**, echte Plus-/Minus-Klicks, mehr als 5.000 veränderte Weltpixel und passende projizierte Figurengröße; feste HUD-Größe |
-| Sechs Schatzfunde | **PASS**, echte Hinweise, echte Wege und Aufnahme je 75 Sterne, 0 Schüsse; im Testprofil Gesamtstand 2.400 → 2.850 |
-| Schatzregeln | **PASS**, erreichbare Such-/Fundpunkte, Entdeckung/Speicherung, Sichtlinie, keine Aufnahme durch Wände/Tore, keine Doppelbelohnung oder erneute Hinweiskosten |
-| Bisherige tatsächliche GUI | **PASS**, fünf direkte Gesten, Helden/Käufe/Missionen/Fallen/Schutzort/Heilung und beide Fensterformate; Fallenbedienung zusätzlich bei 175% Zoom |
-| Getrennte Speicherprozesse | **PASS**, Sterne, Guthaben, Käufe, Figur, Hinweise, Musik; Zoom und Schatzentdeckung zusätzlich rekonstruiert |
-| HD-Figuren | **PASS**, 3 Atlanten 1536×1024, 24 unterschiedliche transparente Zellen, alte Quellen erhalten, aktive Modell-/Shaderbindungen |
-| Native Schimmerausgabe | **PASS**, an/aus 2.937 veränderte Pixel; sechs begrenzte native Lichtobjekte |
-| Native Geschossverdeckung | **PASS**, verdeckt 0 Pixel; sichtbarer Kontrollfall 328 Pixel |
-| Native Energieschild-Ausgabe | **PASS**, an/aus 15.701 veränderte Pixel |
-| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01346, aus 0, Mischung 0,04235; kein gemessener Überlauf |
-| Sprache | **32/32 technisch PASS**, 2 neue Ansagen frisch unabhängig ASR-exakt, 30 vorherige samt Metadaten unverändert |
-| Eigene Sichtprüfung | Neue drei Atlanten, Figurenwahl, sechs Hinweisaufnahmen, Zoomvergleich und native Bewegungssequenz angesehen |
-| APK 0.11.0 / Code 12 | **PASS**, sauberer Quellstand, Paket/APIs/Querformat, keine Berechtigungen, Backup aus, v2-Signatur und gleiches Zertifikat wie 0.10, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung, 828 identische Projektdateien und Android-Shaderexport |
+| Native Regeln/Darstellung | **1.066 PASS**, 820 bisherige + 167 Wiederholungs- + 79 Fallenprüfungen |
+| Gemeinsame Tests | **15 Gruppen PASS**, Regeln, Medien, Herkunft, aktive Ressourcen und exportierte Wandgeometrie |
+| Fehler reproduziert | Vollständig verdienter Spielstand: alle sechs Arenen ohne lebende Bonusziele, Truhe ausgeblendet und Fertigmeldung statt Bonusführung |
+| Wiederhergestellte Boni | **PASS**, zwei aktuelle Rundenziele je Arena; sechs echte reflektierte Schüsse lösen Abprallboni gegen unveränderte Wände |
+| Tatsächliche Wiederholungs-GUI | **PASS**, alle sechs Lichter-/Zeitfensterboni mit echten Bildschirmtaps/Projektilen gelöst, sechs Truhen durch Hinlaufen gesammelt und erneuter Besuch geprüft |
+| Fortschritt/Speicher | **PASS**, 4.350 Gesamtsterne und 4.090 Guthaben unverändert; gekaufte Rüstung/Prisma erhalten, auch nach Prozessneustart; keine Doppelbelohnungen |
+| Sinnvolle Hinweise | **PASS**, Info/Funk/Hinweis erklären die offene Bonusaufgabe wird erklärt, auch bei bereits verdienter Schatzbelohnung; direkte Schatzwahl bleibt möglich |
+| Fallenreichweite | **PASS**, 5,25 statt 3,5; dieselbe Grenze für Anzeige/Controller/direkte Regel, Wände und Sichtlinie bleiben wirksam |
+| Tatsächliche Fallen-GUI | **PASS**, alle drei Typen und Abbruch bei 100% und 175% Zoom; reale Platzierung 4,4 Welteinheiten entfernt, außerhalb des alten Kreises |
+| Wirkzeit/Lernstufen | **PASS**, initial 18/27/15 Sekunden, unbenutzt 36; später 2,5×/2× nur nach erfolgreichem Fangen und Abschluss unterschiedlicher früherer Missionen; kein Fortschritt durch bloßes Laden |
+| Alte GUI/Bedienung | **PASS**, Gesten, fünf direkte Eingaben, Helden, Käufe, zwei Fensterformate, Weiter, Schutzort und Heilung |
+| Zoom/Schatz/HD | **PASS**, bisherige Zoom-/Eingaberegressionen, sechs erstmalige Schatzfunde mit +75, echte Zoomausgabe und HD-Atlanten; Schimmervergleich 2.937 Pixel |
+| Native Verdeckung/Schild | **PASS**, verdecktes Geschoss 0 geänderte Pixel, sichtbare Kontrolle 328; Schild 15.701 |
+| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01342, aus 0, Mischung 0,04256; kein gemessener Überlauf |
+| Sprache/Medien | **PASS**, unveränderte 32 aktive Ansagen erneut technisch dekodiert und per Hash/Dauer/Pegel geprüft; keine neue Hör-/ASR-Prüfung |
 
-Geprüfter Quellstand [`f8e63f6`](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181),
-APK-Snapshot [`284a94a`](https://github.com/sayac007/EnergyBlast/commit/284a94a0659ca9c0fd453977343053274bf214df),
-gebaut 29.10.2026, 11:15 MEZ. [Dateigröße, SHA-256 und Download](../downloads/README.md).
+Die native Suite wurde über `python3 tools/check_defold.py` vollständig ausgeführt,
+die gemeinsame Suite über `python3 tools/check_shared.py`. XTest bedient die echte
+Linux/OpenGL-Laufzeit. Der neue Wiederholungstest startet mit einem kontrollierten
+alten Spielstand, stellt die Figur an erreichbare Positionen und deaktiviert die
+feindliche KI. Aufgaben, Treffer, Wände und Belohnungsregeln bleiben echt.
+Das ist keine unbegleitete Android-Spielrunde.
 
-Die echte Zwei-Finger-Geste wurde hier nicht auf Android ausgeführt. Native
-Controllerpakete prüfen Verarbeitung und Abbruch; XTest klickt die Zoombuttons.
-Ein Sofortschuss vor dem Hinzukommen eines zweiten Fingers kann nicht zurückgenommen
-werden, ohne die bisherige unmittelbare Gegnerreaktion zu ändern. Freier Boden
-ist deshalb der empfohlene Beginn für eine Zoomgeste.
+Die Aufnahmen der wiederhergestellten Ziele und des größeren Fallenkreises wurden
+angesehen. Unveränderte eigene Figuren, Musik und Quellen bleiben erhalten.
 
-Die Truhen bleiben native tiefengeprüfte Objekte. Eine Markierung zeigt bei
-Verdeckung den Fundort; sie hebt die Wandkollision nicht auf. Welttext wird mit
-vergrößert, das HUD bleibt konstant. Die neuen Figuren sind weiterhin 2,5D.
+**Android-Build dieser Korrektur:** wird nach dem sauberen Quellcommit ausgeführt;
+noch kein Ergebnis aus einem älteren APK als aktuellen Nachweis verwenden.
 
-**Manuell offen:** Android-Update/Spielstände, echter Mehrfingerzoom, tatsächliche
-Eingabelatenz, kleine/größere Displays, maximale Zoomleistung, Klang und grafische
-Abnahme sowie langfristige Balance. Keine Store-Freigabe, neue grüne CI oder
-empirische Lernwirkung behauptet. Keine zusätzlichen Hörprüfungen für die 30
-unveränderten Aufnahmen vorgetäuscht.
+**Manuell offen:** Android-Update samt eigenem Spielstand, größerer Fallenkreis auf
+Handy/Tablet, neuer Schwierigkeitsverlauf, echte Zwei-Finger-Geste, Klang, Leistung
+und längere Spielrunden. Keine neue grüne CI, Store-Freigabe oder Lernwirkung behauptet.
 
-[Vorheriger 0.10-Prüfstand](https://github.com/sayac007/EnergyBlast/blob/fb75f015ba31141b1658207b581e87bdffb2a279/docs/QUALITY.md),
-[0.10-Meilenstein](MILESTONE_09.md), [0.9](MILESTONE_08.md).
+[Vorheriger 0.11-Prüfstand](https://github.com/sayac007/EnergyBlast/blob/1cd1be18bfb8d316454279bbb756b128d373da3c/docs/QUALITY.md),
+[0.11-Meilenstein](MILESTONE_10.md), [0.10](MILESTONE_09.md).

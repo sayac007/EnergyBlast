@@ -210,3 +210,26 @@ repository changes. Keep historical instructions below as a decision log.
   bounded orbit lights. Keep old source atlases and immutable provenance intact.
 - 0.11.0/code12, same package/debug certificate. Real native UI tests must find all
   six treasures and compare rendered zoom/scaled actors; physical pinch stays open.
+
+## Playable replay bonuses and forgiving traps 0.12 — 29 October 2026
+
+- Continue feat/zoom-treasure-polish. The operator externally merged 0.11 into
+  main through PR #1 (ffbdb91); preserve that history. No new automatic game merge,
+  PR, Actions, Release/Play publication or other-repository writes.
+- Keep one-time earned-star/purchase ledgers separate from current-visit optional
+  objectives. Restore bonus targets and replay chests on mission load; resuming or
+  focusing the same round must not respawn them. Label replay rewards honestly,
+  preserve scores and purchases, and never award the same key twice.
+- Hint/Info must lead to an unfinished bonus when the chest reward was earned;
+  do not announce that everything is collected while playable objectives remain.
+  Verify all six maps, reachable targets and actual reflected projectile hits.
+- Current trap placement radius is 5.25 world units; renderer and validator share
+  it. Reject walls, occluded floor and out-of-range points through either UI or
+  direct gameplay calls. Enable the catalogue in forge, echo and rescue.
+- Initially triple triggered durations (magnet18/frost27/pulse15 seconds) and
+  armed lifetime (36 seconds). Later factors2.5/2 require an actual successful
+  trap and completion in distinct earlier eligible missions; retries/old reward
+  flags alone do not advance training. Snapshot timing at load, preserve longer
+  active effects and keep repeat visits to earlier missions generous.
+- 0.12.0/code13, same package/debug certificate. Extend native rule and actual GUI
+  regressions using previously completed saves; report real Android checks separately.

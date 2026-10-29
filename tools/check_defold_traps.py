@@ -41,6 +41,8 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-traps-',dir='/tmp')a
     if kind=='magnet':
      click(*coordinates('DEFOLD FIELD TRAP CANCEL'));wait_for('DEFOLD FIELD TRAP CANCEL PASS traps=0 shots=0');click(*badge)
     click(*coordinates('DEFOLD FIELD TRAP OPTION '+kind));wait_for('DEFOLD FIELD TRAP SELECT PASS '+kind);screenshot('preview')
+    timing=re.search(r'DEFOLD FIELD TRAP CIRCLE radius=([0-9.]+) duration=([0-9.]+) lifetime=([0-9.]+)',log.read_text())
+    assert timing and tuple(map(float,timing.groups()))==(5.25,{'magnet':18,'frost':27,'pulse':15}[kind],36),log.read_text()
     click(*coordinates('DEFOLD FIELD TRAP FLOOR'));wait_for('DEFOLD FIELD TRAP PLACED PASS '+kind+' shots=0');screenshot('planted')
     assert 'ERROR:'not in log.read_text(),log.read_text()
    finally:

@@ -1,8 +1,9 @@
 -- A separate explicit tactical mode. Ordinary hold/release remains aim/fire.
 local Objectives=require 'main.objectives'
-local Projectiles=require 'main.projectiles'
 local T={range=3.5,catalogue=Objectives.catalogue}
-local function distance(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
+-- Render and input consume this same current radius. T.range remains the frozen
+-- historical value for older fixtures, never the current visible circle.
+function T.range_for(g)return Objectives.trap_range(g)end
 function T.new(g,ground)
  local c={pointer=nil}
  function c:cancel(spoken)
@@ -13,7 +14,7 @@ function T.new(g,ground)
   if active and spoken and g.trap_test then print('DEFOLD FIELD TRAP CANCEL PASS traps='..#g.traps..' shots='..g.shots_fired)end
  end
  function c:open()
-  if g.paused or g.over or g.background or g.m.kind~='trap'then return false end
+  if g.paused or g.over or g.background or not Objectives.can_trap(g)then return false end
   if g.trap_cooldown>0 then g.status='FALLEN LADEN: '..math.ceil(g.trap_cooldown)..' s';return false end
   if g.touch then g.touch:cancel()end
   g.path={};g.held=false;g.aiming=false;g.pending_hold=false
@@ -23,14 +24,7 @@ function T.new(g,ground)
   return true
  end
  function c:valid(p)
-  if not p or g:blocked(p)then return false,'HIER IST EINE WAND'end
-  local d=distance(p,g.p)
-  if d>T.range then return false,'ZU WEIT WEG'end
-  if d>.001 then
-   local direction={(p[1]-g.p[1])/d,(p[2]-g.p[2])/d}
-   if Projectiles.ray(g.p,direction,d,g:active())then return false,'WAND DAZWISCHEN'end
-  end
-  return true,'TIPPE AUF FREIEN BODEN'
+  return Objectives.valid_trap_position(g,p)
  end
  function c:preview(p)
   if not g.trap_ui or g.trap_ui.mode~='place'then return false end

@@ -24,7 +24,10 @@ function M.run(data)
  check(task.done and g:total()==100,'real reflected projectile awards optional crystal')
  check(not g.solved,'bonus alone cannot finish main mission')
  g:hit(e,1);check(g:total()==100,'no double bonus from dead target')
- g:load(1);check(g.bonus.completed==1 and g.bonus.tasks[1].targets[1].hp==0,'collected bonus persists on replay')
+ g:load(1)
+ if data.optional_replay then
+  check(g.bonus.completed==0 and g.bonus.tasks[1].targets[1].hp==1 and g.bonus.tasks[1].replay,'replay restores challenge while retaining earned reward')
+ else check(g.bonus.completed==1 and g.bonus.tasks[1].targets[1].hp==0,'historical collected bonus stays completed')end
  local seq=fresh(1);local t=seq.bonus.tasks[2]
  seq:hit(t.targets[t.sequence[2]],0);check(t.progress==0 and not t.done,'wrong bonus order resets without awarding')
  for _,order in ipairs(t.sequence)do seq:hit(t.targets[order],0)end
@@ -40,7 +43,7 @@ function M.run(data)
  check(completed.solved and completed.bonus.completed==0,'open bonus targets do not block mission completion')
  local total=completed:total();completed:finish();check(completed:total()==total,'finish remains one-time with bonuses')
  local forge=fresh(4);local crystal=forge.bonus.tasks[1].targets[1];forge.enemies={crystal}
- forge:trap(crystal.p,'magnet');forge:update(.05)
+ forge.p={crystal.p[1],crystal.p[2]};forge:trap(crystal.p,'magnet');forge:update(.05)
  check(#forge.traps==1 and not forge.bonus.tasks[1].done,'optional crystals cannot consume magnetic traps')
  local echo=fresh(5)
  for _,enemy in ipairs(echo.enemies)do if not enemy.optional and enemy.kind~='sequence'then enemy.hp=0 end end

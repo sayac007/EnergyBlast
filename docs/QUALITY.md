@@ -22,9 +22,9 @@
 | Eigene Sichtprüfung | Neue drei Atlanten, Figurenwahl, sechs Hinweisaufnahmen, Zoomvergleich und native Bewegungssequenz angesehen |
 | APK 0.11.0 / Code 12 | **PASS**, sauberer Quellstand, Paket/APIs/Querformat, keine Berechtigungen, Backup aus, v2-Signatur und gleiches Zertifikat wie 0.10, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung, 828 identische Projektdateien und Android-Shaderexport |
 
-Geprüfter Quellstand [`59f1312`](https://github.com/sayac007/EnergyBlast/commit/59f13122e5840731d07c7a5c6b25a9ed18eea54c),
-APK-Snapshot [`16dc606`](https://github.com/sayac007/EnergyBlast/commit/16dc606fa4b273887d20e6939539d39cd3b5439c),
-gebaut 29.10.2026, 11:05 MEZ. [Dateigröße, SHA-256 und Download](../downloads/README.md).
+Geprüfter Quellstand [`f8e63f6`](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181),
+APK-Snapshot [`284a94a`](https://github.com/sayac007/EnergyBlast/commit/284a94a0659ca9c0fd453977343053274bf214df),
+gebaut 29.10.2026, 11:15 MEZ. [Dateigröße, SHA-256 und Download](../downloads/README.md).
 
 Die echte Zwei-Finger-Geste wurde hier nicht auf Android ausgeführt. Native
 Controllerpakete prüfen Verarbeitung und Abbruch; XTest klickt die Zoombuttons.

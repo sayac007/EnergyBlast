@@ -115,13 +115,13 @@ erneut bestanden; der ältere Shaderpfad wird beibehalten.
 
 ## Nachvollziehbarer Android-Snapshot
 
-Quellcommit [`59f1312`](https://github.com/sayac007/EnergyBlast/commit/59f13122e5840731d07c7a5c6b25a9ed18eea54c),
-APK-Commit [`16dc606`](https://github.com/sayac007/EnergyBlast/commit/16dc606fa4b273887d20e6939539d39cd3b5439c),
-gebaut 29.10.2026, 11:05 MEZ vom sauberen Stand. **0.11.0 / Code 12**, 68.195.514 Bytes,
-SHA-256 `acdf205c266855daa70b66f1d0556062876b7fb6fb442da571f31c39501d9020`.
+Quellcommit [`f8e63f6`](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181),
+APK-Commit [`284a94a`](https://github.com/sayac007/EnergyBlast/commit/284a94a0659ca9c0fd453977343053274bf214df),
+gebaut 29.10.2026, 11:15 MEZ vom sauberen Stand. **0.11.0 / Code 12**, 68.195.514 Bytes,
+SHA-256 `d53d05d51aced01aa0407866cd48ca3ea7f107bdc9e6e60e5ba9a3739e345308`.
 Paket/APIs, Querformat, Berechtigungsfreiheit, Backup aus, Signatur/v2 und
 Zertifikatsgleichheit, ZIP-CRC, fehlende Schlüsseldateien, ZIP-Ausrichtung und
 identischer Projektabzug (828 Dateien) geprüft. Der Android-Export mit dem
 beibehaltenen älteren Shaderpfad ist bestanden.
 
-[APK direkt herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/16dc606fa4b273887d20e6939539d39cd3b5439c/downloads/energyblast-defold-debug.apk) · [Metadaten/Installation](../downloads/README.md).
+[APK direkt herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk) · [Metadaten/Installation](../downloads/README.md).

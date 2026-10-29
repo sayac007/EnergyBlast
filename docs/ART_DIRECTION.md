@@ -98,7 +98,7 @@ Zusätzlich tatsächlich eingesehen:
 markante Gegner, ruhigen futuristischen Deckboden, gepanzerte Lichtarchitektur,
 illustrierte Missionskarten und echte mehrphasige Explosionen um. Das sind bewusst
 2,5D-Figuren, keine vollwertigen Skelettmodelle. Originalquellen und Ableitungen:
-[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
+[PROVENANCE.json](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/assets/defold07/PROVENANCE.json). Keine Referenzgrafik
 wird übernommen. Neue Bedienausnahme auf Betreiberwunsch: der pausierte
 Fallenkatalog liegt direkt im Feld; normale HUD-Flächen bleiben außerhalb.
 
@@ -113,5 +113,18 @@ Deckungstypen je Bereich mit echten 1024-AO-Texturen, weiche Kontaktschatten,
 animierte tiefengeprüfte Energieschilde, dünne Figurenkonturen und nähere Kamera.
 Die ursprünglichen 2,5D-Figuren bleiben erhalten; keine Behauptung vollständig
 skelettanimierter 3D-Figuren. [Echte Bilder und Gestenbelege](MILESTONE_08.md),
-[neue Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/a2fef82fb2c12d5a4b7b56cdd3735c50c6060f89/shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
+[neue Bildherkunft](https://github.com/sayac007/EnergyBlast/blob/7b3ac4f316a0e5c05f3fbb439887d959f6cf42fc/shared/assets/defold09/PROVENANCE.json). Technische Prüfungen
 ersetzen weder persönliche grafische Abnahme noch einen physischen Gerätebenchmark.
+
+## 0.10 — protection and restrained tension
+
+Preserve 0.9 floors, sculpted cover and native illustrated actors. Add a mint
+protection platform with a stepped luminous beacon, a clearly drawn boundary,
+short label and navigation button. The dome and platform render in the native
+world; the game collision handles projectile absorption independently of art.
+A compact numeric energy bar replaces the old row of hearts so 15–35 HP fits.
+The shop separates weapons, armor and extras into icon tabs, with a permanent
+health refill and dimmed future stages. Higher weapon tiers change projectile
+halo colour/size without changing collision footprints. The new slower original
+minor/modal soundtrack supplies space, tension and recovery. Whether it feels
+right is a human listening/playtest decision, not an RMS measurement.

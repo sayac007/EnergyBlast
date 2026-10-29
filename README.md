@@ -6,7 +6,7 @@ integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Zoom, auffindbare
 Schätze und neu gezeichnete HD-Figuren mit animiertem Schimmer.**
 Defold bleibt der Schwerpunkt.
 
-**[Android 0.10 herunterladen — 64,0 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk)** ·
+**[Android 0.11 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/16dc606fa4b273887d20e6939539d39cd3b5439c/downloads/energyblast-defold-debug.apk)** ·
 [Update und geprüfte Metadaten](downloads/README.md) ·
 [Änderungen und tatsächliche Tests](docs/MILESTONE_10.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
@@ -86,7 +86,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 28.10.2026 | 0.8 | Klarer Missionswechsel, sichtbare Helden/Käufe, Schatzführung, je zwei integrierte Bonusziele und höhere Belohnungen. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6b1afee89855c737358859ce4fd2f83100f53583) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads) · [Bericht](docs/MILESTONE_07.md) |
 | 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
-| 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf dem Arbeitsbranch.** | [Bericht](docs/MILESTONE_10.md) · [Quell-/APK-Bezug](downloads/README.md) |
+| 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/59f13122e5840731d07c7a5c6b25a9ed18eea54c) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/16dc606fa4b273887d20e6939539d39cd3b5439c/downloads) · [Bericht](docs/MILESTONE_10.md) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.

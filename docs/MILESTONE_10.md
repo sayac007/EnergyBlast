@@ -108,3 +108,16 @@ Beim ersten Android-Export wurde eine nicht für ESSL 100 verfügbare Texturabfr
 im neuen Schimmer gefunden. Texturabmessungen werden deshalb als Materialkonstante
 übergeben. Die nativen Prüfungen und der positive Schimmervergleich wurden danach
 erneut bestanden; der ältere Shaderpfad wird beibehalten.
+
+## Nachvollziehbarer Android-Snapshot
+
+Quellcommit [`59f1312`](https://github.com/sayac007/EnergyBlast/commit/59f13122e5840731d07c7a5c6b25a9ed18eea54c),
+APK-Commit [`16dc606`](https://github.com/sayac007/EnergyBlast/commit/16dc606fa4b273887d20e6939539d39cd3b5439c),
+gebaut 29.10.2026, 11:05 MEZ vom sauberen Stand. **0.11.0 / Code 12**, 68.195.514 Bytes,
+SHA-256 `acdf205c266855daa70b66f1d0556062876b7fb6fb442da571f31c39501d9020`.
+Paket/APIs, Querformat, Berechtigungsfreiheit, Backup aus, Signatur/v2 und
+Zertifikatsgleichheit, ZIP-CRC, fehlende Schlüsseldateien, ZIP-Ausrichtung und
+identischer Projektabzug (828 Dateien) geprüft. Der Android-Export mit dem
+beibehaltenen älteren Shaderpfad ist bestanden.
+
+[APK direkt herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/16dc606fa4b273887d20e6939539d39cd3b5439c/downloads/energyblast-defold-debug.apk) · [Metadaten/Installation](../downloads/README.md).

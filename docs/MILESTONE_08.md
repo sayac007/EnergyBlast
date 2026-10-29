@@ -50,17 +50,30 @@ Linux-Laufzeit mit echten XTest-Eingaben. [Feuern vor dem Loslassen](images/09-d
 
 ## Verifikation
 
-440 native Prüfungen =347 erhaltene und93 neue direkte Gestenprüfungen;
+440 native Prüfungen = 347 erhaltene und 93 neue direkte Gestenprüfungen;
 14 gemeinsame Medien-/Geometrie-/Konfigurationsgruppen. Fünf tatsächliche neue
 Touchabläufe, bestehende Menüs/Käufe/Fallen/Missionswechsel, getrennte Speicherstarts,
 zwei Fensterformate, Audioausgabe und exportierte Wand-/Batch-Geometrie bestanden.
 Geschossverdeckung 0 veränderte Pixel, davor 328 sichtbare Kontrollpixel. Energieschild
 an/aus verändert 15.701 Pixel und erreicht damit tatsächlich den Renderer.
 
-Zwei neue Sprachdateien frisch unabhängig normalisiert exakt erkannt;25vorherige
+Zwei neue Sprachdateien frisch unabhängig normalisiert exakt erkannt; 25 vorherige
 Clips unverändert. Alle 27 technisch dekodiert/geprüft. [Zentraler Status](QUALITY.md),
 [Befehle](BUILD_AND_TEST.md), [APK-/Quellbezug](../downloads/README.md).
 
 Manuell offen: tatsächliche Geräte-Latenz, Mehrfingergefühl, Update/Spielstandübernahme,
 Klang, längere Runden, mobile Leistung und persönliche grafische Abnahme. Keine
 Store-/Lernwirkungsfreigabe, neue grüne CI oder kommerzielle Gleichwertigkeit behauptet.
+
+## Nachvollziehbarer Android-Snapshot
+
+Quellcommit [`d4dea7d`](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0),
+APK-Commit [`e49218e`](https://github.com/sayac007/EnergyBlast/commit/e49218e7015e365a0913961a0f1e005436c271f2),
+gebaut 29.10.2026, 08:08 MEZ vom sauberen Stand. **0.9.0 / Code 10**, 63.853.754 Bytes,
+SHA-256 `9bbb4d96d4b61c0725876f8be8e842d38114ee6bd1e8805890289669749c6ec3`.
+
+Paket, APIs, userLandscape, keine Berechtigungen, Backup aus, v2-Signatur und
+Zertifikatsgleichheit mit 0.8, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und identischer vollständiger Projektabzug (795 Dateien) geprüft.
+[APK und Installation](https://raw.githubusercontent.com/sayac007/EnergyBlast/e49218e7015e365a0913961a0f1e005436c271f2/downloads/energyblast-defold-debug.apk) · [Geprüfte Metadaten](../downloads/README.md).
+Keine physische Android-Installation oder mobile Bildrate aus diesen Prüfungen abgeleitet.

@@ -70,7 +70,7 @@ python3 tools/check_defold.py
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native Regelsuite einschließlich der unveränderten0.7-Fixture, neuer Spielfluss- und Bonusprüfungen; aktuelle tatsächlich ausgeführte Anzahl in QUALITY.md. Sechs
+  Native Regelsuite einschließlich der unveränderten 0.7-Fixture, neuer Spielfluss- und Bonusprüfungen; aktuelle tatsächlich ausgeführte Anzahl in QUALITY.md. Sechs
   Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, aktive 0,14-s-Schwelle und historische 0,30-s-Fixtures,
   langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
 - Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
@@ -92,13 +92,13 @@ python3 tools/check_defold.py
 Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast08-images
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast09-images
 ```
 
 Bewegungs-/Schusssequenz mit tatsächlichen XTest-Eingaben aufnehmen:
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast08-motion
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast09-motion
 ```
 
 Das schreibt echte Laufzeitbilder/GIF außerhalb des Repositories, keine
@@ -147,7 +147,7 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold08-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold09-build
 ```
 
 Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.9.0 / Code 10**,
@@ -159,7 +159,7 @@ Die temporäre bekannte Debug-Passwortdatei wird nach dem Export gelöscht.
 Ausgabe: APK, Build-/Signatur-/Manifestauszüge und `verification.json` mit Quell-
 commit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur und
 ZIP-Ausrichtung. Zusätzlich vor Veröffentlichung: ZIP-CRC, keine Schlüsseldateien,
-Zertifikatsgleichheit mit 0.3 und Hash der veröffentlichten Download-Datei prüfen.
+Zertifikatsgleichheit mit der vorherigen 0.8 und Hash der veröffentlichten Download-Datei prüfen.
 
 Abschlussexport vom sauberen Quellcommit, anschließend APK/Metadaten separat
 versionieren. Das ist ein nachvollziehbarer Bauweg, keine Zusicherung bitidentischer

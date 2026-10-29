@@ -4,7 +4,8 @@ Offline-Touch-Shooter mit drei Helden, sechs Missionen, reflektierten Schüssen,
 integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Neue Direktsteuerung
 und überarbeitete Kampfansichten.** Defold bleibt der Schwerpunkt.
 
-[APK/Update und geprüfte Metadaten](downloads/README.md) ·
+**[Android 0.9 herunterladen — 63,9 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/e49218e7015e365a0913961a0f1e005436c271f2/downloads/energyblast-defold-debug.apk)** ·
+[Update und geprüfte Metadaten](downloads/README.md) ·
 [Änderungen und tatsächliche Tests](docs/MILESTONE_08.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
@@ -79,11 +80,11 @@ Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
 
 ## Prüfungen und Grenzen
 
-**29.10.2026:** 440 native Prüfungen,14 gemeinsame Testgruppen, fünf tatsächliche
+**29.10.2026:** 440 native Prüfungen, 14 gemeinsame Testgruppen, fünf tatsächliche
 neue Gestenabläufe und alle bisherigen Menü-/Kauf-/Speicher-/Fallenabläufe bestanden.
 Zwei Fenstergrößen, Audioausgabe, tatsächliche Wandverdeckung und ein positiver
 Pixeltest der Energieschilde geprüft. Zwei neue Gestenansagen unabhängig exakt
-erkannt,25 andere Sprachdateien unverändert. [Details](docs/QUALITY.md).
+erkannt, 25 andere Sprachdateien unverändert. [Details](docs/QUALITY.md).
 
 Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
 längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete

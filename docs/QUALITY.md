@@ -5,17 +5,22 @@
 
 | Tatsächlich ausgeführt | Ergebnis |
 |---|---|
-| Native Regeln/Darstellung | **440 PASS**,347 erhaltene+93 neue direkte Gestenfälle |
+| Native Regeln/Darstellung | **440 PASS**, 347 erhaltene + 93 neue direkte Gestenfälle |
 | Gemeinsame Tests | **14 Gruppen PASS**, Daten/Medien/Hashes, sechs neue Materialien, tatsächliche AO-Bindung, Wandpuffer, Batch-Identität und Komponentenkapazitäten |
 | Neue tatsächliche Gesten | **5 Szenarien PASS**: Bodentipp, wiederholte Schüsse VOR Loslassen, sofortiger gepolsterter Gegnertipp, gepufferte schnelle Tipps, Bewegung WÄHREND Ziehen |
 | Bisherige tatsächliche GUI | **PASS**, Helden, Käufe, fehlende Sterne, Schatz-/Bonusführung, Nachfolger, sichere Suche, Fallen und zwei Fensterformate |
 | Getrennte Speicherprozesse | **PASS**, Sterne/Guthaben/Käufe/Figur/Hinweise/Musik; Missionswiederherstellung zusätzlich simuliert |
 | Native Geschossverdeckung | **PASS**, verdeckt 0 Pixel verändert; sichtbarer Kontrollfall 328 Pixel |
 | Native Energieschild-Ausgabe | **PASS**, an/aus 15.701 unterschiedliche Pixel; echte Renderausgabe statt nur Materialdeklaration |
-| Audioausgabe | **PASS**, Musik an RMS 0,01135, aus 0, Mischung 0,04234; kein gemessener Überlauf im Test |
-| Sprachdateien | **27/27 technisch PASS**, zwei neue Gestenhinweise frisch ASR 2/2 exakt,25 andere samt Metadaten unverändert |
+| Audioausgabe | **PASS**, Musik an RMS 0,01135, aus 0, Mischung 0,04182; kein gemessener Überlauf im Test |
+| Sprachdateien | **27/27 technisch PASS**, zwei neue Gestenhinweise frisch ASR 2/2 exakt, 25 andere samt Metadaten unverändert |
 | Eigene Sichtprüfung | Menü und sechs Sektoren, Schüsse vor Loslassen, sofortiger Gegnertipp, Ziehen und 36 native Bewegungs-/Kampfframes angesehen |
-| APK | Abschlussprüfung und sauberer Quellstand werden nach Export in den Download-Metadaten dokumentiert |
+| APK 0.9.0 / Code 10 | **PASS**, sauberer Quellstand, ARM64, Paket/APIs/Querformat, keine Berechtigungen, Backup aus, v2-Signatur, gleiches Zertifikat wie 0.8, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung und 795 identische Projektdateien |
+
+Geprüfter Spielquellstand: [`d4dea7d`](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0);
+APK-Snapshot [`e49218e`](https://github.com/sayac007/EnergyBlast/commit/e49218e7015e365a0913961a0f1e005436c271f2),
+gebaut 29.10.2026, 08:08 MEZ. [Größe, SHA-256 und Download](../downloads/README.md).
+Die abschließende APK-Prüfung ist kein zusätzlicher physischer Spieltest.
 
 Eine Waffenpause von 0,24 Sekunden bleibt. Die Tests messen Eingabelogik und
 beobachtete native Ausführung, keine physische Android-Touch-to-Photon-Latenz.

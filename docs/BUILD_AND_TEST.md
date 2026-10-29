@@ -92,7 +92,7 @@ python3 tools/check_defold.py
 - `check_defold_resilience_ui.py` prüft tatsächliche Heilung ohne Doppelabbuchung, Waffen-/Rüstungsstufen, alle drei Shopkategorien sowie den echten Weg in den Schutzort mit gezählten Geschossabsorptionen und Erholung.
 - `check_defold_direct_touch.py` prüft fünf neue echte Gesten, ausdrücklich vor dem Loslassen. `check_defold_energy.py` vergleicht tatsächliche Pixel mit Schild an/aus.
 - `check_defold_flow_ui.py` prüft zusätzlich drei reale GUI-Abläufe für Heldenwahl/Käufe, Weiter trotz offenem Schatz und freiwillige Suche mit anschließendem Weiter.
-- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena.
+- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena, zusätzlich bei 175% Zoom.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
   WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
   Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.

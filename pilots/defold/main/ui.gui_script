@@ -77,7 +77,7 @@ local function field_guide(self,g,state)
    local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local size=38+t.proximity*18;local pulse=1+math.sin(g.clock*4)*.06
    circle(self,x,y,size*pulse,'443414');ring(self,x,y,size*pulse,'ffda64',4);icon(self,x,y,'treasure',size*1.4)
    if off then local dx,dy=tx-x,ty-y;local d=math.sqrt(dx*dx+dy*dy);if d>0 then line(self,x+dx/d*size,y+dy/d*size,x+dx/d*(size+15),y+dy/d*(size+15),'ffe394',5)end end
-   text(self,x,clamp(y-size-15,Layout.bottom+23,Layout.top-23),t.discovered and(t.occluded and'HINTER DER DECKUNG'or'ZUR TRUHE')or'SUCHGEBIET','ffe99a',.62,205)
+   text(self,clamp(x,Layout.left+176,Layout.right-176),clamp(y-size-15,Layout.bottom+23,Layout.top-23),t.discovered and(t.occluded and'HINTER DER DECKUNG'or'ZUR TRUHE')or'SUCHGEBIET','ffe99a',.62,205)
    local n=box(self,x,y,size*2,size*2,'ffffff');gui.set_color(n,vmath.vector4(1,1,1,0))
    self.buttons[#self.buttons+1]={node=n,action='treasure_walk',world=true,rect={x,y,size*2,size*2}}
    return
@@ -358,7 +358,9 @@ function update(self,dt)
  if g.clue_time>0 then local treasure=g:treasure_state();local p=treasure.discovered and treasure.position or treasure.hint;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
  if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
  field_guide(self,g,state)
+ local world_zoom=self.world_zoom;self.world_zoom=1
  field_traps(self,g)
+ self.world_zoom=world_zoom
  self.world_parent=nil
  if g.ui_test or g.trap_test or g.flow_ui_test then
   for _,b in ipairs(self.buttons)do local r=b.rect

@@ -39,7 +39,8 @@ bleiben weg und zahlen keine Sterne ein zweites Mal.
 Plus/Minus unten links oder zwei Finger auf freiem Spielfeld verändern die Ansicht
 zwischen **75 und 175 Prozent**. Alle nativen Weltobjekte und Figuren verwenden
 zusammen dieselbe Kameramatrix; Touchrückprojektion und Zielbereiche folgen ihr.
-Welttexte werden bei Vergrößerung ebenfalls größer. HUD und Bedientasten behalten
+Welttexte werden bei Vergrößerung ebenfalls größer. Fallenmenü und taktische Bedientexte behalten ebenfalls ihre feste Bildschirmgröße.
+HUD und Bedientasten behalten
 ihre Größe und liegen weiterhin außerhalb der Arena.
 
 Die Stelle zwischen den beiden Fingern bleibt beim Zoomen möglichst am selben
@@ -56,6 +57,7 @@ vom Betreiber verlangte sofortige Gegnerreaktion.
 
 ![Vergrößerte native Ansicht](images/11-defold-zoom-close.png)
 ![Weitere Übersicht](images/11-defold-zoom-wide.png)
+![Fallenmenü bei 175 Prozent](images/11-defold-traps-max.png)
 
 ## Figurenbilder und tatsächliche Animation
 
@@ -90,7 +92,9 @@ Truhen werden durch echte Bewegung gesammelt, nicht per Fixture vergeben.
 - Echte Plus-/Minus-Klicks verändern Weltpixel und die projizierte Figurengröße.
   Derselbe Lauf findet **alle sechs Truhen mit je 75 Sternen und null Schüssen**.
 - Alle bisherigen echten Gesten, Menüs, Käufe, Fallen, Speicherneustarts,
-  Schutzort-/Heilungstests und beide Fensterformate bestehen weiterhin.
+  Schutzort-/Heilungstests und beide Fensterformate bestehen weiterhin. Alle drei
+  Fallen wurden zusätzlich bei 175% Zoom ausgewählt und gesetzt; auch der Abbruch
+  wurde geprüft.
 - Schimmer an/aus: **2.937 geänderte native Pixel**. Geschossverdeckung: 0 Pixel
   hinter der Wand, 328 im sichtbaren Kontrollfall. Energieschild: 15.701 Pixel.
 - **32/32 Sprachdateien technisch geprüft**, zwei neue Ansagen frisch unabhängig

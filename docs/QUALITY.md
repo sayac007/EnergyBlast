@@ -11,13 +11,13 @@
 | Tatsächliche Zoom-Ausgabe | **PASS**, echte Plus-/Minus-Klicks, mehr als 5.000 veränderte Weltpixel und passende projizierte Figurengröße; feste HUD-Größe |
 | Sechs Schatzfunde | **PASS**, echte Hinweise, echte Wege und Aufnahme je 75 Sterne, 0 Schüsse; im Testprofil Gesamtstand 2.400 → 2.850 |
 | Schatzregeln | **PASS**, erreichbare Such-/Fundpunkte, Entdeckung/Speicherung, Sichtlinie, keine Aufnahme durch Wände/Tore, keine Doppelbelohnung oder erneute Hinweiskosten |
-| Bisherige tatsächliche GUI | **PASS**, fünf direkte Gesten, Helden/Käufe/Missionen/Fallen/Schutzort/Heilung und beide Fensterformate |
+| Bisherige tatsächliche GUI | **PASS**, fünf direkte Gesten, Helden/Käufe/Missionen/Fallen/Schutzort/Heilung und beide Fensterformate; Fallenbedienung zusätzlich bei 175% Zoom |
 | Getrennte Speicherprozesse | **PASS**, Sterne, Guthaben, Käufe, Figur, Hinweise, Musik; Zoom und Schatzentdeckung zusätzlich rekonstruiert |
 | HD-Figuren | **PASS**, 3 Atlanten 1536×1024, 24 unterschiedliche transparente Zellen, alte Quellen erhalten, aktive Modell-/Shaderbindungen |
 | Native Schimmerausgabe | **PASS**, an/aus 2.937 veränderte Pixel; sechs begrenzte native Lichtobjekte |
 | Native Geschossverdeckung | **PASS**, verdeckt 0 Pixel; sichtbarer Kontrollfall 328 Pixel |
 | Native Energieschild-Ausgabe | **PASS**, an/aus 15.701 veränderte Pixel |
-| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01342, aus 0, Mischung 0,04256; kein gemessener Überlauf |
+| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01346, aus 0, Mischung 0,04235; kein gemessener Überlauf |
 | Sprache | **32/32 technisch PASS**, 2 neue Ansagen frisch unabhängig ASR-exakt, 30 vorherige samt Metadaten unverändert |
 | Eigene Sichtprüfung | Neue drei Atlanten, Figurenwahl, sechs Hinweisaufnahmen, Zoomvergleich und native Bewegungssequenz angesehen |
 | APK 0.11.0 / Code 12 | **PASS**, sauberer Quellstand, Paket/APIs/Querformat, keine Berechtigungen, Backup aus, v2-Signatur und gleiches Zertifikat wie 0.10, ZIP-CRC, keine Schlüsseldateien, 16-KB-ZIP-Ausrichtung, 828 identische Projektdateien und Android-Shaderexport |

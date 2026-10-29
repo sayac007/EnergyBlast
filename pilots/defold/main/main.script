@@ -199,6 +199,7 @@ function init(self)
  local path=sys.get_save_file('energyblast','progress');self.save_path=path
  local saved=not self.test_mode and sys.load(path)or nil;if saved and not saved.earned then saved=nil end
  self.g=Combat.new(data,saved);self.g.muted=self.muted;bind_controls(self.g)
+ local capture_zoom=sys.get_config_number('project.capture_zoom',1);if capture_zoom~=1 then self.g.zoom_control:set(capture_zoom)end
  self.g.changed=function()
   if not self.test_mode and not sys.save(path,self.g.saved)then self.g.status='Spielstand konnte nicht gespeichert werden.'end
  end

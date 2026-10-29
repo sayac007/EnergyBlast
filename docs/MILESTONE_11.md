@@ -74,9 +74,16 @@ unverändert. Die reale Fallenbedienung prüft alle drei Geräte bei 100% und 17
 Zoom mit einem Ziel 4,4 Welteinheiten entfernt, außerhalb der früheren Reichweite.
 
 Vorhandene Gesten-, Menü-, Shop-, Speicher-, Zoom-, Audio-, Verdeckungs- und
-Materialtests bleiben bestanden. Der Android-Build folgt nach dem sauberen
-Quellcommit; die finalen Metadaten werden vor Auslieferung ergänzt.
+Materialtests bleiben bestanden. Auch Funk wird in allen sechs Arenen mit
+echten Eingaben auf passende Bonusansagen geprüft. Der Android-Build ist bestanden.
 Ausführliche Ergebnisse und Grenzen stehen im [Qualitätsstatus](QUALITY.md).
+
+Geprüfter Quellstand [`9554e66`](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1),
+APK-Snapshot [`8d0de93`](https://github.com/sayac007/EnergyBlast/commit/8d0de931d121f89e5ad8b6841c4124035a24c12b),
+gebaut am 29.10.2026, 16:31 MEZ. APK **68.211.898 Bytes**; Paket/Version/APIs,
+Berechtigungsfreiheit, Backup aus, v2/v3-Signatur und Zertifikatsgleichheit,
+ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung und 831 identische
+Projektdateien geprüft. Der Quellstand war sauber. [Download und SHA-256](../downloads/README.md).
 
 Neue Regressionen prüfen zuvor vollständig abgeschlossene Spielstände,
 Wiederholbarkeit ohne Doppelbelohnung, alle sechs Bonusorte, echte Abprallschüsse,

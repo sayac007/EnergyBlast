@@ -18,7 +18,7 @@
 | Alte GUI/Bedienung | **PASS**, Gesten, fünf direkte Eingaben, Helden, Käufe, zwei Fensterformate, Weiter, Schutzort und Heilung |
 | Zoom/Schatz/HD | **PASS**, bisherige Zoom-/Eingaberegressionen, sechs erstmalige Schatzfunde mit +75, echte Zoomausgabe und HD-Atlanten; Schimmervergleich 2.937 Pixel |
 | Native Verdeckung/Schild | **PASS**, verdecktes Geschoss 0 geänderte Pixel, sichtbare Kontrolle 328; Schild 15.701 |
-| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01342, aus 0, Mischung 0,04256; kein gemessener Überlauf |
+| Tatsächliche Audioausgabe | **PASS**, Musik an RMS 0,01342, aus 0, Mischung 0,04214; kein gemessener Überlauf |
 | Sprache/Medien | **PASS**, unveränderte 32 aktive Ansagen erneut technisch dekodiert und per Hash/Dauer/Pegel geprüft; keine neue Hör-/ASR-Prüfung |
 
 Die native Suite wurde über `python3 tools/check_defold.py` vollständig ausgeführt,
@@ -31,8 +31,13 @@ Das ist keine unbegleitete Android-Spielrunde.
 Die Aufnahmen der wiederhergestellten Ziele und des größeren Fallenkreises wurden
 angesehen. Unveränderte eigene Figuren, Musik und Quellen bleiben erhalten.
 
-**Android-Build dieser Korrektur:** wird nach dem sauberen Quellcommit ausgeführt;
-noch kein Ergebnis aus einem älteren APK als aktuellen Nachweis verwenden.
+**APK 0.12.0 / Code 13: PASS.** Gebaut 29.10.2026, 16:31 MEZ vom sauberen
+Quellstand [`9554e66`](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1);
+APK-Snapshot [`8d0de93`](https://github.com/sayac007/EnergyBlast/commit/8d0de931d121f89e5ad8b6841c4124035a24c12b).
+Paket/APIs/Querformat, Berechtigungsfreiheit, Backup aus, v2/v3-Signatur,
+identisches Zertifikat zur vorherigen APK, ZIP-CRC, keine privaten Schlüsseldateien,
+16-KB-ZIP-Ausrichtung und 831 per Hash identische Projektdateien bestanden.
+68.211.898 Bytes, nur 16 KiB mehr als 0.11. [SHA-256 und Download](../downloads/README.md).
 
 **Manuell offen:** Android-Update samt eigenem Spielstand, größerer Fallenkreis auf
 Handy/Tablet, neuer Schwierigkeitsverlauf, echte Zwei-Finger-Geste, Klang, Leistung

@@ -1,31 +1,31 @@
-# EnergyBlast — Defold 0.11 herunterladen
+# EnergyBlast — Defold 0.12 herunterladen
 
-**[EnergyBlast 0.11 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk) — 68,2 MB.**
+**[EnergyBlast 0.12 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk) — 68,2 MB.**
 
-Zoomen für die ganze Welt, auffindbare goldene Schatzführung und neu gezeichnete
-HD-Figuren mit Schimmer/Lichtpartikeln. Alle bisherigen Missionen, Sterne, Käufe,
-Gesundheit/Erholung und Schutzorte bleiben erhalten.
-[Änderungen und echte Laufzeitbilder](../docs/MILESTONE_10.md).
+Wieder spielbare Bonusaufgaben und Truhen, passende Hinweise und Funkansagen,
+50 Prozent größerer Fallenkreis und anfangs dreifache Wirkzeit. Gespeicherte
+Sterne, Käufe und Ausrüstung bleiben erhalten. Nur **16 KiB größer als 0.11**.
+[Änderungen und echte Laufzeitbilder](../docs/MILESTONE_11.md).
 
 | Merkmal | Tatsächlicher Wert |
 |---|---|
 | Engine / App | Defold 1.14.0, native ARM64-Test-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.11.0 / 12** |
-| Größe | **68.195.514 Bytes**, etwa 4,2 MB mehr als 0.10 |
+| Version / Code | **0.12.0 / 13** |
+| Größe | **68.211.898 Bytes** |
 | Android | Android 7/API 24+, ARM64, targetSdk 36, userLandscape |
-| Quellcommit | [`f8e63f6`](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) |
-| APK-Snapshot | [`284a94a`](https://github.com/sayac007/EnergyBlast/commit/284a94a0659ca9c0fd453977343053274bf214df) |
-| Gebaut | 29.10.2026, 11:15 MEZ, sauberer Quellstand |
-| Signatur | v2 geprüft, identisches Entwicklungszertifikat wie 0.10 |
+| Quellcommit | [`9554e66`](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) |
+| APK-Snapshot | [`8d0de93`](https://github.com/sayac007/EnergyBlast/commit/8d0de931d121f89e5ad8b6841c4124035a24c12b) |
+| Gebaut | 29.10.2026, 16:31 MEZ, sauberer Quellstand |
+| Signatur | v2/v3 geprüft, identisches Entwicklungszertifikat wie 0.11 |
 | Physischer Geräte-/Mehrfingertest | **OFFEN** |
 
 ```text
-SHA-256 d53d05d51aced01aa0407866cd48ca3ea7f107bdc9e6e60e5ba9a3739e345308
+SHA-256 24f1c6a641e9456f74069cb0882a8d98d04598216d22ac95b55ce03478da94b4
 ```
 
-[Maschinenlesbare Metadaten](defold-verification.json) enthalten Buildzeit, Größe,
-Hash, Quellcommit, `source_dirty:false`, Zertifikat und ausgeführte APK-Prüfungen.
+[Maschinenlesbare Metadaten](defold-verification.json): Buildzeit, Größe, Hash,
+Quellcommit, `source_dirty:false`, Zertifikat und technische APK-Prüfungen.
 
 ## Installation und Bedienung
 
@@ -33,32 +33,41 @@ Als Update über die vorhandene Defold-App installieren. **Nicht vorher deinstal
 wenn Sterne, Käufe, Hinweise und Figur bleiben sollen. Android kann die Freigabe
 der Downloadquelle verlangen. Debug-Testfassung, keine Release-/Play-Signatur.
 
-**Zoom:** Plus/Minus unten links oder zwei Finger auf freiem Spielfeld, 75–175%.
-Welt und Figuren werden zusammen größer, HUD bleibt konstant. Die Größe bleibt
-lokal gespeichert. Ein erster bereits ausgelöster Gegnertipp kann vor einem
-später hinzukommenden zweiten Finger einen Schuss erzeugt haben.
+**Boni:** Mission über die bebilderte Auswahl erneut starten. Beide Bonusaufgaben
+und die Truhe erscheinen wieder. „Noch einmal“ bedeutet: erneut spielbar, die
+Sterne sind bereits gespeichert und werden nicht doppelt vergeben. Der obere
+Rundenzähler und die als „geholt“ markierten dauerhaften Menüerfolge sind getrennt.
+Info/Funk/Hinweis erklären offene Ziele. Fortsetzen setzt gelöste Rundenziele nicht zurück.
 
-**Schatz:** HINWEIS aktiviert die goldene Führung; bei Annäherung wird die Truhe
-größer/leuchtender. Goldzeichen antippen läuft zum Suchgebiet bzw. zur Truhe.
-Aufnahme erfordert echte Nähe und freie Sicht. Bereits entdeckte/gesammelte Funde
-kosten keine zusätzlichen Hinweise. [Gesamte Bedienung](../README.md).
+**Fallen:** Fallenbild neben der Figur → Gerät auswählen → freien Boden im hellen
+Kreis antippen. Anfangs Magnet 18 s, Eis 27 s, Impuls 15 s; Bereitschaft 36 s.
+Kreisradius 5,25 statt 3,5. Später sinken Zeiten nur nach erfolgreichen früheren
+Fallenmissionen. [Zeiten und Regeln](../docs/TRAPS.md).
+
+**Zoom:** Plus/Minus oder zwei Finger auf freiem Spielfeld, 75–175%; gesamter
+Bereich und Figuren werden vergrößert. [Gesamte Bedienung](../README.md).
 
 ## Tatsächliche Prüfung
 
-**820 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Neue native
-Zoom-/Touchpaket-/Schatzprüfungen; tatsächliche Zoomtasten verändern gerenderte
-Weltpixel und Figurengröße. Alle sechs Truhen wurden mit echten Eingaben für je
-75 Sterne ohne Schüsse gesammelt. Native Schimmerausgabe: 2.937 veränderte Pixel.
-Bisherige Gesten, Menüs/Käufe/Fallen, Speicher, zwei Fensterformate, Audio und
-Geschossverdeckung bleiben grün. 32 Sprachdateien technisch geprüft; zwei neue
-Ansagen frisch unabhängig exakt erkannt. [Nachweise/Grenzen](../docs/QUALITY.md).
+**1.066 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Alle sechs
+Lichter-/Zeitfensterboni mit echten Bildschirmtaps und Projektilen gelöst, sechs
+Truhen durch Hinlaufen gesammelt; Wiederbesuch und Prozessneustart erhalten
+4.350 Gesamtsterne, 4.090 Guthaben und gekaufte Ausrüstung. Alle drei Fallen bei
+100% und 175% Zoom real außerhalb der alten Reichweite platziert. Bisherige
+Gesten-, Menü-, Shop-, Speicher-, Zoom-, Audio- und Verdeckungstests bestanden.
+[Nachweise und Grenzen](../docs/QUALITY.md).
 
-APK: Paket/Version/APIs, Querformatmanifest, Berechtigungsfreiheit, Backup aus,
-v2-Signatur/Zertifikatsgleichheit, ZIP-CRC, fehlende Schlüsseldateien, ZIP-Ausrichtung
-und vollständiger Projektabzug mit 828 Dateien bestanden. Android-Shaderexport
-mit beibehaltenem älteren GLES-Pfad bestanden. ZIP-Ausrichtung allein ist keine
-Play-/16-KB-Zertifizierung. Echte Geräte-/Mehrfinger-/Hörabnahme bleibt offen.
+APK: Paket/Version/APIs, Querformatmanifest, keine Berechtigungen, Backup aus,
+v2/v3-Signatur und Zertifikatsgleichheit, ZIP-CRC, keine privaten Schlüsseldateien,
+16-KB-ZIP-Ausrichtung und vollständiger Abzug mit **831 identischen Projektdateien**
+bestanden. Die Android-Shader wurden erfolgreich exportiert. ZIP-Ausrichtung allein
+ist keine Play-/16-KB-Zertifizierung. Echte Geräte-/Mehrfinger-/Hörabnahme bleibt offen.
 Keine neue grüne CI oder Store-Veröffentlichung behauptet.
+
+## Vorherige 0.11 dauerhaft erhalten
+
+[Defold 0.11 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk)
+— 68.195.514 Bytes, [damaliger Stand](../docs/MILESTONE_10.md).
 
 ## Vorherige 0.10 dauerhaft erhalten
 
@@ -102,7 +111,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.11 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.12 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

@@ -5,9 +5,9 @@ sechs Missionen, reflektierten Schüssen,
 integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Wieder spielbare Boni, ein größerer Fallenkreis und längere Fallenwirkung.**
 Defold bleibt der Schwerpunkt.
 
-**[Android 0.11 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk)** ·
+**[Android 0.12 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads/energyblast-defold-debug.apk)** ·
 [Update und geprüfte Metadaten](downloads/README.md) ·
-[Änderungen und tatsächliche Tests](docs/MILESTONE_10.md) ·
+[Änderungen und tatsächliche Tests](docs/MILESTONE_11.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
 ## Aktueller Stand
@@ -105,6 +105,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
 | 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Durch PR #1 in main übernommen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
+| 29.10.2026 | 0.12 | Bereits belohnte Bonusziele und Truhen wieder spielbar, passende Hinweise/Funk, größerer Fallenkreis und nach Lernerfolg abgestufte längere Wirkzeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](docs/MILESTONE_11.md) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.

@@ -1,61 +1,69 @@
-# EnergyBlast — Defold 0.10 herunterladen
+# EnergyBlast — Defold 0.11 herunterladen
 
-**[EnergyBlast 0.10 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk) — 64,0 MB.**
+**[EnergyBlast 0.11 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk) — 68,2 MB.**
 
-15 statt 3 Energie, kostenlose Erholung, leuchtender Zikurrat in allen sechs Arenen,
-ein echter Stufenshop und neue zurückhaltende Science-Fiction-Musik. Direkte Gesten,
-Missionen, drei Helden und Spielstände bleiben erhalten.
-[Reale Laufzeitbilder und Änderungen](../docs/MILESTONE_09.md).
+Zoomen für die ganze Welt, auffindbare goldene Schatzführung und neu gezeichnete
+HD-Figuren mit Schimmer/Lichtpartikeln. Alle bisherigen Missionen, Sterne, Käufe,
+Gesundheit/Erholung und Schutzorte bleiben erhalten.
+[Änderungen und echte Laufzeitbilder](../docs/MILESTONE_10.md).
 
 | Merkmal | Tatsächlicher Wert |
 |---|---|
 | Engine / App | Defold 1.14.0, native ARM64-Test-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.10.0 / 11** |
-| Größe | **64.033.978 Bytes**, nur 180.224 Bytes mehr als 0.9 |
+| Version / Code | **0.11.0 / 12** |
+| Größe | **68.195.514 Bytes**, etwa 4,2 MB mehr als 0.10 |
 | Android | Android 7/API 24+, ARM64, targetSdk 36, userLandscape |
-| Quellcommit | [`6cea6cd`](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) |
-| APK-Snapshot | [`6ef588b`](https://github.com/sayac007/EnergyBlast/commit/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18) |
-| Gebaut | 29.10.2026, 09:19 MEZ, sauberer Quellstand |
-| Signatur | v2 geprüft, identisches Entwicklungszertifikat wie 0.9 |
-| Physischer Geräte-/Hörtest | **OFFEN** |
+| Quellcommit | [`f8e63f6`](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) |
+| APK-Snapshot | [`284a94a`](https://github.com/sayac007/EnergyBlast/commit/284a94a0659ca9c0fd453977343053274bf214df) |
+| Gebaut | 29.10.2026, 11:15 MEZ, sauberer Quellstand |
+| Signatur | v2 geprüft, identisches Entwicklungszertifikat wie 0.10 |
+| Physischer Geräte-/Mehrfingertest | **OFFEN** |
 
 ```text
-SHA-256 2e63aff021048d617febf5415388af6da4237979e54470a39e088bb221c90623
+SHA-256 d53d05d51aced01aa0407866cd48ca3ea7f107bdc9e6e60e5ba9a3739e345308
 ```
 
 [Maschinenlesbare Metadaten](defold-verification.json) enthalten Buildzeit, Größe,
 Hash, Quellcommit, `source_dirty:false`, Zertifikat und ausgeführte APK-Prüfungen.
 
-## Installation und Update
+## Installation und Bedienung
 
 Als Update über die vorhandene Defold-App installieren. **Nicht vorher deinstallieren**,
 wenn Sterne, Käufe, Hinweise und Figur bleiben sollen. Android kann die Freigabe
 der Downloadquelle verlangen. Debug-Testfassung, keine Release-/Play-Signatur.
 
-Gesundheit, Erholung und Zikurrat stehen kostenlos bereit. Wiederholte Sofortheilung
-kostet 40 Sterne; bei voller Energie wird nichts abgebucht. Vier Waffen- und vier
-Rüstungsstufen, zwei Tarnstufen und ein Erholungskern ergänzen den Shop. Zum Schießen
-verlässt man den Zikurrat. Frühere Tempokäufe bleiben erhalten; neue gibt es nicht.
-Sechs Missionen bieten bis 4.350 Sterne, mit alten 0.1-Erfolgen bis 4.675.
-[Bedienung](../README.md).
+**Zoom:** Plus/Minus unten links oder zwei Finger auf freiem Spielfeld, 75–175%.
+Welt und Figuren werden zusammen größer, HUD bleibt konstant. Die Größe bleibt
+lokal gespeichert. Ein erster bereits ausgelöster Gegnertipp kann vor einem
+später hinzukommenden zweiten Finger einen Schuss erzeugt haben.
+
+**Schatz:** HINWEIS aktiviert die goldene Führung; bei Annäherung wird die Truhe
+größer/leuchtender. Goldzeichen antippen läuft zum Suchgebiet bzw. zur Truhe.
+Aufnahme erfordert echte Nähe und freie Sicht. Bereits entdeckte/gesammelte Funde
+kosten keine zusätzlichen Hinweise. [Gesamte Bedienung](../README.md).
 
 ## Tatsächliche Prüfung
 
-**629 native Prüfungen, 14 gemeinsame Gruppen**, bestehende direkte Gesten,
-Menüs/Käufe/Fallen/Missionsabläufe, getrennte Speicherneustarts, zwei Fensterformate,
-Audioausgabe, native Verdeckung und reale Geometrie bestanden. Der neue GUI-Test
-kauft Heilung und Stufen tatsächlich per XTest, prüft die Doppelabbuchungssperre und
-geht in den Schutzort. Gespeicherte Aufnahme: **75 injizierte, 72 wirklich absorbierte
-Geschosse, 0 Schaden, 20/20 Energie**. Drei neue Ansagen frisch ASR-exakt erkannt;
-27 alte unverändert, alle 30 technisch geprüft. Neue Musik: 80 s, Stereo und echte
-Abschnittsdynamik. [Zentrale Nachweise/Grenzen](../docs/QUALITY.md).
+**820 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Neue native
+Zoom-/Touchpaket-/Schatzprüfungen; tatsächliche Zoomtasten verändern gerenderte
+Weltpixel und Figurengröße. Alle sechs Truhen wurden mit echten Eingaben für je
+75 Sterne ohne Schüsse gesammelt. Native Schimmerausgabe: 2.937 veränderte Pixel.
+Bisherige Gesten, Menüs/Käufe/Fallen, Speicher, zwei Fensterformate, Audio und
+Geschossverdeckung bleiben grün. 32 Sprachdateien technisch geprüft; zwei neue
+Ansagen frisch unabhängig exakt erkannt. [Nachweise/Grenzen](../docs/QUALITY.md).
 
-APK erzeugt; Paket/Version/APIs, Querformatmanifest, v2-Signatur, Zertifikatsgleichheit,
-keine Berechtigungen, Backup aus, ZIP-CRC, keine Schlüsseldateien, ZIP-Ausrichtung
-und vollständiger Buildprojekt-Abzug (810 Dateien) bestanden. Ausrichtung allein
-ist keine Play-/16-KB-Zertifizierung. Physische Android-Abnahme, langfristige
-Balance und menschliche Musik-/Klangabnahme bleiben offen; keine neue grüne CI.
+APK: Paket/Version/APIs, Querformatmanifest, Berechtigungsfreiheit, Backup aus,
+v2-Signatur/Zertifikatsgleichheit, ZIP-CRC, fehlende Schlüsseldateien, ZIP-Ausrichtung
+und vollständiger Projektabzug mit 828 Dateien bestanden. Android-Shaderexport
+mit beibehaltenem älteren GLES-Pfad bestanden. ZIP-Ausrichtung allein ist keine
+Play-/16-KB-Zertifizierung. Echte Geräte-/Mehrfinger-/Hörabnahme bleibt offen.
+Keine neue grüne CI oder Store-Veröffentlichung behauptet.
+
+## Vorherige 0.10 dauerhaft erhalten
+
+[Defold 0.10 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk)
+— 64.033.978 Bytes, [damaliger Stand](../docs/MILESTONE_09.md).
 
 ## Vorherige 0.9 dauerhaft erhalten
 
@@ -94,7 +102,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.10 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.11 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

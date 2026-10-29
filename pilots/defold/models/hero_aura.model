@@ -1,0 +1,2 @@
+mesh: "/models/glow.gltf"
+materials { name: "Mint light" material: "/models/hero_aura-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

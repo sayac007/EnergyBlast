@@ -1,2 +1,2 @@
 mesh: "/models/illustrated_hero.gltf"
-materials { name: "Original illustrated illustrated_hero" material: "/models/illustrated_hero-0.material" textures { sampler: "tex0" texture: "/models/hero-walk.png" } }
+materials { name: "Original polished illustrated_hero" material: "/models/illustrated_hero-0.material" textures { sampler: "tex0" texture: "/models/hero-hd-walk.png" } }

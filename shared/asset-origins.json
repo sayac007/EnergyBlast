@@ -2151,6 +2151,106 @@
       "path": "shared/assets/defold10/sanctuary.gltf",
       "sha256": "b2e9d4266f5e4efff7766094af7cc9344f2bc0a941b0e96dff89cd1cb6907162",
       "origin": "Original passable sanctuary platform and luminous stepped beacon, tools/make_sanctuary.py; no external assets"
+    },
+    {
+      "path": "shared/assets/defold11/PROVENANCE.json",
+      "sha256": "3422b3fedf96532834be4020f9014a6f842d33ad5b4de4995654f891145e24aa",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/dragon-hd-original.png",
+      "sha256": "2589f6b9565c7c5d1a3a4d73287c3d26152f7c71c7de3020059ed81a8c095d58",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/dragon-hd-polish-original.png",
+      "sha256": "bd96e99c49bfde98de8bb90a2169684287dd6aea5aab6f89cb1b863430fece5a",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/dragon-hd-portrait.png",
+      "sha256": "a12100b97d776bb972480d3a6e0e82d1da27b0394658930dd758f8f19319e7f7",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/dragon-hd-walk.png",
+      "sha256": "4fc7db005d0f455a49aaa474efc51a8b1e427aaa36ee1886fc41ebf766438e15",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/fox-hd-original.png",
+      "sha256": "6d4163cac300e6ab34548427b3d2b7a040d38bd8e246cdebbb1c13fff59cd634",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/fox-hd-polish-original.png",
+      "sha256": "3bec926a5d096559f44d188d1252c5159e506f7b889bee2d357be99497f6f3b4",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/fox-hd-portrait.png",
+      "sha256": "eed14c089d5e4816f2994bca170638345524f152c19b094f1b5265820083c6ff",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/fox-hd-walk.png",
+      "sha256": "d3eb9cbefd10730cf613308029f4e37e0f6e2c565af146191b24307dc00557a9",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/hero-hd-original.png",
+      "sha256": "06dcb3b37d5bc031498f1587ebd892394f7b1856a78e2efa7b885146f8594fb2",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/hero-hd-polish-original.png",
+      "sha256": "a4098ef5d25e14281c1c5f36c578e3ba8ec60d97c9c4fd817d908c7da76df61a",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/hero-hd-portrait.png",
+      "sha256": "28a111117d74f92f9c67daa35ea9b4e2aecf652a0e9dc84c412d53f9053b2399",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/hero-hd-walk.png",
+      "sha256": "be2f268e7d14a1a0d646154db67b79882acabd78f7b47fe31668e0607a870fb1",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_dragon.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_dragon.gltf",
+      "sha256": "76ee3ca6ce8724d06c3f81c7f101ce663851f7ab3b8df6c9948ffc8b90f5de83",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_fox.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_fox.gltf",
+      "sha256": "8cd1048a707dcb9335b5130eb55bd2abacadd759809d92db335ba95d29ba7916",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_hero.bin",
+      "sha256": "d38ef2fae31f552b1f8e8ff1359d83f655f49b1e122fd1953d463b51237d6b61",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/illustrated_hero.gltf",
+      "sha256": "5be2a37f73c3e76ca55d22b6d69a0e4a4bdcf4e0b5d28e4fe5d872f172e1cac7",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
+    },
+    {
+      "path": "shared/assets/defold11/models.json",
+      "sha256": "f297e6d612fb178dbb142a3172cc4852c024d557d1c89869607ec0004e8c1b7d",
+      "origin": "Original OpenAI image-generation character redraw from our own existing designs, 2026-10-29; technical HD atlas import tools/import_defold11_art.py; PROVENANCE.json"
     }
   ],
   "audio": "shared/audio/de/manifest.json",

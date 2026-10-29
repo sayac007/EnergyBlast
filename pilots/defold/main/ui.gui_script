@@ -11,7 +11,7 @@ local function box(self,x,y,w,h,c)
 end
 local function text(self,x,y,s,c,scale,max_width)
  local n=gui.new_text_node(vmath.vector3(x,y,0),s);gui.set_font(n,'ui');gui.set_color(n,color(c or'ffffff'))
- local scale=scale or 1;local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),s);if max_width and metrics.width*scale>max_width then scale=max_width/metrics.width end
+ local scale=(scale or 1)*(self.world_parent and(self.world_zoom or 1)or 1);if max_width and self.world_parent then max_width=max_width*(self.world_zoom or 1)end;local metrics=resource.get_text_metrics(gui.get_font_resource('ui'),s);if max_width and metrics.width*scale>max_width then scale=max_width/metrics.width end
  gui.set_scale(n,vmath.vector3(scale));return track(self,n)
 end
 local function picture(self,x,y,w,h,name,atlas,sliced)
@@ -71,6 +71,17 @@ local function ground_ring(self,g,p,r,c,width)
 end
 local function field_guide(self,g,state)
  if state.goal and not g.trap_ui then
+  if state.goal_kind=='treasure'and g.treasure_state then
+   local t=g:treasure_state();local target=state.goal
+   local tx,ty=g.project(g,target,.35);local x=clamp(tx,Layout.left+65,Layout.right-65);local y=clamp(ty,Layout.bottom+65,Layout.top-65)
+   local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local size=38+t.proximity*18;local pulse=1+math.sin(g.clock*4)*.06
+   circle(self,x,y,size*pulse,'443414');ring(self,x,y,size*pulse,'ffda64',4);icon(self,x,y,'treasure',size*1.4)
+   if off then local dx,dy=tx-x,ty-y;local d=math.sqrt(dx*dx+dy*dy);if d>0 then line(self,x+dx/d*size,y+dy/d*size,x+dx/d*(size+15),y+dy/d*(size+15),'ffe394',5)end end
+   text(self,clamp(x,Layout.left+176,Layout.right-176),clamp(y-size-15,Layout.bottom+23,Layout.top-23),t.discovered and(t.occluded and'HINTER DER DECKUNG'or'ZUR TRUHE')or'SUCHGEBIET','ffe99a',.62,205)
+   local n=box(self,x,y,size*2,size*2,'ffffff');gui.set_color(n,vmath.vector4(1,1,1,0))
+   self.buttons[#self.buttons+1]={node=n,action='treasure_walk',world=true,rect={x,y,size*2,size*2}}
+   return
+  end
   local tx,ty=g.project(g,state.goal,.15);local x=clamp(tx,Layout.left+48,Layout.right-48);local y=clamp(ty,Layout.bottom+44,Layout.top-44)
   local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local guide_color=state.goal_kind=='exit'and'78ffb7'or state.goal_kind=='bonus'and'c5a0ff'or'ffe5a0'
   local symbol=state.goal_kind=='treasure'and'treasure'or state.goal_kind=='exit'and'dash'or state.goal_kind=='drone'and'heart'or state.goal_kind=='sequence'and'radio'or state.goal_kind=='bonus'and'star'or'aim'
@@ -132,7 +143,7 @@ local function field_traps(self,g)
 end
 local function page(self,g,title)
  -- The background is a separate earlier render pass; the animated 3D hero stays visible.
- text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'SCHUTZ & AUSRUESTUNG  ·  0.10','a3e7df',.61)
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'ZOOM & SCHATZSUCHE  ·  0.11','a3e7df',.61)
  glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
  icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
  text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
@@ -246,6 +257,7 @@ end
 function init(self)self.nodes={};self.buttons={};self.ui_pointers={};self.counter=0;self.trap_test=sys.get_config_string('project.trap_test','0')=='1';self.flow_test=sys.get_config_string('project.flow_ui_test','0')=='1';msg.post('.','acquire_input_focus')end
 function update(self,dt)
  local g=_G.energyblast;if not g then return end
+ self.world_zoom=math.max(1,math.min(1.6,g.zoom or 1))
  if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
  if g.dialog then
   local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id])},'|')
@@ -286,7 +298,9 @@ function update(self,dt)
   text(self,r[1],r[2]-36,name=='fire'and'FEUER'or(g.dash_cooldown>0 and string.format('%.1f',g.dash_cooldown)or'DASH'),'ffffff',.69)
   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
- text(self,551,57,g.status,'d2e9ec',.64,780);text(self,551,27,'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.45,790)
+ text(self,610,57,g.status,'d2e9ec',.64,620);text(self,610,27,'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.43,620)
+ button(self,174,44,56,56,'-','zoom_out','blue');button(self,240,44,56,56,'+','zoom_in','blue')
+ text(self,207,83,'ZOOM '..math.floor((g.zoom or 1)*100+.5)..'%','c8eaff',.34,137)
  if g.m.sanctuary and not g.solved then button(self,72,136,120,54,'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
  if g.solved then button(self,72,124,120,62,g:next_index()and'WEITER'or'MISSIONEN',g:next_index()and'next'or'menu','green')end
  text(self,72,45,'? '..g:credits(),'ffe590',.73)
@@ -294,6 +308,7 @@ function update(self,dt)
  local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
  for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
  if g.m.sanctuary then local sx,sy=mini(g.m.sanctuary.position);ring(self,sx,sy,5,'8fffc7',2)end
+ local treasure=g:treasure_state();if treasure.available and(treasure.discovered or treasure.tracking)then local tx,ty=mini(treasure.discovered and treasure.position or treasure.hint);circle(self,tx,ty,4,'ffd66c')end
  local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
  if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
   for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
@@ -340,10 +355,12 @@ function update(self,dt)
  if g.m.heal and not g.heal_used then local x,y=g.project(g,g.m.heal,.4);circle(self,x,y,16,'255a52');text(self,x,y,'+','9affe0',1)end
  if g.drone then local x,y=g.project(g,g.drone.p,1.2);text(self,x,y,g.drone.moving and'»'or'...','fff4b0',.9)end
  if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);ring(self,x,y,20+math.sin(g.clock*3)*2,'ffdf58',3)end
- if g.clue_time>0 then local p=g:level()>1 and g.m.secret.position or g.m.secret.hint_landmark;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
+ if g.clue_time>0 then local treasure=g:treasure_state();local p=treasure.discovered and treasure.position or treasure.hint;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
  if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
  field_guide(self,g,state)
+ local world_zoom=self.world_zoom;self.world_zoom=1
  field_traps(self,g)
+ self.world_zoom=world_zoom
  self.world_parent=nil
  if g.ui_test or g.trap_test or g.flow_ui_test then
   for _,b in ipairs(self.buttons)do local r=b.rect
@@ -372,7 +389,9 @@ local function handle(self,a)
   local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end;if g.flow_ui_test then print('DEFOLD FLOW ACTION '..action)end
   if action~='fire'and action~='dash'and action~='hint'and action~='trap'then g.cancel_controls()end
   self.ui_pointers[key]=action
-  if action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
+  if action=='zoom_in'or action=='zoom_out'then g.zoom_control:step(action=='zoom_in'and 1 or-1);if not g.saved.zoom_help_heard then g.saved.zoom_help_heard=true;g.changed();g.say('defold_zoom_help')end
+  elseif action=='treasure_walk'then local t=g:treasure_state();g:navigate(t.discovered and t.position or t.hint);g.status=t.discovered and'ZUR TRUHE - FOLGE DEM GOLDENEN ZEICHEN'or'ZUM GOLDENEN SUCHGEBIET'
+  elseif action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
   elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
   elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11));if action:sub(11)=='dragon'then g.say('flow_dragon')end
   elseif action:sub(1,9)=='shop_tab:'then self.shop_category=action:sub(10);g.shop_status=nil
@@ -402,6 +421,7 @@ local function handle(self,a)
  if not g.dialog and Layout.field(a.x,a.y)then g.input(a)end;return true
 end
 function on_input(self,id,a)
- if id==hash('multitouch')then for _,t in ipairs(a.touch or{})do handle(self,t)end;return true elseif id==hash('touch')then return handle(self,a)elseif id==hash('back')and a.pressed then _G.energyblast.cancel_controls();_G.energyblast.paused=true;_G.energyblast.dialog='menu';return true end
+ local g=_G.energyblast;if not g or not g.zoom_control then return false end
+ if id==hash('multitouch')then if _G.energyblast.zoom_control:input(a.touch or{})then return true end;for _,t in ipairs(a.touch or{})do handle(self,t)end;return true elseif id==hash('touch')then if _G.energyblast.zoom_control:blocks_mouse()then return true end;return handle(self,a)elseif id==hash('back')and a.pressed then _G.energyblast.cancel_controls();_G.energyblast.paused=true;_G.energyblast.dialog='menu';return true end
 end
 function on_message(self,id)if id==hash('cancel_controls')then self.ui_pointers={}end end

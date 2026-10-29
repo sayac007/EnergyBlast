@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.10.0
+# Bauen und prüfen — Defold 0.11.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
@@ -54,9 +54,15 @@ cards/floor/lobby/explosion/props zu diesen Dateien wiederholen:
 `python3 tools/import_defold07_art.py --sources /tmp/sources.json`.
 Das ist eine Atlas-Aufbereitung, keine Zusicherung identischer neuer KI-Erzeugung.
 Weltgeometrie separat erneuern: Blender-Befehl mit `-- --world-only` ergänzen.
-Die aktuelle 2,5D-Darstellung verwendet Front-/Rückansicht mit jeweils vier
+Die aktuelle HD-2,5D-Darstellung verwendet Front-/Rückansicht mit jeweils vier
 Laufphasen und Spiegelung. Gegner haben vier Zustandsbilder. Alle sind native
 Weltmodelle mit Alpha-Ausschnitt und Tiefenprüfung; keine GUI-Projektilbilder.
+
+Aktiv sind außerdem die drei HD-Figuren unter `shared/assets/defold11`.
+`tools/import_defold11_art.py --sources /tmp/sources.json` erwartet je hero/dragon/fox
+ein Objekt mit `source` und `intermediate` als Pfade auf die versionierten Originale.
+Es isoliert die Alpha-Silhouetten und erzeugt 1536×1024-Laufatlanten ohne Vergrößern
+der generierten Laufbildpixel. Keine kreative Neuerzeugung im regulären Build nötig.
 
 Danach Herkunftshashes in `shared/asset-origins.json` aktualisieren und prüfen.
 Blender **4.3.2** wurde hier verwendet. Keine Bilder-/Modell-/Musikdownloads nötig.
@@ -69,8 +75,8 @@ python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** vierzehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 59 Sprach-
+- **check_shared:** fünfzehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
+  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 61 Sprach-
   aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
   Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
 - **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
@@ -81,10 +87,12 @@ python3 tools/check_defold.py
   Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
   am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
   UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
+- `check_defold_polish_ui.py` prüft echte Zoomtasten, geänderte Weltpixel/Figurengröße sowie echte Hinweise und Sammlung aller sechs Schätze.
+- `check_defold_hero_glow.py` prüft den tatsächlichen Figurenschimmer mit einem positiven Pixelvergleich an/aus.
 - `check_defold_resilience_ui.py` prüft tatsächliche Heilung ohne Doppelabbuchung, Waffen-/Rüstungsstufen, alle drei Shopkategorien sowie den echten Weg in den Schutzort mit gezählten Geschossabsorptionen und Erholung.
 - `check_defold_direct_touch.py` prüft fünf neue echte Gesten, ausdrücklich vor dem Loslassen. `check_defold_energy.py` vergleicht tatsächliche Pixel mit Schild an/aus.
 - `check_defold_flow_ui.py` prüft zusätzlich drei reale GUI-Abläufe für Heldenwahl/Käufe, Weiter trotz offenem Schatz und freiwillige Suche mit anschließendem Weiter.
-- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena.
+- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena, zusätzlich bei 175% Zoom.
 - `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
   WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
   Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
@@ -97,13 +105,13 @@ python3 tools/check_defold.py
 Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast10-images
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast11-images
 ```
 
 Bewegungs-/Schusssequenz mit tatsächlichen XTest-Eingaben aufnehmen:
 
 ```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast10-motion
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast11-motion
 ```
 
 Das schreibt echte Laufzeitbilder/GIF außerhalb des Repositories, keine
@@ -122,7 +130,7 @@ python3 tools/check_gdevelop_combat.py
 
 GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
 Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.10 werden diese unveränderten Apps nicht erneut gebaut.
+erhalten. Für 0.11 werden diese unveränderten Apps nicht erneut gebaut.
 
 ## Bedienansage und Musik
 
@@ -152,10 +160,10 @@ Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold10-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold11-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.10.0 / Code 11**,
+Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.11.0 / Code 12**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
 für Entwicklung angelegte Schlüssel außerhalb des Repositories:
 `<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.
@@ -164,7 +172,7 @@ Die temporäre bekannte Debug-Passwortdatei wird nach dem Export gelöscht.
 Ausgabe: APK, Build-/Signatur-/Manifestauszüge und `verification.json` mit Quell-
 commit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur und
 ZIP-Ausrichtung. Zusätzlich vor Veröffentlichung: ZIP-CRC, keine Schlüsseldateien,
-Zertifikatsgleichheit mit der vorherigen 0.9 und Hash der veröffentlichten Download-Datei prüfen.
+Zertifikatsgleichheit mit der vorherigen 0.10 und Hash der veröffentlichten Download-Datei prüfen.
 
 Abschlussexport vom sauberen Quellcommit, anschließend APK/Metadaten separat
 versionieren. Das ist ein nachvollziehbarer Bauweg, keine Zusicherung bitidentischer

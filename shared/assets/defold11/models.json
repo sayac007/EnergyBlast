@@ -1,0 +1,20 @@
+{
+  "illustrated_hero": {
+    "texture": "hero-hd-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_dragon": {
+    "texture": "dragon-hd-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  },
+  "illustrated_fox": {
+    "texture": "fox-hd-walk.png",
+    "tag": "billboard",
+    "columns": 4,
+    "rows": 2
+  }
+}

@@ -1,0 +1,658 @@
+{
+  "created": "2026-10-29",
+  "generator": "OpenAI image generation",
+  "origin": "New polished edits of our own original 0.7 EnergyBlast characters; no external game artwork input",
+  "runtime_import": "tools/import_defold11_art.py",
+  "animation": "Eight generated walk keyframes, four front and four rear; native transformations and rim shaders supply additional continuous motion, not skeletal 3D.",
+  "resolution": "1536x1024 runtime atlases,384x512 per frame, twice the pixel count of the previous1024x768 atlases. Runtime walk-atlas import never upscales the generated sprite pixels; portraits are fitted separately to the established512x640 UI canvas.",
+  "sheets": [
+    {
+      "id": "hero",
+      "path": "hero-hd-original.png",
+      "sha256": "06dcb3b37d5bc031498f1587ebd892394f7b1856a78e2efa7b885146f8594fb2",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "intermediate": {
+        "path": "hero-hd-polish-original.png",
+        "sha256": "a4098ef5d25e14281c1c5f36c578e3ba8ec60d97c9c4fd817d908c7da76df61a"
+      },
+      "original_parent": {
+        "path": "shared/assets/defold07/hero-original.png",
+        "sha256": "9e047d780ae097da5d1ff4fef2afe0355bb9d3954f8cbb47d648a6e146178afc"
+      },
+      "runtime": {
+        "path": "hero-hd-walk.png",
+        "sha256": "be2f268e7d14a1a0d646154db67b79882acabd78f7b47fe31668e0607a870fb1",
+        "size": [
+          1536,
+          1024
+        ],
+        "cell": [
+          384,
+          512
+        ],
+        "scale_from_generated_pixels": 0.9608938547486033,
+        "frames": [
+          {
+            "source_crop": [
+              0,
+              0,
+              453,
+              512
+            ],
+            "silhouette_bbox": [
+              42,
+              20,
+              349,
+              512
+            ],
+            "source_subject_pixels": 74730,
+            "runtime_size": [
+              295,
+              473
+            ],
+            "runtime_offset": [
+              44,
+              23
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              0,
+              837,
+              512
+            ],
+            "silhouette_bbox": [
+              107,
+              21,
+              415,
+              511
+            ],
+            "source_subject_pixels": 74580,
+            "runtime_size": [
+              296,
+              471
+            ],
+            "runtime_offset": [
+              44,
+              25
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              0,
+              1221,
+              512
+            ],
+            "silhouette_bbox": [
+              83,
+              22,
+              422,
+              512
+            ],
+            "source_subject_pixels": 76051,
+            "runtime_size": [
+              326,
+              471
+            ],
+            "runtime_offset": [
+              29,
+              25
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              0,
+              1536,
+              512
+            ],
+            "silhouette_bbox": [
+              99,
+              18,
+              417,
+              511
+            ],
+            "source_subject_pixels": 75110,
+            "runtime_size": [
+              306,
+              474
+            ],
+            "runtime_offset": [
+              39,
+              22
+            ]
+          },
+          {
+            "source_crop": [
+              0,
+              512,
+              453,
+              1024
+            ],
+            "silhouette_bbox": [
+              48,
+              14,
+              398,
+              485
+            ],
+            "source_subject_pixels": 73915,
+            "runtime_size": [
+              336,
+              453
+            ],
+            "runtime_offset": [
+              24,
+              43
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              512,
+              837,
+              1024
+            ],
+            "silhouette_bbox": [
+              111,
+              15,
+              469,
+              477
+            ],
+            "source_subject_pixels": 73659,
+            "runtime_size": [
+              344,
+              444
+            ],
+            "runtime_offset": [
+              20,
+              52
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              512,
+              1221,
+              1024
+            ],
+            "silhouette_bbox": [
+              106,
+              16,
+              457,
+              485
+            ],
+            "source_subject_pixels": 74991,
+            "runtime_size": [
+              337,
+              451
+            ],
+            "runtime_offset": [
+              23,
+              45
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              512,
+              1536,
+              1024
+            ],
+            "silhouette_bbox": [
+              92,
+              15,
+              446,
+              480
+            ],
+            "source_subject_pixels": 73026,
+            "runtime_size": [
+              340,
+              447
+            ],
+            "runtime_offset": [
+              22,
+              49
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "dragon",
+      "path": "dragon-hd-original.png",
+      "sha256": "2589f6b9565c7c5d1a3a4d73287c3d26152f7c71c7de3020059ed81a8c095d58",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "intermediate": {
+        "path": "dragon-hd-polish-original.png",
+        "sha256": "bd96e99c49bfde98de8bb90a2169684287dd6aea5aab6f89cb1b863430fece5a"
+      },
+      "original_parent": {
+        "path": "shared/assets/defold07/dragon-original.png",
+        "sha256": "a8928091d28e73824beb49e0b5f58f44562fefc05d7313f66dfab19199034274"
+      },
+      "runtime": {
+        "path": "dragon-hd-walk.png",
+        "sha256": "4fc7db005d0f455a49aaa474efc51a8b1e427aaa36ee1886fc41ebf766438e15",
+        "size": [
+          1536,
+          1024
+        ],
+        "cell": [
+          384,
+          512
+        ],
+        "scale_from_generated_pixels": 0.9272237196765498,
+        "frames": [
+          {
+            "source_crop": [
+              0,
+              0,
+              453,
+              512
+            ],
+            "silhouette_bbox": [
+              21,
+              61,
+              382,
+              480
+            ],
+            "source_subject_pixels": 76503,
+            "runtime_size": [
+              335,
+              389
+            ],
+            "runtime_offset": [
+              24,
+              107
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              0,
+              837,
+              512
+            ],
+            "silhouette_bbox": [
+              85,
+              61,
+              448,
+              475
+            ],
+            "source_subject_pixels": 73852,
+            "runtime_size": [
+              337,
+              384
+            ],
+            "runtime_offset": [
+              23,
+              112
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              0,
+              1221,
+              512
+            ],
+            "silhouette_bbox": [
+              79,
+              61,
+              440,
+              487
+            ],
+            "source_subject_pixels": 75969,
+            "runtime_size": [
+              335,
+              395
+            ],
+            "runtime_offset": [
+              24,
+              101
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              0,
+              1536,
+              512
+            ],
+            "silhouette_bbox": [
+              76,
+              60,
+              430,
+              479
+            ],
+            "source_subject_pixels": 74396,
+            "runtime_size": [
+              328,
+              389
+            ],
+            "runtime_offset": [
+              28,
+              107
+            ]
+          },
+          {
+            "source_crop": [
+              0,
+              512,
+              453,
+              1024
+            ],
+            "silhouette_bbox": [
+              23,
+              2,
+              394,
+              441
+            ],
+            "source_subject_pixels": 77041,
+            "runtime_size": [
+              344,
+              407
+            ],
+            "runtime_offset": [
+              20,
+              89
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              512,
+              837,
+              1024
+            ],
+            "silhouette_bbox": [
+              97,
+              2,
+              458,
+              438
+            ],
+            "source_subject_pixels": 70940,
+            "runtime_size": [
+              335,
+              404
+            ],
+            "runtime_offset": [
+              24,
+              92
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              512,
+              1221,
+              1024
+            ],
+            "silhouette_bbox": [
+              92,
+              3,
+              458,
+              446
+            ],
+            "source_subject_pixels": 77059,
+            "runtime_size": [
+              339,
+              411
+            ],
+            "runtime_offset": [
+              22,
+              85
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              512,
+              1536,
+              1024
+            ],
+            "silhouette_bbox": [
+              87,
+              2,
+              442,
+              427
+            ],
+            "source_subject_pixels": 70182,
+            "runtime_size": [
+              329,
+              394
+            ],
+            "runtime_offset": [
+              27,
+              102
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "fox",
+      "path": "fox-hd-original.png",
+      "sha256": "6d4163cac300e6ab34548427b3d2b7a040d38bd8e246cdebbb1c13fff59cd634",
+      "source_size": [
+        1536,
+        1024
+      ],
+      "intermediate": {
+        "path": "fox-hd-polish-original.png",
+        "sha256": "3bec926a5d096559f44d188d1252c5159e506f7b889bee2d357be99497f6f3b4"
+      },
+      "original_parent": {
+        "path": "shared/assets/defold07/fox-original.png",
+        "sha256": "fa9007689029b5268ce9177580336d42d2ce57e4f27e364a852df7bd4041ebb2"
+      },
+      "runtime": {
+        "path": "fox-hd-walk.png",
+        "sha256": "d3eb9cbefd10730cf613308029f4e37e0f6e2c565af146191b24307dc00557a9",
+        "size": [
+          1536,
+          1024
+        ],
+        "cell": [
+          384,
+          512
+        ],
+        "scale_from_generated_pixels": 1,
+        "frames": [
+          {
+            "source_crop": [
+              0,
+              0,
+              453,
+              512
+            ],
+            "silhouette_bbox": [
+              45,
+              39,
+              359,
+              501
+            ],
+            "source_subject_pixels": 68683,
+            "runtime_size": [
+              314,
+              462
+            ],
+            "runtime_offset": [
+              35,
+              34
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              0,
+              837,
+              512
+            ],
+            "silhouette_bbox": [
+              113,
+              39,
+              415,
+              501
+            ],
+            "source_subject_pixels": 66806,
+            "runtime_size": [
+              302,
+              462
+            ],
+            "runtime_offset": [
+              41,
+              34
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              0,
+              1221,
+              512
+            ],
+            "silhouette_bbox": [
+              97,
+              37,
+              411,
+              502
+            ],
+            "source_subject_pixels": 70456,
+            "runtime_size": [
+              314,
+              465
+            ],
+            "runtime_offset": [
+              35,
+              31
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              0,
+              1536,
+              512
+            ],
+            "silhouette_bbox": [
+              88,
+              43,
+              392,
+              503
+            ],
+            "source_subject_pixels": 66367,
+            "runtime_size": [
+              304,
+              460
+            ],
+            "runtime_offset": [
+              40,
+              36
+            ]
+          },
+          {
+            "source_crop": [
+              0,
+              512,
+              453,
+              1024
+            ],
+            "silhouette_bbox": [
+              44,
+              0,
+              363,
+              464
+            ],
+            "source_subject_pixels": 71941,
+            "runtime_size": [
+              319,
+              464
+            ],
+            "runtime_offset": [
+              32,
+              32
+            ]
+          },
+          {
+            "source_crop": [
+              315,
+              512,
+              837,
+              1024
+            ],
+            "silhouette_bbox": [
+              111,
+              2,
+              428,
+              464
+            ],
+            "source_subject_pixels": 69592,
+            "runtime_size": [
+              317,
+              462
+            ],
+            "runtime_offset": [
+              33,
+              34
+            ]
+          },
+          {
+            "source_crop": [
+              699,
+              512,
+              1221,
+              1024
+            ],
+            "silhouette_bbox": [
+              99,
+              2,
+              418,
+              465
+            ],
+            "source_subject_pixels": 71651,
+            "runtime_size": [
+              319,
+              463
+            ],
+            "runtime_offset": [
+              32,
+              33
+            ]
+          },
+          {
+            "source_crop": [
+              1083,
+              512,
+              1536,
+              1024
+            ],
+            "silhouette_bbox": [
+              82,
+              1,
+              397,
+              465
+            ],
+            "source_subject_pixels": 71709,
+            "runtime_size": [
+              315,
+              464
+            ],
+            "runtime_offset": [
+              34,
+              32
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -194,3 +194,19 @@ repository changes. Keep historical instructions below as a decision log.
 - 0.10.0/code11, same package/debug certificate. Other engines remain frozen.
   Preserve actual gesture/save/audio/depth tests and new sanctuary/shop UI test.
   No PR, game merge, Actions, Release/Play or other-repository changes.
+
+## Zoom and visible treasure 0.11 — latest operator task, 29 October 2026
+
+- Work on feat/zoom-treasure-polish; preserve main's integrated 0.10 and all history.
+  No automatic game merge, PR, Release/Play publication or other-repository writes.
+- Zoom the whole world from75–175%, with shared camera/unprojection/hit regions;
+  fixed HUD controls, larger world text, persistent scale and focal-area anchoring.
+  Pinch cancels ordinary input, including its remaining-finger tail. Keep immediate
+  enemy presses; a shot emitted before a second finger exists cannot be undone.
+- Current treasure guidance must link speech/compass/search area, use reachable
+  landmarks and persistent discovery, enlarge/glow on approach, and require actual
+  reachable LOS pickup. Never spend another clue for a collected/discovered chest.
+- Current art adds shared/assets/defold11 HD redraws, native rim shimmer and six
+  bounded orbit lights. Keep old source atlases and immutable provenance intact.
+- 0.11.0/code12, same package/debug certificate. Real native UI tests must find all
+  six treasures and compare rendered zoom/scaled actors; physical pinch stays open.

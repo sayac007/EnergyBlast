@@ -1,4 +1,4 @@
-# EnergyBlast — Defold 0.10
+# EnergyBlast — Defold 0.11
 
 > **Neuer Teststand 0.11 — Zoom, sichtbare Schätze und HD-Figuren:**
 > [Android-APK herunterladen – 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk).
@@ -11,21 +11,21 @@
 
 Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
 sechs Missionen, reflektierten Schüssen,
-integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Mehr Gesundheit,
-ein geschützter Zikurrat, ein größerer Stufenshop und neue Science-Fiction-Musik.**
+integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Zoom, auffindbare
+Schätze und neu gezeichnete HD-Figuren mit animiertem Schimmer.**
 Defold bleibt der Schwerpunkt.
 
-**[Android 0.10 herunterladen — 64,0 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads/energyblast-defold-debug.apk)** ·
+**[Android 0.11 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk)** ·
 [Update und geprüfte Metadaten](downloads/README.md) ·
-[Änderungen und tatsächliche Tests](docs/MILESTONE_09.md) ·
+[Änderungen und tatsächliche Tests](docs/MILESTONE_10.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
 ## Aktueller Stand
 
-**Version 0.10.0 / Android-Code 11, Stand 29.10.2026.** Der vollständige Quellcode,
-die Spielinhalte, Originalassets, Buildskripte, Tests und die geprüfte APK liegen
-jetzt auf `main`. Der frühere Arbeitsbranch und alle historischen Commits bleiben
-erhalten. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
+**Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Die neue Iteration liegt
+auf `feat/zoom-treasure-polish`; der integrierte 0.10-Stand bleibt auf `main`.
+Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
+nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 
 | Bestandteil | Aktuell enthalten |
 |---|---|
@@ -36,7 +36,25 @@ erhalten. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 | Ton | Deutsche synthetische Ansagen, eigene Science-Fiction-Musik und Effekte; stummschaltbar |
 | Engine | Defold 1.14.0 aktiv; Godot 0.2 und GDevelop 0.3 als unveränderte Vergleichsstände erhalten |
 
-### Was 0.10 ergänzt
+### Was 0.11 verbessert
+
+- **Ganzes Spielfeld zoomen:** Plus/Minus oder zwei Finger auf freiem Boden,
+  75–175 Prozent. Welt, Figuren und Weltbeschriftungen werden größer; das HUD
+  bleibt gleich groß. Die gewählte Größe bleibt gespeichert, der betrachtete
+  Bereich beim Stillstehen im Blick.
+- **Hinweise führen zum Schatz:** Drei früher in Deckungen liegende Suchpunkte
+  sind korrigiert. „Hinweis“ schaltet den goldenen Wegweiser auf die Schatzsuche.
+  Die neue Stimme beschreibt dieses Zeichen statt einer nicht sichtbaren blauen Kiste.
+- **Truhen erkennen:** Bei Annäherung leuchten und wachsen sie. Große Goldmarkierung,
+  Minikarte und ein antippbares Suchzeichen helfen auch hinter einer Deckung.
+  Zum Einsammeln muss die Figur tatsächlich hinlaufen; Wände bleiben wirksam.
+- **Neue HD-Figuren:** Nova, Flammi und der Fuchs haben neue Originalbilder mit
+  1536×1024 statt 1024×768 Pixeln pro Laufatlas. Farbige Schimmerkanten,
+  Lichtpartikel, Atmen, Laufschwung und Rückstoß ergänzen die acht Bildphasen.
+
+[Umsetzung und Laufzeitbilder](docs/MILESTONE_10.md).
+
+### Aus 0.10 erhalten
 
 - **15 statt 3 Energie.** Nach vier Sekunden ohne Treffer erholt sich die Figur
   um einen Punkt alle zwei Sekunden. Die Anzeige zeigt Energie und Erholung.
@@ -77,9 +95,10 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 28.10.2026 | 0.8 | Klarer Missionswechsel, sichtbare Helden/Käufe, Schatzführung, je zwei integrierte Bonusziele und höhere Belohnungen. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6b1afee89855c737358859ce4fd2f83100f53583) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/5c8e1ca956e99abd805cc29f90f9ee6620a7a5ce/downloads) · [Bericht](docs/MILESTONE_07.md) |
 | 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
+| 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
 | 29.10.2026 | 0.11 | Zoom für die ganze Welt, korrigierte Schatzführung und HD-Figuren mit nativem Schimmer. **Neue Testfassung auf separatem Branch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/1cd1be18bfb8d316454279bbb756b128d373da3c/docs/MILESTONE_10.md) |
 
-**29.10.2026 – Repository-Übernahme:** Bis 0.10 erschien auf `main` die aktuelle
+**29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.
 Auf Betreiberwunsch sind beide Historien mit einem Merge-Commit
 zusammengeführt. Alle alten Quell-/APK-Commits bleiben erreichbar; kein Squash,
@@ -100,6 +119,9 @@ ist weiterhin im Repository verfügbar.
 | Gegner ungefähr antippen | Sofort im Eingabeereignis schießen, mit großzügiger Trefferzone |
 | Gegner halten | Weiter beschießen |
 | Eigene Figur anfassen und ziehen | Während des Ziehens kollisionssicher laufen |
+| Zwei Finger auf freiem Boden auseinander/zusammen | Ganzen Bereich vergrößern/verkleinern |
+| Plus / Minus unten links | Zoom schrittweise ändern |
+| Goldmarkierung antippen | Tatsächlichen Weg zur Truhe / zum Suchgebiet laufen |
 | Loslassen | Halten/Ziehen beenden; **kein zusätzlicher Schuss** |
 
 Die kurze Bodenschwelle unterscheidet Laufen von Feuern. Beim Gegner entfällt
@@ -116,9 +138,9 @@ echte gebackene AO-Schattierung pro Arena, weiche Bodenschatten, animierte
 Energieschilde und eine nähere Kamera. Keine übernommenen Referenzspiel-Assets.
 Die Figuren bleiben ein 2,5D-Hybrid aus Original-Animationsbildern und nativer 3D-Welt.
 
-![Neue Reaktoransicht](docs/images/10-defold-prisma.png)
-![Magnetwerk](docs/images/10-defold-forge.png)
-![Echte Bewegung und Feuern während des Haltens](docs/images/10-defold-gameplay.gif)
+![Schatzhinweis und HD-Figur](docs/images/11-defold-reactor-hint.png)
+![Vergrößerte Spielansicht](docs/images/11-defold-zoom-close.png)
+![Echte Bewegung, Schimmer und Feuern](docs/images/11-defold-gameplay.gif)
 
 Native Linux/OpenGL-/XTest-Aufnahmen, keine behaupteten Handyaufnahmen.
 [Sechs Bereichsansichten und Gestenbelege aus 0.9](docs/MILESTONE_08.md),
@@ -182,26 +204,25 @@ python3 tools/check_defold.py
 
 ## Prüfungen und Grenzen
 
-**29.10.2026:** **629 native Prüfungen und 14 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
-im [zentralen Qualitätsstatus](docs/QUALITY.md). Bei der Übernahme in `main`
-wurde die vollständige Suite erneut ausgeführt. Die fünf direkten Gesten sowie
+**29.10.2026:** **820 native Prüfungen und 15 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
+im [zentralen Qualitätsstatus](docs/QUALITY.md). Die vollständige Suite wurde für 0.11 erneut ausgeführt. Die fünf direkten Gesten sowie
 Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
-Geschossverdeckung bleiben Teil der vollständigen Suite. Drei neue kurze
-Schutzort-/Shopansagen wurden unabhängig exakt erkannt, 27 andere bleiben erhalten.
+Geschossverdeckung bleiben Teil der vollständigen Suite. Zwei neue kurze Schatz-/Zoomansagen wurden unabhängig exakt erkannt,
+30 andere bleiben erhalten. Zwei-Finger-Pakete sind nativ simuliert geprüft;
+der echte Android-Mehrfingertest bleibt offen.
 
 Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
 längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
 kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
 
-Am 29.10.2026 auf ausdrücklichen Betreiberwunsch in `main` integriert: vollständiger
-Spielstand aus `feat/touch-shooter-v2`, mit erhaltener Commit-Historie. Die zuvor
-veröffentlichte 0.10-APK bleibt bytegleich; diese Übernahme erzeugt keine neue
-Spielversion. Kein GitHub-Release oder Store-Upload. Andere Repositories und
+Der 0.10-Stand wurde am 29.10.2026 mit erhaltener Commit-Historie in `main`
+integriert. Die neue 0.11-Testfassung wird separat entwickelt und veröffentlicht.
+Kein automatischer Spielmerge, GitHub-Release oder Store-Upload. Andere Repositories und
 Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
 Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.
 
 [Auftrag](docs/PROJECT_BRIEF.md), [Art Direction](docs/ART_DIRECTION.md),
 [Regeln](shared/defold04.json), [Direktsteuerung](pilots/defold/main/touch.lua),
 [Antippzonen](pilots/defold/main/hit_regions.lua),
-[neue Bildherkunft](shared/assets/defold09/PROVENANCE.json),
-[Lizenzen](THIRD_PARTY.md), [vorheriger Stand](docs/MILESTONE_08.md).
+[neue Figurenherkunft](shared/assets/defold11/PROVENANCE.json),
+[Lizenzen](THIRD_PARTY.md), [vorheriger Stand](docs/MILESTONE_09.md).

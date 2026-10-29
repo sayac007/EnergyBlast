@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-10",
+  "id": "energyblast-defold-11",
   "language": "de",
   "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
@@ -141,7 +141,7 @@
         "item": "wide_lens",
         "hint_landmark": [
           -6.75,
-          -1.95
+          -4.9
         ],
         "marks": [
           {
@@ -309,8 +309,8 @@
         ],
         "item": "quiet_boots",
         "hint_landmark": [
-          -3.0,
-          -0.6
+          -2.7,
+          -4.75
         ],
         "marks": [
           {
@@ -450,7 +450,7 @@
         "item": "reactor_cell",
         "hint_landmark": [
           -4.2,
-          -0.6
+          -4.6
         ],
         "marks": [
           {
@@ -1207,5 +1207,12 @@
       "price": 280,
       "regen_delay": 2
     }
-  ]
+  ],
+  "treasure_guidance": {
+    "discover_radius": 5.2,
+    "pickup_radius": 1.05,
+    "far_scale": 1.4,
+    "near_scale": 2.3,
+    "search_radius": 1.8
+  }
 }

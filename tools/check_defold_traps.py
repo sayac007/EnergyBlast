@@ -7,7 +7,7 @@ import argparse,ctypes,os,re,subprocess,tempfile,time
 from pathlib import Path
 from PIL import ImageGrab
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--engine',type=Path,default=Path('/tmp/energyblast-defold-tools/dmengine'));p.add_argument('--project',type=Path,default=ROOT/'pilots/defold');p.add_argument('--output',type=Path);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--engine',type=Path,default=Path('/tmp/energyblast-defold-tools/dmengine'));p.add_argument('--project',type=Path,default=ROOT/'pilots/defold');p.add_argument('--output',type=Path);p.add_argument('--zoom',type=float,default=1);a=p.parse_args()
 x=ctypes.CDLL('libX11.so.6');x.XOpenDisplay.restype=ctypes.c_void_p;display=x.XOpenDisplay(None);assert display
 xt=ctypes.CDLL('libXtst.so.6');xt.XTestFakeMotionEvent.argtypes=[ctypes.c_void_p,ctypes.c_int,ctypes.c_int,ctypes.c_int,ctypes.c_ulong];xt.XTestFakeButtonEvent.argtypes=[ctypes.c_void_p,ctypes.c_uint,ctypes.c_int,ctypes.c_ulong];x.XFlush.argtypes=[ctypes.c_void_p]
 def click(px,py,duration=.07):
@@ -34,7 +34,7 @@ with tempfile.TemporaryDirectory(prefix='energyblast-native-traps-',dir='/tmp')a
   def screenshot(name):
    if a.output:ImageGrab.grab().crop((0,0,1280,720)).save(state/(name+'.png'))
   with log.open('w')as stream:
-   process=subprocess.Popen([str(a.engine),'--config=project.capture_mode=1','--config=project.capture_sector=4','--config=project.trap_test=1',str(a.project/'build/default/game.projectc')],env=env,stdout=stream,stderr=subprocess.STDOUT)
+   process=subprocess.Popen([str(a.engine),'--config=project.capture_mode=1','--config=project.capture_sector=4','--config=project.trap_test=1','--config=project.capture_zoom='+str(a.zoom),str(a.project/'build/default/game.projectc')],env=env,stdout=stream,stderr=subprocess.STDOUT)
    try:
     badge=coordinates('DEFOLD FIELD TRAP READY');click(*badge)
     wait_for('DEFOLD FIELD TRAP CATALOGUE PASS shots=0');screenshot('catalogue')

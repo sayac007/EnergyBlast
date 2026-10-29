@@ -24,7 +24,7 @@ function M.new(data,saved)
   if self.cancel_controls then self.cancel_controls()end
   if type(index)~='number'or index%1~=0 or not data.missions[index]then index=self:start_index()end
   self.peaceful=false;self.navigation_focus='objective';self.exit_announced=false;self:remember_mission(index)
-  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil
+  self.pending_win=nil;self.index=index;self.m=data.missions[index];self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil;self.secret_visible=false
   self.walls=Surfaces.for_mission(data,self.m)
   for _,t in ipairs(self.m.turrets)do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=t.hp or 2,max_hp=t.hp or 2,shield=t.shield,trap_shield=t.trap_shield,boss=t.boss,burst=t.burst or 1,patrol=t.patrol,waypoint=2,speed=t.speed or 1,timer=t.phase+.7,warning=0,direction={-1,0}}end
   for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
@@ -86,7 +86,19 @@ function M.new(data,saved)
   end
  end
  function g:hint()
-  if self.hint_debounce>0 then return end;self.hint_debounce=1.2;local level=self:level();if level<2 then if self:credits()<=0 then self.say('hints_empty');return end;self.saved.clues[#self.saved.clues+1]=self.m.id..':'..(level+1);self.changed()end;self.clue_time=8;self.say(self.m.kind~='combat'and'defold_secret'or(self.m.id=='dock'and'raid_hint'or(self.m.id=='reactor'and'hint_bank'or'hint_guardian')))
+  if self.hint_debounce>0 then return end;self.hint_debounce=1.2
+  if data.treasure_guidance then
+   local state=self:treasure_state()
+   if not state.available then self.say('flow_no_treasure');return false end
+   -- The free search-area guide always works. An earned clue optionally reveals
+   -- the exact location once; revisiting an already discovered chest costs none.
+   if not state.discovered and self:level()<1 and self:credits()>0 then
+    self.saved.clues[#self.saved.clues+1]=self.m.id..':1';self:discover_treasure()
+   end
+   self.navigation_focus='treasure';self.clue_time=12;self.status='FOLGE DEM GOLDENEN SCHATZZEICHEN'
+   self.say('defold_treasure_hint');return true
+  end
+  local level=self:level();if level<2 then if self:credits()<=0 then self.say('hints_empty');return end;self.saved.clues[#self.saved.clues+1]=self.m.id..':'..(level+1);self.changed()end;self.clue_time=8;self.say(self.m.kind~='combat'and'defold_secret'or(self.m.id=='dock'and'raid_hint'or(self.m.id=='reactor'and'hint_bank'or'hint_guardian')))
  end
  -- A hero must fit fully inside the field, including the swept hit radius.
  function g:is_safe(p)
@@ -135,8 +147,11 @@ function M.new(data,saved)
   Projectiles.update(self,dt)
   Objectives.update(self,dt,M.dist)
   if self.m.heal and not self.heal_used and self.hp<self.max_hp and M.dist(self.p,self.m.heal)<.65 then self.hp=math.min(self.max_hp,self.hp+1);self.heal_used=true;self.status='+1 ENERGIE';if self.sfx then self.sfx('bounce')end end
-  local sp=self.m.secret.position;local d=M.dist(self.p,sp);self.secret_visible=not self.saved.earned['secret:'..self.m.id]and d<4 and not M.ray(self.p,M.norm({sp[1]-self.p[1],sp[2]-self.p[2]}),d-.05,self.walls)
-  if self.secret_visible and d<.7 then self:award('secret:'..self.m.id);self.say(self.solved and'flow_no_treasure'or'combat_loot');self.secret_visible=false;if self.solved then self.status='ALLES GEFUNDEN - NAECHSTE MISSION';self.navigation_focus='objective'end end
+  if data.treasure_guidance then self:update_treasure()
+  else
+   local sp=self.m.secret.position;local d=M.dist(self.p,sp);self.secret_visible=not self.saved.earned['secret:'..self.m.id]and d<4 and not M.ray(self.p,M.norm({sp[1]-self.p[1],sp[2]-self.p[2]}),d-.05,self.walls)
+   if self.secret_visible and d<.7 then self:award('secret:'..self.m.id);self.say(self.solved and'flow_no_treasure'or'combat_loot');self.secret_visible=false;if self.solved then self.status='ALLES GEFUNDEN - NAECHSTE MISSION';self.navigation_focus='objective'end end
+  end
   if not self.solved and self.m.kind~='escort'and self.m.exit_required and self:open() and M.dist(self.p,self.m.goal)<.8 then local alive=false;for _,t in ipairs(self.enemies)do alive=alive or(not t.optional and t.hp>0)end;if not alive then self:finish()end end
  end
  function g:trap(p,id)return Objectives.trap(self,p,id)end

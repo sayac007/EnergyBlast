@@ -353,6 +353,116 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 375857410
+    },
+    {
+      "id": "defold_power_up",
+      "text": "Bonus geschafft. Du bist jetzt größer und stärker. Deine neue Kraft bleibt gespeichert.",
+      "file": "defold_power_up.ogg",
+      "sha256": "eaec70a53291a3ac084f451a99c78d283093c41efb7eae0273155fabbbf3f710",
+      "seconds": 6.84,
+      "playback_gain_db": 8.004496716160629,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2990260085
+    },
+    {
+      "id": "defold_power_help",
+      "text": "Löse die Bonusaufgaben. So wachsen deine Gesundheit, dein Schild und deine Feuerkraft. Deine neue Kraft bleibt gespeichert.",
+      "file": "defold_power_help.ogg",
+      "sha256": "062bbc7e9e8a65f02bab030a3136abcaf612ffa3ff37abc7cac38d31811d71b9",
+      "seconds": 10.36,
+      "playback_gain_db": 4.7478790957540635,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3697933322
+    },
+    {
+      "id": "defold_drone_open",
+      "text": "Wähle eine Drohne aus deinem Vorrat.",
+      "file": "defold_drone_open.ogg",
+      "sha256": "15e57d2ca8882717a51e31037baf82d7972fc6959d5baba772974ea61465c86f",
+      "seconds": 3.48,
+      "playback_gain_db": 7.702325262585415,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 933670130
+    },
+    {
+      "id": "defold_drone_empty",
+      "text": "Keine Drohnen mehr. Nutze deine Waffe oder eine Falle.",
+      "file": "defold_drone_empty.ogg",
+      "sha256": "d8db5107ee0300d6eeeaf93d9cdfb34e5e9511f7ea022a333b1d2e608a9c7302",
+      "seconds": 4.28,
+      "playback_gain_db": 8.358323002093707,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2495328870
+    },
+    {
+      "id": "defold_campaign_mission",
+      "text": "Verlasse den Schutzort. Schalte die Gegner aus und nutze die Deckung.",
+      "file": "defold_campaign_mission.ogg",
+      "sha256": "d83ed64c930564029a90b5076e831aaaa3983bb8cc6384aa97c10d7d3bcc7a43",
+      "seconds": 5.32,
+      "playback_gain_db": 5.997108452472414,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3639874177
+    },
+    {
+      "id": "defold_campaign_sequence",
+      "text": "Schalte die Gegner aus. Merke dir die Lichter und triff sie in der richtigen Reihenfolge.",
+      "file": "defold_campaign_sequence.ogg",
+      "sha256": "7b0331f4c69801d98194beaa7f0e347a1b688d7ac57bdb65c71413a810416320",
+      "seconds": 5.96,
+      "playback_gain_db": 2.770319146182346,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 448571819
+    },
+    {
+      "id": "defold_campaign_clear",
+      "text": "Alle Gegner ausgeschaltet. Weiter zur nächsten Mission.",
+      "file": "defold_campaign_clear.ogg",
+      "sha256": "4d5572b55db1c5434ee0318907bd5d889f8c959fa37c7e6f05a1033712ab6794",
+      "seconds": 4.68,
+      "playback_gain_db": 6.608449948127685,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 3534121295
+    },
+    {
+      "id": "defold_drone_launch",
+      "text": "Die Drohne fliegt jetzt zu deinem Ziel.",
+      "file": "defold_drone_launch.ogg",
+      "sha256": "ef9c496a3b829dbc3728c94b653fae3218dbe979d87bef023a21d7dceab97779",
+      "seconds": 3.4,
+      "playback_gain_db": 10.784304139486416,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 4252407604
+    },
+    {
+      "id": "defold_drone_target",
+      "text": "Wähle jetzt das Ziel. Du kannst auf einen Gegner tippen oder die Drohne zu ihm ziehen.",
+      "file": "defold_drone_target.ogg",
+      "sha256": "ade02e32b0d8c4bce16f81ed7c1bb8350a5be3fab079d0c2e1845f2b2412a0eb",
+      "seconds": 5.56,
+      "playback_gain_db": 5.130582514905528,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 2820721432
+    },
+    {
+      "id": "defold_campaign_swarm",
+      "text": "Kleine Drohnen voraus. Einige können sich teilen.",
+      "file": "defold_campaign_swarm.ogg",
+      "sha256": "62080cba34b7d52f4bf589a1a48bd4d45298467df620d7e2c397a8b802108d7c",
+      "seconds": 4.68,
+      "playback_gain_db": 8.646119607927773,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 1647356558
     }
   ]
 }

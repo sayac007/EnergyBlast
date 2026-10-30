@@ -1,0 +1,4 @@
+sound: "/audio/defold_campaign_mission.ogg"
+looping: 0
+group: "master"
+gain: 1.77768751630624

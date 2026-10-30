@@ -4,9 +4,12 @@ local function dist(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
 local function complete(g,task)
  if task.done then return end
  task.done=true;g.bonus.completed=g.bonus.completed+1
- local amount=g:award(task.key);g.status='BONUS GESCHAFFT + '..amount..' STERNE'
+ local amount=g:award(task.key);task.rewarded=true
+ local power=g:power_state()
+ g.status=amount>0 and(power.enabled and('BONUS! '..power.title..' · '..g.max_hp..' ENERGIE')or('BONUS GESCHAFFT + '..amount..' STERNE'))or'BONUS ERNEUT GESCHAFFT - STERNE SCHON GESPEICHERT'
  for _,e in ipairs(task.targets)do e.hp=0;e.death_age=0;g.fx[#g.fx+1]={kind='bonus',p={e.p[1],e.p[2]},age=0,life=.65}end
  if g.sfx then g.sfx('bounce')end
+ if amount>0 and power.enabled then g.say('defold_power_up')end
 end
 local function target(g,task,p,order)
  local e={p={p[1],p[2]},hp=task.done and 0 or 1,max_hp=1,optional=true,kind='bonus_'..task.kind,bonus_order=order,bonus_task=task,timer=999,warning=0,direction={0,1}}
@@ -18,7 +21,8 @@ function B.load(g)
  for _,id in ipairs({'prism','pattern'})do
   local spec=g.m.bonuses[id];local kind=id=='prism'and'prism'or spec.kind
   local key='bonus:'..id..':'..g.m.id
-  local task={id=id,kind=kind,key=key,title=kind=='prism'and'ABPRALL-BONUS'or kind=='sequence'and'LICHTER-BONUS'or'GEDULDS-BONUS',reward=g.data.rewards[key],p={spec.p[1],spec.p[2]},done=g.saved.earned[key]==true,targets={},clock=0,progress=0,sequence=spec.sequence}
+  local rewarded=g.saved.earned[key]==true
+  local task={id=id,kind=kind,key=key,rewarded=rewarded,replay=g.data.optional_replay==true and rewarded,title=kind=='prism'and'ABPRALL-BONUS'or kind=='sequence'and'LICHTER-BONUS'or'GEDULDS-BONUS',reward=g.data.rewards[key],p={spec.p[1],spec.p[2]},done=rewarded and not g.data.optional_replay,targets={},clock=0,progress=0,sequence=spec.sequence}
   g.bonus.tasks[#g.bonus.tasks+1]=task;g.bonus.total=g.bonus.total+1
   if task.done then g.bonus.completed=g.bonus.completed+1 end
   if kind=='sequence'then for i,p in ipairs(spec.nodes)do target(g,task,p,i)end else target(g,task,spec.p,1)end

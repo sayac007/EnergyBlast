@@ -1,0 +1,2 @@
+mesh: "/models/energy_field.gltf"
+materials { name: "energy_field" material: "/models/hero_power_shield-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

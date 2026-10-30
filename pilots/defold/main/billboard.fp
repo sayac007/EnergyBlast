@@ -3,7 +3,7 @@
 in mediump vec2 var_texcoord0;
 out vec4 out_fragColor;
 uniform mediump sampler2D tex0;
-uniform fs_uniforms { mediump vec4 tint; mediump vec4 frame; mediump vec4 edge; mediump vec4 hero_fx; mediump vec4 atlas_texel; };
+uniform fs_uniforms { mediump vec4 tint; mediump vec4 frame; mediump vec4 edge; mediump vec4 hero_fx; mediump vec4 atlas_texel; mediump vec4 power_fx; };
 void main(){
  vec2 local_uv=vec2(var_texcoord0.x,1.0-var_texcoord0.y);
  if(tint.w<0.0)local_uv.x=1.0-local_uv.x;
@@ -34,5 +34,12 @@ void main(){
   float sweep=pow(max(0.0,.5+.5*sin(local_uv.y*8.0+local_uv.x*2.0-t*1.5)),18.0);
   rgb+=hue*((1.0-low)*.38*pulse+sweep*.09+hero_fx.z*.10);
  }
- out_fragColor=vec4(rgb*color.a,color.a);
+ // Genuine cloak translucency uses premultiplied output. Its luminous outline
+ // remains readable so the player can still locate the enlarged character.
+ float opacity=clamp(power_fx.x,.1,1.0);
+ float power=clamp(power_fx.y,0.0,1.0),flash=clamp(power_fx.z,0.0,1.0);
+ float power_sweep=pow(max(0.0,.5+.5*sin(local_uv.y*8.0+local_uv.x*2.0-t*1.5)),18.0);
+ rgb+=mix(hue,vec3(1.0,.83,.28),power)*power*(.05+.08*power_sweep);
+ rgb+=vec3(.4,.6,.7)*flash;
+ out_fragColor=vec4(rgb*color.a*opacity,color.a*opacity);
 }

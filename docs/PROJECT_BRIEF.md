@@ -196,3 +196,96 @@ betrachteten Spielfeldbereich einschließlich Figuren und verbessert die Lesbark
 kleiner Weltbeschriftungen, besonders am Handy. Figuren sollen ansprechendere,
 höher aufgelöste Bilder, leuchtenden Schimmer und komplexere Animationen erhalten.
 Der übrige 0.10-Funktionsumfang und gespeicherter Fortschritt bleiben erhalten.
+
+## Betreiberergänzung — 29.10.2026: spielbare Boni und großzügigere Fallen
+
+Bei erneut besuchten Missionen fehlen die Boni; die Infoansage behauptet nur,
+der Bonus sei bereits gesammelt. Die Bonusaufgaben müssen wieder sichtbar und
+spielbar sein und brauchbare Hinweise erhalten. Bereits verdiente Sterne und
+gekaufte Ausrüstung bleiben erhalten; ein erneutes Spielen setzt den gespeicherten
+Erfolg nicht zurück und verspricht keine zweite Auszahlung.
+
+Der helle Platzierungskreis der Fallen soll größer werden und die tatsächliche
+Platzierung begrenzen. Die Wirkzeit wird zunächst verdreifacht und in späteren
+Missionen vorsichtig reduziert, sobald das Kind mit den Fallen umgehen kann.
+Die Umsetzung knüpft diese Reduktion an tatsächlichen Fang plus erfolgreichen
+Abschluss verschiedener früherer Missionen, nicht bloß an vergangene Spielzeit.
+[Aktuelle Regeln](TRAPS.md), [Umsetzung und Prüfstatus](MILESTONE_11.md).
+
+Der zuvor ausgelieferte 0.11-Stand wurde zwischenzeitlich durch PR #1 nach `main`
+übernommen. Diese Korrekturrunde entwickelt `feat/zoom-treasure-polish` weiter;
+sie beauftragt keinen neuen automatischen Merge, PR oder Release-/Store-Upload.
+
+## Neue Priorität — 29.10.2026: zuerst dauerhafte Bonus-Macht
+
+Der Betreiber priorisiert zunächst das sichtbare und spürbare Stärkerwerden durch
+gelöste Bonusaufgaben. Gesundheit soll bewusst weit über übliche kleine Zuwächse
+hinaus wachsen: über 20, 30 und 40 bis zu 1.000 und schließlich einer Million.
+Dazu gehören größere Spielfiguren, stärkeres Schild, mehr Feuerkraft und Tarnung.
+Diese Macht bleibt beim nächsten App-Start erhalten. Bereits gelöste Bonusaufgaben
+werden angerechnet; Sterne und gekaufte Ausrüstung bleiben bestehen.
+
+Die Umsetzung erfolgt separat auf `feat/bonus-power` als Version 0.13. Es bleiben
+zunächst **sechs Missionen mit zwölf unterschiedlichen Bonus-Erfolgen**. Jede
+erstmals gelöste Bonusaufgabe steigert die Macht; die fünf benannten Stufen machen
+größere Etappen sichtbar. Wiederholungen bleiben spielbar, vervielfachen aber
+keinen gespeicherten Erfolg. Die Figur wächst sichtbar innerhalb einer spielbaren
+Grenze; Wege und Deckungen bleiben nutzbar.
+
+**Als Nächstes geplant, hier noch nicht umgesetzt:** die zusätzlich gewünschten
+20 Missionen und die vorgeschlagene Ich-Perspektive. Sie wurden durch „zuerst“
+nach hinten gestellt und gehören nicht zum ausgelieferten Umfang dieser Runde.
+[Bonus-Macht, tatsächlicher Prüfstand und Grenzen](MILESTONE_12.md).
+
+## Betreiberrevision — 30.10.2026: 16 Missionen, klare Ziele und begrenzte Macht
+
+Der neueste Auftrag ersetzt die frühere Planung von 20 weiteren Missionen durch
+**zehn neue Missionen**, also 16 insgesamt. Versteckte Bonusaufgaben und Truhen
+entfallen vollständig aus dem aktiven Spiel. Sie waren trotz mehrerer
+Auffindbarkeitshilfen noch unklar. Gespeicherte frühere Sterne und gekaufte
+Ausrüstung bleiben bestehen; Fortschritt entsteht künftig durch abgeschlossene
+Missionen statt durch versteckte Funde.
+
+Die übertriebene Millionengesundheit wird auf **höchstens 100 inklusive Rüstung**
+begrenzt. Schild, Feuerkraft und Darstellungsgröße erhalten passende Grenzen.
+Tarnung reduziert die normale Entdeckung, macht den Spieler aber nicht dauerhaft
+unauffindbar: Gegner können ihn wiederholt auch aus großer Entfernung genau orten.
+Wände behalten ihre Wirkung auf tatsächliche Geschosse.
+
+Der **Zikkurat ist immer der Startpunkt**. Er liegt in einer begehbaren geschützten
+Nische und schließt gegnerische Schüsse zuverlässig aus. Komplexere Arenen werden
+in Breite und Tiefe um 50 bis 100 Prozent größer. Maximales Herauszoomen zeigt die
+Feldgrenzen; außerhalb erscheint keine irritierende All-Kulisse. Größere Arenen
+kombinieren zusätzliche Schusslinien, Relais, Lichterfolgen, Fallen und neue
+Gegnertypen. Teilbare Mini-Drohnen-Familien bleiben endlich; maximal 50 lebende
+Gegner sind gleichzeitig zulässig.
+
+Die begleitete Schutzdrohne wird durch eine **steuerbare Angriffsdrohne aus einem
+Vorrat** ersetzt. Die abschließende Präzisierung ist verbindlich: Im Katalog eine
+Drohne wählen, anschließend auf sie drücken und zum Gegner ziehen; alternativ
+nach „Wähle jetzt das Ziel“ den Gegner antippen. Sie wird nicht als statische Falle
+auf den Boden gelegt. Erst ihr tatsächlicher Flug und Kontakt lösen die stilisierte
+Blitz-/Zerstörungsanimation aus. Boss-Relaisregeln bleiben erhalten.
+
+Die Missionsauswahl muss alle 16 Missionen auf verständlichen Seiten anbieten.
+Angekündigte Aktionen der oberen Leiste werden anklickbar; die alten Bonus- und
+Schatzanzeigen verschwinden. Sprachhinweise müssen zum aktuellen Ziel und zur
+Drohnenbedienung passen, ohne alte Sammel- oder Begleitaufträge zu wiederholen.
+
+Umsetzung auf `feat/campaign-16` als **0.14.0 / Android-Code 15**.
+[Missionen, Steuerung und tatsächlicher Prüfstand](MILESTONE_13.md).
+Die historischen Anweisungen und früheren APKs bleiben als Entwicklungsnachweis
+getrennt erhalten. Kein automatischer Merge, neuer PR oder Release-/Store-Upload.
+
+## Betreiberauftrag — 30.10.2026: aktuellen Stand vollständig übernehmen
+
+„Kannst Du den aktuellen Stand ins Repo übertragen?“ Die fertige 0.14-Fassung
+wird entsprechend der bereits für 0.10 vereinbarten Repository-Übernahme mit einem
+echten Merge nach `main` übernommen. Beide Historien und der Entwicklungsbranch
+bleiben erhalten. Spielcode, Inhalte, Assets, Werkzeuge, Tests und geprüfte APK
+entsprechen unverändert dem veröffentlichten Stand `425dd3c`; nur die aktuelle
+Dokumentation beschreibt jetzt `main` als vollständigen Spielstand. Die bisherigen
+Merge-Beschränkungen werden für diese beauftragte Übernahme aufgehoben.
+APK-Build- und Spieltestergebnisse bleiben ihrem ursprünglichen Quellstand
+zugeordnet. Es entstehen keine neue APK, PR, Release-/Store-Veröffentlichung oder
+Änderung eines anderen Repositories. [Aktueller Stand](../README.md).

@@ -55,7 +55,9 @@ function M.run(original)
  check(g:mission_state().goal[1]==g.m.secret.hint_landmark[1]and g:mission_state().goal[2]==g.m.secret.hint_landmark[2],'distant free guidance identifies landmark rather than silently revealing entire secret')
  g:track_objective();check(g:mission_state().goal_kind~='treasure','primary target can be restored without restarting')
  g.saved.earned['secret:'..g.m.id]=true
- check(g:mission_state().treasures_remaining==0 and not g:track_treasure(),'already collected treasure is never advertised as remaining')
+ if g.data.optional_replay then
+  check(g:mission_state().treasures_remaining==1 and g:mission_state().treasure_replay and g:track_treasure(),'replay treasure stays available and is labelled already rewarded')
+ else check(g:mission_state().treasures_remaining==0 and not g:track_treasure(),'historical collected treasure stays removed')end
  g=fresh();local last
  for _,enemy in ipairs(g.enemies)do if not enemy.optional then last=enemy;enemy.hp=0 end end
  last.hp=1;last.shield=false;g:hit(last,0)

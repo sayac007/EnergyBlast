@@ -22,16 +22,23 @@ function P.bind(g)
   for _,item in ipairs(self.data.shop_catalog)do
    if item.category=='armor'and self:owns(item.id)then bonus=math.max(bonus,item.health_bonus or 0)end
   end
-  return self.data.player.hit_points+bonus
+  local maximum=math.max(self.data.player.hit_points,self:power_state().min_health)+bonus
+  return self.data.campaign_enabled and math.min(100,maximum)or maximum
  end
  function g:weapon_stats()
   local base={id='pulse',damage=1,cooldown=self.data.combat.fire_cooldown,bounces=1}
   if self.data.shop_catalog then
    local item=catalogue(self,self.saved.weapon)
    if item and item.category=='weapon'and self:owns(item.id)then
-    return{id=item.id,damage=item.damage or 1,cooldown=item.cooldown or base.cooldown,bounces=item.bounces or 1}
+    base={id=item.id,damage=item.damage or 1,cooldown=item.cooldown or base.cooldown,bounces=item.bounces or 1}
    end
   elseif self:owns('prism')and self.saved.weapon=='prism'then base.id='prism';base.bounces=2 end
+  local power=self:power_state()
+  if power.enabled and power.count>0 then
+   base.damage=base.damage*power.damage_multiplier
+   base.cooldown=math.max(self.data.bonus_power.minimum_fire_cooldown,base.cooldown/(1+power.count*.12))
+  end
+  if self.data.campaign_enabled then base.damage=math.min(8,base.damage);base.cooldown=math.max(.16,base.cooldown)end
   return base
  end
  function g:shop_item(id)
@@ -43,6 +50,10 @@ function P.bind(g)
   item.missing=math.max(0,item.price-self:wallet())
   item.available=not item.locked and item.missing==0 and not item.owned
   if item.id=='health'then item.available=item.available and self.hp~=nil and self.hp>0 and self.hp<self.max_hp end
+  if self.data.campaign_enabled and item.category=='armor'and not item.owned then
+   local projected=math.min(100,math.max(self.data.player.hit_points,self:power_state().min_health)+(item.health_bonus or 0))
+   if projected<=self:max_health()then item.available=false;item.unavailable_reason='GESUNDHEIT BEREITS MAXIMAL'end
+  end
   if item.category=='weapon'and item.owned then item.available=not item.equipped end
   return item
  end
@@ -60,6 +71,7 @@ function P.bind(g)
    if item.category=='weapon'and not item.equipped then return true,'AUSRUESTEN'end
    return false,item.equipped and'AUSGERUESTET'or'GEKAUFT'
   end
+  if item.unavailable_reason then return false,item.unavailable_reason end
   if item.locked then return false,'VORHERIGE STUFE ZUERST'end
   if item.id=='health'and(not self.hp or self.hp<=0 or self.over and not self.solved)then return false,'NEUER ANLAUF'end
   if item.id=='health'and self.hp>=self.max_hp then return false,'GESUNDHEIT VOLL'end

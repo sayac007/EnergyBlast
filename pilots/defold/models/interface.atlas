@@ -30,4 +30,6 @@ images { image: "/models/mission_echo.png" }
 images { image: "/models/mission_rescue.png" }
 images { image: "/models/lobby.png" }
 images { image: "/models/chest-prop.png" }
+images { image: "/models/ui_attack_drone.png" }
+images { image: "/models/ui_swarm.png" }
 extrude_borders: 2

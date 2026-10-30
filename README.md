@@ -1,85 +1,139 @@
-# EnergyBlast — Defold 0.11
+# EnergyBlast — Defold 0.14
 
-> **Neuer Teststand 0.14 — 16 Missionen und steuerbare Angriffsdrohnen:**
-> [Android-APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk).
-> Zehn neue Missionen, größere Felder, geschützte Zikkurat-Starts, keine versteckten
-> Boni/Schätze. Gesundheit maximal 100 einschließlich Rüstung, begrenzte Tarnung,
-> endliche Schwärme mit höchstens 50 lebenden Gegnern. Alte Sterne/Käufe bleiben.
-> Drohne aus dem Vorrat wählen, dann zum Gegner ziehen oder nach der Ansage das
-> Ziel antippen. Temporäre Kartenübersicht, echter Flug und elektrischer Treffer.
-> **4.540 native Prüfungen, vollständige GUI-Suite und 16 Testgruppen bestanden.**
-> [Missionen, Bilder, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/425dd3c29b7776864d0fcb0642f16d38db2f46d0/docs/MILESTONE_13.md) ·
-> [Vollständiger aktueller Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/campaign-16).
-> Als Update mit identischem Entwicklungszertifikat installierbar; nicht vorher
-> deinstallieren. Physische Handy-/Tablet-Abnahme und Spielbalance bleiben offen.
-> Der unten beschriebene Spielcode in `main` bleibt 0.11; diese Ankündigung
-> aktualisiert Dokumentation und führt keinen Spielcode automatisch zusammen.
+Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: **16 Missionen**, drei
+Helden, reflektierte Schüsse, Deckung, Fallen und steuerbare Angriffsdrohnen.
+Zehn neue Missionen steigern die Komplexität. Gespeicherte Sterne und Ausrüstung
+bleiben erhalten; versteckte Bonusaufgaben und Schatztruhen entfallen.
 
-Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren, mit drei Helden,
-sechs Missionen, reflektierten Schüssen,
-integrierten Bonusaufgaben und lokal gespeicherten Sternen. **Zoom, auffindbare
-Schätze und neu gezeichnete HD-Figuren mit animiertem Schimmer.**
-Defold bleibt der Schwerpunkt.
-
-**[Android 0.11 herunterladen — 68,2 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/284a94a0659ca9c0fd453977343053274bf214df/downloads/energyblast-defold-debug.apk)** ·
-[Update und geprüfte Metadaten](downloads/README.md) ·
-[Änderungen und tatsächliche Tests](docs/MILESTONE_10.md) ·
+**[Android 0.14 herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
+[Letzte geprüfte APK 0.13 — vorheriger Spielstand](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
+[Änderungen und Prüfstand](docs/MILESTONE_13.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
 ## Aktueller Stand
 
-**Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Diese Version liegt
-seit PR #1 auf `main`. Die zusätzliche 0.14-Testfassung ist oben verlinkt.
-Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
-nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
+**0.14.0 / Android-Code 15, Stand 30.10.2026**, vollständig auf **`main`**
+übernommen. Der Entwicklungsbranch `feat/campaign-16` bleibt erhalten. Die neueste Anweisung ersetzt den früheren Plan von 20
+zusätzlichen Missionen durch **zehn neue, insgesamt 16**. Defold 1.14.0 bleibt
+der Schwerpunkt; Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
+Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Telemetrie.
 
-| Bestandteil | Aktuell enthalten |
+| Bestandteil | Aktuell implementiert |
 |---|---|
-| Spiel | Sechs Missionen: Abpraller, Deckung/Timing, Relais/Boss, Magnetfallen, Lichterfolge, Drohnenrettung |
-| Figuren | Drei auswählbare Originalfiguren, darunter Drache Flammi; animierte 2,5D-Bilder in nativer 3D-Welt |
-| Fortschritt | Lokale Gesamtsterne, verfügbares Guthaben, Käufe, Hinweise und aktuelle Mission; zwei freiwillige Bonusziele je Mission |
-| Ausrüstung | Zwölf Shopangebote: wiederholte Heilung, vier Waffen-, vier Rüstungs-, zwei Tarnstufen und Erholungskern |
-| Ton | Deutsche synthetische Ansagen, eigene Science-Fiction-Musik und Effekte; stummschaltbar |
-| Engine | Defold 1.14.0 aktiv; Godot 0.2 und GDevelop 0.3 als unveränderte Vergleichsstände erhalten |
+| Missionen | 16 Missionen auf drei Auswahlseiten; Abpraller, Deckung, Relais, Lichterfolgen, Fallen und gemischte Gegner |
+| Felder | Neue Arenen von 31,5 × 22,5 bis 42 × 30 statt bisher 21 × 15 Welteinheiten |
+| Gegner | Wächter, Bodenkrabbler, Energiefunken, Mini-Drohnen und begrenzt teilbare Schwärme; maximal 50 lebende Gegner gleichzeitig |
+| Schutz | Jede Mission startet im begehbaren, geschützten Zikkurat; Schüsse werden am Schutzbereich absorbiert |
+| Angriffsdrohnen | Vorrat von drei bis acht; auswählen, zum Gegner ziehen oder das Ziel antippen; echter Flug und elektrische Zerstörung |
+| Fortschritt | Abgeschlossene Missionen statt versteckter Funde; Gesamtsterne, verfügbares Guthaben, Käufe und aktuelle Mission bleiben gespeichert |
+| Gesundheit/Tarnung | Maximal 100 Gesundheit einschließlich Rüstung; begrenzte Tarnung mit wiederholter gegnerischer Fernortung |
+| Grafik/Ton | Drei animierte Originalhelden, native Weltmodelle und Effekte; deutsche synthetische Ansagen und eigene Science-Fiction-Musik |
 
-### Was 0.11 verbessert
+Die größeren Arenen wachsen in beiden Achsen um 50 bis 100 Prozent, entsprechend
+2,25- bis vierfacher Fläche. Ihre Schwierigkeit verbindet zusätzliche Schusslinien,
+Relais, bewegliche Gegner und Lichterfolgen. [Alle Missionen im Überblick](docs/MILESTONE_13.md).
 
-- **Ganzes Spielfeld zoomen:** Plus/Minus oder zwei Finger auf freiem Boden,
-  75–175 Prozent. Welt, Figuren und Weltbeschriftungen werden größer; das HUD
-  bleibt gleich groß. Die gewählte Größe bleibt gespeichert, der betrachtete
-  Bereich beim Stillstehen im Blick.
-- **Hinweise führen zum Schatz:** Drei früher in Deckungen liegende Suchpunkte
-  sind korrigiert. „Hinweis“ schaltet den goldenen Wegweiser auf die Schatzsuche.
-  Die neue Stimme beschreibt dieses Zeichen statt einer nicht sichtbaren blauen Kiste.
-- **Truhen erkennen:** Bei Annäherung leuchten und wachsen sie. Große Goldmarkierung,
-  Minikarte und ein antippbares Suchzeichen helfen auch hinter einer Deckung.
-  Zum Einsammeln muss die Figur tatsächlich hinlaufen; Wände bleiben wirksam.
-- **Neue HD-Figuren:** Nova, Flammi und der Fuchs haben neue Originalbilder mit
-  1536×1024 statt 1024×768 Pixeln pro Laufatlas. Farbige Schimmerkanten,
-  Lichtpartikel, Atmen, Laufschwung und Rückstoß ergänzen die acht Bildphasen.
+## Steuerung
 
-[Umsetzung und Laufzeitbilder](docs/MILESTONE_10.md).
+| Berührung | Wirkung |
+|---|---|
+| Boden kurz antippen | Dorthin laufen |
+| Boden halten | Nach 0,14 Sekunden wiederholt feuern; Ziehen ändert die Schussrichtung |
+| Gegner ungefähr antippen | Sofort schießen, mit großzügigem Zielbereich |
+| Eigene Figur anfassen und ziehen | Kollisionssicher bewegen |
+| Fallenbild → Gerät wählen → freien Boden antippen | Eine Falle im hellen Reichweitenkreis platzieren |
+| Drohnenbild → Drohne im Vorrat auswählen | Zielmodus mit gesprochener Anleitung starten |
+| Im Drohnenmodus Gegner antippen **oder** bereitstehende Drohne auf ihn ziehen | Angriffsdrohne zum gewählten Gegner schicken |
+| Abbrechen | Auswahl schließen, ohne Vorrat zu verbrauchen oder einen normalen Schuss auszulösen |
+| Plus/Minus oder zwei Finger auf freiem Feld | Gesamtes Spielfeld samt Figuren vergrößern/verkleinern |
+| Obere Ziel-/Gegneranzeige antippen | Aktuelle Missionsinformation öffnen |
+| Oberen Missionsknopf antippen | Missionsauswahl öffnen |
 
-### Aus 0.10 erhalten
+Beim Auswählen einer Drohne öffnet sich vorübergehend eine **Übersicht der ganzen
+Karte**, damit entfernte Ziele erreichbar sind. Die gespeicherte Zoomwahl bleibt
+unverändert. Nach dem Flug oder Abbruch kehrt die vorherige Ansicht zurück.
+Eine bewusst währenddessen geänderte Zoomwahl hat Vorrang vor dieser Rückkehr.
+Die Drohne wird zum Gegner gelenkt und dort durch Kontakt ausgelöst.
 
-- **15 statt 3 Energie.** Nach vier Sekunden ohne Treffer erholt sich die Figur
-  um einen Punkt alle zwei Sekunden. Die Anzeige zeigt Energie und Erholung.
-- **Zikurrat in jeder Arena:** mintfarben leuchtender Schutzort nahe dem Start,
-  mit eigenem Wegknopf und Minikartenzeichen. Feindliche Schüsse werden an seinem
-  Rand neutralisiert, auch nach Abprallern. Dort regenerieren zwei Punkte pro
-  Sekunde. Zum Schießen verlässt man den geschützten Bereich.
-- **Gesundheit immer im Shop:** 40 Sterne füllen die Energie vollständig auf.
-  Wiederholt kaufbar; bei voller Gesundheit wird nichts abgebucht. Die kostenlose
-  Erholung bleibt jederzeit als Alternative erhalten.
-- **Vier Waffen- und vier Rüstungsstufen:** Waffen werden stärker, Rüstung erhöht
-  die maximale Energie bis 35. Nächste Stufen bleiben gedimmt mit Preis sichtbar.
-  Dazu zwei Tarnstufen und ein Erholungskern. Keine neuen Tempokäufe; alte Käufe
-  und Spielstände bleiben erhalten. Verfügbare und gesamte Sterne sind getrennt.
-- **Neue Musik:** originale 80-Sekunden-Komposition bei 96 BPM in D-Moll/modal,
-  mit tiefem Puls, warmen Flächen, sparsamen Signalen und gedämpfter Percussion.
-  Im Schutzort wird sie leiser; Ansagen senken sie weiterhin ab.
+Maximales Herauszoomen endet an den Feldgrenzen. Unterschiedliche Displayformate
+können neutrale Ränder zeigen; dort stehen keine zusätzlichen All-Kulissen und
+Touchpunkte außerhalb der dargestellten Arena bewegen oder beschießen nichts.
+Die bewegte Spielfigur und tatsächliche Geschosse bleiben Teil der nativen Welt.
 
-[Umsetzung, Preise, Laufzeitbilder und Grenzen](docs/MILESTONE_09.md).
+## Tatsächliche Spielansichten
+
+![Zielauswahl aus dem geschützten Startpunkt](docs/images/14-drone-target-overview.png)
+![Elektrischer Drohnentreffer](docs/images/14-drone-electric-impact.png)
+
+Native Linux/OpenGL-Aufnahmen, keine behaupteten Handyaufnahmen.
+[Größere Mission, Seitenübersicht und 50 Gegner](docs/MILESTONE_13.md).
+
+## Missionen, Schutz und Ausrüstung
+
+- **Start und Rückzug:** Die Figur beginnt im Zikkurat. Zum normalen Feuern den
+  geschützten Bereich verlassen; bei Bedarf dorthin zurückkehren und erholen.
+- **Drohne steuern:** Nach der Katalogwahl heißt die Ansage „Wähle jetzt das Ziel“.
+  Ein gültiger Start verbraucht eine Drohne. Ungültige Ziele und Abbruch kosten
+  keinen Vorrat. Ein durch Relais geschützter Boss behält seine Relaisregel.
+- **Nächste Mission:** Die Hauptziele abschließen und anschließend **Nächste Mission**
+  wählen. Es gibt keine versteckten Funde, die den Wechsel verzögern.
+- **Sterne ausgeben:** Den Sternenknopf öffnen, Gegenstand wählen und **Kaufen**.
+  Gesamtsterne bleiben; nur das verfügbare Guthaben sinkt. Heilung bleibt bei Bedarf
+  wiederholt kaufbar. Bereits gekaufte Waffen, Rüstung und Tarnung bleiben erhalten.
+- **Figur wählen:** Nova, Drache Flammi und Fennek bleiben über ihre Bilder auswählbar.
+
+Aktuelle Missionen vergeben einmalig 300 bis 550 Sterne, dazu bis zu 100 für den
+schadensfreien Abschluss. Frühere Bonus-/Schatzsterne bleiben im alten Spielstand
+erhalten. Dieselben Missionserfolge werden beim Wiederholen nicht erneut bezahlt.
+Gesundheit ist einschließlich Ausrüstung auf 100 begrenzt; Schild auf 20 und
+Projektilschaden auf 8. Bei stärkster Tarnung können Gegner den Spieler weiterhin
+regelmäßig präzise orten, auch aus großer Entfernung. Wände blockieren die echten
+Geschosse weiterhin durch Reflexion oder klar markierte Absorption.
+
+## Prüfstand und Grenzen
+
+**Gezielte Prüfungen bereits bestanden:** 4.540 native Regelprüfungen, davon
+1.311 mit eingefrorenen 0.13-Regeln und 3.229 mit aktiven 0.14-Regeln; 16 gemeinsame
+Testgruppen einschließlich 1.686 Exportgeometrieprüfungen. Echte native GUI-Eingaben
+prüfen alle 16 Missionen und drei Seiten bei 1280 × 720 sowie 1280 × 800,
+anklickbare obere Menüs, Drohnen per Tippen/Ziehen und eine Szene mit 50 nativen
+Gegnern. Ein kontrollierter alter Spielstand behält 4.350 Gesamtsterne und 2.690
+Guthaben und startet nach der neuen Begrenzung mit 70 Gesundheit.
+
+**Vollständige Suite: PASS.** Alle 21 zusammenhängenden Prüfschritte sind bestanden.
+Die alten Bonus-/Millionenprüfungen sind historische Regressionen, keine Behauptung
+dieser Funktionen im aktuellen Spiel. **Android-APK: PASS**, vom sauberen Quellcommit gebaut: Paket/Version,
+Signaturgleichheit, keine Berechtigungen, Backup aus, ZIP-CRC und 1.220 identische
+Projektdateien geprüft. Physische Geräteabnahme bleibt offen.
+[Aktueller Qualitätsstatus](docs/QUALITY.md).
+
+Realer Handy-/Tablet-Test, Eingabelatenz, Mehrfingergefühl, Klang, längere Runden,
+GPU-Leistung bei 50 Gegnern und die neue Schwierigkeit bleiben manuell offen.
+Keine behauptete Store-Reife, kommerzielle Qualitätsgleichheit oder empirische
+Lernwirkung. Entwicklungssignatur, keine Release-/Play-Identität.
+
+## Repositoryaufbau
+
+| Pfad | Zweck |
+|---|---|
+| [pilots/defold](pilots/defold) | Aktuelles Spiel, Eingabe, native Darstellung, Speicher und Audio |
+| [shared/defold04.json](shared/defold04.json) | Aktive 16-Missionen-Kampagne und Regeln |
+| [Neue Weltgeometrie](shared/assets/defold14) | Eigene Feldmodelle und überprüfbare Herkunft |
+| [Neue Einheiten](shared/assets/defold14_units) | Eigene Gegner-, Drohnen- und elektrische Effektmodelle |
+| [tools](tools) | Synchronisation, reproduzierbare Builds und Regressionstests |
+| [Prüffälle](pilots/defold/main) | Aktive Regeln und eingefrorene historische Fixtures |
+| [docs](docs) | Auftrag, Meilensteine, Bauanleitung und Qualitätsnachweise |
+| [downloads](downloads) | Geprüfte APKs und Metadaten; frühere Dateien über feste Commits |
+
+```bash
+python3 tools/check_shared.py
+python3 tools/check_defold.py
+```
+
+Voraussetzungen und gezielte Einzelprüfungen: [BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md).
+Die Übernahme nach `main` erfolgt auf ausdrücklichen Betreiberauftrag. Andere
+Repositories und Vergleichs-Engines bleiben unverändert. Veröffentlichungen als
+GitHub-Release oder im Store benötigen einen gesonderten Auftrag.
 
 ## Entwicklungshistorie
 
@@ -102,9 +156,9 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.9 | Halten feuert, Gegnertipp schießt sofort, eigene Figur ziehen; neue Böden, plastischere Deckungen, AO, Schatten und Schilde. | [Quelle](https://github.com/sayac007/EnergyBlast/commit/d4dea7d0768191c67d01206381d4913615f74ff0) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/e49218e7015e365a0913961a0f1e005436c271f2/downloads) · [Bericht](docs/MILESTONE_08.md) |
 | 29.10.2026 | 0.10 | 15 Grundenergie, Erholung, sechs Zikurrate, zwölf Shopangebote mit Waffen-/Rüstungsstufen und ruhigere Science-Fiction-Musik. **In main integrierter Ausgangsstand.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/6cea6cdcdb0ad8092fa483dd641836dcbca2be94) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/6ef588bd40f4a63e5f267f2fbf45e77b74aeca18/downloads) · [Bericht](docs/MILESTONE_09.md) |
 | 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Durch PR #1 in main übernommen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
-| 29.10.2026 | 0.12 | Bereits belohnte Boni und Truhen erneut spielbar, passende Hinweise/Funk, größerer Fallenkreis und an Lernerfolg angepasste längere Zeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) |
-| 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis eine Million Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e557d93/docs/MILESTONE_12.md) |
-| 30.10.2026 | 0.14 | Zehn neue Missionen, keine versteckten Boni, Gesundheit maximal 100, geschützte Starts, größere Felder, endliche Schwärme und steuerbare Angriffsdrohnen. **Separater Testbranch, kein Spielcode-Merge.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/425dd3c29b7776864d0fcb0642f16d38db2f46d0/docs/MILESTONE_13.md) |
+| 29.10.2026 | 0.12 | Bereits belohnte Bonusziele und Truhen wieder spielbar, passende Hinweise/Funk, größerer Fallenkreis und nach Lernerfolg abgestufte längere Wirkzeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](docs/MILESTONE_11.md) |
+| 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis 1.000.000 Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 neuen Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](docs/MILESTONE_12.md) |
+| 30.10.2026 | 0.14 | Zehn neue Missionen, keine versteckten Boni/Truhen, maximal 100 Gesundheit, geschützter Start, größere Felder, endliche Schwärme und steuerbare Angriffsdrohnen. **Vollständig nach main übernommen.** | [Umsetzung und Prüfstand](docs/MILESTONE_13.md) · [Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.
@@ -112,126 +166,24 @@ Auf Betreiberwunsch sind beide Historien mit einem Merge-Commit
 zusammengeführt. Alle alten Quell-/APK-Commits bleiben erreichbar; kein Squash,
 keine neu geschriebene Historie und keine neue APK nur für die Übernahme.
 
+**30.10.2026 – Repository-Übernahme von 0.14:** Der Betreiber beauftragt die
+Übernahme des aktuellen fertigen Standes. `main` enthält nun Spielcode, Inhalte,
+Assets, Werkzeuge, Prüfungen und die unveränderte geprüfte APK von 0.14. Ein echter
+Merge erhält sowohl die bisherige `main`-Historie als auch die Entwicklung von
+0.12 bis 0.14. Der einzige Konflikt betraf die ältere README-Ankündigung; der
+Spielstand entspricht bytegleich `425dd3c`. Aktuelle Angaben stehen oben,
+historische Quell-/APK-Verweise bleiben bestehen. Die übernommenen Spieltests
+und der APK-Build wurden für diese Repository-Integration nicht erneut ausgeführt;
+Dateiidentität, Hash und Dokumentationslinks wurden gesondert geprüft.
+
 [Ursprünglicher Auftrag](docs/pilot-brief.md),
 [fortgeschriebene Entscheidungen](docs/PROJECT_BRIEF.md) und
 [historische Downloads](downloads/README.md) bleiben getrennt nachvollziehbar.
 Die [vollständige Commit-Historie](https://github.com/sayac007/EnergyBlast/commits/main/)
 ist weiterhin im Repository verfügbar.
 
-## Steuerung
 
-| Berührung im Spielfeld | Wirkung |
-|---|---|
-| Boden kurz antippen | Dorthin laufen |
-| Boden halten | Nach **0,14 Sekunden** wiederholt feuern; Finger bewegen ändert die Richtung |
-| Gegner ungefähr antippen | Sofort im Eingabeereignis schießen, mit großzügiger Trefferzone |
-| Gegner halten | Weiter beschießen |
-| Eigene Figur anfassen und ziehen | Während des Ziehens kollisionssicher laufen |
-| Zwei Finger auf freiem Boden auseinander/zusammen | Ganzen Bereich vergrößern/verkleinern |
-| Plus / Minus unten links | Zoom schrittweise ändern |
-| Goldmarkierung antippen | Tatsächlichen Weg zur Truhe / zum Suchgebiet laufen |
-| Loslassen | Halten/Ziehen beenden; **kein zusätzlicher Schuss** |
-
-Die kurze Bodenschwelle unterscheidet Laufen von Feuern. Beim Gegner entfällt
-sie vollständig. Waffenabstand der Basiswaffe 0,24 Sekunden, höhere Stufen bis 0,18 Sekunden; schnelle Gegnertipps während
-dieser Abklingzeit werden begrenzt gepuffert. Die Zielhilfe verändert nicht die
-Schussphysik: Deckungen reflektieren weiterhin. Reale Android-Eingabelatenz und
-Mehrfingergefühl müssen am Gerät geprüft werden; keine Null-Millisekunden-Zusage.
-Die Stimme erklärt die neuen Gesten. FEUER, DASH und die Fallenwahl bleiben erhalten.
-
-## Spielansichten
-
-Sechs eigene großformatige Bodenmaterialien, verschiedene plastische Deckungstypen,
-echte gebackene AO-Schattierung pro Arena, weiche Bodenschatten, animierte
-Energieschilde und eine nähere Kamera. Keine übernommenen Referenzspiel-Assets.
-Die Figuren bleiben ein 2,5D-Hybrid aus Original-Animationsbildern und nativer 3D-Welt.
-
-![Schatzhinweis und HD-Figur](docs/images/11-defold-reactor-hint.png)
-![Vergrößerte Spielansicht](docs/images/11-defold-zoom-close.png)
-![Echte Bewegung, Schimmer und Feuern](docs/images/11-defold-gameplay.gif)
-
-Native Linux/OpenGL-/XTest-Aufnahmen, keine behaupteten Handyaufnahmen.
-[Sechs Bereichsansichten und Gestenbelege aus 0.9](docs/MILESTONE_08.md),
-[aktuelle Schutzort-/Shopbilder aus 0.10](docs/MILESTONE_09.md).
-
-## Wo finde ich was?
-
-- **Drache wählen:** Auf der Startseite direkt das Bild **Drache Flammi** antippen.
-  Alle drei Helden bleiben sichtbar. Auch das Heldenbild im Spiel öffnet die Wahl.
-- **Sterne ausgeben:** Goldene Schaltfläche auf der Startseite → Bild/Effekt ansehen
-  → **Kaufen**. Waffen, Rüstung, wiederholte Heilung, Tarnung und Erholung. Käufe
-  wirken sofort; Gesamtsterne bleiben, nur das verfügbare Guthaben sinkt.
-- **Offene Schätze:** Oben steht **Schatz 0/1** oder **1/1**. Antippen aktiviert
-  einen kostenlosen goldenen Wegweiser zum Suchgebiet. Bei Annäherung wird die
-  Truhe sichtbar. Nach Missionsabschluss führt er direkt zum verbliebenen Schatz.
-- **Nächste Mission:** Nach dem Sieg ausdrücklich **Nächste Mission** antippen.
-  Der Schatz und die Bonusziele sind freiwillig. Wer weitersucht, kann jederzeit
-  über **Weiter** wechseln. Die aktuelle Mission bleibt beim Neustart gespeichert.
-- **Neue Aufgaben:** Magnetfallen, Lichterfolge und Drohnenrettung sind deutlich
-  markiert. Außerdem enthält **jede Mission zwei Bonusziele direkt im Spielfeld**.
-
-## Mehr Sterne und integrierte Boni
-
-| Erfolg | Einmalige Sterne |
-|---|---:|
-| Mission geschafft | 300 |
-| Ohne Schaden / Drohne unbeschädigt | 100 |
-| Schatz gefunden | 75 |
-| Goldenen Kristall durch einen echten Abpraller treffen | 100 |
-| Lichterfolge oder grünes Zeitfenster lösen | 150 |
-| Maximum pro Mission | **725** |
-
-Sechs Missionen ergeben bis **4.350 Sterne**, mit alten 0.1-Erfolgen bis 4.675.
-Vorhandene Erfolge werden mit den erhöhten Werten bewertet; Käufe, Figur, Hinweise
-und Musik bleiben erhalten. Wiederholen erzeugt keine doppelten Belohnungen.
-
-Die Boni sind tatsächliche Schussaufgaben in der normalen Arena, keine zusätzliche
-Bonusmission und kein vorgeschalteter Fragebogen. Die Lichterfolge wird beobachtet
-und nachgespielt. Beim Zeitfenster muss das Kind auf Grün warten; Dauerfeuer startet
-nur die Wartephase neu. Kein Verlust von Gesundheit oder schon verdienten Punkten.
-Auch nach dem Sieg können die offenen Boni in Ruhe gelöst werden.
-
-## Repositoryaufbau
-
-| Pfad | Zweck |
-|---|---|
-| [pilots/defold](pilots/defold) | Aktuelles natives Spiel einschließlich Eingabe, Darstellung, Speicher und Audio |
-| [shared](shared) | Regeln, Missionen, Originalassets, Herkunftsnachweise und Audioquellen |
-| [tools](tools) | Synchronisation, reproduzierbare Buildbefehle und Regressionstests |
-| [Prüffälle und Fixtures](pilots/defold/main) | Native `*_checks.lua`-Prüffälle; archivierte Regeldaten unter `pilots/defold/data` |
-| [docs](docs) | Auftrag, Meilensteine, Bauanleitung und zentraler Qualitätsstatus |
-| [downloads](downloads) | Geprüfte APKs und maschinenlesbare Buildmetadaten; frühere Dateien über feste Commits |
-
-Aktuelle Prüfkommandos vom Repository-Hauptverzeichnis; Voraussetzungen und
-Werkzeugversionen stehen in [BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md):
-
-```bash
-python3 tools/check_shared.py
-python3 tools/check_defold.py
-```
-
-## Prüfungen und Grenzen
-
-**29.10.2026:** **820 native Prüfungen und 15 gemeinsame Testgruppen bestanden.** Details zu Gesundheit, Schutzort und Stufenshop stehen
-im [zentralen Qualitätsstatus](docs/QUALITY.md). Die vollständige Suite wurde für 0.11 erneut ausgeführt. Die fünf direkten Gesten sowie
-Menüs, Käufe, Speicherneustarts, Fallen, Missionswechsel, native Audioausgabe und
-Geschossverdeckung bleiben Teil der vollständigen Suite. Zwei neue kurze Schatz-/Zoomansagen wurden unabhängig exakt erkannt,
-30 andere bleiben erhalten. Zwei-Finger-Pakete sind nativ simuliert geprüft;
-der echte Android-Mehrfingertest bleibt offen.
-
-Handy-/Tablet-Installation, tatsächliche Latenz, Mehrfingergefühl, Klang,
-längere Runden, Leistung und grafische Abnahme bleiben offen. Keine behauptete
-kommerziell gleichwertige Gesamtproduktion, empirische Lernwirkung oder Store-Reife.
-
-Der 0.10-Stand wurde am 29.10.2026 mit erhaltener Commit-Historie in `main`
-integriert. 0.11 wurde anschließend durch PR #1 übernommen. Die 0.12-Korrekturfassung bleibt erhalten. Die vorgezogene 0.13-Bonus-Macht
-wird separat auf `feat/bonus-power` entwickelt und veröffentlicht.
-Kein automatischer Spielmerge, GitHub-Release oder Store-Upload. Andere Repositories und
-Vergleichs-Engines bleiben unverändert. Keine privaten Familien-Assets oder Schlüssel,
-Konten, Werbung oder Telemetrie. Lokale Daten, keine Android-Berechtigungen, Backup aus.
-
-[Auftrag](docs/PROJECT_BRIEF.md), [Art Direction](docs/ART_DIRECTION.md),
-[Regeln](shared/defold04.json), [Direktsteuerung](pilots/defold/main/touch.lua),
-[Antippzonen](pilots/defold/main/hit_regions.lua),
-[neue Figurenherkunft](shared/assets/defold11/PROVENANCE.json),
-[Lizenzen](THIRD_PARTY.md), [vorheriger Stand](docs/MILESTONE_09.md).
+[Auftrag](docs/PROJECT_BRIEF.md) · [aktueller Meilenstein](docs/MILESTONE_13.md) ·
+[Art Direction](docs/ART_DIRECTION.md) · [Figurenherkunft](shared/assets/defold11/PROVENANCE.json) ·
+[Weltgeometrieherkunft](shared/assets/defold14/PROVENANCE.json) · [Lizenzen](THIRD_PARTY.md) ·
+[vorheriger Spielstand 0.13](docs/MILESTONE_12.md).

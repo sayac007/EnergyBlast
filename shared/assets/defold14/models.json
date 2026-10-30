@@ -1,0 +1,274 @@
+{
+  "campaign_reactor": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_reactor.runtime.gltf"
+  },
+  "campaign_reactor_ground": {
+    "tag": "model",
+    "texture": "floor-reactor.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_citadel": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_citadel.runtime.gltf"
+  },
+  "campaign_citadel_ground": {
+    "tag": "model",
+    "texture": "floor-citadel.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_dock": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_dock.runtime.gltf"
+  },
+  "campaign_dock_ground": {
+    "tag": "model",
+    "texture": "floor-dock.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_forge": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_forge.runtime.gltf"
+  },
+  "campaign_forge_ground": {
+    "tag": "model",
+    "texture": "floor-forge.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_echo": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_echo.runtime.gltf"
+  },
+  "campaign_echo_ground": {
+    "tag": "model",
+    "texture": "floor-echo.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_rescue": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_rescue.runtime.gltf"
+  },
+  "campaign_rescue_ground": {
+    "tag": "model",
+    "texture": "floor-rescue.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_crystal_pass": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_crystal_pass.runtime.gltf"
+  },
+  "campaign_crystal_pass_ground": {
+    "tag": "model",
+    "texture": "floor-reactor.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_swarm_nest": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_swarm_nest.runtime.gltf"
+  },
+  "campaign_swarm_nest_ground": {
+    "tag": "model",
+    "texture": "floor-echo.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_relay_ring": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_relay_ring.runtime.gltf"
+  },
+  "campaign_relay_ring_ground": {
+    "tag": "model",
+    "texture": "floor-dock.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_double_signal": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_double_signal.runtime.gltf"
+  },
+  "campaign_double_signal_ground": {
+    "tag": "model",
+    "texture": "floor-forge.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_ghost_sparks": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_ghost_sparks.runtime.gltf"
+  },
+  "campaign_ghost_sparks_ground": {
+    "tag": "model",
+    "texture": "floor-citadel.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_drone_corridor": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_drone_corridor.runtime.gltf"
+  },
+  "campaign_drone_corridor_ground": {
+    "tag": "model",
+    "texture": "floor-rescue.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_magnetic_cascade": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_magnetic_cascade.runtime.gltf"
+  },
+  "campaign_magnetic_cascade_ground": {
+    "tag": "model",
+    "texture": "floor-forge.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_light_maze": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_light_maze.runtime.gltf"
+  },
+  "campaign_light_maze_ground": {
+    "tag": "model",
+    "texture": "floor-echo.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_triple_core": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_triple_core.runtime.gltf"
+  },
+  "campaign_triple_core_ground": {
+    "tag": "model",
+    "texture": "floor-dock.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  },
+  "campaign_storm_center": {
+    "tag": "model",
+    "texture": null,
+    "runtime": "campaign_storm_center.runtime.gltf"
+  },
+  "campaign_storm_center_ground": {
+    "tag": "model",
+    "texture": "floor-citadel.png",
+    "color_tint": [
+      0.84,
+      0.88,
+      0.96,
+      1
+    ],
+    "campaign_ground": true,
+    "repeat": true
+  }
+}

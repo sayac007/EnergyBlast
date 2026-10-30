@@ -4,6 +4,8 @@ import json,shutil,zipfile,struct
 R=Path(__file__).resolve().parents[1];D=R/'pilots/defold'
 shutil.copyfile(R/'shared/defold04.json',D/'data/defold04.json')
 shutil.copyfile(R/'shared/defold07-regression.json',D/'data/defold07.json')
+shutil.copyfile(R/'shared/defold12-regression.json',D/'data/defold12.json')
+shutil.copyfile(R/'shared/defold13-regression.json',D/'data/defold13.json')
 shutil.copytree(R/'shared/notices',D/'data/notices',dirs_exist_ok=True)
 shutil.copyfile(R/'shared/audio/de/manifest.json',D/'data/audio.json')
 shutil.copyfile(R/'shared/audio/de/LICENSE.txt',D/'data/AUDIO_LICENSE.txt')
@@ -29,10 +31,20 @@ if (polished/'models.json').exists():
  models.update(json.loads((polished/'models.json').read_text()))
  for f in polished.iterdir():
   if f.suffix in ['.gltf','.bin','.png']and '-original'not in f.name:shutil.copyfile(f,D/'models'/f.name)
+# Campaign worlds and original units share existing textures; no repeated art pack.
+for folder in ['defold14','defold14_units']:
+ pack=R/'shared/assets'/folder
+ if (pack/'models.json').exists():
+  models.update(json.loads((pack/'models.json').read_text()))
+  for f in pack.iterdir():
+   if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
 models['hero_aura']={'runtime':'glow.gltf','tag':'hero_aura','texture':None,'fragment':'glow.fp'}
+models['hero_power_shield']={'runtime':'energy_field.gltf','tag':'hero_aura','texture':None,'fragment':'energy_field.fp'}
 for key in models:
  if key.endswith('_ground'):
-  mission=key[:-7];models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png';models[key]['color_tint']=[.84,.88,.96,1]
+  mission=key[:-7]
+  if not key.startswith('campaign_'):models[key]['texture']='floor-'+mission+'.png'if effects.exists()else'floor.png'
+  models[key]['color_tint']=[.84,.88,.96,1]
 for f in art.iterdir():
  if f.suffix in ['.gltf','.bin','.png']:shutil.copyfile(f,D/'models'/f.name)
 for name in models:
@@ -58,6 +70,8 @@ samplers { name: "tex0" wrap_u: WRAP_MODE_CLAMP_TO_EDGE wrap_v: WRAP_MODE_CLAMP_
   if fragment=='billboard.fp':
    width,height=struct.unpack('>II',(D/'models'/texture).read_bytes()[16:24])
    material+='fragment_constants { name: \"atlas_texel\" type: CONSTANT_TYPE_USER value { x: '+str(1/width)+' y: '+str(1/height)+' z: 0 w: 0 } }\n'
+   material+='fragment_constants { name: "power_fx" type: CONSTANT_TYPE_USER value { x: 1 y: 0 z: 0 w: 0 } }\n'
+  if models[name].get('repeat'):material=material.replace('WRAP_MODE_CLAMP_TO_EDGE','WRAP_MODE_REPEAT')
   material='\n'.join(line for line in material.splitlines()if not(('name: \"tint\"'in line and fragment in ['shadow.fp','cover_shadow.fp'])or('name: \"frame\"'in line and fragment not in ['billboard.fp','cover_shadow.fp','energy_field.fp'])or('name: \"hero_fx\"'in line and fragment!='billboard.fp')or('name: \"edge\"'in line and fragment!='billboard.fp')or('name: \"surface\"'in line and fragment!='bright.fp')or('samplers {'in line and fragment in ['shadow.fp','glow.fp','cover_shadow.fp','energy_field.fp'])))+'\n'
   (D/'models'/(key+'.material')).write_text(material)
   model.append('materials { name: '+json.dumps(m['name'])+' material: "/models/'+key+'.material" textures { sampler: "tex0" texture: "/models/'+texture+'" } }')
@@ -109,12 +123,16 @@ for name in ['hero','dragon','fox']:
  portrait=(polished/(name+'-hd-portrait.png'))if (polished/(name+'-hd-portrait.png')).exists()else(illustrations/(name+'-portrait.png'))if illustrations.exists()else(art/(name+'.png'))
  shutil.copyfile(portrait,D/'models'/(name+'.png'))
 (D/'models/portraits.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ['hero','dragon','fox'])+'\nextrude_borders: 2\n')
-shutil.copyfile(art/'surfaces.json',D/'data/surfaces.json')
+shutil.copyfile(art/'surfaces.json',D/'data/surfaces-013.json')
+surface_pack=R/'shared/assets/defold14/surfaces.json'
+shutil.copyfile(surface_pack if surface_pack.exists()else art/'surfaces.json',D/'data/surfaces.json')
 
 shutil.copyfile(art/'rigs.json',D/'data/rigs.json')
 
 ui_names=['button_blue','button_gold','button_green','button_violet','panel']+['ui_'+n for n in ['star','heart','aim','dash','hint','radio','gear','menu','sound','trap']]+['ui_background']
 if illustrations.exists():ui_names += ['ui_'+n for n in ['trap_magnet','trap_frost','trap_pulse','trap_cancel','cannon','armor','boots','cloak']]+['mission_'+n for n in ['reactor','citadel','dock','forge','echo','rescue']]+['lobby','chest-prop']
+for name in ['ui_attack_drone','ui_swarm','ui_crawler','ui_wisp']:
+ if (D/'models'/(name+'.png')).exists():ui_names.append(name)
 (D/'models/interface.atlas').write_text('\n'.join('images { image: "/models/'+n+'.png" }'for n in ui_names)+'\nextrude_borders: 2\n')
 components.append('components { id: "backdrop" component: "/main/backdrop.gui" }')
 (D/'main/main.go').write_text('\n'.join(components)+'\n')

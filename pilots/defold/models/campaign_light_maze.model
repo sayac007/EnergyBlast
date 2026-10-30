@@ -1,0 +1,6 @@
+mesh: "/models/campaign_light_maze.runtime.gltf"
+materials { name: "Hull" material: "/models/campaign_light_maze-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ceramic" material: "/models/campaign_light_maze-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain rim" material: "/models/campaign_light_maze-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous campaign circuit" material: "/models/campaign_light_maze-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Brass fastener" material: "/models/campaign_light_maze-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

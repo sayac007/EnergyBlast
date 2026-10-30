@@ -198,3 +198,30 @@ import, not a claim of skeletal animation. The coloured silhouette shimmer and
 bounded native orbit lights are original shader/code effects. Two new Serena/Qwen
 original generated cues describe treasure guidance and zoom; existing model/audio
 notices and all30 earlier voice recordings remain unchanged.
+
+## Defold 0.13 — permanent bonus powers
+
+Two new complete original Serena/Qwen sentences explain growing bonus powers
+and their local persistence. They use the same pinned synthetic speaker and
+model notices; no actor voice imitation or external recording is used. All32
+earlier spoken recordings and their individual provenance rows are preserved.
+
+## Defold 0.14 — campaign and targetable attack-drone cues
+
+Eight new complete original Serena/Qwen sentences explain stock selection,
+click-or-drag target selection, launch/empty inventory, safe starting cover,
+drone swarms, light sequences and mission completion. They use the same pinned
+synthetic speaker and model notices; no actor imitation, external recording or
+private family asset is used. All34 earlier clips and their provenance rows remain
+preserved; only cues matching the current mission are routed by the game.
+
+## EnergyBlast 0.14 campaign and units
+
+The sixteen campaign arenas and the mini-drone, splitter, crawler, energy wisp,
+attack-drone and lightning meshes are original procedural work created in this
+repository. Sources are `tools/make_defold14_worlds.py` and
+`tools/make_defold14_units.py`; pack provenance records generator and file hashes.
+The arenas reuse the existing original `defold09` floor illustrations. No external
+character/model or reference-game artwork was downloaded for these additions.
+The project's existing terms apply to these original additions; existing third-party
+font, engine, music and speech-model notices remain included.

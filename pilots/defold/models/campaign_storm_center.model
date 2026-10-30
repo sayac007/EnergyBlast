@@ -1,0 +1,6 @@
+mesh: "/models/campaign_storm_center.runtime.gltf"
+materials { name: "Hull" material: "/models/campaign_storm_center-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Ceramic" material: "/models/campaign_storm_center-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Porcelain rim" material: "/models/campaign_storm_center-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous campaign circuit" material: "/models/campaign_storm_center-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Brass fastener" material: "/models/campaign_storm_center-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

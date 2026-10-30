@@ -1,0 +1,4 @@
+sound: "/audio/defold_power_help.ogg"
+looping: 0
+group: "master"
+gain: 1.5395505555914433

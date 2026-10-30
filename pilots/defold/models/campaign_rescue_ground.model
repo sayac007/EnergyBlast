@@ -1,0 +1,2 @@
+mesh: "/models/campaign_rescue_ground.gltf"
+materials { name: "Floor albedo" material: "/models/campaign_rescue_ground-0.material" textures { sampler: "tex0" texture: "/models/floor-rescue.png" } }

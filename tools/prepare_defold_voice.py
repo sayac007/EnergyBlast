@@ -35,6 +35,16 @@ TEXTS={
  'defold_health_refill':'Hier kannst du deine Energie mit Sternen auffüllen. Sie erholt sich auch von selbst.',
  'defold_treasure_hint':'Folge dem goldenen Schatzzeichen. Wenn du näher kommst, leuchtet die Truhe. Geh zu ihr.',
  'defold_zoom_help':'Mit Plus siehst du alles größer. Mit Minus siehst du mehr vom Feld. Mit zwei Fingern kannst du auch zoomen.',
+ 'defold_power_up':'Bonus geschafft. Du bist jetzt größer und stärker. Deine neue Kraft bleibt gespeichert.',
+ 'defold_power_help':'Löse die Bonusaufgaben. So wachsen deine Gesundheit, dein Schild und deine Feuerkraft. Deine neue Kraft bleibt gespeichert.',
+ 'defold_drone_open':'Wähle eine Drohne aus deinem Vorrat.',
+ 'defold_drone_target':'Wähle jetzt das Ziel. Du kannst auf einen Gegner tippen oder die Drohne zu ihm ziehen.',
+ 'defold_drone_launch':'Die Drohne fliegt jetzt zu deinem Ziel.',
+ 'defold_drone_empty':'Keine Drohnen mehr. Nutze deine Waffe oder eine Falle.',
+ 'defold_campaign_mission':'Verlasse den Schutzort. Schalte die Gegner aus und nutze die Deckung.',
+ 'defold_campaign_swarm':'Kleine Drohnen voraus. Einige können sich teilen.',
+ 'defold_campaign_sequence':'Schalte die Gegner aus. Merke dir die Lichter und triff sie in der richtigen Reihenfolge.',
+ 'defold_campaign_clear':'Alle Gegner ausgeschaltet. Weiter zur nächsten Mission.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

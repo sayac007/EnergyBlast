@@ -6,11 +6,11 @@ local Z={}
 local function distance(a,b)return math.sqrt((a.x-b.x)^2+(a.y-b.y)^2)end
 local function point(a,b)return(a.x+b.x)/2,(a.y+b.y)/2 end
 local function eligible(g,a)
- return not g.dialog and not g.paused and not g.over and not g.background and not g.tactical_pause and Layout.field(a.x,a.y)
+ return not g.dialog and not g.paused and not g.over and not g.background and not g.tactical_pause and View.field(g,a.x,a.y)
 end
 function Z.new(g)
  local c={g=g,contacts={},pinch=nil,draining=false,dirty=false}
- g.zoom=View.zoom_factor(g.saved and g.saved.zoom)
+ g.zoom=View.zoom_factor(g.saved and g.saved.zoom,g)
  if g.saved and g.saved.zoom~=nil then g.saved.zoom=g.zoom end
  local function stop_actions()
   if g.touch then g.touch:cancel()end
@@ -21,7 +21,7 @@ function Z.new(g)
   self.dirty=false;g.saved.zoom=g.zoom;if g.changed then g.changed()end
  end
  function c:set(value,x,y,save)
-  local zoom=View.zoom_factor(value)
+  local zoom=View.zoom_factor(value,g)
   if math.abs(zoom-g.zoom)<.000001 then return false end
   x=x or(Layout.left+Layout.right)/2;y=y or(Layout.bottom+Layout.top)/2
   local before=View.unproject(g,x,y)
@@ -60,7 +60,7 @@ function Z.new(g)
   local pair={};local active=0
   for id,p in pairs(self.contacts)do if not released[id]then
    active=active+1
-   if p.field and Layout.field(p.x,p.y)then pair[#pair+1]={id=id,x=p.x,y=p.y}end
+   if p.field and View.field(g,p.x,p.y)then pair[#pair+1]={id=id,x=p.x,y=p.y}end
   end end
   table.sort(pair,function(a,b)return tostring(a.id)<tostring(b.id)end)
   local consumed=self.draining or self.pinch~=nil

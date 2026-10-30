@@ -1,0 +1,6 @@
+mesh: "/models/enemy_wisp.gltf"
+materials { name: "Titanium silver" material: "/models/enemy_wisp-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/enemy_wisp-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Iris enamel" material: "/models/enemy_wisp-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous cyan" material: "/models/enemy_wisp-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous amber" material: "/models/enemy_wisp-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

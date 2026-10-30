@@ -6,9 +6,16 @@ function P.bind(g)
   local cfg=self.data.bonus_power
   local state={enabled=cfg~=nil,count=0,total=0,tier=0,title='ENTDECKER',min_health=self.data.player.hit_points,visual_scale=1,damage_multiplier=1,shield_max=0,cloak_multiplier=1,detection_multiplier=1,regen_fraction=0,milestones={}}
   if not cfg then return state end
+  if self.data.campaign_enabled then
+   state.progress_source='missions'
+   for _,mission in ipairs(self.data.missions)do
+    state.total=state.total+1
+    if self.saved.earned['mission:'..mission.id]==true then state.count=state.count+1 end
+   end
+  end
   for _,mission in ipairs(self.data.missions)do
    for _,id in ipairs({'prism','pattern'})do
-    if mission.bonuses and mission.bonuses[id]and self.data.rewards['bonus:'..id..':'..mission.id]then
+    if not self.data.campaign_enabled and mission.bonuses and mission.bonuses[id]and self.data.rewards['bonus:'..id..':'..mission.id]then
      state.total=state.total+1
      if self.saved.earned['bonus:'..id..':'..mission.id]==true then state.count=state.count+1 end
     end
@@ -28,6 +35,15 @@ function P.bind(g)
     if state.count>=threshold then state.tier=state.tier+1 end
     break
    end end
+  end
+  if self.data.campaign_enabled then
+   state.min_health=math.min(100,math.max(20,state.min_health))
+   state.damage_multiplier=math.min(2,math.max(1,state.damage_multiplier))
+   state.shield_max=math.min(20,math.max(0,state.shield_max))
+   state.visual_scale=math.min(1.25,math.max(1,state.visual_scale))
+   state.detection_multiplier=math.max(.8,math.min(1,state.detection_multiplier))
+   state.cloak_multiplier=state.detection_multiplier
+   if state.next then state.next.min_health=math.min(100,state.next.min_health)end
   end
   return state
  end
@@ -76,7 +92,8 @@ function P.bind(g)
  end
  function g:detection_multiplier()
   local gear=self:owns('cloak2')and .5 or self:owns('cloak')and .825 or 1
-  return gear*self:power_state().detection_multiplier
+  local value=gear*self:power_state().detection_multiplier
+  return self.data.campaign_enabled and math.max(.55,value)or value
  end
 end
 return P

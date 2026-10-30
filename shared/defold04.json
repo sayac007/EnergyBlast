@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "id": "energyblast-defold-13",
+  "id": "energyblast-defold-14",
   "language": "de",
   "controls": "direct_touch_hold_fire_drag_hero",
   "arena": [
@@ -12,7 +12,7 @@
   "player": {
     "speed": 4.8,
     "radius": 0.27,
-    "hit_points": 15,
+    "hit_points": 20,
     "dash_speed": 12,
     "dash_seconds": 0.18,
     "dash_cooldown": 2.8
@@ -65,7 +65,27 @@
     "bonus:prism:echo": 100,
     "bonus:pattern:echo": 150,
     "bonus:prism:rescue": 100,
-    "bonus:pattern:rescue": 150
+    "bonus:pattern:rescue": 150,
+    "mission:crystal_pass": 325,
+    "skill:crystal_pass": 100,
+    "mission:swarm_nest": 350,
+    "skill:swarm_nest": 100,
+    "mission:relay_ring": 375,
+    "skill:relay_ring": 100,
+    "mission:double_signal": 400,
+    "skill:double_signal": 100,
+    "mission:ghost_sparks": 425,
+    "skill:ghost_sparks": 100,
+    "mission:drone_corridor": 450,
+    "skill:drone_corridor": 100,
+    "mission:magnetic_cascade": 475,
+    "skill:magnetic_cascade": 100,
+    "mission:light_maze": 500,
+    "skill:light_maze": 100,
+    "mission:triple_core": 525,
+    "skill:triple_core": 100,
+    "mission:storm_center": 550,
+    "skill:storm_center": 100
   },
   "unlocks": [
     {
@@ -98,8 +118,8 @@
       "id": "reactor",
       "title": "PRISMA-STATION",
       "spawn": [
-        -6.0,
-        4.8
+        -8.0,
+        5.0
       ],
       "goal": [
         6.75,
@@ -121,6 +141,36 @@
       ],
       "covers": [
         [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
+        [
           -1.05,
           -0.9,
           2.1,
@@ -133,34 +183,7 @@
           1.5
         ]
       ],
-      "secret": {
-        "position": [
-          -6.75,
-          -3.75
-        ],
-        "item": "wide_lens",
-        "hint_landmark": [
-          -6.75,
-          -4.9
-        ],
-        "marks": [
-          {
-            "position": [
-              -6.75,
-              -3.5
-            ],
-            "kind": "scorch"
-          },
-          {
-            "position": [
-              -7.65,
-              -3.5
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Kanone voraus. Nutze die leuchtende Wand.",
+      "description": "Abprallwinkel finden.",
       "turrets": [
         {
           "position": [
@@ -186,55 +209,69 @@
         }
       ],
       "kind": "combat",
-      "voice": "combat_reactor",
-      "bonuses": {
-        "prism": {
-          "p": [
-            -8,
-            1
-          ]
-        },
-        "pattern": {
-          "kind": "sequence",
-          "p": [
-            -5.8,
-            -5.5
-          ],
-          "nodes": [
-            [
-              -7.5,
-              -5.5
-            ],
-            [
-              -5.8,
-              -5.5
-            ],
-            [
-              -4.1,
-              -5.5
-            ]
-          ],
-          "sequence": [
-            2,
-            1,
-            3
-          ]
-        }
-      },
+      "voice": "defold_campaign_mission",
       "sanctuary": {
         "position": [
-          -8.2,
-          4.8
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "reactor",
+      "arena_model": "campaign_reactor",
+      "complexity": 1,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Abprallwinkel finden.",
+      "icon": "aim",
+      "subtitle": "ABPRALLER"
     },
     {
       "id": "citadel",
       "title": "NEON-ZITADELLE",
       "spawn": [
-        -8.25,
-        5.25
+        -8.0,
+        5.0
       ],
       "goal": [
         7.8,
@@ -255,6 +292,36 @@
         ]
       ],
       "covers": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
         [
           -4.5,
           -2.25,
@@ -302,34 +369,7 @@
           4.35
         ]
       ],
-      "secret": {
-        "position": [
-          -2.7,
-          -3.6
-        ],
-        "item": "quiet_boots",
-        "hint_landmark": [
-          -2.7,
-          -4.75
-        ],
-        "marks": [
-          {
-            "position": [
-              -2.7,
-              -3.1
-            ],
-            "kind": "scorch"
-          },
-          {
-            "position": [
-              -3.7,
-              -3.1
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Zwei Kanonen. Nutze die Deckung.",
+      "description": "Deckung wechseln und das Torfenster nutzen.",
       "turrets": [
         {
           "position": [
@@ -363,36 +403,69 @@
         }
       ],
       "kind": "combat",
-      "voice": "combat_citadel",
-      "bonuses": {
-        "prism": {
-          "p": [
-            -7.5,
-            1
-          ]
-        },
-        "pattern": {
-          "kind": "wait",
-          "p": [
-            1,
-            -4.5
-          ]
-        }
-      },
+      "voice": "defold_campaign_mission",
       "sanctuary": {
         "position": [
-          -6.1,
-          5.1
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "citadel",
+      "arena_model": "campaign_citadel",
+      "complexity": 2,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Deckung wechseln und das Torfenster nutzen.",
+      "icon": "armor",
+      "subtitle": "DECKUNG & TIMING"
     },
     {
       "id": "dock",
       "title": "AURORA-DOCK",
       "spawn": [
-        -8.25,
-        5.1
+        -8.0,
+        5.0
       ],
       "goal": [
         7.8,
@@ -413,6 +486,36 @@
         ]
       ],
       "covers": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
         [
           -5.4,
           -1.8,
@@ -442,34 +545,7 @@
         7.2,
         0.15
       ],
-      "secret": {
-        "position": [
-          -4.2,
-          -3.45
-        ],
-        "item": "reactor_cell",
-        "hint_landmark": [
-          -4.2,
-          -4.6
-        ],
-        "marks": [
-          {
-            "position": [
-              -4.2,
-              -2.6
-            ],
-            "kind": "scorch"
-          },
-          {
-            "position": [
-              -5.2,
-              -2.6
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Relais ausschalten. Dann den Kern sichern.",
+      "description": "Erst die Relais, dann den geschützten Kern ausschalten.",
       "heal": [
         -8.25,
         -3.75
@@ -544,56 +620,70 @@
         }
       ],
       "kind": "combat",
-      "voice": "raid_dock",
-      "bonuses": {
-        "prism": {
-          "p": [
-            -8,
-            0.7
-          ]
-        },
-        "pattern": {
-          "kind": "sequence",
-          "p": [
-            1.6,
-            -2.8
-          ],
-          "nodes": [
-            [
-              0,
-              -2.8
-            ],
-            [
-              1.7,
-              -2.8
-            ],
-            [
-              3.4,
-              -2.8
-            ]
-          ],
-          "sequence": [
-            3,
-            1,
-            2
-          ]
-        }
-      },
+      "voice": "defold_campaign_mission",
       "sanctuary": {
         "position": [
-          -6.1,
-          5.1
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "dock",
+      "arena_model": "campaign_dock",
+      "complexity": 3,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Erst die Relais, dann den geschützten Kern ausschalten.",
+      "icon": "cannon",
+      "subtitle": "RELAIS & KERN"
     },
     {
       "id": "forge",
       "title": "MAGNETWERK",
       "kind": "trap",
       "spawn": [
-        -7,
-        4.8
+        -8.0,
+        5.0
       ],
       "goal": [
         6,
@@ -615,6 +705,36 @@
       ],
       "covers": [
         [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
+        [
           -3,
           -1,
           2,
@@ -627,34 +747,7 @@
           3
         ]
       ],
-      "secret": {
-        "position": [
-          -5,
-          -4.8
-        ],
-        "item": "bonus_stars",
-        "hint_landmark": [
-          -5,
-          -3.3
-        ],
-        "marks": [
-          {
-            "position": [
-              -5,
-              -3.65
-            ],
-            "kind": "crack"
-          },
-          {
-            "position": [
-              -6,
-              -4.0
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Lege eine Falle. Locke den Waechter hinein.",
+      "description": "Fallen vorbereiten und den Wächter hineinlocken.",
       "voice": "defold_forge",
       "radar": [
         -2.0,
@@ -701,55 +794,69 @@
           "phase": 0.4
         }
       ],
-      "bonuses": {
-        "prism": {
-          "p": [
-            -8,
-            1.5
-          ]
-        },
-        "pattern": {
-          "kind": "sequence",
-          "p": [
-            -4.2,
-            -5.8
-          ],
-          "nodes": [
-            [
-              -6,
-              -5.8
-            ],
-            [
-              -4.2,
-              -5.8
-            ],
-            [
-              -2.4,
-              -5.8
-            ]
-          ],
-          "sequence": [
-            1,
-            3,
-            2
-          ]
-        }
-      },
       "sanctuary": {
         "position": [
-          -8.4,
-          3.4
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "forge",
+      "arena_model": "campaign_forge",
+      "complexity": 4,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Fallen vorbereiten und den Wächter hineinlocken.",
+      "icon": "trap_magnet",
+      "subtitle": "MAGNETFALLEN"
     },
     {
       "id": "echo",
       "title": "ECHO-KAMMER",
       "kind": "sequence",
       "spawn": [
-        -6,
-        0
+        -8.0,
+        5.0
       ],
       "goal": [
         5,
@@ -771,6 +878,36 @@
       ],
       "covers": [
         [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
+        [
           -2,
           -1.5,
           2,
@@ -783,35 +920,8 @@
           2
         ]
       ],
-      "secret": {
-        "position": [
-          -7,
-          -4.7
-        ],
-        "item": "bonus_stars",
-        "hint_landmark": [
-          -7,
-          -3.2
-        ],
-        "marks": [
-          {
-            "position": [
-              -7,
-              -3.5500000000000003
-            ],
-            "kind": "crack"
-          },
-          {
-            "position": [
-              -8,
-              -3.9000000000000004
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Merke dir die Folge. Triff die Kristalle.",
-      "voice": "defold_echo",
+      "description": "Lichtfolge beobachten und in derselben Reihenfolge treffen.",
+      "voice": "defold_campaign_sequence",
       "radar": [
         -1.0,
         0.5
@@ -855,36 +965,69 @@
           -3.6
         ]
       ],
-      "bonuses": {
-        "prism": {
-          "p": [
-            -8,
-            2
-          ]
-        },
-        "pattern": {
-          "kind": "wait",
-          "p": [
-            -5,
-            4.5
-          ]
-        }
-      },
       "sanctuary": {
         "position": [
-          -6,
-          2.7
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "echo",
+      "arena_model": "campaign_echo",
+      "complexity": 5,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Lichtfolge beobachten und in derselben Reihenfolge treffen.",
+      "icon": "radio",
+      "subtitle": "LICHTERFOLGE"
     },
     {
       "id": "rescue",
-      "title": "DROHNEN-RETTUNG",
-      "kind": "escort",
+      "title": "DROHNEN-ANGRIFF",
+      "kind": "combat",
       "spawn": [
-        -7,
-        4.8
+        -8.0,
+        5.0
       ],
       "goal": [
         6,
@@ -906,6 +1049,36 @@
       ],
       "covers": [
         [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ],
+        [
           -3,
           -2.5,
           2,
@@ -918,35 +1091,8 @@
           3
         ]
       ],
-      "secret": {
-        "position": [
-          -7,
-          -4.8
-        ],
-        "item": "bonus_stars",
-        "hint_landmark": [
-          -7,
-          -3.3
-        ],
-        "marks": [
-          {
-            "position": [
-              -7,
-              -3.65
-            ],
-            "kind": "crack"
-          },
-          {
-            "position": [
-              -8,
-              -4.0
-            ],
-            "kind": "arrow"
-          }
-        ]
-      },
-      "description": "Begleite die Drohne. Schuetze ihren Weg.",
-      "voice": "defold_rescue",
+      "description": "Eine Angriffsdrohne auswählen und ein Ziel bestimmen.",
+      "voice": "defold_drone_open",
       "radar": [
         -2.0,
         0.0
@@ -960,14 +1106,15 @@
           "radius": 0.65
         }
       ],
-      "exit_required": true,
+      "exit_required": false,
       "turrets": [
         {
           "position": [
             7,
             3.8
           ],
-          "hp": 2,
+          "kind": "sentinel",
+          "hp": 3,
           "phase": 1
         },
         {
@@ -975,58 +1122,2544 @@
             2,
             -4.8
           ],
-          "hp": 2,
+          "kind": "crawler",
+          "hp": 3,
           "phase": 0.6
+        },
+        {
+          "position": [
+            -4,
+            -4.5
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 1.6
+        },
+        {
+          "position": [
+            7,
+            -2
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 2.1
         }
       ],
-      "escort": {
-        "spawn": [
-          -6.5,
-          4.4
-        ],
-        "route": [
-          [
-            -6,
-            3
-          ],
-          [
-            -5,
-            -3.8
-          ],
-          [
-            0,
-            -4.8
-          ],
-          [
-            6,
-            -4.8
-          ]
-        ],
-        "hp": 3,
-        "speed": 1.7
-      },
-      "bonuses": {
-        "prism": {
-          "p": [
-            -8,
-            1.5
-          ]
-        },
-        "pattern": {
-          "kind": "wait",
-          "p": [
-            1.6,
-            4.7
-          ]
-        }
-      },
       "sanctuary": {
         "position": [
-          -8.4,
-          3.4
+          -8.0,
+          5.0
         ],
         "radius": 1.2
-      }
+      },
+      "arena": [
+        -10.5,
+        -7.5,
+        21.0,
+        15.0
+      ],
+      "theme": "rescue",
+      "arena_model": "campaign_rescue",
+      "complexity": 6,
+      "shelter_walls": [
+        [
+          -10.0,
+          3.0,
+          0.3,
+          4
+        ],
+        [
+          -10.0,
+          3.0,
+          4,
+          0.3
+        ],
+        [
+          -10.0,
+          6.7,
+          4,
+          0.3
+        ],
+        [
+          -6.3,
+          3.0,
+          0.3,
+          2.5
+        ],
+        [
+          -5.0,
+          5.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Eine Angriffsdrohne auswählen und ein Ziel bestimmen.",
+      "icon": "attack_drone",
+      "subtitle": "DROHNE ZUM ZIEL"
+    },
+    {
+      "id": "crystal_pass",
+      "title": "KRISTALLPASS",
+      "theme": "reactor",
+      "arena": [
+        -15.75,
+        -11.25,
+        31.5,
+        22.5
+      ],
+      "arena_model": "campaign_crystal_pass",
+      "complexity": 7,
+      "spawn": [
+        -13.25,
+        8.75
+      ],
+      "sanctuary": {
+        "position": [
+          -13.25,
+          8.75
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        13.75,
+        -9.25
+      ],
+      "covers": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ],
+        [
+          -4,
+          -5,
+          2,
+          10
+        ],
+        [
+          3,
+          -8,
+          2,
+          6
+        ],
+        [
+          5,
+          2,
+          5,
+          1.2
+        ]
+      ],
+      "reflectors": [
+        [
+          -14.9,
+          -10.5,
+          29.8,
+          0.35
+        ],
+        [
+          14.55,
+          -9.5,
+          0.35,
+          18
+        ]
+      ],
+      "turrets": [
+        {
+          "position": [
+            8,
+            -6
+          ],
+          "kind": "sentinel",
+          "hp": 3,
+          "phase": 0.2,
+          "shield": true
+        },
+        {
+          "position": [
+            11,
+            5
+          ],
+          "kind": "sentinel",
+          "hp": 3,
+          "phase": 1.2
+        },
+        {
+          "position": [
+            -8,
+            -7
+          ],
+          "kind": "sentinel",
+          "hp": 2,
+          "phase": 2.1
+        },
+        {
+          "position": [
+            4,
+            8
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 2.5
+        }
+      ],
+      "absorbers": [],
+      "description": "Nutze mehrere Deckungen und finde einen Abpraller für den Schild.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Zwei Sichtlinien und reflektierte Wege kombinieren.",
+      "icon": "aim",
+      "subtitle": "MEHRERE SCHUSSLINIEN"
+    },
+    {
+      "id": "swarm_nest",
+      "title": "SCHWARMNEST",
+      "theme": "echo",
+      "arena": [
+        -15.75,
+        -11.25,
+        31.5,
+        22.5
+      ],
+      "arena_model": "campaign_swarm_nest",
+      "complexity": 8,
+      "spawn": [
+        -13.25,
+        8.75
+      ],
+      "sanctuary": {
+        "position": [
+          -13.25,
+          8.75
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        13.75,
+        -9.25
+      ],
+      "covers": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ],
+        [
+          -6,
+          -6,
+          1.5,
+          9
+        ],
+        [
+          1,
+          -3,
+          2,
+          8
+        ],
+        [
+          6,
+          3,
+          4,
+          1.2
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            -8,
+            -6
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 0.4,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -6,
+            -9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 0.68,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            0,
+            -8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 0.9600000000000001,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            4,
+            -7
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 1.2400000000000002,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            9,
+            -7
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 1.52,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            10,
+            1
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 1.8000000000000003,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            7,
+            6
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 2.08,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            1,
+            8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 2.3600000000000003,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            7,
+            -2
+          ],
+          "kind": "splitter",
+          "hp": 3,
+          "phase": 1,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -3,
+            -7
+          ],
+          "kind": "splitter",
+          "hp": 3,
+          "phase": 2,
+          "replication_period": 9,
+          "max_generation": 2
+        }
+      ],
+      "absorbers": [],
+      "description": "Schwärme teilen sich. Nutze freie Schusslinien und unterbrich die Ausbreitung.",
+      "kind": "combat",
+      "voice": "defold_campaign_swarm",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 3,
+        "speed": 7
+      },
+      "lesson": "Wachsende Gruppen früh erkennen und sichere Wege offen halten.",
+      "icon": "swarm",
+      "subtitle": "SCHWARM STOPPEN"
+    },
+    {
+      "id": "relay_ring",
+      "title": "RELAISRING",
+      "theme": "dock",
+      "arena": [
+        -15.75,
+        -11.25,
+        31.5,
+        22.5
+      ],
+      "arena_model": "campaign_relay_ring",
+      "complexity": 9,
+      "spawn": [
+        -13.25,
+        8.75
+      ],
+      "sanctuary": {
+        "position": [
+          -13.25,
+          8.75
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        13.75,
+        -9.25
+      ],
+      "covers": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ],
+        [
+          -5,
+          -7,
+          1.4,
+          10
+        ],
+        [
+          2,
+          -3,
+          6,
+          1.4
+        ],
+        [
+          7,
+          2,
+          1.4,
+          6
+        ]
+      ],
+      "reflectors": [
+        [
+          -14.9,
+          -10.5,
+          29.8,
+          0.35
+        ]
+      ],
+      "turrets": [
+        {
+          "position": [
+            10,
+            -7
+          ],
+          "kind": "sentinel",
+          "hp": 7,
+          "phase": 0.2,
+          "boss": true,
+          "burst": 3
+        },
+        {
+          "position": [
+            5,
+            8
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 1
+        },
+        {
+          "position": [
+            -1,
+            -7
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 1.5
+        },
+        {
+          "position": [
+            10,
+            2
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 2
+        },
+        {
+          "position": [
+            -8,
+            -3
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 2.5
+        }
+      ],
+      "absorbers": [],
+      "description": "Zwei Relais schützen den Kern. Triff sie zuerst.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 4,
+        "speed": 7
+      },
+      "lesson": "Zielreihenfolge trotz mehrerer Gegner beibehalten.",
+      "relays": [
+        {
+          "position": [
+            -8,
+            -8
+          ]
+        },
+        {
+          "position": [
+            9,
+            7
+          ]
+        }
+      ],
+      "icon": "cannon",
+      "subtitle": "RELAISREIHENFOLGE"
+    },
+    {
+      "id": "double_signal",
+      "title": "DOPPELTES SIGNAL",
+      "theme": "forge",
+      "arena": [
+        -15.75,
+        -11.25,
+        31.5,
+        22.5
+      ],
+      "arena_model": "campaign_double_signal",
+      "complexity": 10,
+      "spawn": [
+        -13.25,
+        8.75
+      ],
+      "sanctuary": {
+        "position": [
+          -13.25,
+          8.75
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        13.75,
+        -9.25
+      ],
+      "covers": [
+        [
+          -15.25,
+          6.75,
+          0.3,
+          4
+        ],
+        [
+          -15.25,
+          6.75,
+          4,
+          0.3
+        ],
+        [
+          -15.25,
+          10.45,
+          4,
+          0.3
+        ],
+        [
+          -11.55,
+          6.75,
+          0.3,
+          2.5
+        ],
+        [
+          -10.25,
+          8.9,
+          0.3,
+          1.95
+        ],
+        [
+          -5,
+          -4,
+          2,
+          8
+        ],
+        [
+          2,
+          -5,
+          1.5,
+          7
+        ],
+        [
+          7,
+          3,
+          4,
+          1.4
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            7,
+            -3
+          ],
+          "kind": "sentinel",
+          "hp": 4,
+          "phase": 0.2,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              7,
+              -3
+            ],
+            [
+              11,
+              -3
+            ],
+            [
+              11,
+              1.7
+            ],
+            [
+              7,
+              1.7
+            ]
+          ],
+          "speed": 1.1
+        },
+        {
+          "position": [
+            9,
+            7
+          ],
+          "kind": "sentinel",
+          "hp": 3,
+          "phase": 1.5
+        },
+        {
+          "position": [
+            -6,
+            -2
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 2
+        },
+        {
+          "position": [
+            -1,
+            7
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 2.5
+        }
+      ],
+      "absorbers": [],
+      "description": "Schalte den Wächter aus und spiele die Lichterfolge nach.",
+      "kind": "sequence",
+      "voice": "defold_campaign_sequence",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 4,
+        "speed": 7
+      },
+      "lesson": "Vorbereitung, Gegnerbeobachtung und Reihenfolge verbinden.",
+      "sequence": [
+        3,
+        1,
+        2
+      ],
+      "sequence_nodes": [
+        [
+          -7,
+          -8
+        ],
+        [
+          0,
+          -8
+        ],
+        [
+          7,
+          -8
+        ]
+      ],
+      "icon": "radio",
+      "subtitle": "WAECHTER & LICHTER"
+    },
+    {
+      "id": "ghost_sparks",
+      "title": "SPUKFUNKEN",
+      "theme": "citadel",
+      "arena": [
+        -17.5,
+        -12.5,
+        35,
+        25
+      ],
+      "arena_model": "campaign_ghost_sparks",
+      "complexity": 11,
+      "spawn": [
+        -15.0,
+        10.0
+      ],
+      "sanctuary": {
+        "position": [
+          -15.0,
+          10.0
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        15.5,
+        -10.5
+      ],
+      "covers": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ],
+        [
+          -8,
+          -7,
+          1.5,
+          10
+        ],
+        [
+          -1,
+          -4,
+          2,
+          8
+        ],
+        [
+          6,
+          -7,
+          1.5,
+          11
+        ],
+        [
+          9,
+          5,
+          5,
+          1.2
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            -9,
+            -9
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 0.3
+        },
+        {
+          "position": [
+            -3,
+            -9
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 0.75
+        },
+        {
+          "position": [
+            4,
+            -10
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 1.2
+        },
+        {
+          "position": [
+            11,
+            -6
+          ],
+          "kind": "wisp",
+          "hp": 2,
+          "phase": 1.6500000000000001
+        },
+        {
+          "position": [
+            -6,
+            2
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 1.0
+        },
+        {
+          "position": [
+            3,
+            5
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 1.35
+        },
+        {
+          "position": [
+            11,
+            3
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 1.7
+        },
+        {
+          "position": [
+            8,
+            9
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 2.05
+        }
+      ],
+      "absorbers": [],
+      "description": "Leuchtwesen und Krabbler greifen aus verschiedenen Richtungen an.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 5,
+        "speed": 7
+      },
+      "lesson": "Gegnerarten unterscheiden und zwischen Deckungen planen.",
+      "icon": "swarm",
+      "subtitle": "WISPS & KRABBLER"
+    },
+    {
+      "id": "drone_corridor",
+      "title": "DROHNENKORRIDOR",
+      "theme": "rescue",
+      "arena": [
+        -17.5,
+        -12.5,
+        35,
+        25
+      ],
+      "arena_model": "campaign_drone_corridor",
+      "complexity": 12,
+      "spawn": [
+        -15.0,
+        10.0
+      ],
+      "sanctuary": {
+        "position": [
+          -15.0,
+          10.0
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        15.5,
+        -10.5
+      ],
+      "covers": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ],
+        [
+          -8,
+          -6,
+          1.5,
+          11
+        ],
+        [
+          -1,
+          -9,
+          1.5,
+          11
+        ],
+        [
+          6,
+          -3,
+          1.5,
+          10
+        ],
+        [
+          10,
+          6,
+          5,
+          1.2
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            11,
+            -8
+          ],
+          "kind": "sentinel",
+          "hp": 7,
+          "phase": 0.2,
+          "boss": true,
+          "burst": 2
+        },
+        {
+          "position": [
+            3,
+            -5
+          ],
+          "kind": "sentinel",
+          "hp": 3,
+          "phase": 1
+        },
+        {
+          "position": [
+            12,
+            1
+          ],
+          "kind": "sentinel",
+          "hp": 3,
+          "phase": 1.5
+        },
+        {
+          "position": [
+            -5,
+            5
+          ],
+          "kind": "crawler",
+          "hp": 3,
+          "phase": 2
+        },
+        {
+          "position": [
+            3,
+            8
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 2.5
+        },
+        {
+          "position": [
+            -9,
+            -3
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.0
+        },
+        {
+          "position": [
+            -4,
+            -9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.25
+        },
+        {
+          "position": [
+            6,
+            -10
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.5
+        },
+        {
+          "position": [
+            13,
+            5
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.75
+        }
+      ],
+      "absorbers": [],
+      "description": "Finde den offenen Korridor und setze Angriffsdrohnen gezielt ein.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 5,
+        "speed": 7
+      },
+      "lesson": "Einen entfernten Zielweg zwischen Deckungen auswählen.",
+      "relays": [
+        {
+          "position": [
+            -10,
+            -10
+          ]
+        },
+        {
+          "position": [
+            12,
+            9
+          ]
+        }
+      ],
+      "icon": "attack_drone",
+      "subtitle": "DROHNENKORRIDOR"
+    },
+    {
+      "id": "magnetic_cascade",
+      "title": "MAGNETKASKADE",
+      "theme": "forge",
+      "arena": [
+        -17.5,
+        -12.5,
+        35,
+        25
+      ],
+      "arena_model": "campaign_magnetic_cascade",
+      "complexity": 13,
+      "spawn": [
+        -15.0,
+        10.0
+      ],
+      "sanctuary": {
+        "position": [
+          -15.0,
+          10.0
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        15.5,
+        -10.5
+      ],
+      "covers": [
+        [
+          -17.0,
+          8.0,
+          0.3,
+          4
+        ],
+        [
+          -17.0,
+          8.0,
+          4,
+          0.3
+        ],
+        [
+          -17.0,
+          11.7,
+          4,
+          0.3
+        ],
+        [
+          -13.3,
+          8.0,
+          0.3,
+          2.5
+        ],
+        [
+          -12.0,
+          10.15,
+          0.3,
+          1.95
+        ],
+        [
+          -7,
+          -7,
+          1.6,
+          12
+        ],
+        [
+          0,
+          -3,
+          2,
+          8
+        ],
+        [
+          7,
+          -8,
+          1.6,
+          11
+        ],
+        [
+          10,
+          6,
+          4,
+          1.3
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            -3,
+            -8
+          ],
+          "kind": "sentinel",
+          "hp": 4,
+          "phase": 0.5,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              -3,
+              -8
+            ],
+            [
+              0,
+              -8
+            ],
+            [
+              0,
+              -5
+            ],
+            [
+              -3,
+              -5
+            ]
+          ],
+          "speed": 1.05
+        },
+        {
+          "position": [
+            10.5,
+            -7
+          ],
+          "kind": "sentinel",
+          "hp": 4,
+          "phase": 1.2,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              10.5,
+              -7
+            ],
+            [
+              13.5,
+              -7
+            ],
+            [
+              13.5,
+              -4
+            ],
+            [
+              10.5,
+              -4
+            ]
+          ],
+          "speed": 1.05
+        },
+        {
+          "position": [
+            10.5,
+            2.5
+          ],
+          "kind": "sentinel",
+          "hp": 4,
+          "phase": 1.9,
+          "shield": true,
+          "trap_shield": true,
+          "patrol": [
+            [
+              10.5,
+              2.5
+            ],
+            [
+              13.5,
+              2.5
+            ],
+            [
+              13.5,
+              4.8
+            ],
+            [
+              10.5,
+              4.8
+            ]
+          ],
+          "speed": 1.05
+        },
+        {
+          "position": [
+            -10,
+            -8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.0
+        },
+        {
+          "position": [
+            -3,
+            5
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.3
+        },
+        {
+          "position": [
+            4,
+            8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.6
+        },
+        {
+          "position": [
+            12,
+            9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.9
+        },
+        {
+          "position": [
+            12,
+            -10
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.2
+        },
+        {
+          "position": [
+            2,
+            -10
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.5
+        }
+      ],
+      "absorbers": [],
+      "description": "Drei Wächter verlangen vorbereitete Fallen oder gezielte Drohnen.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 6,
+        "speed": 7
+      },
+      "lesson": "Mehrere vorbereitete Gelegenheiten nacheinander nutzen.",
+      "icon": "trap_magnet",
+      "subtitle": "DREI WAECHTER"
+    },
+    {
+      "id": "light_maze",
+      "title": "LICHTLABYRINTH",
+      "theme": "echo",
+      "arena": [
+        -21,
+        -15,
+        42,
+        30
+      ],
+      "arena_model": "campaign_light_maze",
+      "complexity": 14,
+      "spawn": [
+        -18.5,
+        12.5
+      ],
+      "sanctuary": {
+        "position": [
+          -18.5,
+          12.5
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        19.0,
+        -13.0
+      ],
+      "covers": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ],
+        [
+          -12,
+          -10,
+          1.5,
+          16
+        ],
+        [
+          -5,
+          -5,
+          1.5,
+          15
+        ],
+        [
+          3,
+          -12,
+          1.5,
+          14
+        ],
+        [
+          11,
+          -4,
+          1.5,
+          16
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            -9,
+            -8
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 0.5
+        },
+        {
+          "position": [
+            -2,
+            0
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 1.0
+        },
+        {
+          "position": [
+            7,
+            -6
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 1.5
+        },
+        {
+          "position": [
+            16,
+            6
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 2.0
+        },
+        {
+          "position": [
+            -8,
+            8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.0,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            0,
+            9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.3,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            6,
+            6
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.6,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            17,
+            -9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.9,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            15,
+            -12
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.2,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            7,
+            12
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.5,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            -1,
+            -8
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 2,
+          "replication_period": 9,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            15,
+            0
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 2.5,
+          "replication_period": 9,
+          "max_generation": 2
+        }
+      ],
+      "absorbers": [],
+      "description": "Plane Wege im großen Labyrinth und behalte die Lichtfolge im Kopf.",
+      "kind": "sequence",
+      "voice": "defold_campaign_sequence",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 6,
+        "speed": 7
+      },
+      "lesson": "Räumliche Planung und eine getrennte Signalaufgabe verbinden.",
+      "sequence": [
+        2,
+        3,
+        1
+      ],
+      "sequence_nodes": [
+        [
+          -10,
+          -12
+        ],
+        [
+          0,
+          -12
+        ],
+        [
+          10,
+          -12
+        ]
+      ],
+      "icon": "radio",
+      "subtitle": "WEGE & SIGNALE"
+    },
+    {
+      "id": "triple_core",
+      "title": "DREIFACHKERN",
+      "theme": "dock",
+      "arena": [
+        -21,
+        -15,
+        42,
+        30
+      ],
+      "arena_model": "campaign_triple_core",
+      "complexity": 15,
+      "spawn": [
+        -18.5,
+        12.5
+      ],
+      "sanctuary": {
+        "position": [
+          -18.5,
+          12.5
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        19.0,
+        -13.0
+      ],
+      "covers": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ],
+        [
+          -12,
+          -9,
+          1.7,
+          16
+        ],
+        [
+          -5,
+          -10,
+          8,
+          1.7
+        ],
+        [
+          2,
+          -3,
+          1.7,
+          13
+        ],
+        [
+          10,
+          -11,
+          1.7,
+          13
+        ],
+        [
+          13,
+          6,
+          5,
+          1.4
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            16,
+            -11
+          ],
+          "kind": "sentinel",
+          "hp": 10,
+          "phase": 0.2,
+          "boss": true,
+          "burst": 3
+        },
+        {
+          "position": [
+            -6,
+            -5
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 1
+        },
+        {
+          "position": [
+            6,
+            5
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 1.5
+        },
+        {
+          "position": [
+            15,
+            10
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 2
+        },
+        {
+          "position": [
+            4,
+            -12
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 2.5
+        },
+        {
+          "position": [
+            -9,
+            -12
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.0,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            -7,
+            9
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.35,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            -2,
+            10
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 3.7,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            6,
+            -7
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.05,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            15,
+            -5
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.4,
+          "replication_period": 10,
+          "max_generation": 1
+        },
+        {
+          "position": [
+            18.6,
+            4.8
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 4.75,
+          "replication_period": 10,
+          "max_generation": 1
+        }
+      ],
+      "absorbers": [],
+      "description": "Drei Relais schützen den Kern. Öffne zuerst die richtigen Sichtlinien.",
+      "kind": "combat",
+      "voice": "defold_campaign_mission",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 7,
+        "speed": 7
+      },
+      "lesson": "Mehrstufige Zielprioritäten in einer großen Arena verfolgen.",
+      "relays": [
+        {
+          "position": [
+            -15,
+            -12
+          ]
+        },
+        {
+          "position": [
+            6,
+            11
+          ]
+        },
+        {
+          "position": [
+            17,
+            0
+          ]
+        }
+      ],
+      "icon": "cannon",
+      "subtitle": "DREI RELAIS"
+    },
+    {
+      "id": "storm_center",
+      "title": "STURMZENTRUM",
+      "theme": "citadel",
+      "arena": [
+        -21,
+        -15,
+        42,
+        30
+      ],
+      "arena_model": "campaign_storm_center",
+      "complexity": 16,
+      "spawn": [
+        -18.5,
+        12.5
+      ],
+      "sanctuary": {
+        "position": [
+          -18.5,
+          12.5
+        ],
+        "radius": 1.2
+      },
+      "shelter_walls": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ]
+      ],
+      "goal": [
+        19.0,
+        -13.0
+      ],
+      "covers": [
+        [
+          -20.5,
+          10.5,
+          0.3,
+          4
+        ],
+        [
+          -20.5,
+          10.5,
+          4,
+          0.3
+        ],
+        [
+          -20.5,
+          14.2,
+          4,
+          0.3
+        ],
+        [
+          -16.8,
+          10.5,
+          0.3,
+          2.5
+        ],
+        [
+          -15.5,
+          12.65,
+          0.3,
+          1.95
+        ],
+        [
+          -12,
+          -9,
+          1.6,
+          15
+        ],
+        [
+          -5,
+          -11,
+          1.6,
+          15
+        ],
+        [
+          2,
+          -4,
+          1.6,
+          15
+        ],
+        [
+          9,
+          -11,
+          1.6,
+          15
+        ],
+        [
+          14,
+          7,
+          5,
+          1.3
+        ]
+      ],
+      "reflectors": [],
+      "turrets": [
+        {
+          "position": [
+            -8,
+            -12
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 0.4,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -1,
+            -12
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 0.7,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            5,
+            -12
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 1.0,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            15,
+            -12
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 1.2999999999999998,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -9,
+            -4
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 1.6,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -1,
+            5
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 1.9,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            6,
+            6
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 2.1999999999999997,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            15,
+            2
+          ],
+          "kind": "splitter",
+          "hp": 4,
+          "phase": 2.5,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            -8,
+            7
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 3.0
+        },
+        {
+          "position": [
+            0,
+            -7
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 3.3
+        },
+        {
+          "position": [
+            7,
+            11
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 3.6
+        },
+        {
+          "position": [
+            16,
+            -5
+          ],
+          "kind": "wisp",
+          "hp": 3,
+          "phase": 3.9
+        },
+        {
+          "position": [
+            -9,
+            -8
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 4.0
+        },
+        {
+          "position": [
+            -2,
+            9
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 4.3
+        },
+        {
+          "position": [
+            6,
+            -6
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 4.6
+        },
+        {
+          "position": [
+            17,
+            5
+          ],
+          "kind": "crawler",
+          "hp": 4,
+          "phase": 4.9
+        },
+        {
+          "position": [
+            -7,
+            11
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 5.0,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            0,
+            12
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 5.3,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            14,
+            11
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 5.6,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            17,
+            -10
+          ],
+          "kind": "mini_drone",
+          "hp": 1,
+          "phase": 5.9,
+          "replication_period": 8,
+          "max_generation": 2
+        },
+        {
+          "position": [
+            17,
+            -2
+          ],
+          "kind": "sentinel",
+          "hp": 10,
+          "phase": 5.5,
+          "boss": true,
+          "burst": 3
+        }
+      ],
+      "absorbers": [],
+      "description": "Stoppe den wachsenden Schwarm, schalte Relais aus und erreiche den Kern.",
+      "kind": "combat",
+      "voice": "defold_campaign_swarm",
+      "exit_required": false,
+      "radar": [
+        0,
+        0
+      ],
+      "attack_drone": {
+        "stock": 8,
+        "speed": 7
+      },
+      "lesson": "Bekannte Werkzeuge flexibel kombinieren; maximal fünfzig Gegner gleichzeitig.",
+      "relays": [
+        {
+          "position": [
+            -15,
+            -12
+          ]
+        },
+        {
+          "position": [
+            17,
+            9
+          ]
+        }
+      ],
+      "icon": "swarm",
+      "subtitle": "ALLE WERKZEUGE"
     }
   ],
   "combat": {
@@ -1053,7 +3686,17 @@
     "dock",
     "forge",
     "echo",
-    "rescue"
+    "rescue",
+    "crystal_pass",
+    "swarm_nest",
+    "relay_ring",
+    "double_signal",
+    "ghost_sparks",
+    "drone_corridor",
+    "magnetic_cascade",
+    "light_maze",
+    "triple_core",
+    "storm_center"
   ],
   "hint_completion_keys": [
     "mission:bank",
@@ -1063,7 +3706,17 @@
     "mission:dock",
     "mission:forge",
     "mission:echo",
-    "mission:rescue"
+    "mission:rescue",
+    "mission:crystal_pass",
+    "mission:swarm_nest",
+    "mission:relay_ring",
+    "mission:double_signal",
+    "mission:ghost_sparks",
+    "mission:drone_corridor",
+    "mission:magnetic_cascade",
+    "mission:light_maze",
+    "mission:triple_core",
+    "mission:storm_center"
   ],
   "preview_trajectory": false,
   "world_scale": 1.5,
@@ -1087,7 +3740,7 @@
       "shot": "energy"
     }
   ],
-  "bonuses_enabled": true,
+  "bonuses_enabled": false,
   "visual_wall_height": 1.7,
   "recovery": {
     "delay_seconds": 4,
@@ -1208,14 +3861,7 @@
       "regen_delay": 2
     }
   ],
-  "treasure_guidance": {
-    "discover_radius": 5.2,
-    "pickup_radius": 1.05,
-    "far_scale": 1.4,
-    "near_scale": 2.3,
-    "search_radius": 1.8
-  },
-  "optional_replay": true,
+  "optional_replay": false,
   "trap_training": {
     "first_mission_index": 4,
     "placement_range": 5.25,
@@ -1228,126 +3874,167 @@
   },
   "bonus_power": {
     "schema": 1,
-    "minimum_fire_cooldown": 0.12,
+    "minimum_fire_cooldown": 0.16,
     "shield_regen_delay": 3,
     "shield_regen_fraction": 0.2,
     "health_regen_fraction": 0.025,
     "steps": [
       {
         "bonuses": 1,
-        "title": "FUNKENHELD",
-        "health": 20,
-        "damage_multiplier": 2,
-        "shield": 3,
-        "detection_multiplier": 0.95,
-        "visual_scale": 1.0625
+        "title": "ENTDECKER",
+        "health": 25,
+        "damage_multiplier": 1.0625,
+        "shield": 2,
+        "detection_multiplier": 0.9875,
+        "visual_scale": 1.0125
       },
       {
         "bonuses": 2,
-        "title": "KRAFTHELD",
+        "title": "ENTDECKER",
         "health": 30,
-        "damage_multiplier": 3,
-        "shield": 5,
-        "detection_multiplier": 0.9,
-        "visual_scale": 1.125
+        "damage_multiplier": 1.125,
+        "shield": 3,
+        "detection_multiplier": 0.975,
+        "visual_scale": 1.025
       },
       {
         "bonuses": 3,
-        "title": "KRAFTHELD",
+        "title": "ENTDECKER",
         "health": 35,
-        "damage_multiplier": 4,
-        "shield": 8,
-        "detection_multiplier": 0.85,
-        "visual_scale": 1.1875
+        "damage_multiplier": 1.1875,
+        "shield": 4,
+        "detection_multiplier": 0.9625,
+        "visual_scale": 1.0375
       },
       {
         "bonuses": 4,
-        "title": "STERNENHELD",
+        "title": "PFADFINDER",
         "health": 40,
-        "damage_multiplier": 6,
-        "shield": 12,
-        "detection_multiplier": 0.8,
-        "visual_scale": 1.25
+        "damage_multiplier": 1.25,
+        "shield": 5,
+        "detection_multiplier": 0.95,
+        "visual_scale": 1.05
       },
       {
         "bonuses": 5,
-        "title": "STERNENHELD",
-        "health": 80,
-        "damage_multiplier": 10,
-        "shield": 20,
-        "detection_multiplier": 0.72,
-        "visual_scale": 1.3125
+        "title": "PFADFINDER",
+        "health": 45,
+        "damage_multiplier": 1.3125,
+        "shield": 7,
+        "detection_multiplier": 0.9375,
+        "visual_scale": 1.0625
       },
       {
         "bonuses": 6,
-        "title": "STERNENHELD",
-        "health": 160,
-        "damage_multiplier": 16,
-        "shield": 40,
-        "detection_multiplier": 0.65,
-        "visual_scale": 1.375
+        "title": "PFADFINDER",
+        "health": 50,
+        "damage_multiplier": 1.375,
+        "shield": 8,
+        "detection_multiplier": 0.925,
+        "visual_scale": 1.075
       },
       {
         "bonuses": 7,
-        "title": "STERNENHELD",
-        "health": 400,
-        "damage_multiplier": 25,
-        "shield": 75,
-        "detection_multiplier": 0.56,
-        "visual_scale": 1.4375
+        "title": "PFADFINDER",
+        "health": 55,
+        "damage_multiplier": 1.4375,
+        "shield": 9,
+        "detection_multiplier": 0.9125,
+        "visual_scale": 1.0875
       },
       {
         "bonuses": 8,
-        "title": "TITAN",
-        "health": 1000,
-        "damage_multiplier": 50,
-        "shield": 150,
-        "detection_multiplier": 0.45,
-        "visual_scale": 1.5
+        "title": "TAKTIKHELD",
+        "health": 60,
+        "damage_multiplier": 1.5,
+        "shield": 10,
+        "detection_multiplier": 0.9,
+        "visual_scale": 1.1
       },
       {
         "bonuses": 9,
-        "title": "TITAN",
-        "health": 10000,
-        "damage_multiplier": 100,
-        "shield": 1000,
-        "detection_multiplier": 0.35,
-        "visual_scale": 1.5625
+        "title": "TAKTIKHELD",
+        "health": 65,
+        "damage_multiplier": 1.5625,
+        "shield": 12,
+        "detection_multiplier": 0.8875,
+        "visual_scale": 1.1125
       },
       {
         "bonuses": 10,
-        "title": "TITAN",
-        "health": 100000,
-        "damage_multiplier": 250,
-        "shield": 5000,
-        "detection_multiplier": 0.25,
-        "visual_scale": 1.625
+        "title": "TAKTIKHELD",
+        "health": 70,
+        "damage_multiplier": 1.625,
+        "shield": 13,
+        "detection_multiplier": 0.875,
+        "visual_scale": 1.125
       },
       {
         "bonuses": 11,
-        "title": "TITAN",
-        "health": 400000,
-        "damage_multiplier": 500,
-        "shield": 20000,
-        "detection_multiplier": 0.17,
-        "visual_scale": 1.6875
+        "title": "TAKTIKHELD",
+        "health": 75,
+        "damage_multiplier": 1.6875,
+        "shield": 14,
+        "detection_multiplier": 0.8625,
+        "visual_scale": 1.1375
       },
       {
         "bonuses": 12,
-        "title": "KOSMISCHER RIESE",
-        "health": 1000000,
-        "damage_multiplier": 1000,
-        "shield": 100000,
-        "detection_multiplier": 0.1,
-        "visual_scale": 1.75
+        "title": "STERNENWAECHTER",
+        "health": 80,
+        "damage_multiplier": 1.75,
+        "shield": 15,
+        "detection_multiplier": 0.85,
+        "visual_scale": 1.15
+      },
+      {
+        "bonuses": 13,
+        "title": "STERNENWAECHTER",
+        "health": 85,
+        "damage_multiplier": 1.8125,
+        "shield": 17,
+        "detection_multiplier": 0.8375,
+        "visual_scale": 1.1625
+      },
+      {
+        "bonuses": 14,
+        "title": "STERNENWAECHTER",
+        "health": 90,
+        "damage_multiplier": 1.875,
+        "shield": 18,
+        "detection_multiplier": 0.825,
+        "visual_scale": 1.175
+      },
+      {
+        "bonuses": 15,
+        "title": "STERNENWAECHTER",
+        "health": 95,
+        "damage_multiplier": 1.9375,
+        "shield": 19,
+        "detection_multiplier": 0.8125,
+        "visual_scale": 1.1875
+      },
+      {
+        "bonuses": 16,
+        "title": "MEISTER",
+        "health": 100,
+        "damage_multiplier": 2.0,
+        "shield": 20,
+        "detection_multiplier": 0.8,
+        "visual_scale": 1.2
       }
     ],
     "milestones": [
       1,
-      2,
       4,
       8,
-      12
-    ]
-  }
+      12,
+      16
+    ],
+    "mode": "missions",
+    "cap_health": 100
+  },
+  "campaign_enabled": true,
+  "campaign_v14": true,
+  "max_hostiles": 50
 }

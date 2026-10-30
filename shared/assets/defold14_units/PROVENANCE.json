@@ -1,0 +1,76 @@
+{
+  "generator": "tools/make_defold14_units.py",
+  "origin": "Original procedural geometry and offline rendered icons; no external images/models",
+  "files": [
+    {
+      "path": "shared/assets/defold14_units/attack_drone.bin",
+      "bytes": 178560,
+      "sha256": "154abb5571648bd45362e90e430af5c26ec18d1d0918f0236a5048421237b47b"
+    },
+    {
+      "path": "shared/assets/defold14_units/attack_drone.gltf",
+      "bytes": 4783,
+      "sha256": "d7aac5f903505eaebbaa2cb65ccfda2e87b7d12a222bab523cfbb63cde6bb68c"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_crawler.bin",
+      "bytes": 117504,
+      "sha256": "71c9468d67b768578dc21fa6eb2f42c1c3a7dca9ece95b579a16360ee7478c07"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_crawler.gltf",
+      "bytes": 5046,
+      "sha256": "1dd537ea59cadd0ea7b61597c41958996c8293bc9b7c64c2bb09d50d11d3831d"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_mini_drone.bin",
+      "bytes": 164736,
+      "sha256": "390432d0ff69a1f68b71d195b00af399b0bb15b1aae06ce72a5085645e478d6a"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_mini_drone.gltf",
+      "bytes": 4036,
+      "sha256": "703048cac3cd14f258da46e4bf548f6e9fcdac3dc6c477d72e477bedb150aab7"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_splitter.bin",
+      "bytes": 125952,
+      "sha256": "6cd653a94364fe22cee0da61500208a0d3d4bfde3106a40758cbcaf00348af57"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_splitter.gltf",
+      "bytes": 5206,
+      "sha256": "611c5af3175e0e30fe090dcbff62f4623193a8d9075de2a450aa4d5c623e6e38"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_wisp.bin",
+      "bytes": 67584,
+      "sha256": "d95ea7bef8adc5bf98618626826064b8ba93344340c97bc11c156187bdf2420b"
+    },
+    {
+      "path": "shared/assets/defold14_units/enemy_wisp.gltf",
+      "bytes": 4302,
+      "sha256": "64a0c469f661e03112cbedbecde4d922231d61c371c719766c942b681a8c8b18"
+    },
+    {
+      "path": "shared/assets/defold14_units/ui_attack_drone.png",
+      "bytes": 31674,
+      "sha256": "61876568c67eda9a08a1ccc79e1e9aa3d4268a7f90b22c97c29a71b11ac83a4b"
+    },
+    {
+      "path": "shared/assets/defold14_units/ui_swarm.png",
+      "bytes": 31450,
+      "sha256": "aa261ddf93aab98c05af830575cb16ed44904ae8286c8d915c6e0a73fd7dbec1"
+    },
+    {
+      "path": "shared/assets/defold14_units/unit_lightning.bin",
+      "bytes": 26880,
+      "sha256": "46c0ade1f61e96183525f2673e90ef2fa22eb708b211fc179b07f5d51363c096"
+    },
+    {
+      "path": "shared/assets/defold14_units/unit_lightning.gltf",
+      "bytes": 1158,
+      "sha256": "3876032bc7de74ae8399b02d6e9cfeb51a5a575242d136944e218fd42fb045ce"
+    }
+  ]
+}

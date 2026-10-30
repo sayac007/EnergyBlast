@@ -236,3 +236,43 @@ Grenze; Wege und Deckungen bleiben nutzbar.
 20 Missionen und die vorgeschlagene Ich-Perspektive. Sie wurden durch „zuerst“
 nach hinten gestellt und gehören nicht zum ausgelieferten Umfang dieser Runde.
 [Bonus-Macht, tatsächlicher Prüfstand und Grenzen](MILESTONE_12.md).
+
+## Betreiberrevision — 30.10.2026: 16 Missionen, klare Ziele und begrenzte Macht
+
+Der neueste Auftrag ersetzt die frühere Planung von 20 weiteren Missionen durch
+**zehn neue Missionen**, also 16 insgesamt. Versteckte Bonusaufgaben und Truhen
+entfallen vollständig aus dem aktiven Spiel. Sie waren trotz mehrerer
+Auffindbarkeitshilfen noch unklar. Gespeicherte frühere Sterne und gekaufte
+Ausrüstung bleiben bestehen; Fortschritt entsteht künftig durch abgeschlossene
+Missionen statt durch versteckte Funde.
+
+Die übertriebene Millionengesundheit wird auf **höchstens 100 inklusive Rüstung**
+begrenzt. Schild, Feuerkraft und Darstellungsgröße erhalten passende Grenzen.
+Tarnung reduziert die normale Entdeckung, macht den Spieler aber nicht dauerhaft
+unauffindbar: Gegner können ihn wiederholt auch aus großer Entfernung genau orten.
+Wände behalten ihre Wirkung auf tatsächliche Geschosse.
+
+Der **Zikkurat ist immer der Startpunkt**. Er liegt in einer begehbaren geschützten
+Nische und schließt gegnerische Schüsse zuverlässig aus. Komplexere Arenen werden
+in Breite und Tiefe um 50 bis 100 Prozent größer. Maximales Herauszoomen zeigt die
+Feldgrenzen; außerhalb erscheint keine irritierende All-Kulisse. Größere Arenen
+kombinieren zusätzliche Schusslinien, Relais, Lichterfolgen, Fallen und neue
+Gegnertypen. Teilbare Mini-Drohnen-Familien bleiben endlich; maximal 50 lebende
+Gegner sind gleichzeitig zulässig.
+
+Die begleitete Schutzdrohne wird durch eine **steuerbare Angriffsdrohne aus einem
+Vorrat** ersetzt. Die abschließende Präzisierung ist verbindlich: Im Katalog eine
+Drohne wählen, anschließend auf sie drücken und zum Gegner ziehen; alternativ
+nach „Wähle jetzt das Ziel“ den Gegner antippen. Sie wird nicht als statische Falle
+auf den Boden gelegt. Erst ihr tatsächlicher Flug und Kontakt lösen die stilisierte
+Blitz-/Zerstörungsanimation aus. Boss-Relaisregeln bleiben erhalten.
+
+Die Missionsauswahl muss alle 16 Missionen auf verständlichen Seiten anbieten.
+Angekündigte Aktionen der oberen Leiste werden anklickbar; die alten Bonus- und
+Schatzanzeigen verschwinden. Sprachhinweise müssen zum aktuellen Ziel und zur
+Drohnenbedienung passen, ohne alte Sammel- oder Begleitaufträge zu wiederholen.
+
+Umsetzung auf `feat/campaign-16` als **0.14.0 / Android-Code 15**.
+[Missionen, Steuerung und tatsächlicher Prüfstand](MILESTONE_13.md).
+Die historischen Anweisungen und früheren APKs bleiben als Entwicklungsnachweis
+getrennt erhalten. Kein automatischer Merge, neuer PR oder Release-/Store-Upload.

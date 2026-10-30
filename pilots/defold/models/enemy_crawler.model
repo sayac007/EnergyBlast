@@ -1,0 +1,7 @@
+mesh: "/models/enemy_crawler.gltf"
+materials { name: "Hull midnight" material: "/models/enemy_crawler-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Titanium silver" material: "/models/enemy_crawler-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Jade enamel" material: "/models/enemy_crawler-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/enemy_crawler-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Coral armor" material: "/models/enemy_crawler-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous red" material: "/models/enemy_crawler-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }

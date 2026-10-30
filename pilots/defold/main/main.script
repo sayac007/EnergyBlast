@@ -5,10 +5,12 @@ local Zoom=require 'main.zoom'
 local PolishFixture=require 'main.polish_fixture'
 local ReplayFixture=require 'main.replay_fixture'
 local PowerFixture=require 'main.power_fixture'
+local CampaignFixture=require 'main.campaign_fixture'
+local DroneControls=require 'main.drone_controls'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
- local contextual=id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_power_')~=nil or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and self.voice_id:match('^defold_trap_')~=nil)
+ local contextual=id:match('^defold_drone_')~=nil or id:match('^defold_campaign_')~=nil or id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_power_')~=nil or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and (self.voice_id:match('^defold_trap_')~=nil or self.voice_id:match('^defold_drone_')~=nil))
  if contextual then
   if self.voice_id then sound.stop('#'..self.voice_id)end
   self.voice_left=0;self.voice_next=nil;self.follow_enemy_tap=false
@@ -132,26 +134,50 @@ local function draw_projectiles(self,dt)
   b.trail_clock=(b.trail_clock or 0)+dt
   if not self.g.paused and b.trail_clock>.045 then
    b.trail_clock=0
-   if #self.trails>=80 then go.delete(self.trails[1].id);table.remove(self.trails,1)end
+   if #self.trails>=((self.g.data.campaign_enabled or self.g.data.campaign_v14)and 48 or 80)then go.delete(self.trails[1].id);table.remove(self.trails,1)end
    self.trails[#self.trails+1]={id=glow(self,b.p,b,.34),life=.19}
   end
  end
  for b,id in pairs(self.projectile_nodes)do if not alive[b]then go.delete(id);if self.halo_nodes[b]then go.delete(self.halo_nodes[b])end;self.halo_nodes[b]=nil;self.projectile_nodes[b]=nil end end
 end
+local native_kinds={mini_drone=true,splitter=true,crawler=true,wisp=true}
+local function delete_enemy(self,enemy)
+ for _,key in ipairs({'node','shadow','field'})do
+  local id=enemy[key];if id and go.exists(id)then go.delete(id)end;enemy[key]=nil
+ end
+ if self.enemy_nodes then self.enemy_nodes[enemy]=nil end
+end
+local function ensure_enemy(self,enemy)
+ if enemy.node and go.exists(enemy.node)then return end
+ self.enemy_nodes=self.enemy_nodes or{};self.enemy_nodes[enemy]=true
+ enemy.native_unit=native_kinds[enemy.kind]==true
+ enemy.illustrated=not enemy.native_unit and not enemy.optional and enemy.kind~='relay'and enemy.kind~='sequence'
+ enemy.shadow=factory.create('#shadow',vmath.vector3(enemy.p[1],0,enemy.p[2]))
+ local model=enemy.native_unit and('enemy_'..enemy.kind)or enemy.illustrated and('illustrated_'..(enemy.boss and'boss'or enemy.trap_shield and'guardian'or'sentinel'))or'illustrated_relay'
+ enemy.node=factory.create('#'..model,vmath.vector3(enemy.p[1],0,enemy.p[2]))
+ if enemy.shield or enemy.boss then enemy.field=factory.create('#energy_field',vmath.vector3(enemy.p[1],0,enemy.p[2]))end
+ enemy.model_pending=nil
+end
 local function rebuild(self,index)
  clear_fragments(self);clear_projectiles(self)
+ for enemy in pairs(self.enemy_nodes or{})do delete_enemy(self,enemy)end;self.enemy_nodes={}
  for _,id in ipairs(self.objects or{})do go.delete(id)end;self.objects={};self.g:load(index)
+ local zoom=View.zoom_factor(self.g.zoom or 1,self.g)
+ if self.g.zoom~=zoom then self.g.zoom=zoom;self.g.saved.zoom=zoom;self.g.changed()end
  local function make(name,p)
   local id=factory.create('#'..name,vmath.vector3(p[1],0,p[2]));self.objects[#self.objects+1]=id;return id
  end
- self.arena=make(self.g.m.id,{0,0});self.ground=make(self.g.m.id..'_ground',{0,0});replace_hero(self)
+ local arena_model=self.g.m.arena_model or self.g.m.id
+ self.arena=make(arena_model,{0,0});self.ground=make(arena_model..'_ground',{0,0});replace_hero(self)
  self.cover_shadows={}
  for _,wall in ipairs(self.g.walls)do if wall.type~='border'then local r=wall.r;local id=make('cover_shadow',{r[1]+r[3]/2+.1,r[2]+r[4]/2+.1});go.set_position(vmath.vector3(r[1]+r[3]/2+.1,.077,r[2]+r[4]/2+.1),id);go.set_scale(vmath.vector3(r[3]+.65,1,r[4]+.65),id);go.set(msg.url(nil,id,'model'),'frame',vmath.vector4(r[3]/(r[3]+.65),r[4]/(r[4]+.65),.42,0));self.cover_shadows[#self.cover_shadows+1]=id end end
- self.selection=make('selection_ring',self.g.p);self.hero_shadow=make('shadow',self.g.p);self.chest=make('illustrated_chest',self.g.m.secret.position)
- self.chest_glow=glow(self,self.g.m.secret.position,{visual='treasure'},.48);self.objects[#self.objects+1]=self.chest_glow
+ self.selection=make('selection_ring',self.g.p);self.hero_shadow=make('shadow',self.g.p);self.chest=nil;self.chest_glow=nil
+ if self.g.m.secret and not self.g.data.campaign_enabled then
+  self.chest=make('illustrated_chest',self.g.m.secret.position);self.chest_glow=glow(self,self.g.m.secret.position,{visual='treasure'},.48);self.objects[#self.objects+1]=self.chest_glow
+ end
  self.gate=self.g.m.gate_rect and make('gate',{0,0})or nil
  self.drone=self.g.drone and make('illustrated_drone',self.g.drone.p)or nil
- self.lobby=make('lobby',self.g.p)
+ self.lobby=not self.g.data.campaign_enabled and make('lobby',self.g.p)or nil
  self.sanctuary=nil;self.sanctuary_field=nil
  if self.g.m.sanctuary then
   local zone=self.g.m.sanctuary
@@ -159,36 +185,92 @@ local function rebuild(self,index)
  end
  self.heal=self.g.m.heal and make('illustrated_heal',self.g.m.heal)or nil
  for _,id in pairs(self.device_nodes or{})do go.delete(id)end;self.device_nodes={}
- for _,t in ipairs(self.g.enemies)do t.shadow=make('shadow',t.p);t.illustrated=not t.optional and t.kind~='relay'and t.kind~='sequence';t.node=make(t.illustrated and('illustrated_'..(t.boss and'boss'or t.trap_shield and'guardian'or'sentinel'))or'illustrated_relay',t.p);if t.shield or t.boss then t.field=make('energy_field',t.p)end end
+ for _,t in ipairs(self.g.enemies)do ensure_enemy(self,t)end
  View.follow(self.g,0,true)
  if not self.suppress_intro then self.g.say(self.g.m.voice or(self.g.m.id=='dock'and'raid_dock'or'combat_'..self.g.m.id));if self.g.m.kind~='trap'then self.voice_next='defold_controls'end end
 end
 local function render_fragments(self)
- local alive={}
- for _,f in ipairs(self.g.fx)do if f.kind=='explosion'then
-  alive[f]=true
-  if not self.fragments[f]then
-   self.fragments[f]={}
-   for j=1,10 do self.fragments[f][j]=factory.create(j%2==0 and'#spark_hot'or'#spark',vmath.vector3(f.p[1],.8,f.p[2]))end
-   self.fragments[f][11]=factory.create('#illustrated_explosion',vmath.vector3(f.p[1],.1,f.p[2]))
-  end
-  for j,id in ipairs(self.fragments[f])do
-   if j==11 then local frame=math.min(7,math.floor(f.age/.9*8));sprite_frame(id,frame%4,math.floor(frame/4),4,2,false,false)
-   else local a=j*2.399963;local speed=1.6+(j%3)*.65;local t=f.age
-   go.set_position(vmath.vector3(f.p[1]+math.cos(a)*speed*t,.8+(2.8+(j%2))*t-4*t*t,f.p[2]+math.sin(a)*speed*t),id)
-   go.set_rotation(vmath.quat_rotation_z(t*(j%2==0 and 9 or -9))*vmath.quat_rotation_y(a+t*5),id)
-   go.set_scale(math.max(.001,f.life/.9)*(1+(j%3)*.3),id)
+ local campaign=self.g.data.campaign_enabled or self.g.data.campaign_v14
+ local alive={};local count=0
+ local effects={}
+ if campaign then for _,f in ipairs(self.g.fx)do if f.kind=='lightning'and f.primary then effects[#effects+1]=f end end end
+ for index=#self.g.fx,1,-1 do local f=self.g.fx[index];if not(campaign and f.kind=='lightning'and f.primary)then effects[#effects+1]=f end end
+ for _,f in ipairs(effects)do
+  if(f.kind=='explosion'or(campaign and f.kind=='lightning'))and(not campaign or count<8)then
+   count=count+1;alive[f]=true
+   if f.kind=='lightning'then
+    if not self.fragments[f]then self.fragments[f]={factory.create('#unit_lightning',vmath.vector3(f.p[1],.12,f.p[2]))}end
+    local id=self.fragments[f][1];local pulse=.8+math.abs(math.sin((f.age or 0)*42))*.55
+    go.set_scale(vmath.vector3(pulse,1.05+math.sin((f.age or 0)*28)*.18,pulse),id)
+    go.set_rotation(vmath.quat_rotation_y((f.age or 0)*9),id)
+   else
+    local bits=campaign and 4 or 10;local atlas=bits+1
+    if not self.fragments[f]then
+     self.fragments[f]={}
+     for j=1,bits do self.fragments[f][j]=factory.create(j%2==0 and'#spark_hot'or'#spark',vmath.vector3(f.p[1],.8,f.p[2]))end
+     self.fragments[f][atlas]=factory.create('#illustrated_explosion',vmath.vector3(f.p[1],.1,f.p[2]))
+    end
+    for j,id in ipairs(self.fragments[f])do
+     if j==atlas then local frame=math.min(7,math.floor(f.age/.9*8));sprite_frame(id,frame%4,math.floor(frame/4),4,2,false,false)
+     else local a=j*2.399963;local speed=1.6+(j%3)*.65;local t=f.age
+      go.set_position(vmath.vector3(f.p[1]+math.cos(a)*speed*t,.8+(2.8+(j%2))*t-4*t*t,f.p[2]+math.sin(a)*speed*t),id)
+      go.set_rotation(vmath.quat_rotation_z(t*(j%2==0 and 9 or-9))*vmath.quat_rotation_y(a+t*5),id)
+      go.set_scale(math.max(.001,f.life/.9)*(1+(j%3)*.3),id)
+     end
+    end
    end
   end
- end end
+ end
  for f,ids in pairs(self.fragments)do if not alive[f]then for _,id in ipairs(ids)do go.delete(id)end;self.fragments[f]=nil end end
+end
+local function draw_campaign_units(self,dt)
+ if not(self.g.data.campaign_enabled or self.g.data.campaign_v14)then return end
+ local heights={mini_drone=1.45,splitter=1.35,crawler=1.1,wisp=1.8}
+ for index,e in ipairs(self.g.enemies)do if heights[e.kind]and e.node and go.exists(e.node)then
+  e.ui_height=heights[e.kind];e.native_unit=true
+  local seed=e.uid or index;local phase=self.visual_clock*(e.kind=='wisp'and 2.2 or 4.5)+seed
+  local hover=e.kind=='mini_drone'and(.42+math.sin(phase)*.11)or e.kind=='wisp'and(.65+math.sin(phase)*.2)or e.kind=='splitter'and(.11+math.sin(phase)*.035)or .025
+  local d=e.direction or{0,1};local yaw=math.atan2(d[1],d[2])+math.pi
+  if e.kind=='wisp'then yaw=phase*.7 end
+  local bank=e.kind=='crawler'and math.sin(phase*2)*.035 or math.sin(phase)*.08
+  go.set_position(vmath.vector3(e.p[1],hover,e.p[2]),e.node)
+  go.set_rotation(vmath.quat_rotation_y(yaw)*vmath.quat_rotation_z(bank),e.node)
+  local age=e.death_age;local size=e.hp>0 and 1 or(age and math.max(.001,1-age/.32)or .001)
+  local pulse=e.kind=='splitter'and(1+math.sin(phase*.6)*.04)or 1
+  go.set_scale(vmath.vector3(size*pulse,size*(1-bank*.4),size*pulse),e.node)
+ end end
+end
+local function draw_attack_drone(self,dt)
+ local state=self.g.attack_drone
+ if self.attack_drone_owner~=state then
+  if self.attack_drone_node and go.exists(self.attack_drone_node)then go.delete(self.attack_drone_node)end
+  if self.attack_drone_glow and go.exists(self.attack_drone_glow)then go.delete(self.attack_drone_glow)end
+  self.attack_drone_node=nil;self.attack_drone_glow=nil;self.attack_drone_owner=state;self.attack_drone_last=nil
+ end
+ if not state or state.phase~='flying'or not state.p then
+  if self.attack_drone_node and go.exists(self.attack_drone_node)then go.delete(self.attack_drone_node)end
+  if self.attack_drone_glow and go.exists(self.attack_drone_glow)then go.delete(self.attack_drone_glow)end
+  self.attack_drone_node=nil;self.attack_drone_glow=nil;self.attack_drone_last=nil;return
+ end
+ if not self.attack_drone_node then
+  self.attack_drone_node=factory.create('#attack_drone',vmath.vector3(state.p[1],.8,state.p[2]))
+  self.attack_drone_glow=glow(self,state.p,{visual='fireball'},.35)
+ end
+ local p=state.p;local prior=self.attack_drone_last or p;local dx,dz=p[1]-prior[1],p[2]-prior[2]
+ if dx*dx+dz*dz>.000001 then self.attack_drone_yaw=math.atan2(dx,dz)+math.pi end
+ local hover=.82+math.sin(self.visual_clock*12)*.035
+ go.set_position(vmath.vector3(p[1],hover,p[2]),self.attack_drone_node)
+ go.set_rotation(vmath.quat_rotation_y(self.attack_drone_yaw or 0)*vmath.quat_rotation_z(math.sin(self.visual_clock*16)*.035),self.attack_drone_node)
+ go.set_position(vmath.vector3(p[1],hover+.10,p[2]),self.attack_drone_glow);go.set_scale(.35+.05*math.sin(self.visual_clock*10),self.attack_drone_glow)
+ self.attack_drone_last={p[1],p[2]}
 end
 local function bind_controls(g)
  g.project=View.project
  g.touch=Touch.new(g,function(x,y)return View.ground(g,x,y)end)
  g.zoom_control=Zoom.new(g)
+ g.drone_control=DroneControls.new(g)
  g.input=function(a)g.touch:input(a)end
- g.control_tick=function(dt)g.touch:update(dt)end
+ g.control_tick=function(dt)g.touch:update(dt);g.drone_control:update(dt)end
 end
 local function run_tests(self)
  -- Retain the previous combat regression against its original arena fixture.
@@ -217,12 +299,21 @@ local function run_tests(self)
  n=n+require('main.power_checks').run(self.g.data)
  self.g.paused=false;self.g.path={{self.g.p[1]+1,self.g.p[2]}};self.visual_clock=.20;animate_hero(self,.016)
  n=n+require('main.presentation_checks').run(self)
+ print('DEFOLD ARCHIVED013: '..n..' native checks PASS')
+ local current=json.decode(sys.load_resource('/data/defold04.json'));current.visual_surfaces=json.decode(sys.load_resource('/data/surfaces.json'))
+ local archived=n
+ n=n+require('main.campaign_checks').run(current)
+ n=n+require('main.campaign_core_checks').run(current)
+ n=n+require('main.attack_drone_checks').run(current)
+ n=n+require('main.camera14_checks').run(current)
+ print('DEFOLD ACTIVE014: '..(n-archived)..' native checks PASS')
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
 end
 function init(self)
  self.capture_hero_fx_off=sys.get_config_string('project.capture_hero_fx_off','0')=='1';self.capture_field_off=sys.get_config_string('project.capture_field_off','0')=='1';self.objects={};self.fragments={};self.visual_clock=0;self.rigs=json.decode(sys.load_resource('/data/rigs.json'));self.voice_left=0;self.clips={};self.voice_next=nil
  self.test_mode=sys.get_config_string('project.test_mode','0')=='1';self.muted=self.test_mode
- local data=json.decode(sys.load_resource('/data/defold04.json'));data.visual_surfaces=json.decode(sys.load_resource('/data/surfaces.json'))
+ local archived=os.getenv('ENERGYBLAST_REGRESSION_RULES')=='013'and sys.get_config_string('project.campaign_ui_test','0')=='0'
+ local data=json.decode(sys.load_resource(archived and'/data/defold13.json'or'/data/defold04.json'));data.visual_surfaces=json.decode(sys.load_resource(archived and'/data/surfaces-013.json'or'/data/surfaces.json'))
  local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
  local path=sys.get_save_file('energyblast','progress');self.save_path=path
  local saved=not self.test_mode and sys.load(path)or nil;if saved and not saved.earned then saved=nil end
@@ -243,7 +334,7 @@ function init(self)
   for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end
  end
  self.ui_test=sys.get_config_string('project.ui_test','0')=='1';self.g.ui_test=self.ui_test;if self.ui_test then self.g.saved={earned={},clues={},weapon='pulse',music=true,schema=2,purchases={},spent={}};for k in pairs(self.g.data.rewards)do if not k:match(':bank$')and not k:match(':guardian$')then self.g.saved.earned[k]=true end end end
- self.g.cancel_controls=function()self.g.touch:cancel();self.g.zoom_control:cancel();msg.post('#ui','cancel_controls')end
+ self.g.cancel_controls=function()self.g.touch:cancel();self.g.zoom_control:cancel();self.g.drone_control:reset();msg.post('#ui','cancel_controls')end
  self.g.choose=function(index)msg.post(self.logic_url,'choose',{index=index})end
  self.g.pick_character=function(id)msg.post(self.logic_url,'character',{id=id})end
  self.g.replay=function()msg.post(self.logic_url,'radio')end
@@ -285,6 +376,7 @@ function init(self)
  PolishFixture.init(self)
  ReplayFixture.init(self)
  PowerFixture.init(self)
+ CampaignFixture.init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
@@ -332,12 +424,22 @@ function update(self,dt)
  PolishFixture.update(self,dt)
  ReplayFixture.update(self,dt)
  PowerFixture.update(self,dt)
- View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],hero_scale=self.hero_visual_scale or 1,zoom=self.g.zoom})
+ CampaignFixture.update(self,dt)
+ View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],hero_scale=self.hero_visual_scale or 1,zoom=self.g.zoom,campaign=self.g.data.campaign_enabled==true,arena=self.g.arena})
  local p=self.g.p
  animate_hero(self,dt)
  go.set_position(vmath.vector3(p[1],0,p[2]),self.hero_shadow);go.set_scale(self.hero_visual_scale or 1,self.hero_shadow);go.set_position(vmath.vector3(p[1],0,p[2]),self.selection);go.set_scale((self.hero_visual_scale or 1)*(self.g.dragging and 1.25 or 1),self.selection)
- go.set_position(vmath.vector3(p[1],0,p[2]),self.lobby)
+ if self.lobby then go.set_position(vmath.vector3(p[1],0,p[2]),self.lobby)end
+ local active={};local dying=0
  for _,t in ipairs(self.g.enemies)do
+  active[t]=true
+  local render=true
+  if self.g.data.campaign_enabled and t.hp<=0 then
+   local recent=(t.death_age or 999)<.45
+   if recent then dying=dying+1 end
+   render=recent and dying<=8
+  end
+  if not render then delete_enemy(self,t)else ensure_enemy(self,t)
   local age=t.death_age;local scale=t.hp>0 and(t.optional and .7 or t.boss and 1.2 or 1)or(age and age<.32 and math.max(.001,1-age/.32)*1.2 or .001)
   go.set_position(vmath.vector3(t.p[1],0,t.p[2]),t.shadow);go.set_scale(t.hp>0 and 1 or .001,t.shadow)
   go.set_position(vmath.vector3(t.p[1],t.kind=='relay'and math.sin(self.g.clock*2)*.08 or 0,t.p[2]),t.node)
@@ -357,7 +459,10 @@ function update(self,dt)
    go.set(msg.url(nil,t.field,'model'),'frame',vmath.vector4(self.visual_clock,0,0,0))
    go.set(msg.url(nil,t.field,'model'),'tint',t.trap_shield and vmath.vector4(.65,.30,1,.9)or vmath.vector4(.15,.75,1,.85))
   end
- end
+ end end
+ for e in pairs(self.enemy_nodes or{})do if not active[e]then delete_enemy(self,e)end end
+ self.g.retired_enemies={}
+ draw_campaign_units(self,dt);draw_attack_drone(self,dt)
  draw_projectiles(self,dt)
  local devices={}
  for _,trap in ipairs(self.g.traps)do
@@ -373,11 +478,13 @@ function update(self,dt)
  end
  if self.heal then go.set_scale(self.g.heal_used and .001 or(1+math.sin(self.visual_clock*2)*.025),self.heal)end
  if self.gate then local r=self.g.m.gate_rect;go.set_position(vmath.vector3(r[1]+r[3]/2,0,r[2]+r[4]/2),self.gate);go.set_scale(vmath.vector3(r[3],self.g:open()and .001 or 1,r[4]),self.gate)end
+ if self.chest and self.chest_glow then
  local treasure=self.g:treasure_state()
  go.set_scale(treasure.visible and treasure.scale*(1+math.sin(self.visual_clock*3)*.035)or .001,self.chest)
  go.set(msg.url(nil,self.chest,'model'),'hero_fx',vmath.vector4(self.visual_clock,0,treasure.proximity,treasure.visible and 4 or 0))
  go.set_position(vmath.vector3(treasure.position[1],.55,treasure.position[2]),self.chest_glow);go.set_scale(treasure.visible and treasure.scale*.72 or .001,self.chest_glow)
  go.set_position(vmath.vector3(self.g.m.secret.position[1],.04+math.sin(self.visual_clock*3)*.025,self.g.m.secret.position[2]),self.chest)
+ end
  if self.drone then local e=self.g.drone;go.set_position(vmath.vector3(e.p[1],.08*math.sin(self.g.clock*5),e.p[2]),self.drone)end
  render_fragments(self)
 end
@@ -393,6 +500,7 @@ function on_message(self,id,message)
   PolishFixture.choose(self)
   ReplayFixture.choose(self)
   PowerFixture.choose(self)
+  CampaignFixture.choose(self)
   if self.g.direct_touch_test then self.g.p={4,4.8};self.g.invulnerable=999;for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end;self.g.paused=false;self.g.dialog=nil;View.follow(self.g,0,true)end
   if sys.get_config_string('project.capture_motion','0')=='1'then
    self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-3},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-4.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))

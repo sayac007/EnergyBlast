@@ -260,3 +260,43 @@ repository changes. Keep historical instructions below as a decision log.
   regression fixture. Test fresh and previously completed saves, actual native
   growth/shield/cloak output and GUI input; separate physical Android checks.
   No automatic merge, PR, Actions, Release/Play or other-repository changes.
+
+## Campaign revision 0.14 — latest operator request, 30 October 2026
+
+- Work on `feat/campaign-16`, version 0.14.0 / code 15. The latest request replaces
+  the former 20-mission plan with exactly 10 additional missions: 16 total. Remove
+  active hidden bonus tasks and chests entirely. Preserve earlier earned stars,
+  purchases and immutable historical assets/reports rather than deleting them.
+- Progress now follows completed missions. Maximum health is 100 INCLUDING all
+  purchased armor; shield capacity 20, projectile damage 8 and fire interval 0.16 s
+  bound the earlier extravagant power model. Keep existing purchases useful and
+  never mint a second completion reward on replay. Legacy 0.13 data remains frozen
+  for explicit historical regressions; new campaign checks must use active rules.
+- Camouflage is partial. Ordinary detection retains a 0.55 floor and enemies have
+  repeated accurate long-distance sensor locks. Neither concealment nor cover
+  permits bullets through walls. Do not restore permanently invisible players.
+- Every mission starts the hero inside its Zikkurat. Use a reachable physical
+  shelter plus swept projectile absorption; enemy shots cannot reach its interior,
+  including reflections or an inside spawn. The exit remains walkable.
+- More complex fields use individual mission arenas from 31.5x22.5 to 42x30 versus
+  the former 21x15. Geometry, collision, navigation, projection and picking must
+  consume those same bounds. Maximum zoom-out stops at the field boundary;
+  neutral aspect-ratio margins contain no outside scenery or decorative cosmos.
+- Add recognizable mini-drones, finite splitting families, crawlers, wisps and
+  stronger guardians. Bound simultaneous living hostiles to 50, preserve finite
+  family generations and clean dead render objects. Never create an endless
+  replication wave that silently prevents completion.
+- Attack drones are selected from a finite stock catalogue, like choosing a trap,
+  but their targeting is different: after selecting, DRAG the ready drone onto an
+  enemy OR hear "Waehle jetzt das Ziel" and TAP an enemy. Real flight precedes
+  the electric contact destruction. Invalid targets, foreign fingers, cancellation
+  and background/menu changes must not spend stock or leak walking/shooting.
+  Keep relay locks on bosses; empty stock cannot make a mission impossible.
+- Mission selection has 16 accessible cards across pages. The upper HUD must use
+  real touch buttons for its advertised actions; remove obsolete bonus/chest
+  controls and stale "already collected" or escort instructions.
+- Retain the existing synthetic speaker; eight new complete cues are technically
+  decoded/hash-checked and independently transcribed. Do not confuse those checks
+  with a human hearing test. Report actual native/Android build results separately.
+- No automatic game merge, PR, Actions, Release/Play upload, private family asset,
+  signing-key publication or changes to another repository.

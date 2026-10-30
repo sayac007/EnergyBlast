@@ -10,7 +10,7 @@ function M.run(g)
  local function step(seconds)for i=1,math.floor(seconds/.025+.001)do g:update(.025)end end
  local function fresh(i)g.saved={earned={},clues={},weapon='pulse',schema=2,purchases={},spent={}};g:load(i or 1);for _,e in ipairs(g.enemies)do e.timer=999;e.warning=0 end end
  local function fire_at(t)local p=t.p;g.aim=C.norm({p[1]-g.p[1],p[2]-g.p[2]});g.cooldown=0;g:fire();step(.25)end
- local surfaces=json.decode(sys.load_resource('/data/surfaces.json'))
+ local surfaces=json.decode(sys.load_resource('/data/surfaces-013.json'))
  check(#g.data.missions==6,'six selectable sectors')
  for i,m in ipairs(g.data.missions)do
   fresh(i);local rows=surfaces[m.id];check(#rows==#g.walls,'rendered surface count matches collision count '..m.id)

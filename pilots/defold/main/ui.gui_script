@@ -2,6 +2,15 @@ local Layout=require 'main.layout'
 local Traps=require 'main.trap_controls'
 local Objectives=require 'main.objectives'
 local PowerFormat=require 'main.power_format'
+local View=require 'main.view'
+local Regions=require 'main.hit_regions'
+local function campaign(g)return g.data.campaign_enabled==true or g.data.campaign_v14==true end
+local function field(g,x,y)return campaign(g)and View.field(g,x,y)or(not campaign(g)and Layout.field(x,y))end
+local function picked(g,b,x,y)
+ if not campaign(g)then return gui.pick_node(b.node,x,y)end
+ local r=b.rect
+ return x>=r[1]-r[3]/2 and x<=r[1]+r[3]/2 and y>=r[2]-r[4]/2 and y<=r[2]+r[4]/2
+end
 local function color(hex)return vmath.vector4(tonumber(hex:sub(1,2),16)/255,tonumber(hex:sub(3,4),16)/255,tonumber(hex:sub(5,6),16)/255,1)end
 local function track(self,n)
  gui.set_adjust_mode(n,gui.ADJUST_STRETCH)
@@ -51,18 +60,18 @@ local function power_button(self,g,x,y,w,h)
  local n=picture(self,x,y,w,h,state.count>0 and'button_violet'or'button_blue',nil,true)
  icon(self,x-w/2+26,y+6,'armor',32)
  text(self,x+17,y+7,tostring(state.count)..'/'..tostring(state.total),'fff0a3',.61,w-53)
- text(self,x,y-h/2+12,'BONUS-MACHT','d4eaff',.31,w-10)
+ text(self,x,y-h/2+12,campaign(g)and'AUSRUESTUNG'or'BONUS-MACHT','d4eaff',.31,w-10)
  self.buttons[#self.buttons+1]={node=n,action='power',rect={x,y,w,h}}
 end
 local function power_page(self,g)
  local state=power_state(g)
  panel(self,930,376,630,477)
- text(self,930,587,state.title or'DEINE BONUS-MACHT','fff0a6',1.02,578)
- text(self,930,551,tostring(state.count)..' VON '..tostring(state.total)..' BONI · GROESSE '..math.floor((state.visual_scale or 1)*100+.5)..'%','a8ebed',.52,578)
+ text(self,930,587,state.title or(campaign(g)and'DEINE AUSRUESTUNG'or'DEINE BONUS-MACHT'),'fff0a6',1.02,578)
+ text(self,930,551,tostring(state.count)..' VON '..tostring(state.total)..(campaign(g)and' MISSIONEN · GESUNDHEIT MAXIMAL 100'or' BONI · GROESSE '..math.floor((state.visual_scale or 1)*100+.5)..'%'),'a8ebed',.52,578)
  local cards={
   {x=778,y=476,icon='heart',title='GESUNDHEIT',value=PowerFormat.number(g.max_hp)},
   {x=1082,y=476,icon='armor',title='SCHILD',value=PowerFormat.number(g.max_shield or state.shield_max)},
-  {x=778,y=378,icon='cannon',title='FEUERKRAFT',value='x'..PowerFormat.number(state.damage_multiplier)},
+  {x=778,y=378,icon='cannon',title='FEUERKRAFT',value=campaign(g)and(PowerFormat.decimal(g:weapon_stats().damage)..' SCHADEN')or'x'..PowerFormat.number(state.damage_multiplier)},
   {x=1082,y=378,icon='cloak',title='TARNUNG',value=PowerFormat.percent(1-(g.detection_multiplier and g:detection_multiplier()or state.detection_multiplier or state.cloak_multiplier or 1))}
  }
  for _,card in ipairs(cards)do
@@ -71,17 +80,17 @@ local function power_page(self,g)
   text(self,card.x+22,card.y-11,card.value,'ffffff',.84,198)
  end
  local next=state.next
- local target=next and('NOCH '..math.max(0,next.count-state.count)..' BONI: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE')or'ALLE BONI GESCHAFFT · DEINE MACHT BLEIBT'
+ local target=next and('NOCH '..math.max(0,next.count-state.count)..(campaign(g)and' MISSIONEN: '..PowerFormat.number(math.min(100,next.min_health))..' ENERGIE'or' BONI: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE'))or(campaign(g)and'ALLE MISSIONEN GESCHAFFT · AUSRUESTUNG BLEIBT'or'ALLE BONI GESCHAFFT · DEINE MACHT BLEIBT')
  text(self,930,305,target,'ffe590',.57,580)
  local milestones=state.milestones or{}
  for i,m in ipairs(milestones)do
   local x=682+(i-1)*124;local earned=state.count>=m.count
   picture(self,x,238,113,89,earned and'button_green'or'panel',nil,true)
   icon(self,x-29,255,earned and'star'or'heart',25)
-  text(self,x+15,255,tostring(m.count)..' BONI',earned and'ffffff'or'aac5d7',.39,77)
+  text(self,x+15,255,tostring(m.count)..(campaign(g)and' MISSIONEN'or' BONI'),earned and'ffffff'or'aac5d7',.39,77)
   text(self,x,220,PowerFormat.number(m.min_health),earned and'fff0a3'or'b1cbdf',.55,103)
  end
- text(self,930,164,'BONI LOESEN · DAUERHAFT STAERKER WERDEN · KEINE STERNKOSTEN','a3d5e2',.42,595)
+ text(self,930,164,campaign(g)and'TARNUNG HILFT · GEGNER KOENNEN DICH WEITERHIN ORTEN'or'BONI LOESEN · DAUERHAFT STAERKER WERDEN · KEINE STERNKOSTEN','a3d5e2',.42,595)
  button(self,930,78,615,78,'ZURUECK','power_close','green','dash')
  if g.power_ui_test then print('DEFOLD POWER PAGE READY count='..state.count..' hp='..g.max_hp..' shield='..(g.max_shield or 0))end
 end
@@ -91,20 +100,26 @@ local function mission_card(self,g,m,i,x,y,subtitle)
  glass(self,x,y-4,306,144,.96)
  local clip=box(self,x,y,298,136,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false)
  local first=#self.nodes+1
- picture(self,x,y+8,300,169,'mission_'..m.id)
+ picture(self,x,y+8,300,169,'mission_'..(campaign(g)and(m.theme or m.id)or m.id))
  local shade=box(self,x,y-38,300,62,'07152c');gui.set_color(shade,vmath.vector4(.025,.06,.13,.90))
  local done=(g.saved.earned['bonus:prism:'..m.id]and 1 or 0)+(g.saved.earned['bonus:pattern:'..m.id]and 1 or 0)
- text(self,x,y-26,m.title,'ffffff',.77,278);text(self,x,y-51,subtitle..' · BONI '..done..'/2 GEHOLT','bdebf1',.41,280)
+ local detail=campaign(g)and(subtitle..' · STUFE '..tostring(m.complexity or m.difficulty or i))or(subtitle..' · BONI '..done..'/2 GEHOLT')
+ text(self,x,y-26,m.title,'ffffff',.77,278);text(self,x,y-51,detail,'bdebf1',.41,280)
  if i>=4 and not g.saved.earned['mission:'..m.id]then local tag=box(self,x,y+53,88,24,'d79125');text(self,x,y+53,'NEU','ffffff',.55,80)end
  circle(self,x-123,y+45,19,'142b47')
  if g.saved.earned['mission:'..m.id]then icon(self,x-123,y+46,'star',32)else text(self,x-123,y+45,tostring(i),'ffffff',.70)end
  local symbols={'aim','armor','cannon','trap_magnet','radio','heart'}
- circle(self,x+122,y+44,23,'10243c');icon(self,x+122,y+44,symbols[i],41)
+ local symbol=campaign(g)and(m.icon or(m.kind=='sequence'and'radio'or m.kind=='trap'and'trap_magnet'or'aim'))or symbols[i]
+ circle(self,x+122,y+44,23,'10243c');icon(self,x+122,y+44,symbol,41)
  for j=first,#self.nodes do gui.set_parent(self.nodes[j],clip,true)end
  self.buttons[#self.buttons+1]={node=clip,action='sector'..i,rect={x,y,298,136}}
  gui.set_position(clip,vmath.vector3(x,y-10,0));gui.animate(clip,gui.PROP_POSITION,vmath.vector3(x,y,0),gui.EASING_OUTCUBIC,.24,(i-1)*.025)
 end
 local function clamp(v,a,b)return math.max(a,math.min(b,v))end
+local function viewport(g)
+ if not campaign(g)then return Layout end
+ local w,h=window.get_size();return View.viewport(g,w,h)
+end
 local function ground_ring(self,g,p,r,c,width)
  for j=0,47 do
   local a=j*math.pi/24;local b=(j+1)*math.pi/24
@@ -114,19 +129,20 @@ local function ground_ring(self,g,p,r,c,width)
  end
 end
 local function field_guide(self,g,state)
- if state.goal and not g.trap_ui then
+ local bounds=viewport(g)
+ if state.goal and not g.trap_ui and not g.drone_ui then
   if state.goal_kind=='treasure'and g.treasure_state then
    local t=g:treasure_state();local target=state.goal
-   local tx,ty=g.project(g,target,.35);local x=clamp(tx,Layout.left+65,Layout.right-65);local y=clamp(ty,Layout.bottom+65,Layout.top-65)
+   local tx,ty=g.project(g,target,.35);local x=clamp(tx,bounds.left+65,bounds.right-65);local y=clamp(ty,bounds.bottom+65,bounds.top-65)
    local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local size=38+t.proximity*18;local pulse=1+math.sin(g.clock*4)*.06
    circle(self,x,y,size*pulse,'443414');ring(self,x,y,size*pulse,'ffda64',4);icon(self,x,y,'treasure',size*1.4)
    if off then local dx,dy=tx-x,ty-y;local d=math.sqrt(dx*dx+dy*dy);if d>0 then line(self,x+dx/d*size,y+dy/d*size,x+dx/d*(size+15),y+dy/d*(size+15),'ffe394',5)end end
-   text(self,clamp(x,Layout.left+176,Layout.right-176),clamp(y-size-15,Layout.bottom+23,Layout.top-23),t.discovered and(t.occluded and'HINTER DER DECKUNG'or t.replay and'NOCH EINMAL FINDEN'or'ZUR TRUHE')or'SUCHGEBIET','ffe99a',.62,205)
+   text(self,clamp(x,bounds.left+176,bounds.right-176),clamp(y-size-15,bounds.bottom+23,bounds.top-23),t.discovered and(t.occluded and'HINTER DER DECKUNG'or t.replay and'NOCH EINMAL FINDEN'or'ZUR TRUHE')or'SUCHGEBIET','ffe99a',.62,205)
    local n=box(self,x,y,size*2,size*2,'ffffff');gui.set_color(n,vmath.vector4(1,1,1,0))
    self.buttons[#self.buttons+1]={node=n,action='treasure_walk',world=true,rect={x,y,size*2,size*2}}
    return
   end
-  local tx,ty=g.project(g,state.goal,.15);local x=clamp(tx,Layout.left+48,Layout.right-48);local y=clamp(ty,Layout.bottom+44,Layout.top-44)
+  local tx,ty=g.project(g,state.goal,.15);local x=clamp(tx,bounds.left+48,bounds.right-48);local y=clamp(ty,bounds.bottom+44,bounds.top-44)
   local off=math.abs(x-tx)>1 or math.abs(y-ty)>1;local guide_color=state.goal_kind=='exit'and'78ffb7'or state.goal_kind=='bonus'and'c5a0ff'or'ffe5a0'
   local symbol=state.goal_kind=='treasure'and'treasure'or state.goal_kind=='exit'and'dash'or state.goal_kind=='drone'and'heart'or state.goal_kind=='sequence'and'radio'or state.goal_kind=='bonus'and'star'or'aim'
   if off then
@@ -137,13 +153,15 @@ local function field_guide(self,g,state)
    end
   else ground_ring(self,g,state.goal,.65,state.goal_kind=='treasure'and'ffda79'or state.goal_kind=='exit'and'78ffb7'or'8cebe7',2)end
   local title=state.goal_kind=='treasure'and'SCHATZSPUR'or state.goal_kind=='exit'and'AUSGANG'or state.goal_kind=='drone'and'DROHNE'or state.goal_kind=='sequence'and'LICHTER'or state.goal_kind=='bonus'and'BONUS'or'ZIEL'
-  text(self,clamp(x,Layout.left+85,Layout.right-85),clamp(y-34,Layout.bottom+16,Layout.top-16),title,guide_color,.43,160)
+  text(self,clamp(x,bounds.left+85,bounds.right-85),clamp(y-34,bounds.bottom+16,bounds.top-16),title,guide_color,.43,160)
  end
 end
 local function field_traps(self,g)
  if not Objectives.can_trap(g)or g.over then return end
+ if campaign(g)and g.drone_ui then return end
+ local bounds=viewport(g)
  local px,py=g.project(g,g.p,.4)
- local bx=clamp(px+87,Layout.left+54,Layout.right-54);local by=clamp(py+20,Layout.bottom+58,Layout.top-58)
+ local bx=clamp(px+87,bounds.left+54,bounds.right-54);local by=clamp(py+20,bounds.bottom+58,bounds.top-58)
  if not g.trap_ui then
   local n=picture(self,bx,by,92,92,'button_violet',nil,true);icon(self,bx,by+9,'trap_magnet',61)
   text(self,bx,by-29,g.trap_cooldown>0 and tostring(math.ceil(g.trap_cooldown))..' s'or'FALLEN','ffffff',.48,83)
@@ -152,9 +170,9 @@ local function field_traps(self,g)
   return
  end
  local ui=g.trap_ui
- local x=clamp(px,Layout.left+240,Layout.right-240);local y=clamp(py,Layout.bottom+190,Layout.top-175)
+ local x=clamp(px,bounds.left+240,bounds.right-240);local y=clamp(py,bounds.bottom+190,bounds.top-175)
  if ui.mode=='catalogue'then
-  local dim=box(self,640,360,Layout.right-Layout.left,Layout.top-Layout.bottom,'111e41');gui.set_color(dim,vmath.vector4(.04,.08,.2,.82))
+  local dim=box(self,640,360,bounds.right-bounds.left,bounds.top-bounds.bottom,'111e41');gui.set_color(dim,vmath.vector4(.04,.08,.2,.82))
   panel(self,x,y,470,329);text(self,x,y+138,'WAEHLE DEINE FALLE','ffffff',.93,430)
   local offsets={-145,0,145}
   for i,base in ipairs(Objectives.catalogue)do
@@ -184,11 +202,11 @@ local function field_traps(self,g)
   ground_ring(self,g,preview,spec.radius,ui.valid and'9cffce'or'ff718e',4)
   local tx,ty=g.project(g,preview,.12)
   local n=icon(self,tx,ty+21,spec.icon,64);gui.set_color(n,vmath.vector4(1,1,1,.70))
-  text(self,clamp(tx,Layout.left+160,Layout.right-160),clamp(ty-45,Layout.bottom+24,Layout.top-24),ui.reason,ui.valid and'a7ffd9'or'ff90a8',.57,310)
+  text(self,clamp(tx,bounds.left+160,bounds.right-160),clamp(ty-45,bounds.bottom+24,bounds.top-24),ui.reason,ui.valid and'a7ffd9'or'ff90a8',.57,310)
   -- Only this cancel control is overlaid; the rest of the floor remains a target.
-  local cy=Layout.top-42
-  button(self,Layout.right-114,cy,214,64,'ABBRECHEN','trap_cancel','blue','trap_cancel')
-  text(self,Layout.left+290,cy,'TIPPE AUF FREIEN BODEN','d6fff0',.75,500)
+  local cy=bounds.top-42
+  button(self,bounds.right-114,cy,214,64,'ABBRECHEN','trap_cancel','blue','trap_cancel')
+  text(self,bounds.left+290,cy,'TIPPE AUF FREIEN BODEN','d6fff0',.75,500)
   if g.trap_test and self.trap_logged_mode~=ui.mode then
    -- Exercise a real floor point beyond the former 3.5-unit placement circle.
    local tx,ty=g.project(g,{g.p[1]+4.4,g.p[2]},0)
@@ -198,9 +216,70 @@ local function field_traps(self,g)
  end
  self.trap_logged_mode=ui.mode
 end
+local function field_drone(self,g)
+ if not campaign(g)or not g.attack_drone or not g.attack_drone.enabled or g.over then return end
+ if g.trap_ui then return end
+ local d=g.attack_drone;local ui=g.drone_ui;local bounds=viewport(g)
+ local px,py=g.project(g,g.p,.4)
+ local bx=clamp(px-100,bounds.left+51,bounds.right-51);local by=clamp(py+20,bounds.bottom+55,bounds.top-55)
+ if not ui then
+  -- Keep the two tactical controls separate even beside a viewport edge.
+  for _,b in ipairs(self.buttons)do if b.action=='trap_open'then
+   local r=b.rect
+   if math.abs(bx-r[1])<97 and math.abs(by-r[2])<97 then
+    local choices={{r[1]-104,r[2]},{r[1],r[2]+106},{r[1],r[2]-106},{r[1]+104,r[2]}}
+    for _,p in ipairs(choices)do
+     local x=clamp(p[1],bounds.left+51,bounds.right-51);local y=clamp(p[2],bounds.bottom+55,bounds.top-55)
+     if math.abs(x-r[1])>=97 or math.abs(y-r[2])>=97 then bx,by=x,y;break end
+    end
+   end
+  end end
+  local busy=d.phase=='flying'or d.phase=='cooldown'
+  local n=picture(self,bx,by,90,90,busy and'button_blue'or d.stock>0 and'button_gold'or'panel',nil,true)
+  icon(self,bx,by+12,'attack_drone',58)
+  text(self,bx,by-27,busy and'UNTERWEGS'or'DROHNEN '..d.stock,'ffffff',.43,84)
+  self.buttons[#self.buttons+1]={node=n,action='drone_open',world=true,rect={bx,by,90,90}}
+  if g.campaign_ui_test and self.drone_ready~=g.index then self.drone_ready=g.index;print('DEFOLD CAMPAIGN DRONE BADGE '..math.floor(bx)..' '..math.floor(by)..' stock='..d.stock)end
+  return
+ end
+ local x=clamp(px,bounds.left+245,bounds.right-245);local y=clamp(py,bounds.bottom+164,bounds.top-164)
+ if ui.mode=='catalogue'then
+  local dim=box(self,(bounds.left+bounds.right)/2,(bounds.bottom+bounds.top)/2,bounds.right-bounds.left,bounds.top-bounds.bottom,'111e41');gui.set_color(dim,vmath.vector4(.04,.08,.2,.82))
+  panel(self,x,y,460,312)
+  text(self,x,y+124,'DEIN DROHNENVORRAT','ffffff',.87,420)
+  local n=picture(self,x,y+15,250,153,d.stock>0 and'button_gold'or'panel',nil,true)
+  icon(self,x,y+40,'attack_drone',87)
+  text(self,x,y-29,'ANGRIFFSDROHNE','ffffff',.61,233)
+  text(self,x,y-64,tostring(d.stock)..' VON '..tostring(d.max_stock)..' BEREIT','c9eaff',.49,300)
+  self.buttons[#self.buttons+1]={node=n,action='drone_select',world=true,rect={x,y+15,250,153}}
+  button(self,x,y-112,250,58,'ABBRECHEN','drone_cancel','blue','trap_cancel')
+  if g.campaign_ui_test and self.logged_drone_mode~='catalogue'then
+   print('DEFOLD CAMPAIGN DRONE OPTION '..math.floor(x)..' '..math.floor(y+15)..' stock='..d.stock)
+   print('DEFOLD CAMPAIGN DRONE CANCEL '..math.floor(x)..' '..math.floor(y-112)..' mode=catalogue')
+  end
+ else
+  local tx=clamp(ui.dragging and(ui.x or bx)or bx,bounds.left+48,bounds.right-48)
+  local ty=clamp(ui.dragging and(ui.y or by)or by,bounds.bottom+52,bounds.top-52)
+  ui.rect={tx,ty,94,94}
+  ring(self,tx,ty,46,'ffe38b',4);icon(self,tx,ty+3,'attack_drone',73)
+  if ui.dragging then
+   local enemy=Regions.enemy(g,ui.x or tx,ui.y or ty)
+   if enemy then local r=Regions.bounds(g,enemy);ring(self,r.x,r.y,math.max(24,math.min(46,r.w/2)),'ffd375',3)end
+  end
+  text(self,tx,clamp(ty-64,bounds.bottom+22,bounds.top-22),'ZUM GEGNER ZIEHEN','fff0a3',.43,190)
+  local cy=bounds.top-35
+  button(self,bounds.right-112,cy,210,58,'ABBRECHEN','drone_cancel','blue','trap_cancel')
+  text(self,bounds.left+250,cy,'TIPPE AUF EINEN GEGNER','fff0ac',.66,450)
+  if g.campaign_ui_test and self.logged_drone_mode~='target'then
+   print('DEFOLD CAMPAIGN DRONE PREVIEW '..math.floor(tx)..' '..math.floor(ty)..' stock='..d.stock)
+   print('DEFOLD CAMPAIGN DRONE CANCEL '..math.floor(bounds.right-112)..' '..math.floor(cy)..' mode=target')
+  end
+ end
+ self.logged_drone_mode=ui.mode
+end
 local function page(self,g,title)
  -- The background is a separate earlier render pass; the animated 3D hero stays visible.
- text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,'BONUS-MACHT  ·  0.13','a3e7df',.61)
+ text(self,284,673,'ENERGYBLAST','ffffff',1.30,515);text(self,284,633,campaign(g)and'ANGRIFFSDROHNEN  ·  0.14'or'BONUS-MACHT  ·  0.13','a3e7df',.61)
  glass(self,930,670,640,82,.86);text(self,930,682,title,'ffffff',.96,590)
  icon(self,665,652,'star',29);text(self,744,652,tostring(g:total())..' GESAMT','ffe58b',.56,180)
  text(self,1080,652,g:wallet()..' ZUM AUSGEBEN','a4f3d5',.56,220)
@@ -232,11 +311,14 @@ local function shop_row(self,g,u,y)
   label=u.category=='weapon'and(u.equipped and 'AUSGERUESTET'or 'AUSWAEHLEN')or 'GEKAUFT'
   style=u.equipped and 'green'or u.category=='weapon'and 'violet'or 'green'
  elseif u.locked then label='DANACH '..u.price;style='blue'
+ elseif campaign(g)and u.unavailable_reason then label='MAXIMAL 100';style='blue'
  else label='KAUFEN '..u.price;style=u.available and 'gold'or 'blue'end
  local b=button(self,1130,y,183,75,label,'buy:'..u.id,style,u.owned and 'gear'or 'star')
  if u.locked then
   gui.set_color(b,vmath.vector4(.48,.57,.70,.74))
   text(self,850,y-31,'NAECHSTE STUFE · '..u.price..' STERNE','9aafc6',.34,265)
+ elseif campaign(g)and u.unavailable_reason then
+  text(self,850,y-31,u.unavailable_reason,'a9d2df',.34,265)
  elseif not u.owned and(u.missing or 0)>0 then
   text(self,1130,y-31,'NOCH '..u.missing..' STERNE','c9d5eb',.31,170)
  end
@@ -269,18 +351,30 @@ end
 
 local function dialog(self,g)
  self.buttons={};local state=g:mission_state()
- page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or g.dialog=='power'and'DEINE BONUS-MACHT'or'GESCHAFFT!')
+ page(self,g,g.dialog=='menu'and'DEINE MISSIONEN'or g.dialog=='gear'and'STERNE AUSGEBEN'or g.dialog=='characters'and'DEIN HELD'or g.dialog=='power'and(campaign(g)and'DEINE AUSRUESTUNG'or'DEINE BONUS-MACHT')or g.dialog=='objective'and'DEIN AUFTRAG'or'GESCHAFFT!')
  if g.dialog~='power'then power_button(self,g,493,354,140,68)end
  if g.dialog=='menu'then
   local names={'ABPRALLER','DECKUNG & TIMING','RELAIS & BOSS','MAGNETFALLEN','LICHTERFOLGE','DROHNE RETTEN'}
-  for i,m in ipairs(g.data.missions)do
-   local x=i%2==1 and 772 or 1090;local y=534-math.floor((i-1)/2)*153
-   mission_card(self,g,m,i,x,y,names[i])
+  local pages=math.ceil(#g.data.missions/6)
+  if campaign(g)then self.menu_page=clamp(self.menu_page or math.floor((g.index-1)/6)+1,1,pages)end
+  local first=campaign(g)and((self.menu_page-1)*6+1)or 1
+  local last=campaign(g)and math.min(#g.data.missions,first+5)or#g.data.missions
+  for i=first,last do
+   local m=g.data.missions[i];local slot=campaign(g)and(i-first)or(i-1)
+   local x=slot%2==0 and 772 or 1090;local y=534-math.floor(slot/2)*153
+   mission_card(self,g,m,i,x,y,campaign(g)and(m.subtitle or m.description or'MISSION '..i)or names[i])
   end
   hero_choices(self,g)
   local next=g.solved and g:next_index()
-  button(self,807,83,366,78,next and'NAECHSTE MISSION'or'MISSION '..g.index..' STARTEN',next and'next'or'continue','green','dash')
-  button(self,1130,83,250,78,'ALLE HELDEN','characters','blue','heart')
+  local by=campaign(g)and 67 or 83;local bh=campaign(g)and 70 or 78
+  button(self,807,by,366,bh,next and'NAECHSTE MISSION'or'MISSION '..g.index..(campaign(g)and' FORTSETZEN'or' STARTEN'),next and'next'or'continue','green','dash')
+  button(self,1130,by,250,bh,'ALLE HELDEN','characters','blue','heart')
+  if campaign(g)then
+   if self.menu_page>1 then button(self,657,134,70,48,'<','missions_prev','blue')end
+   text(self,930,134,'SEITE '..self.menu_page..' / '..pages..'  ·  '..#g.data.missions..' MISSIONEN','cae8ee',.52,440)
+   if self.menu_page<pages then button(self,1207,134,70,48,'>','missions_next','blue')end
+   if g.campaign_ui_test then print('DEFOLD CAMPAIGN MENU PAGE '..self.menu_page..' first='..first..' last='..last..' current='..g.index)end
+  end
   button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
   if g.ui_test and not self.menu_ready then self.menu_ready=true;print('DEFOLD MENU READY')end
   if g.flow_ui_test then print('DEFOLD FLOW MENU READY mission='..g.index..' wallet='..g:wallet()..' hero='..g:character().id)end
@@ -295,16 +389,34 @@ local function dialog(self,g)
   button(self,930,83,615,78,'ZURUECK ZU DEN MISSIONEN','menu','blue','menu')
  elseif g.dialog=='power'then
   power_page(self,g)
+ elseif g.dialog=='objective'and campaign(g)then
+  panel(self,930,375,630,478)
+  icon(self,930,535,state.goal_kind=='sequence'and'radio'or state.goal_kind=='trap'and'trap_magnet'or'aim',80)
+  text(self,930,469,g.m.title,'fff0a6',.99,582)
+  text(self,930,421,state.headline or'ERREICHE DAS MISSIONSZIEL','d5eff0',.73,568)
+  text(self,930,371,g.m.description or'Besiege die Gegner und erreiche das Ziel.','c2e3ec',.57,568)
+  local arena=g.arena or g.m.arena or g.data.arena
+  text(self,930,326,'GEGNER '..(state.enemies or 0)..'  ·  RELAIS '..(state.relays or 0),'a7e9e3',.68,570)
+  text(self,930,287,'MISSION '..g.index..' VON '..#g.data.missions..'  ·  FELD '..PowerFormat.decimal(arena[3])..' x '..PowerFormat.decimal(arena[4]),'9fcbdf',.48,570)
+  button(self,930,213,566,72,'AUFTRAG ANHOEREN','objective_voice','violet','radio')
+  button(self,930,78,615,78,'ZURUECK ZUM SPIEL','objective_close','green','dash')
+  if g.campaign_ui_test then print('DEFOLD CAMPAIGN OBJECTIVE PAGE mission='..g.index..' enemies='..(state.enemies or 0))end
  elseif g.dialog=='gear'then
   shop(self,g)
  elseif g.dialog=='win'then
   panel(self,930,403,628,450);text(self,930,556,'MISSION GESCHAFFT!','ffe38b',1.05,580)
   star(self,930,477,40);text(self,930,405,'+ '..g.reward..' STERNE','ffe38b',1.07)
-  text(self,930,354,state.treasure_replay and'TRUHE ERNEUT FINDEN · STERNE GESPEICHERT'or state.treasures_remaining>0 and'1 SCHATZ NOCH OFFEN · FREIWILLIG'or'SCHATZ GEFUNDEN','d6e9ec',.60,560)
-  text(self,930,319,'BONI '..state.bonus_done..' / '..state.bonus_total..' · FREIWILLIG','c1dbe4',.55,555)
+  if campaign(g)then
+   text(self,930,354,'DEINE STERNE UND AUSRUESTUNG BLEIBEN','d6e9ec',.60,560)
+   text(self,930,319,'MISSION '..g.index..' VON '..#g.data.missions..' ABGESCHLOSSEN','c1dbe4',.55,555)
+  else
+   text(self,930,354,state.treasure_replay and'TRUHE ERNEUT FINDEN · STERNE GESPEICHERT'or state.treasures_remaining>0 and'1 SCHATZ NOCH OFFEN · FREIWILLIG'or'SCHATZ GEFUNDEN','d6e9ec',.60,560)
+   text(self,930,319,'BONI '..state.bonus_done..' / '..state.bonus_total..' · FREIWILLIG','c1dbe4',.55,555)
+  end
   local next=g:next_index()
   button(self,930,231,585,79,next and'NAECHSTE MISSION'or'ZUR MISSIONSAUSWAHL',next and'next'or'menu','green','dash')
-  button(self,930,99,615,80,state.treasures_remaining>0 and'SCHATZ SUCHEN · FREIWILLIG'or'BONI SUCHEN · FREIWILLIG',state.treasures_remaining>0 and'loot'or'bonus_search','violet',state.treasures_remaining>0 and'treasure'or'star')
+  if campaign(g)then button(self,930,99,615,80,'ZUR MISSIONSAUSWAHL','menu','violet','menu')
+  else button(self,930,99,615,80,state.treasures_remaining>0 and'SCHATZ SUCHEN · FREIWILLIG'or'BONI SUCHEN · FREIWILLIG',state.treasures_remaining>0 and'loot'or'bonus_search','violet',state.treasures_remaining>0 and'treasure'or'star')end
   button(self,284,63,490,78,'STERNE AUSGEBEN · '..g:wallet(),'gear','gold','star')
   hero_choices(self,g)
   if g.flow_ui_test then print('DEFOLD FLOW WIN READY remaining='..state.treasures_remaining..' next='..tostring(next))end
@@ -321,23 +433,35 @@ function update(self,dt)
  if self.trap_test then g.trap_test=true end;if self.flow_test then g.flow_ui_test=true end
  if g.dialog then
   local power=power_state(g)
-  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id]),tostring(power.count),tostring(g.shield)},'|')
+  local key=table.concat({g.dialog,g:character().id,tostring(g:total()),tostring(g:wallet()),tostring(g.saved.music),g.saved.weapon or'',g.shop_status or'',self.shop_category or 'weapon',tostring(g.hp),tostring(g.max_hp),tostring(g.reward),tostring(g.index),tostring(g.solved),tostring(g.saved.earned['secret:'..g.m.id]),tostring(power.count),tostring(g.shield),tostring(self.menu_page)},'|')
   if key==self.dialog_key then return end;self.dialog_key=key
  else self.dialog_key=nil end
  for _,n in ipairs(self.nodes)do gui.delete_node(n)end;self.nodes={};self.buttons={};self.world_parent=nil
  if g.dialog then self.counter=g:total();dialog(self,g);return end
  panel(self,640,673,1280,96);panel(self,72,360,144,528);panel(self,1208,360,144,528);panel(self,640,48,1280,96)
  self.counter=self.counter+(g:total()-self.counter)*math.min(1,dt*10)
- icon(self,38,678,'star',46);text(self,121,680,tostring(math.floor(self.counter+.5)),'ffe590',1.08,125);text(self,120,649,'GESAMTSTERNE','a6d3e5',.42,185)
- text(self,634,682,g.m.title,'ffffff',1.0,650)
+ icon(self,38,678,'star',46);text(self,121,680,tostring(math.floor(self.counter+.5)),'ffe590',1.08,125);text(self,120,649,campaign(g)and'STERNE · ZUM AUSGEBEN TIPPEN'or'GESAMTSTERNE','a6d3e5',campaign(g)and .31 or .42,185)
+ if campaign(g)then local n=box(self,124,674,232,92,'ffffff');gui.set_color(n,vmath.vector4(1,1,1,0));self.buttons[#self.buttons+1]={node=n,action='gear',rect={124,674,232,92}}end
  local state=g:mission_state()
- local target_node=box(self,441,648,350,42,'ffffff');gui.set_color(target_node,vmath.vector4(1,1,1,0))
- text(self,441,650,state.headline,'b9dfe5',.49,340)
- self.buttons[#self.buttons+1]={node=target_node,action='track_objective',rect={441,648,350,42}}
- local bonus_node=box(self,720,648,168,42,'ffffff');gui.set_color(bonus_node,vmath.vector4(1,1,1,0));icon(self,655,649,'star',24);text(self,720,650,'BONI '..state.bonus_done..'/'..state.bonus_total,'c0e6dc',.45,140);self.buttons[#self.buttons+1]={node=bonus_node,action='track_bonus',rect={720,648,168,42}}
- local chest_node=picture(self,904,648,190,42,'button_'..(state.treasures_remaining>0 and'gold'or'green'),nil,true)
- picture(self,835,650,31,31,'chest-prop');text(self,919,650,state.treasure_replay and'NOCHMAL 0/1'or state.treasures_remaining>0 and'SCHATZ 0/1'or'SCHATZ 1/1','ffffff',.38,143)
- self.buttons[#self.buttons+1]={node=chest_node,action='track_treasure',rect={904,648,190,42}}
+ if campaign(g)then
+  button(self,634,694,730,39,g.m.title,'mission_menu','blue','menu')
+  button(self,410,649,280,48,'ZIEL ANSEHEN','objective','blue','aim')
+  button(self,670,649,222,48,'GEGNER '..((state.enemies or 0)+(state.relays or 0)),'objective','blue')
+  button(self,900,649,216,48,'MISSION '..g.index..' / '..#g.data.missions,'mission_menu','violet')
+  if g.campaign_ui_test and self.logged_campaign_hud~=g.index then
+   self.logged_campaign_hud=g.index
+   print('DEFOLD CAMPAIGN HUD READY mission='..g.index..' objective=410,649 enemies=670,649 menu=900,649')
+  end
+ else
+  text(self,634,682,g.m.title,'ffffff',1.0,650)
+  local target_node=box(self,441,648,350,42,'ffffff');gui.set_color(target_node,vmath.vector4(1,1,1,0))
+  text(self,441,650,state.headline,'b9dfe5',.49,340)
+  self.buttons[#self.buttons+1]={node=target_node,action='track_objective',rect={441,648,350,42}}
+  local bonus_node=box(self,720,648,168,42,'ffffff');gui.set_color(bonus_node,vmath.vector4(1,1,1,0));icon(self,655,649,'star',24);text(self,720,650,'BONI '..state.bonus_done..'/'..state.bonus_total,'c0e6dc',.45,140);self.buttons[#self.buttons+1]={node=bonus_node,action='track_bonus',rect={720,648,168,42}}
+  local chest_node=picture(self,904,648,190,42,'button_'..(state.treasures_remaining>0 and'gold'or'green'),nil,true)
+  picture(self,835,650,31,31,'chest-prop');text(self,919,650,state.treasure_replay and'NOCHMAL 0/1'or state.treasures_remaining>0 and'SCHATZ 0/1'or'SCHATZ 1/1','ffffff',.38,143)
+  self.buttons[#self.buttons+1]={node=chest_node,action='track_treasure',rect={904,648,190,42}}
+ end
  if g.flow_ui_test and self.flow_play_mission~=g.index then self.flow_play_mission=g.index;print('DEFOLD FLOW PLAY READY mission='..g.index..' treasure='..state.treasures_remaining..' bonus='..state.bonus_total)end
 
  local hero_thumb=portrait(self,72,548,g:character().id,135);self.buttons[#self.buttons+1]={node=hero_thumb,action='characters',rect={72,548,135,135}}
@@ -371,36 +495,38 @@ function update(self,dt)
   self.buttons[#self.buttons+1]={node=n,action=name,rect=r}
  end
  local growth=(g.power_flash or 0)>0 and g.power_gain
- local bottom=growth and('BONUS-MACHT '..growth.count..'! '..PowerFormat.number(growth.health)..' ENERGIE · FEUERKRAFT x'..PowerFormat.number(growth.damage_multiplier))or g.status
+ local bottom=growth and((campaign(g)and'MISSIONSFORTSCHRITT 'or'BONUS-MACHT ')..growth.count..'! '..PowerFormat.number(growth.health)..' ENERGIE · FEUERKRAFT x'..PowerFormat.number(growth.damage_multiplier))or g.status
  text(self,610,57,bottom,growth and'fff0a3'or'd2e9ec',growth and .68 or .64,620)
  local next=power.next
- text(self,610,27,next and('NAECHSTER BONUS: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE · MACHT BLEIBT GESPEICHERT')or power.count>0 and'ALLE BONUSKRAEFTE GESPEICHERT · WIEDER SPIELBAR'or'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN','8db8cd',.43,620)
+ local tip=campaign(g)and'KURZ TIPPEN: LAUFEN   HALTEN: FEUERN   DROHNE: ZIEHEN ODER ZIEL ANTIPPEN'or(next and('NAECHSTER BONUS: '..PowerFormat.number(next.min_health)..' BONUS-ENERGIE · MACHT BLEIBT GESPEICHERT')or power.count>0 and'ALLE BONUSKRAEFTE GESPEICHERT · WIEDER SPIELBAR'or'KURZ TIPPEN: LAUFEN     HALTEN: FEUERN     FIGUR ZIEHEN: LAUFEN')
+ text(self,610,27,tip,'8db8cd',.43,620)
  button(self,174,44,56,56,'-','zoom_out','blue');button(self,240,44,56,56,'+','zoom_in','blue')
  text(self,207,83,'ZOOM '..math.floor((g.zoom or 1)*100+.5)..'%','c8eaff',.34,137)
- if g.m.sanctuary and not g.solved then button(self,72,136,120,54,'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
+ if g.m.sanctuary and not g.solved then button(self,72,136,120,54,campaign(g)and'ZIKKURAT'or'ZIKURRAT','sanctuary',g.in_sanctuary and 'green'or 'violet')end
  if g.solved then button(self,72,124,120,62,g:next_index()and'WEITER'or'MISSIONEN',g:next_index()and'next'or'menu','green')end
- text(self,72,45,'? '..g:credits(),'ffe590',.73)
- panel(self,1051,47,151,72);local bounds=g.data.arena
+ text(self,72,45,campaign(g)and(g.index..' / '..#g.data.missions)or'? '..g:credits(),'ffe590',.73)
+ panel(self,1051,47,151,72);local bounds=campaign(g)and(g.arena or g.m.arena or g.data.arena)or g.data.arena
  local function mini(p)return 984+(p[1]-bounds[1])/bounds[3]*134,19+(1-(p[2]-bounds[2])/bounds[4])*57 end
  for _,e in ipairs(g.enemies)do if e.hp>0 then local x,y=mini(e.p);circle(self,x,y,2.5,e.kind=='relay'and'ffd674'or'ff7394')end end
  if g.m.sanctuary then local sx,sy=mini(g.m.sanctuary.position);ring(self,sx,sy,5,'8fffc7',2)end
- local treasure=g:treasure_state();if treasure.available and(treasure.discovered or treasure.tracking)then local tx,ty=mini(treasure.discovered and treasure.position or treasure.hint);circle(self,tx,ty,4,'ffd66c')end
+ if not campaign(g)then local treasure=g:treasure_state();if treasure.available and(treasure.discovered or treasure.tracking)then local tx,ty=mini(treasure.discovered and treasure.position or treasure.hint);circle(self,tx,ty,4,'ffd66c')end end
  local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
  if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
   for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
  end
  -- World-only annotations are clipped at the exact render/input viewport.
- local clip=box(self,(Layout.left+Layout.right)/2,(Layout.bottom+Layout.top)/2,Layout.right-Layout.left,Layout.top-Layout.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
+ local world_bounds=viewport(g)
+ local clip=box(self,(world_bounds.left+world_bounds.right)/2,(world_bounds.bottom+world_bounds.top)/2,world_bounds.right-world_bounds.left,world_bounds.top-world_bounds.bottom,'ffffff');gui.set_clipping_mode(clip,gui.CLIPPING_MODE_STENCIL);gui.set_clipping_visible(clip,false);self.world_parent=clip
  if g.m.sanctuary then
   local safe=g.m.sanctuary
   ground_ring(self,g,safe.position,safe.radius,'8fffd0',3)
   local sx,sy=g.project(g,safe.position,.12)
-  text(self,sx,sy+39,'ZIKURRAT','baffdf',.49,160)
+  text(self,sx,sy+39,campaign(g)and'ZIKKURAT'or'ZIKURRAT','baffdf',.49,160)
   text(self,sx,sy+20,'SCHUTZ & ERHOLUNG','9cdbc9',.30,174)
  end
  for _,e in ipairs(g.enemies)do if e.hp>0 then
-  local x,y=g.project(g,e.p,e.boss and 6.4 or e.illustrated and 4.0 or 3.2)
-  if e.warning>0 and(x<Layout.left+12 or x>Layout.right-12 or y<Layout.bottom+15 or y>Layout.top-15)then local ex=math.max(Layout.left+22,math.min(Layout.right-22,x));local ey=math.max(Layout.bottom+25,math.min(Layout.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
+  local x,y=g.project(g,e.p,e.ui_height or(({mini_drone=1.45,splitter=1.35,crawler=1.1,wisp=1.8})[e.kind])or(e.boss and 6.4 or e.illustrated and 4.0 or 3.2))
+  if e.warning>0 and(x<world_bounds.left+12 or x>world_bounds.right-12 or y<world_bounds.bottom+15 or y>world_bounds.top-15)then local ex=math.max(world_bounds.left+22,math.min(world_bounds.right-22,x));local ey=math.max(world_bounds.bottom+25,math.min(world_bounds.top-25,y));circle(self,ex,ey,13,'7b344e');text(self,ex,ey,'!','ffcf8c',.85)end
   if e.optional then
    local bx,by=g.project(g,e.p,1.4);icon(self,bx,by+22,'star',29)
    if e.kind=='bonus_sequence'then if e.bonus_lit or(e.lit or 0)>0 then ring(self,bx,by+5,28,'fff1a0',4)end;text(self,bx,by,tostring(e.bonus_order),'fff3a7',.70)elseif e.kind=='bonus_wait'then text(self,bx,by,e.bonus_green and'JETZT!'or'WARTE',e.bonus_green and'a7ffe0'or'ffb1b6',.45,100)else text(self,bx,by,'ABPRALLER','ffe5a0',.40,110)end
@@ -409,9 +535,11 @@ function update(self,dt)
    local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
    ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
   else
-   box(self,x,y,50,8,'11223b');box(self,x-(1-e.hp/e.max_hp)*25,y,50*e.hp/e.max_hp,8,'ff7394')
+   local compact=campaign(g)and(e.kind=='mini_drone'or e.kind=='splitter'or e.kind=='crawler'or e.kind=='wisp')
+   local width=compact and 28 or 50;local height=compact and 5 or 8
+   box(self,x,y,width,height,'11223b');box(self,x-(1-e.hp/e.max_hp)*width/2,y,width*e.hp/e.max_hp,height,'ff7394')
    if e.shield or g:locked(e)then text(self,x,y+26,e.trap_shield and((e.trapped or 0)>0 and'!'or'X')or'+','d4afff',.8)end
-   if e.warning>0 then text(self,x,y+32,'!','ffcf66',1.15)end
+   if e.warning>0 then text(self,x,y+(compact and 15 or 32),'!','ffcf66',compact and .75 or 1.15)end
    if (e.trapped or 0)>0 then local tx,ty=g.project(g,e.p,.2);ring(self,tx,ty,28,'97f0ff',4);text(self,tx,ty-28,math.ceil(e.trapped)..' s','cafff5',.48,100)end
   end
  end end
@@ -431,47 +559,83 @@ function update(self,dt)
  if g.m.heal and not g.heal_used then local x,y=g.project(g,g.m.heal,.4);circle(self,x,y,16,'255a52');text(self,x,y,'+','9affe0',1)end
  if g.drone then local x,y=g.project(g,g.drone.p,1.2);text(self,x,y,g.drone.moving and'»'or'...','fff4b0',.9)end
  if g.m.exit_required then local x,y=g.project(g,g.m.goal,.3);ring(self,x,y,20+math.sin(g.clock*3)*2,'ffdf58',3)end
- if g.clue_time>0 then local treasure=g:treasure_state();local p=treasure.discovered and treasure.position or treasure.hint;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
+ if not campaign(g)and g.clue_time>0 then local treasure=g:treasure_state();local p=treasure.discovered and treasure.position or treasure.hint;local x,y=g.project(g,g.p);local x2,y2=g.project(g,p);line(self,x,y,x2,y2,'ffda7d',3)end
  if g.m.gate_rect then local r=g.m.gate_rect;local x,y=g.project(g,{r[1]+r[3]/2,r[2]+.6},1.5);text(self,x,y,g:open()and'OFFEN'or'...',g:open()and'4edfbd'or'ffcf66',.65)end
  field_guide(self,g,state)
  local world_zoom=self.world_zoom;self.world_zoom=1
  field_traps(self,g)
+ field_drone(self,g)
  self.world_zoom=world_zoom
  self.world_parent=nil
- if g.ui_test or g.trap_test or g.flow_ui_test then
+ if g.ui_test or g.trap_test or g.flow_ui_test or g.campaign_ui_test then
+  local limits=viewport(g)
   for _,b in ipairs(self.buttons)do local r=b.rect
-   if b.world then assert(r[1]-r[3]/2>=Layout.left and r[1]+r[3]/2<=Layout.right and r[2]-r[4]/2>=Layout.bottom and r[2]+r[4]/2<=Layout.top,'field control leaves scene: '..b.action)
+   if b.world then assert(r[1]-r[3]/2>=limits.left and r[1]+r[3]/2<=limits.right and r[2]-r[4]/2>=limits.bottom and r[2]+r[4]/2<=limits.top,'field control leaves scene: '..b.action)
    else assert(Layout.safe(r[1],r[2],r[3],r[4]),'HUD overlaps scene: '..b.action)end
   end
   if g.m.id=='dock'and not self.ui_ready then self.ui_ready=true;local x,y=g.project(g,{g.p[1]+3,g.p[2]-.5},0);print('DEFOLD UI READY dock '..math.floor(x)..' '..math.floor(y))end
  end
 end
+local function selected_button(self,g,a)
+ if not a.pressed then return nil end
+ -- HUD always wins over field modes; its explicit logical rectangles also work
+ -- for transparent labels and card nodes parented to clipping containers.
+ if campaign(g)then
+  for _,b in ipairs(self.buttons)do if not b.world and picked(g,b,a.x,a.y)then return b end end
+ end
+ for _,b in ipairs(self.buttons)do if picked(g,b,a.x,a.y)then return b end end
+end
 local function handle(self,a)
  local g=_G.energyblast;if not g then return false end
  local key=a.id or 0;local captured=self.ui_pointers[key]
  if captured then if a.released then if captured=='fire'then g.held=false end;self.ui_pointers[key]=nil end;return true end
- if g.trap_ui then
-  if a.pressed then for _,b in ipairs(self.buttons)do if b.world and gui.pick_node(b.node,a.x,a.y)then
+ local chosen=selected_button(self,g,a)
+ local hud=campaign(g)and chosen and not chosen.world
+ if g.trap_ui and not hud then
+  if a.pressed then for _,b in ipairs(self.buttons)do if b.world and picked(g,b,a.x,a.y)then
    self.ui_pointers[key]=b.action
    if b.action=='trap_cancel'then g.trap_control:cancel(true)
    elseif b.action:sub(1,12)=='trap_select:'then g.trap_control:select(b.action:sub(13))end
    return true
   end end end
-  if Layout.field(a.x,a.y)then g.trap_control:input(a)elseif a.released then g.trap_control.pointer=nil end
+  if field(g,a.x,a.y)then g.trap_control:input(a)elseif a.released then g.trap_control.pointer=nil end
   return true
  end
+ if campaign(g)and g.drone_control and(g.drone_ui or g.drone_control:blocks_input())and not hud then
+  local drone_button=chosen and(chosen.action=='drone_select'or chosen.action=='drone_cancel'or chosen.action=='drone_open')
+  if not drone_button then g.drone_control:input(a);return true end
+ end
  if not a.pressed then g.input(a);return true end
- for _,b in ipairs(self.buttons)do if gui.pick_node(b.node,a.x,a.y)then
-  local action=b.action;if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end;if g.flow_ui_test then print('DEFOLD FLOW ACTION '..action)end
-  if action~='fire'and action~='dash'and action~='hint'and action~='trap'then g.cancel_controls()end
+ if chosen then
+  local action=chosen.action
+  if g.ui_test then print('DEFOLD UI ACTION '..action..' paused='..tostring(g.paused))end
+  if g.flow_ui_test then print('DEFOLD FLOW ACTION '..action)end
+  if g.campaign_ui_test then print('DEFOLD CAMPAIGN ACTION '..action..' mission='..g.index..' paused='..tostring(g.paused))end
+  -- FEUER/DASH/zoom cannot leave a held-shot tail behind a tactical selection.
+  if campaign(g)and(g.trap_ui or g.drone_ui)and(action=='fire'or action=='dash'or action=='zoom_in'or action=='zoom_out')then self.ui_pointers[key]=action;return true end
+  if campaign(g)and(action=='zoom_in'or action=='zoom_out')and g.drone_control and not g.drone_ui then g.drone_control:keep_view()end
+  local drone_action=action=='drone_open'or action=='drone_select'or action=='drone_cancel'
+  local tactical_help=campaign(g)and(g.trap_ui or g.drone_ui)and(action=='radio'or action=='hint')
+  if not drone_action and not tactical_help and action~='fire'and action~='dash'and action~='hint'and action~='trap'then
+   if campaign(g)and g.trap_ui then g.trap_control:cancel(false)end
+   g.cancel_controls()
+  end
   self.ui_pointers[key]=action
   if action=='zoom_in'or action=='zoom_out'then g.zoom_control:step(action=='zoom_in'and 1 or-1);if not g.saved.zoom_help_heard then g.saved.zoom_help_heard=true;g.changed();g.say('defold_zoom_help')end
   elseif action=='treasure_walk'then local t=g:treasure_state();g:navigate(t.discovered and t.position or t.hint);g.status=t.discovered and'ZUR TRUHE - FOLGE DEM GOLDENEN ZEICHEN'or'ZUM GOLDENEN SUCHGEBIET'
-  elseif action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then g:hint()elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
-  elseif action:sub(1,6)=='sector'then g.choose(tonumber(action:sub(7)))
+  elseif action=='fire'then g.held=true;g:fire()elseif action=='dash'then g:dash()elseif action=='hint'then if g.drone_ui then g.say(g.drone_ui.mode=='target'and'defold_drone_target'or'defold_drone_open')elseif campaign(g)and g.trap_ui then g.say(g.trap_ui.mode=='place'and'defold_trap_select'or'defold_trap_open')else g:hint()end elseif action=='trap_open'then self.trap_logged_mode=nil;g.trap_control:open()
+  elseif action=='drone_open'then if g.trap_ui then g.trap_control:cancel(false)end;self.logged_drone_mode=nil;g.drone_control:open()
+  elseif action=='drone_select'then g.drone_control:select()
+  elseif action=='drone_cancel'then g.drone_control:cancel(false);self.logged_drone_mode=nil
+  elseif action:sub(1,6)=='sector'then local index=tonumber(action:sub(7));if campaign(g)then self.menu_page=math.floor((index-1)/6)+1 end;g.choose(index)
+  elseif action=='missions_prev'or action=='missions_next'then self.menu_page=clamp((self.menu_page or 1)+(action=='missions_next'and 1 or-1),1,math.ceil(#g.data.missions/6));self.dialog_key=nil
+  elseif action=='objective'then self.objective_return=g.dialog or false;g.paused=true;g.dialog='objective';g:guide()
+  elseif action=='objective_voice'then g:guide();self.dialog_key=nil
+  elseif action=='objective_close'then if self.objective_return then g.dialog=self.objective_return;g.paused=true else g:resume_mission()end;self.objective_return=nil
+  elseif action=='mission_menu'then self.menu_page=math.floor((g.index-1)/6)+1;g.paused=true;g.dialog='menu';g.say('flow_menu')
   elseif action:sub(1,10)=='character:'then g.pick_character(action:sub(11));if action:sub(11)=='dragon'then g.say('flow_dragon')end
   elseif action:sub(1,9)=='shop_tab:'then self.shop_category=action:sub(10);g.shop_status=nil
-  elseif action=='sanctuary'then if g.m.sanctuary then g:navigate(g.m.sanctuary.position);g.status='ZUM ZIKURRAT - HIER BIST DU GESCHUETZT';g.say('defold_sanctuary_intro')end
+  elseif action=='sanctuary'then if g.m.sanctuary then g:navigate(g.m.sanctuary.position);g.status=campaign(g)and'ZUM ZIKKURAT - GESCHUETZTER STARTPUNKT'or'ZUM ZIKURRAT - HIER BIST DU GESCHUETZT';g.say('defold_sanctuary_intro')end
   elseif action:sub(1,4)=='buy:'then
    local owned=g:owns(action:sub(5));local bought=g:buy(action:sub(5))
    if not owned then
@@ -482,9 +646,9 @@ local function handle(self,a)
    end
    if g.ui_test then if bought or g:owns(action:sub(5))then print('DEFOLD SHOP PURCHASE PASS '..action)else print('DEFOLD SHOP BLOCKED '..action)end end
    if g.flow_ui_test then print('DEFOLD FLOW PURCHASE '..action:sub(5)..' owned='..tostring(g:owns(action:sub(5)))..' wallet='..g:wallet()..' hp='..g.hp..' max='..g.max_hp)end
-  elseif action=='power'then self.power_return=g.dialog or false;g.paused=true;g.dialog='power';g.say('defold_power_help')
+  elseif action=='power'then self.power_return=g.dialog or false;g.paused=true;g.dialog='power';g.say(campaign(g)and'defold_shop_tiers'or'defold_power_help')
   elseif action=='power_close'then if self.power_return then g.dialog=self.power_return;g.paused=true else g:resume_mission()end;self.power_return=nil
-  elseif action=='menu'or action=='gear'or action=='characters'then g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'defold_shop_tiers'or'flow_menu')end
+  elseif action=='menu'or action=='gear'or action=='characters'then if campaign(g)and action=='menu'and not g.dialog then self.menu_page=math.floor((g.index-1)/6)+1 end;g.paused=true;g.dialog=action;if action~='characters'then g.say(action=='gear'and'defold_shop_tiers'or'flow_menu')end
   elseif action=='continue'then g:resume_mission();if g.intro_needed then g.intro_needed=false;g.replay()end
   elseif action=='retry'then g.choose(g.index)
   elseif action=='loot'then g:search_loot()
@@ -493,10 +657,10 @@ local function handle(self,a)
   elseif action=='track_treasure'then if not g:track_treasure()then g.say('flow_no_treasure')end;if g.flow_ui_test then print('DEFOLD FLOW TREASURE TRACK PASS remaining='..g:mission_state().treasures_remaining)end
   elseif action=='track_bonus'then g:track_bonus();if g.flow_ui_test then print('DEFOLD FLOW BONUS TRACK PASS total='..g:mission_state().bonus_total)end
   elseif action=='track_objective'then g:track_objective();g:guide()
-  elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then g.replay()end
+  elseif action=='music'then g.toggle_music()elseif action=='sound'then g.toggle_sound()elseif action=='radio'then if g.drone_ui then g.say(g.drone_ui.mode=='target'and'defold_drone_target'or'defold_drone_open')elseif campaign(g)and g.trap_ui then g.say(g.trap_ui.mode=='place'and'defold_trap_select'or'defold_trap_open')else g.replay()end end
   return true
- end end
- if not g.dialog and Layout.field(a.x,a.y)then g.input(a)end;return true
+ end
+ if not g.dialog and field(g,a.x,a.y)then g.input(a)end;return true
 end
 function on_input(self,id,a)
  local g=_G.energyblast;if not g or not g.zoom_control then return false end

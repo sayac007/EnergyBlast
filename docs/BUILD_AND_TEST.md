@@ -1,189 +1,160 @@
-# Bauen und prüfen — Defold 0.13.0
+# Bauen und prüfen — Defold 0.14.0
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
-keine Schlüssel in Git. Aktuell wird Defold weiterentwickelt. Die unveränderten
-GDevelop-0.3-/Godot-0.2-Anleitungen bleiben über [Meilenstein 02](MILESTONE_02.md)
-und dessen feste Quell-/APK-Referenzen erreichbar.
+keine Schlüssel in Git. Die aktuelle Fassung enthält 16 Missionen. Der jeweilige
+[Qualitätsstatus](QUALITY.md) dokumentiert ausgeführte Ergebnisse; die Anleitung
+allein ist kein Nachweis eines erfolgreichen Builds oder Gerätetests.
 
 ## Werkzeuge und Vorbereitung
 
-- Python 3.12, FFmpeg und NumPy für Geometrie-/Medienprüfungen und optionale Synthese.
+- Python 3.12, FFmpeg, NumPy und Pillow für Regeln, Medien und Bildprüfungen.
 - Defold **1.14.0**, Bob und native Engine; Java **25** aus dessen offizieller
   Linux-Distribution. SDK-Dateien sind in `tools/defold-sdk.json` per Hash gepinnt.
-- Android SDK platform **36**, build-tools **36.1.0**, JDK 17 für die APK-Prüfwerkzeuge.
-  Standardverzeichnis `/workspace/tools`, über `--tools` anpassbar.
-- Pillow für echte native Screenshots und die Pixelprüfung; Blender/Cycles mit
-  deaktiviertem Denoising für die optionalen Originalporträts.
-- Native Linux-Tests: Xvfb/OpenGL, `libX11.so.6`, `libXtst.so.6`, OpenAL Soft mit
-  Null- und WAVE-Backend. Die Audioausgabe wird tatsächlich aufgezeichnet.
+- Android SDK platform **36**, build-tools **36.1.0**, JDK 17 für APK-Prüfwerkzeuge.
+  Standardverzeichnis `/workspace/tools`, per `--tools` anpassbar.
+- Native Linux-Tests: Xvfb/OpenGL, `libX11.so.6`, `libXtst.so.6`, OpenAL Soft
+  mit Null- und WAVE-Backend. Der Test zeichnet tatsächliche Audioausgabe auf.
 
 ```bash
 python3 tools/setup_defold.py --output /tmp/energyblast-defold-tools
 python3 tools/sync_defold.py
 ```
 
-Defold konsumiert `shared/defold04.json`, Weltgeometrie aus `shared/assets/defold06` und originale Animationsbilder aus `shared/assets/defold07`. Die alte
-`shared/raid.json` wird zusätzlich als unveränderte Arenageometrie für Kampf-
-Regressionsfixtures mitgeliefert. GDevelop-/Godot-Projekte und Exporte für diese
-Iteration nicht neu erzeugen; ihre aktuellen Vergleichsdateien bleiben unverändert.
+Aktive Regeln: `shared/defold04.json`. Die neuen originalen Arenen liegen unter
+`shared/assets/defold14`, Gegner/Drohnen/Effekte unter `shared/assets/defold14_units`.
+HD-Helden aus `shared/assets/defold11`, eigene ältere Texturen und Musik bleiben
+enthalten. Für normale Builds sind keine neuen Bilder oder Modellsynthesen nötig.
 
-Optionale Neuerzeugung der eigenen Modelle und Töne:
+## Eigene Geometrie bei Bedarf erneut erzeugen
 
 ```bash
-blender -b -t 4 --python tools/make_defold06_models.py
-python3 tools/make_defold_ui.py
-python3 tools/update_defold06_provenance.py
-python3 tools/make_defold_music.py
+python3 tools/make_defold14_worlds.py
+python3 tools/make_defold14_units.py
 python3 tools/sync_defold.py
+python3 tools/make_defold14_worlds.py --check
 ```
 
-Der neue passierbare Schutzort wird durch `blender -b --python tools/make_sanctuary.py`
-aus eigener Geometrie erzeugt und unter `shared/assets/defold10` versioniert.
-Für reguläre Builds ist auch hier keine Neuerzeugung nötig.
+Der Weltgenerator liest die aktuelle Regelfassung. Er erzeugt sichtbare Geometrie,
+Kollisionsmetadaten, Batches und Herkunftshashes für dieselben 16 Arenen. Die
+Prüfung liest die exportierten Positionspuffer und kontrolliert auch Dekorationen
+innerhalb der tatsächlichen Kollisionsflächen. Bestehende eigene Bodenbilder
+werden wiederverwendet. Die neuen Einheiten und Piktogramme entstehen aus eigener
+prozeduraler Geometrie; keine externe Spielgrafik wird heruntergeladen.
 
-Zusätzlich aktiv: `shared/assets/defold09` mit sechs neuen Original-Bodenbildern
-und analytischen Effektquads. Reimport: `python3 tools/import_defold09_art.py
---sources /tmp/sources.json` mit einer JSON-Zuordnung der sechs Missions-IDs zu
-ihren versionierten Original-PNGs. Keine Bildgenerierung für den Build nötig.
+Optionale ältere Blender-/Atlas-Importanleitungen bleiben im
+[festen 0.13-Dokumentationsstand](https://github.com/sayac007/EnergyBlast/blob/e557d936dac49f64b602239ace33379b490d3b2e/docs/BUILD_AND_TEST.md)
+erhalten. Blender 4.3.2 wurde für diese älteren Quellen verwendet. Eine neue
+Bildgenerierung ist für die aktuelle APK nicht nötig.
 
-Die ursprünglichen zehn generierten Illustrations-/Animationsquellen liegen in
-`shared/assets/defold07/*-original.png`; `PROVENANCE.json` enthält ihre Hashes.
-Für einen normalen Build ist kein Bildgenerator nötig. Der optionale technische
-Import lässt sich mit einer JSON-Zuordnung der IDs hero/dragon/fox/enemies/icons/
-cards/floor/lobby/explosion/props zu diesen Dateien wiederholen:
-`python3 tools/import_defold07_art.py --sources /tmp/sources.json`.
-Das ist eine Atlas-Aufbereitung, keine Zusicherung identischer neuer KI-Erzeugung.
-Weltgeometrie separat erneuern: Blender-Befehl mit `-- --world-only` ergänzen.
-Die aktuelle HD-2,5D-Darstellung verwendet Front-/Rückansicht mit jeweils vier
-Laufphasen und Spiegelung. Gegner haben vier Zustandsbilder. Alle sind native
-Weltmodelle mit Alpha-Ausschnitt und Tiefenprüfung; keine GUI-Projektilbilder.
-
-Aktiv sind außerdem die drei HD-Figuren unter `shared/assets/defold11`.
-`tools/import_defold11_art.py --sources /tmp/sources.json` erwartet je hero/dragon/fox
-ein Objekt mit `source` und `intermediate` als Pfade auf die versionierten Originale.
-Es isoliert die Alpha-Silhouetten und erzeugt 1536×1024-Laufatlanten ohne Vergrößern
-der generierten Laufbildpixel. Keine kreative Neuerzeugung im regulären Build nötig.
-
-Danach Herkunftshashes in `shared/asset-origins.json` aktualisieren und prüfen.
-Blender **4.3.2** wurde hier verwendet. Keine Bilder-/Modell-/Musikdownloads nötig.
-Schrift und Engine-/Modellhinweise bleiben mit ihren Fremdlizenzen enthalten.
-
-## Aktuelle Prüfungen
-
-Die exakten Shop-/Erholungswerte aus 0.12 bleiben zusätzlich als unveränderte
-Regeldaten unter `shared/defold12-regression.json` erhalten. Nur deren strikte
-15–35-HP-/1–4-Schaden-Prüfungen und die historische Shop-GUI-Fixture verwenden
-diese alten Werte; die übrigen Regel-/GUI-Prüfungen und neuen Machtprüfungen
-laufen mit den aktuellen Bonus-Macht-Regeln.
-
+## Vollständige Prüfung
 
 ```bash
 python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** fünfzehn Testgruppen. Daten/Modelle/Provenienz, unveränderte
-  andere Engine-Kopien, Hashwerte, tatsächliche FFmpeg-Decodierung von 63 Sprach-
-  aufnahmen und Musik/Explosion, Pegel/Dauer/Schleifenübergang, begrenzte Sterne,
-  Offline-Manifeste und kein berechneter Vorschaupfad in der GUI.
-- **check_defold:** baut zuerst; bei Fehlern läuft niemals eine alte Binärdatei.
-  Native Regelsuite einschließlich der unveränderten 0.7-Fixture, neuer Spielfluss- und Bonusprüfungen; aktuelle tatsächlich ausgeführte Anzahl in QUALITY.md. Sechs
-  Sektoren werden mit bewegten Geschossen abgeschlossen. Kamera, aktive 0,14-s-Schwelle und historische 0,30-s-Fixtures,
-  langsame Frames, schnelle Wischbewegungen, Abbruch/Finger und Effekte geprüft.
-- Danach getrennte Speicherprozesse für Sterne, Ausrüstung, Hinweise und
-  Musikpräferenz, gekaufte Ausrüstung, Guthaben und Figur. Echte XTest-Eingaben prüfen Figurenwahl/Käufe, Menü, kurzen Tipp und langen Hold
-  am selben Punkt, FEUER sowie TON aus/an mit angehaltenem Ansagetimer. Die volle
-  UI-Eingabefolge läuft bei 1280×720 und nach echter Fensteränderung auf 1280×800.
-- `check_defold_power_ui.py` verdient mit echten Schüssen die Machtstufen 1, 8 und 12, prüft sichtbares Wachstum und Tarnmaterial, lesbare Millionengesundheit, Schutzschild, POWER-Menü, Prozessneustart und Wiederholung ohne Zusatzgewinn.
-- `check_defold_replay_ui.py` lädt einen vollständig belohnten Spielstand, löst alle sechs Lichter-/Timingboni mit echten Schüssen, sammelt die wiederhergestellten Truhen per Laufweg und prüft Wiederbesuch/Prozessneustart ohne zusätzliche Sterne.
-- `check_defold_polish_ui.py` prüft echte Zoomtasten, geänderte Weltpixel/Figurengröße sowie echte Hinweise und Sammlung aller sechs Schätze.
-- `check_defold_hero_glow.py` prüft den tatsächlichen Figurenschimmer mit einem positiven Pixelvergleich an/aus.
-- `check_defold_resilience_ui.py` prüft tatsächliche Heilung ohne Doppelabbuchung, Waffen-/Rüstungsstufen, alle drei Shopkategorien sowie den echten Weg in den Schutzort mit gezählten Geschossabsorptionen und Erholung.
-- `check_defold_direct_touch.py` prüft fünf neue echte Gesten, ausdrücklich vor dem Loslassen. `check_defold_energy.py` vergleicht tatsächliche Pixel mit Schild an/aus.
-- `check_defold_flow_ui.py` prüft zusätzlich drei reale GUI-Abläufe für Heldenwahl/Käufe, Weiter trotz offenem Schatz und freiwillige Suche mit anschließendem Weiter.
-- `check_defold_traps.py` prüft zusätzlich echte Bildschirmtaps für alle drei Fallen und Abbruch, vollständig innerhalb der Arena, zusätzlich bei 175% Zoom; die tatsächlichen Taps platzieren 4,4 Welteinheiten entfernt, außerhalb der früheren Grenze.
-- `check_defold_audio.py` zeichnet drei echte native Ausgaben mit OpenALs
-  WAVE-Backend auf: Musik an, Musik aus und Musik/Sprache/Explosion gemischt.
-  Signal/RMS und Pegel werden geprüft. Das ist keine menschliche Klangabnahme.
+- **check_shared:** 16 Gruppen. Datenkopien, Regeln, unveränderte frühere Engine-
+  Quellen, Herkunft und Hashes, tatsächliche FFmpeg-Decodierung von **71 Sprach-
+  aufnahmen** (42 Defold, 3 Raid, 26 DE), Musik/Explosion, Pegel und Dauer,
+  Offline-Manifeste sowie Exportgeometrie. Die 1.686 Geometrieprüfungen sind Teil
+  dieser Suite, keine zusätzlichen nativen Regelprüfungen.
+- **check_defold:** baut zuerst. Ein fehlgeschlagener Build darf niemals eine
+  alte Binärdatei ausführen. Die native Suite meldet historische und aktive
+  Regeln getrennt: **1.311 mit 0.13-Fixtures plus 3.229 mit aktiven 0.14-Regeln**,
+  insgesamt 4.540. Danach folgen getrennte native GUI-/Speicher-/Audio-Prozesse.
+- Die bisherige Oberfläche, direkte Touch-Gesten, Käufe, Speicherneustart,
+  Verdeckung, Schimmer, Fallen und frühere Missionsabläufe bleiben als historische
+  Regressionen erhalten. Dabei bedeuten damalige Bonus-/Schatz-/Millionenprüfungen
+  nicht, dass diese Inhalte in der aktuellen Kampagne vorhanden sind.
+- Die neuen Kampagnen- und Drohnenprüfungen laden ausdrücklich die aktuelle
+  Regelfassung und prüfen alle 16 Missionen, drei Seiten, sichere Startpunkte,
+  obere Bedienelemente, Gesundheitsbegrenzung, Migration und echte Angriffsdrohnen.
+- Echte XTest-Taps und Ziehgesten prüfen das Zielantippen sowie das Ziehen der
+  gewählten Drohne, echte Flugzeit/Blitzwirkung und Mission→Weiter. Ungültige Ziele
+  und Abbruch dürfen keine Munition verbrauchen oder normale Schüsse auslösen.
+- Die temporäre Kartenübersicht muss den gespeicherten Zoom unverändert lassen.
+  Eine eigene Zoomänderung während des Fluges bleibt erhalten; sonst kehrt die
+  vorherige Ansicht nach Flug oder Abbruch zurück.
+- Die Kampagnentour läuft bei 1280 × 720 und nach tatsächlicher Fensteränderung
+  auf 1280 × 800. Eine native Szene prüft 50 Gegner und zusätzliche echte Teilung.
+  Das ist keine Messung der Bildrate auf einem physischen Android-Gerät.
+- Der Starter isoliert Zustandsverzeichnisse, beendet bei Timeout die ganze
+  Prozessgruppe und hält Laufzeitberichte außerhalb von Git.
 
-- `check_defold_depth.py` prüft tatsächlich gerenderte verdeckte Geschosse mit
-  einem sichtbaren Kontrollgeschoss. `check_shared.py` liest die echten glTF-
-  Positionspuffer aller Wandkörper und prüft deren Kollisionsflächen sowie
-  Stereomischung und Abschnittsdynamik. Beide laufen in den obigen Befehlen.
+Der Teststarter setzt für alte Prozesse `ENERGYBLAST_REGRESSION_RULES=013`.
+Das ist eine ausdrückliche historische Fixture-Auswahl. Aktuelle Kampagnen-GUI-
+Prozesse entfernen die Variable. Der normale App-Start ohne diese Testumgebung
+verwendet immer die aktive 0.14-Regelfassung.
 
-Optionale native Spiel-/Menübilder (vorher `check_defold.py` zum Bauen):
+## Gezielte aktuelle GUI-Prüfungen und Bilder
 
-```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold.py --output /tmp/energyblast11-images
-```
-
-Bewegungs-/Schusssequenz mit tatsächlichen XTest-Eingaben aufnehmen:
-
-```bash
-xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/capture_defold_motion.py --output /tmp/energyblast11-motion
-```
-
-Das schreibt echte Laufzeitbilder/GIF außerhalb des Repositories, keine
-Konzeptanimation. Quellen und Sichtabnahme: [ART_DIRECTION.md](ART_DIRECTION.md).
-
-`--sdk` ändert den SDK-Pfad. Der Starter isoliert private Zustandsverzeichnisse
-und beendet bei Timeout seine gesamte Prozessgruppe. Laufzeitberichte verbleiben
-unter temporären Pfaden, keine Einzelprotokolle pro Testlauf in Git.
-
-Die ältere reine GDevelop-/Godot-Regression ist weiterhin ausführbar:
+Nach einem erfolgreichen nativen Build:
 
 ```bash
-python3 tools/check_godot.py
-python3 tools/check_gdevelop_combat.py
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_campaign_ui.py --output /tmp/energyblast14-campaign
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_drone_ui.py --output /tmp/energyblast14-drones
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_campaign_ui.py --scenario tour --resize 1280 800 --output /tmp/energyblast14-resized
 ```
 
-GDevelop benötigt dafür den passenden gepinnten 0.3-Webexport; die bisherige
-Anleitung ist im [0.3-Dokumentationssnapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md)
-erhalten. Für 0.13 werden diese unveränderten Apps nicht erneut gebaut.
+`--engine` ändert den Engine-Pfad. Die Prüfungen speichern auf Wunsch echte
+Linux/OpenGL-Aufnahmen in den Ausgabepfad. Sie nutzen kontrollierte frühere
+Spielstände und ruhige KI für einzelne Eingaben; Flug, Kontakte, Belohnungen,
+Kollision und Speicher bleiben Produktionsregeln. Keine behauptete echte
+Handyaufnahme oder unbegleitete Kinderspielrunde.
 
-## Bedienansage und Musik
+Die eingefrorenen Godot-/GDevelop-Vergleichsfassungen bleiben erhalten. Ihre
+Anleitungen stehen im [0.3-Snapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md).
+Diese Apps werden für 0.14 nicht neu gebaut.
 
-Bereits enthaltene Aufnahmen reichen für Builds. Die neue Ansage liegt separat
-in `shared/audio/defold04/manifest.json`; alte Audioquellen bleiben unverändert.
-Optionale Offline-Erzeugung derselben synthetischen Serena-Stimme:
+## Bedienansagen und Musik
+
+Die versionierten Aufnahmen genügen für Builds. Optionale Offline-Neuerzeugung
+mit derselben synthetischen Serena-Stimme:
 
 ```bash
 /workspace/tools/qwen-env/bin/python tools/prepare_defold_voice.py --model /workspace/tools/qwen-female
 ```
 
-Unabhängiger ASR-Screen, ohne Referenztext als Prompt:
+Unabhängiger Whisper-Screen ohne Referenztext als Prompt:
 
 ```bash
 /workspace/tools/piper-env/bin/python tools/screen_voice.py \
   --model /workspace/tools/asr/sherpa-onnx-whisper-small \
   --manifest shared/audio/defold04/manifest.json \
-  --output /tmp/energyblast-defold04-asr.json
+  --output /tmp/energyblast-defold14-asr.json
 ```
 
-Musik-/Klangherkunft, Hash und Messwerte in `shared/audio/defold04/music.json`.
-80 Sekunden, 32 Takte bei 96 BPM in D-Moll/modal, vollständig eigene Synthese. Statischer
-Musik-Gain **1**; Laufzeitpegel 0,28 im Spiel, 0,24 im Menü, 0,065 unter Ansagen.
-Im Schutzort ohne Ansage 0,20. Master-Gain 0,75, SFX separat gedämpft. Musikpräferenz wird lokal gespeichert.
-Keine Schauspieleraufnahme, Silbenmontage oder kopierte Referenzmelodie.
+Acht neue vollständige Ansagen erläutern Drohnenvorrat, beide Zielgesten,
+Flug und leeren Vorrat sowie Missions-, Schwarm-, Lichter- und Abschlussziele.
+Alle 34 früheren Dateien bleiben unverändert; ihre alten Sammel-/Begleitansagen
+werden in der aktiven Kampagne nicht als aktuelle Anweisung geroutet.
+Die 42 Dateien des Defold-Sprachpakets sind technisch geprüft. Das ist kein
+menschlicher Hörtest. Der aktuell gemessene ASR-Umfang steht in QUALITY.md.
+
+Musikherkunft, Hashes und Messwerte: `shared/audio/defold04/music.json`.
+80 Sekunden, 32 Takte bei 96 BPM in D-Moll/modal, vollständig eigene Synthese.
+Musikpräferenz und Stummschaltung bleiben lokal gespeichert. 61 native
+Soundkomponenten liegen unter dem bestehenden Limit von 64.
 
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold11-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold14-build
 ```
 
-Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.12.0 / Code 13**,
-`org.example.energyblast.defold`, minSdk 24, targetSdk 36. Derselbe ausschließlich
-für Entwicklung angelegte Schlüssel außerhalb des Repositories:
-`<tools>/energyblast-pilot-signing/debug.keystore`. Keine Release-/Play-Identität.
-Die temporäre bekannte Debug-Passwortdatei wird nach dem Export gelöscht.
+Das Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.14.0 / Code 15**,
+`org.example.energyblast.defold`, minSdk 24, targetSdk 36. Der bestehende Schlüssel
+für Entwicklungsupdates bleibt außerhalb des Repositories unter
+`<tools>/energyblast-pilot-signing/debug.keystore`. Die temporäre bekannte
+Debug-Passwortdatei wird nach dem Export gelöscht.
 
-Ausgabe: APK, Build-/Signatur-/Manifestauszüge und `verification.json` mit Quell-
-commit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur und
-ZIP-Ausrichtung. Zusätzlich vor Veröffentlichung: ZIP-CRC, keine Schlüsseldateien,
-Zertifikatsgleichheit mit der vorherigen 0.10 und Hash der veröffentlichten Download-Datei prüfen.
+Ausgabe: APK, Build-/Signatur-/Manifestprotokolle und `verification.json` mit
+Quellcommit, sauberem/dirty Status, Buildzeit, Größe, Hash, Paket/Version, Signatur
+und ZIP-Ausrichtung. Vor Veröffentlichung zusätzlich ZIP-CRC, fehlende private
+Schlüsseldateien, gleiches Zertifikat zur vorherigen APK und Hash des tatsächlich
+erreichbaren Downloads prüfen.
 
-Abschlussexport vom sauberen Quellcommit, anschließend APK/Metadaten separat
-versionieren. Das ist ein nachvollziehbarer Bauweg, keine Zusicherung bitidentischer
-Ausgaben oder einer bereits bestandenen physischen Android-Installation.
-Keine Actions-Artefaktflut, PRs, Merges oder automatischen Releases.
+**0.14-Abschlussexport: PENDING.** Der finale Bau folgt vom sauberen Quellcommit;
+APK und Metadaten werden danach separat versioniert. Das ist kein Beleg für eine
+physische Android-Installation, Play-Signatur oder bereits erteilte Store-Freigabe.
+Keine neuen Actions-Artefakte, PRs, automatischen Merges oder Releases.

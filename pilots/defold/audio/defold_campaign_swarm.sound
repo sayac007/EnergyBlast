@@ -1,0 +1,4 @@
+sound: "/audio/defold_campaign_swarm.ogg"
+looping: 0
+group: "master"
+gain: 2.411603915935348

@@ -82,7 +82,7 @@ function F.bind(g)
  function g:next_mission()
   if not self.solved then return false end
   local index=self:next_index()
-  if not index then self.dialog='menu';self.paused=true;self.say('flow_final');return false end
+  if not index then self.dialog='menu';self.paused=true;self.say(self.data.campaign_enabled and'defold_campaign_clear'or'flow_final');return false end
   self:remember_mission(index)
   if self.choose then self.choose(index)else self:load(index)end
   return true
@@ -97,7 +97,7 @@ function F.bind(g)
   if self.solved then
    self.over=false;self.pending_win=nil;self.peaceful=true;self.bullets={}
    for _,enemy in ipairs(self.enemies)do enemy.warning=0 end
-   self.status='MISSION GESCHAFFT - SCHATZ OPTIONAL'
+   self.status=self.data.campaign_enabled and'MISSION GESCHAFFT - WEITER ZUR NAECHSTEN MISSION'or'MISSION GESCHAFFT - SCHATZ OPTIONAL'
   end
   return true
  end
@@ -122,6 +122,13 @@ function F.bind(g)
  end
  function g:guide()
   local state=self:mission_state()
+  if self.data.campaign_enabled then
+   if state.primary_done then self.say('defold_campaign_clear')
+   elseif state.goal_kind=='sequence'then self.say('defold_campaign_sequence')
+   elseif state.goal_kind=='exit'then self.say('flow_exit')
+   else self.say(self.m.voice or'defold_campaign_mission')end
+   return state
+  end
   -- Info must explain a remaining bonus, even if the chest's one-time reward
   -- was earned in a previous app session. Explicit chest tracking stays valid.
   if self.data.optional_replay and self.navigation_focus~='treasure'and(state.primary_done or state.treasure_rewarded)then
@@ -155,7 +162,7 @@ function F.bind(g)
    if bonus.replay then state.bonus_replay=state.bonus_replay+1 end
   end
   if self.solved then
-   state.headline=state.treasures_remaining>0 and'MISSION GESCHAFFT - SCHATZ OPTIONAL'or state.bonus_done<state.bonus_total and'MISSION GESCHAFFT - BONI OPTIONAL'or'ALLES GEFUNDEN - NAECHSTE MISSION'
+   state.headline=self.data.campaign_enabled and'MISSION GESCHAFFT - NAECHSTE MISSION'or state.treasures_remaining>0 and'MISSION GESCHAFFT - SCHATZ OPTIONAL'or state.bonus_done<state.bonus_total and'MISSION GESCHAFFT - BONI OPTIONAL'or'ALLES GEFUNDEN - NAECHSTE MISSION'
   elseif self.m.kind=='escort'and self.drone and not self.drone.arrived then
    state.headline='BEGLEITE DIE DROHNE';state.goal=self.drone.p;state.goal_kind='drone'
   elseif state.sequence_remaining>0 then

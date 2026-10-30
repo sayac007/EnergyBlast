@@ -1,0 +1,33 @@
+{
+  "enemy_mini_drone": {
+    "runtime": "enemy_mini_drone.gltf",
+    "tag": "model",
+    "texture": null
+  },
+  "enemy_splitter": {
+    "runtime": "enemy_splitter.gltf",
+    "tag": "model",
+    "texture": null
+  },
+  "enemy_crawler": {
+    "runtime": "enemy_crawler.gltf",
+    "tag": "model",
+    "texture": null
+  },
+  "enemy_wisp": {
+    "runtime": "enemy_wisp.gltf",
+    "tag": "model",
+    "texture": null
+  },
+  "attack_drone": {
+    "runtime": "attack_drone.gltf",
+    "tag": "model",
+    "texture": null
+  },
+  "unit_lightning": {
+    "runtime": "unit_lightning.gltf",
+    "tag": "hero_aura",
+    "texture": null,
+    "fragment": "bright.fp"
+  }
+}

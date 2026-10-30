@@ -58,7 +58,7 @@ function O.load(g)
  g.trap_success_this_round=false;training(g)
  g.traps={};g.trap_cooldown=0;g.trap_ui=nil;g.tactical_pause=false;g.sequence_progress=0;g.sequence_clock=0;g.sequence_wrong=0
  for i,p in ipairs(g.m.sequence_nodes or{})do g.enemies[#g.enemies+1]={p={p[1],p[2]},hp=1,max_hp=1,kind='sequence',order=i,timer=999,warning=0,direction={0,1}}end
- if g.m.escort then local e=g.m.escort;g.drone={p={e.spawn[1],e.spawn[2]},hp=e.hp,waypoint=1,invulnerable=0,arrived=false}else g.drone=nil end
+ if g.m.escort and not g.data.campaign_enabled then local e=g.m.escort;g.drone={p={e.spawn[1],e.spawn[2]},hp=e.hp,waypoint=1,invulnerable=0,arrived=false}else g.drone=nil end
 end
 function O.sequence_hit(g,t)
  local expected=g.m.sequence[g.sequence_progress+1]
@@ -68,7 +68,11 @@ function O.sequence_hit(g,t)
  g.sequence_progress=g.sequence_progress+1;t.lit=.7;g.status='FOLGE '..g.sequence_progress..'/3'
  if g.sequence_progress==#g.m.sequence then
   for _,e in ipairs(g.enemies)do if e.kind=='sequence'then e.hp=0;e.death_age=0;g.fx[#g.fx+1]={kind='explosion',p={e.p[1],e.p[2]},life=.9,age=0}end end
-  local alive=false;for _,e in ipairs(g.enemies)do alive=alive or(not e.optional and e.hp>0)end;if not alive then g:finish()end
+  local alive=false;for _,e in ipairs(g.enemies)do alive=alive or(not e.optional and e.hp>0)end
+  if not alive then
+   if g.data.campaign_enabled and g.m.exit_required then g.status='ZIELE ERLEDIGT - ZUM AUSGANG';g.say('flow_exit')
+   else g:finish()end
+  end
  end
 end
 function O.trap(g,p,id)

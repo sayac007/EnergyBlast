@@ -1,71 +1,50 @@
-# EnergyBlast — Defold 0.13 herunterladen
+# EnergyBlast — Defold 0.14 herunterladen
 
-**[EnergyBlast 0.13 APK herunterladen](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) — 68,3 MB.**
+**APK-Abschlussprüfung läuft. Der aktuelle APK-Link wird nach dem sauberen Build hier ergänzt.**
 
-Jeder neue Bonus bringt dauerhafte Macht: Gesundheit bis **1.000.000** plus
-gekaufte Rüstung, größerer Held, Schutzschild, stärkere Schüsse und Tarnung.
-Vorhandene Bonus-Erfolge werden sofort angerechnet. Nur **128 KiB größer als 0.12**.
-[Regeln, Bilder und Prüfungen](../docs/MILESTONE_12.md).
+**16 Missionen, zehn davon neu**, größere Felder, geschützte Zikkurat-Starts,
+keine versteckten Boni oder Schatztruhen. Gesundheit maximal **100 einschließlich
+Rüstung**, begrenzte Tarnung und endliche Mini-Drohnen-Schwärme mit höchstens
+50 lebenden Gegnern. Frühere Sterne und Käufe bleiben erhalten.
+[Regeln, Bilder und Prüfungen](../docs/MILESTONE_13.md).
 
-| Merkmal | Tatsächlicher Wert |
-|---|---|
-| Engine / App | Defold 1.14.0, native ARM64-Test-App |
-| Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.13.0 / 14** |
-| Größe | **68.342.970 Bytes** |
-| Android | Android 7/API 24+, ARM64, targetSdk 36, userLandscape |
-| Quellcommit | [`fda39e5`](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) |
-| APK-Snapshot | [`9e486f1`](https://github.com/sayac007/EnergyBlast/commit/9e486f1dec3b6ca67371f1491c8e7b5991885a14) |
-| Gebaut | 29.10.2026, 17:12 MEZ, sauberer Quellstand |
-| Signatur | v2/v3 geprüft, identisches Entwicklungszertifikat wie 0.12 |
-| Physischer Geräte-/Mehrfingertest | **OFFEN** |
-
-```text
-SHA-256 31e6828183f15578e631c716cbe517fd7e24194c2a6e334d0c4dfb7ef53a2d15
-```
-
-[Maschinenlesbare Metadaten](defold-verification.json) dokumentieren Größe, Hash,
-Buildzeit, Quellcommit, `source_dirty:false`, Zertifikat und APK-Prüfungen.
-
-## Installation und Bedienung
+## Installation und Drohnenbedienung
 
 Als Update über die vorhandene Defold-App installieren. **Nicht vorher deinstallieren**,
 wenn Sterne, Käufe, Hinweise und Figur bleiben sollen. Android kann die Freigabe
 der Downloadquelle verlangen. Debug-Testfassung, keine Release-/Play-Signatur.
 
-**Bonus-Macht:** Beide freiwilligen Bonusaufgaben jeder Mission lösen. Jeder
-verschiedene erstmalige Erfolg bringt eine neue Machtstufe. Vorhandene Erfolge
-zählen sofort, auch nach dem Neustart. Erneutes Spielen derselben bereits
-belohnten Aufgabe gibt keine weitere Macht. Geld oder zusätzliche Sternkosten
-gibt es dafür nicht. Gekaufte Rüstung und Waffen verbessern die Werte weiterhin.
+Das Drohnenbild auf dem Feld öffnet den Vorrat. Eine Drohne auswählen; die Stimme
+sagt **„Wähle jetzt das Ziel“**. Jetzt entweder die bereitstehende Drohne auf einen
+Gegner ziehen und loslassen, oder den Gegner direkt antippen. Die vorübergehende
+Kartenübersicht zeigt auch entfernte Gegner. Sie verändert die gespeicherte
+Zoomstufe nicht. Nach Flug und Blitzeffekt kehrt der vorherige Ausschnitt zurück;
+bewusstes Zoomen während des Flugs hat Vorrang. Abbrechen verbraucht keinen Vorrat.
 
-**POWER:** Rechts oben im Spiel oder neben der Figur im Menü antippen. Die Seite
-zeigt echte Werte, nächste Verbesserung und die großen Meilensteine bei 1, 2, 4,
-8 und 12 Boni. Vollständige Millionenzahlen bleiben lesbar. Figur und Schilde
-wachsen; Bewegung und die Kollisionsgröße bleiben erhalten.
+Die Drohne fliegt tatsächlich über einen freien Weg zum Gegner und löst erst bei
+Kontakt den elektrischen Treffer aus. Geschützte Bosse behalten ihre Relaisregel.
+Pro Mission gibt es drei bis acht Drohnen. Waffe und Fallen bleiben verfügbar.
 
-Zoom, freie Bonussuche, größere Fallenkreise und lange Anfangszeiten aus 0.12
-bleiben enthalten. [Gesamte Bedienung](../README.md).
+Die obere Leiste bietet anklickbare Schaltflächen für Ziel, Gegner und Mission;
+die Sternanzeige öffnet die Ausrüstung. Alle 16 Missionen stehen auf drei Seiten.
+[Gesamte Bedienung](../README.md).
 
 ## Tatsächliche Prüfung
 
-**1.311 native Prüfungen, 15 gemeinsame Gruppen bestanden.** Echte Bonusschüsse
-verdienen 20 / 1.005 / 1.000.005 Gesundheit inklusive bestehender Rüstung. Native
-Größe, Schild und Tarnmaterial, Kameragrenzen bei 175% Zoom, POWER-Seite, lesbare
-Millionenzahl, Speicherung und Wiederholung ohne zusätzliche Vergabe sind geprüft.
-Bisherige Eingabe-, Menü-, Shop-, Schatz-, Fallen-, Bonus-, Zoom-, Audio- und
-Verdeckungstests bleiben bestanden. Zwei neue Ansagen unabhängig exakt erkannt;
-34 aktive Ansagen technisch geprüft. [Ausführliche Nachweise und Grenzen](../docs/QUALITY.md).
+**Vollständige Suite bestanden:** 4.540 native Prüfungen (1.311 historische,
+3.229 aktive) plus tatsächliche GUI-/Speicher-/Audio-/Pixelabläufe, 16 gemeinsame
+Testgruppen mit 1.686 Geometriepufferprüfungen. Alle 16 Missionen bei 720/800
+Fensterhöhe, echter Drohnenflug vom Zikkurat bis Missionserfolg/WEITER, beide
+Gesten, Abbruch, Bestand, Kamerarückkehr und bewusstes Zoomen sind geprüft.
+APK-Metadaten werden nach dem sauberen Build ergänzt.
+Physische Handy-/Tablet-Gesten, Android-Update mit eigenen Spielständen, Audio,
+Leistung bei 50 Gegnern und Spielbalance bleiben separat manuell zu prüfen.
+[Zentraler Qualitätsstatus](../docs/QUALITY.md).
 
-APK: Paket/Version/APIs, Querformat, keine Berechtigungen, Backup aus,
-v2/v3-Signatur und Zertifikatsgleichheit, ZIP-CRC, keine privaten Schlüsseldateien,
-16-KB-ZIP-Ausrichtung, Android-Shaderexport und **845 identische Projektdateien**
-bestanden. ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
-Echte Geräte-/Mehrfinger-/Hörabnahme und Spielbalance bleiben offen.
+## Vorherige 0.13 dauerhaft erhalten
 
-**Umfang dieser Version:** die sechs bisherigen Missionen mit zwölf Machtboni.
-Die zusätzlichen 20 Missionen und die FPV-Spiel-Drohne sind als nächster Auftrag
-erfasst; die Bonus-Macht wurde vom Betreiber ausdrücklich vorgezogen.
+[Defold 0.13 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk)
+— 68.342.970 Bytes, [damaliger Stand](../docs/MILESTONE_12.md).
 
 ## Vorherige 0.12 dauerhaft erhalten
 
@@ -119,7 +98,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.13 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.14 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

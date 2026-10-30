@@ -1,0 +1,2 @@
+mesh: "/models/unit_lightning.gltf"
+materials { name: "Luminous lightning" material: "/models/unit_lightning-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }

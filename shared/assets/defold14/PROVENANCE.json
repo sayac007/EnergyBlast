@@ -1,0 +1,584 @@
+{
+  "schema": 1,
+  "generator": "tools/make_defold14_worlds.py",
+  "generator_sha256": "d2c64d1782ff76a3ebc1544e9cd2018eb189e9e393783b44bbfd251d810f3b64",
+  "floor_images": "Unmodified original shared/assets/defold09/floor-THEME.png; reused without new image downloads",
+  "assets": [
+    {
+      "path": "shared/assets/defold14/campaign_citadel.bin",
+      "sha256": "b3493edcc4589132fb20663c5d032ccc090c88714697f0831936e0b93c8f3af6",
+      "bytes": 80256,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_citadel.gltf",
+      "sha256": "c903d37d38dd8dd151df826460100123673a442514fde91f650ada6e29c1f551",
+      "bytes": 70576,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_citadel.runtime.bin",
+      "sha256": "466e7059c0bc8089533863515a7c56a4e4f34cbd610c633779fcf6e897dad2ce",
+      "bytes": 80256,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_citadel.runtime.gltf",
+      "sha256": "4a19c6e5cc1acf1223c304a455c9a85321bd5ae7ed33c7409ab118d37b2b403f",
+      "bytes": 4735,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_citadel_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_citadel_ground.gltf",
+      "sha256": "d40dba38a0c8d6e5ab461a324137ef5c716a8426a4665d8c5681388d0361ab1a",
+      "bytes": 1099,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass.bin",
+      "sha256": "75b5251798457caf88043982f4438c7523bcf292cf012617069cc25991839aa9",
+      "bytes": 98496,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass.gltf",
+      "sha256": "9d438c5643116478a8cefb382716632c02940baca4c19834cc00405ac0cc9e7a",
+      "bytes": 86924,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass.runtime.bin",
+      "sha256": "a18dc43a64b6fef82134e69b0303e6d37a61587b254faced6d57f45d5b248d8b",
+      "bytes": 98496,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass.runtime.gltf",
+      "sha256": "30dc59b688aca9649d542a7331161ad994a9fd8e8d6967c62663a96ee1f8950c",
+      "bytes": 4715,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass_ground.bin",
+      "sha256": "48eec76c23b4de7a6ebeb7da6b4b5c819ee587180a271281fb893943db75b318",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_crystal_pass_ground.gltf",
+      "sha256": "a0f5736fa7dca9d4e7ebaf482b5a5cf4a9423014544d591923dc5b451c742220",
+      "bytes": 1120,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock.bin",
+      "sha256": "328b6056852a5543c06534d27a2764f4b4f3ff9bd11fe69b6118f23a3d3ac30f",
+      "bytes": 80256,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock.gltf",
+      "sha256": "35c39fef5c435bfca8aa2945406d94f9fefd01d37f9127c5992d31bde3235a31",
+      "bytes": 70697,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock.runtime.bin",
+      "sha256": "c0d3f798b08011b97e79293e5dcbde90ab1bd77a80031ea7715e4dc86fcfc220",
+      "bytes": 80256,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock.runtime.gltf",
+      "sha256": "9d3f574370a13a5b873fc4888a603e00d7fd1396ff45bee018e9afa7f2211c13",
+      "bytes": 4732,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_dock_ground.gltf",
+      "sha256": "e250930a42f13f7e16ab4b7acd76ccfad89a59ab8a0f787c747d9e0773d7abfb",
+      "bytes": 1090,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal.bin",
+      "sha256": "d1a2ac007094aa733dbc42a5e97cd478060c6bfb2dc576a440c63fee7a0b4253",
+      "bytes": 78432,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal.gltf",
+      "sha256": "b366b34c1356846dd2e2c86343d2dc280dab842d096f5336ba37fbc135903183",
+      "bytes": 69375,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal.runtime.bin",
+      "sha256": "d25420ed92a2dbbee0610a2437827485a998b29f31295cd5e8a9bbcaad207236",
+      "bytes": 78432,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal.runtime.gltf",
+      "sha256": "4cf206749e0ab0d854db490d98de4feea4c5ff7fde974d8f147035537e6d32a3",
+      "bytes": 4700,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal_ground.bin",
+      "sha256": "48eec76c23b4de7a6ebeb7da6b4b5c819ee587180a271281fb893943db75b318",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_double_signal_ground.gltf",
+      "sha256": "6a3c60c3fd03abee4f576d46bf5c0f76449bf5667484e338b22a81ef4c2ccdb0",
+      "bytes": 1123,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor.bin",
+      "sha256": "f5033c820cd00d8b91ef0670b5b940587a00df19f1b3244bb8b0f0fb8a2283bf",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor.gltf",
+      "sha256": "5e9d644676d0daba255cdf5f005621ff5c0d0e2a9aa046c51674bd0edbc9cbf9",
+      "bytes": 80438,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor.runtime.bin",
+      "sha256": "8b22aa5bc912a96edf03e00022e4cf44c2b79608d7c713a1ac481134f4161dfa",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor.runtime.gltf",
+      "sha256": "48908e9a85f59eeb33ec86717803acf793378f0d7b2556f4375178fdbab22ce1",
+      "bytes": 4713,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor_ground.bin",
+      "sha256": "4b66fd4ef8cc1c44317e0d4b532a2d9ae17c3a2f0c5f2db9a8a754bdf239ef3e",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_drone_corridor_ground.gltf",
+      "sha256": "367ad75358f5a16b77fd2ac88244f83b92a69789f42d00ad5db8751e2e928ac1",
+      "bytes": 1122,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo.bin",
+      "sha256": "5b64099c84cd4e9bd301c8d2722e31192a4de26b9bda52b3e07b86bf0d190cee",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo.gltf",
+      "sha256": "7980d833601197748e234cf27f7e2293b9f2301d33ec5566c6d9ea625c25e205",
+      "bytes": 67179,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo.runtime.bin",
+      "sha256": "9defe6614dd8bb36a19354bbe22b391e5eb8a7cd413bb920801ada6d72471cf5",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo.runtime.gltf",
+      "sha256": "6fb9d740566ce4f113a14eae40cf969b96bfd4fb6f528ff76beaa63af5c4ac02",
+      "bytes": 4710,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_echo_ground.gltf",
+      "sha256": "66b05c185d7146ea78d92f0d482a8c5100325be19eebf86b6d95a17428d95374",
+      "bytes": 1090,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge.bin",
+      "sha256": "e3d837657e4563a838e907b02972220430685e683ca2685225a5a9f7e3b94436",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge.gltf",
+      "sha256": "7ee01a292271611daa330270fe13e704eb1a8f91f64cf4eacd6919ef56a4da9b",
+      "bytes": 67211,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge.runtime.bin",
+      "sha256": "6745ef98d0ef21fd30d318a7c93b02581deeb49fbb6232824adea35f77f8ad5a",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge.runtime.gltf",
+      "sha256": "98fa3628147c82e56a90899279e3761ce7dc9cb61ceff3e2fd2fd7122d68e75f",
+      "bytes": 4738,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_forge_ground.gltf",
+      "sha256": "422d97aba19641811835a211f3c55d0ae84ff47ebb50c814d86dab22c83c305d",
+      "bytes": 1093,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks.bin",
+      "sha256": "43f2f6a66f1789dff9a5e83f83f7a7d89ae54ee794db33353b87a1f53bd9ff54",
+      "bytes": 90288,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks.gltf",
+      "sha256": "4ec05b1bd445b209c5b61fd95627069f2a00f446c58d522484268ea87ba4a871",
+      "bytes": 79599,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks.runtime.bin",
+      "sha256": "8879c9cbfd7d6e18532f4a2ab4797598573ddd0223eac3f5b30f3ee740ddf897",
+      "bytes": 90288,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks.runtime.gltf",
+      "sha256": "dd8a3f5e6b9a5e529311d99bc52d87b6e4f5aa4845b011910a38c00327642cc7",
+      "bytes": 4708,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks_ground.bin",
+      "sha256": "4b66fd4ef8cc1c44317e0d4b532a2d9ae17c3a2f0c5f2db9a8a754bdf239ef3e",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_ghost_sparks_ground.gltf",
+      "sha256": "55eab1eab2bcab12b35e3914b006828ded42cece2ffc6f022402856a2db7814d",
+      "bytes": 1116,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze.bin",
+      "sha256": "a33e204d7fcbc99cab9c3bf7fd428442671b1546a11650fb24e8a46ae09fe72a",
+      "bytes": 108528,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze.gltf",
+      "sha256": "38cbcea8265e613b31a5d41a39078dab041d7b1748b5d823095072933ceae124",
+      "bytes": 94832,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze.runtime.bin",
+      "sha256": "c11765cf2b3bfcb00fa4e1203ad501ab932322ed2214b4390e8942777e507a6a",
+      "bytes": 108528,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze.runtime.gltf",
+      "sha256": "d8f8382eab811a7a50caa543bb88d3c6acd22b74fb6264c641801191ee744381",
+      "bytes": 4741,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze_ground.bin",
+      "sha256": "2d31a0ee9d7aa64324c78f7f73811e3d5726299a113727bce4105bdc90fb8cf6",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_light_maze_ground.gltf",
+      "sha256": "45b4d0f516611664429c231221138e606dc4f04959abf3bc5b3bb74ac0f1392c",
+      "bytes": 1102,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade.bin",
+      "sha256": "7c149ec25e29ca3e3fdf07a03c34218170ca56fd35ab36212055829d893ac6fa",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade.gltf",
+      "sha256": "e2e4b327e0ad5cd574bb1ec3bda62ca552cdce78effa0c5b0025cfcd285ec831",
+      "bytes": 80334,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade.runtime.bin",
+      "sha256": "81ee8062ea7f01639ccb3cd116c17b42302d9325a68133bbde0e7bfbf9cb0242",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade.runtime.gltf",
+      "sha256": "68ae8a3660c2126a6908d9508631d6e62c40e62b8fbe7765d54150f836911922",
+      "bytes": 4724,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade_ground.bin",
+      "sha256": "4b66fd4ef8cc1c44317e0d4b532a2d9ae17c3a2f0c5f2db9a8a754bdf239ef3e",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_magnetic_cascade_ground.gltf",
+      "sha256": "907607c2e34631b6b3bd0a18ca0c3116efaf718fcae65354c69da3deefa6be5e",
+      "bytes": 1128,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor.bin",
+      "sha256": "8724eb5598d3d0a1372412ca312b585de0feeef8baf63c2af5178e5c75c857c9",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor.gltf",
+      "sha256": "a60dc8454f66dab5173e7c92c22818ccd46f4aa927a739456419c9913e412417",
+      "bytes": 67386,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor.runtime.bin",
+      "sha256": "c4711fbdf154263ddb4792309de008e1ce7f4ee920a26e9cd536ae4ecd0a89bb",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor.runtime.gltf",
+      "sha256": "21027891d80138288858ad8c47e44d9591df1bc25b812b66ec4cfa5848a36797",
+      "bytes": 4732,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_reactor_ground.gltf",
+      "sha256": "d9c594dd6745d4eed0fd755bb364734f330a204c6bd096ac4137d06d4b31ed9a",
+      "bytes": 1099,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring.bin",
+      "sha256": "d241c6d9f17d1dc163f9907426eed816b80c992ec5226f40dcc1987f0e2fd7ca",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring.gltf",
+      "sha256": "0210413018517a15e571e8d6b101bbbce0c070d440b141d309db1327ac22458d",
+      "bytes": 80661,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring.runtime.bin",
+      "sha256": "59ffdf580115e20aa96ac816e2bc93b92e56083d61cab0de397960bfb5f8477b",
+      "bytes": 91200,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring.runtime.gltf",
+      "sha256": "9bffb06dc947c9c853f827fb0f809f12c337081446ead221fd1bed93a85f1aa0",
+      "bytes": 4699,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring_ground.bin",
+      "sha256": "48eec76c23b4de7a6ebeb7da6b4b5c819ee587180a271281fb893943db75b318",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_relay_ring_ground.gltf",
+      "sha256": "245be6e8fc9c7afdbf92244b52184e1bf31ec76b694e74a5933b9278b40d9108",
+      "bytes": 1114,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue.bin",
+      "sha256": "c2915bcb46dcb4838476ae7a9fcf6e0abf3ca1cf4ed5453c220af254f7462180",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue.gltf",
+      "sha256": "d1d19b10bf773327fbb4399c39b3bb8b6e07fdb8e1a496c2e8d8c33fc89d3b67",
+      "bytes": 67218,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue.runtime.bin",
+      "sha256": "88c5f78a821875f988a45de5dc7fb42a5355141ca373aad3df58415442d29cd1",
+      "bytes": 76608,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue.runtime.gltf",
+      "sha256": "d8af1c885bd80c3b48f14f9c93970306b2c2b69ac3d6a5a19b1086b6e5e22289",
+      "bytes": 4743,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue_ground.bin",
+      "sha256": "404a054d60a25c003ab66bbca5e6337fbee185339984301250ff32b58273af51",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_rescue_ground.gltf",
+      "sha256": "cb027da5ae76bfdf13ae38583b807b37adfdabef5ea2bfc1c64c7415f3e6a224",
+      "bytes": 1096,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center.bin",
+      "sha256": "8db7b9a64c05f6e7c0cfa316cb925148a24a68a12d18bd0ecd6371938581a28d",
+      "bytes": 114912,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center.gltf",
+      "sha256": "873b0b2b10b5203afad4fa0009c794801701e680accda81c5e6e59ffee4d9ceb",
+      "bytes": 100604,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center.runtime.bin",
+      "sha256": "0e2a70c9b26ded87d1adaa85b465d32fd1f31554f055b4816b4a970fe710f2bf",
+      "bytes": 114912,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center.runtime.gltf",
+      "sha256": "6b441557b13e40d80f6683f47e25d8854670fc8388a07a65a10d9a285c727fe7",
+      "bytes": 4720,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center_ground.bin",
+      "sha256": "2d31a0ee9d7aa64324c78f7f73811e3d5726299a113727bce4105bdc90fb8cf6",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_storm_center_ground.gltf",
+      "sha256": "4795127f2cd15267ee33530ca8fcd6cf39583dd64d0cc1a9d91693e15bd7ef1f",
+      "bytes": 1108,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest.bin",
+      "sha256": "38ac7a24d7dfa799be3e9c1983887e0a380107845d7ca8b62aa29fef5e1506d1",
+      "bytes": 79344,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest.gltf",
+      "sha256": "d7e24cf18bdd67ec9879c4714e7f494dbd677c85ddb3d7c0268be1b5c36c8ad9",
+      "bytes": 70107,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest.runtime.bin",
+      "sha256": "50ff55c765913e2d27442c8330c711da5ccae1901857a12caba13545b4448c26",
+      "bytes": 79344,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest.runtime.gltf",
+      "sha256": "c56583994cff595ad45f6efb285d7ed5c3135a238d6b90c2bc2173959085bf43",
+      "bytes": 4697,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest_ground.bin",
+      "sha256": "48eec76c23b4de7a6ebeb7da6b4b5c819ee587180a271281fb893943db75b318",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_swarm_nest_ground.gltf",
+      "sha256": "d022edeb4e5ad7937ae83c55f8efee69915e0b552e070e51e7304fb6dc5d341a",
+      "bytes": 1114,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core.bin",
+      "sha256": "f825fa6c95b51354f96885853a84096add066689be97a0df916903af55c7549b",
+      "bytes": 110352,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core.gltf",
+      "sha256": "3da0b674646ff5fb278f9affdbb50d43e220cdef2f9a2fb7036b98afc2c7e0b9",
+      "bytes": 96790,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core.runtime.bin",
+      "sha256": "a9dc5a3a87f67d80bde4a55ca7d877a51e1adc355bd6cc42c2a76badc62aa7fe",
+      "bytes": 110352,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core.runtime.gltf",
+      "sha256": "af2f73e70f2ef921931285ed4b2ec504751532df2534c08ccd54590cbe983dca",
+      "bytes": 4755,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core_ground.bin",
+      "sha256": "2d31a0ee9d7aa64324c78f7f73811e3d5726299a113727bce4105bdc90fb8cf6",
+      "bytes": 152,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    },
+    {
+      "path": "shared/assets/defold14/campaign_triple_core_ground.gltf",
+      "sha256": "2581fd6c9a6d730d4e847cbce85fae87eb262f2c3830af55e063f72c29bb0ebc",
+      "bytes": 1105,
+      "origin": "Original deterministic geometry from tools/make_defold14_worlds.py; no external image/model import"
+    }
+  ]
+}

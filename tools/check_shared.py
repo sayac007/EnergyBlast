@@ -53,8 +53,8 @@ class SharedChecks(unittest.TestCase):
    self.assertAlmostEqual(len(samples)/22050,c['seconds'],places=2)
  def test_defold_music_voice_and_larger_world(self):
   d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/raid.json').read_text())
-  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),6)
-  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),34)
+  self.assertEqual(d['arena'][2]*d['arena'][3],2.25*old['arena'][2]*old['arena'][3]);self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()));self.assertEqual(len(d['missions']),16)
+  manifest=json.loads((ROOT/'shared/audio/defold04/manifest.json').read_text());self.assertEqual(len(manifest['clips']),42)
   music=json.loads((ROOT/'shared/audio/defold04/music.json').read_text())
   for c in manifest['clips']+music['files']:
    file=c.get('file');raw=(ROOT/'shared/audio/defold04'/file).read_bytes()
@@ -68,15 +68,25 @@ class SharedChecks(unittest.TestCase):
     self.assertLess(abs(samples[0]-samples[-1]),.005)
   sound=(ROOT/'pilots/defold/audio/music.sound').read_text();self.assertIn('looping: 1',sound);self.assertIn('gain: 1.0',sound)
   self.assertIn('defold_controls',(ROOT/'pilots/defold/main/main.go').read_text())
- def test_integrated_bonuses_and_non_decreasing_rewards(self):
-  d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/defold07-regression.json').read_text())
+ def test_campaign_removes_searches_preserves_earned_rewards(self):
+  d=json.loads((ROOT/'shared/defold04.json').read_text());old=json.loads((ROOT/'shared/defold13-regression.json').read_text())
   self.assertTrue(all(d['rewards'][k]>=v for k,v in old['rewards'].items()))
-  self.assertEqual(sum(d['rewards'][p+':'+m['id']]for m in d['missions']for p in ['mission','skill','secret','bonus:prism','bonus:pattern']),4350)
-  for m in d['missions']:
-   self.assertEqual(d['rewards']['mission:'+m['id']],300)
-   self.assertEqual(set(m['bonuses']),{'prism','pattern'})
-   self.assertIn(m['bonuses']['pattern']['kind'],['sequence','wait'])
-  self.assertEqual(old,(json.loads((ROOT/'pilots/defold/data/defold07.json').read_text())))
+  self.assertEqual(len(d['missions']),16);self.assertEqual(d['max_hostiles'],50)
+  self.assertFalse(d['bonuses_enabled']);self.assertTrue(d['campaign_enabled'])
+  self.assertEqual(d['bonus_power']['cap_health'],100)
+  for i,m in enumerate(d['missions']):
+   self.assertNotIn('bonuses',m);self.assertNotIn('secret',m);self.assertNotIn('escort',m)
+   self.assertEqual(m['spawn'],m['sanctuary']['position'])
+   self.assertIn('arena_model',m);self.assertGreater(m['attack_drone']['stock'],0)
+   if i>=6:
+    self.assertGreaterEqual(m['arena'][2],old['arena'][2]*1.5)
+    self.assertGreaterEqual(m['arena'][3],old['arena'][3]*1.5)
+  self.assertEqual(old,json.loads((ROOT/'pilots/defold/data/defold13.json').read_text()))
+ def test_campaign_exported_geometry_and_provenance(self):
+  import sys
+  result=subprocess.run([sys.executable,str(ROOT/'tools/make_defold14_worlds.py'),'--check'],capture_output=True,text=True)
+  self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+  self.assertIn('1686',result.stdout)
  def test_exported_wall_geometry_matches_every_collider(self):
   # Read actual exported POSITION buffers, not just the generator's claims.
   surfaces=json.loads((ROOT/'shared/assets/defold06/surfaces.json').read_text())
@@ -167,7 +177,7 @@ class SharedChecks(unittest.TestCase):
    material=(ROOT/'pilots/defold/models'/('illustrated_'+name+'-0.material')).read_text();self.assertIn('name: "hero_fx"',material)
   shader=(ROOT/'pilots/defold/main/billboard.fp').read_text();self.assertNotIn('textureSize(',shader);self.assertIn('atlas_texel.xy',shader)
   self.assertIn('zoom=self.g.zoom',(ROOT/'pilots/defold/main/main.script').read_text())
-  self.assertIn('View.matrices(w,h,self.center,self.zoom)',(ROOT/'pilots/defold/main/main.render_script').read_text())
+  self.assertIn('View.matrices(w,h,self.center,self.zoom,self.campaign and self.arena or nil)',(ROOT/'pilots/defold/main/main.render_script').read_text())
  def test_static_batches_preserve_source_geometry(self):
   import numpy as np
   art=ROOT/'shared/assets/defold06';models=json.loads((art/'models.json').read_text())

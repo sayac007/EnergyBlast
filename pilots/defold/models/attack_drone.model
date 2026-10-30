@@ -1,0 +1,7 @@
+mesh: "/models/attack_drone.gltf"
+materials { name: "Hull midnight" material: "/models/attack_drone-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Titanium silver" material: "/models/attack_drone-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/attack_drone-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Coral armor" material: "/models/attack_drone-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous amber" material: "/models/attack_drone-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous red" material: "/models/attack_drone-5.material" textures { sampler: "tex0" texture: "/models/white.png" } }

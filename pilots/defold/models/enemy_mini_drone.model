@@ -1,0 +1,6 @@
+mesh: "/models/enemy_mini_drone.gltf"
+materials { name: "Hull midnight" material: "/models/enemy_mini_drone-0.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Titanium silver" material: "/models/enemy_mini_drone-1.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Jade enamel" material: "/models/enemy_mini_drone-2.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Solar gold" material: "/models/enemy_mini_drone-3.material" textures { sampler: "tex0" texture: "/models/white.png" } }
+materials { name: "Luminous cyan" material: "/models/enemy_mini_drone-4.material" textures { sampler: "tex0" texture: "/models/white.png" } }

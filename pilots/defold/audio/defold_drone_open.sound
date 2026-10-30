@@ -1,0 +1,4 @@
+sound: "/audio/defold_drone_open.ogg"
+looping: 0
+group: "master"
+gain: 2.1632975734118345

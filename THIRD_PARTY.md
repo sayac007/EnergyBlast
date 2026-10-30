@@ -225,3 +225,11 @@ The arenas reuse the existing original `defold09` floor illustrations. No extern
 character/model or reference-game artwork was downloaded for these additions.
 The project's existing terms apply to these original additions; existing third-party
 font, engine, music and speech-model notices remain included.
+
+## Freely aimed relay instruction
+
+One new complete original Serena/Qwen sentence explains that relay switches may
+be hit directly or by reflecting a shot from a wall. It uses the same pinned
+synthetic speaker and existing speech-model notices; no external recording, actor
+voice imitation or private family material is used. All 42 preceding clips and
+their individual provenance entries remain unchanged.

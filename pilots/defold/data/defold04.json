@@ -4036,5 +4036,10 @@
   },
   "campaign_enabled": true,
   "campaign_v14": true,
-  "max_hostiles": 50
+  "max_hostiles": 50,
+  "sequence_timing": {
+    "step_seconds": 1.8,
+    "lit_seconds": 1.2,
+    "pause_seconds": 2.4
+  }
 }

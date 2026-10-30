@@ -1,21 +1,24 @@
-# EnergyBlast — Defold 0.14
+# EnergyBlast — Defold 0.14.1
 
 Offline-Touch-Shooter für Kinder etwa von 7 bis 10 Jahren: **16 Missionen**, drei
 Helden, reflektierte Schüsse, Deckung, Fallen und steuerbare Angriffsdrohnen.
 Zehn neue Missionen steigern die Komplexität. Gespeicherte Sterne und Ausrüstung
 bleiben erhalten; versteckte Bonusaufgaben und Schatztruhen entfallen.
 
-**[Android 0.14 herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
+**0.14.1: Vollständige Tests PASS; sauberer Android-Export und feste Pins folgen.**
+
+**[Letzte geprüfte Android-APK 0.14 — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
 [Letzte geprüfte APK 0.13 — vorheriger Spielstand](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
 [Änderungen und Prüfstand](docs/MILESTONE_13.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
 ## Aktueller Stand
 
-**0.14.0 / Android-Code 15, Stand 30.10.2026**, vollständig auf **`main`**
-übernommen. Der Entwicklungsbranch `feat/campaign-16` bleibt erhalten. Die neueste Anweisung ersetzt den früheren Plan von 20
-zusätzlichen Missionen durch **zehn neue, insgesamt 16**. Defold 1.14.0 bleibt
-der Schwerpunkt; Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
+**0.14.1 / Android-Code 16, Stand 30.10.2026**, Korrekturbranch
+`fix/free-relays-slower-patterns`. Die zuvor geprüfte 0.14-Fassung liegt vollständig
+auf `main`; die aktuelle Korrektur wird vor Auslieferung erneut geprüft.
+Es bleiben **16 Missionen**. Defold 1.14.0 bleibt der Schwerpunkt;
+Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
 Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Telemetrie.
 
 | Bestandteil | Aktuell implementiert |
@@ -32,6 +35,18 @@ Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Tel
 Die größeren Arenen wachsen in beiden Achsen um 50 bis 100 Prozent, entsprechend
 2,25- bis vierfacher Fläche. Ihre Schwierigkeit verbindet zusätzliche Schusslinien,
 Relais, bewegliche Gegner und Lichterfolgen. [Alle Missionen im Überblick](docs/MILESTONE_13.md).
+
+## Kleine Korrektur 0.14.1
+
+- **Schalter frei treffen:** Passive Relais lassen sich direkt oder über eine
+  Wand ausschalten. Der Abpraller ist dort freiwillig. Erst alle Schalter lösen,
+  dann den Kern treffen; gefährliche Gegner behalten ihre Schild-/Fallenregeln.
+- **Lichter langsamer:** In Echo-Kammer, Doppeltes Signal und Lichtlabyrinth
+  dauert jeder Schritt jetzt **1,8 Sekunden**: 1,2 Sekunden leuchten, 0,6 Sekunden
+  dunkel. Nach der Dreierfolge folgen 2,4 Sekunden Pause, insgesamt 7,8 Sekunden
+  pro Wiederholung. Weltkreise und Seitenanzeige verwenden dieselbe Zeitsteuerung.
+- **Passende Ansage:** „Erst die Schalter, dann der Kern. Du kannst direkt treffen
+  oder die Wand nutzen.“ Alle bisherigen Missionen, Sterne und Käufe bleiben.
 
 ## Steuerung
 
@@ -91,6 +106,16 @@ regelmäßig präzise orten, auch aus großer Entfernung. Wände blockieren die 
 Geschosse weiterhin durch Reflexion oder klar markierte Absorption.
 
 ## Prüfstand und Grenzen
+
+**Aktuelle Korrektur 0.14.1: vollständige Regression PASS.** Alle 22 Prüfschritte,
+**4.674 native Prüfungen** (1.311 historische, 3.363 aktuelle, davon 134 neu) und
+16 gemeinsame Testgruppen bestanden. Echte Projektiltreffer an allen elf Relais,
+ein freiwilliger physischer Abpraller, Boss-Sperren, ein tatsächlicher Bildschirm-
+Direktschuss sowie sechs zeitlich geprüfte native Lichtzustände sind abgesichert.
+Wiederholte Bosstreffer starten die neue vollständige Ansage nicht neu.
+Sauberer Android-Export und neue feste Pins folgen.
+
+Die folgenden älteren Ergebnisse gehören zur vorherigen **0.14-Fassung**.
 
 **Gezielte Prüfungen bereits bestanden:** 4.540 native Regelprüfungen, davon
 1.311 mit eingefrorenen 0.13-Regeln und 3.229 mit aktiven 0.14-Regeln; 16 gemeinsame
@@ -159,6 +184,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.12 | Bereits belohnte Bonusziele und Truhen wieder spielbar, passende Hinweise/Funk, größerer Fallenkreis und nach Lernerfolg abgestufte längere Wirkzeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](docs/MILESTONE_11.md) |
 | 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis 1.000.000 Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 neuen Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](docs/MILESTONE_12.md) |
 | 30.10.2026 | 0.14 | Zehn neue Missionen, keine versteckten Boni/Truhen, maximal 100 Gesundheit, geschützter Start, größere Felder, endliche Schwärme und steuerbare Angriffsdrohnen. **Vollständig nach main übernommen.** | [Umsetzung und Prüfstand](docs/MILESTONE_13.md) · [Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) |
+| 30.10.2026 | 0.14.1 | Passive Relais direkt oder per Abpraller treffen; langsamere gemeinsame Lichterfolge und passende Ansage. | [Korrektur und Prüfstand](docs/MILESTONE_13.md) · Quelle/APK **PENDING** |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.

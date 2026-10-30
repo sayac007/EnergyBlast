@@ -1,4 +1,4 @@
--- Three tactical situations: prepare a trap, remember a sequence, escort a drone.
+-- Tactical objectives: prepare a trap and remember a sequence.
 local O={}
 local Projectiles=require 'main.projectiles'
 local function distance(a,b)return math.sqrt((a[1]-b[1])^2+(a[2]-b[2])^2)end
@@ -65,7 +65,7 @@ function O.sequence_hit(g,t)
  if t.order~=expected then
   g.sequence_progress=0;g.sequence_clock=0;g.sequence_wrong=.65;g.status='NEUE FOLGE - SCHAU AUF DIE LICHTER';g.say('defold_echo');return
  end
- g.sequence_progress=g.sequence_progress+1;t.lit=.7;g.status='FOLGE '..g.sequence_progress..'/3'
+ g.sequence_progress=g.sequence_progress+1;t.lit=.7;g.status='FOLGE '..g.sequence_progress..'/'..#g.m.sequence
  if g.sequence_progress==#g.m.sequence then
   for _,e in ipairs(g.enemies)do if e.kind=='sequence'then e.hp=0;e.death_age=0;g.fx[#g.fx+1]={kind='explosion',p={e.p[1],e.p[2]},life=.9,age=0}end end
   local alive=false;for _,e in ipairs(g.enemies)do alive=alive or(not e.optional and e.hp>0)end

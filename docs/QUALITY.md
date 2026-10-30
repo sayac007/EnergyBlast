@@ -1,7 +1,39 @@
-# Aktueller Prüfstand — Defold 0.14
+# Aktueller Prüfstand — Defold 0.14.1
 
 **30.10.2026.** [Umsetzung, Missionen und Laufzeitbilder](MILESTONE_13.md) ·
 [Testkommandos](BUILD_AND_TEST.md) · [Download-Metadaten](../downloads/README.md).
+
+## Aktuelle Korrektur 0.14.1 / Code 16
+
+Branch `fix/free-relays-slower-patterns`: Passive Relais akzeptieren direkte und
+reflektierte Treffer; die Boss-Sperre bis zum letzten Relais bleibt. Schild- und
+Fallenregeln echter Gegner sowie Wandreflexionen bleiben erhalten. Die drei
+Lichtermissionen verwenden gemeinsam 1,8 Sekunden je Schritt, davon 1,2 Sekunden
+leuchtend, und 2,4 Sekunden Pause nach der Folge: insgesamt 7,8 Sekunden.
+
+| Prüfung der Korrektur | Tatsächlicher Status |
+|---|---|
+| Neue Ansage `defold_relays_free` | **PASS**, 6,12 Sekunden, FFmpeg/Hash/Dauer/Pegel; unabhängiges Whisper ohne Referenzprompt **1/1 exakt** |
+| Bisherige 42 Clips und Modelldaten | **PASS**, alle Datei-Hashes und individuellen/globalen Metadaten unverändert |
+| Vollständige Regel-/GUI-/Medienregression | **PASS**, alle 22 Befehle; 4.674 native Prüfungen (1.311 historische + 3.363 aktuelle, davon 134 neu), 16 gemeinsame Gruppen mit 1.686 Geometrieprüfungen |
+| Neuer sauberer Android-Build und Artefaktprüfung | **PENDING** |
+| Feste neue Quell-/APK-Verweise | **PENDING** |
+
+Das Paket enthält nun 43 Defold-Sprachaufnahmen und 62 native Soundkomponenten.
+Ein ASR-Screen ist kein menschlicher Hörtest. Die älteren grünen Ergebnisse unten
+bleiben als historische Ergebnisse getrennt; die aktuelle vollständige Regression ist erneut bestanden.
+
+Tatsächlich geprüft sind alle elf Relais über direkte fliegende Projektile,
+ein echter Abpraller an normaler Deckung, verbleibende Boss-Sperren und alte
+Schild-/Timingregeln. XTest bedient den echten Relaistreffer. Sechs Bildzustände
+bei ungefähr 0,87/1,37/2,07/4,02/5,82/7,95 Sekunden prüfen die langsameren
+Seitenkreise. Der laufende Spieltakt wird nicht manuell vorgerückt. Die tatsächliche
+Sprachsteuerung ersetzt eine vorherige Ansage und bleibt nach vier erneuten
+Bosstreffern bei derselben Restdauer; sie beginnt nicht erneut. Native Aufnahmen
+wurden angesehen. Python-Syntax, Whitespace und 204 lokale Dokumentationsziele
+sind geprüft. Physische Geräte-/Hörabnahme bleibt offen.
+
+## Historischer vollständig verifizierter Stand: 0.14
 
 **Vollständige native Suite: PASS, alle 21 Prüfschritte erfolgreich.**
 **APK 0.14: PASS**, [saubere Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads).

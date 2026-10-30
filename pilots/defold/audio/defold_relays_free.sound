@@ -1,0 +1,4 @@
+sound: "/audio/defold_relays_free.ogg"
+looping: 0
+group: "master"
+gain: 1.9021022321706176

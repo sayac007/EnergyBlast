@@ -72,7 +72,7 @@ function M.run(data)
  e.optional=true;check(not g:drone_target(e),'optional puzzle targets cannot be bypassed');e.optional=nil
  e.kind='sequence';check(not g:drone_target(e),'sequence nodes are not attack-drone enemies');e.kind='sentinel'
  e.boss=true;local relay=enemy(g,{3,2},'relay')
- check(not g:drone_target(e)and g.attack_drone.stock==before and g.spoken[#g.spoken]=='raid_relays','boss relay lock is preserved without wasting stock')
+ check(not g:drone_target(e)and g.attack_drone.stock==before and g.spoken[#g.spoken]=='defold_relays_free','boss relay lock is preserved without wasting stock')
  check(g:drone_target(relay),'relay itself is a legitimate tactical target')
  step(g,3);check(relay.hp==0 and e.hp==3,'drone can disable the protecting relay, not a locked boss')
 

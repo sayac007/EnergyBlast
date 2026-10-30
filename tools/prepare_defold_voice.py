@@ -45,6 +45,7 @@ TEXTS={
  'defold_campaign_swarm':'Kleine Drohnen voraus. Einige können sich teilen.',
  'defold_campaign_sequence':'Schalte die Gegner aus. Merke dir die Lichter und triff sie in der richtigen Reihenfolge.',
  'defold_campaign_clear':'Alle Gegner ausgeschaltet. Weiter zur nächsten Mission.',
+ 'defold_relays_free':'Erst die Schalter, dann der Kern. Du kannst direkt treffen oder die Wand nutzen.',
 }
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():

@@ -1,6 +1,7 @@
 local Layout=require 'main.layout'
 local Traps=require 'main.trap_controls'
 local Objectives=require 'main.objectives'
+local SequenceTiming=require 'main.sequence_timing'
 local PowerFormat=require 'main.power_format'
 local View=require 'main.view'
 local Regions=require 'main.hit_regions'
@@ -511,8 +512,8 @@ function update(self,dt)
  if g.m.sanctuary then local sx,sy=mini(g.m.sanctuary.position);ring(self,sx,sy,5,'8fffc7',2)end
  if not campaign(g)then local treasure=g:treasure_state();if treasure.available and(treasure.discovered or treasure.tracking)then local tx,ty=mini(treasure.discovered and treasure.position or treasure.hint);circle(self,tx,ty,4,'ffd66c')end end
  local mx,my=mini(g.p);circle(self,mx,my,4,'a1fff0');if state.goal then local gx,gy=mini(state.goal);icon(self,gx,gy,state.goal_kind=='treasure'and'treasure'or'dash',13)end
- if g.m.kind=='sequence'then local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1
-  for i=1,3 do local lit=slot<=3 and g.m.sequence[slot]==i and phase%.9<.6;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
+ if g.m.kind=='sequence'then local signal=SequenceTiming.state(g)
+  for i=1,#g.m.sequence_nodes do local lit=signal.lit and signal.order==i;circle(self,1208,585-i*40,14,lit and'ffe57a'or'394a7d');text(self,1208,585-i*40,tostring(i),lit and'17214b'or'b8bfff',.62)end
  end
  -- World-only annotations are clipped at the exact render/input viewport.
  local world_bounds=viewport(g)
@@ -532,7 +533,7 @@ function update(self,dt)
    if e.kind=='bonus_sequence'then if e.bonus_lit or(e.lit or 0)>0 then ring(self,bx,by+5,28,'fff1a0',4)end;text(self,bx,by,tostring(e.bonus_order),'fff3a7',.70)elseif e.kind=='bonus_wait'then text(self,bx,by,e.bonus_green and'JETZT!'or'WARTE',e.bonus_green and'a7ffe0'or'ffb1b6',.45,100)else text(self,bx,by,'ABPRALLER','ffe5a0',.40,110)end
    if e.bonus_task then text(self,bx,by-22,e.bonus_task.replay and'NOCH EINMAL'or'+'..e.bonus_task.reward..(power.enabled and' · MACHT +1'or''),'ffe5a0',.46,175)end
   elseif e.kind=='sequence'then
-   local phase=g.sequence_clock%4.6;local slot=math.floor(phase/.9)+1;local lit=slot<=3 and g.m.sequence[slot]==e.order and phase% .9<.6 or(e.lit or 0)>0
+   local signal=SequenceTiming.state(g);local lit=signal.lit and signal.order==e.order or(e.lit or 0)>0
    ring(self,x,y-30,lit and 30 or 20,lit and'ffef81'or'a589e5',lit and 6 or 2);text(self,x,y+8,tostring(e.order),lit and'ffef81'or'c6b2ff',.9)
   else
    local compact=campaign(g)and(e.kind=='mini_drone'or e.kind=='splitter'or e.kind=='crawler'or e.kind=='wisp')

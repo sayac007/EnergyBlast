@@ -1,12 +1,31 @@
 # EnergyBlast — Defold 0.14 herunterladen
 
-**APK-Abschlussprüfung läuft. Der aktuelle APK-Link wird nach dem sauberen Build hier ergänzt.**
+**[EnergyBlast 0.14 APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)**
 
 **16 Missionen, zehn davon neu**, größere Felder, geschützte Zikkurat-Starts,
 keine versteckten Boni oder Schatztruhen. Gesundheit maximal **100 einschließlich
 Rüstung**, begrenzte Tarnung und endliche Mini-Drohnen-Schwärme mit höchstens
 50 lebenden Gegnern. Frühere Sterne und Käufe bleiben erhalten.
 [Regeln, Bilder und Prüfungen](../docs/MILESTONE_13.md).
+
+| Merkmal | Tatsächlicher Wert |
+|---|---|
+| Engine / App | Defold 1.14.0, native ARM64-Test-App |
+| Paket | `org.example.energyblast.defold` |
+| Version / Code | **0.14.0 / 15** |
+| Größe | **69.063.866 Bytes**; 720.896 Bytes mehr als 0.13 |
+| Android | API 24+, target 36, ARM64, userLandscape |
+| Quelle | [9eecbbe](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4), `source_dirty:false` |
+| APK-Snapshot | [11248b5](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) |
+| Gebaut | 30.10.2026, 15:10 MEZ |
+| Signatur | v2/v3, identisches Entwicklungszertifikat wie 0.13 |
+| Physischer Geräte-/Mehrfingertest | **OFFEN** |
+
+```text
+SHA-256 d8a3206c2e45f48bdb9765ba73c4646ce62ca02738b86b1d5d3d0015b3cc7bfd
+```
+
+[Maschinenlesbare Metadaten](defold-verification.json).
 
 ## Installation und Drohnenbedienung
 
@@ -36,7 +55,10 @@ die Sternanzeige öffnet die Ausrüstung. Alle 16 Missionen stehen auf drei Seit
 Testgruppen mit 1.686 Geometriepufferprüfungen. Alle 16 Missionen bei 720/800
 Fensterhöhe, echter Drohnenflug vom Zikkurat bis Missionserfolg/WEITER, beide
 Gesten, Abbruch, Bestand, Kamerarückkehr und bewusstes Zoomen sind geprüft.
-APK-Metadaten werden nach dem sauberen Build ergänzt.
+APK: **PASS**, saubere Quelle, Paket/Version/API/Querformat, keine Berechtigungen,
+Backup aus, v2/v3-Signatur, Zertifikatsgleichheit, ZIP-CRC, keine privaten Schlüssel,
+16-KB-ZIP-Ausrichtung und 1.220 bytegleiche Projektdateien. Die ZIP-Prüfung allein
+ist keine Play-/16-KB-Freigabe.
 Physische Handy-/Tablet-Gesten, Android-Update mit eigenen Spielständen, Audio,
 Leistung bei 50 Gegnern und Spielbalance bleiben separat manuell zu prüfen.
 [Zentraler Qualitätsstatus](../docs/QUALITY.md).

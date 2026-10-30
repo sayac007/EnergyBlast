@@ -148,8 +148,17 @@ Blitzanimation und bewusstes Zoomen während des Flugs bestehen.
 nur mit ausdrücklich eingefrorenen historischen Daten; sie behaupten keine
 solchen Funktionen in der aktiven App. Der normale App-Start lädt 0.14.
 
-**Android-Abschlussprüfung läuft:** Quellcommit, APK-Commit, Größe, Signatur und
-SHA-256 werden vor Auslieferung hier und im [Qualitätsstatus](QUALITY.md) ergänzt.
+**Android-Abschlussprüfung: PASS.** 0.14.0/Code 15, **69.063.866 Bytes**,
+gebaut 30.10.2026, 15:10 MEZ von [sauberer Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4).
+[Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads); gleiches Paket und Entwicklungszertifikat wie
+0.13. Paket/Version/API/Querformat, keine Berechtigungen, Backup aus, v2/v3,
+ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung sowie alle
+**1.220 Projektdateien** im Abzug bytegleich geprüft. APK nur 720.896 Bytes größer
+als 0.13. Keine Play-/16-KB-Freigabe allein aus der ZIP-Prüfung ableitbar.
+
+```text
+SHA-256 d8a3206c2e45f48bdb9765ba73c4646ce62ca02738b86b1d5d3d0015b3cc7bfd
+```
 
 **Manuell offen:** Android-Update und eigene Spielstände, reale Handy-/Tablet-
 Gesten einschließlich Ziehen der Drohne, Lesbarkeit, Audio, GPU-Leistung bei

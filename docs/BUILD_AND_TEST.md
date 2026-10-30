@@ -154,7 +154,9 @@ und ZIP-Ausrichtung. Vor Veröffentlichung zusätzlich ZIP-CRC, fehlende private
 Schlüsseldateien, gleiches Zertifikat zur vorherigen APK und Hash des tatsächlich
 erreichbaren Downloads prüfen.
 
-**0.14-Abschlussexport: PENDING.** Der finale Bau folgt vom sauberen Quellcommit;
-APK und Metadaten werden danach separat versioniert. Das ist kein Beleg für eine
-physische Android-Installation, Play-Signatur oder bereits erteilte Store-Freigabe.
-Keine neuen Actions-Artefakte, PRs, automatischen Merges oder Releases.
+**0.14-Abschlussexport: PASS.** Gebaut vom [sauberen Quellcommit](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4);
+[fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads), 69.063.866 Bytes. Signaturgleichheit zur
+vorherigen APK, v2/v3, Paket/Version/API, keine Berechtigungen, Backup aus,
+ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung und
+1.220 bytegleiche Projektdateien tatsächlich geprüft.
+Reale Handy-/Tablet-Abnahme bleibt offen; Details in [QUALITY.md](QUALITY.md).

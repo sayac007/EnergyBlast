@@ -4,7 +4,7 @@
 [Testkommandos](BUILD_AND_TEST.md) · [Download-Metadaten](../downloads/README.md).
 
 **Vollständige native Suite: PASS, alle 21 Prüfschritte erfolgreich.**
-**APK 0.14: PENDING**, Android-Abschlussexport und feste Quell-/APK-Verweise folgen.
+**APK 0.14: PASS**, [saubere Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads).
 
 | Tatsächlich ausgeführt | Ergebnis |
 |---|---|
@@ -12,7 +12,7 @@
 | Gemeinsame Suite | **16 Gruppen PASS**, einschließlich Medien, Regeln, Archividentität, Manifesten und Herkunft |
 | Exportgeometrie | **1.686 PASS**, tatsächliche Positionspuffer, Kollisionsgrundrisse, unveränderte Material-Batches und Herkunftshashes; Teil der gemeinsamen Suite |
 | Aktive Kampagne | **PASS**, genau 16 Missionen, keine Bonus-/Schatz-/Begleitaufträge, gültige Ziele und sichere Startpunkte |
-| Gesundheit und Tarnung | **PASS**, höchstens 100 einschließlich Rüstung, bounded Schild/Schaden, wiederholte genaue Fernortung trotz stärkster Tarnung |
+| Gesundheit und Tarnung | **PASS**, höchstens 100 einschließlich Rüstung, begrenzter Schild/Schaden, wiederholte genaue Fernortung trotz stärkster Tarnung |
 | Schwärme | **PASS**, endliche Familien, kontrollierte Teilungen, Kollisionsgrenzen und maximal 50 lebende Gegner |
 | Tatsächliche Kampagnen-GUI | **PASS**, alle 16 Missionen, drei Auswahlseiten, obere Ziel-/Gegner-/Missionsaktionen, Schutzstart und Rückkehr zur Auswahl |
 | Fensterformate | **PASS**, vollständige Missionstour bei 1280 × 720 und nach tatsächlicher Fensteränderung auf 1280 × 800 |
@@ -51,10 +51,18 @@ Das ist keine unbegleitete Android-Spielrunde.
 
 ## Offene Freigaben
 
-**Android-Abschlussexport: PENDING.** Vor Auslieferung werden Paket/Version,
-Signatur und gleiches Entwicklungszertifikat, Berechtigungen, Backup, ZIP-CRC,
-Dateiformat, Ausrichtung, Quellabzug, Dateigröße und SHA-256 tatsächlich geprüft.
-Die vorherige 0.13-APK wird nicht als 0.14-Artefakt ausgegeben.
+**Android-Abschlussexport: PASS.** Gebaut 30.10.2026, 15:10 MEZ von
+[sauberer Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4), `source_dirty:false`.
+69.063.866 Bytes, Version 0.14.0/Code 15, Paket `org.example.energyblast.defold`,
+API 24/target 36/ARM64, userLandscape, keine Berechtigungen, Backup aus.
+v2/v3-Signatur und dasselbe Entwicklungszertifikat wie 0.13, ZIP-CRC, keine
+privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung und **1.220 bytegleiche
+Projektdateien** im Buildabzug bestanden. ZIP-Ausrichtung allein ist keine
+Play-/16-KB-Zertifizierung. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads).
+
+```text
+SHA-256 d8a3206c2e45f48bdb9765ba73c4646ce62ca02738b86b1d5d3d0015b3cc7bfd
+```
 
 **Manuell offen:** Update und eigene Spielstände auf Handy/Tablet, reale
 Mehrfingergesten und Drohnenziehen, kleine Displays, Klang, GPU-Leistung bei

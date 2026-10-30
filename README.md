@@ -5,10 +5,10 @@ Helden, reflektierte Schüsse, Deckung, Fallen und steuerbare Angriffsdrohnen.
 Zehn neue Missionen steigern die Komplexität. Gespeicherte Sterne und Ausrüstung
 bleiben erhalten; versteckte Bonusaufgaben und Schatztruhen entfallen.
 
-**0.14.1: Vollständige Tests PASS; sauberer Android-Export und feste Pins folgen.**
+**[Android 0.14.1 herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
 
-**[Letzte geprüfte Android-APK 0.14 — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
-[Letzte geprüfte APK 0.13 — vorheriger Spielstand](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
+**[Vorherige geprüfte Android-APK 0.14 — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
+[Vorherige geprüfte APK 0.13](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
 [Änderungen und Prüfstand](docs/MILESTONE_13.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
@@ -16,7 +16,7 @@ bleiben erhalten; versteckte Bonusaufgaben und Schatztruhen entfallen.
 
 **0.14.1 / Android-Code 16, Stand 30.10.2026**, Korrekturbranch
 `fix/free-relays-slower-patterns`. Die zuvor geprüfte 0.14-Fassung liegt vollständig
-auf `main`; die aktuelle Korrektur wird vor Auslieferung erneut geprüft.
+auf `main`; die aktuelle Korrektur ist vollständig geprüft und als Update-APK verfügbar.
 Es bleiben **16 Missionen**. Defold 1.14.0 bleibt der Schwerpunkt;
 Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
 Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Telemetrie.
@@ -113,7 +113,9 @@ Geschosse weiterhin durch Reflexion oder klar markierte Absorption.
 ein freiwilliger physischer Abpraller, Boss-Sperren, ein tatsächlicher Bildschirm-
 Direktschuss sowie sechs zeitlich geprüfte native Lichtzustände sind abgesichert.
 Wiederholte Bosstreffer starten die neue vollständige Ansage nicht neu.
-Sauberer Android-Export und neue feste Pins folgen.
+**Sauberer APK-Export: PASS.** Identisches Paket und Entwicklungszertifikat,
+Version 0.14.1/Code 16, 69.113.018 Bytes, keine Berechtigungen, Backup aus,
+v2/v3, ZIP-CRC und 1.225 bytegleiche Projektdateien geprüft. [APK-Nachweise](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads).
 
 Die folgenden älteren Ergebnisse gehören zur vorherigen **0.14-Fassung**.
 
@@ -184,7 +186,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.12 | Bereits belohnte Bonusziele und Truhen wieder spielbar, passende Hinweise/Funk, größerer Fallenkreis und nach Lernerfolg abgestufte längere Wirkzeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](docs/MILESTONE_11.md) |
 | 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis 1.000.000 Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 neuen Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](docs/MILESTONE_12.md) |
 | 30.10.2026 | 0.14 | Zehn neue Missionen, keine versteckten Boni/Truhen, maximal 100 Gesundheit, geschützter Start, größere Felder, endliche Schwärme und steuerbare Angriffsdrohnen. **Vollständig nach main übernommen.** | [Umsetzung und Prüfstand](docs/MILESTONE_13.md) · [Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) |
-| 30.10.2026 | 0.14.1 | Passive Relais direkt oder per Abpraller treffen; langsamere gemeinsame Lichterfolge und passende Ansage. | [Korrektur und Prüfstand](docs/MILESTONE_13.md) · Quelle/APK **PENDING** |
+| 30.10.2026 | 0.14.1 | Passive Relais direkt oder per Abpraller treffen; langsamere gemeinsame Lichterfolge und passende Ansage. | [Korrektur und Prüfstand](docs/MILESTONE_13.md) · [Quelle](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.

@@ -31,7 +31,20 @@ enthält jetzt 43 Defold-Aufnahmen und 62 native Soundkomponenten.
 Alle elf Relais werden durch echte Direktprojektile getroffen; ein tatsächlicher
 Abpraller bleibt gültig. XTest prüft den direkten Relaistreffer, die Boss-Sperre,
 sechs langsamere Pixelzustände im laufenden Takt sowie die Ansage ohne Neustart
-bei wiederholten Bosstreffern. Sauberer Android-Export und feste Pins folgen.
+bei wiederholten Bosstreffern.
+
+**APK 0.14.1 / Code 16: PASS.** 69.113.018 Bytes (49.152 Bytes mehr als 0.14),
+gebaut 30.10.2026, 16:26 MEZ vom [sauberen Quellstand](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853),
+`source_dirty:false`. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads). Paket
+`org.example.energyblast.defold`, API 24/target 36/ARM64, userLandscape, keine
+Berechtigungen, Backup aus. Identisches Entwicklungszertifikat wie 0.14,
+v2/v3-Signatur, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und **1225 bytegleiche Projektdateien** im Abzug bestanden.
+ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+
+```text
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
+```
 Die nachfolgenden Ergebnisse und APK-Verweise dokumentieren den unveränderten
 vorherigen 0.14-Stand. Reale
 Handy-/Tablet-Abnahme bleibt gesondert offen.

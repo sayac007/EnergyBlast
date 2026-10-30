@@ -16,8 +16,8 @@ leuchtend, und 2,4 Sekunden Pause nach der Folge: insgesamt 7,8 Sekunden.
 | Neue Ansage `defold_relays_free` | **PASS**, 6,12 Sekunden, FFmpeg/Hash/Dauer/Pegel; unabhängiges Whisper ohne Referenzprompt **1/1 exakt** |
 | Bisherige 42 Clips und Modelldaten | **PASS**, alle Datei-Hashes und individuellen/globalen Metadaten unverändert |
 | Vollständige Regel-/GUI-/Medienregression | **PASS**, alle 22 Befehle; 4.674 native Prüfungen (1.311 historische + 3.363 aktuelle, davon 134 neu), 16 gemeinsame Gruppen mit 1.686 Geometrieprüfungen |
-| Neuer sauberer Android-Build und Artefaktprüfung | **PENDING** |
-| Feste neue Quell-/APK-Verweise | **PENDING** |
+| Neuer sauberer Android-Build und Artefaktprüfung | **PASS**, 0.14.1/16, identisches Zertifikat, 1.225 bytegleiche Projektdateien, Paket/Manifest/v2/v3/ZIP geprüft |
+| Feste neue Quell-/APK-Verweise | [Quelle](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads) |
 
 Das Paket enthält nun 43 Defold-Sprachaufnahmen und 62 native Soundkomponenten.
 Ein ASR-Screen ist kein menschlicher Hörtest. Die älteren grünen Ergebnisse unten
@@ -32,6 +32,19 @@ Sprachsteuerung ersetzt eine vorherige Ansage und bleibt nach vier erneuten
 Bosstreffern bei derselben Restdauer; sie beginnt nicht erneut. Native Aufnahmen
 wurden angesehen. Python-Syntax, Whitespace und 204 lokale Dokumentationsziele
 sind geprüft. Physische Geräte-/Hörabnahme bleibt offen.
+
+**APK 0.14.1 / Code 16: PASS.** 69.113.018 Bytes (49.152 Bytes mehr als 0.14),
+gebaut 30.10.2026, 16:26 MEZ vom [sauberen Quellstand](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853),
+`source_dirty:false`. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads). Paket
+`org.example.energyblast.defold`, API 24/target 36/ARM64, userLandscape, keine
+Berechtigungen, Backup aus. Identisches Entwicklungszertifikat wie 0.14,
+v2/v3-Signatur, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und **1225 bytegleiche Projektdateien** im Abzug bestanden.
+ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+
+```text
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
+```
 
 ## Historischer vollständig verifizierter Stand: 0.14
 

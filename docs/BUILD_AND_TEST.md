@@ -168,9 +168,18 @@ und ZIP-Ausrichtung. Vor Veröffentlichung zusätzlich ZIP-CRC, fehlende private
 Schlüsseldateien, gleiches Zertifikat zur vorherigen APK und Hash des tatsächlich
 erreichbaren Downloads prüfen.
 
-**0.14.1-Abschlussexport: PENDING.** Der abschließende Build erfolgt erst vom
-sauberen neuen Quellcommit; Paket/Version, Signaturgleichheit, APK-Inhalt und
-Download-Hash werden für die neue Datei erneut geprüft.
+**APK 0.14.1 / Code 16: PASS.** 69.113.018 Bytes (49.152 Bytes mehr als 0.14),
+gebaut 30.10.2026, 16:26 MEZ vom [sauberen Quellstand](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853),
+`source_dirty:false`. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads). Paket
+`org.example.energyblast.defold`, API 24/target 36/ARM64, userLandscape, keine
+Berechtigungen, Backup aus. Identisches Entwicklungszertifikat wie 0.14,
+v2/v3-Signatur, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und **1225 bytegleiche Projektdateien** im Abzug bestanden.
+ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+
+```text
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
+```
 
 **Historischer 0.14-Abschlussexport: PASS.** Gebaut vom [sauberen Quellcommit](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4);
 [fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads), 69.063.866 Bytes. Signaturgleichheit zur

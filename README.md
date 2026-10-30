@@ -1,14 +1,17 @@
 # EnergyBlast — Defold 0.11
 
-> **Neuer Teststand 0.13 — dauerhafte Bonus-Macht:**
-> [Android-APK herunterladen — 68,3 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk).
-> Jeder neue Bonus bringt mehr Gesundheit bis 1.000.000 plus Rüstung, sichtbares
-> Wachstum, Schutzschild, Feuerkraft und Tarnung. Vorhandene Erfolge zählen sofort.
-> **1.311 native Prüfungen und 15 Testgruppen bestanden.**
-> [Bilder, Werte, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/e557d93/docs/MILESTONE_12.md) ·
-> [Aktueller vollständiger Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/bonus-power).
-> Die Bonus-Macht wurde ausdrücklich vorgezogen. 20 zusätzliche Missionen und die
-> FPV-Spiel-Drohne sind noch der nachfolgende Auftrag und in 0.13 nicht enthalten.
+> **Neuer Teststand 0.14 — 16 Missionen und steuerbare Angriffsdrohnen:**
+> [Android-APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk).
+> Zehn neue Missionen, größere Felder, geschützte Zikkurat-Starts, keine versteckten
+> Boni/Schätze. Gesundheit maximal 100 einschließlich Rüstung, begrenzte Tarnung,
+> endliche Schwärme mit höchstens 50 lebenden Gegnern. Alte Sterne/Käufe bleiben.
+> Drohne aus dem Vorrat wählen, dann zum Gegner ziehen oder nach der Ansage das
+> Ziel antippen. Temporäre Kartenübersicht, echter Flug und elektrischer Treffer.
+> **4.540 native Prüfungen, vollständige GUI-Suite und 16 Testgruppen bestanden.**
+> [Missionen, Bilder, Tests und offene Geräteprüfungen](https://github.com/sayac007/EnergyBlast/blob/425dd3c29b7776864d0fcb0642f16d38db2f46d0/docs/MILESTONE_13.md) ·
+> [Vollständiger aktueller Teststand](https://github.com/sayac007/EnergyBlast/tree/feat/campaign-16).
+> Als Update mit identischem Entwicklungszertifikat installierbar; nicht vorher
+> deinstallieren. Physische Handy-/Tablet-Abnahme und Spielbalance bleiben offen.
 > Der unten beschriebene Spielcode in `main` bleibt 0.11; diese Ankündigung
 > aktualisiert Dokumentation und führt keinen Spielcode automatisch zusammen.
 
@@ -26,7 +29,7 @@ Defold bleibt der Schwerpunkt.
 ## Aktueller Stand
 
 **Testversion 0.11.0 / Android-Code 12, Stand 29.10.2026.** Diese Version liegt
-seit PR #1 auf `main`. Die zusätzliche 0.13-Testfassung ist oben verlinkt.
+seit PR #1 auf `main`. Die zusätzliche 0.14-Testfassung ist oben verlinkt.
 Quellcode, Inhalte, Originalassets, Buildskripte, Tests und APK sind hier gemeinsam
 nachvollziehbar. Android 7/API 24+, ARM64; Entwicklungsfassung mit lokaler Speicherung.
 
@@ -101,6 +104,7 @@ Entscheidungen und Spielstände. Ein technisch bestandener Test war keine
 | 29.10.2026 | 0.11 | Zoombedienung, verlässliche Schatzführung und HD-Figuren mit nativem Schimmer. **Durch PR #1 in main übernommen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/f8e63f64fb8275cc49e609479777486c10da7181) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/284a94a0659ca9c0fd453977343053274bf214df/downloads) · [Bericht](docs/MILESTONE_10.md) |
 | 29.10.2026 | 0.12 | Bereits belohnte Boni und Truhen erneut spielbar, passende Hinweise/Funk, größerer Fallenkreis und an Lernerfolg angepasste längere Zeiten. **Neue Korrekturfassung auf dem Arbeitsbranch.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9554e66ba5ede774779857a0285b27e4d670d8c1) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/8d0de931d121f89e5ad8b6841c4124035a24c12b/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e76739a/docs/MILESTONE_11.md) |
 | 29.10.2026 | 0.13 | Dauerhafte Bonus-Macht bis eine Million Grundgesundheit, Wachstum, echte Schilde, Feuerkraft und Tarnung. **Vor den 20 Missionen und FPV vorgezogen.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/fda39e50c0fa1166b0be2847eebaf86adf38d89a) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/e557d93/docs/MILESTONE_12.md) |
+| 30.10.2026 | 0.14 | Zehn neue Missionen, keine versteckten Boni, Gesundheit maximal 100, geschützte Starts, größere Felder, endliche Schwärme und steuerbare Angriffsdrohnen. **Separater Testbranch, kein Spielcode-Merge.** | [Quelle](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4) · [APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) · [Bericht](https://github.com/sayac007/EnergyBlast/blob/425dd3c29b7776864d0fcb0642f16d38db2f46d0/docs/MILESTONE_13.md) |
 
 **29.10.2026 – Repository-Übernahme von 0.10:** Bis 0.10 erschien auf `main` die aktuelle
 Dokumentation, während der vollständige Spielcode auf dem Arbeitsbranch lag.

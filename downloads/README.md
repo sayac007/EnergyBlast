@@ -1,6 +1,9 @@
-# EnergyBlast — Defold 0.14 herunterladen
+# EnergyBlast — Defold 0.14.1 herunterladen
 
-**[EnergyBlast 0.14 APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)**
+**[EnergyBlast 0.14.1 APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads/energyblast-defold-debug.apk)**
+
+**Korrektur 0.14.1:** Passive Schalter direkt oder per Abpraller treffen, passende
+Ansage und halb so schneller Wechsel der leuchtenden Kreise.
 
 **16 Missionen, zehn davon neu**, größere Felder, geschützte Zikkurat-Starts,
 keine versteckten Boni oder Schatztruhen. Gesundheit maximal **100 einschließlich
@@ -12,17 +15,17 @@ Rüstung**, begrenzte Tarnung und endliche Mini-Drohnen-Schwärme mit höchstens
 |---|---|
 | Engine / App | Defold 1.14.0, native ARM64-Test-App |
 | Paket | `org.example.energyblast.defold` |
-| Version / Code | **0.14.0 / 15** |
-| Größe | **69.063.866 Bytes**; 720.896 Bytes mehr als 0.13 |
+| Version / Code | **0.14.1 / 16** |
+| Größe | **69.113.018 Bytes**; 49.152 Bytes mehr als 0.14 |
 | Android | API 24+, target 36, ARM64, userLandscape |
-| Quelle | [9eecbbe](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4), `source_dirty:false` |
-| APK-Snapshot | [11248b5](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads) |
-| Gebaut | 30.10.2026, 15:10 MEZ |
-| Signatur | v2/v3, identisches Entwicklungszertifikat wie 0.13 |
+| Quelle | [2fb7785](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853), `source_dirty:false` |
+| APK-Snapshot | [387b8a7](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads) |
+| Gebaut | 30.10.2026, 16:26 MEZ |
+| Signatur | v2/v3, identisches Entwicklungszertifikat wie 0.14 |
 | Physischer Geräte-/Mehrfingertest | **OFFEN** |
 
 ```text
-SHA-256 d8a3206c2e45f48bdb9765ba73c4646ce62ca02738b86b1d5d3d0015b3cc7bfd
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
 ```
 
 [Maschinenlesbare Metadaten](defold-verification.json).
@@ -50,18 +53,26 @@ die Sternanzeige öffnet die Ausrüstung. Alle 16 Missionen stehen auf drei Seit
 
 ## Tatsächliche Prüfung
 
-**Vollständige Suite bestanden:** 4.540 native Prüfungen (1.311 historische,
-3.229 aktive) plus tatsächliche GUI-/Speicher-/Audio-/Pixelabläufe, 16 gemeinsame
+**Vollständige Suite bestanden:** 4.674 native Prüfungen (1.311 historische,
+3.363 aktive, davon 134 neu) plus tatsächliche GUI-/Speicher-/Audio-/Pixelabläufe, 16 gemeinsame
 Testgruppen mit 1.686 Geometriepufferprüfungen. Alle 16 Missionen bei 720/800
 Fensterhöhe, echter Drohnenflug vom Zikkurat bis Missionserfolg/WEITER, beide
 Gesten, Abbruch, Bestand, Kamerarückkehr und bewusstes Zoomen sind geprüft.
+Auch direkte Projektiltreffer an allen elf Relais, der freiwillige Abpraller,
+sechs tatsächliche langsamere Lichtzustände und die Ansage ohne Neustart bei
+wiederholten Bosstreffern sind geprüft.
 APK: **PASS**, saubere Quelle, Paket/Version/API/Querformat, keine Berechtigungen,
 Backup aus, v2/v3-Signatur, Zertifikatsgleichheit, ZIP-CRC, keine privaten Schlüssel,
-16-KB-ZIP-Ausrichtung und 1.220 bytegleiche Projektdateien. Die ZIP-Prüfung allein
+16-KB-ZIP-Ausrichtung und 1.225 bytegleiche Projektdateien. Die ZIP-Prüfung allein
 ist keine Play-/16-KB-Freigabe.
 Physische Handy-/Tablet-Gesten, Android-Update mit eigenen Spielständen, Audio,
 Leistung bei 50 Gegnern und Spielbalance bleiben separat manuell zu prüfen.
 [Zentraler Qualitätsstatus](../docs/QUALITY.md).
+
+## Vorherige 0.14 dauerhaft erhalten
+
+[Defold 0.14 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)
+— 69.063.866 Bytes, [damaliger Stand](https://github.com/sayac007/EnergyBlast/blob/425dd3c29b7776864d0fcb0642f16d38db2f46d0/docs/MILESTONE_13.md).
 
 ## Vorherige 0.13 dauerhaft erhalten
 
@@ -120,7 +131,7 @@ Dieser grafische Stand wurde vom Betreiber abgelehnt; die technische Historie bl
 
 ## Erhaltene Vergleichsfassungen
 
-Diese Apps wurden für 0.14 nicht verändert oder neu gebaut:
+Diese Apps wurden für 0.14.1 nicht verändert oder neu gebaut:
 
 - [GDevelop 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-gdevelop-debug.apk) — 2.153.923 Bytes, GDJS/WebGL in lokaler Android-WebView.
 - [Defold 0.3 APK](https://raw.githubusercontent.com/sayac007/EnergyBlast/943f9340ef78079ed60c7db068cd5b76f86d1b6a/downloads/energyblast-defold-debug.apk) — 9.065.658 Bytes, alter Vergleich.

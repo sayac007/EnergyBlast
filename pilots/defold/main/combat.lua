@@ -66,7 +66,7 @@ function M.new(data,saved)
   self.pending_win=nil;self.index=index;self.m=data.missions[index];self.arena=self.m.arena or data.arena;self.p={self.m.spawn[1],self.m.spawn[2]};self.aim=M.norm({8.5,-11.9});self.clock=0;self.path={};self.bullets={};self.shots_fired=0;self.enemies={};self.fx={};self.hp=self:max_health();self.max_hp=self.hp;self.regen_since_hit=0;self.regen_charge=0;self.regenerating=false;self.sanctuary_absorbed=0;self.in_sanctuary=self:is_safe();self.invulnerable=0;self.cooldown=0;self.dash_cooldown=0;self.dash_time=0;self.damage=0;self.solved=false;self.over=false;self.held=false;self.aiming=false;self.clue_time=0;self.hint_debounce=0;self.heal_used=false;self.feedback=0;self.target=nil;self.secret_visible=false;self.treasure_collected=false
   self.walls=Surfaces.for_mission(data,self.m)
   for _,t in ipairs(self.m.turrets)do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=t.hp or 2,max_hp=t.hp or 2,shield=t.shield,trap_shield=t.trap_shield,boss=t.boss,burst=t.burst or 1,patrol=t.patrol,waypoint=2,speed=t.speed or 1,timer=t.phase+.7,warning=0,direction={-1,0},kind=t.kind,source_spec=t,replication_period=t.replication_period,max_generation=t.max_generation,generation=t.generation}end
-  for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=true,kind='relay',timer=999,warning=0,direction={0,1}}end
+  for _,t in ipairs(self.m.relays or{})do self.enemies[#self.enemies+1]={p={t.position[1],t.position[2]},hp=1,max_hp=1,shield=not data.campaign_enabled,kind='relay',timer=999,warning=0,direction={0,1}}end
   Objectives.load(self)
   Swarm.initialize(self)
   Bonus.load(self)
@@ -101,13 +101,19 @@ function M.new(data,saved)
   for _,e in ipairs(self.enemies)do if e.kind=='relay'and e.hp>0 then return true end end
   return false
  end
+ function g:relay_voice()
+  return data.campaign_enabled and'defold_relays_free'or'raid_relays'
+ end
  function g:hit(t,bounces,damage)
   if t.hp<=0 then return end
   if Bonus.hit(self,t,bounces)then return end
   if t.kind=='sequence'then Objectives.sequence_hit(self,t);return end
   if t.trap_shield and(t.trapped or 0)<=0 then self.status='MAGNETFALLE BRICHT DEN SCHILD';return end
-  if self:locked(t)then self.status='RELAIS ZUERST';self.say('raid_relays');return end
-  if t.shield and not t.trap_shield and bounces==0 then
+  if self:locked(t)then self.status='RELAIS ZUERST';self.say(self:relay_voice());return end
+  -- A passive switch accepts either route. Real combat shields retain their
+  -- existing rules, and a boss still waits for all of its switches to be hit.
+  local free_relay=data.campaign_enabled and t.kind=='relay'
+  if t.shield and not t.trap_shield and not free_relay and bounces==0 then
    self.status='SCHILD: Triff ueber eine Wand.';self.say(t.kind=='relay'and'raid_relays'or'combat_shield');return
   end
   t.hp=math.max(0,t.hp-(damage or 1));t.hit_timer=.18

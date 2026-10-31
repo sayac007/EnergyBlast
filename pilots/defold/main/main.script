@@ -6,11 +6,14 @@ local PolishFixture=require 'main.polish_fixture'
 local ReplayFixture=require 'main.replay_fixture'
 local PowerFixture=require 'main.power_fixture'
 local CampaignFixture=require 'main.campaign_fixture'
+local TacticsFixture=require 'main.tactics_fixture'
 local DroneControls=require 'main.drone_controls'
 
 local function voice(self,id)
  if self.muted or not self.clips[id]then return end
- local contextual=id:match('^defold_drone_')~=nil or id:match('^defold_campaign_')~=nil or id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_power_')~=nil or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and (self.voice_id:match('^defold_trap_')~=nil or self.voice_id:match('^defold_drone_')~=nil))
+ -- Repeated hits on a locked boss must not restart this complete explanation.
+ if id=='defold_relays_free'and self.voice_id==id and self.voice_left>0 then return end
+ local contextual=id=='defold_relays_free' or id:match('^defold_drone_')~=nil or id:match('^defold_campaign_')~=nil or id=='defold_treasure_hint' or id=='defold_zoom_help' or id:match('^defold_power_')~=nil or id:match('^defold_sanctuary_')~=nil or id=='defold_shop_tiers' or id=='defold_health_refill' or id:match('^flow_')~=nil or id:match('^bonus_')~=nil or id:match('^defold_trap_')~=nil or(id=='defold_controls'and self.voice_id and (self.voice_id:match('^defold_trap_')~=nil or self.voice_id:match('^defold_drone_')~=nil))
  if contextual then
   if self.voice_id then sound.stop('#'..self.voice_id)end
   self.voice_left=0;self.voice_next=nil;self.follow_enemy_tap=false
@@ -306,13 +309,14 @@ local function run_tests(self)
  n=n+require('main.campaign_core_checks').run(current)
  n=n+require('main.attack_drone_checks').run(current)
  n=n+require('main.camera14_checks').run(current)
+ n=n+require('main.tactics_checks').run(current,json.decode(sys.load_resource('/data/defold13.json')))
  print('DEFOLD ACTIVE014: '..(n-archived)..' native checks PASS')
  print('DEFOLD COMBAT: '..n..' native checks PASS');msg.post('@system:','exit',{code=0})
 end
 function init(self)
  self.capture_hero_fx_off=sys.get_config_string('project.capture_hero_fx_off','0')=='1';self.capture_field_off=sys.get_config_string('project.capture_field_off','0')=='1';self.objects={};self.fragments={};self.visual_clock=0;self.rigs=json.decode(sys.load_resource('/data/rigs.json'));self.voice_left=0;self.clips={};self.voice_next=nil
  self.test_mode=sys.get_config_string('project.test_mode','0')=='1';self.muted=self.test_mode
- local archived=os.getenv('ENERGYBLAST_REGRESSION_RULES')=='013'and sys.get_config_string('project.campaign_ui_test','0')=='0'
+ local archived=os.getenv('ENERGYBLAST_REGRESSION_RULES')=='013'and sys.get_config_string('project.campaign_ui_test','0')=='0'and sys.get_config_string('project.tactics_ui_test','0')=='0'
  local data=json.decode(sys.load_resource(archived and'/data/defold13.json'or'/data/defold04.json'));data.visual_surfaces=json.decode(sys.load_resource(archived and'/data/surfaces-013.json'or'/data/surfaces.json'))
  local audio=json.decode(sys.load_resource('/data/audio.json'));for _,c in ipairs(audio.clips)do self.clips[c.id]=c end
  local path=sys.get_save_file('energyblast','progress');self.save_path=path
@@ -377,6 +381,7 @@ function init(self)
  ReplayFixture.init(self)
  PowerFixture.init(self)
  CampaignFixture.init(self)
+ TacticsFixture.init(self)
  if self.test_mode then self.g.changed=function()end;self.g.say=function()end;self.test_wait=.15 end
 end
 function update(self,dt)
@@ -425,6 +430,7 @@ function update(self,dt)
  ReplayFixture.update(self,dt)
  PowerFixture.update(self,dt)
  CampaignFixture.update(self,dt)
+ TacticsFixture.update(self,dt)
  View.follow(self.g,dt,false);if self.capture_depth then self.g.camera={0,1.8}end;msg.post('@render:','camera',{x=self.g.camera[1],z=self.g.camera[2],scene=self.g.dialog==nil,hero_x=self.g.p[1],hero_z=self.g.p[2],hero_scale=self.hero_visual_scale or 1,zoom=self.g.zoom,campaign=self.g.data.campaign_enabled==true,arena=self.g.arena})
  local p=self.g.p
  animate_hero(self,dt)
@@ -501,6 +507,7 @@ function on_message(self,id,message)
   ReplayFixture.choose(self)
   PowerFixture.choose(self)
   CampaignFixture.choose(self)
+ TacticsFixture.choose(self)
   if self.g.direct_touch_test then self.g.p={4,4.8};self.g.invulnerable=999;for _,e in ipairs(self.g.enemies)do e.timer=999;e.warning=0 end;self.g.paused=false;self.g.dialog=nil;View.follow(self.g,0,true)end
   if sys.get_config_string('project.capture_motion','0')=='1'then
    self.g.motion_capture=true;local x,y=View.project(self.g,{self.g.p[1]+2,self.g.p[2]-3},0);local ax,ay=View.project(self.g,{self.g.p[1]+4,self.g.p[2]-4.5},0);print('DEFOLD MOTION READY '..math.floor(x)..' '..math.floor(y)..' '..math.floor(ax)..' '..math.floor(ay))

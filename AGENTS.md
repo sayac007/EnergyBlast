@@ -315,3 +315,19 @@ repository changes. Keep historical instructions below as a decision log.
   with a human hearing test. Report actual native/Android build results separately.
 - No automatic game merge, PR, Actions, Release/Play upload, private family asset,
   signing-key publication or changes to another repository.
+
+## Free relay shots and slower lights — operator correction, 30 October 2026
+
+- Patch 0.14.1/code16 on `fix/free-relays-slower-patterns`. Passive switches must
+  accept both direct and reflected shots. Do not force wall shots for non-hostile
+  tasks; preserve reflective walls, real enemy shield/trap rules and the boss's
+  relay lock. This is free shot-route choice, without a new compulsory mode.
+- Active relay hints and boss/drone-lock responses use `defold_relays_free`, never
+  the historical wall-only `raid_relays`. Historical clips and 0.13 fixtures stay.
+- Slow the active light pattern to 1.8-second steps, lit for 1.2 seconds, followed
+  by a 2.4-second replay pause. Side and world indicators share sequence_timing.
+  Observation repeats freely; correct order is not a timed shooting test.
+- Keep sixteen missions, saves, purchases and all existing controls. Test real
+  direct-projectile relay hits, optional ricochets, retained boss locks, actual
+  rendered light timing, historical rules and the update APK. No automatic merge,
+  PR, Actions, Release/Play upload or writes to other repositories are authorized.

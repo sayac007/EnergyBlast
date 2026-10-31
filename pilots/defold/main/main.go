@@ -139,6 +139,7 @@ components { id: "defold_campaign_clear" component: "/audio/defold_campaign_clea
 components { id: "defold_drone_launch" component: "/audio/defold_drone_launch.sound" }
 components { id: "defold_drone_target" component: "/audio/defold_drone_target.sound" }
 components { id: "defold_campaign_swarm" component: "/audio/defold_campaign_swarm.sound" }
+components { id: "defold_relays_free" component: "/audio/defold_relays_free.sound" }
 components { id: "fx_hit" component: "/audio/fx_hit.sound" }
 components { id: "fx_fire" component: "/audio/fx_fire.sound" }
 components { id: "fx_dash" component: "/audio/fx_dash.sound" }

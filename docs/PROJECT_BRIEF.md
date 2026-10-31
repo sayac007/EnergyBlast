@@ -289,3 +289,17 @@ Merge-Beschränkungen werden für diese beauftragte Übernahme aufgehoben.
 APK-Build- und Spieltestergebnisse bleiben ihrem ursprünglichen Quellstand
 zugeordnet. Es entstehen keine neue APK, PR, Release-/Store-Veröffentlichung oder
 Änderung eines anderen Repositories. [Aktueller Stand](../README.md).
+
+## Korrektur — 30.10.2026: Schalter frei treffen, Lichter langsamer zeigen
+
+Der Betreiber möchte bei unbeweglichen Aufgaben keine Pflicht „Erst die Schalter –
+triff sie über die Wand“. Passive Relais lassen sich direkt oder mit Abprallern
+abschalten; der Schussweg ist frei wählbar. Physische Wandreflexionen und echte
+gegnerische Schutzmechaniken bleiben Teil des Kampfes. Ein Kern mit Relais bleibt
+bis zu deren Abschaltung geschützt. Eine neue Ansage erklärt beide Schusswege.
+
+Die Aufgaben mit leuchtenden Kreisen bleiben erhalten. Ihre Darstellung wird
+langsamer: 1,8 Sekunden je Schritt mit 1,2 Sekunden Leuchten, danach 2,4 Sekunden
+Pause vor der Wiederholung. Die Schussfolge verlangt die richtige Reihenfolge,
+keinen Treffer innerhalb des kurzen Leuchtfensters. Seitenanzeige und Spielfeld
+verwenden denselben Takt. Korrekturfassung0.14.1 auf `fix/free-relays-slower-patterns`.

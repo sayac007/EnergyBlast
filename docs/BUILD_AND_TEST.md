@@ -1,4 +1,4 @@
-# Bauen und prüfen — Defold 0.14.0
+# Bauen und prüfen — Defold 0.14.1
 
 Vom Repository-Hauptverzeichnis ausführen. Ausgaben außerhalb des Checkouts;
 keine Schlüssel in Git. Die aktuelle Fassung enthält 16 Missionen. Der jeweilige
@@ -53,15 +53,17 @@ python3 tools/check_shared.py
 python3 tools/check_defold.py
 ```
 
-- **check_shared:** 16 Gruppen. Datenkopien, Regeln, unveränderte frühere Engine-
-  Quellen, Herkunft und Hashes, tatsächliche FFmpeg-Decodierung von **71 Sprach-
-  aufnahmen** (42 Defold, 3 Raid, 26 DE), Musik/Explosion, Pegel und Dauer,
+- **check_shared:** Gruppenanzahl im aktuellen Qualitätsstatus. Datenkopien, Regeln, unveränderte frühere Engine-
+  Quellen, Herkunft und Hashes, tatsächliche FFmpeg-Decodierung von **72 Sprach-
+  aufnahmen** (43 Defold, 3 Raid, 26 DE), Musik/Explosion, Pegel und Dauer,
   Offline-Manifeste sowie Exportgeometrie. Die 1.686 Geometrieprüfungen sind Teil
   dieser Suite, keine zusätzlichen nativen Regelprüfungen.
 - **check_defold:** baut zuerst. Ein fehlgeschlagener Build darf niemals eine
   alte Binärdatei ausführen. Die native Suite meldet historische und aktive
-  Regeln getrennt: **1.311 mit 0.13-Fixtures plus 3.229 mit aktiven 0.14-Regeln**,
-  insgesamt 4.540. Danach folgen getrennte native GUI-/Speicher-/Audio-Prozesse.
+  Regeln getrennt: 1.311 mit eingefrorenen 0.13-Fixtures plus aktive
+  Kampagnenprüfungen einschließlich freier Relaistreffer und langsamer Lichter.
+  Tatsächlich ausgeführte aktuelle Anzahl in [QUALITY.md](QUALITY.md). Danach
+  folgen getrennte native GUI-/Speicher-/Audio-Prozesse.
 - Die bisherige Oberfläche, direkte Touch-Gesten, Käufe, Speicherneustart,
   Verdeckung, Schimmer, Fallen und frühere Missionsabläufe bleiben als historische
   Regressionen erhalten. Dabei bedeuten damalige Bonus-/Schatz-/Millionenprüfungen
@@ -84,7 +86,14 @@ python3 tools/check_defold.py
 Der Teststarter setzt für alte Prozesse `ENERGYBLAST_REGRESSION_RULES=013`.
 Das ist eine ausdrückliche historische Fixture-Auswahl. Aktuelle Kampagnen-GUI-
 Prozesse entfernen die Variable. Der normale App-Start ohne diese Testumgebung
-verwendet immer die aktive 0.14-Regelfassung.
+verwendet immer die aktuelle Kampagnen-Regelfassung.
+
+Die zusätzliche Taktikprüfung verwendet alle elf tatsächlichen Relais mit echten
+Direktprojektilen und einen reflektierten Schuss an einer normalen Deckung.
+Ein XTest-Tipp schaltet das Relais im Dock aus; der Kern bleibt bis zum letzten
+Relais geschützt. Sechs Pixelzustände beobachten den laufenden langsameren
+Lichttakt. Die tatsächliche Sprachsteuerung ersetzt eine ältere Ansage und lässt
+die neue Erklärung bei wiederholten abgewiesenen Bosstreffern zu Ende laufen.
 
 ## Gezielte aktuelle GUI-Prüfungen und Bilder
 
@@ -93,6 +102,7 @@ Nach einem erfolgreichen nativen Build:
 ```bash
 xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_campaign_ui.py --output /tmp/energyblast14-campaign
 xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_drone_ui.py --output /tmp/energyblast14-drones
+xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_tactics_ui.py --output /tmp/energyblast141-tactics
 xvfb-run -a -s '-screen 0 1600x1600x24' python3 tools/check_defold_campaign_ui.py --scenario tour --resize 1280 800 --output /tmp/energyblast14-resized
 ```
 
@@ -104,7 +114,7 @@ Handyaufnahme oder unbegleitete Kinderspielrunde.
 
 Die eingefrorenen Godot-/GDevelop-Vergleichsfassungen bleiben erhalten. Ihre
 Anleitungen stehen im [0.3-Snapshot](https://github.com/sayac007/EnergyBlast/blob/cd9dc64/docs/BUILD_AND_TEST.md).
-Diese Apps werden für 0.14 nicht neu gebaut.
+Diese Apps werden für die 0.14.1-Korrektur nicht neu gebaut.
 
 ## Bedienansagen und Musik
 
@@ -128,21 +138,25 @@ Acht neue vollständige Ansagen erläutern Drohnenvorrat, beide Zielgesten,
 Flug und leeren Vorrat sowie Missions-, Schwarm-, Lichter- und Abschlussziele.
 Alle 34 früheren Dateien bleiben unverändert; ihre alten Sammel-/Begleitansagen
 werden in der aktiven Kampagne nicht als aktuelle Anweisung geroutet.
-Die 42 Dateien des Defold-Sprachpakets sind technisch geprüft. Das ist kein
-menschlicher Hörtest. Der aktuell gemessene ASR-Umfang steht in QUALITY.md.
+Für 0.14.1 kommt eine vollständige Ansage zur freien Schusswahl bei Relais hinzu:
+„Erst die Schalter, dann der Kern. Du kannst direkt treffen oder die Wand nutzen.“
+Die nun 43 Dateien und ihre Metadaten sind versioniert; alle bisherigen 42 bleiben
+unverändert. Der neue Clip wurde technisch geprüft und unabhängig exakt erkannt.
+Das ist kein menschlicher Hörtest. Der aktuelle Prüf- und ASR-Umfang steht in
+[QUALITY.md](QUALITY.md).
 
 Musikherkunft, Hashes und Messwerte: `shared/audio/defold04/music.json`.
 80 Sekunden, 32 Takte bei 96 BPM in D-Moll/modal, vollständig eigene Synthese.
-Musikpräferenz und Stummschaltung bleiben lokal gespeichert. 61 native
+Musikpräferenz und Stummschaltung bleiben lokal gespeichert. 62 native
 Soundkomponenten liegen unter dem bestehenden Limit von 64.
 
 ## Android-APK
 
 ```bash
-python3 tools/build_defold_android.py --output /tmp/energyblast-defold14-build
+python3 tools/build_defold_android.py --output /tmp/energyblast-defold141-build
 ```
 
-Das Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.14.0 / Code 15**,
+Das Ausgabeverzeichnis muss neu sein. Native ARM64-App, **0.14.1 / Code 16**,
 `org.example.energyblast.defold`, minSdk 24, targetSdk 36. Der bestehende Schlüssel
 für Entwicklungsupdates bleibt außerhalb des Repositories unter
 `<tools>/energyblast-pilot-signing/debug.keystore`. Die temporäre bekannte
@@ -154,7 +168,20 @@ und ZIP-Ausrichtung. Vor Veröffentlichung zusätzlich ZIP-CRC, fehlende private
 Schlüsseldateien, gleiches Zertifikat zur vorherigen APK und Hash des tatsächlich
 erreichbaren Downloads prüfen.
 
-**0.14-Abschlussexport: PASS.** Gebaut vom [sauberen Quellcommit](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4);
+**APK 0.14.1 / Code 16: PASS.** 69.113.018 Bytes (49.152 Bytes mehr als 0.14),
+gebaut 30.10.2026, 16:26 MEZ vom [sauberen Quellstand](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853),
+`source_dirty:false`. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads). Paket
+`org.example.energyblast.defold`, API 24/target 36/ARM64, userLandscape, keine
+Berechtigungen, Backup aus. Identisches Entwicklungszertifikat wie 0.14,
+v2/v3-Signatur, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und **1225 bytegleiche Projektdateien** im Abzug bestanden.
+ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+
+```text
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
+```
+
+**Historischer 0.14-Abschlussexport: PASS.** Gebaut vom [sauberen Quellcommit](https://github.com/sayac007/EnergyBlast/commit/9eecbbe5efe88973c8e4a4f0e26bbaa4a5dfdfa4);
 [fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads), 69.063.866 Bytes. Signaturgleichheit zur
 vorherigen APK, v2/v3, Paket/Version/API, keine Berechtigungen, Backup aus,
 ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung und

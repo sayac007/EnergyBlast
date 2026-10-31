@@ -463,6 +463,17 @@
       "source": "New complete raid sentence; same local synthetic speaker",
       "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
       "synthesis_seed": 1647356558
+    },
+    {
+      "id": "defold_relays_free",
+      "text": "Erst die Schalter, dann der Kern. Du kannst direkt treffen oder die Wand nutzen.",
+      "file": "defold_relays_free.ogg",
+      "sha256": "12724364ae4f8db239df2bbd1fb3ff64e91ec68f066005f462ea41a85dd7daf3",
+      "seconds": 6.12,
+      "playback_gain_db": 6.584677104545245,
+      "source": "New complete raid sentence; same local synthetic speaker",
+      "model_sha256": "bc3c7e785eb961179c25450d1acff03f839e0002f2f3a5aeb67b5735c0fa2adb",
+      "synthesis_seed": 1976611025
     }
   ]
 }

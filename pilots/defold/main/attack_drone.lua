@@ -73,7 +73,7 @@ function A.bind(g)
   local d=self.attack_drone
   if not d or not d.enabled or not self.drone_ui or self.drone_ui.mode~='target'or self.paused or self.over or self.background or d.stock<=0 then return false end
   if not live_target(self,enemy)then self.status='WAEHLE EINEN LEBENDEN GEGNER';return false end
-  if self:locked(enemy)then self.status='ERST DIE RELAIS AUSSCHALTEN';self.say('raid_relays');return false end
+  if self:locked(enemy)then self.status='ERST DIE RELAIS AUSSCHALTEN';self.say(self:relay_voice());return false end
   local planned=route(self,self.p,enemy.p)
   if not planned then self.status='KEIN FREIER FLUGWEG - ANDERES ZIEL WAEHLEN';return false end
   self.path={};self.held=false;self.aiming=false;self.pending_hold=false;self.dragging=false

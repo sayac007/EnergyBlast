@@ -6,6 +6,57 @@ Die aktuelle Betreiberrevision ersetzt die frühere Planung
 von 20 zusätzlichen Missionen durch **zehn neue Missionen, insgesamt 16**.
 Die Bonus-Suche und die Millionengesundheit aus 0.13 werden ausdrücklich abgelöst.
 
+## Kleine Korrektur 0.14.1 — freie Schalter und langsamere Lichter
+
+**30.10.2026, Android-Code 16**, Branch `fix/free-relays-slower-patterns`.
+Passive Relais-Schalter lassen sich nun direkt **oder** per Abpraller treffen.
+Die Reihenfolge „Schalter vor dem Kern“ bleibt; die Wand ist für diese Aufgaben
+keine Pflicht mehr. Gefährliche Gegner behalten ihre Schild-/Fallenregeln,
+alle Wände reflektieren weiter. Die bisherigen 16 Missionen und Spielstände bleiben.
+
+Die Lichterfolgen in Mission 5 (Echo-Kammer), 10 (Doppeltes Signal) und 14
+(Lichtlabyrinth) wechseln langsamer: **1,8 Sekunden je Schritt**, davon 1,2 Sekunden
+leuchtend und 0,6 Sekunden dunkel; anschließend 2,4 Sekunden Pause. Eine Dreierfolge
+wiederholt sich nach **7,8 Sekunden**, zuvor nach 4,6 Sekunden mit 0,9-Sekunden-
+Schritten. Weltkreise und Seitenanzeige verwenden dieselbe Timingfunktion.
+
+Eine neue vollständige Serena/Qwen-Ansage erklärt die freie Wahl:
+„Erst die Schalter, dann der Kern. Du kannst direkt treffen oder die Wand nutzen.“
+**6,12 Sekunden, technisch PASS, unabhängig mit Whisper 1/1 exakt erkannt.**
+Die früheren 42 Clips samt Herkunfts-/Modelldaten sind unverändert; das Paket
+enthält jetzt 43 Defold-Aufnahmen und 62 native Soundkomponenten.
+
+**Aktuelle vollständige Regression: PASS.** 22 Befehle, 4.674 native Prüfungen
+(1.311 historische und 3.363 aktuelle, darunter 134 neue), 16 gemeinsame Gruppen.
+Alle elf Relais werden durch echte Direktprojektile getroffen; ein tatsächlicher
+Abpraller bleibt gültig. XTest prüft den direkten Relaistreffer, die Boss-Sperre,
+sechs langsamere Pixelzustände im laufenden Takt sowie die Ansage ohne Neustart
+bei wiederholten Bosstreffern.
+
+**APK 0.14.1 / Code 16: PASS.** 69.113.018 Bytes (49.152 Bytes mehr als 0.14),
+gebaut 30.10.2026, 16:26 MEZ vom [sauberen Quellstand](https://github.com/sayac007/EnergyBlast/commit/2fb77853b9018ac872c11a92c6fe6afb46317853),
+`source_dirty:false`. [Fester APK-Snapshot](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads). Paket
+`org.example.energyblast.defold`, API 24/target 36/ARM64, userLandscape, keine
+Berechtigungen, Backup aus. Identisches Entwicklungszertifikat wie 0.14,
+v2/v3-Signatur, ZIP-CRC, keine privaten Schlüsseldateien, 16-KB-ZIP-Ausrichtung
+und **1225 bytegleiche Projektdateien** im Abzug bestanden.
+ZIP-Ausrichtung allein ist keine Play-/16-KB-Zertifizierung.
+
+```text
+SHA-256 20451a92eac9aab78cfea4ae2e0b9258c2b77d2367ee1d473e24506b2560270d
+```
+Die nachfolgenden Ergebnisse und APK-Verweise dokumentieren den unveränderten
+vorherigen 0.14-Stand. Reale
+Handy-/Tablet-Abnahme bleibt gesondert offen.
+
+![Tatsächlicher direkter Relaistreffer](images/14-1-direct-relay.png)
+![Langsameres Signal im Spielfeld und in der Seitenanzeige](images/14-1-slow-lights.png)
+
+Native Laufzeitaufnahmen aus einer kontrollierten Regression: erreichbare
+Schussposition, ruhige Gegner; der Relaistreffer entsteht durch einen tatsächlichen
+Bildschirmtipp und ein fliegendes Projektil. Die Lichteraufnahme beobachtet den
+laufenden Takt ohne gesetzte Lösung oder vorgerückten Zeitwert.
+
 ## Aktueller Umfang
 
 Versteckte Bonusaufgaben und Schatztruhen entfallen aus allen aktiven Missionen.
@@ -120,7 +171,7 @@ Die Stern-/Rüstungswerte stammen aus einer kontrollierten Migrationsfixture.
 Die Schwarmaufnahme beschleunigt die realen Vermehrungstimer; KI und Schaden
 sind in den GUI-Prüfungen teilweise kontrolliert. Das ist keine Geräteabnahme.
 
-## Tatsächlicher Prüfstand
+## Tatsächlicher Prüfstand der ursprünglichen 0.14-Fassung
 
 **Sprachdateien bereits geprüft:** Acht neue vollständige Serena/Qwen-Ansagen
 wurden unabhängig ohne Referenztext-Prompt mit Whisper geprüft: **8/8 nach

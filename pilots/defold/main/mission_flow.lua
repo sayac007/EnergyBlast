@@ -124,6 +124,7 @@ function F.bind(g)
   local state=self:mission_state()
   if self.data.campaign_enabled then
    if state.primary_done then self.say('defold_campaign_clear')
+   elseif state.goal_kind=='relay'then self.say(self:relay_voice())
    elseif state.goal_kind=='sequence'then self.say('defold_campaign_sequence')
    elseif state.goal_kind=='exit'then self.say('flow_exit')
    else self.say(self.m.voice or'defold_campaign_mission')end

@@ -1,4 +1,4 @@
-# EnergyBlast — Defold 0.14
+# EnergyBlast — Defold 0.14.1
 
 > **Korrektur 0.14.1 zum Testen:** [Android-APK herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads/energyblast-defold-debug.apk).
 > Passive Relais direkt oder per Abpraller treffen; neue Ansage erklärt beide Wege.
@@ -15,17 +15,20 @@ Helden, reflektierte Schüsse, Deckung, Fallen und steuerbare Angriffsdrohnen.
 Zehn neue Missionen steigern die Komplexität. Gespeicherte Sterne und Ausrüstung
 bleiben erhalten; versteckte Bonusaufgaben und Schatztruhen entfallen.
 
-**[Android 0.14 herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
-[Letzte geprüfte APK 0.13 — vorheriger Spielstand](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
+**[Android 0.14.1 herunterladen — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
+
+**[Vorherige geprüfte Android-APK 0.14 — 69,1 MB](https://raw.githubusercontent.com/sayac007/EnergyBlast/11248b5ef4215838cb08bd2c8164d9718d9efcae/downloads/energyblast-defold-debug.apk)** · [Update und Metadaten](downloads/README.md).
+[Vorherige geprüfte APK 0.13](https://raw.githubusercontent.com/sayac007/EnergyBlast/9e486f1dec3b6ca67371f1491c8e7b5991885a14/downloads/energyblast-defold-debug.apk) ·
 [Änderungen und Prüfstand](docs/MILESTONE_13.md) ·
 [Qualitätsstatus](docs/QUALITY.md) · [Selbst bauen](docs/BUILD_AND_TEST.md)
 
 ## Aktueller Stand
 
-**0.14.0 / Android-Code 15, Stand 30.10.2026**, vollständig auf **`main`**
-übernommen. Der Entwicklungsbranch `feat/campaign-16` bleibt erhalten. Die neueste Anweisung ersetzt den früheren Plan von 20
-zusätzlichen Missionen durch **zehn neue, insgesamt 16**. Defold 1.14.0 bleibt
-der Schwerpunkt; Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
+**0.14.1 / Android-Code 16, Stand 30.10.2026**, Korrekturbranch
+`fix/free-relays-slower-patterns`. Die zuvor geprüfte 0.14-Fassung liegt vollständig
+auf `main`; die aktuelle Korrektur ist vollständig geprüft und als Update-APK verfügbar.
+Es bleiben **16 Missionen**. Defold 1.14.0 bleibt der Schwerpunkt;
+Godot 0.2 und GDevelop 0.3 sind unveränderte Vergleichsstände.
 Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Telemetrie.
 
 | Bestandteil | Aktuell implementiert |
@@ -42,6 +45,18 @@ Android 7/API 24+, ARM64, lokale Spielstände und keine Konten, Werbung oder Tel
 Die größeren Arenen wachsen in beiden Achsen um 50 bis 100 Prozent, entsprechend
 2,25- bis vierfacher Fläche. Ihre Schwierigkeit verbindet zusätzliche Schusslinien,
 Relais, bewegliche Gegner und Lichterfolgen. [Alle Missionen im Überblick](docs/MILESTONE_13.md).
+
+## Kleine Korrektur 0.14.1
+
+- **Schalter frei treffen:** Passive Relais lassen sich direkt oder über eine
+  Wand ausschalten. Der Abpraller ist dort freiwillig. Erst alle Schalter lösen,
+  dann den Kern treffen; gefährliche Gegner behalten ihre Schild-/Fallenregeln.
+- **Lichter langsamer:** In Echo-Kammer, Doppeltes Signal und Lichtlabyrinth
+  dauert jeder Schritt jetzt **1,8 Sekunden**: 1,2 Sekunden leuchten, 0,6 Sekunden
+  dunkel. Nach der Dreierfolge folgen 2,4 Sekunden Pause, insgesamt 7,8 Sekunden
+  pro Wiederholung. Weltkreise und Seitenanzeige verwenden dieselbe Zeitsteuerung.
+- **Passende Ansage:** „Erst die Schalter, dann der Kern. Du kannst direkt treffen
+  oder die Wand nutzen.“ Alle bisherigen Missionen, Sterne und Käufe bleiben.
 
 ## Steuerung
 
@@ -101,6 +116,18 @@ regelmäßig präzise orten, auch aus großer Entfernung. Wände blockieren die 
 Geschosse weiterhin durch Reflexion oder klar markierte Absorption.
 
 ## Prüfstand und Grenzen
+
+**Aktuelle Korrektur 0.14.1: vollständige Regression PASS.** Alle 22 Prüfschritte,
+**4.674 native Prüfungen** (1.311 historische, 3.363 aktuelle, davon 134 neu) und
+16 gemeinsame Testgruppen bestanden. Echte Projektiltreffer an allen elf Relais,
+ein freiwilliger physischer Abpraller, Boss-Sperren, ein tatsächlicher Bildschirm-
+Direktschuss sowie sechs zeitlich geprüfte native Lichtzustände sind abgesichert.
+Wiederholte Bosstreffer starten die neue vollständige Ansage nicht neu.
+**Sauberer APK-Export: PASS.** Identisches Paket und Entwicklungszertifikat,
+Version 0.14.1/Code 16, 69.113.018 Bytes, keine Berechtigungen, Backup aus,
+v2/v3, ZIP-CRC und 1.225 bytegleiche Projektdateien geprüft. [APK-Nachweise](https://github.com/sayac007/EnergyBlast/tree/387b8a7169d5b6a2a0b04dfaf4bfc12e03e929e7/downloads).
+
+Die folgenden älteren Ergebnisse gehören zur vorherigen **0.14-Fassung**.
 
 **Gezielte Prüfungen bereits bestanden:** 4.540 native Regelprüfungen, davon
 1.311 mit eingefrorenen 0.13-Regeln und 3.229 mit aktiven 0.14-Regeln; 16 gemeinsame
